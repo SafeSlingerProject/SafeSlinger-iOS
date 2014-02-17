@@ -1,0 +1,710 @@
+/*
+    The MIT License (MIT)
+    
+    Copyright (c) 2010-2014 Carnegie Mellon University
+    
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+    
+    The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
+    
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+    THE SOFTWARE.
+*/
+
+/* 'Send invite link with...' is an action title (sentence case, ellipsis); this title is used during Share Application in a dialog of application choices, which can send an installation URL for SafeSlinger. */
+"action_NewUserRequest" = "இணைப்பு அழை...";
+/* 'View %s with...' is an action title (sentence case, ellipsis); this title is used when more than one application can open this file type, and the user can choose, which to view it with. %s = the file name of the attachment to view. */
+"action_ViewFile" = "காட்சி %@ கொண்டு...";
+
+/* 'SafeSlinger' is an application name (title case); used for home screen icons, at the top of many screens, and many other places in the application. */
+"app_name" = "SafeSlinger";
+/* 'Michael W Farb' is a language editor (title case); the name of the individual who translated it and/or reviewed this localization. */
+"app_TranslatorName" = "Google Translate";
+
+/* 'Backup is disabled. Do you want to adjust backup settings and keep this reminder?' is a question message (sentence case, question mark); used to warn when the backup is off to confirm we should keep reminding the user. Used with Forget and Remind buttons. */
+"ask_BackupDisabledRemindLater" = "காப்பு முடக்கப்பட்டுள்ளது. நீங்கள் காப்பு அமைப்புகளை சரிசெய்ய இந்த நினைவூட்டல் வைக்க வேண்டுமா?";
+/* '%s has a more recent device or key, are you sure you want to use this older one?' is a question message (sentence case, question mark); is a confirmation question that occurs when the user selected a recipient with more recent information in the database. */
+"ask_ConfirmUseOlderDeviceOrKey" = "%@ சமீபத்திய சாதனம் அல்லது முக்கிய உள்ளது, நீங்கள் இந்த பழைய பயன்படுத்த விரும்புகிறீர்களா?";
+/* 'File name %s already exists. Overwrite?' is a question message (sentence case, question mark); is a question that occurs when the user attempts to save a file with the same name as an existing file in the same location. %s = the file name of the attachment. */
+"ask_FileExistsOverwrite" = "கோப்பு பெயர் %@ ஏற்கனவே உள்ளது. மேலெழுதவா?";
+/* 'Without a Google Account you will only be able to send, NOT receive messages. Do you want to add a Google account?' is a question message (sentence case, question mark); used to warn when a Google account has not been setup, if the user intends to receive messages. Android-only. */
+"ask_GoogleAccountToReceiveMsgs" = "Google கணக்கு இல்லாமல் நீங்கள் மட்டுமே பெற, செய்திகள் அனுப்ப முடியும். நீங்கள் ஒரு Google கணக்கை சேர்க்க வேண்டுமா?";
+/* 'Quit? Are you sure?' is a question message (sentence case, question mark); is a confirmation question that occurs when the user chooses to end the exchange protocol prematurely. */
+"ask_QuitConfirmation" = "வெளியேறு? நீங்கள் உறுதியாக இருக்கிறீர்களா?";
+/* 'We'd like your help improving SafeSlinger. Would you like to automatically send any errors to us?' is a question message (sentence case, question mark); is a question that occurs when the user encounters an unhandled exception and are asked if they want to upload this error log and any future error logs. */
+"ask_SendErrorData" = "நாம் உங்கள் உதவி SafeSlinger மேம்படுத்த விரும்புகிறேன். நீங்கள் தானாக எங்களுக்கு எந்த பிழைகளை அனுப்ப விரும்புகிறீர்களா?";
+
+/* 'Accept' is a button (title case); the Accept button is paired with the Refuse button to indicate user acceptance of a secure introduction. */
+"btn_Accept" = "ஏற்கவும்";
+/* 'Begin Exchange' is a button (title case); the Begin Exchange button is used to begin the SafeSlinger exchange protocol. */
+"btn_BeginExchangeProximity" = "சந்தை தொடங்கியிருக்கவேண்டும்";
+/* 'Cancel' is a button (title case); the Cancel button is used to indicate the user wishes to exit the current screen without saving data. For non-Android use only, since Android uses the Back hardware button instead. */
+"btn_Cancel" = "ரத்து";
+/* 'Close' is a button (title case); the Close button is used to allow the user to dismiss a dialog. */
+"btn_Close" = "Close";
+/* 'Continue' is a button (title case); the Continue button is used to remind the user that there is another step to complete. */
+"btn_Continue" = "தொடர்";
+/* 'Discard' is a button (title case); the Discard button is used to indicate the user wishes to exit the current screen without saving data, such as a voice memo. For non-Android use only, since Android uses the Back hardware button instead. */
+"btn_discard" = "கைவிடு";
+/* 'Done' is a button (title case); the Done button is used to allow the user to complete a current multi-step process. */
+"btn_Done" = "செய்த";
+/* 'Exit' is a button (title case); the Exit button is used to close the application. For non-Android use only, since Android uses the Back hardware button instead. */
+"btn_Exit" = "வெளியேறு";
+/* 'Import' is a button (title case); the Import button is used to import a set of contacts on after an unsuccessful exchange protocol has finished. */
+"btn_Import" = "இறக்குமதி";
+/* 'Introduce' is a button (title case); the Introduce button is used to send a secure introduction to the two users selected on the Secure Introduction screen. */
+"btn_Introduce" = "அறிமுகம்";
+/* 'Next' is a button (title case); the Next button is used to remind the user that there is another step to complete. */
+"btn_Match" = "அடுத்து";
+/* 'No' is a button (title case); the No button is paired with the Yes button, and is used to indicate a negative answer to a Yes/No question. */
+"btn_No" = "இல்லை";
+/* 'No Match' is a button (title case); the No Match button is used if the user cannot find the same batting screen on another user's device during the exchange critical care. */
+"btn_NoMatch" = "இல்லை போட்டி";
+/* 'Forget' is a button (title case); the Forget button is paired with the Remind button and is used to indicate the user wishes to dismiss the current reminder of a potential error state, such as having backup or notification settings turned off, and not be reminded again. */
+"btn_NotRemind" = "மறக்க";
+/* 'OK' is a button (title case); the OK button is affirmation button used to indicate the user accepts the data entered on the current screen. */
+"btn_OK" = "சரி";
+/* 'Refuse' is a button (title case); the Refuse button is paired with the Accept button to indicate user refusal of a secure introduction. */
+"btn_Refuse" = "மறுப்பு";
+/* 'Remind' is a button (title case); the Remind button is paired with the Forget button and is used to indicate the user wishes to dismiss the current reminder of a potential error state, such as having backup or notification settings turned off, and does want to be reminded again later. */
+"btn_Remind" = "நினைவூட்டு";
+/* 'Save' is a button (title case); the Save button is used to indicate the data in question should be saved and persisted. */
+"btn_Save" = "சேமிக்கவும்";
+/* 'Add Attachment' is a button (title case); the Add Attachment button is used on the Compose screen to allow the user to select the source of an attachment to the current message. */
+"btn_SelectFile" = "இணைப்பை சேர்";
+/* 'Send' is a button (title case); the Send button will secure the current text message and attachment, if any, and send the message to the selected recipient. */
+"btn_SendFile" = "அனுப்பு";
+/* 'Yes' is a button (title case); the Yes button is paired with the No button, and is used to indicate an affirmative answer to a Yes/No question. */
+"btn_Yes" = "ஆம்";
+
+/* '10 minutes' is a choice (sentence case); used to set the password timeout to 10 minutes. */
+"choice_10mins" = "10 நிமிடங்கள்";
+/* '1 hour' is a choice (sentence case); used to set the password timeout to 1 hour. */
+"choice_1hour" = "1 மணி நேரம்";
+/* '1 minute' is a choice (sentence case); used to set the password timeout to 1 minute. */
+"choice_1min" = "1 நிமிடம்";
+/* '20 minutes' is a choice (sentence case); used to set the password timeout to 20 minutes. */
+"choice_20mins" = "20 நிமிடங்கள்";
+/* '2 hours' is a choice (sentence case); used to set the password timeout to 2 hours. */
+"choice_2hours" = "2 மணி நேரம்";
+/* '3 minutes' is a choice (sentence case); used to set the password timeout to 3 minutes. */
+"choice_3mins" = "3 நிமிடங்கள்";
+/* '40 minutes' is a choice (sentence case); used to set the password timeout to 40 minutes. */
+"choice_40mins" = "40 நிமிடங்கள்";
+/* '4 hours' is a choice (sentence case); used to set the password timeout to 4 hours. */
+"choice_4hours" = "4 மணி நேரம்";
+/* '5 minutes' is a choice (sentence case); used to set the password timeout to 5 minutes. */
+"choice_5mins" = "5 நிமிடங்கள்";
+/* '8 hours' is a choice (sentence case); used to set the password timeout to 8 hours. */
+"choice_8hours" = "8 மணி நேரம்";
+/* 'Default Storage' is a choice (sentence case); used to set the attachment root path to the default source. Android-only. */
+"choice_auto_storage" = "இயல்புநிலை சேமிப்பு";
+/* 'External Storage' is a choice (sentence case); used to set the attachment root path to an external source. Android-only. */
+"choice_external_storage" = "வெளி சேமிப்பு";
+/* 'Internal Storage' is a choice (sentence case); used to set the attachment root path to an internal source. Android-only. */
+"choice_internal_storage" = "உள்நாட்டு சேமிப்பு";
+/* 'No Limit' is a choice (sentence case); used to remove the timeout for the password. */
+"choice_nolimit" = "வரம்பு இல்லை";
+/* '%d users' is a choice (sentence case); used to describe the number of users currently attempting to exchange keys. %d = number of users in the exchange. */
+"choice_NumUsers" = "%d பயனர்";
+/* 'Save Directory' is a choice (sentence case); used when the user chooses to change the directory of the attachment before saving. */
+"choice_SaveDirectory" = "சேமி அடைவு";
+/* 'Save file' is a choice (sentence case); used when the user chooses to change the filename of the attachment before saving. */
+"choice_SaveFile" = "கோப்பு சேமிக்க";
+/* 'Up' is a choice (sentence case); used in the File Manager dialog to navigate up to a parent directory. */
+"choice_Up" = "மேலே";
+
+/* 'Some members are using an older version; all members must at least use %s.' is an error message (sentence case, period); used to warn when some members of the key exchange protocol are using less than the minimum version. Used for backward-compatibility in some cases. %s = the minimum cross-platform version number of SafeSlinger, usually expressed as x.x. */
+"error_AllMembersMustUpgrade" = "சில உறுப்பினர்கள் ஒரு பழைய பதிப்பு பயன்படுத்தி அனைத்து உறுப்பினர்கள் குறைந்தது %@ பயன்படுத்த வேண்டும்.";
+/* 'All members must upgrade, some are using older key formats.' is an error message (sentence case, period); used to warn when the key format is incorrect after an exchange and perhaps used an old format. */
+"error_AllMembersMustUpgradeBadKeyFormat" = "உறுப்பினர் சில பழைய முக்கிய வடிவங்கள் பயன்படுத்தி, மேம்படுத்த வேண்டும்.";
+/* 'All members must upgrade, some are using older push registration formats.' is an error message (sentence case, period); used to warn when the push registration format is incorrect or corrupted. */
+"error_AllMembersMustUpgradeBadPushToken" = "உறுப்பினர் சில பழைய மிகுதி பதிவு வடிவங்கள் பயன்படுத்தி, மேம்படுத்த வேண்டும்.";
+/* 'Audio player decoding error.' is an error message (sentence case, period); used to warn when attempting to play an audio message fails to decode properly. iOS-only. */
+"error_AudioPlayerDecodeError" = "ஆடியோ பிளேயர் நீக்கத்திற்கு பிழை.";
+/* 'Cannot play the recording.' is an error message (sentence case, period); used to warn when the voice recording received cannot be played. iOS-only. */
+"error_AudioPlayerError" = "பதிவு விளையாட முடியாது.";
+/* 'Audio recorder encoding error.' is an error message (sentence case, period); used to warn when attempting to record an audio message fails to encode properly. iOS-only. */
+"error_AudioRecorderEncodeError" = "ஆடியோ ரெக்கார்டர் குறியீட்டு பிழை.";
+/* 'Microphone permission required. Please go to iOS Settings to enable Microphone permissions.' is an error message (sentence case, period); used to warn when user disable microphone permission. iOS-only. */
+"error_AudioRecorderPermissionError" = "ஒலிவாங்கி அனுமதி தேவை. ஒலிவாங்கி அனுமதிகள் செயல்படுத்த iOS அமைப்புகள் செல்க.";
+/* 'No backup to restore.' is an error message (sentence case, period); used to warn at application setup, when there is no pre-existing backup to restore and warn the user that any previous keys have not been restored. */
+"error_BackupNotFound" = "மீட்க இல்லை காப்பு.";
+/* 'Device does not support backup restore.' is an error message (sentence case, period); used to warn when the device hardware does not support restoration from backup. */
+"error_BackupNotSupportedDevice" = "சாதன காப்பு மீண்டும் ஆதரிக்கவில்லை.";
+/* 'Due to a bug in Android 4.1, you will have to uninstall and reinstall SafeSlinger.' is an error message (sentence case, period); used to warn when unable to load native libraries due to a Google Play copy-protection bug, which can corrupt installations for users upgrading to Android 4.1. Android-only. */
+"error_BadCopyProtectUpgrade" = "காரணமாக அண்ட்ராய்டு 4.1 இல் ஒரு பிழை, நீங்கள் நீக்க வேண்டும் மற்றும் SafeSlinger மீண்டும்.";
+/* 'A Google account is required. Please open the account manager and add a Google account.' is an error message (sentence case, period); used to warn during push registration: There is no Google account on the phone. The application should ask the user to open the account manager and add a Google account. Fix on the device side. Android-only. */
+"error_C2DMRegAccountMissing" = "ஒரு Google கணக்கை தேவைப்படுகிறது. கணக்கு மேலாளர் திறக்க மற்றும் ஒரு Google கணக்கு சேர்க்க தயவு செய்து.";
+/* 'Registration not authenticated, please retry manually later.' is an error message (sentence case, period); used to warn during push registration: Bad password. The application should ask the user to enter his/her password, and let user retry manually later. Fix on the device side. Android-only. */
+"error_C2DMRegAuthenticationFailed" = "பதிவு அங்கீகரிக்காத, பின்னர் கைமுறையாக மீண்டும் முயற்சிக்கவும்.";
+/* 'Registration is not available for this version, please check for an updated version.' is an error message (sentence case, period); used to warn during push registration: The sender account is not recognized. Android-only. */
+"error_C2DMRegInvalidSender" = "பதிவு இந்த பதிப்பு கிடைக்கவில்லை, ஒரு மேம்படுத்தப்பட்ட பதிப்பு சரிபார்க்கவும்.";
+/* 'Incorrect device registration with Google. This device does not currently support push messaging.' is an error message (sentence case, period); used to warn during push registration: Incorrect phone registration with Google. This phone doesn't currently support C2DM. Android-only. */
+"error_C2DMRegPhoneRegistrationError" = "கூகிள் கொண்டு தவறான சாதனம் பதிவு. இந்த சாதனம் தற்போது மிகுதி செய்தி ஆதரிக்கவில்லை.";
+/* 'Push registration service not available, scheduling retry in %d seconds.' is an error message (sentence case, period); used to warn during push registration: The device can't read the response, or there was a 500/503 from the server that can be retried later. The application should use exponential back off and retry. %d = the current number of seconds until the next push registration attempt. Android-only. */
+"error_C2DMRegServiceNotAvailable" = "புஷ் பதிவு சேவை இல்லை, திட்டமிடல் %d வினாடிகளில் மீண்டும்.";
+/* 'Too many applications are registered for Push. Please uninstall some other applications and retry.' is an error message (sentence case, period); used to warn during push registration: The user has too many applications registered. The application should tell the user to uninstall some other applications, let user retry manually. Fix on the device side. Android-only. */
+"error_C2DMRegTooManyRegistrations" = "பல பயன்பாடுகள் தள்ள பதிவு. வேறு சில பயன்பாடுகள் நீக்க மீண்டும் முயற்சி செய்க.";
+/* 'Cannot send an empty attachment.' is an error message (sentence case, period); used to warn when use attempts to attach an empty file to the message. */
+"error_CannotSendEmptyFile" = "ஒரு வெற்று இணைப்பு அனுப்ப முடியாது.";
+/* 'Cannot send attachments greater than %d bytes in size.' is an error message (sentence case, period); used to warn when the message and attachment (if any) exceed the current quota limits for the App Engine service we use. %d the maximum limit in bytes of the entire message plus attachments that the App Engine service will allow us to upload. */
+"error_CannotSendFilesOver" = "அளவு %d பைட்டுகள் விட இணைப்புகளை அனுப்ப முடியும்.";
+/* 'Cannot send a null attachment.' is an error message (sentence case, period); used to warn when use attempts to attach an empty file to the message. */
+"error_CannotSendNullFile" = "ஒரு பூஜ்ய இணைப்பு அனுப்ப முடியாது.";
+/* 'Contact creation failed.' is an error message (sentence case, period); used to warn when failing to insert new contact data on the Setup screen. */
+"error_contactCreationFailure" = "தொடர்பு உருவாக்கம் தோல்வியடைந்தது.";
+/* 'Contact insert failed.' is an error message (sentence case, period); used to warn when failing to insert new contact data after an exchange. */
+"error_ContactInsertFailed" = "தொடர்பு சேர்க்கைக்கு தோல்வியடைந்தது.";
+/* 'This contact is missing a name, please edit.' is an error message (sentence case, period); used to warn when the matching contact found on the Setup screen does not have a name. */
+"error_ContactNameMissing" = "இந்த தொடர்பு ஒரு பெயர் இல்லை, திருத்த தயவு செய்து.";
+/* 'This contact is missing a name, please reselect.' is an error message (sentence case, period); used to warn when the matching contact found on the Setup screen does not have a name. */
+"error_ContactNameMissing2" = "இந்த தொடர்பு ஒரு பெயர் இல்லை, reselect தயவு செய்து.";
+/* 'Contact update failed.' is an error message (sentence case, period); used to warn when failing to merge contact data after an exchange. */
+"error_ContactUpdateFailed" = "தொடர்பு புதுப்பித்தல் தோல்வியடைந்தது.";
+/* 'Internet not available, check your settings.' is an error message (sentence case, period); used to warn when the user attempts to communicate with a server and the device cannot detect a path to the Internet. */
+"error_CorrectYourInternetConnection" = "இல்லை இண்டர்நெட், உங்கள் அமைப்புகளை சரிபார்க்கவும்.";
+/* 'Could not extract private key.' is an error message (sentence case, period); used to warn when the user is not able to extract the private key from the encrypted private key stored on the device. */
+"error_couldNotExtractPrivateKey" = "தனிப்பட்ட விசை எடுக்க முடியவில்லை.";
+/* 'Exchange timeout exceeded. Begin the exchange again.' is an error message (sentence case, period); used to warn when users have waited too long, 10 minutes, before completing the exchange protocol. */
+"error_ExchangeProtocolTimeoutExceeded" = "சந்தை நேரம் தாண்டியது. மீண்டும் பரிமாற்றம் தொடங்கும்.";
+/* '%s is not supported on %s at this time.' is an error message (sentence case, period); used to warn when a specific capability is not supported by a specific platform. */
+"error_FeatureIsNotSupport" = "%@ இந்த நேரத்தில் %@ ஆதரிக்கவில்லை.";
+/* 'Unable to save %s.' is an error message (sentence case, period); used to warn when there was disk error attempting to save an attachment to the users' device. %s = the name of the file that failed to save. */
+"error_FileSave" = "%@ காப்பாற்ற முடியவில்லை.";
+/* 'File storage is not available.' is an error message (sentence case, period); used to warn when attempting to read/write to attachment storage becomes unavailable. */
+"error_FileStorageUnavailable" = "கோப்பு சேமிப்பு இல்லை.";
+/* 'Server HTTP Error: %d' is an error message (sentence case, period); used to warn when the key exchange or messaging servers encountered an error and need to notify the user. %d = the HTTP status line code is case of an error, like 404 (file not found). 500 is common for uncaught Python run-time errors. */
+"error_HttpCode" = "சர்வர் HTTP பிழை: %d";
+/* 'Incorrect data found in exchange. Begin the exchange again.' is an error message (sentence case, period); used to warn when some item received from another group member during the key exchange did not hash correctly to the previously committed value. */
+"error_InvalidCommitVerify" = "பரிமாற்றம் காணப்படும் தவறான தரவு. மீண்டும் பரிமாற்றம் தொடங்கும்.";
+/* 'Please enter a positive integer.' is an error message (sentence case, period); used to warn when the user attempted to type in a group ID on the Grouping screen that was zero, negative, or empty. */
+"error_InvalidCommonUserId" = "ஒரு நேர்மறையான முழு உள்ளிடவும்.";
+/* 'A valid contact name is required.' is an error message (sentence case, period); used to warn when the user completes Setup without typing a name, or the name includes 3rd-person words we cannot allow, such as: 'Me', 'Contact', 'Foo',… */
+"error_InvalidContactName" = "ஒரு செல்லுபடியாகும் தொடர்பு பெயர் தேவைப்படுகிறது.";
+/* 'Bad incoming message format.' is an error message (sentence case, period); used to warn when the incoming message was not formatted properly. */
+"error_InvalidIncomingMessage" = "பேட் உள்வரும் செய்தி வடிவம்.";
+/* 'Bad message format.' is an error message (sentence case, period); used to warn when the outgoing message was not formatted properly. */
+"error_InvalidMsg" = "பேட் செய்தி வடிவம்.";
+/* 'Invalid recipient.' is an error message (sentence case, period); used to warn when the user has not selected 1 recipient to send a message on the Compose Message screen, also when the user has not selected 2 recipients to send introductions to on the Secure Introduction screen. */
+"error_InvalidRecipient" = "தவறான பெறுநர்.";
+/* 'You have reported a difference in phrases. Begin the exchange again.' is an error message (sentence case, period); used to warn when the user presses the 'No Match' button that they are aborting the protocol for the group and sending a non-match signature to others. */
+"error_LocalGroupCommitDiffer" = "நீங்கள் சொற்றொடர்களை ஒரு வித்தியாசம் அறிக்கை. மீண்டும் பரிமாற்றம் தொடங்கும்.";
+/* 'The peer key format is invalid.' is an error message (sentence case, period); used to warn when the public key we used for this recipient does not exist or is improperly formatted. */
+"error_MessageInvalidPeerKeyFormat" = "பியர் முக்கிய வடிவம் தவறானது.";
+/* 'Signature verification failed.' is an error message (sentence case, period); used to warn when key used to generate an incoming message signature is not in the key database. */
+"error_MessageSignatureVerificationFails" = "கையொப்ப சரிபார்த்தல் தோல்வியுற்றது.";
+/* 'Passphrases require at least %d characters.' is an error message (sentence case, period); used to warn when a user has setup a passphrase, which does not fit the minimum required length. %d = current requirement is at least 8 characters. */
+"error_minPassphraseRequire" = "கடவுச்சொற்களை குறைந்தது %d எழுத்துக்கள் தேவைப்படும்.";
+/* 'A minimum of %d members are required to exchange data.' is an error message (sentence case, period); used to warn when attempting to leave the Group Size screen without choosing a group size. %d = the minimum number of users to complete the exchange protocol, 2 usually. */
+"error_MinUsersRequired" = "%d உறுப்பினர்கள் ஒரு குறைந்தபட்ச தரவு பரிமாற்றம் செய்ய வேண்டும்.";
+/* 'SafeSlinger did not detect NDK support on this device, which is required.' is an error message (sentence case, period); used to warn when device has no Native Development Kit support installed. Android-only. */
+"error_MissingNdk" = "SafeSlinger தேவைப்படுகிறது, இது இந்த சாதனத்தில் NDK ஆதரவு கண்டறிய முடியவில்லை.";
+/* 'Unexpected data found in exchange. Begin the exchange again.' is an error message (sentence case, period); used to warn when a user has entered a group size number that is too low during the exchange protocol or possibly a Man-in-The-Middle (MiTM) attack where a malicious outsider attempts to join the group. */
+"error_MoreDataThanUsers" = "பரிமாற்றம் காணப்படும் எதிர்பாராத தரவு. மீண்டும் பரிமாற்றம் தொடங்கும்.";
+/* 'You are attempting to send multiple items. At this time, SafeSlinger only supports sending one item at a time.' is an error message (sentence case, period); used to warn when the user attempts to select multiple attachments to send when we only allow one attachment for now. */
+"error_MultipleSendNotSupported" = "நீங்கள் பல பொருட்களை அனுப்ப முயற்சித்து வருகின்றனர். இந்த நேரத்தில், SafeSlinger மட்டுமே ஒரு நேரத்தில் ஒரு பொருளை அனுப்பும் ஆதரிக்கிறது.";
+/* 'Email account is not setup!' is an error message (sentence case, period); used to warn that a user did not have an email account when he/she tries to send out comments to administrator account. iOS-only. */
+"error_NoEmailAccount" = "மின்னஞ்சல் கணக்கு அமைப்பு அல்ல!";
+/* 'No passphrase entered.' is an error message (sentence case, period); used to warn when a user generates or changes a passphrase and they have entered a blank password, which is not acceptable. */
+"error_noPassPhrase" = "இல்லை கடவுச்சொல்லை நுழைந்தது.";
+/* 'You must select one of the phrases before proceeding.' is an error message (sentence case, period); used to warn when the user attempts to proceed past the word phrase Verify screen during the exchange protocol and they have not selected, which of the three phrases match with the other users'. */
+"error_NoWordListSelected" = "தொடர்வதற்கு முன் சொற்றொடர்களை ஒன்றை தேர்ந்தெடுக்க வேண்டும்.";
+/* 'Someone reported a difference in phrases. Begin the exchange again.' is an error message (sentence case, period); used to warn when at least one other member of the group during the exchange protocol pressed the 'No Match' button. */
+"error_OtherGroupCommitDiffer" = "யாரோ சொற்றொடர்களை ஒரு வித்தியாசம் தகவல். மீண்டும் பரிமாற்றம் தொடங்கும்.";
+/* 'Memory is too low to complete this operation.' is an error message (sentence case, period); used to warn when a request for memory is made that cannot be satisfied using the available platform resources. Such a request may be made by both the running application or by an internal function of the VM. */
+"error_OutOfMemoryError" = "நினைவகம் இந்த அறுவை சிகிச்சை முடிக்க மிகவும் குறைவாக உள்ளது.";
+/* 'Passphrases do not match.' is an error message (sentence case, period); used to warn when the user creates or changes their passphrase and the confirmation second entry did not match the first. */
+"error_passPhrasesDoNotMatch" = "கடவுச்சொற்களை பொருந்தவில்லை.";
+/* 'You have exceeded the message quota for that recipient. Please retry later.' is an error message (sentence case, period): used to warn when sending messages to device and the message quota for all applications on the device is full. */
+"error_PushMsgDeviceQuotaExceeded" = "நீங்கள் பெறுநர் செய்தி ஒதுக்கீட்டை மீறிவிட்டீர்கள். பின்னர் மீண்டும் முயற்சி செய்க.";
+/* 'That recipient has a missing or bad push registration. You should stop sending messages to this device.' is an error message (sentence case, period); used to warn when sending messages to device and the recipient registration was never registered with the push service. */
+"error_PushMsgInvalidRegistration" = "அந்த பெறுநர் ஒரு விடுபட்ட அல்லது கெட்ட மிகுதி பதிவு உள்ளது. நீங்கள் இந்த சாதனத்தை செய்திகளை அனுப்பி நிறுத்த வேண்டும்.";
+/* 'Message expired.' is an error message (sentence case, period); used to warn when getting messages, the message id cannot be found and it has likely been scrubbed from the server. */
+"error_PushMsgMessageNotFound" = "செய்தி காலாவதியானது.";
+/* 'The message is too big. Reduce the size of the message.' is an error message (sentence case, period); used to warn when sending messages to device and the initial push exceeds 1024 bytes. Unlikely, since the initial push only contains the message hash identifier, which is 32 bytes plus a bit more of meta data. */
+"error_PushMsgMessageTooBig" = "செய்தி மிகவும் பெரியதாக உள்ளது. செய்தி அளவை குறைக்கவும்.";
+/* 'That recipient's push registration is no longer valid. The recipient may have uninstalled SafeSlinger or turned off notifications. You should stop sending messages to this device.' is an error message (sentence case, period); used to warn when sending messages to device and the recipient is no longer registered. */
+"error_PushMsgNotRegistered" = "அந்த பெறுநர் மிகுதி பதிவு இனி செல்லுபடியாகாது. பெறுநர் SafeSlinger நீக்கம் அல்லது அறிவிப்புகளை அணைக்கப்பட்டது. நீங்கள் இந்த சாதனத்தை செய்திகளை அனுப்பி நிறுத்த வேண்டும்.";
+/* 'There was an error communicating with the push notification service.' is an error message (sentence case, period); used to warn when sending messages to device and the push service replies incorrect HTTP status code. */
+"error_PushMsgNotSucceed" = "புஷ் அறிவிப்பு சேவையுடன் தொடர்புகொள்ளும்போது பிழை.";
+/* 'You have exceeded the message quota for this device. Please retry later.' is an error message (sentence case, period); used to warn when sending messages to device and the message quota for SafeSlinger on the device is full. */
+"error_PushMsgQuotaExceeded" = "நீங்கள் இந்த சாதனம் செய்தி ஒதுக்கீட்டை மீறிவிட்டீர்கள். பின்னர் மீண்டும் முயற்சி செய்க.";
+/* 'Notification service is not available this time. Please try to send the message later.' is an error message (sentence case, period); used to warn when sending messages to device and the push service has no response for push messages. */
+"error_PushMsgServiceFail" = "அறிவித்தல் சேவை இந்த நேரத்தில் இல்லை. பின்னர் செய்தி அனுப்ப முயற்சி செய்யுங்கள்.";
+/* 'Cannot prepare the audio recorder.' is an error message (sentence case, period); used to warn when the audio recorder is unavailable from the system to record an audio message. iOS-only. */
+"error_RecoderError" = "ஆடியோ ரெக்கார்டர் தயாராக முடியாது.";
+/* 'To start, 'Sling Keys' with another phone at the same time.' is an error message (sentence case, period); used to remind in a notification message that the user should exchange keys with at least one other user to make the app useful to them. */
+"error_ReminderToSlingKeysToUseApp" = "அதே நேரத்தில், மற்றொரு தொலைபேசி மூலம் ' ஸ்லிங் விசைகள்' தொடங்க.";
+/* 'You need an attachment or a text message to send.' is an error message (sentence case, period); used to warn when the user has not attached a file or typed any text message to send to the recipient after using the 'Send' button. */
+"error_selectDataToSend" = "நீங்கள் ஒரு இணைப்பு அல்லது அனுப்ப ஒரு உரை செய்தியை வேண்டும்.";
+/* 'Server Message: '%s'' is an error message (sentence case, period); used to warn when the server has an error message to send back to the client. %s = an English (non-localized) error message sent by our App Engine server code. Android-only. */
+"error_ServerAppMessage" = "சர்வர் செய்தி: '%@'";
+/* 'Server Message: '%s'' is an error message (sentence case, period); this is a duplicate message with alternate formatting for iOS, see error_ServerAppMessage. iOS-only. */
+"error_ServerAppMessageCStr" = "சர்வர் செய்தி: '%@'";
+/* 'No response from server.' is an error message (sentence case, period); used to warn when the server timeout occurs, usually after 30 seconds and did not respond to the client. */
+"error_ServerNotResponding" = "சர்வர் இருந்து எந்த பதிலும்.";
+/* 'Cannot remove the shared file.' is an error message (sentence case, period); used to warn when the shared file cannot be deleted. iOS-only. */
+"error_ShareFileDelError" = "பகிர்வு கோப்பு நீக்க முடியாது.";
+/* 'Timeout waiting for some group members to add data.' is an error message (sentence case, period); used to warn during the key exchange protocol when at least one of the members of the group has not submitted their data to the server or client itself is not able to retrieve the data within the timeout window, currently 2 minutes. */
+"error_TimeoutWaitingForAllMembers" = "சில குழு உறுப்பினர்கள் தரவு சேர்க்க காத்திருக்கும் காலம் கடந்தது.";
+/* 'Unable to match public key to private key in crypto provider.' is an error message (sentence case, period); used to warn when the public encryption key used in the message received is not currently the same private key used, the user should probably sling keys to update again. */
+"error_UnableFindPubKey" = "பரமேஸ்வரன் வழங்குநர் தனியார் முக்கிய பொது முக்கிய பொருத்த முடியவில்லை.";
+/* 'Unable to save to the message database.' is an error message (sentence case, period); used to warn when there is database error inserting a new message. */
+"error_UnableToSaveMessageInDB" = "செய்தி தகவல் சேமிக்க முடியவில்லை.";
+/* 'Unable to save to the recipient database.' is an error message (sentence case, period); used to warn when there is database error inserting a new recipient key/registration . */
+"error_UnableToSaveRecipientInDB" = "பெறுநர் தகவல் சேமிக்க முடியவில்லை.";
+/* 'Unable to update the message database.' is an error message (sentence case, period); used to warn when there is database error updating a message. */
+"error_UnableToUpdateMessageInDB" = "செய்தி தகவல் புதுப்பிக்க இயலவில்லை.";
+/* 'Unable to update the recipient database.' is an error message (sentence case, period); used to warn when there is database error updating a recipient key/registration . */
+"error_UnableToUpdateRecipientInDB" = "பெறுநர் தகவல் புதுப்பிக்க இயலவில்லை.";
+/* 'SafeSlinger error, please restart.' is an error message (sentence case, period); used to warn when an unhandled exception or application fault has occurred. */
+"error_UncaughtExceptionOccured" = "SafeSlinger பிழை, மறுதொடக்கம் செய்யவும்.";
+/* 'Contact data was formatted incorrectly.' is an error message (sentence case, period); used to warn when the vCard format used to exchange contact fields during key exchange are improperly formatted. */
+"error_VcardParseFailure" = "தொடர்பு தரவு தவறாக வடிவமைக்கப்பட்டுள்ளது.";
+/* 'User canceled server request.' is an error message (sentence case, period); used to warn when the user exited the key exchange protocol or messaging transmission before it was finished. */
+"error_WebCancelledByUser" = "பயனர் சர்வர் இரத்து செய்தது.";
+
+/* 'Use this screen to set your name, phone, and email to exchange with others. Tap the 'Done' button when finished.' is a help message (sentence case, period); used via Help button on the Setup screen to describe in more detail what the Setup screen does. */
+"help_find" = "மற்றவர்களுடன் பரிமாறி உங்கள் பெயர், தொலைபேசி, மற்றும் மின்னஞ்சல் அமைக்க இந்த திரையை பயன்படுத்தவும். முடித்த போது ' முடிந்தது ' பொத்தானை தட்டவும்.";
+/* 'To exchange identity data, ensure all users are nearby or on the phone. The 'Begin Exchange' button will exchange only the checked contact data.' is a help message (sentence case, period); used via Help button on the Begin Exchange screen and also the key exchange walkthrough tutorial to describe in more detail what the Begin Exchange screen does. */
+"help_home" = "அடையாள பரிமாற்றம் தரவு, அனைத்து பயனர்கள் அருகிலுள்ள அல்லது தொலைபேசியில் உறுதி. ' தொடங்கியிருக்கவேண்டும் செலாவணி ' பொத்தானை மட்டுமே சரிபார்க்கப்பட தொடர்பு தரவு மாற்றித்தரும்.";
+/* '\n\nYou may also change personal data about your identity on this screen by tapping on the button with your name. This will display a menu allowing you to 'Edit' your contact, 'Create New' contact, or 'Use Another' contact.' is a help message (sentence case, period); Additional help text, which is appended to the Help button text on the Compose and Begin Exchange screens. */
+"help_identity_menu" = "\n\nஉங்கள் பெயர் பொத்தானை தட்டுவதன் மூலம் இந்த திரையில் உங்கள் அடையாளம் பற்றி தனிப்பட்ட தரவு மாற்றலாம். இந்த 'Edit' தொடர்பு, தொடர்பு ' நியூ உருவாக்கவும் ', அல்லது தொடர்பு ' மற்றொரு பயன்பாடு ' அனுமதிக்கும் ஒரு மெனு காண்பிக்கும்.";
+/* 'This screen displays all past messages, and attachments that are still available for download.' is a help message (sentence case, period); used via Help button on the Messages list screen to describe in more detail what the Messages list screen does. */
+"help_Messages" = "இந்த திரையில் அனைத்து கடந்த செய்திகள், மற்றும் இன்னும் பதிவிறக்க கிடைக்க உள்ளன என்று இணைப்புகளை காட்டுகிறது.";
+/* 'Use this screen to login to the application with your passphrase.' is a help message (sentence case, period); used via Help button on the Passphrase screen to describe in more detail what the Passphrase screen does. */
+"help_passphrase" = "உங்கள் கடவுச்சொல்லை பயன்பாட்டு உள்நுழைய இந்த திரையை பயன்படுத்தவும்.";
+/* 'Contacts with SafeSlinger keys are displayed here, select one to send your message to.' is a help message (sentence case, period); used via Help button on the Recipients list screen to describe in more detail what the Recipients list screen does. */
+"help_PickRecip" = "SafeSlinger விசைகளை தொடர்புகள் உங்கள் செய்தியை அனுப்ப தேர்ந்தெடுத்து, இங்கே காட்டப்படும்.";
+/* 'When finished, the protocol will reveal a list of the identity data exchanged. Select the contacts you wish to save and press 'Import'.' is a help message (sentence case, period); used via Help button on the End Exchange screen and also the key exchange walkthrough tutorial to describe in more detail what the End Exchange screen does. */
+"help_save" = "முடிந்ததும், நெறிமுறை பரிமாறி அடையாளத்தை தரவு பட்டியலில் வெளிப்படுத்த வேண்டும். நீங்கள் ' இறக்குமதி ' காப்பாற்ற அழுத்தவும் விரும்புகிறேன் தொடர்புகளை தேர்ந்தெடுக்கவும்.";
+/* 'This screen allows you to select two people you have slung keys with before to securely send their keys to each other. Simply press 'Introduce' when ready.' is a help message (sentence case, period); used via Help button on the Secure Introduction screen to describe in more detail what the Secure Introduction screen does. */
+"help_SecureIntroduction" = "இந்த திரையில் நீங்கள் பாதுகாப்பாக ஒருவருக்கொருவர் தங்களது விசைகளை அனுப்ப முன் விசைகளை ஓடும் இரண்டு மக்கள் தேர்ந்தெடுக்க அனுமதிக்கிறது. போது தயாராக வெறுமனே ' அறிமுகம் ' அழுத்தவும்.";
+/* 'This screen allows you to select some data and a recipient to send to. Simply press 'Send' when ready.' is a help message (sentence case, period); used via Help button on the Compose Message screen to describe in more detail what the Compose Message screen does. */
+"help_Send" = "இந்த திரை நீங்கள் சில தரவு மற்றும் அனுப்ப பெறுநர் தேர்ந்தெடுக்க அனுமதிக்கிறது. போது தயாராக வெறுமனே ' அனுப்பவும் ' அழுத்தவும்.";
+/* 'Select the number of people who are attempting to exchange data together and press 'OK'.' is a help message (sentence case, period); used via Help button on the Group Size screen and also the key exchange walkthrough tutorial to describe in more detail what the Group Size screen does. */
+"help_size" = "'சரி' ஒன்றாக தரவு பரிமாற்றம் மற்றும் அழுத்தவும் முயற்சிக்கும் மக்கள் எண்ணிக்கை தேர்ந்தெடுக்கவும்.";
+/* 'This number on this screen is used to create a unique group of users. Review the numbers on all users' screens, then all users should enter the same lowest number and press 'OK'.' is a help message (sentence case, period); used via Help button on the Grouping screen and also the key exchange walkthrough tutorial to describe in more detail what the Grouping screen does. */
+"help_userid" = "இந்த திரையில் இந்த எண் செய்த ஒரு தனிப்பட்ட குழுவை உருவாக்க பயன்படுத்தப்படுகிறது. அனைத்து பயனர்கள் எண்கள் விமர்சனம் ' சரி' திரைகளில், பின்னர் அனைத்து பயனர்கள் அதே குறைந்த எண்ணிக்கையிலான உள்ளிடவும் வேண்டும் '.";
+/* 'Now, you must match one of these 3-word phrases with all users. Every user must select the same common phrase, and press 'Next'.' is a help message (sentence case, period); used via Help button on the Verify screen and also the key exchange walkthrough tutorial to describe in more detail what the Verify screen does. */
+"help_verify" = "இப்போது, நீங்கள் அனைத்து பயனர்கள் இந்த 3 வார்த்தை சொற்றொடர்கள் ஒரு பொருந்த வேண்டும். ஒவ்வொரு பயனர் அதே பொதுவான சொற்றொடர், மற்றும் பத்திரிகை ' அடுத்த ' தேர்ந்தெடுக்க வேண்டும்.";
+
+/* 'Contacts permission required. Please go to iOS Settings to enable Contacts permissions.' is an error message (sentence case, period); used to warn that the user has disabled read/write access to the address book and instructions on how to correct it. iOS-only. */
+"iOS_contactError" = "தொடர்புகள் அனுமதி தேவை. தொடர்புகள் அனுமதிகள் செயல்படுத்த iOS அமைப்புகள் செல்க.";
+/* 'Push registration is missing.' is an error message (sentence case, period); used to warn the user the push registration is missing. iOS-only. */
+"iOS_errorpushtoken" = "புஷ் பதிவு காணவில்லை.";
+/* 'Notifications permission required. Please go to iOS Settings to enable Notifications permissions.' is an error message (sentence case, period); used to warn that push notifications have been turned off for the user and if so they will be unable to receive messages from other users, which is a crucial component of the application. iOS-only. */
+"iOS_notificationError1" = "அறிவிப்புகளை அனுமதி தேவை. அறிவிப்புகள் அனுமதிகள் செயல்படுத்த iOS அமைப்புகள் செல்க.";
+/* '%s permission required. Please go to iOS Settings to enable Notifications permissions.' is an error message (sentence case, period); see iOS_notificationError1. %s = appears to be only a substitution of 'notifications'. iOS-only. */
+"iOS_notificationError2" = "%@ அனுமதி தேவை. அறிவிப்புகள் அனுமதிகள் செயல்படுத்த iOS அமைப்புகள் செல்க.";
+/* 'SafeSlinger is not optimized for iOS 5.x devices. SafeSlinger requires iOS 6 or higher.' is a warning message (sentence case, period); message for dialog popups when a user still uses an old iOS device. iOS-only. */
+"iOS_oldOSWarn" = "SafeSlinger iOS 5.x சாதனங்கள் உகந்ததாக இல்லை. SafeSlinger iOS 6 அல்லது அதிக தேவைப்படுகிறது.";
+
+/* '%s ago' is a screen label (match English casing); used This text appears on the messages list screen and is used to describe how long ago a message was sent or received. %s = a time measurement, such as '5 minutes' or '2 hours'. */
+"label_ago" = "%@ முன்பு";
+/* 'Last Backup Completed' is a screen label (match English casing); used on the Settings screen to indicate the time and date when the last backup was confirmed. */
+"label_backupCompleteDate" = "நிறைவு கடைசியாக காப்பு";
+/* 'Last Backup Request' is a screen label (match English casing); used on the Settings screen to indicate when the user last edited data that should be backed up and the application requested a backup from the backup service. */
+"label_backupRequestDate" = "கடந்த காப்பு கோரிக்கை";
+/* 'Backup URL' is a screen label (match English casing); used on the Settings screen above the URL used for iCloud backups. iOS-only. */
+"label_backupURL" = "காப்பு URL ஐ";
+/* 'Touch to review your %d messages' is a screen label (match English casing); used in the notification drop down window to indicate what will happen when received messages notification is touched. %d = the number of unseen messages received. */
+"label_ClickForNMsgs" = "உங்கள் %d செய்திகளை மறுபரிசீலனை செய்ய டச்";
+/* 'Compose Message' is a screen label (match English casing); used as a text box hint on the Compose Message screen where the user can type a message in the box. */
+"label_ComposeHint" = "செய்தி எழுது";
+/* 'Your Email' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current email to use. */
+"label_ContactEmail" = "உங்கள் மின்னஞ்சல்";
+/* 'Your Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current user name (first and last) to use. Android-only. */
+"label_ContactName" = "உங்கள் பெயர்";
+/* 'Your Phone' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current phone to use. */
+"label_ContactPhone" = "உங்கள் தொலைபேசி";
+/* '%d days' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole days. */
+"label_days" = "%d நாட்கள்";
+/* 'Device:' is a screen label (match English casing); used to prefix a push registration in the recipients list screen as a device ID. */
+"label_Device" = "சாதனம்:";
+/* 'Send-only mode' is a screen label (match English casing); used in many UIs to show that receiving push messages is not supported. */
+"label_DeviceInSendOnlyMode" = "அனுப்புக மட்டுமே முறையில்";
+/* 'Your key has changed: Sling Keys again.' is an error message (sentence case, period); used to warn the user that the key in the Recipients list screen has been exchanged once before with a different key from this user. */
+"label_DisabledExchSourceKeyChange" = "உங்கள் முக்கிய மாறிவிட்டது: ஸ்லிங் விசைகள் மீண்டும்.";
+/* 'DRAFT' is a screen label (match English casing); used to label a message in the Messages list that has been saved in progress but not yet sent. */
+"label_Draft" = "வரைவு";
+/* 'Key format deprecated: Sling Keys again.' is an error message (sentence case, period); used on the Recipient list screen to warn users that older key formats have been deprecated. Android-only. */
+"label_EnabledKeyFormatDeprecated" = "முக்கிய வடிவம் நீக்கப்பட்டது: ஸ்லிங் விசைகள் மீண்டும்.";
+/* 'exchanged' is a screen label (match English casing); used to indicate 0-hop or direct trust from a key exchange in the Recipient list screen. */
+"label_exchanged" = "பரிமாறி";
+/* 'expired' is a screen label (match English casing); used on the Messages list for message attachment that has not been downloaded more than 24 hours after it was originally sent. */
+"label_expired" = "காலாவதியான";
+/* 'expires %s' is a screen label (match English casing); used on the message list to show how much time is left to download an attachment. %s = a time measurement, such as 'in 5 minutes' or 'in 2 hours'. Android-only. */
+"label_expires" = "%@ காலாவதியாகிறது";
+/* 'expires in' is a screen label (match English casing); used on the message list to show how much time is left to download an attachment; a time measurement, such as '5 minutes' or '2 hours' will be appended to this string. iOS-only. */
+"label_expiresIn" = "ல் காலாவதியாகிறது";
+/* 'File Name' is a screen label (match English casing); used on the Save File As dialog as a hint in the file name text box when changing the file name. */
+"label_FileNameHint" = "கோப்பு பெயர்";
+/* 'Please enter your personal information. This data will only be securely shared with individuals whom you choose to share it with.' is a screen label (match English casing); used to instruct the user how to proceed on the Setup screen. */
+"label_FindInstruct" = "உங்கள் தனிப்பட்ட தகவல்களை உள்ளிடவும். இந்த தரவு பாதுகாப்பாக நீங்கள் பகிர்ந்து கொள்ள தேர்வு யாரை தனிநபர்கள் பகிர்ந்து கொள்ளப்படும்.";
+/* 'First Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current first name to use. iOS-only. */
+"label_FirstName" = "முதல் பெயர்";
+/* 'Check items you wish to share and tap 'Begin Exchange' when others are ready to exchange.' is a screen label (match English casing); used to instruct the user how to proceed on the Begin Exchange screen. */
+"label_Home" = "நீங்கள் பகிர்ந்து மற்றும் 'எக்ஸ்சேஞ்ச் தொடங்கியிருக்கவேண்டும் ' தட்டி விரும்பும் பொருட்களை சரிபார்க்கவும் மற்றவர்கள் பரிமாறி தயாராக இருக்கும் போது.";
+/* 'Home' is a screen label (match English casing); used to denote a 'home' type of email or phone on the Setup screen. iOS-only. */
+"label_hometag" = "முகப்பு";
+/* '%d hours' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole hours. */
+"label_hours" = "%d மணி நேரம்";
+/* 'SafeSlinger iCloud is enabled. Tap the 'Done' button when finished.' is a screen label (match English casing); used to indicate the backup will occur while on the Setup screen. iOS-only. */
+"label_iCloudEnable" = "SafeSlinger iCloud செயல்படுத்தப்படும். முடித்த போது ' முடிந்தது ' பொத்தானை தட்டவும்.";
+/* 'No messages. You may send a message from the 'Compose Message' button on the Home menu.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. iOS-only. */
+"label_InstNoMessages" = "செய்திகள் இல்லை. நீங்கள் முகப்பு மெனுவில் ' செய்தி எழுது ' பொத்தானை ஒரு செய்தியை அனுப்ப வேண்டும்.";
+/* 'No messages. You may send a message from the 'Compose' tab.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. Android-only. */
+"label_InstNoMessagesAndroid" = "செய்திகள் இல்லை. நீங்கள் ' தொகுத்தல் ' தாவலில் இருந்து ஒரு செய்தியை அனுப்ப வேண்டும்.";
+/* 'No recipients. Find another SafeSlinger user nearby and touch the 'Sling Keys' tab to share keys.' is a screen label (match English casing); used to instruct the user how to proceed on the Recipient list screen is case of no recipients. */
+"label_InstNoRecipients" = "இல்லை பெறுபவர்கள். அருகில் உள்ள மற்றொரு SafeSlinger பயனர் கண்டறிய மற்றும் விசைகளை பகிர்ந்து கொள்ள ' ஸ்லிங் விசைகள்' தாவலை தொட்டு.";
+/* 'No shared file. Connect your device with iTunes and drag files to the shared folder.' is a screen label (match English casing); used to instruct the user how to proceed on the Shared Files screen is case of no files to share. iOS-only. */
+"label_InstNoSharedFile" = "இல்லை பகிர்வு கோப்பு. பகிரப்பட்ட கோப்புறை ஐடியூன்ஸ் மற்றும் இழுவை கோப்புகளை உங்கள் சாதனத்தை இணைக்க.";
+/* 'Pick a recipient to send a message to:' is a screen label (match English casing); used to instruct the user how to proceed on the Pick Recipients list screen. */
+"label_InstRecipients" = "ஒரு செய்தியை அனுப்ப, ஒரு பெறுநர் தேர்வு:";
+/* 'Pick recipients to introduce securely:' is a screen label (match English casing); used to instruct the user how to proceed on the Secure Introduction Recipients list screen. */
+"label_InstSendInvite" = "பாதுகாப்பாக அறிமுகப்படுத்த பெறுபவர்கள் தேர்வு:";
+/* 'Pick a file to attach:' is a screen label (match English casing); used as a title for a list of files that could be attached to the message. */
+"label_InstSharedFile" = "இணைக்க ஒரு கோப்பு தேர்வு:";
+/* 'introduced' is a screen label (match English casing); used to indicate 1-hop trust from a secure introduction in the Recipient list screen. */
+"label_introduced" = "அறிமுகம்";
+/* 'Key:' is a screen label (match English casing); used to prefix the key generation date in the Recipients list and on the Compose Message screen. */
+"label_Key" = "முக்கிய:";
+/* 'Last Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current last name to use. iOS-only. */
+"label_LastName" = "கடைசி பெயர்";
+/* 'Me' is a screen label (match English casing); used on the secure introduction invitation dialog to indicate the one-hop trust relationship between the user (Me); the trusted person, and the new person. */
+"label_Me" = "என்னை";
+/* 'I would like to introduce %s to you.' is a screen label (match English casing); used as the text message when sending secure introduction invitations. %s = the name of a person. */
+"label_messageIntroduceNameToYou" = "நான் உங்களுக்கு %@ அறிமுகப்படுத்த விரும்புகிறேன்.";
+/* 'Me (to %s):' is a screen label (match English casing); used as a header for sent messages in the messages list screen. %s = the name of a person. */
+"label_MeToSender" = "(%@) எனக்கு:";
+/* '%d minutes' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole minutes. */
+"label_minutes" = "%d நிமிடங்கள்";
+/* 'Mobile' is a screen label (match English casing); used to denote a 'mobile' type of email or phone on the Setup screen. iOS-only. */
+"label_mobiletag" = "மொபைல்";
+/* 'Most recent only' is a screen label (match English casing); used as a label for the boolean toggle switching between all or recent-only recipients on recipient list. */
+"label_MostRecentOnly" = "மிக சமீபத்திய மட்டுமே";
+/* 'My updated SafeSlinger credentials are attached.' is a screen label (match English casing); used as default message attached to a credential update. */
+"label_MsgSendUpdate" = "என் மேம்படுத்தப்பட்டது SafeSlinger சான்றுகளை இணைக்கப்பட்டுள்ளது.";
+/* 'None' is a screen label (match English casing); used to indicate the local, non-synchronized contacts account name on the phone when picking a Save Account. */
+"label_None" = "இல்லை";
+/* 'Non-English' is a screen label (match English casing); used to instruct the user how to switch on Numeric mode while doing comparison. */
+"label_NumericModeHint" = "ஆங்கிலம் அல்லாத";
+/* '%d Files to Share:' is a screen label (match English casing); used on the Sharing Folder screen. %d = the number of files to share. iOS-only. */
+"label_numsharedfiles" = "%d கோப்புகளை பகிர்ந்து கொள்ள:";
+/* 'Old Threads' is a screen label (match English casing); used for the old thread (iOS only). */
+"label_OldThreads" = "பழைய இழைகள்";
+/* 'Other' is a screen label (match English casing); used to denote a 'other' type of email or phone on the Setup screen. iOS-only. */
+"label_othertag" = "வேறு";
+/* 'Retry' is a screen label (match English casing); used in the Passphrase screen text box as a prefix hint combined with a time measurement when, which is exponentially backed off on invalid passphrase entry, such as 'Retry in 14 seconds'. Used during back off while all user controls have been disabled. */
+"label_PassHintBackoff" = "மீண்டும் முயற்சி செய்க";
+/* 'Updated Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint to create a replacement passphrase. */
+"label_PassHintChange" = "இற்றை கடவுச்சொல்லை";
+/* 'Create Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint to create a new passphrase. */
+"label_PassHintCreate" = "கடவுச்சொல்லை உருவாக்கவும்";
+/* 'Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint enter the passphrase. */
+"label_PassHintEnter" = "கடவுச்சொல்லை";
+/* 'Repeat Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint to confirm the passphrase again. */
+"label_PassHintRepeat" = "மீண்டும் மீண்டும் கடவுச்சொல்லை";
+/* 'Passphrase Cache' is a screen label (match English casing); used on the Settings screen to above the display of the users' passphrase timeout period. */
+"label_passPhraseCacheTtl" = "கடவுச்சொல்லை Cache";
+/* 'Passphrase cached' is a screen label (match English casing); used in the notification window when a passphrase has been cached. Android-only. */
+"label_PassPhraseIsCached" = "கடவுச்சொல்லை தேக்கப்பட்ட";
+/* 'phone-only' is a screen label (match English casing); used to indicate the local, non-synchronized contacts account type on the phone when picking a Save Account. */
+"label_phoneOnly" = "தொலைபேசி மட்டுமே";
+/* 'Photo' is a screen label (match English casing); used on the Begin Exchange screen to toggle sending the users' photo during the exchange. */
+"label_Photo" = "புகைப்பட";
+/* 'This number is used to create a unique group of users. Compare, and then enter the lowest number among all users.' is a screen label (match English casing); used to instruct the user how to proceed on the Grouping screen. */
+"label_PromptInstruct" = "இந்த எண் செய்த ஒரு தனிப்பட்ட குழுவை உருவாக்க பயன்படுத்தப்படுகிறது. ஒப்பிட்டு பின்னர் அனைத்து பயனர்கள் மத்தியில் மிக குறைந்த எண்ணிக்கை உள்ளிடவும்.";
+/* 'Key ID' is a screen label (match English casing); used on the Settings, Compose Message, and Recipients list screens as a label above the base-64 encoded key IDs for sender and recipients. */
+"label_PublicKeyID" = "விசை ID";
+/* 'Push Registration ID' is a screen label (match English casing); used on the Settings screen as a label above the push registration for this user. */
+"label_PushTokenID" = "புஷ் பதிவு ஐடி";
+/* 'received %d items' is a screen label (match English casing); used to show the progress when collecting group members data during the key exchange protocol. %d = the number of members' data items received during the current phase of the exchange protocol. */
+"label_ReceivedNItems" = "%d பொருட்களை பெற்றது";
+/* 'Backup Reminder' is a screen label (match English casing); used on the Settings screen to toggle the reminder when pending backups do not execute in timely manner. */
+"label_RemindBackupDelay" = "காப்பு நினைவூட்டல்";
+/* 'Reported inactive %s.' is an error message (sentence case, period); used on the Recipient list screen to warn users that the push registration has been reported not-registered or inactive by the push service. %s = a time measurement of how long it has been reported inactive: '2 days ago' and the like.. */
+"label_ReportedInactive" = "செயலற்று %@ தகவல்.";
+/* 'Last Restore Completed' is a screen label (match English casing); used above a time stamp on the Settings screen to indicate the last time backup settings were restored. */
+"label_restoreCompleteDate" = "கடந்த நிறைவு மீட்டமை";
+/* 'SafeSlinger backup delayed' is a screen label (match English casing); used as a title of the notification when a backup request has been pending more than 1 hour. */
+"label_SafeSlingerBackupDelayed" = "தாமதமாக SafeSlinger காப்பு";
+/* '(SafeSlinger Direct Exchange)' is a screen label (match English casing); used on the Secure Introduction invitation dialog to denote the sender whom the user has performed a direct exchange with and holds direct trust. */
+"label_safeslingered" = "(SafeSlinger நேரடி எக்ஸ்சேஞ்ச்)";
+/* 'Save Account' is a screen label (match English casing); used above the editable field on the Setup and End Exchange screen to showing the address book account to use when saving or updating contacts. */
+"label_SaveAccount" = "கணக்கு சேமிக்கவும்";
+/* 'Exchange Complete! Select member data to save to your address book:' is a screen label (match English casing); used to instruct the user how to proceed on the End Exchange screen. */
+"label_SaveInstruct" = "சந்தை நிறைவு! உங்கள் முகவரி புத்தகத்தில் காப்பாற்ற உறுப்பினர் தரவு தேர்ந்தெடுக்கவும்:";
+/* '%d seconds' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole seconds. */
+"label_seconds" = "%d வினாடிகள்";
+/* 'Select label' is a screen label (match English casing); used on the drop-down menu title on the Setup screen when choosing an email of phone type label. Android 2.2 and 2.3. */
+"label_selectLabel" = "தேர்ந்தெடு";
+/* 'Select Recipient' is a screen label (match English casing); used on the Compose Message screen recipient button before a recipient has been selected. */
+"label_SelectRecip" = "தேர்வு பெற்றவர்";
+/* 'Send Error Data' is a screen label (match English casing); used on the Settings screen to toggle the automatic upload of error reports. */
+"label_sendErrorData" = "பிழை என்பது தரவு அனுப்பவும்";
+/* 'From:' is a screen label (match English casing); used on the Compose Message screen to prefix the recipient's name. */
+"label_SendFrom" = "இருந்து:";
+/* 'To:' is a screen label (match English casing); used on the Compose Message screen to prefix the sender's name. */
+"label_SendTo" = "செய்ய:";
+/* 'Show this hint next time.' is a screen label (match English casing); used in the key exchange walkthrough dialog to toggle the display of the walkthrough at the next attempted key exchange. */
+"label_ShowHintAtLaunch" = "இந்த குறிப்பை அடுத்த முறை காட்டு.";
+/* 'Step 1' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
+"label_step_1" = "படி 1";
+/* 'Step 2' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
+"label_step_2" = "படி 2";
+/* 'Step 3' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
+"label_step_3" = "படி 3";
+/* 'Step 4' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
+"label_step_4" = "படி 4";
+/* 'Step 5' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
+"label_step_5" = "படி 5";
+/* 'Tap to decrypt file' is a screen label (match English casing); used to indicate tapping this message in the list will attempt to decrypt the attachment (if needed). */
+"label_TapToDecryptFile" = "கோப்பை டிக்ரிப்ட் செய்ய தட்டுக";
+/* 'Tap to decrypt' is a screen label (match English casing); used to indicate tapping this message in the list will attempt to decrypt it. */
+"label_TapToDecryptMessage" = "டிக்ரிப்ட் தட்டவும்";
+/* 'Tap to download file' is a screen label (match English casing); used to indicate tapping this message in the list will download the file (and attempt to decrypt it). */
+"label_TapToDownloadFile" = "கோப்பை பதிவிறக்க தட்டவும்";
+/* 'Tap to download message' is a screen label (match English casing); used to indicate tapping this message in the list will download the message (if needed). */
+"label_TapToDownloadMessage" = "செய்தி பதிவிறக்க தட்டவும்";
+/* 'Tap to open file' is a screen label (match English casing); used to indicate tapping this decrypted message in the list will attempt to view the decrypted attachment. */
+"label_TapToOpenFile" = "கோப்பு திறக்க தட்டுக";
+/* 'Tap to resume message draft' is a screen label (match English casing); used to indicate tapping this message in the list will take the user to the composition screen. */
+"label_TapToResumeDraft" = "செய்தி வரைவு மீண்டும் தட்டவும்";
+/* 'Tap and hold to send credential update.' is a screen label (match English casing); used as a hint on the recipient list to help the user know if a credential update is needed. Android-only. */
+"label_TapToSendCredentialUpdate" = "தட்டி அறிமுக மேம்படுத்தல் அனுப்ப நடத்த.";
+/* 'Contacts Account' is a screen label (match English casing); used above the editable field on the Settings screen to show the current address book account to use. */
+"label_targetAccountLabel" = "தொடர்புகள் கணக்கு";
+/* 'You may optionally enable SafeSlinger iCloud backup in iOS Settings. Tap the 'Done' button when finished.' is a screen label (match English casing); used on the Setup screen to remind the user that no backups will be restored on new installation. iOS-only. */
+"label_TouchToConfigureBackupSettings" = "நீங்கள் விருப்பப்பட்டால் iOS அமைப்புகள் SafeSlinger iCloud காப்பு இயக்க வேண்டும். முடித்த போது ' முடிந்தது ' பொத்தானை தட்டவும்.";
+/* 'Touch to configure backup settings.' is a screen label (match English casing); used in the notification window when the backup request has been pending over 1 hour. Android-only. */
+"label_TouchToConfigureBackupSettingsAndroid" = "காப்பு அமைப்புகளை கட்டமைக்க டச்.";
+/* 'Touch to configure cache timeout settings.' is a screen label (match English casing); used in the notification window when a passphrase has been cached. Android-only. */
+"label_TouchToConfigureCacheTimeout" = "கேச் நேரம் அமைப்புகளை கட்டமைக்க டச்.";
+/* 'Unknown' is a screen label (match English casing); used in menu lists when unexpected type definitions are encountered. */
+"label_undefinedTypeLabel" = "தெரியாத";
+/* 'Encrypted Sender' is a screen label (match English casing); used as the header for an encrypted message in the message list. */
+"label_UnknownSender" = "மறைகுறியாக்கப்பட்ட அனுப்புநர்";
+/* 'Lowest' is a screen label (match English casing); used as a text box hint on the Grouping screen when entering the lowest ID number. */
+"label_UserIdHint" = "மிகக்குறைந்த";
+/* 'User Name' is a screen label (match English casing); used as a placeholder before the users' contact has been loaded. */
+"label_UserName" = "பயனர் பெயர்";
+/* 'All phones must match one of the 3-word phrases. Compare, and then pick the matching phrase.' is a screen label (match English casing); used to instruct the user how to proceed on the Verify screen. */
+"label_VerifyInstruct" = "அனைத்து தொலைபேசிகள் 3 வார்த்தை சொற்றொடர்கள் ஒரு பொருந்த வேண்டும். ஒப்பிட்டு பின்னர் பொருத்தமான சொற்றொடர் எடுக்க.";
+/* 'Work' is a screen label (match English casing); used to denote a 'work' type of email or phone on the Setup screen. iOS-only. */
+"label_worktag" = "வேலை";
+
+/* 'About' is a menu option (title case); used to show the about dialog via the Settings screen. */
+"menu_About" = "பற்றி";
+/* 'Change' is a menu option (title case); used to change the currently selected file attachment via the File Options dialog. */
+"menu_Change" = "மாறுதல்";
+/* 'Change Passphrase' is a menu option (title case); used to confirm the current passphrase and create and new one via the Settings screen. */
+"menu_ChangePassphrase" = "மாற்றம் கடவுச்சொல்லை";
+/* 'Create New' is a menu option (title case); used to show a new empty contact in the address book for editing as the users' current identity via the My Identity dialog. */
+"menu_CreateNew" = "புதிய உருவாக்கவும்";
+/* 'Delete' is a menu option (title case); used to delete the current item from the list context menu. */
+"menu_delete" = "நீக்கு";
+/* 'Delete Thread '%s'' is a menu option (title case); used to delete all messages from this person via the message list context menu. %s = the name of a person. */
+"menu_deleteThread" = "கயிற்றால் %@ ' நீக்கு";
+/* 'View Detail' is a menu option (title case); used to show a dialog of more detail about the item via the message list context menu. */
+"menu_Details" = "காட்சி விரிவாக";
+/* 'Download Directory' is a choice (sentence case); used when the user chooses to change the directory of the attachment before saving. */
+"menu_DownloadDirectory" = "அடைவு பதிவிறக்க";
+/* 'Edit' is a menu option (title case); used to show the users' current contact in the address book for editing via the My Identity dialog. */
+"menu_Edit" = "திருத்து";
+/* 'File Manager' is a menu option (title case); used to show a custom file system navigation menu via the Choose Your File dialog. Android-only. */
+"menu_FileManager" = "கோப்பு மேலாளர்";
+/* 'Help' is a menu option (title case); used to show a help dialog for the current screen. */
+"menu_Help" = "உதவி";
+/* 'Introduction' is a menu option (title case); used to show the secure introduction composition screen via the main home screen. */
+"menu_Introduction" = "அறிமுகப்படுத்துதல்";
+/* 'License' is a menu option (title case); used to show a dialog of the EULA via the Settings screen. Android-only. */
+"menu_License" = "உரிமம்";
+/* 'Logout' is a menu option (title case); used to remove the cached passphrase and force the user to login again. */
+"menu_Logout" = "விடு பதிகை";
+/* 'Copy Text' is a menu option (title case); used to copy the message text into the clipboard via the message list context menu. */
+"menu_messageCopyText" = "நகல் உரை";
+/* 'Forward' is a menu option (title case); used to create a new message with the same text message/attachment via the message list context menu. */
+"menu_messageForward" = "முன்";
+/* 'Remove' is a menu option (title case); used to remove the currently selected file attachment via the File Options dialog. */
+"menu_Remove" = "நீக்கு";
+/* 'Send Application' is a menu option (title case); used to send an email or text message containing an installation link for SafeSlinger. */
+"menu_SelectShareApp" = "விண்ணப்ப அனுப்பவும்";
+/* 'Send Feedback' is a menu option (title case); used to send an email with support data for feedback. */
+"menu_sendFeedback" = "பின்னூட்டம் அனுப்பு";
+/* 'Send Update' is a menu option (title case); used to send a credential update via the recipient list context menu. */
+"menu_SendUpdate" = "புதுப்பி அனுப்பு";
+/* 'Settings' is a menu option (title case); used to show the settings screen. */
+"menu_Settings" = "அமைப்புகள்";
+/* 'Show Tutorial' is a menu option (title case); used to toggle the key exchange walkthrough when exchanging keys via the Settings screen. */
+"menu_ShowTutorial" = "காட்டு பயிற்சி";
+/* 'Compose' is a menu option (title case); used at the title of the message composition tab for the home tab view. */
+"menu_TagComposeMessage" = "அச்சுக்கோர்";
+/* 'Sling Keys' is a menu option (title case); used as the title of the key exchange tab for the home tab view. */
+"menu_TagExchange" = "ஸ்லிங் விசைகள்";
+/* 'Messages' is a menu option (title case); used as the title of the message list tab for the home tab view. */
+"menu_TagListMessages" = "செய்திகள்";
+/* 'Use Another' is a menu option (title case); used to redo the Setup process again to find another contact to use as the users' main identity via the My Identity dialog. */
+"menu_UseAnother" = "மற்றொரு பயன்பாடு";
+
+/* 'waiting for verification from all members...' is a progress message (lower case, ellipsis); used to show progress while verifying data from all members hash equal to the initial commitment they sent. */
+"prog_CollectingOthersCommitVerify" = "அனைத்து உறுப்பினர்கள் சரிபார்ப்பு காத்திருக்கிறது...";
+/* 'waiting for all users to join...' is a progress message (lower case, ellipsis); used to show progress while waiting to collect all initial commitments from members who entered the same lowest number grouping ID. */
+"prog_CollectingOthersItems" = "அனைத்து பயனர்கள் சேர காத்திருக்கும்...";
+/* 'constructing group key...' is a progress message (lower case, ellipsis); used to show progress while generating the asymmetric shared group key tree and distributing the appropriate public tree nodes. */
+"prog_ConstructingGroupKey" = "குழு முக்கிய அமைக்க...";
+/* 'decrypting...' is a progress message (lower case, ellipsis); used to show progress during message decryption (and currently signature verification as well). */
+"prog_decrypting" = "டிக்ரிபிசன்...";
+/* 'encrypting...' is a progress message (lower case, ellipsis); used to show progress during message encryption (and currently signing as well). */
+"prog_encrypting" = "என்க்ரிப்ட்...";
+/* 'message sent, awaiting response...' is a progress message (lower case, ellipsis); used to show progress after the message has been uploaded, but the server has not confirmed the generation of a push message yet. */
+"prog_FileSent" = "செய்தி பதிலை எதிர்பார்த்திருப்பதாகவும், அனுப்பி...";
+/* 'finding key...' is a progress message (lower case, ellipsis); used to show progress while looking up a matching key in the key database. */
+"prog_findingKey" = "முக்கிய வேலையாகும்...";
+/* 'generating key, this can take a while...' is a progress message (lower case, ellipsis); used to show progress during encryption key and signature key public/private key pair generation. */
+"prog_GeneratingKey" = "முக்கிய உருவாக்கும், இந்த ஒரு போது எடுத்து கொள்ளலாம்...";
+/* 'generating signature...' is a progress message (lower case, ellipsis); used to show progress during message signature generation. */
+"prog_generatingSignature" = "கையெழுத்து உருவாக்க...";
+/* 'loading content...' is a progress message (lower case, ellipsis); used to show progress during file preview loading. */
+"prog_loadingContent" = "ஏற்றுதல் உள்ளடக்கம்...";
+/* 'receiving encrypted file...' is a progress message (lower case, ellipsis); used to show progress while receiving the requested file. */
+"prog_ReceivingFile" = "மறைகுறியாக்கப்பட்ட கோப்பு பெறும்...";
+/* 'requesting encrypted file...' is a progress message (lower case, ellipsis); used to show progress while waiting for the server to return the requested file. */
+"prog_RequestingFile" = "மறைகுறியாக்கப்பட்ட கோப்பு கோருகிறது...";
+/* 'requesting encrypted message...' is a progress message (lower case, ellipsis); used to show progress while waiting for the server to return the requested message. */
+"prog_RequestingMessage" = "மறைக்கப்பட்ட செய்தி கேட்டு...";
+/* 'requesting push registration...' is a progress message (lower case, ellipsis); used to show progress while waiting for Google or APNS to return a registration id for this phone to receive SafeSlinger-only push messages. */
+"prog_RequestingPushReg" = "மிகுதி பதிவு கோருகிறது...";
+/* 'requesting membership...' is a progress message (lower case, ellipsis); used to show progress while waiting for the exchange server to return a grouping ID number. */
+"prog_RequestingUserId" = "உறுப்பினர் கோருகிறது...";
+/* 'updating address book...' is a progress message (lower case, ellipsis); used to show progress while newly exchanged contact data is added to the users' address book. */
+"prog_SavingContactsToAddressBook" = "புதுப்பித்தல் முகவரி புத்தகம்...";
+/* 'updating key database...' is a progress message (lower case, ellipsis); used to show progress while newly exchanged keys are added to the local database. */
+"prog_SavingContactsToKeyDatabase" = "முக்கிய தகவல் மேம்படுத்தும்...";
+/* 'searching for backup...' is a progress message (lower case, ellipsis); used to show progress during a search for backed up settings. */
+"prog_SearchingForBackup" = "காப்பு தேடி...";
+/* 'sending encrypted %s...' is a progress message (lower case, ellipsis); used to show progress while a message is being sent. %s = the file name if an attachment exists. */
+"prog_SendingFile" = "குறியாக்கம் %@ அனுப்பும்...";
+/* 'verifying integrity...' is a progress message (lower case, ellipsis); used to show progress during message integrity verification. */
+"prog_verifyingIntegrity" = "ஒருமைப்பாடு சரிபார்க்கிறது...";
+/* 'verifying signature...' is a progress message (lower case, ellipsis); used to show progress during message signature verification. */
+"prog_verifyingSignature" = "கையொப்பம் சரிபார்க்கிறது...";
+
+/* 'Advanced' is a preferences title (title case); used to sub-divide the Advanced section of the settings screen. */
+"section_advanced" = "மேம்பட்ட";
+/* 'Backup' is a preferences title (title case); used to sub-divide the Backup section of the settings screen. */
+"section_backup" = "காப்பு";
+/* 'General' is a preferences title (title case); used to sub-divide the General section of the settings screen. */
+"section_general" = "பொதுவான";
+
+/* 'Backup restored.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm backup keys and settings have bee restored on re-install. */
+"state_BackupRestored" = "காப்பு மீண்டும்.";
+/* 'Deleted file %s.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that a file has been deleted. %s = the file name of the deleted file. */
+"state_FileDeleted" = "நீக்கப்பட்ட கோப்பு %@.";
+/* 'Message sent.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that a message has been sent. */
+"state_FileSent" = "செய்தி அனுப்பப்பட்டது.";
+/* 'Message saved as draft.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that an un-sent message has been saved. */
+"state_MessageSavedAsDraft" = "சேமிக்கப்பட்டது செய்தி.";
+/* '%d messages deleted.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the number of messages deleted. %d = the number of messages successfully deleted. */
+"state_MessagesDeleted" = "நீக்கப்பட்ட %d செய்திகளை.";
+/* 'Passphrase updated.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the change of password. */
+"state_PassphraseUpdated" = "கடவுச்சொல்லை மேம்படுத்தப்பட்டது.";
+/* '%d recipients deleted.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the number of recipients deleted. %d the number of recipient's keys successfully deleted. */
+"state_RecipientsDeleted" = "%d பெறுபவர்கள் நீக்கப்பட்டது.";
+/* '%s contacts imported.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the number of contacts imported after exchange. %s the number of contacts imported, may be expressed as a ratio, such as 4/5 in case of a partial import. */
+"state_SomeContactsImported" = "%@ தொடர்புகளை இறக்குமதி.";
+/* 'Text copied to clipboard.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the message text has been copied to the device native clipboard. */
+"state_TextCopiedToClipboard" = "உரை இடைநிலைப்பலகையில் நகலெடுக்கப்படும்.";
+
+/* '%s\n\nSafeSlinger is designed to easily share identity data, in person or over the phone, authenticated, private, and intact. Each person you share with creates a secure end-to-end channel to send messages.\n\nFeatures:\n- Easily exchange contact information with others\n- Securely sling texts, photos, anything!\n- Strong cryptography protects your information\n\nemail: %s\nweb: %s' is an application description (sentence case); used at the beginning of the about box and app store listing to describe the application features. %1$s = application name and version number, %2$s = SafeSlinger support email address, %3$s = SafeSlinger project web page address. */
+"text_About" = "%@\n\nSafeSlinger தனியார், அங்கீகரிக்கப்பட்ட நபர் அல்லது தொலைபேசி, எளிதாக அடையாளம் தரவு பகிர்ந்து வடிவமைக்கப்பட்டுள்ளது, அப்படியே உள்ளது. நீங்கள் பகிர்ந்து ஒவ்வொரு நபர் செய்திகளை அனுப்ப ஒரு பாதுகாப்பான இறுதி வரை இறுதி சேனல் உருவாக்குகிறது.\n\nஅம்சங்கள்:\n- எளிதாக மற்றவர்கள் பாதுகாப்பாக நூல்கள், புகைப்படங்கள், எதையும் உணர்த்துவது\n- தொடர்பு தகவல்களை பரிமாறி! %@\nவலை: %@\n- வலுவான குறியாக்கவியல் உங்கள் தகவல்\n\nமின்னஞ்சல் பாதுகாக்கிறது";
+/* 'Languages provided by:' is an application description (sentence case); used at the end of the about dialog to list the translators of SafeSlinger. */
+"text_LanguagesProvidedBy" = "வழங்கப்பட்ட மொழிகள்:";
+/* 'Requirements:\n1. Must be installed on a minimum of 2 devices.\n2. An Internet connection must be active.' is an application description (sentence case); used in the about box and app store listing to enumerate requirements. */
+"text_Requirements" = "தேவைகள்:\n1. 2 சாதனங்களை ஒரு குறைந்தபட்ச நிறுவ வேண்டும்.\n2. இணைய இணைப்பு செயலில் இருக்க வேண்டும்.";
+
+/* 'About' is a title (title case); used as the */
+"title_About" = "பற்றி";
+/* 'Camera' is a menu option (title case); used in the Select File Option menu to take a picture with the camera on iOS. */
+"title_camera" = "கேமரா";
+/* 'Choose Directory' is a title (title case); used at the top of the menu when choosing a directory to load or save a file attachment. */
+"title_ChooseDirectory" = "அடைவு தேர்வு";
+/* 'Choose Your Attachment' is a title (title case); used at the top of the menu options when choosing among sources to pick an attachment. */
+"title_ChooseFileLoad" = "உங்கள் இணைப்பு தேர்வு";
+/* 'Comments/Questions' is a title (title case); used as the Subject field of an email message for the user to send feedback to developers. Also used as the menu option to start the email. */
+"title_comments" = "Comments/கேள்விகள்";
+/* 'Error' is a title (title case); used at the top of the error dialog. */
+"title_Error" = "பிழை";
+/* 'Sling Keys Assistant' is a title (title case); used at the top of the dialog, which provides a walkthrough of the key exchange protocol. */
+"title_ExchangeWalkthrough" = "ஸ்லிங் விசைகள் உதவி";
+/* 'Attachment Options' is a title (title case); used at the top of the menu when choosing whether to remove the current attachment or select a new one. */
+"title_FileOptions" = "இணைப்பு விருப்பங்கள்";
+/* 'Setup' is a title (title case); used at the top of the setup screen where we help the user find their own contact entry. */
+"title_find" = "அமைப்பு";
+/* 'Begin Exchange' is a title (title case); used at the top of the begin exchange screen to start the exchange protocol. */
+"title_home" = "சந்தை தொடங்கியிருக்கவேண்டும்";
+/* 'Home' is a title (title case); used at the top of the home screen on iOS. */
+"title_HomePanel" = "முகப்பு";
+/* 'Message' is a title (title case); used at the top of the dialog when viewing message details. */
+"title_MessageDetail" = "செய்தி";
+/* 'Messages' is a title (title case); used at the top of the message list screen. */
+"title_Messages" = "செய்திகள்";
+/* 'My Identity' is a title (title case); used at the top of a menu when choosing to alter the users' contact: Edit, Create New, or Use Another. */
+"title_MyIdentity" = "என் அடையாளத்தை";
+/* 'SafeSlinger Message Available' is a title (title case); used as the title of an incoming message in the notification window. */
+"title_NotifyFileAvailable" = "கிடைக்கும் SafeSlinger செய்தி";
+/* '%d SafeSlinger Messages Available' is a title (title case); used as the title of multiple incoming messages in the notification window. iOS-only. */
+"title_NotifyMulFileAvailable" = "கிடைக்கும் %d SafeSlinger செய்திகள்";
+/* 'Passphrase' is a title (title case); used at the top of the passphrase screen where user will login. */
+"title_passphrase" = "கடவுச்சொல்லை";
+/* 'Photo Album' is a menu option (title case); used in the Select File Option menu to select a picture from the photo album on iOS. */
+"title_photoalbum" = "புகைப்பட ஆல்பம்";
+/* 'Photo Library' is a menu option (title case); used in the Select File Option menu to create a picture from the photo library on iOS. */
+"title_photolibary" = "புகைப்பட நூலகம்";
+/* 'Recipients' is a title (title case); used at the top of the recipient list screen. */
+"title_PickRecipient" = "பெற்றவர்கள்";
+/* 'Question' is a title (title case); used at the top question yes/no dialog. */
+"title_Question" = "வினா";
+/* 'Recipient Detail' is a title (title case); used at the top of the dialog when viewing recipient/key details. */
+"title_RecipientDetail" = "பெறுநர் விரிவாக";
+/* 'End Exchange' is a title (title case); used at the top of the import contacts screen at the end of the exchange protocol. */
+"title_save" = "முடிவு செலாவணி";
+/* 'Save File As' is a title (title case); used at the top of the File Manager when saving a file on Android. */
+"title_SaveFileAs" = "கோப்பாக சேமித்து";
+/* 'Secure Introduction' is a title (title case); used at the top of the secure introduction composition screen. */
+"title_SecureIntroduction" = "பாதுகாப்பான அறிமுகம்";
+/* 'Secure Introduction Invitation!' is a title (title case); used at the top of the confirmation dialog when receiving a secure introduction. */
+"title_SecureIntroductionInvite" = "அறிமுகம் அழைப்பிதழ் பாதுகாப்பு!";
+/* 'Sending Options:' is a title (title case); used to denote the dialog for user to pickup sender source options. */
+"title_SelectSource" = "விருப்பங்கள் அனுப்புதல்:";
+/* 'Send' is a title (title case); used at the top of compose message screen. */
+"title_SendFile" = "அனுப்பு";
+/* 'Sharing Folder' is a menu option (title case); used in the Select File Option menu to select a file from the sharing folder on iOS. */
+"title_sharingfolder" = "கோப்புறை பகிர்வு";
+/* 'How many users in the exchange?' is a title (title case); used at the top of the group size selection screen. */
+"title_size" = "எப்படி பல பயனர்கள் பரிமாற்றம்?";
+/* 'Sound Recorder' is a menu option (title case); used in the Select File Option menu to create a voice recording on iOS. */
+"title_soundrecoder" = "ஒலி பதிவு";
+/* 'SafeSlinger Invitation' is a title (title case); used as the Subject field of an email or text message sent by the Share Application menu option. */
+"title_TextInviteMsg" = "SafeSlinger அழைப்பிதழ்";
+/* 'Threads' is a title (title case); used at the top of the thread list screen. */
+"title_Threads" = "இழைகள்";
+/* 'Grouping' is a title (title case); used at the top of the entry screen for the lowest common number. */
+"title_userid" = "குழுக்கள்";
+/* 'Verify' is a title (title case); used at the top of the word phrase verification screen. */
+"title_verify" = "சரிபார்க்கவும்";
+/* 'Warning' is a title (title case); used at the top of the warning dialog. */
+"title_Warn" = "எச்சரிக்கை";
