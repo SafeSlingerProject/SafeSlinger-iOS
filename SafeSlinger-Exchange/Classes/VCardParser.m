@@ -141,14 +141,24 @@
     
 #pragma mark PubliKey
     [vCard appendFormat: @"IMPP;SafeSlinger-PubKey:%@\n", [Base64 encode:[SSEngine getPackPubKeys]]];
-    
     NSString* uairship = [UAirship shared].deviceToken;
     NSMutableData *encodeToken = [NSMutableData dataWithLength:0];
-    int devtype = htonl(iOS);
-    int len = htonl([uairship length]);
-    [encodeToken appendData:[NSData dataWithBytes: &devtype length: 4]];
-    [encodeToken appendData:[NSData dataWithBytes: &len length: 4]];
-    [encodeToken appendData:[uairship dataUsingEncoding:NSASCIIStringEncoding]];
+    if(uairship)
+    {
+        int devtype = htonl(iOS);
+        int len = htonl([uairship length]);
+        [encodeToken appendData:[NSData dataWithBytes: &devtype length: 4]];
+        [encodeToken appendData:[NSData dataWithBytes: &len length: 4]];
+        [encodeToken appendData:[uairship dataUsingEncoding:NSASCIIStringEncoding]];
+    }else{
+        // no token available
+        int devtype = htonl(DISABLED);
+        NSString* str = @"RECEIVED_DISABLED";
+        int len = htonl([str lengthOfBytesUsingEncoding:NSASCIIStringEncoding]);
+        [encodeToken appendData:[NSData dataWithBytes: &devtype length: 4]];
+        [encodeToken appendData:[NSData dataWithBytes: &len length: 4]];
+        [encodeToken appendData:[str dataUsingEncoding:NSASCIIStringEncoding]];
+    }
     [vCard appendFormat: @"IMPP;SafeSlinger-Push:%@\n", [Base64 encode:encodeToken]];
     
 #pragma mark EndofVCard

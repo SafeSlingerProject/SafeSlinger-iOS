@@ -1,7 +1,7 @@
 {
-	inProduction = YES;
-	developmentAppKey = AppKey;
-	developmentAppSecret = AppSecret;
-	productionAppKey = AppKey;
-	productionAppSecret = AppSecret;
+	inProduction = NO;
+	developmentAppKey = "AppKey";
+	developmentAppSecret = "AppSecret";
+	productionAppKey = "AppKey";
+	productionAppSecret = "AppSecret";
 }

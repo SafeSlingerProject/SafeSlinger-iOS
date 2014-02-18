@@ -289,23 +289,29 @@
                 DEBUGMSG(@"add user: %@", name);
                 
                 // update token
-                if(peer!=nil){
-                    DEBUGMSG(@"update Token&Key");
-                    if(![delegate.DbInstance UpdateToken:tokenstr User:name Dev:devtype Photo:imageData KeyData:keyelement ExchangeOrIntroduction:YES])
-                    {
-                        [[[[iToast makeText: NSLocalizedString(@"error_UnableToUpdateRecipientInDB", @"Unable to update the recipient database.")]
-                           setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-                        continue;
+                if(![tokenstr isEqualToString:@"RECEIVED_DISABLED"])
+                {
+                    if(peer){
+                        DEBUGMSG(@"update Token&Key");
+                        if(![delegate.DbInstance UpdateToken:tokenstr User:name Dev:devtype Photo:imageData KeyData:keyelement ExchangeOrIntroduction:YES])
+                        {
+                            [[[[iToast makeText: NSLocalizedString(@"error_UnableToUpdateRecipientInDB", @"Unable to update the recipient database.")]
+                               setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+                            continue;
+                        }
+                    }else{
+                        DEBUGMSG(@"reg Token&Key");
+                        if(![delegate.DbInstance RegisterToken:tokenstr User:name Dev:devtype Photo:imageData  KeyData:keyelement ExchangeOrIntroduction:YES])
+                        {
+                            [[[[iToast makeText: NSLocalizedString(@"error_UnableToUpdateRecipientInDB", @"Unable to update the recipient database.")]
+                               setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+                            continue;
+                        }
                     }
                 }else{
-                    DEBUGMSG(@"reg Token&Key");
-                    if(![delegate.DbInstance RegisterToken:tokenstr User:name Dev:devtype Photo:imageData  KeyData:keyelement ExchangeOrIntroduction:YES])
-                    {
-                        [[[[iToast makeText: NSLocalizedString(@"error_UnableToUpdateRecipientInDB", @"Unable to update the recipient database.")]
-                           setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-                        continue;
-                    }
+                    DEBUGMSG(@"recipient's token is diabled.");
                 }
+                
                 
                 [delegate.activityView EnableProgress:NSLocalizedString(@"prog_SavingContactsToAddressBook", @"updating address book...") SecondMeesage:nil ProgessBar:YES];
                 

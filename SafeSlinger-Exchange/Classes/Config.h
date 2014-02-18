@@ -82,6 +82,7 @@
 #define MsgBoxHieght 30.0f
 
 typedef enum DevType {
+    DISABLED = 0,
 	Android = 1,
 	iOS
 }DevType;
