@@ -93,8 +93,6 @@
         else {
             ret = NO;
         }
-        [in_sha1 release];
-        [st_sha1 release];
         return ret;
     }
     else
