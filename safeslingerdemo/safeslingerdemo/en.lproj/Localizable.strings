@@ -1,0 +1,44 @@
+/*
+    The MIT License (MIT)
+    
+    Copyright (c) 2010-2014 Carnegie Mellon University
+    
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+    
+    The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
+    
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+    THE SOFTWARE.
+*/
+
+"demo_app_name" = "SafeSlinger Exchange Demo";
+"demo_note" = "NOTE: This is a simple demo using the SafeSlinger Exchange library for software developers. If you want to experience a full implementation of the exchange, try the SafeSlinger Messenger app on https://itunes.apple.com/tw/app/safeslinger/id493529867?mt=8. Full source code is available on http://github.com/safeslingerproject";
+
+"demo_instruct" = "DEMO:\nYou may build and run your own server, OR use ours: slinger-demo.appspot.com. A host name and a secret are required.";
+"demo_hostname_title" = "Server Host Name";
+"demo_hostname_hint" = "i.e. myappengine.appspot.com";
+"demo_secret_title" = "My Secret";
+"demo_secret_hint" = "i.e. key, password, anything";
+"demo_button_begin_exchange" = "Begin Exchange";
+"demo_results" = "Results";
+"demo_result_success" ="Success";
+"demo_result_canceled" = "Canceled";
+"demo_result_indeterminate" = "Indeterminate";
+"demo_result_mine" = "secret %d (mine): %@";
+"demo_result_theirs" = "secret %d (theirs): %@";
+"demo_menu_nfc_settings" ="NFC Settings";
+"demo_button_nfc_on" = "NFC ON";
+"demo_button_nfc_off" = "NFC OFF";
+
+"btn_OK" = "OK";

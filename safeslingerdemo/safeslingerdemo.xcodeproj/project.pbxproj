@@ -1,0 +1,545 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1827E9CF192E4CD700325334 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1827E9CE192E4CD700325334 /* Foundation.framework */; };
+		1827E9D1192E4CD700325334 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1827E9D0192E4CD700325334 /* CoreGraphics.framework */; };
+		1827E9D3192E4CD700325334 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1827E9D2192E4CD700325334 /* UIKit.framework */; };
+		1827E9DB192E4CD700325334 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827E9DA192E4CD700325334 /* main.m */; };
+		1827E9DF192E4CD700325334 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827E9DE192E4CD700325334 /* AppDelegate.m */; };
+		1827E9E7192E4CD700325334 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1827E9E6192E4CD700325334 /* Images.xcassets */; };
+		1850029E1934E1E80080B355 /* libsafeslingerexchange.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 184A3B9E192FEE2C008C64FF /* libsafeslingerexchange.a */; };
+		1881C061196C5C6700D1FFDE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1881C060196C5C6700D1FFDE /* Main.storyboard */; };
+		1881C06B196C817500D1FFDE /* exchangeui.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 189793CC193520B1004C4409 /* exchangeui.bundle */; };
+		18B20CE2192E78090044F0F3 /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B20CE0192E78090044F0F3 /* DemoViewController.m */; };
+		18F32A6B19423789005B14EF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18F32A6919423789005B14EF /* Localizable.strings */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		184A3B9D192FEE2C008C64FF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 184A3B98192FEE2C008C64FF /* safeslingerexchange.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 18FA4BD6192E8DFF00734976;
+			remoteInfo = safeslingerexchange;
+		};
+		185002991934DD7A0080B355 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 184A3B98192FEE2C008C64FF /* safeslingerexchange.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 18FA4BD5192E8DFF00734976;
+			remoteInfo = safeslingerexchange;
+		};
+		189793C8193520B1004C4409 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 184A3B98192FEE2C008C64FF /* safeslingerexchange.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 189793B019351DE3004C4409;
+			remoteInfo = exchangeui;
+		};
+		189793CB193520B1004C4409 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 184A3B98192FEE2C008C64FF /* safeslingerexchange.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 189793B119351DE3004C4409;
+			remoteInfo = exchangeui;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1827E9CB192E4CD700325334 /* safeslingerdemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = safeslingerdemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1827E9CE192E4CD700325334 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1827E9D0192E4CD700325334 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		1827E9D2192E4CD700325334 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		1827E9D6192E4CD700325334 /* safeslingerdemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "safeslingerdemo-Info.plist"; sourceTree = "<group>"; };
+		1827E9DA192E4CD700325334 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1827E9DC192E4CD700325334 /* safeslingerdemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "safeslingerdemo-Prefix.pch"; sourceTree = "<group>"; };
+		1827E9DD192E4CD700325334 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		1827E9DE192E4CD700325334 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		1827E9E6192E4CD700325334 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		1827E9ED192E4CD700325334 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		184A3B98192FEE2C008C64FF /* safeslingerexchange.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = safeslingerexchange.xcodeproj; path = ../safeslingerexchange/safeslingerexchange.xcodeproj; sourceTree = "<group>"; };
+		1881C060196C5C6700D1FFDE /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../Main.storyboard; sourceTree = "<group>"; };
+		18B20CDF192E78090044F0F3 /* DemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
+		18B20CE0192E78090044F0F3 /* DemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
+		18F32A6A19423789005B14EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = safeslingerdemo/en.lproj/Localizable.strings; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1827E9C8192E4CD700325334 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1850029E1934E1E80080B355 /* libsafeslingerexchange.a in Frameworks */,
+				1827E9D1192E4CD700325334 /* CoreGraphics.framework in Frameworks */,
+				1827E9D3192E4CD700325334 /* UIKit.framework in Frameworks */,
+				1827E9CF192E4CD700325334 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1827E9C2192E4CD700325334 = {
+			isa = PBXGroup;
+			children = (
+				18F32A6919423789005B14EF /* Localizable.strings */,
+				184A3B98192FEE2C008C64FF /* safeslingerexchange.xcodeproj */,
+				1827E9D4192E4CD700325334 /* safeslingerdemo */,
+				1827E9CD192E4CD700325334 /* Frameworks */,
+				1827E9CC192E4CD700325334 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1827E9CC192E4CD700325334 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1827E9CB192E4CD700325334 /* safeslingerdemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1827E9CD192E4CD700325334 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1827E9CE192E4CD700325334 /* Foundation.framework */,
+				1827E9D0192E4CD700325334 /* CoreGraphics.framework */,
+				1827E9D2192E4CD700325334 /* UIKit.framework */,
+				1827E9ED192E4CD700325334 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1827E9D4192E4CD700325334 /* safeslingerdemo */ = {
+			isa = PBXGroup;
+			children = (
+				1827E9DD192E4CD700325334 /* AppDelegate.h */,
+				1827E9DE192E4CD700325334 /* AppDelegate.m */,
+				18B20CDF192E78090044F0F3 /* DemoViewController.h */,
+				18B20CE0192E78090044F0F3 /* DemoViewController.m */,
+				1827E9E6192E4CD700325334 /* Images.xcassets */,
+				1827E9D5192E4CD700325334 /* Supporting Files */,
+			);
+			path = safeslingerdemo;
+			sourceTree = "<group>";
+		};
+		1827E9D5192E4CD700325334 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1881C060196C5C6700D1FFDE /* Main.storyboard */,
+				18B20CDE192E751B0044F0F3 /* UI Interface */,
+				1827E9D6192E4CD700325334 /* safeslingerdemo-Info.plist */,
+				1827E9DA192E4CD700325334 /* main.m */,
+				1827E9DC192E4CD700325334 /* safeslingerdemo-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		184A3B99192FEE2C008C64FF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				184A3B9E192FEE2C008C64FF /* libsafeslingerexchange.a */,
+				189793CC193520B1004C4409 /* exchangeui.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		18B20CDE192E751B0044F0F3 /* UI Interface */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "UI Interface";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1827E9CA192E4CD700325334 /* safeslingerdemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1827E9FD192E4CD700325334 /* Build configuration list for PBXNativeTarget "safeslingerdemo" */;
+			buildPhases = (
+				1827E9C7192E4CD700325334 /* Sources */,
+				1827E9C8192E4CD700325334 /* Frameworks */,
+				1827E9C9192E4CD700325334 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				189793C9193520B1004C4409 /* PBXTargetDependency */,
+				1850029A1934DD7A0080B355 /* PBXTargetDependency */,
+			);
+			name = safeslingerdemo;
+			productName = safeslingerdemo;
+			productReference = 1827E9CB192E4CD700325334 /* safeslingerdemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1827E9C3192E4CD700325334 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = CyLab;
+				TargetAttributes = {
+					1827E9CA192E4CD700325334 = {
+						DevelopmentTeam = SKAXY92CB2;
+						SystemCapabilities = {
+							com.apple.DataProtection = {
+								enabled = 0;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 1827E9C6192E4CD700325334 /* Build configuration list for PBXProject "safeslingerdemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				ar,
+				az,
+				be,
+				bg,
+				bn,
+				bs,
+				ca,
+				ceb,
+				cs,
+				cy,
+				da,
+				de,
+				el,
+				eo,
+				es,
+				et,
+				eu,
+				fa,
+				fi,
+				fr,
+				ga,
+				gl,
+				gu,
+				ha,
+				he,
+				hi,
+				hmn,
+				hr,
+				ht,
+				hu,
+				hy,
+				id,
+				ig,
+				is,
+				it,
+				ja,
+				jv,
+				ka,
+				km,
+				kn,
+				ko,
+				la,
+				lo,
+				lt,
+				lv,
+				mi,
+				mk,
+				mn,
+				mr,
+				ms,
+				mt,
+				ne,
+				nl,
+				no,
+				pa,
+				pl,
+				pt,
+				ro,
+				ru,
+				sk,
+				sl,
+				so,
+				sq,
+				sr,
+				sv,
+				sw,
+				ta,
+				te,
+				th,
+				tl,
+				tr,
+				uk,
+				ur,
+				vi,
+				yi,
+				yo,
+				"zh-Hans",
+				"zh-Hant",
+				zu,
+			);
+			mainGroup = 1827E9C2192E4CD700325334;
+			productRefGroup = 1827E9CC192E4CD700325334 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 184A3B99192FEE2C008C64FF /* Products */;
+					ProjectRef = 184A3B98192FEE2C008C64FF /* safeslingerexchange.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				1827E9CA192E4CD700325334 /* safeslingerdemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		184A3B9E192FEE2C008C64FF /* libsafeslingerexchange.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libsafeslingerexchange.a;
+			remoteRef = 184A3B9D192FEE2C008C64FF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		189793CC193520B1004C4409 /* exchangeui.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = exchangeui.bundle;
+			remoteRef = 189793CB193520B1004C4409 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1827E9C9192E4CD700325334 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1881C06B196C817500D1FFDE /* exchangeui.bundle in Resources */,
+				1827E9E7192E4CD700325334 /* Images.xcassets in Resources */,
+				1881C061196C5C6700D1FFDE /* Main.storyboard in Resources */,
+				18F32A6B19423789005B14EF /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1827E9C7192E4CD700325334 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1827E9DF192E4CD700325334 /* AppDelegate.m in Sources */,
+				1827E9DB192E4CD700325334 /* main.m in Sources */,
+				18B20CE2192E78090044F0F3 /* DemoViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1850029A1934DD7A0080B355 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = safeslingerexchange;
+			targetProxy = 185002991934DD7A0080B355 /* PBXContainerItemProxy */;
+		};
+		189793C9193520B1004C4409 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = exchangeui;
+			targetProxy = 189793C8193520B1004C4409 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		18F32A6919423789005B14EF /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18F32A6A19423789005B14EF /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1827E9FB192E4CD700325334 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: YUEH-HSUN LIN (Y286MJ43EP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: YUEH-HSUN LIN (Y286MJ43EP)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		1827E9FC192E4CD700325334 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1827E9FE192E4CD700325334 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "safeslingerdemo/safeslingerdemo-Prefix.pch";
+				GENERATE_MASTER_OBJECT_FILE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"${SRCROOT}/../safeslingerexchange",
+				);
+				INFOPLIST_FILE = "safeslingerdemo/safeslingerdemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-stdlib=libstdc++",
+					"-lstdc++",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = "armv7 armv7s";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		1827E9FF192E4CD700325334 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "safeslingerdemo/safeslingerdemo-Prefix.pch";
+				GENERATE_MASTER_OBJECT_FILE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"${SRCROOT}/../safeslingerexchange",
+				);
+				INFOPLIST_FILE = "safeslingerdemo/safeslingerdemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-stdlib=libstdc++",
+					"-lstdc++",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = "armv7 armv7s";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1827E9C6192E4CD700325334 /* Build configuration list for PBXProject "safeslingerdemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1827E9FB192E4CD700325334 /* Debug */,
+				1827E9FC192E4CD700325334 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1827E9FD192E4CD700325334 /* Build configuration list for PBXNativeTarget "safeslingerdemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1827E9FE192E4CD700325334 /* Debug */,
+				1827E9FF192E4CD700325334 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1827E9C3192E4CD700325334 /* Project object */;
+}

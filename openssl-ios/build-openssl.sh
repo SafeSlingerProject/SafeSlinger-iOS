@@ -1,74 +1,113 @@
 #!/bin/bash
-#
-#  Copyright (c) 2013 Claudiu-Vlad Ursache <claudiu@cvursache.com>
-#  MIT License (see LICENSE.md file)
-#
-#  Based on work by Felix Schulze:
-#
-#  Automatic build script for libssl and libcrypto 
-#  for iPhoneOS and iPhoneSimulator
-#
-#  Created by Felix Schulze on 16.12.10.
-#  Copyright 2010 Felix Schulze. All rights reserved.
-#
-#  Licensed under the Apache License, Version 2.0 (the "License");
-#  you may not use this file except in compliance with the License.
-#  You may obtain a copy of the License at
-#
-#  http://www.apache.org/licenses/LICENSE-2.0
-#
-#  Unless required by applicable law or agreed to in writing, software
-#  distributed under the License is distributed on an "AS IS" BASIS,
-#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-#  See the License for the specific language governing permissions and
-#  limitations under the License.
 
-set -u
- 
-# Setup architectures, library name and other vars + cleanup from previous runs
-ARCHS=("armv7s" "armv7" "i386")
-SDKS=("iphoneos" "iphoneos" "macosx")
-LIB_NAME="openssl-1.0.1e"
-TEMP_LIB_PATH="/tmp/${LIB_NAME}"
-LIB_DEST_DIR="lib"
-HEADER_DEST_DIR="include"
-rm -rf "${HEADER_DEST_DIR}" "${LIB_DEST_DIR}" "${TEMP_LIB_PATH}*" "${LIB_NAME}"
- 
-# Unarchive library, then configure and make for specified architectures
-configure_make()
+# Yay shell scripting! This script builds a static version of
+# OpenSSL ${OPENSSL_VERSION} for iOS 7.0 that contains code for
+# armv6, armv7, arm7s and i386.
+
+set -x
+
+# Setup paths to stuff we need
+
+OPENSSL_VERSION="1.0.1g"
+
+DEVELOPER="/Applications/Xcode.app/Contents/Developer"
+
+SDK_VERSION="7.1"
+MIN_VERSION="4.3"
+
+IPHONEOS_PLATFORM="${DEVELOPER}/Platforms/iPhoneOS.platform"
+IPHONEOS_SDK="${IPHONEOS_PLATFORM}/Developer/SDKs/iPhoneOS${SDK_VERSION}.sdk"
+IPHONEOS_GCC="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang"
+
+IPHONESIMULATOR_PLATFORM="${DEVELOPER}/Platforms/iPhoneSimulator.platform"
+IPHONESIMULATOR_SDK="${IPHONESIMULATOR_PLATFORM}/Developer/SDKs/iPhoneSimulator${SDK_VERSION}.sdk"
+IPHONESIMULATOR_GCC="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang"
+
+# Make sure things actually exist
+
+if [ ! -d "$IPHONEOS_PLATFORM" ]; then
+  echo "Cannot find $IPHONEOS_PLATFORM"
+  exit 1
+fi
+
+if [ ! -d "$IPHONEOS_SDK" ]; then
+  echo "Cannot find $IPHONEOS_SDK"
+  exit 1
+fi
+
+if [ ! -x "$IPHONEOS_GCC" ]; then
+  echo "Cannot find $IPHONEOS_GCC"
+  exit 1
+fi
+
+if [ ! -d "$IPHONESIMULATOR_PLATFORM" ]; then
+  echo "Cannot find $IPHONESIMULATOR_PLATFORM"
+  exit 1
+fi
+
+if [ ! -d "$IPHONESIMULATOR_SDK" ]; then
+  echo "Cannot find $IPHONESIMULATOR_SDK"
+  exit 1
+fi
+
+if [ ! -x "$IPHONESIMULATOR_GCC" ]; then
+  echo "Cannot find $IPHONESIMULATOR_GCC"
+  exit 1
+fi
+
+# Clean up whatever was left from our previous build
+
+rm -rf include lib
+rm -rf /tmp/openssl-${OPENSSL_VERSION}-*
+rm -rf /tmp/openssl-${OPENSSL_VERSION}-*.*-log
+
+build()
 {
-   ARCH=$1; GCC=$2; SDK_PATH=$3;
-   LOG_FILE="${TEMP_LIB_PATH}-${ARCH}.log"
-   tar xfz "${LIB_NAME}.tar.gz"
-   pushd .; cd "${LIB_NAME}";
-
-   ./Configure BSD-generic32 --openssldir="${TEMP_LIB_PATH}-${ARCH}" &> "${LOG_FILE}"
-   
-   make CC="${GCC} -arch ${ARCH}" CFLAG="-isysroot ${SDK_PATH}" &> "${LOG_FILE}"; 
-   make install &> "${LOG_FILE}";
-   popd; rm -rf "${LIB_NAME}";
+   TARGET=$1
+   ARCH=$2
+   GCC=$3
+   SDK=$4
+   EXTRA=$5
+   rm -rf "openssl-${OPENSSL_VERSION}"
+   tar xfz "openssl-${OPENSSL_VERSION}.tar.gz"
+   pushd .
+   cd "openssl-${OPENSSL_VERSION}"
+   ./Configure ${TARGET} --openssldir="/tmp/openssl-${OPENSSL_VERSION}-${ARCH}" ${EXTRA} &> "/tmp/openssl-${OPENSSL_VERSION}-${ARCH}.log"
+   perl -i -pe 's|static volatile sig_atomic_t intr_signal|static volatile int intr_signal|' crypto/ui/ui_openssl.c
+   perl -i -pe "s|^CC= gcc|CC= ${GCC} -arch ${ARCH} -miphoneos-version-min=${MIN_VERSION}|g" Makefile
+   perl -i -pe "s|^CFLAG= (.*)|CFLAG= -isysroot ${SDK} \$1|g" Makefile
+   make &> "/tmp/openssl-${OPENSSL_VERSION}-${ARCH}.build-log"
+   make install &> "/tmp/openssl-${OPENSSL_VERSION}-${ARCH}.install-log"
+   popd
+   rm -rf "openssl-${OPENSSL_VERSION}"
 }
-for ((i=0; i < ${#ARCHS[@]}; i++))
-do
-   SDK_PATH=$(xcrun -sdk ${SDKS[i]} --show-sdk-path)
-   GCC=$(xcrun -sdk ${SDKS[i]} -find gcc)
-   configure_make "${ARCHS[i]}" "${GCC}" "${SDK_PATH}"
-done
 
-# Combine libraries for different architectures into one
-# Use .a files from the temp directory by providing relative paths
-create_lib()
-{
-   LIB_SRC=$1; LIB_DST=$2;
-   LIB_PATHS=( "${ARCHS[@]/#/${TEMP_LIB_PATH}-}" )
-   LIB_PATHS=( "${LIB_PATHS[@]/%//${LIB_SRC}}" )
-   lipo ${LIB_PATHS[@]} -create -output "${LIB_DST}"
-}
-mkdir "${LIB_DEST_DIR}";
-create_lib "lib/libcrypto.a" "${LIB_DEST_DIR}/libcrypto.a"
-create_lib "lib/libssl.a" "${LIB_DEST_DIR}/libssl.a"
- 
-# Copy header files + final cleanups
-mkdir -p "${HEADER_DEST_DIR}"
-cp -R "${TEMP_LIB_PATH}-${ARCHS[0]}/include" "${HEADER_DEST_DIR}"
-rm -rf "${TEMP_LIB_PATH}-*" "{LIB_NAME}"
+build "BSD-generic32" "armv7" "${IPHONEOS_GCC}" "${IPHONEOS_SDK}" ""
+build "BSD-generic32" "armv7s" "${IPHONEOS_GCC}" "${IPHONEOS_SDK}" ""
+build "BSD-generic64" "arm64" "${IPHONEOS_GCC}" "${IPHONEOS_SDK}" ""
+build "BSD-generic32" "i386" "${IPHONESIMULATOR_GCC}" "${IPHONESIMULATOR_SDK}" ""
+build "BSD-generic64" "x86_64" "${IPHONESIMULATOR_GCC}" "${IPHONESIMULATOR_SDK}" "-DOPENSSL_NO_ASM"
+
+#
+
+mkdir include
+cp -r /tmp/openssl-${OPENSSL_VERSION}-i386/include/openssl include/
+
+mkdir lib
+lipo \
+	"/tmp/openssl-${OPENSSL_VERSION}-armv7/lib/libcrypto.a" \
+	"/tmp/openssl-${OPENSSL_VERSION}-armv7s/lib/libcrypto.a" \
+	"/tmp/openssl-${OPENSSL_VERSION}-arm64/lib/libcrypto.a" \
+	"/tmp/openssl-${OPENSSL_VERSION}-i386/lib/libcrypto.a" \
+	"/tmp/openssl-${OPENSSL_VERSION}-x86_64/lib/libcrypto.a" \
+	-create -output lib/libcrypto.a
+lipo \
+	"/tmp/openssl-${OPENSSL_VERSION}-armv7/lib/libssl.a" \
+	"/tmp/openssl-${OPENSSL_VERSION}-armv7s/lib/libssl.a" \
+	"/tmp/openssl-${OPENSSL_VERSION}-arm64/lib/libssl.a" \
+	"/tmp/openssl-${OPENSSL_VERSION}-i386/lib/libssl.a" \
+	"/tmp/openssl-${OPENSSL_VERSION}-x86_64/lib/libssl.a" \
+	-create -output lib/libssl.a
+
+rm -rf "/tmp/openssl-${OPENSSL_VERSION}-*"
+rm -rf "/tmp/openssl-${OPENSSL_VERSION}-*.*-log"
