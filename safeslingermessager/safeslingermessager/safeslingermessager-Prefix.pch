@@ -1,0 +1,32 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+    #import <safeslingerexchange/Base64.h>
+    #import <safeslingerexchange/iToast.h>
+    #import <safeslingerexchange/ActivityWindow.h>
+    #import <sha3/sha3.h>
+
+/* BETA test version flag */
+//#define BETA
+
+#import "Config.h"
+
+#ifdef BETA
+#define DEBUGMSG NSLog
+#else
+#define DEBUGMSG(...)
+#endif
+
+#endif

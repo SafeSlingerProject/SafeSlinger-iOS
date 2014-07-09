@@ -1,5 +1,5 @@
 /*
- Copyright 2009-2013 Urban Airship Inc. All rights reserved.
+ Copyright 2009-2014 Urban Airship Inc. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
@@ -42,12 +42,12 @@
 /**
  * The current app key (resolved using the inProduction flag).
  */
-@property (weak, nonatomic, readonly) NSString *appKey;
+@property (nonatomic, readonly) NSString *appKey;
 
 /**
  * The current app secret (resolved using the inProduction flag).
  */
-@property (weak, nonatomic, readonly) NSString *appSecret;
+@property (nonatomic, readonly) NSString *appSecret;
 
 /**
  * The current log level for the library's UA_L<level> macros (resolved using the inProduction flag).
@@ -137,12 +137,20 @@
 
 
 /**
- * Apps may be set to self-configure based on the APS-environment set in the embedded.mobileprovision file.
- * If `YES`, the inProduction value will be determined at runtime by reading the provisioning profile. If
- * `NO`, the inProduction flag may be set directly or using the AirshipConfig.plist file. Defaults to
- * `YES` for safety so that the production keys will always be used if the profile cannot be read in a released app.
- * Simulator builds do not include profile, so this flag does not have any effect in cases where there is not
- * a profile present. It will fall back to the inProduction property as set in code or a .plist file.
+ * Apps may be set to self-configure based on the APS-environment set in the
+ * embedded.mobileprovision file by using detectProvisioningMode. If
+ * detectProvisioningMode is set to 'YES', the inProduction value will
+ * be determined at runtime by reading the provisioning profile. If it is set to
+ * 'NO' (the default), the inProduction flag may be set directly or by using the
+ * AirshipConfig.plist file.
+ *
+ * When this flag is enabled, the inProduction flag defaults to 'YES' for safety
+ * so that the production keys will always be used if the profile cannot be read
+ * in a released app. Simulator builds do not include the profile, and the
+ * detectProvisioningMode flag does not have any effect in cases where a profile
+ * is not present. When a provisioning file is not present, the app will fall
+ * back to the inProduction property as set in code or the AirshipConfig.plist
+ * file.
  */
 @property (nonatomic, assign) BOOL detectProvisioningMode;
 
@@ -158,10 +166,16 @@
  */
 @property (nonatomic, copy) NSString *deviceAPIURL;
 
+
 /**
  * The Urban Airship analytics API url. This option is reserved for internal debugging.
  */
 @property (nonatomic, copy) NSString *analyticsURL;
+
+/**
+ * The Urban Airship landing page content url. This option is reserved for internal debugging.
+ */
+@property (nonatomic, copy) NSString *landingPageContentURL;
 
 
 ///---------------------------------------------------------------------------------------
