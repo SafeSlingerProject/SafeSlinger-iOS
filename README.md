@@ -36,7 +36,8 @@ Demo Requirements:
 
 ![Demo Main Screen](https://www.andrew.cmu.edu/user/tenma/ios_help/github/demo-1.png)
 
-To execute demo app using Xcode and iPhone simulator.
+To execute demo app using Xcode and iPhone simulator:
+
 1. Install Xcode (at least 5.x) on your Mac OS.
 2. Download the whole source code tree from SafeSlinger iOS Project.
 3. Open safeslingerdemo project using Xcode and select iPhone simulator as your build target.
@@ -49,40 +50,46 @@ Add Secure Exchange to your iOS App
 
 ![AddLibrary1](https://www.andrew.cmu.edu/user/tenma/ios_help/github/addlibrary-1.png)
 
-2. Add '-ObjC' to 'Other Linker Flags' to your target setting.
+2. Add **-ObjC** to *Other Linker Flags* to your target setting.
 
 ![AddLibrary2](https://www.andrew.cmu.edu/user/tenma/ios_help/github/addlibrary-2.png)
 
-3. Add compiled static library 'libsafeslingerexchange.a' to link library in your project.
+3. Add compiled static library **libsafeslingerexchange.a** to link library in your project.
 
 ![AddLibrary3](https://www.andrew.cmu.edu/user/tenma/ios_help/github/addlibrary-3.png)
 
-4. Drag 'exchangeui' bundle from safeslingerexchange subproject to your Bundle resource as well.
+4. Drag **exchangeui** bundle from safeslingerexchange subproject to your Bundle resource as well.
 
 ![AddLibrary4](https://www.andrew.cmu.edu/user/tenma/ios_help/github/addlibrary-4.png)
 
 5. Select building target as safeslingerexchange static library and then build.
 
-6. Make sure your ui controller is embedded in navigation controller, for example, you can add navigation controller to your UI through clicking 'Edit' -> 'Embed In' -> 'Navigation Controller'.
+6. Make sure your ui controller is embedded in navigation controller, for example, you can add navigation controller to your UI through clicking *Edit* -> *Embed In* -> *Navigation Controller*.
 
 ![AddLibrary5](https://www.andrew.cmu.edu/user/tenma/ios_help/github/addlibrary-5.png)
 
-6. Implement SafeSlinger delegate function on your UI controller, e.g., ViewController.
+7. Implement SafeSlinger delegate function on your UI controller, e.g., ViewController.
 
 Import SafeSlinger header into your project.
+
+```
 #import <safeslingerexchange/safeslingerexchange.h>
+```
 
 Add SafeSlinger protocol object into your UIViewController, e.g.,
 
+```
 @interface ViewController : UIViewController <SafeSlingerDelegate>
 {
     // safeslinger exchange object
     safeslingerexchange *proto;
 }
 @property (nonatomic, retain) safeslingerexchange *proto;
+```
 
-To being SafeSlinger exchange, you can initialize SafeSlinger protocol with 'SetupExchange' method and begin the exchange through calling 'BeginExchange', e.g., 
+To being SafeSlinger exchange, you can initialize SafeSlinger protocol with **SetupExchange** method and begin the exchange through calling **BeginExchange**, e.g., 
 
+```
 -(IBAction)BegineExchange:(id)sender
 {
     proto = [[safeslingerexchange alloc]init];
@@ -99,11 +106,13 @@ To being SafeSlinger exchange, you can initialize SafeSlinger protocol with 'Set
     
     // Call BeginExcahnge with your NSData object.
 }
+```
 
-After calling 'BeginExchange', proto Object will navigate your UI to exchange GUI through embedded navigation controller.
+After calling **BeginExchange**, proto Object will navigate your UI to exchange GUI through embedded navigation controller.
 
 After SafeSlinger exchange, your UI has to implement SafeSlingerDelegate protocol to handle either gathered data from other participants when exchange finishes successfully or errors when protocol fails.
 
+```
 #pragma SafeSlingerDelegate Methods
 - (void) EndExchange: (int)status ErrorString: (NSString*)error ExchangeSet: (NSArray*)exchange_set
 {
@@ -143,6 +152,7 @@ After SafeSlinger exchange, your UI has to implement SafeSlingerDelegate protoco
     
     NSLog(@"Gathered Data Set: %@", result);
 }
+```
 
 7. Build your application and run the app on iOS devices or simulator.
 
