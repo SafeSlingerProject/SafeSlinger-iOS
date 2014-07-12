@@ -106,23 +106,10 @@
     scrollView.contentSize = CGSizeMake(_originalFrame.size.width,_originalFrame.size.height);
 }
 
--(int) getVersionNumber
-{
-    NSArray *versionArray = [[[[NSBundle mainBundle] infoDictionary]objectForKey: @"CFBundleVersion"] componentsSeparatedByString:@"."];
-    
-    int version = 0;
-    for(int i=0;i<[versionArray count];i++)
-    {
-        NSString* tmp = [versionArray objectAtIndex:i];
-        version = version | ([tmp intValue] << (8*(3-i)));
-    }
-    return version;
-}
-
 -(IBAction)BegineExchange:(id)sender
 {
     proto = [[safeslingerexchange alloc]init];
-    if([proto SetupExchange: self ServerHost:hostField.text VersionNumber:[self getVersionNumber]])
+    if([proto SetupExchange: self ServerHost:hostField.text VersionNumber:@"1.7.0"])
         [proto BeginExchange: [secretData.text dataUsingEncoding:NSUTF8StringEncoding]];
 }
 

@@ -1,40 +1,157 @@
 SafeSlinger iOS Client
 ===================
-The open source SafeSlinger Exchange library is a secure and easy to use method of exchanging public keys or other authentication data, with strong protection from Man-In-The-Middle (MITM) attacks. Our goal is to make exchanging public keys as simple as possible without sacrificing security. Our [research paper][10], presented at MobiCom '13, provides a technical analysis of SafeSlinger's key exchange properties.
+The open source SafeSlinger Exchange library is a secure and easy to use method of exchanging public keys or other authentication data, with strong protection from Man-In-The-Middle (MITM) attacks. Our goal is to make exchanging public keys as simple as possible without sacrificing security. Our [research paper](http://sparrow.ece.cmu.edu/group/pub/farb_safeslinger_mobicom2013.pdf), presented at MobiCom '13, provides a technical analysis of SafeSlinger's key exchange properties.
 
 Library Features:
 
 - Open source makes security audits easy.
 - The only secure simultaneous key exchange for up to 10 people.
 - Easy to implement and use.
-- Cross-platform Android and iOS ([iOS library][11] coming Spring 2014).
+- Cross-platform Android and iOS.
 - Protection from Man-In-The-Middle attacks during key exchanges.
 - Exchange keys either in person or remote.
 
-The SafeSlinger secure key exchange is implemented cross-platform for [Android][14] and [iOS][11] devices. Keys are exchanged using a simple server implementation on [App Engine][15].
+The SafeSlinger secure key exchange is implemented cross-platform for [Android](http://github.com/SafeSlingerProject/SafeSlinger-Android) and [iOS](http://github.com/SafeSlingerProject/SafeSlinger-iOS) devices. Keys are exchanged using a simple server implementation on [App Engine](http://github.com/SafeSlingerProject/SafeSlinger-AppEngine).
 
 Repository iOS Projects
 =======
 
-- **/safeslinger-exchange** contains the full application project source for the [SafeSlinger Messenger][3] application. This project is a very rich implementation of a safeslinger secure exchange if you want an example of how to use the exchange to verify public keys in your own applications.
-- **/airship_lib** contains the client [Urban Airship][16] library for managing push messages.
-- **/openssl-ios** contains the [OpenSSL][17] library.
-- **/sha3-ios** contains only the Keccak portions of the [sphlib 3.0][4] library.
+- **/safeslingerexchange** contains the library project you can add to your own iOS applications. Both the safeslinger-demo and safeslinger-messenger application projects utilize this library to execute the exchange.
+- **/safeslingerdemo** contains the simple SafeSlinger Exchange Demo application project (will release on App Store soon!) which shows the minimum requirements to run a safeslinger secure exchange.
+- **/safeslingermessenger** contains the full application project source for the [SafeSlinger Messenger](http://itunes.apple.com/app/safeslinger/id493529867) application. This project is a very rich implementation of a safeslinger secure exchange if you want an example of how to use the exchange to verify public keys in your own applications.
+- **/airship_lib** contains the client [Urban Airship](http://www.urbanairship.com) library for managing push messages.
+- **/localizations** contains localization support used in iOS platform.
+- **/openssl-ios** contains the complied [OpenSSL](http://www.openssl.org) library.
+- **/sha3-ios-binary** contains only the Keccak portions of the [sphlib 3.0](http://www.saphir2.com/sphlib) library.
 
-Running the Demo
+Running the Demo on Xcode
 ========
-iOS demo forthcoming.
+
+Demo Requirements:
+
+1. Must be installed on a minimum of 2 devices.
+2. An Internet connection must be active.
+3. 'Server Host Name' can be your own server, OR use ours: `slinger-demo.appspot.com`
+4. 'My Secret' can be any information since it is just a demo.
+
+![Demo Main Screen](https://www.andrew.cmu.edu/user/tenma/ios_help/github/demo-1.png)
+
+To execute demo app using Xcode and iPhone simulator.
+1. Install Xcode (at least 5.x) on your Mac OS.
+2. Download the whole source code tree from SafeSlinger iOS Project.
+3. Open safeslingerdemo project using Xcode and select iPhone simulator as your build target.
+4. Build and Run demo on iPhone simulator.
+
 
 Add Secure Exchange to your iOS App
 ========
-iOS integration instructions forthcoming.
+1. Add safeslingerexchange project as a subproject into your project.
+
+![AddLibrary1](https://www.andrew.cmu.edu/user/tenma/ios_help/github/addlibrary-1.png)
+
+2. Add '-ObjC' to 'Other Linker Flags' to your target setting.
+
+![AddLibrary2](https://www.andrew.cmu.edu/user/tenma/ios_help/github/addlibrary-2.png)
+
+3. Add compiled static library 'libsafeslingerexchange.a' to link library in your project.
+
+![AddLibrary3](https://www.andrew.cmu.edu/user/tenma/ios_help/github/addlibrary-3.png)
+
+4. Drag 'exchangeui' bundle from safeslingerexchange subproject to your Bundle resource as well.
+
+![AddLibrary4](https://www.andrew.cmu.edu/user/tenma/ios_help/github/addlibrary-4.png)
+
+5. Select building target as safeslingerexchange static library and then build.
+
+6. Make sure your ui controller is embedded in navigation controller, for example, you can add navigation controller to your UI through clicking 'Edit' -> 'Embed In' -> 'Navigation Controller'.
+
+![AddLibrary5](https://www.andrew.cmu.edu/user/tenma/ios_help/github/addlibrary-5.png)
+
+6. Implement SafeSlinger delegate function on your UI controller, e.g., ViewController.
+
+Import SafeSlinger header into your project.
+#import <safeslingerexchange/safeslingerexchange.h>
+
+Add SafeSlinger protocol object into your UIViewController, e.g.,
+
+@interface ViewController : UIViewController <SafeSlingerDelegate>
+{
+    // safeslinger exchange object
+    safeslingerexchange *proto;
+}
+@property (nonatomic, retain) safeslingerexchange *proto;
+
+To being SafeSlinger exchange, you can initialize SafeSlinger protocol with 'SetupExchange' method and begin the exchange through calling 'BeginExchange', e.g., 
+
+-(IBAction)BegineExchange:(id)sender
+{
+    proto = [[safeslingerexchange alloc]init];
+    
+    // ServerHost: safeslinger exchange server, e.g., https://slinger-demo.appspot.com by default
+    // Version Number: current minimum protocol version is 1.7.0
+    // Return YES when setup is correct.
+    
+    NSString *_data = @"This is a secret.";
+    NSString *_host = @"https://slinger-demo.appspot.com";
+    
+    if([proto SetupExchange: self ServerHost:_host VersionNumber:@"1.7.0"])
+        [proto BeginExchange: [_data dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    // Call BeginExcahnge with your NSData object.
+}
+
+After calling 'BeginExchange', proto Object will navigate your UI to exchange GUI through embedded navigation controller.
+
+After SafeSlinger exchange, your UI has to implement SafeSlingerDelegate protocol to handle either gathered data from other participants when exchange finishes successfully or errors when protocol fails.
+
+#pragma SafeSlingerDelegate Methods
+- (void) EndExchange: (int)status ErrorString: (NSString*)error ExchangeSet: (NSArray*)exchange_set
+{
+	// we need to push back to the current UI
+    [self.navigationController popToViewController:self animated:YES];
+    
+    switch(status)
+    {
+        case RESULT_EXCHANGE_OK:
+            // Succeed, parse the exchanged data
+            [self ParseData:exchange_set];
+            break;
+        case RESULT_EXCHANGE_CANCELED:
+            // Failed, handle canceled result
+            {
+                NSLog(@"Exchange Error: %@", error);
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+/*	
+ *	ParseData is just an example to show how we process the gathered data from exchanged parties. 
+ *	We expect exchanged data are UTF-8 encoded strings.
+ */
+- (void) ParseData: (NSArray*) exchangeset
+{
+    int i = 0;
+    NSMutableString *result = [NSMutableString string];
+    for (i =0; i<[exchangeset count];i++)
+    {
+        [result appendFormat: @"Secret(%d): %@", i, [[NSString alloc] initWithData:[exchangeset objectAtIndex:i] encoding:NSUTF8StringEncoding]];
+        [result appendString: @"\n"];
+    }
+    
+    NSLog(@"Gathered Data Set: %@", result);
+}
+
+7. Build your application and run the app on iOS devices or simulator.
 
 Contact
 =======
 
-* SafeSlinger [Project Website][9]
-* Please submit [Bug Reports][12]!
-* Looking for answers, try our [FAQ][7]!
+* SafeSlinger [Project Website](http://www.cylab.cmu.edu/safeslinger)
+* Please submit [Bug Reports](http://github.com/SafeSlingerProject/SafeSlinger-iOS/issues)!
+* Looking for answers, try our [FAQ](http://www.cylab.cmu.edu/safeslinger/faq.html)!
 * Support: <safeslingerapp@gmail.com>
 
 License
@@ -63,22 +180,6 @@ License
 
 
 
- [1]: http://play.google.com/store/apps/details?id=edu.cmu.cylab.starslinger
- [2]: http://play.google.com/store/apps/details?id=edu.cmu.cylab.starslinger.demo
- [3]: http://itunes.apple.com/app/safeslinger/id493529867
- [4]: http://www.saphir2.com/sphlib
- [5]: http://code.google.com/p/android-vcard
- [6]: http://www.youtube.com/watch?v=IFXL8fUqNKY
- [7]: http://www.cylab.cmu.edu/safeslinger/faq.html
- [8]: http://www.cylab.cmu.edu/safeslinger/images/android-StartDemo.png
- [9]: http://www.cylab.cmu.edu/safeslinger
- [10]: http://sparrow.ece.cmu.edu/group/pub/farb_safeslinger_mobicom2013.pdf
- [11]: http://github.com/SafeSlingerProject/SafeSlinger-iOS
- [12]: http://github.com/SafeSlingerProject/SafeSlinger-iOS/issues
- [13]: http://developer.android.com/reference/android/support/v7/app/package-summary.html 
- [14]: http://github.com/SafeSlingerProject/SafeSlinger-Android
- [15]: http://github.com/SafeSlingerProject/SafeSlinger-AppEngine
- [16]: http://www.urbanairship.com
- [17]: http://www.openssl.org
+
  
  

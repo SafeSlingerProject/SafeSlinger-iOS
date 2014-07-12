@@ -74,7 +74,7 @@ enum ReturnStatus
 @property (nonatomic) Reachability *internetReachability;
 
 // Public interfaces
--(BOOL)SetupExchange: (UIViewController<SafeSlingerDelegate>*)mainController ServerHost: (NSString*) host VersionNumber:(int)vNum;
+-(BOOL)SetupExchange: (UIViewController<SafeSlingerDelegate>*)mainController ServerHost: (NSString*) host VersionNumber:(NSString*)vNum;
 -(void)BeginExchange: (NSData*)input;
 -(void)BeginGrouping: (int)NumOfUsers;
 -(void)BeginVerifying;

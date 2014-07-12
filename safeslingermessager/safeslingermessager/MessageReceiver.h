@@ -39,7 +39,7 @@ typedef enum MessageStatus
 
 @interface MessageReceiver : NSObject
 {
-    BOOL *MsgFinish;
+    int *MsgFinish;
     SafeSlingerDB *DbInstance;
     UniversalDB *UDbInstance;
 }

@@ -245,7 +245,7 @@
 	[request setHTTPMethod: @"POST"];
 	[request setHTTPBody: pktdata];
     
-    int index = [[_MsgNonces objectForKey:cnonce]integerValue];
+    NSInteger index = [[_MsgNonces objectForKey:cnonce]integerValue];
     
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)

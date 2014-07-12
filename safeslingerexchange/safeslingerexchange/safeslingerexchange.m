@@ -40,7 +40,7 @@
 @synthesize mController, protocol, res;
 @synthesize exchangeInput, pro_expire;
 
--(BOOL)SetupExchange: (UIViewController<SafeSlingerDelegate>*)mainController ServerHost: (NSString*) host VersionNumber:(int)vNum
+-(BOOL)SetupExchange: (UIViewController<SafeSlingerDelegate>*)mainController ServerHost: (NSString*) host VersionNumber:(NSString*)vNum
 {
     if(![mainController isKindOfClass:[UIViewController class]])
         return NO;
@@ -48,7 +48,16 @@
         mController = mainController;
         // set to default if null string
         if([host length]==0) host = DEFAULT_SERVER;
-        protocol = [[SafeSlingerExchange alloc]init:host version:vNum];
+        // parse version number
+        NSArray *versionArray = [vNum componentsSeparatedByString:@"."];
+        int version = 0;
+        for(int i=0;i<[versionArray count];i++)
+        {
+            NSString* tmp = [versionArray objectAtIndex:i];
+            version = version | ([tmp intValue] << (8*(3-i)));
+        }
+        
+        protocol = [[SafeSlingerExchange alloc]init:host version:version];
         protocol.delegate = self;
         res = [NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"exchangeui" withExtension:@"bundle"]];
         

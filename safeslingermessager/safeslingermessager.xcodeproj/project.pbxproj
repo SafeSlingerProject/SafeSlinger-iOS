@@ -1027,7 +1027,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = SafeSlinger;
 				PROVISIONING_PROFILE = "";
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1064,7 +1064,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = SafeSlinger;
 				PROVISIONING_PROFILE = "";
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

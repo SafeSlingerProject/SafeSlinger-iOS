@@ -285,7 +285,7 @@
         if(aBook)CFRelease(aBook);
     }
     
-    [proto SetupExchange:self ServerHost:[NSString stringWithFormat:@"%@%@", HTTPURL_PREFIX, HTTPURL_HOST_EXCHANGE] VersionNumber:[delegate getVersionNumberByInt]];
+    [proto SetupExchange:self ServerHost:[NSString stringWithFormat:@"%@%@", HTTPURL_PREFIX, HTTPURL_HOST_EXCHANGE] VersionNumber:[delegate getVersionNumber]];
     [proto BeginExchange: [vCard dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
