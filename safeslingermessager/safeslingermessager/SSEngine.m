@@ -97,7 +97,7 @@
             break;
     }
     
-    DEBUGMSG(@"encrypted cipher size = %d", [cipher length]);
+    DEBUGMSG(@"encrypted cipher size = %lu", (unsigned long)[cipher length]);
 }
 
 +(NSData*)UnlockPrivateKey: (NSString*)Passphase Size:(int)plen Type:(int)type
@@ -124,7 +124,7 @@
     NSString* key_a = [[NSString alloc]initWithBytes:[cprikey1 bytes] length:[cprikey1 length] encoding:NSASCIIStringEncoding];
     NSString* key_b = [[NSString alloc]initWithBytes:[cprikey2 bytes] length:[cprikey2 length] encoding:NSASCIIStringEncoding];
     
-    DEBUGMSG(@"%d %d", [key_a length], [key_b length]);
+    DEBUGMSG(@"%lu %lu", (unsigned long)[key_a length], (unsigned long)[key_b length]);
     
     if([key_a length]>0&&[key_b length]>0)
     {
@@ -254,10 +254,10 @@
     AppDelegate *delegate = [[UIApplication sharedApplication]delegate];
     switch (keytype) {
         case ENC_PRI:
-            keysize = [[delegate.DbInstance GetConfig:@"ENCPRI"]length];
+            keysize = (int)[[delegate.DbInstance GetConfig:@"ENCPRI"]length];
             break;
         case SIGN_PRI:
-            keysize = [[delegate.DbInstance GetConfig:@"SIGNPRI"]length];
+            keysize = (int)[[delegate.DbInstance GetConfig:@"SIGNPRI"]length];
             break;
         default:
             break;
@@ -294,7 +294,7 @@
     [formatkey appendBytes:[header cStringUsingEncoding:NSASCIIStringEncoding] length:[header length]];
     while (olen)
     {
-        int use_len = olen;
+        size_t use_len = olen;
         if (use_len > 64) use_len = 64;
         [formatkey appendBytes:c length:use_len];
         olen -= use_len;
@@ -322,7 +322,7 @@
         return nil;
     }
     
-    if ( (ret = RSA_public_encrypt([text length], [text bytes], buf, pubKey, RSA_PKCS1_PADDING)) == -1 ) {
+    if ( (ret = RSA_public_encrypt((int)[text length], [text bytes], buf, pubKey, RSA_PKCS1_PADDING)) == -1 ) {
         [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"RSA_public_encrypt ERROR: %s\n", ERR_error_string(ERR_get_error(), NULL)]];
         RSA_free(pubKey);
         return nil;
@@ -355,7 +355,7 @@
     memset(buf, 0, [cipher length]);
     memcpy(buf, [cipher bytes], [cipher length]);
     
-    if ( (ret = RSA_private_decrypt([cipher length], buf, result, priKey, RSA_PKCS1_PADDING)) == -1 ) {
+    if ( (ret = RSA_private_decrypt((int)[cipher length], buf, result, priKey, RSA_PKCS1_PADDING)) == -1 ) {
         [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"RSA_private_decrypt ERROR: %s\n", ERR_error_string(ERR_get_error(), NULL)]];
         RSA_free(priKey);
         return nil;
@@ -387,7 +387,7 @@
     [formatkey appendBytes:[header cStringUsingEncoding:NSASCIIStringEncoding] length:[header length]];
     while (olen)
     {
-        int use_len = olen;
+        size_t use_len = olen;
         if (use_len > 64) use_len = 64;
         [formatkey appendBytes:c length:use_len];
         olen -= use_len;
@@ -409,7 +409,7 @@
     
     size = bits/8;
     // base64 decoding for signature file
-    sigsize = [sig length];
+    sigsize = (int)[sig length];
     memset(sig_buf, 0, 2048);
     memcpy(sig_buf, [sig bytes], sigsize);
     
@@ -422,7 +422,7 @@
     }
     
     // compute text hash
-    int plen = [text length];
+    int plen = (int)[text length];
     unsigned char* p = (unsigned char*)[text bytes];
     j = (int)ceil((float)(plen/1024.0f));
     
@@ -482,7 +482,7 @@
         return nil;
     }
  
-    plen = [text length];
+    plen = (int)[text length];
     p = (unsigned char*)[text bytes];
     j = (int)ceil((float)(plen/1024.0f));
     DEBUGMSG( @"\n Plintext has %d blocks", j);
@@ -547,7 +547,7 @@
     size_t prikey_s = BIO_ctrl_pending(prifile);
     unsigned char* p = malloc(prikey_s);
     memset(p, 0, prikey_s);
-    BIO_read(prifile, p, prikey_s);
+    BIO_read(prifile, p, (int)prikey_s);
     NSData* pridata = [[NSData alloc]initWithBytes:p length:prikey_s];
     
     if(keytype==ENC_PRI)
@@ -571,7 +571,7 @@
     size_t pubkey_s = BIO_ctrl_pending(pubfile);
     p = malloc(pubkey_s);
     memset(p, 0, pubkey_s);
-    BIO_read(pubfile, p, pubkey_s);
+    BIO_read(pubfile, p, (int)pubkey_s);
     
     NSString* pubstr = [[NSString alloc]initWithBytes:p length:pubkey_s encoding:NSASCIIStringEncoding];
     pubstr = [pubstr stringByReplacingOccurrencesOfString:@"-----BEGIN PUBLIC KEY-----" withString:@""];
@@ -646,7 +646,7 @@
     // compute sha512 hash
     memset(keyidarray, 0, 64);
     CC_SHA512_Init(&ctx);
-    CC_SHA512_Update(&ctx, [pkeydata bytes], [pkeydata length]);
+    CC_SHA512_Update(&ctx, [pkeydata bytes], (int)[pkeydata length]);
     CC_SHA512_Final(keyidarray, &ctx);
     NSString *idstr = [Base64 encode:[NSData dataWithBytes:keyidarray length:64]];
     
@@ -659,7 +659,7 @@
 {
     int i, n;
     off_t psize, offset;
-    int keylen;
+    NSInteger keylen;
     unsigned char IV[16];
     unsigned char key[512];
     unsigned char digest[32];
@@ -689,7 +689,7 @@
     {
         CC_SHA256_Init(&ctx);
         CC_SHA256_Update(&ctx, digest, 32);
-        CC_SHA256_Update(&ctx, key, keylen);
+        CC_SHA256_Update(&ctx, key, (CC_LONG)keylen);
         CC_SHA256_Final(digest, &ctx);
     }
     
@@ -740,7 +740,7 @@
     // copy key to key buffer
     memset( key, 0,  512 );
     memcpy( key, [secret bytes], [secret length]);
-    keylen = [secret length];
+    keylen = (int)[secret length];
     
     unsigned char tmp[16];
     
@@ -844,8 +844,7 @@
     [pack appendData:cipher];
     // compute public key hash
     CC_SHA1_Init( &ctx );
-    CC_SHA1_Update( &ctx, (const unsigned char*)[pubkey cStringUsingEncoding:NSASCIIStringEncoding],
-                [pubkey lengthOfBytesUsingEncoding:NSASCIIStringEncoding] );
+    CC_SHA1_Update( &ctx, (const unsigned char*)[pubkey cStringUsingEncoding:NSASCIIStringEncoding], (CC_LONG)[pubkey lengthOfBytesUsingEncoding:NSASCIIStringEncoding] );
     CC_SHA1_Final( hash, &ctx);
     
     //int i;
@@ -911,8 +910,7 @@
     NSData* selfpuk = [self getPubKey:YES];
     // compute public key hash
     CC_SHA1_Init( &ctx );
-    CC_SHA1_Update( &ctx, (const unsigned char*)[selfpuk bytes],
-                   [selfpuk length] );
+    CC_SHA1_Update( &ctx, (const unsigned char*)[selfpuk bytes], (CC_LONG)[selfpuk length] );
     CC_SHA1_Final( hash, &ctx);
     [unpack appendBytes:hash length:20];
     
@@ -952,7 +950,7 @@
     
     // 3. remaindering, block cipher
     s = s + SIGNKEYSIZE/8;
-    clen = [cipher length]-(SIGNKEYSIZE/8)-(ENCKEYSIZE/8);
+    clen = (int)[cipher length]-(SIGNKEYSIZE/8)-(ENCKEYSIZE/8);
     NSData* mciper = [NSData dataWithBytes:s length:clen];
     NSData* mdcipher = [self AESDecrypt:mciper withAESKey:[NSData dataWithBytes:skey length:64] withPlen:plen];
     

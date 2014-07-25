@@ -352,8 +352,6 @@
 "label_expiresIn" = "Ka pau i roto i te";
 /* 'File Name' is a screen label (match English casing); used on the Save File As dialog as a hint in the file name text box when changing the file name. */
 "label_FileNameHint" = "Ingoa kōnae";
-/* 'Enter the name you wish others to see when communicating securely, and a passphrase to protect your data:' is a screen label (match English casing); used to instruct the user how to proceed on the Setup screen. */
-"label_FindInstruct" = "Tomo i te ingoa e hiahia ana koe ki te kite i ētahi atu i te kōrero he wehi:";
 /* 'First Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current first name to use. iOS-only. */
 "label_FirstName" = "Ingoa Tuatahi";
 /* 'Tap your name to add or remove contact data, check items you wish to share, and tap Begin Exchange when others are ready to exchange:' is a screen label (match English casing); used to instruct the user how to proceed on the Begin Exchange screen. */
@@ -364,10 +362,8 @@
 "label_hours" = "%d haora";
 /* 'SafeSlinger iCloud is enabled. Tap the Done button when finished.' is a screen label (match English casing); used to indicate the backup will occur while on the Setup screen. iOS-only. */
 "label_iCloudEnable" = "Ngā makaurangi SafeSlinger iCloud te. Paoa i te pātene Fai ka oti.";
-/* 'No messages. You may send a message from the Compose Message button on the Home menu.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. iOS-only. */
+/* 'No messages. You may send a message from the Compose tab.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. */
 "label_InstNoMessages" = "No karere. Kia unga e koe he karere i te pātene Tito Pōpoaki i runga i te tahua Home.";
-/* 'No messages. You may send a message from the Compose tab.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. Android-only. */
-"label_InstNoMessagesAndroid" = "No karere. Kia unga e koe he karere i te ripa Tito.";
 /* 'To add recipients, you must first Sling Keys with one or more other users at the same time. You may also send a Sling Keys contact invitation from the menu.' is a screen label (match English casing); used to instruct the user how to proceed on the Recipient list screen is case of no recipients. */
 "label_InstNoRecipients" = "Hei tāpiri kaiwhiwhi, me a koutou i te tuatahi te kotaha Pātuhi ki tētahi, ētahi rānei ētahi atu kaiwhakamahi i te wā kotahi. Kia hoki koe unga he kotaha Pātuhi whakapā te aniraa i te tahua.";
 /* 'No shared file. Connect your device with iTunes and drag files to the shared folder.' is a screen label (match English casing); used to instruct the user how to proceed on the Shared Files screen is case of no files to share. iOS-only. */
@@ -484,8 +480,6 @@
 "label_summary_auto_decrypt" = "Wetemuna aunoa karere i te takiuru";
 /* 'Receive notification when backup is offline.' is a screen label (match English casing); used as the settings summary to describe what Backup Reminder will do. */
 "label_summary_remind_backup_delay" = "Whiwhi whakamōhiotanga i te tuimotu pūrua.";
-/* 'Show a tutorial before attemping to Sling Keys.' is a screen label (match English casing); used as the settings summary to describe what Show Walkthrough will do. */
-"label_summary_show_tutorial" = "Whakaaturia te akoranga i mua i attemping ki te kotaha Pātuhi.";
 /* 'Tap to decrypt file' is a screen label (match English casing); used to indicate tapping this message in the list will attempt to decrypt the attachment (if needed). */
 "label_TapToDecryptFile" = "Paoa ki te wetemuna kōnae";
 /* 'Tap to decrypt' is a screen label (match English casing); used to indicate tapping this message in the list will attempt to decrypt it. */
@@ -568,8 +562,6 @@
 "menu_Help" = "Āwhina";
 /* 'Introduction' is a menu option (title case); used to show the secure introduction composition screen via the main home screen. */
 "menu_Introduction" = "Kupu Whakataki";
-/* 'License' is a menu option (title case); used to show a dialog of the End User License Agreement. */
-"menu_License" = "Raihana";
 /* 'Logout' is a menu option (title case); used to remove the cached passphrase and force the user to login again. */
 "menu_Logout" = "Takiputa";
 /* 'Manage Passphrases' is a menu option (title case); used on the settings screen to allow users to remove newer keys if created by users without orignial user authorization. */
@@ -710,8 +702,6 @@
 "text_KeywordKey" = "Matua";
 /* 'Messaging' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordMessaging" = "Karere";
-/* 'Privacy' is an application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordPrivacy" = "Privacy";
 /* 'Security' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordSecurity" = "Haumarutanga";
 /* 'Languages provided by:' is an application description (sentence case); used at the end of the about dialog to list the translators of SafeSlinger. */

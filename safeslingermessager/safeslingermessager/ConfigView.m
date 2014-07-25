@@ -245,7 +245,7 @@
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     cell.textLabel.text = NSLocalizedString(@"label_passPhraseCacheTtl", @"Pass Phrase Cache");
                     NSInteger cache_time = [[NSUserDefaults standardUserDefaults]integerForKey: kPasshpraseCacheTime];
-                    DEBUGMSG(@"cache_time = %d", cache_time);
+                    DEBUGMSG(@"cache_time = %ld", (long)cache_time);
                     cell.detailTextLabel.text = [self GetTimeLabel:cache_time];
                     break;
                 default:
@@ -392,7 +392,7 @@
 
 - (void)ManagePassphraseDialog
 {
-    NSInteger DB_KEY_INDEX = [[NSUserDefaults standardUserDefaults] integerForKey: kDEFAULT_DB_KEY];
+    int DB_KEY_INDEX = (int)[[NSUserDefaults standardUserDefaults] integerForKey: kDEFAULT_DB_KEY];
     NSArray *keyarr = [[NSUserDefaults standardUserDefaults] stringArrayForKey: kDB_KEY];
     NSArray *infoarr = [[NSUserDefaults standardUserDefaults] stringArrayForKey: kDB_LIST];
     NSMutableString* msg = [NSMutableString string];
@@ -429,7 +429,7 @@
 
 - (void)DeleteNewerKeys
 {
-    NSInteger DB_KEY_INDEX = [[NSUserDefaults standardUserDefaults] integerForKey: kDEFAULT_DB_KEY];
+    int DB_KEY_INDEX = (int)[[NSUserDefaults standardUserDefaults] integerForKey: kDEFAULT_DB_KEY];
     NSArray *keyarr = [[NSUserDefaults standardUserDefaults] stringArrayForKey: kDB_KEY];
     NSArray *infoarr = [[NSUserDefaults standardUserDefaults] stringArrayForKey: kDB_LIST];
     

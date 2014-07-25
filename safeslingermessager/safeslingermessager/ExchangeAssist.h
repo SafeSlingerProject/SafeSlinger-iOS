@@ -24,7 +24,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface KeyAssistant : UIViewController
+@interface ExchangeAssist : UIViewController
 
 @property (nonatomic, strong) IBOutlet UIWebView *HelpView;
 @property (nonatomic, strong) IBOutlet UILabel *ShowLabel;

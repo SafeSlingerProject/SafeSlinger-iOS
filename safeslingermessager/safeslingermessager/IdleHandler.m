@@ -60,7 +60,7 @@
     }
     
     //convert the wait period into minutes rather than seconds
-    int timeout = [[NSUserDefaults standardUserDefaults]integerForKey:kPasshpraseCacheTime];
+    NSInteger timeout = [[NSUserDefaults standardUserDefaults]integerForKey:kPasshpraseCacheTime];
     if(timeout>0)
         idleTimer = [NSTimer scheduledTimerWithTimeInterval:timeout target:self selector:@selector(idleTimerExceeded) userInfo:nil repeats:NO];
 }

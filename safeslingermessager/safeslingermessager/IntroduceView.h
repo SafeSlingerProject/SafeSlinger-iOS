@@ -23,11 +23,12 @@
  */
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 
 @class AppDelegate;
 @class ContactEntry;
 
-@interface IntroduceView : UIViewController
+@interface IntroduceView : UIViewController <MFMailComposeViewControllerDelegate, UIActionSheetDelegate>
 {
     AppDelegate *delegate;
 }

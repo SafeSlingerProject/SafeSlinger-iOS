@@ -56,6 +56,17 @@
     [self.view addGestureRecognizer:swipeRight];
     
     [LogoutBtn setTitle:NSLocalizedString(@"menu_Logout", @"Logout")];
+    
+    UITabBarItem *item = [self.viewControllers objectAtIndex: 0];
+    [item setTitle: NSLocalizedString(@"menu_TagListMessages", @"Messages")];
+    item = [self.viewControllers objectAtIndex: 1];
+    [item setTitle: NSLocalizedString(@"menu_TagComposeMessage", @"Compose")];
+    item = [self.viewControllers objectAtIndex: 2];
+    [item setTitle: NSLocalizedString(@"menu_TagExchange", @"Sling Keys")];
+    item = [self.viewControllers objectAtIndex: 3];
+    [item setTitle: NSLocalizedString(@"menu_Introduction", @"Introduction")];
+    item = [self.viewControllers objectAtIndex: 4];
+    [item setTitle: NSLocalizedString(@"menu_Settings", @"Settings")];
 }
 
 - (void)viewWillAppear:(BOOL)animated

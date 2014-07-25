@@ -196,7 +196,7 @@
              if ([data length] > 0 )
              {
                  // start parsing data
-                 DEBUGMSG(@"Succeeded! Received %d bytes of data",[data length]);
+                 DEBUGMSG(@"Succeeded! Received %lu bytes of data",(unsigned long)[data length]);
                  const char *msgchar = [data bytes];
                  DEBUGMSG(@"Return SerV: %02X", ntohl(*(int *)msgchar));
                  if (ntohl(*(int *)msgchar) > 0)
@@ -695,7 +695,7 @@
         return;
     }
     
-    DEBUGMSG(@"cipher size = %d", [msg.msgbody length]);
+    DEBUGMSG(@"cipher size = %lu", (unsigned long)[msg.msgbody length]);
     NSData* decipher = [SSEngine UnpackMessage: msg.msgbody PubKey:pubkeySet Prikey: DecKey];
     
     // parsing
@@ -738,8 +738,7 @@
     len = ntohl(*(int *)(p+offset));
     offset += 4;
     if(len>0){
-        fname = [[NSString alloc] initWithData:[NSData dataWithBytes:p+offset length:len]
-                                      encoding:NSUTF8StringEncoding];
+        fname = [[NSString alloc] initWithBytes:p+offset length:len encoding:NSUTF8StringEncoding];
         // handle file name
         offset = offset+len;
     }
@@ -748,8 +747,7 @@
     offset += 4;
     if(len>0){
         // handle file type
-        ftype = [NSString stringWithCString:[[NSData dataWithBytes:p+offset length:len]bytes]
-                                   encoding:NSASCIIStringEncoding];
+        ftype = [[NSString alloc] initWithBytes:p+offset length:len encoding:NSASCIIStringEncoding];
         offset = offset+len;
     }
     
@@ -757,8 +755,7 @@
     offset += 4;
     if(len>0){
         // handle text
-        text = [NSString stringWithCString:[[NSData dataWithBytes:p+offset length:len]bytes]
-                                  encoding:NSUTF8StringEncoding];
+        text = [[NSString alloc] initWithBytes:p+offset length:len encoding:NSUTF8StringEncoding];
         offset = offset+len;
     }
     
@@ -766,7 +763,7 @@
     offset += 4;
     if(len>0){
         // handle Person Name
-        peer = [NSString stringWithCString:[[NSData dataWithBytes:p+offset length:len]bytes] encoding:NSUTF8StringEncoding];
+        peer = [[NSString alloc] initWithBytes:p+offset length:len encoding:NSUTF8StringEncoding];
         offset = offset+len;
     }
     
@@ -774,7 +771,7 @@
     offset += 4;
     if(len>0){
         // handle text
-        gmt = [NSString stringWithCString:[[NSData dataWithBytes:p+offset length:len]bytes] encoding:NSASCIIStringEncoding];
+        gmt = [[NSString alloc] initWithBytes:p+offset length:len encoding:NSASCIIStringEncoding];
         offset = offset+len;
     }
     

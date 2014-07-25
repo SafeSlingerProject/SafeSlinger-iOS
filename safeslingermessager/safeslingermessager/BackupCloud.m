@@ -216,7 +216,7 @@
         else db_item = [NSString stringWithFormat:@"%@-%d.db", DATABASE_NAME, i];
         
         NSData *DatabaseCopy = [unarchiver decodeObjectForKey: db_item];
-        DEBUGMSG(@"dataebase(%d) has %d bytes.", i, [DatabaseCopy length]);
+        DEBUGMSG(@"dataebase(%d) has %lu bytes.", i, (unsigned long)[DatabaseCopy length]);
         
         NSString* dbpath = [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent: db_item];
         [DatabaseCopy writeToFile: dbpath atomically:YES];
@@ -224,9 +224,9 @@
     
     // load default database
     NSInteger DB_KEY_INDEX = [[NSUserDefaults standardUserDefaults] integerForKey: kDEFAULT_DB_KEY];
-    DEBUGMSG(@"DB_KEY_INDEX = %d", DB_KEY_INDEX);
+    DEBUGMSG(@"DB_KEY_INDEX = %ld", (long)DB_KEY_INDEX);
     if(DB_KEY_INDEX>0){
-        [delegate.DbInstance LoadDBFromStorage: [NSString stringWithFormat:@"%@-%d", DATABASE_NAME, DB_KEY_INDEX]];
+        [delegate.DbInstance LoadDBFromStorage: [NSString stringWithFormat:@"%@-%ld", DATABASE_NAME, (long)DB_KEY_INDEX]];
     }else{
         [delegate.DbInstance LoadDBFromStorage: nil];
     }
@@ -251,7 +251,7 @@
     if(Operation)
     {
         NSData* upload = [self PrepareBackupFile];
-        DEBUGMSG(@"backup file is ready to upload (%d bytes).", [upload length]);
+        DEBUGMSG(@"backup file is ready to upload (%lu bytes).", (unsigned long)[upload length]);
         if(!upload){
             [ErrorLogger ERRORDEBUG: @"The Backup File is Zero Byte."];
         }else{

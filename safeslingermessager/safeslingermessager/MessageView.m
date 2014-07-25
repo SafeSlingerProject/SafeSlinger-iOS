@@ -110,7 +110,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    self.parentViewController.navigationItem.title = [NSString stringWithFormat:@"%d %@",[MessageList count], NSLocalizedString(@"title_Threads" ,@"Threads")];
+    self.parentViewController.navigationItem.title = [NSString stringWithFormat:@"%lu %@",(unsigned long)[MessageList count], NSLocalizedString(@"title_Threads" ,@"Threads")];
     return [MessageList count];
 }
 

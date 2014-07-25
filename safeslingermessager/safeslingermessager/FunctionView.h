@@ -29,6 +29,6 @@
 
 @interface FunctionView : UITabBarController
 
-@property (nonatomic, strong) IBOutlet UITabBarItem *LogoutBtn;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *LogoutBtn;
 
 @end

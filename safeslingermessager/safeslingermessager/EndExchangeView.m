@@ -270,7 +270,7 @@
 	[tableView deselectRowAtIndexPath: [tableView indexPathForSelectedRow] animated: NO];
     if([UtilityFunc checkContactPermission])
     {
-        int row = [indexPath row];
+        NSInteger row = [indexPath row];
         UITableViewCell *cell = [tableView cellForRowAtIndexPath: indexPath];
         if (cell.accessoryType == UITableViewCellAccessoryNone)
         {

@@ -118,6 +118,8 @@
 "choice_8hours" = "8 hours";
 /* choice (sentence case); used to set the attachment root path to the default source. Android-only. */
 "choice_auto_storage" = "Default Storage";
+/* choice (sentence case); used in any menu to denote the default choice. */
+"choice_default" = "Default";
 /* choice (sentence case); used to set the attachment root path to an external source. Android-only. */
 "choice_external_storage" = "External Storage";
 /* choice (sentence case); used in the settings to choose a large font size. */
@@ -351,6 +353,8 @@
 "help_SecureIntroduction" = "This screen allows you to select two people you have slung keys with before to securely send their keys to each other. Simply press Introduce when ready.";
 /* help message (sentence case, period); used via Help button on the Compose Message screen to describe in more detail what the Compose Message screen does. */
 "help_Send" = "This screen allows you to select some data and a recipient to send to. Simply press Send when ready.";
+/* help message (sentence case, period); used via Help button on the Settings screen to describe in more detail what the Settings screen does. */
+"help_settings" = "This screen allows you to change the default settings for the application.";
 /* help message (sentence case, period); used via Help button on the Group Size screen and also the key exchange walkthrough tutorial to describe in more detail what the Group Size screen does. */
 "help_size" = "Select the number of people who are attempting to exchange data together and press OK.";
 /* help message (sentence case, period); used via Help button on the Grouping screen and also the key exchange walkthrough tutorial to describe in more detail what the Grouping screen does. */
@@ -430,7 +434,7 @@
 /* screen label (match English casing); used on the Save File As dialog as a hint in the file name text box when changing the file name. */
 "label_FileNameHint" = "File Name";
 /* screen label (match English casing); used to instruct the user how to proceed on the Setup screen. */
-"label_FindInstruct" = "Enter the name you wish others to see when communicating securely, and a passphrase to protect your data:";
+"label_FindInstruct" = "Enter your name and a passphrase to protect your data:";
 /* screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current first name to use. iOS-only. */
 "label_FirstName" = "First Name";
 /* screen label (match English casing); used to indicate file size on the Messages list and Compose Message screens. %.1f = the number of gigabytes in tenths. */
@@ -443,10 +447,8 @@
 "label_hours" = "%d hours";
 /* screen label (match English casing); used to indicate the backup will occur while on the Setup screen. iOS-only. */
 "label_iCloudEnable" = "SafeSlinger iCloud is enabled. Tap the Done button when finished.";
-/* screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. iOS-only. */
-"label_InstNoMessages" = "No messages. You may send a message from the Compose Message button on the Home menu.";
-/* screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. Android-only. */
-"label_InstNoMessagesAndroid" = "No messages. You may send a message from the Compose tab.";
+/* screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. */
+"label_InstNoMessages" = "No messages. You may send a message from the Compose tab.";
 /* screen label (match English casing); used to instruct the user how to proceed on the Recipient list screen is case of no recipients. */
 "label_InstNoRecipients" = "To add recipients, you must first Sling Keys with one or more other users at the same time. You may also send a Sling Keys contact invitation from the menu.";
 /* screen label (match English casing); used to instruct the user how to proceed on the Shared Files screen is case of no files to share. iOS-only. */
@@ -574,7 +576,7 @@
 /* screen label (match English casing); used as the settings summary to describe what Backup Reminder will do. */
 "label_summary_remind_backup_delay" = "Receive notification when backup is offline.";
 /* screen label (match English casing); used as the settings summary to describe what Show Walkthrough will do. */
-"label_summary_show_tutorial" = "Show a tutorial before attemping to Sling Keys.";
+"label_summary_show_tutorial" = "Show a tutorial before attempting to Sling Keys.";
 /* screen label (match English casing); used to indicate tapping this message in the list will attempt to decrypt the attachment (if needed). */
 "label_TapToDecryptFile" = "Tap to decrypt file";
 /* screen label (match English casing); used to indicate tapping this message in the list will attempt to decrypt it. */
@@ -667,10 +669,14 @@
 "menu_HideInvalid" = "Hide Invalid";
 /* menu option (title case); used to show the secure introduction composition screen via the main home screen. */
 "menu_Introduction" = "Introduction";
+/* menu (title case); used as the settings menu option to change language */
+"menu_language" = "Language";
 /* menu option (title case); used to show a dialog of the End User License Agreement. */
 "menu_License" = "License";
 /* menu option (title case); used to select a contact from the address book to update from and link to. */
-"menu_link_contact" = "Select Contact Badge";
+"menu_link_contact_add" = "Add Contact Link";
+/* menu option (title case); used to select a contact from the address book to update from and link to. */
+"menu_link_contact_change" = "Change Contact Link";
 /* menu option (title case); used to remove the cached passphrase and force the user to login again. */
 "menu_Logout" = "Logout";
 /* menu option (title case); used on the settings screen to allow users to remove newer keys if created by users without orignial user authorization. */
@@ -681,6 +687,8 @@
 "menu_messageCopyText" = "Copy Text";
 /* menu option (title case); used to create a new message with the same text message/attachment via the message list context menu. */
 "menu_messageForward" = "Forward";
+/* menu option (title case); used to show a dialog of the End User License Agreement. */
+"menu_PrivacyPolicy" = "Privacy Policy";
 /* menu option (title case); used to remove the currently selected file attachment via the File Options dialog. */
 "menu_Remove" = "Remove";
 /* menu option (title case); used as Settings screen menu item for restoring all settings to default */
@@ -874,6 +882,8 @@
 "title_home" = "Begin Exchange";
 /* title (title case); used at the top of the home screen on iOS. */
 "title_HomePanel" = "Home";
+/* title (title case); used as the settings title when changing language */
+"title_language" = "Select language. Help us translate by using Send Feedback.";
 /* title (title case); used at the top of the dialog when viewing message details. */
 "title_MessageDetail" = "Message";
 /* title (title case); used at the top of the message list screen. */

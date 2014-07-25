@@ -124,11 +124,39 @@
 {
     UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"title_MyIdentity", @"Personal Contact")
                                                       message:NSLocalizedString(@"help_identity_menu", @"You may also change personal data about your identity on this screen by tapping on the button with your name. This will display a menu allowing you to Edit your contact, Create New contact, or Use Another contact.")
-                                                     delegate:nil
+                                                     delegate:self
                                             cancelButtonTitle:NSLocalizedString(@"btn_Close", @"Close")
-                                            otherButtonTitles:nil];
+                                            otherButtonTitles:NSLocalizedString(@"menu_sendFeedback", @"Send Feedback"), nil];
     [message show];
     message = nil;
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex!=alertView.cancelButtonIndex)
+    {
+        [UtilityFunc SendOpts:self];
+    }
+}
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+        case MFMailComposeResultSaved:
+        case MFMailComposeResultSent:
+            break;
+        case MFMailComposeResultFailed:
+            // toast message
+            [[[[iToast makeText: NSLocalizedString(@"error_CorrectYourInternetConnection", @"Internet not available, check your settings.")]
+               setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+            break;
+        default:
+            break;
+    }
+    // Close the Mail Interface
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 
@@ -162,7 +190,7 @@
     // Configure the cell...
     cell.textLabel.text = [[user_actions allValues]objectAtIndex:indexPath.row];
     cell.detailTextLabel.text = nil;
-    int key = [[[user_actions allKeys]objectAtIndex:indexPath.row]integerValue];
+    NSInteger key = [[[user_actions allKeys]objectAtIndex:indexPath.row]integerValue];
     if(key>=0)
     {
         [cell.imageView setImage:[contact_photos objectAtIndex:key]];
@@ -174,7 +202,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    int key = [[[user_actions allKeys]objectAtIndex:indexPath.row]integerValue];
+    NSInteger key = [[[user_actions allKeys]objectAtIndex:indexPath.row]integerValue];
     
     switch (key) {
         case UseNameOnly:
@@ -194,7 +222,7 @@
             break;
         default:
             // other contacts with the same name
-            [delegate saveConactDataWithoutChaningName: [[contact_index objectAtIndex:key]integerValue] ];
+            [delegate saveConactDataWithoutChaningName: (int)[[contact_index objectAtIndex:key]integerValue] ];
             [self performSegueWithIdentifier:@"FinishEditContact" sender:self];
             break;
     }

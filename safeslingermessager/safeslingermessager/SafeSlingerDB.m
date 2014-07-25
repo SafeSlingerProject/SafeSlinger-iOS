@@ -316,7 +316,7 @@
         
         //item_value
         if(value)
-            sqlite3_bind_blob(sqlStatement, 1, [value bytes], [value length], SQLITE_TRANSIENT);
+            sqlite3_bind_blob(sqlStatement, 1, [value bytes], (int)[value length], SQLITE_TRANSIENT);
         else
             sqlite3_bind_null(sqlStatement, 1);
         
@@ -440,7 +440,7 @@
             return nil;
         }
         
-        sqlite3_bind_blob(sqlStatement, 1, [MSGID bytes], [MSGID length], SQLITE_TRANSIENT);
+        sqlite3_bind_blob(sqlStatement, 1, [MSGID bytes], (int)[MSGID length], SQLITE_TRANSIENT);
         if (sqlite3_step(sqlStatement)==SQLITE_ROW) {
             if(sqlite3_column_type(sqlStatement, 0)==SQLITE_TEXT)
             {
@@ -482,7 +482,7 @@
         const char *sql = [sqlstr UTF8String];
         
         if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) == SQLITE_OK){
-            sqlite3_bind_blob(sqlStatement, 1, [KEYID cStringUsingEncoding:NSUTF8StringEncoding], [KEYID lengthOfBytesUsingEncoding:NSUTF8StringEncoding], SQLITE_TRANSIENT);
+            sqlite3_bind_blob(sqlStatement, 1, [KEYID cStringUsingEncoding:NSUTF8StringEncoding], (int)[KEYID lengthOfBytesUsingEncoding:NSUTF8StringEncoding], SQLITE_TRANSIENT);
             
             // get newest one
             if (sqlite3_step(sqlStatement)==SQLITE_ROW)
@@ -532,7 +532,7 @@
         if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) == SQLITE_OK)
         {
             // keyid
-            sqlite3_bind_blob(sqlStatement, 1, [KEYID cStringUsingEncoding:NSUTF8StringEncoding], [KEYID lengthOfBytesUsingEncoding:NSUTF8StringEncoding], SQLITE_TRANSIENT);
+            sqlite3_bind_blob(sqlStatement, 1, [KEYID cStringUsingEncoding:NSUTF8StringEncoding], (int)[KEYID lengthOfBytesUsingEncoding:NSUTF8StringEncoding], SQLITE_TRANSIENT);
             
             if (sqlite3_step(sqlStatement)==SQLITE_ROW) {
                 if(sqlite3_column_type(sqlStatement, 0)!=SQLITE_NULL)
@@ -574,7 +574,7 @@
             dev = -1;
         }
         
-        sqlite3_bind_blob(sqlStatement, 1, [KEYID cStringUsingEncoding:NSUTF8StringEncoding], [KEYID lengthOfBytesUsingEncoding:NSUTF8StringEncoding], SQLITE_TRANSIENT);
+        sqlite3_bind_blob(sqlStatement, 1, [KEYID cStringUsingEncoding:NSUTF8StringEncoding], (int)[KEYID lengthOfBytesUsingEncoding:NSUTF8StringEncoding], SQLITE_TRANSIENT);
         
         if (sqlite3_step(sqlStatement)==SQLITE_ROW) {
             dev = sqlite3_column_int(sqlStatement, 0);
@@ -613,7 +613,7 @@
             [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
         }
         
-        sqlite3_bind_blob(sqlStatement, 1, [KEYID cStringUsingEncoding:NSUTF8StringEncoding], [KEYID lengthOfBytesUsingEncoding:NSUTF8StringEncoding], SQLITE_TRANSIENT);
+        sqlite3_bind_blob(sqlStatement, 1, [KEYID cStringUsingEncoding:NSUTF8StringEncoding], (int)[KEYID lengthOfBytesUsingEncoding:NSUTF8StringEncoding], SQLITE_TRANSIENT);
         
         if (sqlite3_step(sqlStatement)==SQLITE_ROW) {
             ex_type = sqlite3_column_int(sqlStatement, 0);
@@ -836,7 +836,7 @@
         
         NSString* keyid = [keyarray objectAtIndex:0];
         NSString* ptoken = nil;
-        sqlite3_bind_blob(sqlStatement, 1, [keyid cStringUsingEncoding:NSUTF8StringEncoding], [keyid lengthOfBytesUsingEncoding:NSUTF8StringEncoding], SQLITE_TRANSIENT);
+        sqlite3_bind_blob(sqlStatement, 1, [keyid cStringUsingEncoding:NSUTF8StringEncoding], (int)[keyid lengthOfBytesUsingEncoding:NSUTF8StringEncoding], SQLITE_TRANSIENT);
         
         if (sqlite3_step(sqlStatement)==SQLITE_ROW) {
             ptoken = [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 0)];
@@ -887,7 +887,7 @@
             sqlite3_bind_text( sqlStatement, 8, [stamp UTF8String], -1, SQLITE_TRANSIENT);
             
             // bind keyid
-            sqlite3_bind_blob(sqlStatement, 9, [keyid cStringUsingEncoding:NSUTF8StringEncoding], [keyid lengthOfBytesUsingEncoding:NSUTF8StringEncoding], SQLITE_TRANSIENT);
+            sqlite3_bind_blob(sqlStatement, 9, [keyid cStringUsingEncoding:NSUTF8StringEncoding], (int)[keyid lengthOfBytesUsingEncoding:NSUTF8StringEncoding], SQLITE_TRANSIENT);
             
             if(SQLITE_DONE != sqlite3_step(sqlStatement)){
                 [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"Error while inserting peer. '%s'", sqlite3_errmsg(db)]];
@@ -924,7 +924,7 @@
             else sqlite3_bind_null(sqlStatement, 6);
             
             // bind keyid
-            sqlite3_bind_blob(sqlStatement, 7, [keyid cStringUsingEncoding:NSUTF8StringEncoding], [keyid lengthOfBytesUsingEncoding:NSUTF8StringEncoding], SQLITE_TRANSIENT);
+            sqlite3_bind_blob(sqlStatement, 7, [keyid cStringUsingEncoding:NSUTF8StringEncoding], (int)[keyid lengthOfBytesUsingEncoding:NSUTF8StringEncoding], SQLITE_TRANSIENT);
             
             // pkey
             NSString* keystr = [keyarray objectAtIndex:2];
@@ -974,7 +974,7 @@
         }
         
         // bind keyid
-        sqlite3_bind_blob(sqlStatement, 1, [KEYID cStringUsingEncoding:NSUTF8StringEncoding], [KEYID lengthOfBytesUsingEncoding:NSUTF8StringEncoding], SQLITE_TRANSIENT);
+        sqlite3_bind_blob(sqlStatement, 1, [KEYID cStringUsingEncoding:NSUTF8StringEncoding], (int)[KEYID lengthOfBytesUsingEncoding:NSUTF8StringEncoding], SQLITE_TRANSIENT);
         
         if(SQLITE_DONE != sqlite3_step(sqlStatement)){
             [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"ERROR: Error while inserting data. '%s'", sqlite3_errmsg(db)]];
@@ -1350,7 +1350,7 @@
         sqlite3_stmt *sqlStatement;
         if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) == SQLITE_OK)
         {
-            sqlite3_bind_blob(sqlStatement, 1, [msgid bytes], [msgid length], SQLITE_TRANSIENT);
+            sqlite3_bind_blob(sqlStatement, 1, [msgid bytes], (int)[msgid length], SQLITE_TRANSIENT);
             
             char* output = NULL;
             if (sqlite3_step(sqlStatement)==SQLITE_ROW) {
@@ -1418,7 +1418,7 @@
         }
         
         // msgid
-        sqlite3_bind_blob(sqlStatement, 1, [MSG.msgid bytes], [MSG.msgid length], SQLITE_TRANSIENT);
+        sqlite3_bind_blob(sqlStatement, 1, [MSG.msgid bytes], (int)[MSG.msgid length], SQLITE_TRANSIENT);
         // 2/3: cTime/rTime, rTime is not used anymore
         sqlite3_bind_text(sqlStatement, 2, [MSG.cTime UTF8String], -1, SQLITE_TRANSIENT);
         sqlite3_bind_text(sqlStatement, 3, [MSG.rTime UTF8String], -1, SQLITE_TRANSIENT);
@@ -1438,7 +1438,7 @@
         
         // 7: msgbody
         if(MSG.msgbody)
-            sqlite3_bind_blob(sqlStatement, 7, [MSG.msgbody bytes], [MSG.msgbody length], SQLITE_TRANSIENT);
+            sqlite3_bind_blob(sqlStatement, 7, [MSG.msgbody bytes], (int)[MSG.msgbody length], SQLITE_TRANSIENT);
         else
             sqlite3_bind_null(sqlStatement, 7);
         
@@ -1450,13 +1450,13 @@
             {
                 // fname/fdata
                 sqlite3_bind_text(sqlStatement, 9, [MSG.fname UTF8String], -1, SQLITE_TRANSIENT);
-                sqlite3_bind_blob(sqlStatement, 10, [MSG.fbody bytes], [MSG.fbody length], NULL);
+                sqlite3_bind_blob(sqlStatement, 10, [MSG.fbody bytes], (int)[MSG.fbody length], NULL);
                 sqlite3_bind_null(sqlStatement, 11);
                 sqlite3_bind_text(sqlStatement, 12, [MSG.fext UTF8String], -1, SQLITE_TRANSIENT);
             }else{
                 // FromMsg
                 sqlite3_bind_text(sqlStatement, 9, [MSG.fname UTF8String], -1, SQLITE_TRANSIENT);
-                sqlite3_bind_blob(sqlStatement, 10, [MSG.fbody bytes], [MSG.fbody length], NULL);
+                sqlite3_bind_blob(sqlStatement, 10, [MSG.fbody bytes], (int)[MSG.fbody length], NULL);
                 sqlite3_bind_text(sqlStatement, 11, [MSG.rTime UTF8String], -1, SQLITE_TRANSIENT);
                 sqlite3_bind_text(sqlStatement, 12, [MSG.fext UTF8String], -1, SQLITE_TRANSIENT);
             }
@@ -1563,7 +1563,7 @@
         // bind msgbody
         if(decrypted_message!=NULL)
         {
-            sqlite3_bind_blob(sqlStatement, 1, [[decrypted_message dataUsingEncoding:NSUTF8StringEncoding] bytes], [decrypted_message lengthOfBytesUsingEncoding:NSUTF8StringEncoding], SQLITE_TRANSIENT);
+            sqlite3_bind_blob(sqlStatement, 1, [[decrypted_message dataUsingEncoding:NSUTF8StringEncoding] bytes], (int)[decrypted_message lengthOfBytesUsingEncoding:NSUTF8StringEncoding], SQLITE_TRANSIENT);
         }
         else {
             sqlite3_bind_null(sqlStatement, 1);
@@ -1591,7 +1591,7 @@
         if(UserPhoto!=nil) sqlite3_bind_text(sqlStatement, 5, [UserPhoto UTF8String], -1, SQLITE_TRANSIENT);
         else sqlite3_bind_null(sqlStatement, 5);
         // bind msgid
-        sqlite3_bind_blob(sqlStatement, 6, [msgid bytes], [msgid length], SQLITE_TRANSIENT);
+        sqlite3_bind_blob(sqlStatement, 6, [msgid bytes], (int)[msgid length], SQLITE_TRANSIENT);
         
         if(SQLITE_DONE != sqlite3_step(sqlStatement)){
             [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"Error while updating data. '%s'", sqlite3_errmsg(db)]];
@@ -1630,9 +1630,9 @@
         }
         
         // bind msgbody
-        sqlite3_bind_blob(sqlStatement, 1, [data bytes], [data length], SQLITE_TRANSIENT);
+        sqlite3_bind_blob(sqlStatement, 1, [data bytes], (int)[data length], SQLITE_TRANSIENT);
         // bind msgid
-        sqlite3_bind_blob(sqlStatement, 2, [msgid bytes], [msgid length], SQLITE_TRANSIENT);
+        sqlite3_bind_blob(sqlStatement, 2, [msgid bytes], (int)[msgid length], SQLITE_TRANSIENT);
         
         if(SQLITE_DONE != sqlite3_step(sqlStatement)){
             [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"Error while updating data. '%s'", sqlite3_errmsg(db)]];
@@ -1671,7 +1671,7 @@
         }
         
         // bind msgid
-        sqlite3_bind_blob(sqlStatement, 1, [msgid bytes], [msgid length], SQLITE_TRANSIENT);
+        sqlite3_bind_blob(sqlStatement, 1, [msgid bytes], (int)[msgid length], SQLITE_TRANSIENT);
         
         if (sqlite3_step(sqlStatement) == SQLITE_ERROR) {
             [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"Error while querying data. '%s'", sqlite3_errmsg(db)]];
@@ -1750,7 +1750,7 @@
         }
         
         // bind msgid
-        sqlite3_bind_blob(sqlStatement, 1, [msgid bytes], [msgid length], SQLITE_TRANSIENT);
+        sqlite3_bind_blob(sqlStatement, 1, [msgid bytes], (int)[msgid length], SQLITE_TRANSIENT);
         
         if(SQLITE_DONE != sqlite3_step(sqlStatement)){
             [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while deleting data. '%s'", sqlite3_errmsg(db)]];

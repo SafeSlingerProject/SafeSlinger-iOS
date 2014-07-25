@@ -84,9 +84,9 @@
     DbInstance = [[SafeSlingerDB alloc]init];
     
     NSInteger DB_KEY_INDEX = [[NSUserDefaults standardUserDefaults] integerForKey: kDEFAULT_DB_KEY];
-    DEBUGMSG(@"DB_KEY_INDEX = %d", DB_KEY_INDEX);
+    DEBUGMSG(@"DB_KEY_INDEX = %ld", (long)DB_KEY_INDEX);
     if(DB_KEY_INDEX>0){
-        [DbInstance LoadDBFromStorage: [NSString stringWithFormat:@"%@-%d", DATABASE_NAME, DB_KEY_INDEX]];
+        [DbInstance LoadDBFromStorage: [NSString stringWithFormat:@"%@-%ld", DATABASE_NAME, (long)DB_KEY_INDEX]];
     }else{
         [DbInstance LoadDBFromStorage: nil];
     }
@@ -278,7 +278,7 @@
         if ([[NSFileManager defaultManager] fileExistsAtPath: floc])
         {
             NSData *data = [[NSFileManager defaultManager] contentsAtPath: floc];
-            DEBUGMSG(@"data(%d) = %@", [data length], data);
+            DEBUGMSG(@"data(%lu) = %@", (unsigned long)[data length], data);
             [DbInstance InsertOrUpdateConfig:data withTag:@"ENCPRI"];
         }
     }
@@ -289,7 +289,7 @@
         if ([[NSFileManager defaultManager] fileExistsAtPath: floc])
         {
             NSData *data = [[NSFileManager defaultManager] contentsAtPath: floc];
-            DEBUGMSG(@"data(%d) = %@", [data length], data);
+            DEBUGMSG(@"data(%lu) = %@", (unsigned long)[data length], data);
             [DbInstance InsertOrUpdateConfig:data withTag:@"SIGNPRI"];
         }
     }
@@ -371,7 +371,6 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     DEBUGMSG(@"didReceiveRemoteNotification: fetchCompletionHandler");
-    DEBUGMSG(@"%d", application.applicationState);
     
     if([self checkIdentity])
     {
@@ -386,7 +385,6 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))handler
 {
     DEBUGMSG(@"didReceiveRemoteNotification: fetchCompletionHandler");
-    DEBUGMSG(@"%d", application.applicationState);
     
     if([self checkIdentity])
     {
@@ -451,15 +449,15 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    DEBUGMSG(@"BadgeNumber = %d", [UIApplication sharedApplication].applicationIconBadgeNumber);
+    DEBUGMSG(@"BadgeNumber = %ld", (long)[UIApplication sharedApplication].applicationIconBadgeNumber);
     
     if([self checkIdentity])
     {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidTimeout:) name:KSDIdlingWindowTimeoutNotification object:nil];
         
         if ([UIApplication sharedApplication].applicationIconBadgeNumber>0) {
-            DEBUGMSG(@"Fetch %d messages...", [UIApplication sharedApplication].applicationIconBadgeNumber);
-            [MessageInBox FetchMessageNonces: [UIApplication sharedApplication].applicationIconBadgeNumber];
+            DEBUGMSG(@"Fetch %ld messages...", (long)[UIApplication sharedApplication].applicationIconBadgeNumber);
+            [MessageInBox FetchMessageNonces: (int)[UIApplication sharedApplication].applicationIconBadgeNumber];
         }
     }
 }

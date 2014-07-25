@@ -245,7 +245,7 @@
             attachFile  = nil;
             [AttachBtn setTitle:NSLocalizedString(@"btn_SelectFile", @"Select File") forState:UIControlStateNormal];
         }else{
-            [AttachBtn setTitle:[NSString stringWithFormat:@"%@ (%@)", [attachFile lastPathComponent], [NSString CalculateMemorySize:[attachFileRawBytes length]]] forState:UIControlStateNormal];
+            [AttachBtn setTitle:[NSString stringWithFormat:@"%@ (%@)", [attachFile lastPathComponent], [NSString CalculateMemorySize:(int)[attachFileRawBytes length]]] forState:UIControlStateNormal];
         }
     }else{
         [AttachBtn setTitle:NSLocalizedString(@"btn_SelectFile", @"Select File") forState:UIControlStateNormal];
@@ -419,7 +419,7 @@
              {
                  // start parsing data
                  const char *msgchar = [data bytes];
-                 DEBUGMSG(@"Succeeded! Received %d bytes of data",[data length]);
+                 DEBUGMSG(@"Succeeded! Received %lu bytes of data",(unsigned long)[data length]);
                  DEBUGMSG(@"Return SerV: %02X", ntohl(*(int *)msgchar));
                  if (ntohl(*(int *)msgchar) > 0)
                  {

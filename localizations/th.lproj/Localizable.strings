@@ -352,8 +352,6 @@
 "label_expiresIn" = "จะหมดอายุใน";
 /* 'File Name' is a screen label (match English casing); used on the Save File As dialog as a hint in the file name text box when changing the file name. */
 "label_FileNameHint" = "ชื่อ ไฟล์";
-/* 'Enter the name you wish others to see when communicating securely, and a passphrase to protect your data:' is a screen label (match English casing); used to instruct the user how to proceed on the Setup screen. */
-"label_FindInstruct" = "ใส่ชื่อ ที่คุณต้องการ ให้ผู้อื่นเห็น เมื่อสื่อสาร อย่างปลอดภัย:";
 /* 'First Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current first name to use. iOS-only. */
 "label_FirstName" = "ชื่อ แรก";
 /* 'Tap your name to add or remove contact data, check items you wish to share, and tap Begin Exchange when others are ready to exchange:' is a screen label (match English casing); used to instruct the user how to proceed on the Begin Exchange screen. */
@@ -364,10 +362,8 @@
 "label_hours" = "%d ชั่วโมง";
 /* 'SafeSlinger iCloud is enabled. Tap the Done button when finished.' is a screen label (match English casing); used to indicate the backup will occur while on the Setup screen. iOS-only. */
 "label_iCloudEnable" = "SafeSlinger iCloud จะเปิดใช้งาน แตะที่ปุ่ม เสร็จเมื่อเสร็จแล้ว";
-/* 'No messages. You may send a message from the Compose Message button on the Home menu.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. iOS-only. */
+/* 'No messages. You may send a message from the Compose tab.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. */
 "label_InstNoMessages" = "ไม่มี ข้อความ คุณอาจจะ ส่งข้อความจากปุ่ม เขียน ข้อความ บนเมนู แรก";
-/* 'No messages. You may send a message from the Compose tab.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. Android-only. */
-"label_InstNoMessagesAndroid" = "ไม่มี ข้อความ คุณอาจจะ ส่ง ข้อความจากการเขียน แท็บ";
 /* 'To add recipients, you must first Sling Keys with one or more other users at the same time. You may also send a Sling Keys contact invitation from the menu.' is a screen label (match English casing); used to instruct the user how to proceed on the Recipient list screen is case of no recipients. */
 "label_InstNoRecipients" = "เพื่อเพิ่ม ผู้รับ คุณต้อง แรก สลิง คีย์ หนึ่งคนหรือมากกว่า ผู้ใช้รายอื่น ในเวลาเดียวกัน นอกจากนี้คุณยัง สามารถส่งคำเชิญ ติดต่อ สลิง คีย์ จากเมนู";
 /* 'No shared file. Connect your device with iTunes and drag files to the shared folder.' is a screen label (match English casing); used to instruct the user how to proceed on the Shared Files screen is case of no files to share. iOS-only. */
@@ -484,8 +480,6 @@
 "label_summary_auto_decrypt" = "ถอดรหัสข้อความ โดยอัตโนมัติเมื่อ เข้าสู่ระบบค่ะ";
 /* 'Receive notification when backup is offline.' is a screen label (match English casing); used as the settings summary to describe what Backup Reminder will do. */
 "label_summary_remind_backup_delay" = "ได้รับ การแจ้งเตือนเมื่อ การสำรองข้อมูล เป็น แบบออฟไลน์";
-/* 'Show a tutorial before attemping to Sling Keys.' is a screen label (match English casing); used as the settings summary to describe what Show Walkthrough will do. */
-"label_summary_show_tutorial" = "แสดง การกวดวิชาก่อน ที่จะ attemping สลิง คีย์";
 /* 'Tap to decrypt file' is a screen label (match English casing); used to indicate tapping this message in the list will attempt to decrypt the attachment (if needed). */
 "label_TapToDecryptFile" = "แตะเพื่อ ถอดรหัสไฟล์";
 /* 'Tap to decrypt' is a screen label (match English casing); used to indicate tapping this message in the list will attempt to decrypt it. */
@@ -568,8 +562,6 @@
 "menu_Help" = "ช่วย";
 /* 'Introduction' is a menu option (title case); used to show the secure introduction composition screen via the main home screen. */
 "menu_Introduction" = "การแนะนำ";
-/* 'License' is a menu option (title case); used to show a dialog of the End User License Agreement. */
-"menu_License" = "อนุญาต";
 /* 'Logout' is a menu option (title case); used to remove the cached passphrase and force the user to login again. */
 "menu_Logout" = "ออกจากระบบ";
 /* 'Manage Passphrases' is a menu option (title case); used on the settings screen to allow users to remove newer keys if created by users without orignial user authorization. */
@@ -710,8 +702,6 @@
 "text_KeywordKey" = "สำคัญ";
 /* 'Messaging' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordMessaging" = "การส่งข้อความ";
-/* 'Privacy' is an application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordPrivacy" = "ความเป็นส่วนตัว";
 /* 'Security' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordSecurity" = "ความปลอดภัย";
 /* 'Languages provided by:' is an application description (sentence case); used at the end of the about dialog to list the translators of SafeSlinger. */

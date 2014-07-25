@@ -92,6 +92,12 @@ typedef enum PermDialog {
 #define HalfkeyboardHieght 108.0f
 #define MsgBoxHieght 30.0f
 
+typedef enum HelpActionSheet {
+	Help = 0,
+	Feedback,
+    LicenseLink,
+    PrivacyLink
+}HelpActionSheet;
 
 typedef enum OptionType {
     Unregistered = 0,
@@ -118,12 +124,6 @@ typedef enum ContactCategory {
     Address,
     IMPP
 }ContactCategory;
-
-typedef enum SourceIndex {
-	ComposeView_Idx = 0,
-	IntroduceView_Idx,
-    SlingkeyView_Idx
-}SourceIndex;
 
 typedef enum ContactOperation {
     UseNameOnly = -1,

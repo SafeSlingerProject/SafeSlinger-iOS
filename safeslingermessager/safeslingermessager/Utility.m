@@ -26,9 +26,43 @@
 #import "SafeSlingerDB.h"
 #import "ErrorLogger.h"
 #import "FunctionView.h"
+#import "AppDelegate.h"
 #import <AddressBook/AddressBook.h>
 
 @implementation UtilityFunc
+
++ (void)SendOpts: (UIViewController<MFMailComposeViewControllerDelegate>*)VC
+{
+    // Email Subject
+    NSString *emailTitle = [NSString stringWithFormat:@"%@(iOS%@)",
+                            NSLocalizedString(@"title_comments", @"Questions/Comments"),
+                            [(AppDelegate*)[[UIApplication sharedApplication]delegate]getVersionNumber]];
+    
+    NSArray *toRecipents = [NSArray arrayWithObject:@"safeslingerapp@gmail.com"];
+    
+    if([MFMailComposeViewController canSendMail])
+    {
+        MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+        [mc setTitle:NSLocalizedString(@"menu_sendFeedback", @"Send Feedback")];
+        mc.mailComposeDelegate = VC;
+        [mc setSubject:emailTitle];
+        [mc setToRecipients:toRecipents];
+        
+        NSString *detail = [ErrorLogger GetLogs];
+        if(detail)
+        {
+            // add attachment for debug
+            [mc addAttachmentData:[detail dataUsingEncoding:NSUTF8StringEncoding] mimeType:@"text/txt" fileName:@"feedback.txt"];
+            [ErrorLogger CleanLogFile];
+        }
+        // Present mail view controller on screen
+        [VC presentViewController:mc animated:YES completion:NULL];
+    }else{
+        // display error..
+        [[[[iToast makeText: NSLocalizedString(@"error_NoEmailAccount", @"Email account is not setup!")]
+           setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+    }
+}
 
 + (void)PopToMainPanel: (UINavigationController*)navigationController
 {

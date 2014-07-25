@@ -274,7 +274,7 @@
              {
                  // start parsing data
                  const char *msgchar = [data bytes];
-                 DEBUGMSG(@"Succeeded! Received %d bytes of data",[data length]);
+                 DEBUGMSG(@"Succeeded! Received %lu bytes of data",(unsigned long)[data length]);
                  DEBUGMSG(@"Return SerV: %02X", ntohl(*(int *)msgchar));
                  if (ntohl(*(int *)msgchar) > 0)
                  {
@@ -337,7 +337,7 @@
         //[delegate.activityView DisableProgress];
         [ThreadLock unlock];
         
-        DEBUGMSG(@"IconBadgeNumber = %d", [[UIApplication sharedApplication]applicationIconBadgeNumber]);
+        DEBUGMSG(@"IconBadgeNumber = %ld", (long)[[UIApplication sharedApplication]applicationIconBadgeNumber]);
         
         int _NumExpiredMsg = 0, _NumBadMsg = 0, _NumSafeMsg = 0;
         

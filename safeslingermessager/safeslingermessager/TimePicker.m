@@ -112,7 +112,7 @@
     DEBUGMSG(@"didSelectRowAtIndexPath");
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     // Navigation logic may go here. Create and push another view controller.
-    int period = [[sortkeys objectAtIndex:indexPath.row]integerValue];
+    NSInteger period = [[sortkeys objectAtIndex:indexPath.row]integerValue];
     [[NSUserDefaults standardUserDefaults]setInteger:period forKey:kPasshpraseCacheTime];
     IdleHandler *handler = (IdleHandler*)[UIApplication sharedApplication];
     [handler resetIdleTimer];

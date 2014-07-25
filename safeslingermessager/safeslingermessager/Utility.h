@@ -24,9 +24,11 @@
 
 #import <Foundation/Foundation.h>
 #import <AddressBook/AddressBook.h>
+#import <MessageUI/MessageUI.h>
 
 @interface UtilityFunc : NSObject
 
++ (void)SendOpts: (UIViewController<MFMailComposeViewControllerDelegate>*)VC;
 + (void)PopToMainPanel: (UINavigationController*)navigationController;
 + (BOOL) AddContactEntry: (ABAddressBookRef)aBook TargetRecord:(ABRecordRef)aRecord;
 + (void) RemoveDuplicates: (ABAddressBookRef)aBook AdressList:(CFArrayRef)allPeople CompareArray:(NSMutableDictionary*)compared;

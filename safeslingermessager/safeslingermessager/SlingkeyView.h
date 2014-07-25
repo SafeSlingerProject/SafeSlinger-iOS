@@ -26,10 +26,11 @@
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import <safeslingerexchange/safeslingerexchange.h>
+#import <MessageUI/MessageUI.h>
 
 @class AppDelegate;
 
-@interface SlingkeyView : UIViewController <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate, SafeSlingerDelegate>
+@interface SlingkeyView : UIViewController <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, UIAlertViewDelegate, SafeSlingerDelegate, MFMailComposeViewControllerDelegate>
 {
     AppDelegate *delegate;
     

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		180975EB19691F260073795C /* exchangeui.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 18D6C1FF194610C6000909F4 /* exchangeui.bundle */; };
 		180D25BF195A6A64002C34DC /* UniversalDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 180D25BE195A6A64002C34DC /* UniversalDB.m */; };
-		180D25C2195A6A85002C34DC /* KeyAssistant.m in Sources */ = {isa = PBXBuildFile; fileRef = 180D25C1195A6A85002C34DC /* KeyAssistant.m */; };
+		180D25C2195A6A85002C34DC /* ExchangeAssist.m in Sources */ = {isa = PBXBuildFile; fileRef = 180D25C1195A6A85002C34DC /* ExchangeAssist.m */; };
 		180D25CA195A6AA2002C34DC /* step1.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 180D25C4195A6AA2002C34DC /* step1.PNG */; };
 		180D25CB195A6AA2002C34DC /* step2.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 180D25C5195A6AA2002C34DC /* step2.PNG */; };
 		180D25CC195A6AA2002C34DC /* step3.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 180D25C6195A6AA2002C34DC /* step3.PNG */; };
@@ -38,6 +38,8 @@
 		188EF46E194F90FA0022E6C3 /* ConfigView.m in Sources */ = {isa = PBXBuildFile; fileRef = 188EF46D194F90FA0022E6C3 /* ConfigView.m */; };
 		188EF471194F911C0022E6C3 /* AboutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 188EF470194F911C0022E6C3 /* AboutView.m */; };
 		188EF474194F91290022E6C3 /* KeySelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 188EF473194F91290022E6C3 /* KeySelectionView.m */; };
+		18B08429197EF05C00D9805A /* help.html in Resources */ = {isa = PBXBuildFile; fileRef = 18B08428197EF05C00D9805A /* help.html */; };
+		18B0842C197EF14F00D9805A /* HelpAssist.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0842B197EF14F00D9805A /* HelpAssist.m */; };
 		18D6C19E19460DC9000909F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18D6C19D19460DC9000909F4 /* Main.storyboard */; };
 		18D6C1F51946107D000909F4 /* SSEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D6C1F31946107D000909F4 /* SSEngine.m */; };
 		18D6C20519461268000909F4 /* BackupCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D6C20319461268000909F4 /* BackupCloud.m */; };
@@ -67,6 +69,10 @@
 		18DE70FE194BA38400C43F84 /* ContactSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DE70FD194BA38400C43F84 /* ContactSelectView.m */; };
 		18DE7102194BA54C00C43F84 /* ContactCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DE7101194BA54C00C43F84 /* ContactCellView.m */; };
 		18EE9A131948D58800445D63 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1860573C19451001002DD149 /* UIKit.framework */; };
+		18F908401982EFC0004B540B /* help2.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 18F9083E1982EFC0004B540B /* help2.PNG */; };
+		18F908411982EFC0004B540B /* help1.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 18F9083F1982EFC0004B540B /* help1.PNG */; };
+		18F908441982F736004B540B /* help4.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 18F908421982F736004B540B /* help4.PNG */; };
+		18F908451982F736004B540B /* help3.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 18F908431982F736004B540B /* help3.PNG */; };
 		18FBD719194A0407006CA09C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18FBD6C8194A0407006CA09C /* Localizable.strings */; };
 		18FBD71C194A088E006CA09C /* AudioRecordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBD71B194A088E006CA09C /* AudioRecordView.m */; };
 		18FBD720194A0EED006CA09C /* MessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBD71F194A0EED006CA09C /* MessageView.m */; };
@@ -101,8 +107,8 @@
 /* Begin PBXFileReference section */
 		180D25BD195A6A64002C34DC /* UniversalDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversalDB.h; sourceTree = "<group>"; };
 		180D25BE195A6A64002C34DC /* UniversalDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversalDB.m; sourceTree = "<group>"; };
-		180D25C0195A6A85002C34DC /* KeyAssistant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyAssistant.h; sourceTree = "<group>"; };
-		180D25C1195A6A85002C34DC /* KeyAssistant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyAssistant.m; sourceTree = "<group>"; };
+		180D25C0195A6A85002C34DC /* ExchangeAssist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExchangeAssist.h; sourceTree = "<group>"; };
+		180D25C1195A6A85002C34DC /* ExchangeAssist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExchangeAssist.m; sourceTree = "<group>"; };
 		180D25C4195A6AA2002C34DC /* step1.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = step1.PNG; sourceTree = "<group>"; };
 		180D25C5195A6AA2002C34DC /* step2.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = step2.PNG; sourceTree = "<group>"; };
 		180D25C6195A6AA2002C34DC /* step3.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = step3.PNG; sourceTree = "<group>"; };
@@ -151,6 +157,9 @@
 		188EF470194F911C0022E6C3 /* AboutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutView.m; sourceTree = "<group>"; };
 		188EF472194F91290022E6C3 /* KeySelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeySelectionView.h; sourceTree = "<group>"; };
 		188EF473194F91290022E6C3 /* KeySelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeySelectionView.m; sourceTree = "<group>"; };
+		18B08428197EF05C00D9805A /* help.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = help.html; sourceTree = "<group>"; };
+		18B0842A197EF14F00D9805A /* HelpAssist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpAssist.h; sourceTree = "<group>"; };
+		18B0842B197EF14F00D9805A /* HelpAssist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpAssist.m; sourceTree = "<group>"; };
 		18D6C19D19460DC9000909F4 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		18D6C1F31946107D000909F4 /* SSEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSEngine.m; sourceTree = "<group>"; };
 		18D6C1F41946107D000909F4 /* SSEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSEngine.h; sourceTree = "<group>"; };
@@ -192,6 +201,10 @@
 		18DE70FD194BA38400C43F84 /* ContactSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactSelectView.m; sourceTree = "<group>"; };
 		18DE7100194BA54C00C43F84 /* ContactCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactCellView.h; sourceTree = "<group>"; };
 		18DE7101194BA54C00C43F84 /* ContactCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactCellView.m; sourceTree = "<group>"; };
+		18F9083E1982EFC0004B540B /* help2.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help2.PNG; sourceTree = "<group>"; };
+		18F9083F1982EFC0004B540B /* help1.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help1.PNG; sourceTree = "<group>"; };
+		18F908421982F736004B540B /* help4.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help4.PNG; sourceTree = "<group>"; };
+		18F908431982F736004B540B /* help3.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help3.PNG; sourceTree = "<group>"; };
 		18FBD6C9194A0407006CA09C /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		18FBD6CA194A0407006CA09C /* az */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = az; path = az.lproj/Localizable.strings; sourceTree = "<group>"; };
 		18FBD6CB194A0407006CA09C /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = be; path = be.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -356,8 +369,10 @@
 		182E22151950B9CD00F5997A /* Exchange */ = {
 			isa = PBXGroup;
 			children = (
-				180D25C0195A6A85002C34DC /* KeyAssistant.h */,
-				180D25C1195A6A85002C34DC /* KeyAssistant.m */,
+				180D25C0195A6A85002C34DC /* ExchangeAssist.h */,
+				180D25C1195A6A85002C34DC /* ExchangeAssist.m */,
+				18B0842A197EF14F00D9805A /* HelpAssist.h */,
+				18B0842B197EF14F00D9805A /* HelpAssist.m */,
 				1860577B194518F2002DD149 /* SlingkeyView.h */,
 				1860577C194518F2002DD149 /* SlingkeyView.m */,
 				18FBD725194A4478006CA09C /* EndExchangeView.h */,
@@ -456,8 +471,6 @@
 		1860573E19451001002DD149 /* safeslingermessager */ = {
 			isa = PBXGroup;
 			children = (
-				180D25D5195A6AE6002C34DC /* IdleHandler.h */,
-				180D25D6195A6AE6002C34DC /* IdleHandler.m */,
 				18D6C1F219461027000909F4 /* Utility */,
 				182E22181950BA5900F5997A /* ContactManagement */,
 				182E22171950BA1100F5997A /* Configuration */,
@@ -499,15 +512,31 @@
 		186057811945197D002DD149 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				18B08427197EF05C00D9805A /* help */,
 				180D25C3195A6AA2002C34DC /* tutorial */,
 				18D6C25319463EF7000909F4 /* logo.jpg */,
 			);
 			name = Images;
 			sourceTree = "<group>";
 		};
+		18B08427197EF05C00D9805A /* help */ = {
+			isa = PBXGroup;
+			children = (
+				18F908421982F736004B540B /* help4.PNG */,
+				18F908431982F736004B540B /* help3.PNG */,
+				18F9083E1982EFC0004B540B /* help2.PNG */,
+				18F9083F1982EFC0004B540B /* help1.PNG */,
+				18B08428197EF05C00D9805A /* help.html */,
+			);
+			name = help;
+			path = images/help;
+			sourceTree = "<group>";
+		};
 		18D6C1F219461027000909F4 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				180D25D5195A6AE6002C34DC /* IdleHandler.h */,
+				180D25D6195A6AE6002C34DC /* IdleHandler.m */,
 				180D25BD195A6A64002C34DC /* UniversalDB.h */,
 				180D25BE195A6A64002C34DC /* UniversalDB.m */,
 				18D6C21419461E71000909F4 /* VCardParser.h */,
@@ -576,7 +605,7 @@
 				ORGANIZATIONNAME = CyLab;
 				TargetAttributes = {
 					1860573419451001002DD149 = {
-						DevelopmentTeam = 27LU3HGQJP;
+						DevelopmentTeam = SKAXY92CB2;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -720,18 +749,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18F908411982EFC0004B540B /* help1.PNG in Resources */,
+				18F908441982F736004B540B /* help4.PNG in Resources */,
 				180975EB19691F260073795C /* exchangeui.bundle in Resources */,
+				18B08429197EF05C00D9805A /* help.html in Resources */,
 				18D6C19E19460DC9000909F4 /* Main.storyboard in Resources */,
 				180D25D1195A6AAD002C34DC /* universal.db in Resources */,
 				180D25CF195A6AA2002C34DC /* tutorial.html in Resources */,
 				180D25CA195A6AA2002C34DC /* step1.PNG in Resources */,
 				180D25CB195A6AA2002C34DC /* step2.PNG in Resources */,
+				18F908401982EFC0004B540B /* help2.PNG in Resources */,
 				180D25CC195A6AA2002C34DC /* step3.PNG in Resources */,
 				180D25CE195A6AA2002C34DC /* step5.PNG in Resources */,
 				180D25CD195A6AA2002C34DC /* step4.PNG in Resources */,
 				1860575419451001002DD149 /* Images.xcassets in Resources */,
 				18D6C22F19462CA7000909F4 /* AirshipConfig.plist in Resources */,
 				18FBD719194A0407006CA09C /* Localizable.strings in Resources */,
+				18F908451982F736004B540B /* help3.PNG in Resources */,
 				18D6C25519463EF7000909F4 /* logo.jpg in Resources */,
 				1869D6571948A50400B186D3 /* safeslinger-20120828.db in Resources */,
 			);
@@ -791,7 +825,8 @@
 				18D6C25019463D25000909F4 /* Passphase.m in Sources */,
 				18D6C20E1946141F000909F4 /* Utility.m in Sources */,
 				18FBD727194A4478006CA09C /* EndExchangeView.m in Sources */,
-				180D25C2195A6A85002C34DC /* KeyAssistant.m in Sources */,
+				18B0842C197EF14F00D9805A /* HelpAssist.m in Sources */,
+				180D25C2195A6A85002C34DC /* ExchangeAssist.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1001,8 +1036,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = safeslingermessager/SafeSlinger.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yue-Hsun Lin (X6U2B9ZV7E)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yue-Hsun Lin (X6U2B9ZV7E)";
 				DEPLOYMENT_LOCATION = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1012,7 +1047,6 @@
 				GCC_PREFIX_HEADER = "safeslingermessager/safeslingermessager-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"${SRCROOT}/../safeslingerexchange/**",
 					"${SRCROOT}/../openssl-ios/include",
 					"${SRCROOT}/../sha3-ios-binary/include",
@@ -1021,12 +1055,12 @@
 				INFOPLIST_FILE = "safeslingermessager/safeslingermessager-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/yueh-hsunlin/Documents/SafeSlinger/ios/Airship_lib",
+					"$(SRCROOT)/../Airship_lib",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = SafeSlinger;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "2D47DD9E-CAAD-4A02-B693-65ABAEA49A21";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1049,7 +1083,6 @@
 				GCC_PREFIX_HEADER = "safeslingermessager/safeslingermessager-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"${SRCROOT}/../safeslingerexchange/**",
 					"${SRCROOT}/../openssl-ios/include",
 					"${SRCROOT}/../sha3-ios-binary/include",
@@ -1058,12 +1091,12 @@
 				INFOPLIST_FILE = "safeslingermessager/safeslingermessager-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/yueh-hsunlin/Documents/SafeSlinger/ios/Airship_lib",
+					"$(SRCROOT)/../Airship_lib",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = SafeSlinger;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "2D47DD9E-CAAD-4A02-B693-65ABAEA49A21";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				WRAPPER_EXTENSION = app;
 			};

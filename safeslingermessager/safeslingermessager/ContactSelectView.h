@@ -23,6 +23,7 @@
  */
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 
 @class AppDelegate;
 @class ContactEntry;
@@ -38,7 +39,7 @@
 @end
 
 
-@interface ContactSelectView : UITableViewController <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
+@interface ContactSelectView : UITableViewController <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate>
 {
     // used for show peers, each entry is a SSContactEntry object
     AppDelegate* delegate;

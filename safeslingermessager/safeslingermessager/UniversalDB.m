@@ -83,7 +83,7 @@
         }
         
         // bind msgid
-        sqlite3_bind_blob(sqlStatement, 1, [msgid bytes], [msgid length], SQLITE_TRANSIENT);
+        sqlite3_bind_blob(sqlStatement, 1, [msgid bytes], (int)[msgid length], SQLITE_TRANSIENT);
         
         if (sqlite3_step(sqlStatement) == SQLITE_ERROR) {
             [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"Error while querying data. '%s'", sqlite3_errmsg(db)]];
@@ -124,7 +124,7 @@
         const NSString* unknownFlag = @"UNDEFINED";
         
         // msgid
-        sqlite3_bind_blob(sqlStatement, 1, [msgnonce bytes], [msgnonce length], SQLITE_TRANSIENT);
+        sqlite3_bind_blob(sqlStatement, 1, [msgnonce bytes], (int)[msgnonce length], SQLITE_TRANSIENT);
         // time
         sqlite3_bind_text(sqlStatement, 2, [[NSString GetGMTString:DATABASE_TIMESTR]UTF8String], -1, SQLITE_TRANSIENT);
         // unknown for keyid
@@ -294,8 +294,8 @@
         }
         
         sqlite3_bind_text(sqlStatement, 1, [keyid UTF8String], -1, SQLITE_TRANSIENT);
-        sqlite3_bind_blob(sqlStatement, 2, [cipher bytes], [cipher length], SQLITE_TRANSIENT);
-        sqlite3_bind_blob(sqlStatement, 3, [msgnonce bytes], [msgnonce length], SQLITE_TRANSIENT);
+        sqlite3_bind_blob(sqlStatement, 2, [cipher bytes], (int)[cipher length], SQLITE_TRANSIENT);
+        sqlite3_bind_blob(sqlStatement, 3, [msgnonce bytes], (int)[msgnonce length], SQLITE_TRANSIENT);
         
         if(SQLITE_DONE != sqlite3_step(sqlStatement)){
             [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"Error while updating data. '%s'", sqlite3_errmsg(db)]];
@@ -375,7 +375,7 @@
         }
         
         // bind msgid
-        sqlite3_bind_blob(sqlStatement, 1, [msgid bytes], [msgid length], SQLITE_TRANSIENT);
+        sqlite3_bind_blob(sqlStatement, 1, [msgid bytes], (int)[msgid length], SQLITE_TRANSIENT);
         
         if(SQLITE_DONE != sqlite3_step(sqlStatement)){
             [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while deleting data. '%s'", sqlite3_errmsg(db)]];

@@ -300,7 +300,7 @@
                                         nil];
             
 			CFStringRef typeString = kABOtherLabel;
-			int min = [[tokens objectAtIndex: 0] length] > 4 ? 4 : [[tokens objectAtIndex: 0] length];
+			int min = [[tokens objectAtIndex: 0] length] > 4 ? 4 : (int)[[tokens objectAtIndex: 0] length];
 			while ([[[tokens objectAtIndex: 0] substringToIndex: min] caseInsensitiveCompare: @"TYPE"] == NSOrderedSame)
 			{
 				NSString *typeList = [[tokens objectAtIndex: 0] substringFromIndex: 5];
@@ -320,7 +320,7 @@
 						typeString = kABWorkLabel;
 					}
 				}
-				min = [[tokens objectAtIndex: 0] length] > 4 ? 4 : [[tokens objectAtIndex: 0] length];
+				min = [[tokens objectAtIndex: 0] length] > 4 ? 4 : (int)[[tokens objectAtIndex: 0] length];
 			}
             
 			CFMutableDictionaryRef address = CFDictionaryCreateMutable(kCFAllocatorDefault, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
@@ -365,7 +365,7 @@
 		else if ([item caseInsensitiveCompare: @"EMAIL"] == NSOrderedSame)
 		{
 			CFStringRef typeString = kABOtherLabel;
-			int min = [[tokens objectAtIndex: 0] length] > 4 ? 4 : [[tokens objectAtIndex: 0] length];
+			int min = [[tokens objectAtIndex: 0] length] > 4 ? 4 : (int)[[tokens objectAtIndex: 0] length];
             
 			while ([[[tokens objectAtIndex: 0] substringToIndex: min] caseInsensitiveCompare: @"TYPE"] == NSOrderedSame)
 			{
@@ -384,7 +384,7 @@
 						typeString = kABWorkLabel;
 					}
 				}
-				min = [[tokens objectAtIndex: 0] length] > 4 ? 4 : [[tokens objectAtIndex: 0] length];
+				min = [[tokens objectAtIndex: 0] length] > 4 ? 4 : (int)[[tokens objectAtIndex: 0] length];
 			}
             
 			if ([tokens count] == 0) {

@@ -23,11 +23,17 @@
  */
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 #import "BackupCloud.h"
 
 @class AppDelegate;
 
-@interface SetupView : UIViewController <UITextFieldDelegate, BackupDelegate, UIAlertViewDelegate>
+enum Dialogtype {
+    PushNotificationConfirm,
+    HelpAndFeedBack
+}Dialogtype;
+
+@interface SetupView : UIViewController <UITextFieldDelegate, BackupDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate>
 {
     // For Grand Central Dispatch
     dispatch_queue_t _bg_queue;
@@ -53,9 +59,9 @@
 @property (nonatomic, retain) AppDelegate *delegate;
 @property (nonatomic, readwrite) BOOL newkeycreated;
 
-- (IBAction) DisplayHow: (id)sender;
+- (IBAction) DisplayHelp: (id)sender;
 - (IBAction) CreateProfile: (id)sender;
-- (IBAction)ClickPrivacy:(id)sender;
-- (IBAction)ClickLicense:(id)sender;
+- (IBAction) ClickPrivacy:(id)sender;
+- (IBAction) ClickLicense:(id)sender;
 
 @end

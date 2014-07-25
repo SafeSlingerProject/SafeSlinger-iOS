@@ -73,7 +73,7 @@
                                                          delegate: self
                                                 cancelButtonTitle: NSLocalizedString(@"btn_Exit", @"Exit")
                                                 otherButtonTitles: NSLocalizedString(@"btn_Continue", @"Continue"), nil];
-        
+        message.tag = PushNotificationConfirm;
         [message show];
         message = nil;
     }
@@ -98,14 +98,51 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(buttonIndex==alertView.cancelButtonIndex)
-    {
-        DEBUGMSG(@"EXIT");
-        exit(EXIT_SUCCESS);
-    }else{
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kRequirePushNotification];
-        [delegate registerPushToken];
+    switch (alertView.tag) {
+        case PushNotificationConfirm:
+        {
+            if(buttonIndex==alertView.cancelButtonIndex)
+            {
+                DEBUGMSG(@"EXIT");
+                exit(EXIT_SUCCESS);
+            }else{
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kRequirePushNotification];
+                [delegate registerPushToken];
+            }
+        }
+            break;
+        case HelpAndFeedBack:
+        {
+            if(buttonIndex!=alertView.cancelButtonIndex)
+            {
+                // feedback
+                [UtilityFunc SendOpts:self];
+            }
+        }
+            break;
+        default:
+            break;
     }
+}
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+        case MFMailComposeResultSaved:
+        case MFMailComposeResultSent:
+            break;
+        case MFMailComposeResultFailed:
+            // toast message
+            [[[[iToast makeText: NSLocalizedString(@"error_CorrectYourInternetConnection", @"Internet not available, check your settings.")]
+               setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+            break;
+        default:
+            break;
+    }
+    // Close the Mail Interface
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (void)NotifyRestoreResult: (BOOL)result
@@ -124,11 +161,10 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    if(newkeycreated)
+    if(!newkeycreated)
     {
-        DEBUGMSG(@"Create New Key...");
-    }else{
         // first setup, try to fecth backup
+        self.navigationItem.hidesBackButton = YES;
         [delegate.BackupSys RecheckCapability];
         if(delegate.BackupSys.CloudEnabled){
             delegate.BackupSys.Responder = self;
@@ -140,7 +176,6 @@
                 [self updateprogress];
                 [delegate.BackupSys PerformRecovery];
             });
-            
         }
     }
     
@@ -184,7 +219,7 @@
     
     NSArray *keyarr = [[NSUserDefaults standardUserDefaults] stringArrayForKey: kDB_KEY];
     NSMutableArray *arr = [NSMutableArray arrayWithArray:keyarr];
-    NSString *keyloc = [NSString stringWithFormat:@"%@-%d", DATABASE_NAME, [arr count]];
+    NSString *keyloc = [NSString stringWithFormat:@"%@-%lu", DATABASE_NAME, (unsigned long)[arr count]];
     [arr addObject:keyloc];
     [[NSUserDefaults standardUserDefaults] setObject:arr forKey: kDB_KEY];
     
@@ -194,7 +229,6 @@
 
 -(void) EncryptPrivateKeys: (NSString*) passphrase
 {
-    DEBUGMSG(@"passphrase = %@", passphrase);
     // Setup case
     int PRIKEY_STORE_SIZE = [SSEngine getSelfPrivateKeySize:ENC_PRI];
     [delegate.DbInstance InsertOrUpdateConfig:[NSData dataWithBytes:&PRIKEY_STORE_SIZE length:sizeof(PRIKEY_STORE_SIZE)] withTag:@"PRIKEY_STORE_SIZE"];
@@ -219,7 +253,7 @@
 
 - (void)SetComponentsLocked:(BOOL)lock
 {
-    DoneBtn.enabled = Fnamefield.enabled = Lnamefield.enabled = PassField.enabled = RepassField.enabled = !lock;
+    self.navigationItem.backBarButtonItem.enabled = DoneBtn.enabled = Fnamefield.enabled = Lnamefield.enabled = PassField.enabled = RepassField.enabled = !lock;
     keygenProgress.hidden = keygenIndicator.hidden = !lock;
     if(lock)
     {
@@ -231,13 +265,14 @@
     }
 }
 
-- (IBAction) DisplayHow: (id)sender
+- (IBAction) DisplayHelp: (id)sender
 {
     UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"title_find", @"Setup")
                                                       message:NSLocalizedString(@"help_find", @"Use this screen to set your name, phone, and email to exchange with others. Tap the 'Done' button when finished.")
-                                                     delegate:nil
+                                                     delegate:self
                                             cancelButtonTitle:NSLocalizedString(@"btn_Close", @"Close")
-                                            otherButtonTitles:nil];
+                                            otherButtonTitles:NSLocalizedString(@"menu_sendFeedback", @"Send Feedback"), nil];
+    message.tag = HelpAndFeedBack;
     [message show];
     message = nil;
 }
@@ -363,7 +398,13 @@
 }
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if([textField isEqual:PassField])
+    if([textField isEqual:Fnamefield])
+    {
+        [Lnamefield becomeFirstResponder];
+    }else if([textField isEqual:Lnamefield])
+    {
+        [PassField becomeFirstResponder];
+    }else if([textField isEqual:PassField])
     {
         [RepassField becomeFirstResponder];
     }

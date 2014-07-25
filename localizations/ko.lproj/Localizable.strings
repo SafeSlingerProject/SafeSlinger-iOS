@@ -23,7 +23,7 @@
 */
 
 /* 'Add a Sling Keys contact invitation via...' is an action title (sentence case, ellipsis); this title is used during Add Contact Invitation in a dialog of message choices, which can send an installation URL for SafeSlinger along with instructions. */
-"action_NewUserRequest" = "슬링 키 연락처 초대를 통해 추가...";
+"action_NewUserRequest" = "...를 통해 슬링 키 연락처 추가";
 
 /* 'SafeSlinger' is an application name (title case); used for home screen icons, at the top of many screens, and many other places in the application. */
 "app_name" = "SafeSlinger";
@@ -31,17 +31,17 @@
 "app_TranslatorName" = "Yeon Yim";
 
 /* 'Backup is disabled. Do you want to adjust backup settings and keep this reminder?' is a question message (sentence case, question mark); used to warn when the backup is off to confirm we should keep reminding the user. Used with Forget and Remind buttons. */
-"ask_BackupDisabledRemindLater" = "백업이 비활성화됩니다. 당신은 백업 설정을 조정하고이 신호를 계속 하시겠습니까?";
+"ask_BackupDisabledRemindLater" = "백업이 비활성화되어있습니다. 백업 설정 후 이 메시지를 계속 표시하시겠습니까?";
 /* '%s has a more recent device or key, are you sure you want to use this older one?' is a question message (sentence case, question mark); is a confirmation question that occurs when the user selected a recipient with more recent information in the database. */
-"ask_ConfirmUseOlderDeviceOrKey" = "%@는 더 최근의 장치 또는 키를 가지고, 당신은 하나이 이상을 사용 하시겠습니까?";
+"ask_ConfirmUseOlderDeviceOrKey" = "%@는 더 최근의 장치로 사용할 수 있습니다. 예전 것을 사용 하시겠습니까?";
 /* 'File name %s already exists. Overwrite?' is a question message (sentence case, question mark); is a question that occurs when the user attempts to save a file with the same name as an existing file in the same location. %s = the file name of the attachment. */
 "ask_FileExistsOverwrite" = "파일 이름 %@이(가) 이미 존재합니다. 덮어쓰시겠습니까?";
 /* 'Without a Google Account you will only be able to send, NOT receive messages. Do you want to add a Google account?' is a question message (sentence case, question mark); used to warn when a Google account has not been setup, if the user intends to receive messages. Android-only. */
-"ask_GoogleAccountToReceiveMsgs" = "Google 계정없이 당신은 수신 메시지를 NOT 보낼 수있을 것입니다. 당신은 구글 계정을 추가 하시겠습니까?";
+"ask_GoogleAccountToReceiveMsgs" = "구글 계정 없이는 메시지를 보낼 수만 있고, 받을 수는 없습니다. 구글 계정을 추가 하시겠습니까?";
 /* 'Quit? Are you sure?' is a question message (sentence case, question mark); is a confirmation question that occurs when the user chooses to end the exchange protocol prematurely. */
 "ask_QuitConfirmation" = "정말 종료하시겠습니까?";
 /* 'We'd like your help improving SafeSlinger. Would you like to automatically send any errors to us?' is a question message (sentence case, question mark); is a question that occurs when the user encounters an unhandled exception and are asked if they want to upload this error log and any future error logs. */
-"ask_SendErrorData" = "SafeSlinger를 개선할 수 있도록 도움을 받고싶습니다. 저희에게 오류사항을 보내주시겠습니까?";
+"ask_SendErrorData" = "SafeSlinger를 개선할 수 있도록 도움을 받고싶습니다. 저희에게 오류사항을 자동으로 보내주시겠습니까?";
 
 /* 'Accept' is a button (title case); the Accept button is paired with the Refuse button to indicate user acceptance of a secure introduction. */
 "btn_Accept" = "동의";
@@ -54,9 +54,9 @@
 /* 'Continue' is a button (title case); the Continue button is used to remind the user that there is another step to complete. */
 "btn_Continue" = "계속";
 /* 'Create New Key' is a button (title case); the Create New Key button is paired with the Cancel button, and is used to affirm the creation of a new key and passphrase. */
-"btn_CreateNewKey" = "새 키 를 만듭니다";
+"btn_CreateNewKey" = "키 만들기";
 /* 'Delete Keys' is a button (title case); the Create New Key button is paired with the Cancel button, and is used to affirm the deletion of more recent keys. */
-"btn_DeleteKeys" = "키 에게 삭제";
+"btn_DeleteKeys" = "키 삭제";
 /* 'Discard' is a button (title case); the Discard button is used to indicate the user wishes to exit the current screen without saving data, such as a voice memo. For non-Android use only, since Android uses the Back hardware button instead. */
 "btn_discard" = "지우기";
 /* 'Done' is a button (title case); the Done button is used to allow the user to complete a current multi-step process. */
@@ -352,8 +352,6 @@
 "label_expiresIn" = "만료";
 /* 'File Name' is a screen label (match English casing); used on the Save File As dialog as a hint in the file name text box when changing the file name. */
 "label_FileNameHint" = "파일 이름";
-/* 'Enter the name you wish others to see when communicating securely, and a passphrase to protect your data:' is a screen label (match English casing); used to instruct the user how to proceed on the Setup screen. */
-"label_FindInstruct" = "이름을 입력 안전하게 통신 할 때 다른 사람이 볼을 기원합니다:";
 /* 'First Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current first name to use. iOS-only. */
 "label_FirstName" = "이름";
 /* 'Tap your name to add or remove contact data, check items you wish to share, and tap Begin Exchange when others are ready to exchange:' is a screen label (match English casing); used to instruct the user how to proceed on the Begin Exchange screen. */
@@ -364,10 +362,8 @@
 "label_hours" = "%d 시간";
 /* 'SafeSlinger iCloud is enabled. Tap the Done button when finished.' is a screen label (match English casing); used to indicate the backup will occur while on the Setup screen. iOS-only. */
 "label_iCloudEnable" = "SafeSlinger 아이 클라우드 를 사용할 수 있습니다. 완료되면 '완료 ' 버튼을 누릅니다.";
-/* 'No messages. You may send a message from the Compose Message button on the Home menu.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. iOS-only. */
+/* 'No messages. You may send a message from the Compose tab.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. */
 "label_InstNoMessages" = "메시지가 없습니다. 홈 메뉴의 '메시지 작성'버튼으로 메시지를 보낼 수 있습니다.";
-/* 'No messages. You may send a message from the Compose tab.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. Android-only. */
-"label_InstNoMessagesAndroid" = "메시지가 없습니다. '쓰기'탭으로 메시지를 보낼 수 있습니다.";
 /* 'To add recipients, you must first Sling Keys with one or more other users at the same time. You may also send a Sling Keys contact invitation from the menu.' is a screen label (match English casing); used to instruct the user how to proceed on the Recipient list screen is case of no recipients. */
 "label_InstNoRecipients" = "받는 사람을 추가하려면 먼저 동시에 하나 이상의 다른 사용자와 슬링 키 를 해야합니다. 또한 메뉴에서 슬링 키 연락처 초대를 보낼 수 있습니다.";
 /* 'No shared file. Connect your device with iTunes and drag files to the shared folder.' is a screen label (match English casing); used to instruct the user how to proceed on the Shared Files screen is case of no files to share. iOS-only. */
@@ -484,8 +480,6 @@
 "label_summary_auto_decrypt" = "로그인을 하면 자동으로 메시지를 해독";
 /* 'Receive notification when backup is offline.' is a screen label (match English casing); used as the settings summary to describe what Backup Reminder will do. */
 "label_summary_remind_backup_delay" = "백업이 오프라인 상태 일 때 알림을 받을 수 있습니다.";
-/* 'Show a tutorial before attemping to Sling Keys.' is a screen label (match English casing); used as the settings summary to describe what Show Walkthrough will do. */
-"label_summary_show_tutorial" = "슬링 키 에 시도하기 전에 튜토리얼 을 보여줍니다.";
 /* 'Tap to decrypt file' is a screen label (match English casing); used to indicate tapping this message in the list will attempt to decrypt the attachment (if needed). */
 "label_TapToDecryptFile" = "파일 암호 해제하기";
 /* 'Tap to decrypt' is a screen label (match English casing); used to indicate tapping this message in the list will attempt to decrypt it. */
@@ -568,8 +562,6 @@
 "menu_Help" = "도움말";
 /* 'Introduction' is a menu option (title case); used to show the secure introduction composition screen via the main home screen. */
 "menu_Introduction" = "소개";
-/* 'License' is a menu option (title case); used to show a dialog of the End User License Agreement. */
-"menu_License" = "라이센스";
 /* 'Logout' is a menu option (title case); used to remove the cached passphrase and force the user to login again. */
 "menu_Logout" = "로그 아웃";
 /* 'Manage Passphrases' is a menu option (title case); used on the settings screen to allow users to remove newer keys if created by users without orignial user authorization. */
@@ -710,8 +702,6 @@
 "text_KeywordKey" = "키";
 /* 'Messaging' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordMessaging" = "메시징";
-/* 'Privacy' is an application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordPrivacy" = "개인 정보 보호 정책";
 /* 'Security' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordSecurity" = "보안";
 /* 'Languages provided by:' is an application description (sentence case); used at the end of the about dialog to list the translators of SafeSlinger. */

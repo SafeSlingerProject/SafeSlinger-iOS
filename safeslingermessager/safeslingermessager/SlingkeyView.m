@@ -111,7 +111,7 @@
     {
         DEBUGMSG(@"ShowHelp");
         dispatch_async(dispatch_get_main_queue(), ^(void) {
-            [self performSegueWithIdentifier:@"ShowHelp" sender:self];
+            [self performSegueWithIdentifier:@"ShowExchangeHelp" sender:self];
         });
     }
 }
@@ -472,15 +472,55 @@
 
 - (void)DisplayHow
 {
-    UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"title_home", @"Begin Exchange")
-                                                      message: [NSString stringWithFormat:@"%@\n\n%@", NSLocalizedString(@"help_home", @"To exchange identity data, ensure all users are nearby or on the phone. The 'Begin Exchange' button will exchange only the checked contact data."),
-                                                                NSLocalizedString(@"help_identity_menu", @"You may also change personal data about your identity on this screen by tapping on the button with your name. This will display a menu allowing you to 'Edit' your contact, 'Create New' contact, or 'Use Another' contact.")]
-                                                     delegate:nil
-                                            cancelButtonTitle:NSLocalizedString(@"btn_Close", @"Close")
-                                            otherButtonTitles:nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]
+                                  initWithTitle: nil
+                                  delegate: self
+                                  cancelButtonTitle: NSLocalizedString(@"btn_Cancel", @"Cancel")
+                                  destructiveButtonTitle: nil
+                                  otherButtonTitles:
+                                  NSLocalizedString(@"menu_Help", @"Help"),
+                                  NSLocalizedString(@"menu_sendFeedback", @"Send Feedback"),
+                                  nil];
     
-    [message show];
-    message = nil;
+    [actionSheet showFromTabBar: self.tabBarController.tabBar];
+    actionSheet = nil;
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case Help:
+        {
+            // show help
+            [self performSegueWithIdentifier:@"ShowHelp" sender:self];
+        }
+            break;
+        case Feedback:
+            [UtilityFunc SendOpts:self];
+            break;
+        default:
+            break;
+    }
+}
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+        case MFMailComposeResultSaved:
+        case MFMailComposeResultSent:
+            break;
+        case MFMailComposeResultFailed:
+            // toast message
+            [[[[iToast makeText: NSLocalizedString(@"error_CorrectYourInternetConnection", @"Internet not available, check your settings.")]
+               setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+            break;
+        default:
+            break;
+    }
+    // Close the Mail Interface
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (void)didReceiveMemoryWarning
@@ -493,7 +533,7 @@
 -(void) tableView: (UITableView *)tableView didSelectRowAtIndexPath: (NSIndexPath *)indexPath
 {
 	[tableView deselectRowAtIndexPath: [tableView indexPathForSelectedRow] animated: YES];
-	int row = [indexPath row];
+	NSInteger row = [indexPath row];
 	UITableViewCell *cell = [tableView cellForRowAtIndexPath: indexPath];
     
     if(cell.tag == 0)

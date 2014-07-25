@@ -25,13 +25,6 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 
-typedef enum AboutStatus {
-	Help = 0,
-	Feedback,
-    LicenseLink,
-    PrivacyLink
-}AboutStatus;
-
 @class AppDelegate;
 
 @interface Passphase : UIViewController <UITextFieldDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UIAlertViewDelegate>

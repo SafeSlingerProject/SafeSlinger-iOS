@@ -140,19 +140,45 @@
                 delegate:self
                 cancelButtonTitle: NSLocalizedString(@"btn_Close", @"Close")
                 otherButtonTitles: nil];
-    
-    UserInfo.tag = 1;
 }
 
 - (IBAction) DisplayHow: (id)sender
 {
     UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"title_PickRecipient", @"Recipients")
                                                       message:NSLocalizedString(@"help_PickRecip", @"Contacts with SafeSlinger keys are displayed here, select one to send your message to.")
-                                                     delegate:nil
+                                                     delegate:self
                                             cancelButtonTitle:NSLocalizedString(@"btn_Close", @"Close")
-                                            otherButtonTitles:nil];
+                                            otherButtonTitles:NSLocalizedString(@"menu_sendFeedback", @"Send Feedback"), nil];
     [message show];
     message = nil;
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex!=alertView.cancelButtonIndex)
+    {
+        [UtilityFunc SendOpts:self];
+    }
+}
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+        case MFMailComposeResultSaved:
+        case MFMailComposeResultSent:
+            break;
+        case MFMailComposeResultFailed:
+            // toast message
+            [[[[iToast makeText: NSLocalizedString(@"error_CorrectYourInternetConnection", @"Internet not available, check your settings.")]
+               setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+            break;
+        default:
+            break;
+    }
+    // Close the Mail Interface
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -177,13 +203,13 @@
         });
         
         CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(aBook);
-        int total = CFArrayGetCount(allPeople)-1;
+        long total = CFArrayGetCount(allPeople)-1;
         if(allPeople)CFRelease(allPeople);
         if(aBook)CFRelease(aBook);
         
-        self.navigationItem.title = [NSString stringWithFormat: @"%@(%d/%d)", NSLocalizedString(@"title_PickRecipient", @"Recipients"), [safeslingers count], total];
+        self.navigationItem.title = [NSString stringWithFormat: @"%@(%lu/%ld)", NSLocalizedString(@"title_PickRecipient", @"Recipients"), (unsigned long)[safeslingers count], total];
     }else{
-        self.navigationItem.title = [NSString stringWithFormat: @"%@(%d)", NSLocalizedString(@"title_PickRecipient", @"Recipients"), [safeslingers count]];
+        self.navigationItem.title = [NSString stringWithFormat: @"%@(%lu)", NSLocalizedString(@"title_PickRecipient", @"Recipients"), (unsigned long)[safeslingers count]];
     }
 }
 
@@ -198,11 +224,6 @@
         [UserInfo setMessage: [sc PrintContact]];
         [UserInfo show];
     }
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    
 }
 
 

@@ -22,13 +22,13 @@
  * THE SOFTWARE.
  */
 
-#import "KeyAssistant.h"
+#import "ExchangeAssist.h"
 
-@interface KeyAssistant ()
+@interface ExchangeAssist ()
 
 @end
 
-@implementation KeyAssistant
+@implementation ExchangeAssist
 
 @synthesize HelpView, PreferenceSwitch, ShowLabel;
 

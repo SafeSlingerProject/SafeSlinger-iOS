@@ -56,16 +56,22 @@
 
 +(NSString*)GetLogs
 {
+    NSMutableString *debugstring = [NSMutableString string];
+    
+    [debugstring appendFormat: @"iOS Model: %@\n", [UIDevice currentDevice].model];
+    [debugstring appendFormat: @"iOS OS: %@ %@\n", [UIDevice currentDevice].systemName, [UIDevice currentDevice].systemVersion];
+    [debugstring appendFormat: @"localizedModel: %@\n", [UIDevice currentDevice].localizedModel];
+    
     NSArray *arr = [[NSArray alloc] initWithArray: NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)];
 	NSString* documentsPath = [arr objectAtIndex: 0];
     NSString *logfile = [NSString stringWithFormat: ERRORLOGFILE, documentsPath];
     
     NSError *fileError = nil;
+    [debugstring appendString: [NSString stringWithContentsOfFile:logfile
+                                                         encoding:NSUTF8StringEncoding
+                                                            error:&fileError]];
     
-    NSString *fileContents = [NSString stringWithContentsOfFile:logfile
-                                              encoding:NSUTF8StringEncoding
-                                                 error:&fileError];
-    return fileContents;
+    return debugstring;
 }
 
 +(void)CleanLogFile

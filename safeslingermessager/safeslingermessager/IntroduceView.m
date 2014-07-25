@@ -83,15 +83,56 @@
 
 - (void)DisplayHow
 {
-    UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"title_SecureIntroduction", @"Secure Introduction")
-                                                      message:NSLocalizedString(@"help_SecureIntroduction", @"This screen allows you to select two people you have slung keys with before to securely send their keys to each other. Simply press 'Introduce' when ready.")
-                                                     delegate:nil
-                                            cancelButtonTitle:NSLocalizedString(@"btn_Close", @"Close")
-                                            otherButtonTitles:nil];
-    [message show];
-    message = nil;
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]
+                                  initWithTitle: nil
+                                  delegate: self
+                                  cancelButtonTitle: NSLocalizedString(@"btn_Cancel", @"Cancel")
+                                  destructiveButtonTitle: nil
+                                  otherButtonTitles:
+                                  NSLocalizedString(@"menu_Help", @"Help"),
+                                  NSLocalizedString(@"menu_sendFeedback", @"Send Feedback"),
+                                  nil];
+    
+    [actionSheet showFromTabBar: self.tabBarController.tabBar];
+    actionSheet = nil;
 }
 
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case Help:
+        {
+            // show help
+            [self performSegueWithIdentifier:@"ShowHelp" sender:self];
+        }
+            break;
+        case Feedback:
+            [UtilityFunc SendOpts:self];
+            break;
+        default:
+            break;
+    }
+}
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+        case MFMailComposeResultSaved:
+        case MFMailComposeResultSent:
+            break;
+        case MFMailComposeResultFailed:
+            // toast message
+            [[[[iToast makeText: NSLocalizedString(@"error_CorrectYourInternetConnection", @"Internet not available, check your settings.")]
+               setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+            break;
+        default:
+            break;
+    }
+    // Close the Mail Interface
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -250,7 +291,7 @@
              if ([data length] > 0 )
              {
                  // start parsing data
-                 DEBUGMSG(@"Succeeded! Received %d bytes of data",[data length]);
+                 DEBUGMSG(@"Succeeded! Received %lu bytes of data",(unsigned long)[data length]);
                  [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
                  const char *msgchar = [data bytes];
                  DEBUGMSG(@"Return SerV: %02X", ntohl(*(int *)msgchar));
@@ -306,7 +347,7 @@
              if ([data length] > 0 )
              {
                  // start parsing data
-                 DEBUGMSG(@"Succeeded! Received %d bytes of data",[data length]);
+                 DEBUGMSG(@"Succeeded! Received %lu bytes of data",(unsigned long)[data length]);
                  const char *msgchar = [data bytes];
                  DEBUGMSG(@"Return SerV: %02X", ntohl(*(int *)msgchar));
                  if (ntohl(*(int *)msgchar) > 0)

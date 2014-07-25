@@ -424,7 +424,7 @@
     
     // prepare datam including HNi, Gi, Ei (Encrypted Contact)
     int DHPubKeySize = DH_size(diffieHellmanKeys);
-    int len = 4 + 4 + 4 + 4 + HASHLEN + [encrypted_data length] + DHPubKeySize;
+    int len = 4 + 4 + 4 + 4 + HASHLEN + (int)[encrypted_data length] + DHPubKeySize;
 	char buf[len];
 	*(int *)buf = htonl(version);
 	*(int *)(buf + 4) = htonl([userID intValue]);
@@ -444,7 +444,7 @@
 
 -(void) retrySyncUsers
 {
-	int len = 16 + (4 * [allUsers count]);
+	int len = 16 + (4 * (int)[allUsers count]);
 	char buf[len];
 	*(int *)buf = htonl(version);
 	*(int *)(buf + 4) = htonl([userID intValue]);
@@ -559,8 +559,7 @@
 
 -(void) retrySyncData
 {
-	int len = 12
-    + (4 * [allUsers count]);
+	int len = 12 + (4 * (int)[allUsers count]);
 	char buf[len];
 	*(int *)buf = htonl(version);
 	*(int *)(buf + 4) = htonl([userID intValue]);
@@ -810,7 +809,7 @@
     match_nonce = [match_nonce AES256EncryptWithKey:encryptionKey matchNonce:groupKey];
     
     
-    int len = 4 + 4 + 4 + 4 + [match_nonce length];
+    int len = 4 + 4 + 4 + 4 + (int)[match_nonce length];
 	char buf[len];
     *(int *)buf = htonl(version);
 	*(int *)(buf + 4) = htonl([userID intValue]);
@@ -970,7 +969,7 @@
 
 - (void) retrySyncMatch
 {
-    int len = 12 + (4 * [allUsers count]);
+    int len = 12 + (4 * (int)[allUsers count]);
 	char buf[len];
 	*(int *)buf = htonl(version);
 	*(int *)(buf + 4) = htonl([userID intValue]);
@@ -987,7 +986,7 @@
 
 -(void) retrySyncSigs
 {
-	int len = 12 + (4 * [allUsers count]);
+	int len = 12 + (4 * (int)[allUsers count]);
 	char buf[len];
 	*(int *)buf = htonl(version);
 	*(int *)(buf + 4) = htonl([userID intValue]);
@@ -1075,8 +1074,8 @@
 
 -(void) connection: (NSURLConnection *)connection didReceiveResponse: (NSURLResponse *)response
 {
-	int status = [(NSHTTPURLResponse *)response statusCode];
-	DEBUGMSG(@"HTTP response code: %d", status);
+	NSInteger status = [(NSHTTPURLResponse *)response statusCode];
+	DEBUGMSG(@"HTTP response code: %ld", (long)status);
 	if (status != 200)
 	{
 		DEBUGMSG(@"HTTP header: %@", [(NSHTTPURLResponse *)response allHeaderFields]);

@@ -163,7 +163,7 @@
         {
             UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"title_passphrase", @"Passphrase")
                                                               message:NSLocalizedString(@"help_passphrase", @"Use this screen to login to the application with your passphrase. If you have forgotten your passphrase, you may generate a new key protected by a new passphrase by tapping the Forgot Passphrase? button. Tap the user name to switch between multiple keys.")
-                                                             delegate:nil
+                                                             delegate:self
                                                     cancelButtonTitle:NSLocalizedString(@"btn_Close", @"Close")
                                                     otherButtonTitles:nil];
             
@@ -172,7 +172,7 @@
         }
             break;
         case Feedback:
-            [self SendOpts];
+            [UtilityFunc SendOpts:self];
             break;
         case LicenseLink:
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString: kLicenseURL]];
@@ -185,44 +185,6 @@
     }
 }
 
-- (void)SendOpts
-{
-    // Email Subject
-    NSString *emailTitle = [NSString stringWithFormat:@"%@(iOS%@)",
-                            NSLocalizedString(@"title_comments", @"Questions/Comments"),
-                            [delegate getVersionNumber]];
-    NSArray *toRecipents = [NSArray arrayWithObject:@"safeslingerapp@gmail.com"];
-    
-    if([MFMailComposeViewController canSendMail])
-    {
-        MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
-        [mc setTitle:NSLocalizedString(@"menu_sendFeedback", @"Send Feedback")];
-        mc.mailComposeDelegate = self;
-        [mc setSubject:emailTitle];
-        [mc setToRecipients:toRecipents];
-        
-        NSMutableString *debug = [NSMutableString string];
-        
-        NSString *detail = [ErrorLogger GetLogs];
-        if(detail)
-        {
-            // add attachment for debug
-            [debug appendFormat: @"iOS Model: %@\n", [UIDevice currentDevice].model];
-            [debug appendFormat: @"iOS OS: %@ %@\n", [UIDevice currentDevice].systemName, [UIDevice currentDevice].systemVersion];
-            [debug appendFormat: @"localizedModel: %@\n", [UIDevice currentDevice].localizedModel];
-            [debug appendString: detail];
-            [mc addAttachmentData:[debug dataUsingEncoding:NSUTF8StringEncoding] mimeType:@"text/txt" fileName:@"feedback.txt"];
-            [ErrorLogger CleanLogFile];
-        }
-        // Present mail view controller on screen
-        [self presentViewController:mc animated:YES completion:NULL];
-    }else{
-        // display error..
-        [[[[iToast makeText: NSLocalizedString(@"error_NoEmailAccount", @"Email account is not setup!")]
-           setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-    }
-}
-
 - (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
     switch (result)
@@ -232,7 +194,6 @@
         case MFMailComposeResultSent:
             break;
         case MFMailComposeResultFailed:
-            [ErrorLogger ERRORDEBUG: [NSString stringWithFormat:@"ERROR: Mail sent failure, %@", [error localizedDescription]]];
             // toast message
             [[[[iToast makeText: NSLocalizedString(@"error_CorrectYourInternetConnection", @"Internet not available, check your settings.")]
                setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
@@ -271,7 +232,7 @@
 {
     PassField.text = nil;
     [KeySelectBtn setTitle:delegate.IdentityName forState:UIControlStateNormal];
-    DEBUGMSG(@"key index = %d", [[NSUserDefaults standardUserDefaults] integerForKey: kDEFAULT_DB_KEY]);
+    DEBUGMSG(@"key index = %ld", (long)[[NSUserDefaults standardUserDefaults] integerForKey: kDEFAULT_DB_KEY]);
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShown:)
                                                  name:UIKeyboardWillShowNotification
