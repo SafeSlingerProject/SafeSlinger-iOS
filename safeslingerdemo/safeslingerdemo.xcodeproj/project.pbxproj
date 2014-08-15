@@ -52,7 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1827E9CB192E4CD700325334 /* safeslingerdemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = safeslingerdemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1827E9CB192E4CD700325334 /* SafeSlinger Exchange Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SafeSlinger Exchange Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1827E9CE192E4CD700325334 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1827E9D0192E4CD700325334 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		1827E9D2192E4CD700325334 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -99,7 +99,7 @@
 		1827E9CC192E4CD700325334 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1827E9CB192E4CD700325334 /* safeslingerdemo.app */,
+				1827E9CB192E4CD700325334 /* SafeSlinger Exchange Dev.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -175,7 +175,7 @@
 			);
 			name = safeslingerdemo;
 			productName = safeslingerdemo;
-			productReference = 1827E9CB192E4CD700325334 /* safeslingerdemo.app */;
+			productReference = 1827E9CB192E4CD700325334 /* SafeSlinger Exchange Dev.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -188,7 +188,7 @@
 				ORGANIZATIONNAME = CyLab;
 				TargetAttributes = {
 					1827E9CA192E4CD700325334 = {
-						DevelopmentTeam = SKAXY92CB2;
+						DevelopmentTeam = 27LU3HGQJP;
 						SystemCapabilities = {
 							com.apple.DataProtection = {
 								enabled = 0;
@@ -449,8 +449,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(inherited)",
@@ -472,8 +472,9 @@
 					"-stdlib=libstdc++",
 					"-lstdc++",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PRODUCT_NAME = "SafeSlinger Exchange Dev";
+				PROVISIONING_PROFILE = "9e1d5386-a94c-4255-9507-30e790d6b700";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -488,8 +489,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Carnegie Mellon University (27LU3HGQJP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Carnegie Mellon University (27LU3HGQJP)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(inherited)",
@@ -511,8 +512,9 @@
 					"-stdlib=libstdc++",
 					"-lstdc++",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PRODUCT_NAME = "SafeSlinger Exchange Dev";
+				PROVISIONING_PROFILE = "9e1d5386-a94c-4255-9507-30e790d6b700";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				WRAPPER_EXTENSION = app;
 			};

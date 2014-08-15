@@ -73,6 +73,8 @@
 "btn_No" = "No";
 /* 'No Match' is a button (title case); the No Match button is used if the user cannot find the same batting screen on another user's device during the exchange critical care. */
 "btn_NoMatch" = "No Match";
+/* 'Not Now' is a button (title case); the Not Now button is used as a negative button to decline an offered service or permission. */
+"btn_NotNow" = "E kore e Na";
 /* 'Forget' is a button (title case); the Forget button is paired with the Remind button and is used to indicate the user wishes to dismiss the current reminder of a potential error state, such as having backup or notification settings turned off, and not be reminded again. */
 "btn_NotRemind" = "Wareware";
 /* 'OK' is a button (title case); the OK button is affirmation button used to indicate the user accepts the data entered on the current screen. */
@@ -112,6 +114,8 @@
 "choice_8hours" = "8 haora";
 /* 'Default Storage' is a choice (sentence case); used to set the attachment root path to the default source. Android-only. */
 "choice_auto_storage" = "Storage taunoa";
+/* 'Default' is a choice (sentence case); used in any menu to denote the default choice. */
+"choice_default" = "Taunoa";
 /* 'External Storage' is a choice (sentence case); used to set the attachment root path to an external source. Android-only. */
 "choice_external_storage" = "Storage waho";
 /* 'Large' is a choice (sentence case); used in the settings to choose a large font size. */
@@ -147,6 +151,8 @@
 "error_AudioPlayerError" = "Kāore e taea te takaro i te tuhi.";
 /* 'Audio recorder encoding error.' is an error message (sentence case, period); used to warn when attempting to record an audio message fails to encode properly. iOS-only. */
 "error_AudioRecorderEncodeError" = "Hapa kaiwhakamahara whakawaehere Ororongo.";
+/* 'Microphone permission is required to record a secure voice message. Tap the Help button for SafeSlinger Microphone permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Microphone permission. iOS-only. */
+"error_AudioRecorderPermissionError" = "E hiahiatia ana whakaaetanga hopuoro kua ki te tuhi i tētahi karere reo haumaru. Paoa i te pātene Āwhina mō ngā kōrero whakaaetanga SafeSlinger Uruoro.";
 /* 'No backup to restore.' is an error message (sentence case, period); used to warn at application setup, when there is no pre-existing backup to restore and warn the user that any previous keys have not been restored. */
 "error_BackupNotFound" = "No pūrua ki te whakahoki.";
 /* 'Device does not support backup restore.' is an error message (sentence case, period); used to warn when the device hardware does not support restoration from backup. */
@@ -286,12 +292,18 @@
 /* 'User canceled server request.' is an error message (sentence case, period); used to warn when the user exited the key exchange protocol or messaging transmission before it was finished. */
 "error_WebCancelledByUser" = "Whakakorea Kaiwhakamahi tono tūmau.";
 
+/* 'Use this screen to set your name to exchange with others, and a passphrase to protect your data. Tap the Done button when finished.' is a help message (sentence case, period); used via Help button on the Setup screen to describe in more detail what the Setup screen does. */
+"help_find" = "Whakamahia tēnei mata ki te whakatakotoria tou ingoa ki te whakawhiti ki ētahi atu, me te kīangahipa ki te tiaki i tō raraunga. Paoa i te pātene Fai ka oti.";
 /* 'To exchange identity data, ensure all users are nearby or on the phone. The Begin Exchange button will exchange only the checked contact data.' is a help message (sentence case, period); used via Help button on the Begin Exchange screen and also the key exchange walkthrough tutorial to describe in more detail what the Begin Exchange screen does. */
 "help_home" = "Ki te whakawhiti raraunga tuakiri, te whakarite kei tata ranei i runga i te waea kaiwhakamahi katoa. Ka whakawhiti i te pātene Tīmata Exchange te raraunga whakapā takina anake.";
 /* 'You may also change personal data about your identity on this screen by tapping on the button with your name. This will display a menu allowing you to Edit your contact, Create New contact, or Use Another contact.' is a help message (sentence case, period); Additional help text, which is appended to the Help button text on the Compose and Begin Exchange screens. */
 "help_identity_menu" = "Kia hoki e koe te huri i ngā raraunga whaiaro e pā ana ki o koutou i runga i tenei tuakiri mata i te ingoa i runga i te pātene ki tou ingoa. Tenei ka whakaatu te tahua tuku ki a koutou Whakatikaina koutou whakapā, Waihanga whakapā New, ranei Whakamahia tētahi atu whakapā.";
 /* 'This screen displays all past messages, and attachments that are still available for download.' is a help message (sentence case, period); used via Help button on the Messages list screen to describe in more detail what the Messages list screen does. */
 "help_Messages" = "Ka whakaatu tēnei mata i ngā karere o mua katoa, me ngā tāpiritanga e wātea ana mō te download he tonu.";
+/* 'Use this screen to login to the application with your passphrase. If you have forgotten your passphrase, you may generate a new key protected by a new passphrase by tapping the Forgot Passphrase? button. Tap the user name to switch between multiple keys.' is a help message (sentence case, period); used via Help button on the Passphrase screen to describe in more detail what the Passphrase screen does. */
+"help_passphrase" = "Whakamahia tēnei mata ki te takiuru ki te tono ki to koutou kīangahipa. Ki te mea kua wareware koe tou kīangahipa, kia whakaputa e koe te kī hou tiakina e te kīangahipa hou mā te mirimiri i te Kīangahipa Kua wareware i? pātene. Paoa te ingoa kaiwhakamahi ki te whakawhiti i waenga i te mau taviri maha.";
+/* 'Use this screen to change your passphrase by entering your last passphrase for confirmation and the new passphrase.' is a help message (sentence case, period); used via Help button on the Change Passphrase screen to describe in more detail what the Change Passphrase screen does. */
+"help_passphrase_change" = "Whakamahia tēnei mata ki te huri i tō kīangahipa mā te tomo koutou kīangahipa whakamutunga mo te whakau, me te kīangahipa hou.";
 /* 'Contacts with SafeSlinger keys are displayed here, select one to send your message to.' is a help message (sentence case, period); used via Help button on the Recipients list screen to describe in more detail what the Recipients list screen does. */
 "help_PickRecip" = "Kua whakaaturia ngā Hoapā ki te mau taviri SafeSlinger konei, tīpako i tetahi ki te tuku i tō karere ki te.";
 /* 'When finished, the protocol will reveal a list of the identity data exchanged. Select the contacts you wish to save and press Import.' is a help message (sentence case, period); used via Help button on the End Exchange screen and also the key exchange walkthrough tutorial to describe in more detail what the End Exchange screen does. */
@@ -300,6 +312,8 @@
 "help_SecureIntroduction" = "Mā tēnei mata ki a koe te tīpako e rua iwi kua piua atu e koe mau taviri ki te aroaro o ki he wehi unga ratou mau taviri ki tetahi ki tetahi. Noa pēhi Whakamōhiotia ka rite.";
 /* 'This screen allows you to select some data and a recipient to send to. Simply press Send when ready.' is a help message (sentence case, period); used via Help button on the Compose Message screen to describe in more detail what the Compose Message screen does. */
 "help_Send" = "Mā tēnei mata ki a koe te tīpako i ētahi raraunga me te kaiwhiwhi ki te tuku ki te. Noa pēhi Tukua ka rite.";
+/* 'This screen allows you to change the default settings for the application.' is a help message (sentence case, period); used via Help button on the Settings screen to describe in more detail what the Settings screen does. */
+"help_settings" = "Mā tēnei mata ki a koutou huri i ngā tautuhinga taunoa mo te tono.";
 /* 'Select the number of people who are attempting to exchange data together and press OK.' is a help message (sentence case, period); used via Help button on the Group Size screen and also the key exchange walkthrough tutorial to describe in more detail what the Group Size screen does. */
 "help_size" = "Tīpakohia te tokomaha o te iwi i te hunga e whakamātau ana ki te whakawhiti tahi me te pēhi i te OK raraunga.";
 /* 'This number on this screen is used to create a unique group of users. Review the numbers on all users' screens, then all users should enter the same lowest number and press OK.' is a help message (sentence case, period); used via Help button on the Grouping screen and also the key exchange walkthrough tutorial to describe in more detail what the Grouping screen does. */
@@ -307,10 +321,20 @@
 /* 'Now, you must match one of these 3-word phrases with all users. Every user must select the same common phrase, and press Next.' is a help message (sentence case, period); used via Help button on the Verify screen and also the key exchange walkthrough tutorial to describe in more detail what the Verify screen does. */
 "help_verify" = "Na, me taurite ki a koe tetahi o enei kupui lea 3-kupu ki ngā kaiwhakamahi katoa. Me tīpako i nga kaiwhakamahi i te kīanga noa taua, ka pēhi whai mai.";
 
+/* 'Contacts permission is required for securely sharing contact cards. Tap the Help button for SafeSlinger Contacts permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Contacts permission. iOS-only. */
+"iOS_contactError" = "E hiahiatia ana whakaaetanga Contacts te hoki he wehi faaiteraa i kāri whakapā. Paoa i te pātene Āwhina mō te SafeSlinger kōrero whakaaetanga Contacts.";
 /* 'Push registration is missing.' is an error message (sentence case, period); used to warn the user the push registration is missing. iOS-only. */
 "iOS_errorpushtoken" = "Kei te ngaro te rēhitatanga Pana.";
+/* 'Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the Help button for SafeSlinger Notification permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Notifications permission. iOS-only. */
+"iOS_notificationError1" = "Whakaaetanga whakamōhiotanga mō ngā rānei matohi ranei kara, me tau tohu, kua hiahiatia hoki karere haumaru. Paoa i te pātene Āwhina mō te SafeSlinger kōrero whakaaetanga whakamōhiotanga.";
 /* 'SafeSlinger is not optimized for iOS 5.x devices. SafeSlinger requires iOS 6 or higher.' is an informational message (sentence case, period); message for dialog popups when a user still uses an old iOS device. iOS-only. */
 "iOS_oldOSWarn" = "E kore te SafeSlinger papaitia kia pūrere 5.x iOS. Me SafeSlinger iOS 6 teitei ranei.";
+/* 'You can select your contact card to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Contacts when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Contacts permission. iOS-only. */
+"iOS_RequestPermissionContacts" = "Ka taea e koe te tīpako i tō kāri whakapā ki te unga o koutou hoa, me ka e whakamuna SafeSlinger reira hoki koutou. Hei whakahohe i tēnei āhuatanga, me tuku e koe SafeSlinger uru ki ō Hoapā ka ui.";
+/* 'You can record a voice message to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Microphone when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Microphone permission. iOS-only. */
+"iOS_RequestPermissionMicrophone" = "Ka taea e koe te tuhi i tētahi karere reo ki te unga o koutou hoa, me ka e whakamuna SafeSlinger reira hoki koutou. Hei whakahohe i tēnei āhuatanga, me tuku e koe SafeSlinger uru ki to koutou Hopureo ka ui.";
+/* 'SafeSlinger is an encrypted messaging application and cannot function without allowing incoming messages from Notifications. To enable incoming messages, you must allow SafeSlinger to send you Notifications when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Notifications permission. iOS-only. */
+"iOS_RequestPermissionNotifications" = "He tono karere kua whakamunatia SafeSlinger e kore e taea te mahi i waho tuku karere hou i Whakamōhiotanga he a. Hei whakahohe i ngā karere hou, me tuku e koe SafeSlinger ki te unga koe Whakamōhiotanga ka ui.";
 
 /* '%s ago' is a screen label (match English casing); used on the messages list screen and is used to describe how long ago a message was sent or received. %s = a time measurement, such as '5 minutes' or '2 hours'. */
 "label_ago" = "%@ i mua";
@@ -352,6 +376,8 @@
 "label_expiresIn" = "Ka pau i roto i te";
 /* 'File Name' is a screen label (match English casing); used on the Save File As dialog as a hint in the file name text box when changing the file name. */
 "label_FileNameHint" = "Ingoa kōnae";
+/* 'Enter your name and a passphrase to protect your data:' is a screen label (match English casing); used to instruct the user how to proceed on the Setup screen. */
+"label_FindInstruct" = "Tomo koutou ingoa, me te kīangahipa ki te tiaki i tō raraunga:";
 /* 'First Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current first name to use. iOS-only. */
 "label_FirstName" = "Ingoa Tuatahi";
 /* 'Tap your name to add or remove contact data, check items you wish to share, and tap Begin Exchange when others are ready to exchange:' is a screen label (match English casing); used to instruct the user how to proceed on the Begin Exchange screen. */
@@ -480,6 +506,8 @@
 "label_summary_auto_decrypt" = "Wetemuna aunoa karere i te takiuru";
 /* 'Receive notification when backup is offline.' is a screen label (match English casing); used as the settings summary to describe what Backup Reminder will do. */
 "label_summary_remind_backup_delay" = "Whiwhi whakamōhiotanga i te tuimotu pūrua.";
+/* 'Show a tutorial before attempting to Sling Keys.' is a screen label (match English casing); used as the settings summary to describe what Show Walkthrough will do. */
+"label_summary_show_tutorial" = "Whakaaturia te akoranga i mua i te ngana ki te kotaha Pātuhi.";
 /* 'Tap to decrypt file' is a screen label (match English casing); used to indicate tapping this message in the list will attempt to decrypt the attachment (if needed). */
 "label_TapToDecryptFile" = "Paoa ki te wetemuna kōnae";
 /* 'Tap to decrypt' is a screen label (match English casing); used to indicate tapping this message in the list will attempt to decrypt it. */
@@ -538,6 +566,10 @@
 "menu_Change" = "Change";
 /* 'Change Passphrase' is a menu option (title case); used to confirm the current passphrase and create and new one via the Settings screen. */
 "menu_ChangePassphrase" = "Change Kīangahipa";
+/* 'Email from Contacts' is a menu option (title case); used when adding a contact invitaion via email. */
+"menu_ContactInviteEmail" = "Email i Ngā Hoapā";
+/* 'Text from Contacts' is a menu option (title case); used when adding a contact invitaion via sms. */
+"menu_ContactInviteSms" = "Kuputuhi i Ngā Hoapā";
 /* 'Create New' is a menu option (title case); used to show a new empty contact in the address book for editing as the users' current identity via the Personal Contact dialog. */
 "menu_CreateNew" = "Waihanga New";
 /* 'Delete' is a menu option (title case); used to delete the current item from the list context menu. */
@@ -562,6 +594,12 @@
 "menu_Help" = "Āwhina";
 /* 'Introduction' is a menu option (title case); used to show the secure introduction composition screen via the main home screen. */
 "menu_Introduction" = "Kupu Whakataki";
+/* 'Language' is a menu (title case); used as the settings menu option to change language */
+"menu_language" = "Reo";
+/* 'Add Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
+"menu_link_contact_add" = "Tāpiri Hononga Whakapā mai";
+/* 'Change Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
+"menu_link_contact_change" = "Huria Hononga Whakapā mai";
 /* 'Logout' is a menu option (title case); used to remove the cached passphrase and force the user to login again. */
 "menu_Logout" = "Takiputa";
 /* 'Manage Passphrases' is a menu option (title case); used on the settings screen to allow users to remove newer keys if created by users without orignial user authorization. */
@@ -680,7 +718,7 @@
 /* 'Text copied to clipboard.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the message text has been copied to the device native clipboard. */
 "state_TextCopiedToClipboard" = "Te tārua kuputuhi ki te papatopenga.";
 
-/* 'SafeSlinger is designed to easily share identity data, in person or over the phone, authenticated, private, and intact. Each person you share with creates a secure end-to-end channel to send messages.' is an application description (sentence case); used at the beginning of the about box and app store listing to describe the application. */
+/* 'SafeSlinger is designed to easily share identity data, in person or over the phone, authenticated, private, and intact. Each person you share with creates a secure end-to-end channel to send messages.' is an application description (sentence case); used at the beginning of the about box and app store listing to describe the application. Beginning of long form: 4000 character max. */
 "text_About" = "Hangaia SafeSlinger ki te tiri raraunga tuakiri, te tangata i roto i runga i te waea ranei, whakamotuhēhē, tümataiti, me te whakaū tonu. Ia tangata faaite koe ki te hanga i tētahi hongere haumaru mutunga-ki-mutu ki te unga karere.";
 /* 'Easily exchange contact information with others' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
 "text_About1" = "Ngāwari te whakawhiti pārongo whakapā ki ētahi atu";
@@ -702,6 +740,8 @@
 "text_KeywordKey" = "Matua";
 /* 'Messaging' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordMessaging" = "Karere";
+/* 'Privacy' is an application description (sentence case); one of many keywords to use when searching related terms. */
+"text_KeywordPrivacy" = "Privacy";
 /* 'Security' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordSecurity" = "Haumarutanga";
 /* 'Languages provided by:' is an application description (sentence case); used at the end of the about dialog to list the translators of SafeSlinger. */

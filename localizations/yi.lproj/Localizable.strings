@@ -41,7 +41,7 @@
 /* 'Quit? Are you sure?' is a question message (sentence case, question mark); is a confirmation question that occurs when the user chooses to end the exchange protocol prematurely. */
 "ask_QuitConfirmation" = "פאַרלאָזן? זענען איר זיכער?";
 /* 'We'd like your help improving SafeSlinger. Would you like to automatically send any errors to us?' is a question message (sentence case, question mark); is a question that occurs when the user encounters an unhandled exception and are asked if they want to upload this error log and any future error logs. */
-"ask_SendErrorData" = "מיר 'ד ווי דיין הילף ימפּרוווינג SafeSlinger. וואָלט איר ווי צו אויטאָמאַטיש שיקן קיין ערראָרס צו אונדז?";
+"ask_SendErrorData" = "מירד ווי דיין הילף ימפּרוווינג SafeSlinger. וואָלט איר ווי צו אויטאָמאַטיש שיקן קיין ערראָרס צו אונדז?";
 
 /* 'Accept' is a button (title case); the Accept button is paired with the Refuse button to indicate user acceptance of a secure introduction. */
 "btn_Accept" = "אָננעמען";
@@ -73,6 +73,8 @@
 "btn_No" = "קיין";
 /* 'No Match' is a button (title case); the No Match button is used if the user cannot find the same batting screen on another user's device during the exchange critical care. */
 "btn_NoMatch" = "ניט קיין גלייַכן";
+/* 'Not Now' is a button (title case); the Not Now button is used as a negative button to decline an offered service or permission. */
+"btn_NotNow" = "ניט איצט";
 /* 'Forget' is a button (title case); the Forget button is paired with the Remind button and is used to indicate the user wishes to dismiss the current reminder of a potential error state, such as having backup or notification settings turned off, and not be reminded again. */
 "btn_NotRemind" = "פאַרגעסן";
 /* 'OK' is a button (title case); the OK button is affirmation button used to indicate the user accepts the data entered on the current screen. */
@@ -112,6 +114,8 @@
 "choice_8hours" = "8 שעה";
 /* 'Default Storage' is a choice (sentence case); used to set the attachment root path to the default source. Android-only. */
 "choice_auto_storage" = "פעליקייַט סטאָרידזש";
+/* 'Default' is a choice (sentence case); used in any menu to denote the default choice. */
+"choice_default" = "ניט ויסצאָלן";
 /* 'External Storage' is a choice (sentence case); used to set the attachment root path to an external source. Android-only. */
 "choice_external_storage" = "פונדרויסנדיק סטאָרידזש";
 /* 'Large' is a choice (sentence case); used in the settings to choose a large font size. */
@@ -147,6 +151,8 @@
 "error_AudioPlayerError" = "קענען ניט שפּילן די רעקאָרדינג.";
 /* 'Audio recorder encoding error.' is an error message (sentence case, period); used to warn when attempting to record an audio message fails to encode properly. iOS-only. */
 "error_AudioRecorderEncodeError" = "אַודיאָ רעקאָרדער קאָדירונג טעות.";
+/* 'Microphone permission is required to record a secure voice message. Tap the Help button for SafeSlinger Microphone permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Microphone permission. iOS-only. */
+"error_AudioRecorderPermissionError" = "מיקראָפאָן דערלויבעניש איז פארלאנגט צו רעקאָרדירן אַ זיכער קול אָנזאָג. צאַפּן די הילף קנעפּל פֿאַר סאַפעסלינגער מייקראַפאָון דערלויבעניש פרטים.";
 /* 'No backup to restore.' is an error message (sentence case, period); used to warn at application setup, when there is no pre-existing backup to restore and warn the user that any previous keys have not been restored. */
 "error_BackupNotFound" = "ניט קיין באַקקופּ צו ומקערן.";
 /* 'Device does not support backup restore.' is an error message (sentence case, period); used to warn when the device hardware does not support restoration from backup. */
@@ -256,13 +262,13 @@
 /* 'Cannot prepare the audio recorder.' is an error message (sentence case, period); used to warn when the audio recorder is unavailable from the system to record an audio message. iOS-only. */
 "error_RecoderError" = "קענען ניט צוגרייטן די אַודיאָ מאַגנעטאָפאָן.";
 /* 'To start, Sling Keys with another user at the same time.' is an error message (sentence case, period); used to remind in a notification message that the user should exchange keys with at least one other user to make the app useful to them. */
-"error_ReminderToSlingKeysToUseApp" = "צו אָנהייבן, ' וואַרפלקע קיז ' מיט אנדערן טעלעפאָנירן אין דער זעלביקער צייַט.";
+"error_ReminderToSlingKeysToUseApp" = "צו אָנהייבן, וואַרפלקע קיז מיט אנדערן טעלעפאָנירן אין דער זעלביקער צייַט.";
 /* 'You need an attachment or a text message to send.' is an error message (sentence case, period); used to warn when the user has not attached a file or typed any text message to send to the recipient after using the 'Send' button. */
 "error_selectDataToSend" = "איר דאַרפֿן אַ אַטאַטשמאַנט אָדער אַ טעקסט אָנזאָג צו שיקן.";
 /* 'Server Message: %s' is an error message (sentence case, period); used to warn when the server has an error message to send back to the client. %s = an English (non-localized) error message sent by our App Engine server code. Android-only. */
-"error_ServerAppMessage" = "סערווירער אָנזאָג: '%@'";
+"error_ServerAppMessage" = "סערווירער אָנזאָג:%@";
 /* 'Server Message: %s' is an error message (sentence case, period); this is a duplicate message with alternate formatting for iOS, see error_ServerAppMessage. iOS-only. */
-"error_ServerAppMessageCStr" = "סערווירער אָנזאָג: '%@'";
+"error_ServerAppMessageCStr" = "סערווירער אָנזאָג:%@";
 /* 'No response from server.' is an error message (sentence case, period); used to warn when the server timeout occurs, usually after 30 seconds and did not respond to the client. */
 "error_ServerNotResponding" = "ניט קיין ענטפער פון סערווירער.";
 /* 'Cannot remove the shared file.' is an error message (sentence case, period); used to warn when the shared file cannot be deleted. iOS-only. */
@@ -286,31 +292,49 @@
 /* 'User canceled server request.' is an error message (sentence case, period); used to warn when the user exited the key exchange protocol or messaging transmission before it was finished. */
 "error_WebCancelledByUser" = "באַניצער קאַנסאַלד סערווירער בעטן.";
 
+/* 'Use this screen to set your name to exchange with others, and a passphrase to protect your data. Tap the Done button when finished.' is a help message (sentence case, period); used via Help button on the Setup screen to describe in more detail what the Setup screen does. */
+"help_find" = "נוצן דעם עקראַן צו שטעלן אייער נאָמען צו וועקסל מיט אנדערע, און אַ פּאַסספראַסע צו באַשיצן אייער דאַטע. צאַפּן די דאַן קנעפּל ווען פאַרטיק.";
 /* 'To exchange identity data, ensure all users are nearby or on the phone. The Begin Exchange button will exchange only the checked contact data.' is a help message (sentence case, period); used via Help button on the Begin Exchange screen and also the key exchange walkthrough tutorial to describe in more detail what the Begin Exchange screen does. */
-"help_home" = "צו וועקסל אידענטיטעט דאַטן, ענשור אַלע וסערס זענען נירביי אָדער אויף די טעלעפאָנירן. די ' אָנהייבן עקסטשאַנגע ' קנעפּל וועט וועקסל בלויז די אָפּגעשטעלט קאָנטאַקט דאַטן.";
+"help_home" = "צו וועקסל אידענטיטעט דאַטן, ענשור אַלע וסערס זענען נירביי אָדער אויף די טעלעפאָנירן. די אָנהייבן עקסטשאַנגע קנעפּל וועט וועקסל בלויז די אָפּגעשטעלט קאָנטאַקט דאַטן.";
 /* 'You may also change personal data about your identity on this screen by tapping on the button with your name. This will display a menu allowing you to Edit your contact, Create New contact, or Use Another contact.' is a help message (sentence case, period); Additional help text, which is appended to the Help button text on the Compose and Begin Exchange screens. */
-"help_identity_menu" = "נוולן נוולן איר קען אויך טוישן פּערזענלעך דאַטן וועגן אייער אידענטיטעט אויף דעם עקראַן דורך טאַפּינג אויף די קנעפּל מיט דיין נאָמען. דעם וועט אַרויסווייַזן אַ מעניו אַלאַוינג איר צו ' רעדאַגירן ' דיין קאָנטאַקט, ' שאַפֿן ניו ' ​​קאָנטאַקט, אָדער ' ניצן אן אנדער ' קאָנטאַקט.";
+"help_identity_menu" = "נוולן נוולן איר קען אויך טוישן פּערזענלעך דאַטן וועגן אייער אידענטיטעט אויף דעם עקראַן דורך טאַפּינג אויף די קנעפּל מיט דיין נאָמען. דעם וועט אַרויסווייַזן אַ מעניו אַלאַוינג איר צו רעדאַגירן דיין קאָנטאַקט, שאַפֿן ניו ​​קאָנטאַקט, אָדער ניצן אן אנדער קאָנטאַקט.";
 /* 'This screen displays all past messages, and attachments that are still available for download.' is a help message (sentence case, period); used via Help button on the Messages list screen to describe in more detail what the Messages list screen does. */
 "help_Messages" = "דעם פאַרשטעלן דיספּלייז אַלע פאַרגאַנגענהייַט אַרטיקלען, און אַטאַטשמאַנץ אַז זענען נאָך פאַראַנען פֿאַר אָפּלאָדירן.";
+/* 'Use this screen to login to the application with your passphrase. If you have forgotten your passphrase, you may generate a new key protected by a new passphrase by tapping the Forgot Passphrase? button. Tap the user name to switch between multiple keys.' is a help message (sentence case, period); used via Help button on the Passphrase screen to describe in more detail what the Passphrase screen does. */
+"help_passphrase" = "נוצן דעם עקראַן צו לאָגין צו די אַפּלאַקיישאַן מיט אייער פּאַסספראַסע. אויב איר האָבן פארגעסן דיין פּאַסספראַסע, איר זאלט ​​דזשענערייט אַ נייַ שליסל פּראָטעקטעד דורך אַ נייַ פּאַסספראַסע דורך טאַפּינג די פֿאַרגעסן פּאַסספראַסע? קנעפּל. צאַפּן די באַניצער נאָמען צו באַשטימען צווישן קייפל שליסלען.";
+/* 'Use this screen to change your passphrase by entering your last passphrase for confirmation and the new passphrase.' is a help message (sentence case, period); used via Help button on the Change Passphrase screen to describe in more detail what the Change Passphrase screen does. */
+"help_passphrase_change" = "נוצן דעם עקראַן צו טוישן אייער פּאַסספראַסע דורך קומט דיין לעצט פּאַסספראַסע פֿאַר באַשטעטיקונג און די נייַ פּאַסספראַסע.";
 /* 'Contacts with SafeSlinger keys are displayed here, select one to send your message to.' is a help message (sentence case, period); used via Help button on the Recipients list screen to describe in more detail what the Recipients list screen does. */
 "help_PickRecip" = "קאָנטאַקטן מיט SafeSlinger שליסלען זענען געוויזן דאָ, אויסקלייַבן איינער צו שיקן דיין אָנזאָג צו.";
 /* 'When finished, the protocol will reveal a list of the identity data exchanged. Select the contacts you wish to save and press Import.' is a help message (sentence case, period); used via Help button on the End Exchange screen and also the key exchange walkthrough tutorial to describe in more detail what the End Exchange screen does. */
-"help_save" = "ווען פאַרטיק, די פּראָטאָקאָל וועט אַנטדעקן אַ רשימה פון די אידענטיטעט דאַטן פארביטן. אויסקלייַבן די קאָנטאַקטן איר ווינטשן צו ראַטעווען און דרוק ' ימפּאָרט '.";
+"help_save" = "ווען פאַרטיק, די פּראָטאָקאָל וועט אַנטדעקן אַ רשימה פון די אידענטיטעט דאַטן פארביטן. אויסקלייַבן די קאָנטאַקטן איר ווינטשן צו ראַטעווען און דרוק ימפּאָרט.";
 /* 'This screen allows you to select two people you have slung keys with before to securely send their keys to each other. Simply press Introduce when ready.' is a help message (sentence case, period); used via Help button on the Secure Introduction screen to describe in more detail what the Secure Introduction screen does. */
-"help_SecureIntroduction" = "דעם פאַרשטעלן אַלאַוז איר צו אויסקלייַבן צוויי מענטשן איר האָבן סלאַנג שליסלען מיט איידער צו סיקיורלי שיקן זייער שליסלען צו יעדער אנדערער. פשוט דריקן ' ינטראָדוסע ' ווען גרייט.";
+"help_SecureIntroduction" = "דעם פאַרשטעלן אַלאַוז איר צו אויסקלייַבן צוויי מענטשן איר האָבן סלאַנג שליסלען מיט איידער צו סיקיורלי שיקן זייער שליסלען צו יעדער אנדערער. פשוט דריקן ינטראָדוסע ווען גרייט.";
 /* 'This screen allows you to select some data and a recipient to send to. Simply press Send when ready.' is a help message (sentence case, period); used via Help button on the Compose Message screen to describe in more detail what the Compose Message screen does. */
-"help_Send" = "דעם פאַרשטעלן אַלאַוז איר צו אויסקלייַבן עטלעכע דאַטע און אַ באַקומער צו שיקן צו. פשוט דריקן ' שיקן ' ווען גרייט.";
+"help_Send" = "דעם פאַרשטעלן אַלאַוז איר צו אויסקלייַבן עטלעכע דאַטע און אַ באַקומער צו שיקן צו. פשוט דריקן שיקן ווען גרייט.";
+/* 'This screen allows you to change the default settings for the application.' is a help message (sentence case, period); used via Help button on the Settings screen to describe in more detail what the Settings screen does. */
+"help_settings" = "דעם פאַרשטעלן אַלאַוז איר צו טוישן די פעליקייַט סעטטינגס פֿאַר די אַפּלאַקיישאַן.";
 /* 'Select the number of people who are attempting to exchange data together and press OK.' is a help message (sentence case, period); used via Help button on the Group Size screen and also the key exchange walkthrough tutorial to describe in more detail what the Group Size screen does. */
-"help_size" = "אויסקלייַבן די נומער פון מענטשן וואס זענען אַטעמפּטינג צו וועקסל דאַטן צוזאַמען און דריקן ' גוט '.";
+"help_size" = "אויסקלייַבן די נומער פון מענטשן וואס זענען אַטעמפּטינג צו וועקסל דאַטן צוזאַמען און דריקן גוט.";
 /* 'This number on this screen is used to create a unique group of users. Review the numbers on all users' screens, then all users should enter the same lowest number and press OK.' is a help message (sentence case, period); used via Help button on the Grouping screen and also the key exchange walkthrough tutorial to describe in more detail what the Grouping screen does. */
-"help_userid" = "דעם נומער אויף דעם פאַרשטעלן איז געניצט צו שאַפֿן אַ יינציק גרופּע פון ​​ניצערס. איבערבליק די נומערן אויף אַלע ניצערס ' סקרינז, דעמאָלט אַלע ניצערס זאָל אַרייַן די זעלבע לאָואַסט נומער און דרוקן ' גוט '.";
+"help_userid" = "דעם נומער אויף דעם פאַרשטעלן איז געניצט צו שאַפֿן אַ יינציק גרופּע פון ​​ניצערס. איבערבליק די נומערן אויף אַלע ניצערס סקרינז, דעמאָלט אַלע ניצערס זאָל אַרייַן די זעלבע לאָואַסט נומער און דרוקן גוט.";
 /* 'Now, you must match one of these 3-word phrases with all users. Every user must select the same common phrase, and press Next.' is a help message (sentence case, period); used via Help button on the Verify screen and also the key exchange walkthrough tutorial to describe in more detail what the Verify screen does. */
-"help_verify" = "איצט, איר מוזן גלייַכן איינער פון די 3-וואָרט פראַסעס מיט אַלע ניצערס. יעדער באַניצער מוזן אויסקלייַבן דער זעלביקער פּראָסט פראַזע, און דריקן ' ווייַטער '.";
+"help_verify" = "איצט, איר מוזן גלייַכן איינער פון די 3-וואָרט פראַסעס מיט אַלע ניצערס. יעדער באַניצער מוזן אויסקלייַבן דער זעלביקער פּראָסט פראַזע, און דריקן ווייַטער.";
 
+/* 'Contacts permission is required for securely sharing contact cards. Tap the Help button for SafeSlinger Contacts permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Contacts permission. iOS-only. */
+"iOS_contactError" = "קאָנטאַקטן דערלויבעניש איז פארלאנגט פֿאַר סיקיורלי ייַנטיילונג קאָנטאַקט קאַרדס. צאַפּן די הילף קנעפּל פֿאַר סאַפעסלינגער קאָנטאַקטן דערלויבעניש פרטים.";
 /* 'Push registration is missing.' is an error message (sentence case, period); used to warn the user the push registration is missing. iOS-only. */
 "iOS_errorpushtoken" = "שטופּן רעגיסטראַציע איז פעלנדיק.";
+/* 'Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the Help button for SafeSlinger Notification permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Notifications permission. iOS-only. */
+"iOS_notificationError1" = "אָנזאָג דערלויבעניש פֿאַר יעדער אַלערץ אָדער באַנערז, און אָפּצייכן נומערן, זענען פארלאנגט פֿאַר זיכער מעסידזשינג. צאַפּן די הילף קנעפּל פֿאַר סאַפעסלינגער אָנזאָג דערלויבעניש פרטים.";
 /* 'SafeSlinger is not optimized for iOS 5.x devices. SafeSlinger requires iOS 6 or higher.' is an informational message (sentence case, period); message for dialog popups when a user still uses an old iOS device. iOS-only. */
 "iOS_oldOSWarn" = "SafeSlinger איז ניט אָפּטימיזעד פֿאַר יאָס 5.קס דיווייסאַז. SafeSlinger ריקווייערז יאָס 6 אָדער העכער.";
+/* 'You can select your contact card to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Contacts when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Contacts permission. iOS-only. */
+"iOS_RequestPermissionContacts" = "איר קענען אויסקלייַבן דיין קאָנטאַקט קאַרטל צו שיקן אייער פריינט און סאַפעסלינגער וועט ינקריפּט עס פֿאַר איר. צו געבן דעם שטריך, איר מוזן לאָזן סאַפעסלינגער צוטריט צו אייער קאָנטאַקטן ווען געפרעגט.";
+/* 'You can record a voice message to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Microphone when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Microphone permission. iOS-only. */
+"iOS_RequestPermissionMicrophone" = "איר קענען רעקאָרדירן אַ קול אָנזאָג צו שיקן אייער פריינט און סאַפעסלינגער וועט ינקריפּט עס פֿאַר איר. צו געבן דעם שטריך, איר מוזן לאָזן סאַפעסלינגער צוטריט צו אייער מייקראַפאָון ווען געפרעגט.";
+/* 'SafeSlinger is an encrypted messaging application and cannot function without allowing incoming messages from Notifications. To enable incoming messages, you must allow SafeSlinger to send you Notifications when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Notifications permission. iOS-only. */
+"iOS_RequestPermissionNotifications" = "סאַפעסלינגער איז אַ ענקריפּטיד מעסידזשינג אַפּלאַקיישאַן און קענען ניט פונקציאָנירן אָן אַלאַוינג ינקאַמינג אַרטיקלען פון נאָטיפיקאַטיאָנס. צו געבן ינקאַמינג אַרטיקלען, איר מוזן לאָזן סאַפעסלינגער צו שיקן איר נאָטיפיקאַטיאָנס ווען געפרעגט.";
 
 /* '%s ago' is a screen label (match English casing); used on the messages list screen and is used to describe how long ago a message was sent or received. %s = a time measurement, such as '5 minutes' or '2 hours'. */
 "label_ago" = "%@ צוריק";
@@ -352,18 +376,20 @@
 "label_expiresIn" = "יקספּייערז אין";
 /* 'File Name' is a screen label (match English casing); used on the Save File As dialog as a hint in the file name text box when changing the file name. */
 "label_FileNameHint" = "טעקע נאָמען";
+/* 'Enter your name and a passphrase to protect your data:' is a screen label (match English casing); used to instruct the user how to proceed on the Setup screen. */
+"label_FindInstruct" = "אַרייַן אייער נאָמען און אַ פּאַסספראַסע צו באַשיצן אייער דאַטע:";
 /* 'First Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current first name to use. iOS-only. */
 "label_FirstName" = "ערשטער נאָמען";
 /* 'Tap your name to add or remove contact data, check items you wish to share, and tap Begin Exchange when others are ready to exchange:' is a screen label (match English casing); used to instruct the user how to proceed on the Begin Exchange screen. */
-"label_Home" = "צאַפּן דיין נאָמען צו לייגן אָדער אַראָפּנעמען קאָנטאַקט דאַטן, טשעק זאכן איר ווינטשן צו טיילן, און צאַפּן 'אָנהייבן עקסטשאַנגע' ווען אנדערע זענען גרייט צו בייַט:";
+"label_Home" = "צאַפּן דיין נאָמען צו לייגן אָדער אַראָפּנעמען קאָנטאַקט דאַטן, טשעק זאכן איר ווינטשן צו טיילן, און צאַפּןאָנהייבן עקסטשאַנגע ווען אנדערע זענען גרייט צו בייַט:";
 /* 'Home' is a screen label (match English casing); used to denote a 'home' type of email or phone contact type. iOS-only. */
 "label_hometag" = "היים";
 /* '%d hours' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole hours. */
 "label_hours" = "%d שעה";
 /* 'SafeSlinger iCloud is enabled. Tap the Done button when finished.' is a screen label (match English casing); used to indicate the backup will occur while on the Setup screen. iOS-only. */
-"label_iCloudEnable" = "סאַפעסלינגער יקלאָוד איז ענייבאַלד. צאַפּן די ' דאַן ' קנעפּל ווען פאַרטיק.";
+"label_iCloudEnable" = "סאַפעסלינגער יקלאָוד איז ענייבאַלד. צאַפּן די דאַן קנעפּל ווען פאַרטיק.";
 /* 'No messages. You may send a message from the Compose tab.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. */
-"label_InstNoMessages" = "ניט קיין אַרטיקלען. איר קען שיקן אַ אָנזאָג פון די ' קאַמפּאָוז מעסעדזש ' קנעפּל אויף די היים מעניו.";
+"label_InstNoMessages" = "ניט קיין אַרטיקלען. איר קען שיקן אַ אָנזאָג פון די קאַמפּאָוז מעסעדזש קנעפּל אויף די היים מעניו.";
 /* 'To add recipients, you must first Sling Keys with one or more other users at the same time. You may also send a Sling Keys contact invitation from the menu.' is a screen label (match English casing); used to instruct the user how to proceed on the Recipient list screen is case of no recipients. */
 "label_InstNoRecipients" = "צו לייגן ריסיפּיאַנץ, איר מוזן ערשטער וואַרפלקע קיז מיט איין אָדער מער אנדערע וסערס אין דער זעלביקער צייַט. איר קען אויך שיקן אַ וואַרפלקע קיז קאָנטאַקט פאַרבעטונג פון די מעניו.";
 /* 'No shared file. Connect your device with iTunes and drag files to the shared folder.' is a screen label (match English casing); used to instruct the user how to proceed on the Shared Files screen is case of no files to share. iOS-only. */
@@ -451,7 +477,7 @@
 /* 'Save Account' is a screen label (match English casing); used above the editable field on the End Exchange screen to showing the address book account to use when saving or updating contacts. */
 "label_SaveAccount" = "היט אַקאַונט";
 /* 'Check contacts you want to update in your address book, then tap Import to save secure contacts:' is a screen label (match English casing); used to instruct the user how to proceed on the End Exchange screen. */
-"label_SaveInstruct" = "קוק קאָנטאַקטן איר ווילן צו דערהייַנטיקן אין אייער אַדרעס בוך, דעמאָלט צאַפּן 'ימפּאָרט' צו ראַטעווען זיכער קאָנטאַקטן:";
+"label_SaveInstruct" = "קוק קאָנטאַקטן איר ווילן צו דערהייַנטיקן אין אייער אַדרעס בוך, דעמאָלט צאַפּןימפּאָרט צו ראַטעווען זיכער קאָנטאַקטן:";
 /* '%d seconds' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole seconds. */
 "label_seconds" = "%d סעקונדעס";
 /* 'Select Recipient' is a screen label (match English casing); used on the Compose Message screen recipient button before a recipient has been selected. */
@@ -480,6 +506,8 @@
 "label_summary_auto_decrypt" = "אויטאָמאַטיש דעקריפּט אַרטיקלען ווען לאָגד ין";
 /* 'Receive notification when backup is offline.' is a screen label (match English casing); used as the settings summary to describe what Backup Reminder will do. */
 "label_summary_remind_backup_delay" = "באַקומען אָנזאָג ווען באַקקופּ איז אָפפלינע.";
+/* 'Show a tutorial before attempting to Sling Keys.' is a screen label (match English casing); used as the settings summary to describe what Show Walkthrough will do. */
+"label_summary_show_tutorial" = "ווייַזן אַ טוטאָריאַל איידער אַטעמפּטינג צו וואַרפלקע קיז.";
 /* 'Tap to decrypt file' is a screen label (match English casing); used to indicate tapping this message in the list will attempt to decrypt the attachment (if needed). */
 "label_TapToDecryptFile" = "צאַפּן צו דעקריפּט טעקע";
 /* 'Tap to decrypt' is a screen label (match English casing); used to indicate tapping this message in the list will attempt to decrypt it. */
@@ -499,7 +527,7 @@
 /* 'Contacts Account' is a screen label (match English casing); used above the editable field on the Settings screen to show the current address book account to use. */
 "label_targetAccountLabel" = "קאָנטאַקטן אַקאַונט";
 /* 'You may optionally enable SafeSlinger iCloud backup in iOS Settings. Tap the Done button when finished.' is a screen label (match English casing); used on the Setup screen to remind the user that no backups will be restored on new installation. iOS-only. */
-"label_TouchToConfigureBackupSettings" = "איר קען אָפּטיאָנאַללי געבן סאַפעסלינגער יקלאָוד באַקקופּ אין יאָס סעטטינגס. צאַפּן די ' דאַן ' קנעפּל ווען פאַרטיק.";
+"label_TouchToConfigureBackupSettings" = "איר קען אָפּטיאָנאַללי געבן סאַפעסלינגער יקלאָוד באַקקופּ אין יאָס סעטטינגס. צאַפּן די דאַן קנעפּל ווען פאַרטיק.";
 /* 'Touch to configure backup settings.' is a screen label (match English casing); used in the notification window when the backup request has been pending over 1 hour. Android-only. */
 "label_TouchToConfigureBackupSettingsAndroid" = "פאַרבינדן צו קאַנפיגיער באַקקופּ סעטטינגס.";
 /* 'Touch to configure cache timeout settings.' is a screen label (match English casing); used in the notification window when a passphrase has been cached. Android-only. */
@@ -538,12 +566,16 @@
 "menu_Change" = "טוישן";
 /* 'Change Passphrase' is a menu option (title case); used to confirm the current passphrase and create and new one via the Settings screen. */
 "menu_ChangePassphrase" = "טוישן פּאַסספראַסע";
+/* 'Email from Contacts' is a menu option (title case); used when adding a contact invitaion via email. */
+"menu_ContactInviteEmail" = "Email פון קאָנטאַקטן";
+/* 'Text from Contacts' is a menu option (title case); used when adding a contact invitaion via sms. */
+"menu_ContactInviteSms" = "טעקסט פון קאָנטאַקטן";
 /* 'Create New' is a menu option (title case); used to show a new empty contact in the address book for editing as the users' current identity via the Personal Contact dialog. */
 "menu_CreateNew" = "שאַפֿן ניו";
 /* 'Delete' is a menu option (title case); used to delete the current item from the list context menu. */
 "menu_delete" = "ויסמעקן";
 /* 'Delete Thread %s' is a menu option (title case); used to delete all messages from this person via the message list context menu. %s = the name of a person. */
-"menu_deleteThread" = "דיליט פֿאָדעם '%@'";
+"menu_deleteThread" = "דיליט פֿאָדעם%@";
 /* 'View Detail' is a menu option (title case); used to show a dialog of more detail about the item via the message list context menu. */
 "menu_Details" = "מיינונג דעטאַל";
 /* 'Download Directory' is a choice (sentence case); used when the user chooses to change the directory of the attachment before saving. */
@@ -562,6 +594,12 @@
 "menu_Help" = "הילף";
 /* 'Introduction' is a menu option (title case); used to show the secure introduction composition screen via the main home screen. */
 "menu_Introduction" = "הקדמה";
+/* 'Language' is a menu (title case); used as the settings menu option to change language */
+"menu_language" = "שפּראַך";
+/* 'Add Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
+"menu_link_contact_add" = "לייג קאָנטאַקט לינק";
+/* 'Change Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
+"menu_link_contact_change" = "טוישן קאָנטאַקט לינק";
 /* 'Logout' is a menu option (title case); used to remove the cached passphrase and force the user to login again. */
 "menu_Logout" = "Logout";
 /* 'Manage Passphrases' is a menu option (title case); used on the settings screen to allow users to remove newer keys if created by users without orignial user authorization. */
@@ -597,11 +635,11 @@
 /* 'Use Another' is a menu option (title case); used to redo the Setup process again to find another contact to use as the users' main identity via the Personal Contact dialog. */
 "menu_UseAnother" = "נוצן אן אנדער";
 /* 'Use Contact %s' is a menu option (title case); used to select the found contact as the users' main identity via the Personal Contact dialog. */
-"menu_UseContactPerson" = "נוצן קאָנטאַקט '%@'";
+"menu_UseContactPerson" = "נוצן קאָנטאַקט%@";
 /* 'Use Name Only' is a menu option (title case); used to select no contact as the users' main identity via the Personal Contact dialog. */
 "menu_UseNoContact" = "ניצן נאָמען בלויז";
 /* 'Use Profile %s' is a menu option (title case); used to select the main profile contact as the users' main identity via the Personal Contact dialog. */
-"menu_UseProfilePerson" = "נוצן פּראָופייל '%@'";
+"menu_UseProfilePerson" = "נוצן פּראָופייל%@";
 /* 'Vibrate' is a menu option (title case); used as Settings item for boolean option to vibrate during message notification */
 "menu_vibrate" = "ציטערן";
 
@@ -680,7 +718,7 @@
 /* 'Text copied to clipboard.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the message text has been copied to the device native clipboard. */
 "state_TextCopiedToClipboard" = "טעקסט קאַפּיד צו קליפּבאָרד.";
 
-/* 'SafeSlinger is designed to easily share identity data, in person or over the phone, authenticated, private, and intact. Each person you share with creates a secure end-to-end channel to send messages.' is an application description (sentence case); used at the beginning of the about box and app store listing to describe the application. */
+/* 'SafeSlinger is designed to easily share identity data, in person or over the phone, authenticated, private, and intact. Each person you share with creates a secure end-to-end channel to send messages.' is an application description (sentence case); used at the beginning of the about box and app store listing to describe the application. Beginning of long form: 4000 character max. */
 "text_About" = "סאַפעסלינגער איז דיזיינד צו לייכט טיילן אידענטיטעט דאַטן, אין מענטש אָדער איבער די טעלעפאָנירן, אָטענטאַקייטאַד, פּריוואַט, און בעשאָלעם. יעדער מענטש איר טיילן מיט קריייץ אַ זיכער סוף-צו-סוף קאַנאַל צו שיקן אַרטיקלען.";
 /* 'Easily exchange contact information with others' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
 "text_About1" = "לייכט וועקסל קאָנטאַקט אינפֿאָרמאַציע מיט אנדערע";
@@ -702,6 +740,8 @@
 "text_KeywordKey" = "שליסל";
 /* 'Messaging' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordMessaging" = "מעסידזשינג";
+/* 'Privacy' is an application description (sentence case); one of many keywords to use when searching related terms. */
+"text_KeywordPrivacy" = "אַליינקייַט";
 /* 'Security' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordSecurity" = "זיכערהייַט";
 /* 'Languages provided by:' is an application description (sentence case); used at the end of the about dialog to list the translators of SafeSlinger. */

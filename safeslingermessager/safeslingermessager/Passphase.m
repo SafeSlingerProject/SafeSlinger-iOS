@@ -149,7 +149,7 @@
                                   NSLocalizedString(@"menu_Help", @"Help"),
                                   NSLocalizedString(@"menu_sendFeedback", @"Send Feedback"),
                                   NSLocalizedString(@"menu_License", @"License"),
-                                  NSLocalizedString(@"text_KeywordPrivacy", @"Privacy"),
+                                  NSLocalizedString(@"menu_PrivacyPolicy", @"Privacy Policy"),
                                   nil];
     
     [actionSheet showInView: self.view];

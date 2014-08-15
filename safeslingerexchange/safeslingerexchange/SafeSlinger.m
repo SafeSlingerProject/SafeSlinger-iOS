@@ -827,7 +827,7 @@
 }
 -(void) handleSyncKeyNodes
 {
-    int position;
+    int position = 0;
     char* response;
     
     NSArray *userIDs = [self.allUsers sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];

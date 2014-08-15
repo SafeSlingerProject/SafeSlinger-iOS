@@ -56,7 +56,7 @@
     [RepassField setText:@""];
     [RepassField setPlaceholder:NSLocalizedString(@"label_PassHintRepeat", @"Repeat Passphrase")];
     [LicenseBtn setTitle:NSLocalizedString(@"menu_License", @"License") forState:UIControlStateNormal];
-    [PrivacyBtn setTitle:NSLocalizedString(@"text_KeywordPrivacy", @"Privacy") forState:UIControlStateNormal];
+    [PrivacyBtn setTitle:NSLocalizedString(@"menu_PrivacyPolicy", @"Privacy Policy") forState:UIControlStateNormal];
     
     // ? button
     self.navigationItem.title = NSLocalizedString(@"title_find", @"Setup");

@@ -9,7 +9,7 @@
 
 #define NSLocalizedStringFromBundle(boundle, key, comment) [(boundle) localizedStringForKey:(key) value:(comment) table:nil]
 
-#define SAFESLINGER_DEBUG
+// #define SAFESLINGER_DEBUG
 
 #ifdef SAFESLINGER_DEBUG
 #define DEBUGMSG NSLog

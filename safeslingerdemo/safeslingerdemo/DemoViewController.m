@@ -44,23 +44,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.navigationItem setTitle:NSLocalizedString(@"demo_app_name", @"SafeSlinger Exchange Demo")];
+    [self.navigationItem setTitle:NSLocalizedString(@"dev_app_name_short", @"SafeSlinger for Developers")];
     // Do any additional setup after loading the view from its nib.
-    [self.infoPanel setText: NSLocalizedString(@"demo_note", @"NOTE: This is a simple demo using the SafeSlinger Exchange library for software developers. If you want to experience a full implementation of the exchange, try the SafeSlinger Messenger app on <a href=\"market://details?id=edu.cmu.cylab.starslinger\">Google Play</a>. Full source code is available on <a href=\"http://github.com/safeslingerproject\">GitHub</a>.")];
-    [self.secretLabel setText: NSLocalizedString(@"demo_secret_title", @"My Secret")];
-    [self.hostLabel setText: NSLocalizedString(@"demo_hostname_title", @"Server Host Name")];
-    [self.secretData setPlaceholder: NSLocalizedString(@"demo_secret_hint", @"i.e. key, password, anything")];
-    [self.hostField setPlaceholder: NSLocalizedString(@"demo_hostname_hint", @"i.e. myappengine.appspot.com")];
+    [self.infoPanel setText: NSLocalizedString(@"dev_note", @"NOTE: This is a simple demo using the SafeSlinger Exchange library for software developers. If you want to experience a full implementation of the exchange, try the SafeSlinger Messenger app on <a href=\"market://details?id=edu.cmu.cylab.starslinger\">Google Play</a>. Full source code is available on <a href=\"http://github.com/safeslingerproject\">GitHub</a>.")];
+    [self.secretLabel setText: NSLocalizedString(@"dev_secret_title", @"My Secret")];
+    [self.hostLabel setText: NSLocalizedString(@"dev_hostname_title", @"Server Host Name")];
+    [self.secretData setPlaceholder: NSLocalizedString(@"dev_secret_hint", @"i.e. key, password, anything")];
+    [self.hostField setPlaceholder: NSLocalizedString(@"dev_hostname_hint", @"i.e. myappengine.appspot.com")];
     _originalFrame = self.view.frame;
 }
 
 
 -(IBAction)ShowHelp:(id)sender
 {
-    UIAlertView *help = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"demo_app_name", @"SafeSlinger Exchange Demo")
-                                                    message:NSLocalizedString(@"demo_instruct", @"DEMO:\nYou may build and run your own server, OR use ours: slinger-demo.appspot.com. A host name and a secret are required.")
+    UIAlertView *help = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"dev_app_name_long", @"SafeSlinger Exchange for Security Developers")
+                                                    message:NSLocalizedString(@"dev_instruct", @"DEMO:\nYou may build and run your own server, OR use ours: slinger-demo.appspot.com. A host name and a secret are required.")
                                                    delegate: nil
-                                          cancelButtonTitle: NSLocalizedString(@"btn_OK", @"OK")
+                                          cancelButtonTitle: NSLocalizedString(@"dev_btn_OK", @"OK")
                                           otherButtonTitles: nil];
     [help show];
     help = nil;
@@ -161,16 +161,16 @@
 
 - (void)ParseData: (NSArray*)exchangeset
 {
-    NSString *title = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"demo_results", @"Results"), NSLocalizedString(@"demo_result_success", @"Success")];
+    NSString *title = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"dev_results", @"Results"), NSLocalizedString(@"dev_result_success", @"Success")];
     
     int i = 0;
     NSMutableString *result = [NSMutableString string];
-    [result appendFormat: NSLocalizedString(@"demo_result_mine", @"secret %d (mine): %@"), i, secretData.text];
+    [result appendFormat: NSLocalizedString(@"dev_result_mine", @"secret %d (mine): %@"), i, secretData.text];
     [result appendString: _NEWLINE];
     
     for (i =0; i<[exchangeset count];i++)
     {
-        [result appendFormat: NSLocalizedString(@"demo_result_theirs", @"secret %d (theirs): %@"), i+1, [[NSString alloc] initWithData:[exchangeset objectAtIndex:i] encoding:NSUTF8StringEncoding]];
+        [result appendFormat: NSLocalizedString(@"dev_result_theirs", @"secret %d (theirs): %@"), i+1, [[NSString alloc] initWithData:[exchangeset objectAtIndex:i] encoding:NSUTF8StringEncoding]];
         [result appendString: _NEWLINE];
     }
     
@@ -178,7 +178,7 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle: title
                                                     message: result
                                                    delegate: nil
-                                          cancelButtonTitle: NSLocalizedString(@"btn_OK", @"OK")
+                                          cancelButtonTitle: NSLocalizedString(@"dev_btn_OK", @"OK")
                                           otherButtonTitles: nil];
     [alert show];
     alert = nil;

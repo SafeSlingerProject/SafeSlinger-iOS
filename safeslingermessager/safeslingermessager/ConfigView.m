@@ -341,7 +341,7 @@
                     break;
                 case PrivacyURL:
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                    cell.textLabel.text = NSLocalizedString(@"text_KeywordPrivacy", @"Privacy");
+                    cell.textLabel.text = NSLocalizedString(@"menu_PrivacyPolicy", @"Privacy Policy");
                     cell.detailTextLabel.text = nil;
                     break;
                 default:

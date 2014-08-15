@@ -143,42 +143,46 @@
 /* choice (sentence case); used in the File Manager dialog to navigate up to a parent directory. */
 "choice_Up" = "Up";
 
-/* demo; Demo app name. */
-"demo_app_name" = "SafeSlinger Exchange Demo";
-/* demo; Button text to start exchange. */
-"demo_button_begin_exchange" = "Begin Exchange";
-/* demo; Button text to enable NFC. */
-"demo_button_nfc_off" = "NFC OFF";
-/* demo; Button text to disable NFC. */
-"demo_button_nfc_on" = "NFC ON";
-/* demo; Hint for hostname field. */
-"demo_hostname_hint" = "i.e. myappengine.appspot.com";
-/* demo; Title of hostname field. */
-"demo_hostname_title" = "Server Host Name";
-/* demo; Instructions for use. */
-"demo_instruct" = "DEMO:\nYou may build and run your own server, OR use ours: slinger-demo.appspot.com. A host name and a secret are required.";
-/* demo; Menu text to configure NFC settings. */
-"demo_menu_nfc_settings" = "NFC Settings";
-/* demo; Reminder text that this is a demo app-only. iOS-only. */
-"demo_note" = "NOTE: This is a simple demo using the SafeSlinger Exchange library for software developers. If you want to experience a full implementation of the exchange, try the SafeSlinger Messenger app on https://itunes.apple.com/tw/app/safeslinger/id493529867?mt=8. Full source code is available on http://github.com/safeslingerproject.";
-/* demo; Reminder text that this is a demo app-only. Android-only. */
-"demo_note_Android" = "NOTE: This is a simple demo using the SafeSlinger Exchange library for software developers. If you want to experience a full implementation of the exchange, try the SafeSlinger Messenger app on Google Play. Full source code is available on GitHub.";
-/* demo; Results failure text. */
-"demo_result_canceled" = "Canceled";
-/* demo; Results unknown text. */
-"demo_result_indeterminate" = "Indeterminate";
-/* demo; Results my secret data text. */
-"demo_result_mine" = "secret %d (mine): %@";
-/* demo; Results success text. */
-"demo_result_success" = "Success";
-/* demo; Results other members secret data text. */
-"demo_result_theirs" = "secret %d (theirs): %@";
-/* demo; Results title. */
-"demo_results" = "Results";
-/* demo; Hint for secret data field. */
-"demo_secret_hint" = "i.e. key, password, anything";
-/* demo; Title of secret data field. */
-"demo_secret_title" = "My Secret";
+/* dev; developer tool app name, long. */
+"dev_app_name_long" = "SafeSlinger Exchange for Security Developers";
+/* dev; developer tool app name, short. */
+"dev_app_name_short" = "SafeSlinger for Developers";
+/* dev; Button OK. */
+"dev_btn_OK" = "OK";
+/* dev; Button text to start exchange. */
+"dev_button_begin_exchange" = "Begin Exchange";
+/* dev; Button text to enable NFC. */
+"dev_button_nfc_off" = "NFC OFF";
+/* dev; Button text to disable NFC. */
+"dev_button_nfc_on" = "NFC ON";
+/* dev; Hint for hostname field. */
+"dev_hostname_hint" = "i.e. myappengine.appspot.com";
+/* dev; Title of hostname field. */
+"dev_hostname_title" = "Server Host Name";
+/* dev; Instructions for use. */
+"dev_instruct" = "USAGE:\nYou may build and run your own server, OR use ours: slinger-demo.appspot.com. A host name and a secret are required.";
+/* dev; Menu text to configure NFC settings. */
+"dev_menu_nfc_settings" = "NFC Settings";
+/* dev; Reminder text that this is a developer tool app-only. iOS-only. */
+"dev_note" = "SafeSlinger Exchange for Security Developers allows you to use the SafeSlinger Exchange open-source library to easily exchange any secret data confidentially and authenticated. For end-to-end encryption using the library, use the SafeSlinger Messenger app on https://itunes.apple.com/tw/app/safeslinger/id493529867?mt=8. Full source code is available on http://github.com/safeslingerproject.";
+/* dev; Reminder text that this is a developer tool app-only. Android-only. */
+"dev_note_Android" = "SafeSlinger Exchange for Security Developers allows you to use the SafeSlinger Exchange open-source library to easily exchange any secret data confidentially and authenticated. For end-to-end encryption using the library, use the SafeSlinger Messenger app on Google Play. Full source code is available on GitHub.";
+/* dev; Results failure text. */
+"dev_result_canceled" = "Canceled";
+/* dev; Results unknown text. */
+"dev_result_indeterminate" = "Indeterminate";
+/* dev; Results my secret data text. */
+"dev_result_mine" = "secret %d (mine): %@";
+/* dev; Results success text. */
+"dev_result_success" = "Success";
+/* dev; Results other members secret data text. */
+"dev_result_theirs" = "secret %d (theirs): %@";
+/* dev; Results title. */
+"dev_results" = "Results";
+/* dev; Hint for secret data field. */
+"dev_secret_hint" = "i.e. key, password, anything";
+/* dev; Title of secret data field. */
+"dev_secret_title" = "My Secret";
 
 /* error message (sentence case, period); used to warn when some members of the key exchange protocol are using less than the minimum version. Used for backward-compatibility in some cases. %s = the minimum cross-platform version number of SafeSlinger, usually expressed as x.x. */
 "error_AllMembersMustUpgrade" = "Some members are using an older version; all members must at least use %@.";
@@ -374,7 +378,7 @@
 "iOS_RequestPermissionContacts" = "You can select your contact card to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Contacts when asked.";
 /* informational message (sentence case, period); used as a Pre-Request Notice for Microphone permission. iOS-only. */
 "iOS_RequestPermissionMicrophone" = "You can record a voice message to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Microphone when asked.";
-/* informational message (sentence case, period); used as a  Pre-Request Notice for Notifications permission. iOS-only. */
+/* informational message (sentence case, period); used as a Pre-Request Notice for Notifications permission. iOS-only. */
 "iOS_RequestPermissionNotifications" = "SafeSlinger is an encrypted messaging application and cannot function without allowing incoming messages from Notifications. To enable incoming messages, you must allow SafeSlinger to send you Notifications when asked.";
 
 /* screen label (match English casing); used on the messages list screen and is used to describe how long ago a message was sent or received. %s = a time measurement, such as '5 minutes' or '2 hours'. */
@@ -665,8 +669,6 @@
 "menu_ForgotPassphrase" = "Forgot Passphrase?";
 /* menu option (title case); used to show a help dialog for the current screen. */
 "menu_Help" = "Help";
-/* menu option (title case); used to hide invalid list items, debug-only. Android-only. */
-"menu_HideInvalid" = "Hide Invalid";
 /* menu option (title case); used to show the secure introduction composition screen via the main home screen. */
 "menu_Introduction" = "Introduction";
 /* menu (title case); used as the settings menu option to change language */
@@ -703,8 +705,6 @@
 "menu_SendUpdate" = "Send Update";
 /* menu option (title case); used to show the settings screen. */
 "menu_Settings" = "Settings";
-/* menu option (title case); used to show invalid list items, debug-only. Android-only. */
-"menu_ShowInvalid" = "Show Invalid";
 /* menu option (title case); used to toggle the key exchange walkthrough when exchanging keys via the Settings screen. */
 "menu_ShowTutorial" = "Show Tutorial";
 /* menu option (title case); used at the title of the message composition tab for the home tab view. */
@@ -799,7 +799,7 @@
 /* informational message (sentence case, period); used in an auto-dismissed message to confirm the message text has been copied to the device native clipboard. */
 "state_TextCopiedToClipboard" = "Text copied to clipboard.";
 
-/* application description (sentence case); used at the beginning of the about box and app store listing to describe the application. */
+/* application description (sentence case); used at the beginning of the about box and app store listing to describe the application. Beginning of long form: 4000 character max. */
 "text_About" = "SafeSlinger is designed to easily share identity data, in person or over the phone, authenticated, private, and intact. Each person you share with creates a secure end-to-end channel to send messages.";
 /* application description (sentence case); used in the about box and app store listing to describe the application features. */
 "text_About1" = "Easily exchange contact information with others";
@@ -807,6 +807,8 @@
 "text_About2" = "Securely sling texts, photos, anything!";
 /* application description (sentence case); used in the about box and app store listing to describe the application features. */
 "text_About3" = "Strong cryptography protects your information";
+/* application description (sentence case); used in the about box and app store listing to describe the application features. Short form: 80 character max, should be exciting. */
+"text_About_Short" = "SafeSlinger: Speak 3 words and forever chat in peace.";
 /* application description (sentence case); used in the app store listing, %s = SafeSlinger support email address. */
 "text_AboutEmail" = "email: %@";
 /* application description (sentence case); used in the about box and app store listing to describe the application features. */

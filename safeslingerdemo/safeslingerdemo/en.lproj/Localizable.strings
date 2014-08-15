@@ -22,23 +22,43 @@
     THE SOFTWARE.
 */
 
-"demo_app_name" = "SafeSlinger Exchange Demo";
-"demo_note" = "NOTE: This is a simple demo using the SafeSlinger Exchange library for software developers. If you want to experience a full implementation of the exchange, try the SafeSlinger Messenger app on https://itunes.apple.com/tw/app/safeslinger/id493529867?mt=8. Full source code is available on http://github.com/safeslingerproject";
-
-"demo_instruct" = "DEMO:\nYou may build and run your own server, OR use ours: slinger-demo.appspot.com. A host name and a secret are required.";
-"demo_hostname_title" = "Server Host Name";
-"demo_hostname_hint" = "i.e. myappengine.appspot.com";
-"demo_secret_title" = "My Secret";
-"demo_secret_hint" = "i.e. key, password, anything";
-"demo_button_begin_exchange" = "Begin Exchange";
-"demo_results" = "Results";
-"demo_result_success" ="Success";
-"demo_result_canceled" = "Canceled";
-"demo_result_indeterminate" = "Indeterminate";
-"demo_result_mine" = "secret %d (mine): %@";
-"demo_result_theirs" = "secret %d (theirs): %@";
-"demo_menu_nfc_settings" ="NFC Settings";
-"demo_button_nfc_on" = "NFC ON";
-"demo_button_nfc_off" = "NFC OFF";
-
-"btn_OK" = "OK";
+/* dev; developer tool app name, long. */
+"dev_app_name_long" = "SafeSlinger Exchange for Security Developers";
+/* dev; developer tool app name, short. */
+"dev_app_name_short" = "SafeSlinger for Developers";
+/* dev; Button OK. */
+"dev_btn_OK" = "OK";
+/* dev; Button text to start exchange. */
+"dev_button_begin_exchange" = "Begin Exchange";
+/* dev; Button text to enable NFC. */
+"dev_button_nfc_off" = "NFC OFF";
+/* dev; Button text to disable NFC. */
+"dev_button_nfc_on" = "NFC ON";
+/* dev; Hint for hostname field. */
+"dev_hostname_hint" = "i.e. myappengine.appspot.com";
+/* dev; Title of hostname field. */
+"dev_hostname_title" = "Server Host Name";
+/* dev; Instructions for use. */
+"dev_instruct" = "USAGE:\nYou may build and run your own server, OR use ours: slinger-demo.appspot.com. A host name and a secret are required.";
+/* dev; Menu text to configure NFC settings. */
+"dev_menu_nfc_settings" = "NFC Settings";
+/* dev; Reminder text that this is a developer tool app-only. iOS-only. */
+"dev_note" = "SafeSlinger Exchange for Security Developers allows you to use the SafeSlinger Exchange open-source library to easily exchange any secret data confidentially and authenticated. For end-to-end encryption using the library, use the SafeSlinger Messenger app on https://itunes.apple.com/tw/app/safeslinger/id493529867?mt=8. Full source code is available on http://github.com/safeslingerproject.";
+/* dev; Reminder text that this is a developer tool app-only. Android-only. */
+"dev_note_Android" = "SafeSlinger Exchange for Security Developers allows you to use the SafeSlinger Exchange open-source library to easily exchange any secret data confidentially and authenticated. For end-to-end encryption using the library, use the SafeSlinger Messenger app on Google Play. Full source code is available on GitHub.";
+/* dev; Results failure text. */
+"dev_result_canceled" = "Canceled";
+/* dev; Results unknown text. */
+"dev_result_indeterminate" = "Indeterminate";
+/* dev; Results my secret data text. */
+"dev_result_mine" = "secret %d (mine): %@";
+/* dev; Results success text. */
+"dev_result_success" = "Success";
+/* dev; Results other members secret data text. */
+"dev_result_theirs" = "secret %d (theirs): %@";
+/* dev; Results title. */
+"dev_results" = "Results";
+/* dev; Hint for secret data field. */
+"dev_secret_hint" = "i.e. key, password, anything";
+/* dev; Title of secret data field. */
+"dev_secret_title" = "My Secret";

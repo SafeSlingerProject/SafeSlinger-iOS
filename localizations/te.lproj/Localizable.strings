@@ -73,6 +73,8 @@
 "btn_No" = "సంఖ్య";
 /* 'No Match' is a button (title case); the No Match button is used if the user cannot find the same batting screen on another user's device during the exchange critical care. */
 "btn_NoMatch" = "ఏ మ్యాన్";
+/* 'Not Now' is a button (title case); the Not Now button is used as a negative button to decline an offered service or permission. */
+"btn_NotNow" = "ఇప్పుడు కాదు";
 /* 'Forget' is a button (title case); the Forget button is paired with the Remind button and is used to indicate the user wishes to dismiss the current reminder of a potential error state, such as having backup or notification settings turned off, and not be reminded again. */
 "btn_NotRemind" = "మర్చిపో";
 /* 'OK' is a button (title case); the OK button is affirmation button used to indicate the user accepts the data entered on the current screen. */
@@ -112,6 +114,8 @@
 "choice_8hours" = "8 గంటల";
 /* 'Default Storage' is a choice (sentence case); used to set the attachment root path to the default source. Android-only. */
 "choice_auto_storage" = "డిఫాల్ట్ నిల్వ";
+/* 'Default' is a choice (sentence case); used in any menu to denote the default choice. */
+"choice_default" = "డిఫాల్ట్";
 /* 'External Storage' is a choice (sentence case); used to set the attachment root path to an external source. Android-only. */
 "choice_external_storage" = "బాహ్య నిల్వ";
 /* 'Large' is a choice (sentence case); used in the settings to choose a large font size. */
@@ -147,6 +151,8 @@
 "error_AudioPlayerError" = "రికార్డింగ్ ప్లే కాదు.";
 /* 'Audio recorder encoding error.' is an error message (sentence case, period); used to warn when attempting to record an audio message fails to encode properly. iOS-only. */
 "error_AudioRecorderEncodeError" = "ఆడియో రికార్డర్ ఎన్కోడింగ్ లోపం.";
+/* 'Microphone permission is required to record a secure voice message. Tap the Help button for SafeSlinger Microphone permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Microphone permission. iOS-only. */
+"error_AudioRecorderPermissionError" = "మైక్రోఫోన్ అనుమతి సురక్షిత వాయిస్ సందేశం రికార్డ్ చేయాలి. SafeSlinger మైక్రోఫోన్ అనుమతి వివరాలకు సహాయం బటన్ నొక్కండి.";
 /* 'No backup to restore.' is an error message (sentence case, period); used to warn at application setup, when there is no pre-existing backup to restore and warn the user that any previous keys have not been restored. */
 "error_BackupNotFound" = "పునరుద్ధరించడానికి బ్యాకప్.";
 /* 'Device does not support backup restore.' is an error message (sentence case, period); used to warn when the device hardware does not support restoration from backup. */
@@ -286,12 +292,18 @@
 /* 'User canceled server request.' is an error message (sentence case, period); used to warn when the user exited the key exchange protocol or messaging transmission before it was finished. */
 "error_WebCancelledByUser" = "వాడుకరి సర్వర్ అభ్యర్థనను రద్దు.";
 
+/* 'Use this screen to set your name to exchange with others, and a passphrase to protect your data. Tap the Done button when finished.' is a help message (sentence case, period); used via Help button on the Setup screen to describe in more detail what the Setup screen does. */
+"help_find" = "మీ డేటాను రక్షించడానికి ఇతరులు, మరియు పాస్ఫ్రేజ్తో మార్పిడి మీ పేరు సెట్ తెరమీద ఉపయోగించండి. పూర్తవగానే డన్ బటన్ నొక్కండి.";
 /* 'To exchange identity data, ensure all users are nearby or on the phone. The Begin Exchange button will exchange only the checked contact data.' is a help message (sentence case, period); used via Help button on the Begin Exchange screen and also the key exchange walkthrough tutorial to describe in more detail what the Begin Exchange screen does. */
 "help_home" = "గుర్తింపు డేటా మార్పిడి, యూజర్లు సమీపంలోని లేదా ఫోన్ ఉండేలా. ప్రారంభం SWF ఎక్స్చేంజ్ బటన్ తనిఖీ పరిచయం డేటా మార్పిడి చేస్తుంది.";
 /* 'You may also change personal data about your identity on this screen by tapping on the button with your name. This will display a menu allowing you to Edit your contact, Create New contact, or Use Another contact.' is a help message (sentence case, period); Additional help text, which is appended to the Help button text on the Compose and Begin Exchange screens. */
 "help_identity_menu" = "మీరు కూడా మీ పేరుతో బటన్ నొక్కడం ద్వారా తెరమీద మీ ఐడెంటిటీ వ్యక్తిగత డేటా మార్చవచ్చు. ఈ మీరు మీ సంప్రదింపు సవరించు అనుమతించే మెనును ప్రదర్శిస్తుంది న్యూ పరిచయం సృష్టించు, లేదా మరొక పరిచయం ఉపయోగించండి ఉంటుంది.";
 /* 'This screen displays all past messages, and attachments that are still available for download.' is a help message (sentence case, period); used via Help button on the Messages list screen to describe in more detail what the Messages list screen does. */
 "help_Messages" = "ఈ తెర అన్ని గత సందేశాలను, మరియు ఇప్పటికీ డౌన్లోడ్ కోసం అందుబాటులో జోడింపులను ప్రదర్శిస్తుంది.";
+/* 'Use this screen to login to the application with your passphrase. If you have forgotten your passphrase, you may generate a new key protected by a new passphrase by tapping the Forgot Passphrase? button. Tap the user name to switch between multiple keys.' is a help message (sentence case, period); used via Help button on the Passphrase screen to describe in more detail what the Passphrase screen does. */
+"help_passphrase" = "మీ పాస్ఫ్రేజ్తో అప్లికేషన్ మీరు లాగిన్ ఈ స్క్రీన్ ఉపయోగించండి. మీరు మీ పాస్ఫ్రేజ్ని మర్చిపోతే, మీరు మర్చిపోయారా సంకేతపదమును నొక్కడం ద్వారా కొత్త సంకేతపదమును రక్షణలో కొత్త కీని ఉండవచ్చు? బటన్. బహుళ కీలు మధ్య మారడానికి యూజర్ పేరు కుళాయి.";
+/* 'Use this screen to change your passphrase by entering your last passphrase for confirmation and the new passphrase.' is a help message (sentence case, period); used via Help button on the Change Passphrase screen to describe in more detail what the Change Passphrase screen does. */
+"help_passphrase_change" = "ధృవీకరణ మరియు కొత్త సంకేతపదమును కోసం మీ గత సంకేతపదమును ఎంటర్ చేసి మీ పాస్ఫ్రేజ్ని మార్చడానికి ఈ స్క్రీన్ ఉపయోగించండి.";
 /* 'Contacts with SafeSlinger keys are displayed here, select one to send your message to.' is a help message (sentence case, period); used via Help button on the Recipients list screen to describe in more detail what the Recipients list screen does. */
 "help_PickRecip" = "SafeSlinger కీలను తో కాంటాక్ట్స్ మీ సందేశాన్ని పంపడానికి ఎనన్నుకొనండి, ఇక్కడ ప్రదర్శించబడతాయి.";
 /* 'When finished, the protocol will reveal a list of the identity data exchanged. Select the contacts you wish to save and press Import.' is a help message (sentence case, period); used via Help button on the End Exchange screen and also the key exchange walkthrough tutorial to describe in more detail what the End Exchange screen does. */
@@ -300,6 +312,8 @@
 "help_SecureIntroduction" = "ఈ తెర మీరు సురక్షితంగా ప్రతి ఇతర వారి కీలు పంపడానికి ముందు కీలు slung చేశారు ఇద్దరు వ్యక్తులు ఎంచుకోండి అనుమతిస్తుంది. కేవలం ఉన్నప్పుడు సిద్ధంగా పరిచయం నొక్కండి.";
 /* 'This screen allows you to select some data and a recipient to send to. Simply press Send when ready.' is a help message (sentence case, period); used via Help button on the Compose Message screen to describe in more detail what the Compose Message screen does. */
 "help_Send" = "ఈ తెర మీరు కొన్ని డేటా మరియు పంపడానికి ఒక గ్రహీత ఎంచుకోండి అనుమతిస్తుంది. కేవలం సిద్ధంగా ఉన్నప్పుడు పంపండి నొక్కండి.";
+/* 'This screen allows you to change the default settings for the application.' is a help message (sentence case, period); used via Help button on the Settings screen to describe in more detail what the Settings screen does. */
+"help_settings" = "ఈ తెర మీరు అప్లికేషన్ కోసం డిఫాల్ట్ సెట్టింగులను మార్చడానికి అనుమతించే.";
 /* 'Select the number of people who are attempting to exchange data together and press OK.' is a help message (sentence case, period); used via Help button on the Group Size screen and also the key exchange walkthrough tutorial to describe in more detail what the Group Size screen does. */
 "help_size" = "కలిసి మరియు OK నొక్కండి డేటా మార్పిడి ప్రయత్నిస్తున్నాయి వ్యక్తుల సంఖ్య ఎంచుకోండి.";
 /* 'This number on this screen is used to create a unique group of users. Review the numbers on all users' screens, then all users should enter the same lowest number and press OK.' is a help message (sentence case, period); used via Help button on the Grouping screen and also the key exchange walkthrough tutorial to describe in more detail what the Grouping screen does. */
@@ -307,10 +321,20 @@
 /* 'Now, you must match one of these 3-word phrases with all users. Every user must select the same common phrase, and press Next.' is a help message (sentence case, period); used via Help button on the Verify screen and also the key exchange walkthrough tutorial to describe in more detail what the Verify screen does. */
 "help_verify" = "ఇప్పుడు, మీరు అన్ని వినియోగదారులు ఈ 3-పదం పదబంధాలు ఒకటి సరిపోవాలి. ప్రతి యూజర్ అదే సాధారణ పదబంధం ఎంచుకోండి, మరియు తదుపరి నొక్కండి ఉండాలి.";
 
+/* 'Contacts permission is required for securely sharing contact cards. Tap the Help button for SafeSlinger Contacts permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Contacts permission. iOS-only. */
+"iOS_contactError" = "కాంటాక్ట్స్ అనుమతి సురక్షితంగా కాంటాక్ట్ కార్డులు భాగస్వామ్యం అవసరం. SafeSlinger కాంటాక్ట్స్ అనుమతి వివరాలకు సహాయం బటన్ నొక్కండి.";
 /* 'Push registration is missing.' is an error message (sentence case, period); used to warn the user the push registration is missing. iOS-only. */
 "iOS_errorpushtoken" = "పుష్ గ్రామస్తులకు చెప్పడం.";
+/* 'Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the Help button for SafeSlinger Notification permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Notifications permission. iOS-only. */
+"iOS_notificationError1" = "హెచ్చరికలు లేదా బ్యానర్లు, మరియు బ్యాడ్జ్ సంఖ్యలు కోసం నోటిఫికేషన్ అనుమతి, సురక్షిత సందేశ అవసరం. SafeSlinger నోటిఫికేషన్ అనుమతి వివరాలకు సహాయం బటన్ నొక్కండి.";
 /* 'SafeSlinger is not optimized for iOS 5.x devices. SafeSlinger requires iOS 6 or higher.' is an informational message (sentence case, period); message for dialog popups when a user still uses an old iOS device. iOS-only. */
 "iOS_oldOSWarn" = "SafeSlinger iOS 5.x పరికరాలు ఆప్టిమైజ్ లేదు. SafeSlinger iOS 6 లేదా ఎక్కువ అవసరం.";
+/* 'You can select your contact card to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Contacts when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Contacts permission. iOS-only. */
+"iOS_RequestPermissionContacts" = "మీరు మీ స్నేహితులు పంపడానికి మీ పరిచయం కార్డు ఎంచుకోండి మరియు SafeSlinger మీరు కోసం ఇది గుప్తీకరిస్తుంది. అడిగినప్పుడు ఈ లక్షణాలను సాధ్యం చేయటానికి, మీరు మీ పరిచయాలకు SafeSlinger యాక్సెస్ అనుమతిస్తాయి.";
+/* 'You can record a voice message to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Microphone when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Microphone permission. iOS-only. */
+"iOS_RequestPermissionMicrophone" = "మీరు మీ స్నేహితులు పంపడానికి మరియు SafeSlinger మీరు కోసం ఇది గుప్తీకరించును గాత్ర సందేశాన్ని రికార్డు చేయవచ్చు. అడిగినప్పుడు ఈ లక్షణాలను సాధ్యం చేయటానికి, మీరు మీ మైక్రోఫోన్ కు SafeSlinger యాక్సెస్ అనుమతిస్తాయి.";
+/* 'SafeSlinger is an encrypted messaging application and cannot function without allowing incoming messages from Notifications. To enable incoming messages, you must allow SafeSlinger to send you Notifications when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Notifications permission. iOS-only. */
+"iOS_RequestPermissionNotifications" = "SafeSlinger ఎన్క్రిప్టెడ్ మెసేజింగ్ అప్లికేషన్ మరియు ప్రకటనలు నుండి ఇన్కమింగ్ సందేశాలను అనుమతిస్తుంది లేకుండా పనిచేయలేదు. ఇన్కమింగ్ సందేశాలను పొందటానికి, మీరు అడిగినప్పుడు SafeSlinger మీరు ప్రకటనలు పంపడానికి అనుమతిస్తాయి.";
 
 /* '%s ago' is a screen label (match English casing); used on the messages list screen and is used to describe how long ago a message was sent or received. %s = a time measurement, such as '5 minutes' or '2 hours'. */
 "label_ago" = "%@ క్రితం";
@@ -352,6 +376,8 @@
 "label_expiresIn" = "లో ముగుస్తుంది";
 /* 'File Name' is a screen label (match English casing); used on the Save File As dialog as a hint in the file name text box when changing the file name. */
 "label_FileNameHint" = "దస్త్రం పేరు";
+/* 'Enter your name and a passphrase to protect your data:' is a screen label (match English casing); used to instruct the user how to proceed on the Setup screen. */
+"label_FindInstruct" = "మీ డేటాను రక్షించడానికి మీ పేరు మరియు సంకేతపదమును ప్రవేశపెట్టి:";
 /* 'First Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current first name to use. iOS-only. */
 "label_FirstName" = "మొదటి పేరు";
 /* 'Tap your name to add or remove contact data, check items you wish to share, and tap Begin Exchange when others are ready to exchange:' is a screen label (match English casing); used to instruct the user how to proceed on the Begin Exchange screen. */
@@ -480,6 +506,8 @@
 "label_summary_auto_decrypt" = "లాగిన్ అయినప్పుడు స్వయంచాలకంగా సందేశాలను వ్యక్తీకరించడానికి";
 /* 'Receive notification when backup is offline.' is a screen label (match English casing); used as the settings summary to describe what Backup Reminder will do. */
 "label_summary_remind_backup_delay" = "బ్యాకప్ ఆఫ్లైన్ ఉన్నప్పుడు నోటిఫికేషన్ పొందండి.";
+/* 'Show a tutorial before attempting to Sling Keys.' is a screen label (match English casing); used as the settings summary to describe what Show Walkthrough will do. */
+"label_summary_show_tutorial" = "స్లింగ్ కీస్ ప్రయత్నించే ముందు ఒక ట్యుటోరియల్.";
 /* 'Tap to decrypt file' is a screen label (match English casing); used to indicate tapping this message in the list will attempt to decrypt the attachment (if needed). */
 "label_TapToDecryptFile" = "ఫైల్ను వ్యక్తీకరించడానికి నొక్కండి";
 /* 'Tap to decrypt' is a screen label (match English casing); used to indicate tapping this message in the list will attempt to decrypt it. */
@@ -538,6 +566,10 @@
 "menu_Change" = "మార్పు";
 /* 'Change Passphrase' is a menu option (title case); used to confirm the current passphrase and create and new one via the Settings screen. */
 "menu_ChangePassphrase" = "మార్చు సంకేతపదమును";
+/* 'Email from Contacts' is a menu option (title case); used when adding a contact invitaion via email. */
+"menu_ContactInviteEmail" = "కాంటాక్ట్స్ నుండి ఇమెయిల్";
+/* 'Text from Contacts' is a menu option (title case); used when adding a contact invitaion via sms. */
+"menu_ContactInviteSms" = "కాంటాక్ట్స్ నుండి టెక్స్ట్";
 /* 'Create New' is a menu option (title case); used to show a new empty contact in the address book for editing as the users' current identity via the Personal Contact dialog. */
 "menu_CreateNew" = "న్యూ సృష్టించు";
 /* 'Delete' is a menu option (title case); used to delete the current item from the list context menu. */
@@ -562,6 +594,12 @@
 "menu_Help" = "సహాయం";
 /* 'Introduction' is a menu option (title case); used to show the secure introduction composition screen via the main home screen. */
 "menu_Introduction" = "పరిచయం";
+/* 'Language' is a menu (title case); used as the settings menu option to change language */
+"menu_language" = "భాష";
+/* 'Add Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
+"menu_link_contact_add" = "సంప్రదించండి లింక్ జోడించండి";
+/* 'Change Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
+"menu_link_contact_change" = "సంప్రదించండి లింక్ మార్చు";
 /* 'Logout' is a menu option (title case); used to remove the cached passphrase and force the user to login again. */
 "menu_Logout" = "లాగ్ అవుట్";
 /* 'Manage Passphrases' is a menu option (title case); used on the settings screen to allow users to remove newer keys if created by users without orignial user authorization. */
@@ -680,7 +718,7 @@
 /* 'Text copied to clipboard.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the message text has been copied to the device native clipboard. */
 "state_TextCopiedToClipboard" = "టెక్స్ట్ కాపీ చేయబడి.";
 
-/* 'SafeSlinger is designed to easily share identity data, in person or over the phone, authenticated, private, and intact. Each person you share with creates a secure end-to-end channel to send messages.' is an application description (sentence case); used at the beginning of the about box and app store listing to describe the application. */
+/* 'SafeSlinger is designed to easily share identity data, in person or over the phone, authenticated, private, and intact. Each person you share with creates a secure end-to-end channel to send messages.' is an application description (sentence case); used at the beginning of the about box and app store listing to describe the application. Beginning of long form: 4000 character max. */
 "text_About" = "SafeSlinger, వ్యక్తి లేదా ఫోన్, సులభంగా గుర్తింపు డేటా భాగస్వామ్యం రూపొందించబడింది అధికారం, ప్రైవేట్, మరియు చెక్కుచెదరకుండా ఉంది. మీరు భాగస్వామ్యం ప్రతి వ్యక్తికి సందేశాలను పంపడానికి సురక్షిత ఎండ్ టు ఎండ్ ఛానల్ సృష్టిస్తుంది.";
 /* 'Easily exchange contact information with others' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
 "text_About1" = "సులభంగా ఇతరులతో సంప్రదింపు సమాచారం మార్పిడి";
@@ -702,6 +740,8 @@
 "text_KeywordKey" = "కీ";
 /* 'Messaging' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordMessaging" = "మెసేజింగ్";
+/* 'Privacy' is an application description (sentence case); one of many keywords to use when searching related terms. */
+"text_KeywordPrivacy" = "గోప్యతా";
 /* 'Security' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordSecurity" = "భద్రత";
 /* 'Languages provided by:' is an application description (sentence case); used at the end of the about dialog to list the translators of SafeSlinger. */
