@@ -30,6 +30,7 @@
 #import "UniversalDB.h"
 #import "FunctionView.h"
 #import "MessageDetailView.h"
+#import "MessageView.h"
 
 #import <UAPush.h>
 
@@ -143,7 +144,6 @@
                      {
                          // Received Nonce Count
                          int noncecnt = ntohl(*(int *)(msgchar+8));
-                         DEBUGMSG(@"Received Nonce Count: %d", noncecnt);
                          
                          if(noncecnt>0) {
                              // length check
@@ -377,31 +377,22 @@
                 info = [NSString stringWithFormat:NSLocalizedString(@"title_NotifyMulFileAvailable", @"%d SafeSlinger Messages Available"), _NumSafeMsg];
             [self PrintToastMessage: info];
             
-            // notify UI if necessary
+            // update UI if necessary
             UIViewController *CurrentV = [[[UIApplication sharedApplication]delegate]window].rootViewController;
             if([CurrentV isMemberOfClass:[UINavigationController class]])
             {
                 NSArray *viewstack = [(UINavigationController*)CurrentV viewControllers];
                 UIViewController* top = [viewstack objectAtIndex:[viewstack count]-1];
-                UIViewController* top2 = [viewstack objectAtIndex:[viewstack count]-2];
-                DEBUGMSG(@"top = %@", [[top class]description]);
-                DEBUGMSG(@"top2 = %@", [[top2 class]description]);
-                
                 if([top isMemberOfClass:[FunctionView class]])
                 {
                     FunctionView *funview = (FunctionView*)top;
-                    UIViewController *msgview = [funview.viewControllers objectAtIndex:0];
-                    DEBUGMSG(@"msgview = %@", [[msgview class]description]);
-                    [msgview viewWillAppear:YES];
+                    MessageView *msgview = (MessageView*)[funview.viewControllers objectAtIndex:0];
+                    [msgview UpdateThread];
                 }
                 
                 if([top isMemberOfClass:[MessageDetailView class]])
                 {
-                    [top viewWillAppear:YES];
-                    FunctionView *funview = (FunctionView*)top2;
-                    UIViewController *msgview = [funview.viewControllers objectAtIndex:0];
-                    DEBUGMSG(@"msgview = %@", [[msgview class]description]);
-                    [msgview viewWillAppear:YES];
+                    [(MessageDetailView*)top ReloadTable];
                 }
             }
         }

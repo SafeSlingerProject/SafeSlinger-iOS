@@ -1362,6 +1362,32 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="O7b-js-2Pz">
+                            <rect key="frame" x="0.0" y="125" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Yx1-oA-3q4">
+                                    <rect key="frame" x="8" y="8" width="247" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="o1C-fE-r9V" id="YSN-qY-fmN"/>
+                                    </connections>
+                                </textField>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y0I-Io-mhP">
+                                    <rect key="frame" x="263" y="7" width="46" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" title="Button">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="sendshortmsg:" destination="o1C-fE-r9V" eventType="touchUpInside" id="xeb-fX-6Zh"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </view>
                         <prototypes>
                             <tableViewCell autoresizesSubviews="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageCell" textLabel="dfB-UP-Uxr" detailTextLabel="xl1-O6-2gW" rowHeight="60" style="IBUITableViewCellStyleSubtitle" id="Ks4-uk-bdg">
                                 <rect key="frame" x="0.0" y="55" width="320" height="60"/>
@@ -1394,15 +1420,12 @@
                         </connections>
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" id="z3Q-Yo-6Tg">
-                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="0rr-cl-Sy9">
-                            <connections>
-                                <action selector="SendInstantMessage:" destination="o1C-fE-r9V" id="ylc-SU-yMY"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="z3Q-Yo-6Tg"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="InstanceBox" destination="O7b-js-2Pz" id="LNF-lQ-kBv"/>
+                        <outlet property="InstanceBtn" destination="y0I-Io-mhP" id="fIv-la-eyA"/>
+                        <outlet property="InstanceMessage" destination="Yx1-oA-3q4" id="ORM-Cd-f4L"/>
                         <segue destination="I3B-Od-oYK" kind="push" identifier="ShowInvitation" id="2jF-bd-AcT"/>
                     </connections>
                 </tableViewController>
@@ -1667,7 +1690,7 @@
                                         </constraints>
                                         <inset key="insetFor6xAndEarlier" minX="0.0" minY="10" maxX="0.0" maxY="-10"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" returnKeyType="next" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" returnKeyType="done" secureTextEntry="YES"/>
                                         <connections>
                                             <outlet property="delegate" destination="pnp-7W-pge" id="foR-nE-PPA"/>
                                         </connections>

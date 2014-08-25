@@ -29,6 +29,7 @@
 
 @class MsgListEntry;
 @class AppDelegate;
+@class MessageView;
 
 @interface MessageDetailView : UITableViewController <QLPreviewControllerDataSource, QLPreviewControllerDelegate, UIGestureRecognizerDelegate, UITextFieldDelegate>
 {
@@ -38,6 +39,7 @@
 }
 
 @property (nonatomic, retain) AppDelegate *delegate;
+@property (nonatomic, assign) MessageView *parentView;
 @property (nonatomic, strong) NSMutableArray *messages;
 @property (nonatomic, strong) NSURL *preview_cache_page;
 @property (nonatomic, strong) QLPreviewController *previewer;
@@ -46,16 +48,16 @@
 @property (nonatomic, strong) UIImage *thread_img;
 @property (nonatomic, strong) MsgListEntry *assignedEntry;
 @property (nonatomic, strong) NSLock *OperationLock;
-@property (nonatomic, strong) NSString* instanceMsg;
 @property (nonatomic, strong) ActivityWindow *actWindow;
-
+@property (nonatomic, strong) IBOutlet UITextField *InstanceMessage;
+@property (nonatomic, strong) IBOutlet UIButton *InstanceBtn;
+@property (nonatomic, strong) IBOutlet UIView *InstanceBox;
+@property (nonatomic, strong) UIBarButtonItem *CancelBtn;
+@property (nonatomic, strong) UIBarButtonItem *BackBtn;
 @property (nonatomic) ABRecordRef tRecord;
 
--(IBAction)SendInstantMessage:(id)sender;
-
 -(IBAction)unwindToMessageView:(UIStoryboardSegue *)unwindSegue;
-
-//- (BOOL)IsCurrentThread: (NSString*)token;
-//- (void)ReloadTable;
+-(IBAction)sendshortmsg:(id)sender;
+- (void)ReloadTable;
 
 @end

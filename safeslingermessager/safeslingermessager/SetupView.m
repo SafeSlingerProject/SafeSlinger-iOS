@@ -103,7 +103,6 @@
         {
             if(buttonIndex==alertView.cancelButtonIndex)
             {
-                DEBUGMSG(@"EXIT");
                 exit(EXIT_SUCCESS);
             }else{
                 [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kRequirePushNotification];
@@ -206,6 +205,14 @@
 {
     // make it scrollable
     Scrollview.contentSize=CGSizeMake(_originalFrame.size.width,_originalFrame.size.height*1.3);
+    
+    // get height of the keyboard
+    CGFloat offset = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height+_textfieldOffset-_originalFrame.size.height+60.0f;
+    if( offset > 0)
+    {
+        // covered by keyboard, left the view and scroll it
+        [Scrollview setContentOffset:CGPointMake(0.0, offset) animated:YES];
+    }
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
@@ -279,6 +286,11 @@
 
 - (IBAction)CreateProfile: (id)sender
 {
+    [self profileCreation];
+}
+
+- (void)profileCreation
+{
     [Fnamefield resignFirstResponder];
     [Lnamefield resignFirstResponder];
     [PassField resignFirstResponder];
@@ -330,11 +342,8 @@
             // goto genkeydone
             [self buildProfile];
         }
-        
     }
-    
 }
-
 
 - (void) updateprogress {
      float actual = [keygenProgress progress];
@@ -394,8 +403,9 @@
 #pragma UITextFieldDelegate Methods
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    
+    _textfieldOffset = textField.frame.size.height + textField.frame.origin.y;
 }
+
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     if([textField isEqual:Fnamefield])
@@ -407,6 +417,9 @@
     }else if([textField isEqual:PassField])
     {
         [RepassField becomeFirstResponder];
+    }else if([textField isEqual:RepassField])
+    {
+        [self profileCreation];
     }
 }
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField

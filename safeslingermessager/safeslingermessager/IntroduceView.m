@@ -45,7 +45,6 @@
 
 - (void)viewDidLoad
 {
-    DEBUGMSG(@"viewDidLoad");
     [super viewDidLoad];
     
     delegate = [[UIApplication sharedApplication]delegate];
@@ -92,8 +91,7 @@
                                   NSLocalizedString(@"menu_Help", @"Help"),
                                   NSLocalizedString(@"menu_sendFeedback", @"Send Feedback"),
                                   nil];
-    
-    [actionSheet showFromTabBar: self.tabBarController.tabBar];
+    [actionSheet showFromBarButtonItem:self.parentViewController.navigationItem.rightBarButtonItem animated:YES];
     actionSheet = nil;
 }
 
@@ -142,10 +140,6 @@
 
 - (IBAction)unwindToIntroduction:(UIStoryboardSegue *)unwindSegue
 {
-    DEBUGMSG(@"unwindToIntroduction");
-    DEBUGMSG(@"[unwindSegue identifier] = %@", [unwindSegue identifier]);
-    DEBUGMSG(@"unwindSegue.sourceViewController = %@", unwindSegue.sourceViewController);
-    
     if([[unwindSegue identifier]isEqualToString:@"FinishContactSelect"])
     {
         ContactSelectView *view = [unwindSegue sourceViewController];
@@ -169,12 +163,10 @@
             // rest the selected one
             switch (UserTag) {
                 case 1:
-                    DEBUGMSG(@"reset pickU1");
                     pickU1 = nil;
                     messageForU2 = nil;
                     break;
                 case 2:
-                    DEBUGMSG(@"reset pickU2");
                     pickU2 = nil;
                     messageForU1 = nil;
                     break;
@@ -420,7 +412,6 @@
 {
     if(sender==User1Btn)
     {
-        DEBUGMSG(@"User1Btn");
         UserTag = 1;
         //tabview.SelectEntry1 = pickU1 = nil;
         messageForU2 = nil;
@@ -429,7 +420,6 @@
         
     }else if(sender==User2Btn)
     {
-        DEBUGMSG(@"User2Btn");
         UserTag = 2;
         //tabview.SelectEntry2 = pickU2 = nil;
         messageForU1 = nil;

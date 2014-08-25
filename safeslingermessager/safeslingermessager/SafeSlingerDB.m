@@ -690,7 +690,6 @@
             int rawLen = sqlite3_column_bytes(sqlStatement, 6);
             if(rawLen>0) {
                 sc.keyid = [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 6)];
-                DEBUGMSG(@"sc.keyid = %@", sc.keyid);
             }
             if(sqlite3_column_type(sqlStatement, 8)!=SQLITE_NULL)
             {
@@ -1107,10 +1106,8 @@
             
             sqlite3_bind_text(sqlStatement, 1, [keyid UTF8String], -1, SQLITE_TRANSIENT);
             sqlite3_bind_text(sqlStatement, 2, [token UTF8String], -1, SQLITE_TRANSIENT);
-            if(sqlite3_step(sqlStatement) == SQLITE_DONE)
+            if(sqlite3_step(sqlStatement) != SQLITE_DONE)
             {
-                DEBUGMSG(@"update success for keyid = %@.", keyid);
-            }else{
                 DEBUGMSG(@"update failed.");
                 ret = NO;
             }
@@ -1152,12 +1149,10 @@
         
         if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK)
         {
-            DEBUGMSG(@"ERROR: Problem with prepare statement: %s", sql);
             [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
         }
         
         while (sqlite3_step(sqlStatement)==SQLITE_ROW) {
-            DEBUGMSG(@"ENTRY: %s %s %d", (char*)sqlite3_column_text(sqlStatement, 0), (char*)sqlite3_column_text(sqlStatement, 1), sqlite3_column_int(sqlStatement, 2));
             MsgListEntry *listEnt = [[MsgListEntry alloc]init];
             listEnt.keyid = [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 0)];
             listEnt.lastSeen = [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 1)];
@@ -1231,7 +1226,7 @@
         int rownum = 0;
         tmparray = [NSMutableArray arrayWithCapacity:0];
         
-        const char *sql = "SELECT * FROM msgtable WHERE receipt=? ORDER BY cTime DESC";
+        const char *sql = "SELECT * FROM msgtable WHERE receipt=? ORDER BY cTime ASC";
         sqlite3_stmt *sqlStatement;
         if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK)
         {

@@ -91,10 +91,8 @@
     CFRelease(defaultR);
     
     if (STI==kABSourceTypeLocal) {
-        DEBUGMSG(@"Store to Local One.");
         InsertSucess = ABAddressBookAddRecord(aBook, aRecord, &error);
     }else{
-        DEBUGMSG(@"Store to Non-local sources.");
         // copy out all fields in the old namecard
         CFStringRef f = ABRecordCopyValue(aRecord, kABPersonFirstNameProperty);
         CFStringRef l = ABRecordCopyValue(aRecord, kABPersonLastNameProperty);
@@ -116,7 +114,6 @@
             // possible caes, local, mobileMe, iCloud, and suyn with MAC
             if(!((STII==kABSourceTypeExchange)||(STII==kABSourceTypeExchangeGAL)))
             {
-                DEBUGMSG(@"STII = %d", STII);
                 ABRecordRef acopy = ABPersonCreateInSource(currentSource);
                 // copy necessary field from aRecord
                 if(f) ABRecordSetValue(acopy, kABPersonFirstNameProperty, f, &error);
@@ -163,7 +160,6 @@
         
         if(f==NULL&l==NULL)
         {
-            DEBUGMSG(@"existingName is NULL.");
             continue;
         }
         
@@ -180,7 +176,6 @@
                     NSString *ctoken = (NSString*)CFDictionaryGetValue(anIMPP, kABPersonInstantMessageUsernameKey);
                     if([compared objectForKey:ctoken])
                     {
-                        DEBUGMSG(@"Has old contact exisitng, name = %@", [compared objectForKey:ctoken]);
                         // remove it
                         if(!ABAddressBookRemoveRecord(aBook, existing, &error))
                         {

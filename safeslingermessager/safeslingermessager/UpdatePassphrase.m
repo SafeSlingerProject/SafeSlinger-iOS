@@ -93,6 +93,14 @@
 {
     // make it scrollable
     Scrollview.contentSize=CGSizeMake(_originalFrame.size.width,_originalFrame.size.height*1.3);
+    // get height of the keyboard
+    CGFloat _keyboardHeight = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
+    if(_originalFrame.size.height - (_keyboardHeight+_textfieldOffset) < 0)
+    {
+        // covered by keyboard, left the view and scroll it
+        CGFloat offset = 20.0+(_keyboardHeight+_textfieldOffset)-_originalFrame.size.height;
+        [Scrollview setContentOffset:CGPointMake(0.0, offset) animated:YES];
+    }
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
@@ -162,7 +170,7 @@
 #pragma UITextFieldDelegate Methods
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    
+    _textfieldOffset = 2*textField.frame.size.height + textField.frame.origin.y;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
@@ -176,6 +184,8 @@
     }else if([textField isEqual:RepeatPassField])
     {
         [RepeatPassField resignFirstResponder];
+        // trigger action
+        [self PassphraseChangeHandler];
     }
 }
 

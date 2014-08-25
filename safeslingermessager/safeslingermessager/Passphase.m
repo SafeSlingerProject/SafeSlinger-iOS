@@ -44,7 +44,6 @@
 -(BOOL) CheckPassphase: (NSString*) passphrase
 {
     NSString* status_str = [delegate.DbInstance GetStringConfig:@"PRIKEY_STATUS"];
-    DEBUGMSG(@"status_str = %@", status_str);
     if([status_str isEqualToString:@"ENC"])
     {
         // unlock
@@ -87,7 +86,6 @@
 
 - (void) StartRetryTimer
 {
-    DEBUGMSG(@"tout_bound = %d", tout_bound);
     tout_bound++;
     if(tout_bound>=PENALTY_TIME)
     {
@@ -99,14 +97,12 @@
 
 - (void) UpdateRetryTimer
 {
-    DEBUGMSG(@"UpdateRetryTimer");
     PassField.placeholder = [NSString stringWithFormat:@"%@ (%@)", NSLocalizedString(@"label_PassHintBackoff", @"Retry"), [NSString stringWithFormat: NSLocalizedString(@"label_seconds", @"%d sec"), PENALTY_TIME-tout_bound]];
     [self StartRetryTimer];
 }
 
 -(void) StopRetryTimer
 {
-    DEBUGMSG(@"StopRetryTimer");
     DoneBtn.enabled = YES;
     PassField.enabled = YES;
     [PassField setPlaceholder:NSLocalizedString(@"label_PassHintEnter", @"Passphrase")];
@@ -130,7 +126,6 @@
     
     if(error_t>=MAX_PINCODE_RETRY)
     {
-        DEBUGMSG(@"error_t = %d", error_t);
         PassField.text = @"";
         PassField.enabled = NO;
         DoneBtn.enabled = NO;
@@ -232,7 +227,6 @@
 {
     PassField.text = nil;
     [KeySelectBtn setTitle:delegate.IdentityName forState:UIControlStateNormal];
-    DEBUGMSG(@"key index = %ld", (long)[[NSUserDefaults standardUserDefaults] integerForKey: kDEFAULT_DB_KEY]);
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShown:)
                                                  name:UIKeyboardWillShowNotification
@@ -260,6 +254,14 @@
 {
     // make it scrollable
     Scrollview.contentSize=CGSizeMake(_originalFrame.size.width,_originalFrame.size.height*1.3);
+    
+    // get the size of the keyboard
+    CGFloat keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
+    CGFloat offset = keyboardSize+PassField.frame.origin.y+PassField.frame.size.height-_originalFrame.size.height+60.0f;
+    if(offset > 0)
+    {
+        [Scrollview setContentOffset:CGPointMake(0.0, offset) animated:YES];
+    }
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
@@ -301,7 +303,6 @@
         KeySelectionView *view = (KeySelectionView*)[unwindSegue sourceViewController];
         if(view.keyChanged)
         {
-            DEBUGMSG(@"unwindToLogin: KeySelectionDone");
             [delegate.DbInstance CloseDB];
             [delegate.DbInstance LoadDBFromStorage:[[[NSUserDefaults standardUserDefaults] stringArrayForKey: kDB_KEY] objectAtIndex:[[NSUserDefaults standardUserDefaults] integerForKey:kDEFAULT_DB_KEY]]];
             [delegate checkIdentity];

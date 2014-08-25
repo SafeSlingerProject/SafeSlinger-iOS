@@ -65,7 +65,8 @@ typedef enum AttachCategory{
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *ProgressView;
 @property (nonatomic, strong) IBOutlet UIScrollView *ScrollView;
 @property (nonatomic, strong) UIBarButtonItem *SendBtn;
-@property (nonatomic, strong) UIBarButtonItem *DoneBtn;
+@property (nonatomic, strong) UIBarButtonItem *CancelBtn;
+@property (nonatomic, strong) UIBarButtonItem *LogoutBtn;
 
 @property (nonatomic, readwrite) CGRect originalFrame;
 @property (nonatomic, strong) ContactEntry *selectedUser;

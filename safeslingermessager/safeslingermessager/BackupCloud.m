@@ -110,7 +110,6 @@
         NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
         displayStr = [ubiq lastPathComponent];
         [[NSUserDefaults standardUserDefaults]setObject:displayStr forKey: kBackupURL];
-        DEBUGMSG(@"displayStr = %@", displayStr);
     } else {
         CloudEnabled = NO;
     }

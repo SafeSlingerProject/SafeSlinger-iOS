@@ -55,6 +55,7 @@ enum Dialogtype {
 @property (nonatomic, strong) IBOutlet UIButton *LicenseBtn;
 @property (nonatomic, strong) IBOutlet UIButton *PrivacyBtn;
 @property (nonatomic, readwrite) CGRect originalFrame;
+@property (nonatomic, readwrite) CGFloat textfieldOffset;
 
 @property (nonatomic, retain) AppDelegate *delegate;
 @property (nonatomic, readwrite) BOOL newkeycreated;

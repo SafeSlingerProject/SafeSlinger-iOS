@@ -78,13 +78,11 @@
     // get root path
 	NSArray *arr = [[NSArray alloc] initWithArray: NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)];
 	RootPath = [arr objectAtIndex: 0];
-    DEBUGMSG(@"RootPath = %@", RootPath);
     
     // Prepare Database Object
     DbInstance = [[SafeSlingerDB alloc]init];
     
     NSInteger DB_KEY_INDEX = [[NSUserDefaults standardUserDefaults] integerForKey: kDEFAULT_DB_KEY];
-    DEBUGMSG(@"DB_KEY_INDEX = %ld", (long)DB_KEY_INDEX);
     if(DB_KEY_INDEX>0){
         [DbInstance LoadDBFromStorage: [NSString stringWithFormat:@"%@-%ld", DATABASE_NAME, (long)DB_KEY_INDEX]];
     }else{
@@ -94,9 +92,11 @@
     UDbInstance = [[UniversalDB alloc]init];
     [UDbInstance LoadDBFromStorage];
     
-    if([DbInstance GetProfileName]&&[[NSUserDefaults standardUserDefaults] integerForKey:kAPPVERSION]<[self getVersionNumberByInt])
+    int oldver = (1 << 24) | (7 << 16);
+    
+    if([DbInstance GetProfileName]&&[self getVersionNumberByInt]<oldver)
     {
-        DEBUGMSG(@"Apply Version 1.7 Changes ...");
+        // version 1.6.x, apply 1.7 changes...
         [self ApplyChangeForV17];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kRequirePushNotification];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kRequireMicrophonePrivacy];
@@ -129,8 +129,6 @@
 
 - (void)registerPushToken
 {
-    DEBUGMSG(@"registerPushToken");
-    
     [UAirship setLogLevel:UALogLevelTrace];
     
     UAConfig *config = [UAConfig defaultConfig];
@@ -211,7 +209,6 @@
     // save contact index to database
     if([DbInstance GetProfileName]&&([DbInstance GetConfig:@"IdentityNum"]==nil))
     {
-        DEBUGMSG(@"ApplyChangeForV17");
         int contact_id = NonLink;
         NSString *contactsFile = [NSString stringWithFormat: @"%@/contact", RootPath];
         if ([[NSFileManager defaultManager] fileExistsAtPath: contactsFile])
@@ -220,7 +217,6 @@
             const char *bytes = [data bytes];
             bytes += 8;
             contact_id = *(int *)bytes;
-            DEBUGMSG(@"contact_id = %d", contact_id);
         }
         
         NSData *contact = [NSData dataWithBytes:&contact_id length:sizeof(contact_id)];
@@ -234,7 +230,6 @@
         if ([[NSFileManager defaultManager] fileExistsAtPath: floc])
         {
             NSData *data = [[NSFileManager defaultManager] contentsAtPath: floc];
-            DEBUGMSG(@"data = %s", [data bytes]);
             [DbInstance InsertOrUpdateConfig:data withTag:@"KEYID"];
         }
     }
@@ -245,7 +240,6 @@
         if ([[NSFileManager defaultManager] fileExistsAtPath: floc])
         {
             NSData *data = [[NSFileManager defaultManager] contentsAtPath: floc];
-            DEBUGMSG(@"data = %s", [data bytes]);
             [DbInstance InsertOrUpdateConfig:data withTag:@"KEYGENDATE"];
         }
     }
@@ -256,7 +250,6 @@
         if ([[NSFileManager defaultManager] fileExistsAtPath: floc])
         {
             NSData *data = [[NSFileManager defaultManager] contentsAtPath: floc];
-            DEBUGMSG(@"data = %s", [data bytes]);
             [DbInstance InsertOrUpdateConfig:data withTag:@"ENCPUB"];
         }
     }
@@ -267,7 +260,6 @@
         if ([[NSFileManager defaultManager] fileExistsAtPath: floc])
         {
             NSData *data = [[NSFileManager defaultManager] contentsAtPath: floc];
-            DEBUGMSG(@"data = %s", [data bytes]);
             [DbInstance InsertOrUpdateConfig:data withTag:@"SIGNPUB"];
         }
     }
@@ -278,7 +270,6 @@
         if ([[NSFileManager defaultManager] fileExistsAtPath: floc])
         {
             NSData *data = [[NSFileManager defaultManager] contentsAtPath: floc];
-            DEBUGMSG(@"data(%lu) = %@", (unsigned long)[data length], data);
             [DbInstance InsertOrUpdateConfig:data withTag:@"ENCPRI"];
         }
     }
@@ -289,7 +280,6 @@
         if ([[NSFileManager defaultManager] fileExistsAtPath: floc])
         {
             NSData *data = [[NSFileManager defaultManager] contentsAtPath: floc];
-            DEBUGMSG(@"data(%lu) = %@", (unsigned long)[data length], data);
             [DbInstance InsertOrUpdateConfig:data withTag:@"SIGNPRI"];
         }
     }
@@ -297,7 +287,6 @@
     // Register Default
     if([DbInstance GetProfileName]&&![[NSUserDefaults standardUserDefaults] stringArrayForKey: kDB_KEY])
     {
-        DEBUGMSG(@"Apply patch for DB_KEY...");
         // Add default setting
         NSArray *arr = [NSArray arrayWithObjects: DATABASE_NAME, nil];
         [[NSUserDefaults standardUserDefaults] setObject:arr forKey: kDB_KEY];
@@ -312,7 +301,6 @@
 
 -(BOOL)checkIdentity
 {
-    DEBUGMSG(@"checkIdentity");
     BOOL ret = NO;
     
     // Identity checking, check if conact is linked
@@ -323,8 +311,6 @@
     }else{
         IdentityNum = NonExist;
     }
-    
-    DEBUGMSG(@"IdentityNum = %d", IdentityNum);
     
     switch (IdentityNum) {
         case NonExist:
@@ -370,13 +356,10 @@
 #pragma mark Handle Push Notifications
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    DEBUGMSG(@"didReceiveRemoteNotification: fetchCompletionHandler");
-    
     if([self checkIdentity])
     {
         if ([UIApplication sharedApplication].applicationIconBadgeNumber>0) {
             NSString* nonce = [[[userInfo objectForKey:@"aps"]objectForKey:@"nonce"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            DEBUGMSG(@"incoming nonce: %@", nonce);
             [MessageInBox FetchSingleMessage:nonce];
         }
     }
@@ -384,13 +367,10 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))handler
 {
-    DEBUGMSG(@"didReceiveRemoteNotification: fetchCompletionHandler");
-    
     if([self checkIdentity])
     {
         if ([UIApplication sharedApplication].applicationIconBadgeNumber>0) {
             NSString* nonce = [[[userInfo objectForKey:@"aps"]objectForKey:@"nonce"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            DEBUGMSG(@"incoming nonce: %@", nonce);
             [MessageInBox FetchSingleMessage:nonce];
         }
     }
@@ -413,12 +393,12 @@
         //only alert if this is the first registration, or if push has just been
         //re-enabled
         if ([UAirship shared].deviceToken != nil) { //already been set this session
-            DEBUGMSG(NSLocalizedString(@"iOS_notificationError1", @"Unable to turn on notifications. Use the \"Settings\" app to enable notifications."));
+            [ErrorLogger ERRORDEBUG: NSLocalizedString(@"iOS_notificationError1", @"Unable to turn on notifications. Use the \"Settings\" app to enable notifications.")];
         }
         //Do something when some notification types are disabled
     } else if ([app enabledRemoteNotificationTypes] != [UAPush shared].notificationTypes) {
         
-        DEBUGMSG(@"Failed to register a device token with the requested services. Your notifications may be turned off.");
+        [ErrorLogger ERRORDEBUG: @"ERROR: Failed to register a device token with the requested services. Your notifications may be turned off."];
         //only alert if this is the first registration, or if push has just been
         //re-enabled
     }
@@ -426,7 +406,7 @@
 
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err
 {
-    DEBUGMSG(@"Failed To Register For Remote Notifications With Error: %@", err);
+    [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"Failed To Register For Remote Notifications With Error: %@", err]];
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

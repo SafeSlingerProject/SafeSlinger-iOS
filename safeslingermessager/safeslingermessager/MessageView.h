@@ -38,5 +38,6 @@
 @property (nonatomic, strong) UIImage *b_img;
 
 -(IBAction)unwindToThreadView:(UIStoryboardSegue *)unwindSegue;
+- (void)UpdateThread;
 
 @end

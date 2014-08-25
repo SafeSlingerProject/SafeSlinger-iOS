@@ -411,7 +411,7 @@
         int rownum = 0;
         tmparray = [NSMutableArray arrayWithCapacity:0];
         
-        const char *sql = "SELECT * FROM ciphertable WHERE keyid=? ORDER BY cTime DESC";
+        const char *sql = "SELECT * FROM ciphertable WHERE keyid=? ORDER BY cTime ASC";
         sqlite3_stmt *sqlStatement;
         if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK)
         {

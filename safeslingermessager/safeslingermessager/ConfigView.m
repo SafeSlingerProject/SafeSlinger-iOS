@@ -55,33 +55,27 @@
     // Default
     if([[NSUserDefaults standardUserDefaults] integerForKey: kPasshpraseCacheTime]==Unregistered)
     {
-        DEBUGMSG(@"Install Default Seeting for kPasshpraseCacheTime");
         [[NSUserDefaults standardUserDefaults] setInteger:300 forKey: kPasshpraseCacheTime];
     }
     
     if([[NSUserDefaults standardUserDefaults] integerForKey: kAutoDecryptOpt]==Unregistered)
     {
-        DEBUGMSG(@"Install Default Seeting for kAutoDecryptOpt");
         [[NSUserDefaults standardUserDefaults] setInteger:TurnOn forKey: kAutoDecryptOpt];
     }
     
     if([[NSUserDefaults standardUserDefaults] integerForKey: kRemindBackup]==Unregistered)
     {
-        DEBUGMSG(@"Install Default Seeting for kRemindBackup");
         [[NSUserDefaults standardUserDefaults] setInteger:TurnOn forKey: kRemindBackup];
     }
     
     if([[NSUserDefaults standardUserDefaults] integerForKey: kShowExchangeHint]==Unregistered)
     {
-        DEBUGMSG(@"Install Default Seeting for kShowExchangeHint");
         [[NSUserDefaults standardUserDefaults] setInteger:TurnOn forKey: kShowExchangeHint];
     }
 }
 
 - (IBAction)unwindToConfig:(UIStoryboardSegue *)unwindSegue
 {
-    DEBUGMSG(@"[unwindSegue identifier] = %@", [unwindSegue identifier]);
-    DEBUGMSG(@"unwindSegue.sourceViewController = %@", unwindSegue.sourceViewController);
     if([[unwindSegue identifier]isEqualToString:@"FinishTimePick"])
     {
         [self.tableView reloadData];
@@ -109,7 +103,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    DEBUGMSG(@"config view viewWillAppear");
     self.parentViewController.navigationItem.rightBarButtonItem = nil;
     self.parentViewController.navigationItem.title = NSLocalizedString(@"menu_Settings", @"Settings");
     [self.tableView reloadData];
@@ -245,7 +238,6 @@
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                     cell.textLabel.text = NSLocalizedString(@"label_passPhraseCacheTtl", @"Pass Phrase Cache");
                     NSInteger cache_time = [[NSUserDefaults standardUserDefaults]integerForKey: kPasshpraseCacheTime];
-                    DEBUGMSG(@"cache_time = %ld", (long)cache_time);
                     cell.detailTextLabel.text = [self GetTimeLabel:cache_time];
                     break;
                 default:
@@ -668,7 +660,6 @@
                 break;
             case ManagePass:
             {
-                DEBUGMSG(@"Delete Keys...");
                 [self DeleteNewerKeys];
             }
                 break;

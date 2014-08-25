@@ -32,6 +32,7 @@
 @property (nonatomic, strong) IBOutlet UITextField *RepeatPassField;
 @property (nonatomic, strong) IBOutlet UIScrollView *Scrollview;
 @property (nonatomic, readwrite) CGRect originalFrame;
+@property (nonatomic, readwrite) CGFloat textfieldOffset;
 
 -(IBAction)UpdateNewPhrase:(id)sender;
 

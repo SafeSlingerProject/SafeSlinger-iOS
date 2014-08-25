@@ -31,6 +31,7 @@
 #import "ErrorLogger.h"
 #import "VCardParser.h"
 #import "InvitationView.h"
+#import "MessageView.h"
 
 @interface MessageDetailView ()
 
@@ -38,7 +39,7 @@
 
 @implementation MessageDetailView
 
-@synthesize messages, delegate, b_img, thread_img, assignedEntry, OperationLock, instanceMsg, actWindow;
+@synthesize messages, delegate, b_img, thread_img, assignedEntry, OperationLock, actWindow, InstanceMessage, InstanceBtn, CancelBtn, BackBtn, InstanceBox, parentView;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -69,10 +70,14 @@
     //for unknown thread
     if([assignedEntry.keyid isEqualToString:@"UNDEFINED"])
     {
-        // [delegate.DbInstance UpdateUndefinedThread];
+        DEBUGMSG(@"UNDEFINED thread...");
+        [InstanceBox setHidden:YES];
     }else if([delegate.DbInstance QueryStringInTokenTableByKeyID: assignedEntry.keyid Field:@"pid"]==nil)
     {
-        self.navigationItem.rightBarButtonItem = nil;
+        DEBUGMSG(@"UNDEFINED thread...");
+        [InstanceBox setHidden:YES];
+    }else{
+        [InstanceBox setHidden:NO];
     }
     
     // load message
@@ -83,16 +88,41 @@
     }else{
         thread_img = nil;
     }
-    // [self ReloadTable];
+    
+    BackBtn = self.navigationItem.backBarButtonItem;
+    
+    CancelBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"btn_Cancel", @"Cancel")
+                                                 style:UIBarButtonItemStyleDone
+                                                target:self
+                                                action:@selector(DismissKeyboard)];
+    
+    [InstanceMessage setPlaceholder:NSLocalizedString(@"label_ComposeHint", @"Compose Message")];
+    [InstanceBtn setTitle: NSLocalizedString(@"title_SendFile", @"Send") forState: UIControlStateNormal];
 }
 
+- (void)DismissKeyboard
+{
+    [InstanceMessage resignFirstResponder];
+}
 
 - (void)ReloadTable
 {
     [messages removeAllObjects];
-    [messages setArray:[delegate.UDbInstance LoadThreadMessage: assignedEntry.keyid]];
-    [messages addObjectsFromArray: [delegate.DbInstance LoadThreadMessage: assignedEntry.keyid]];
+    [messages setArray:[delegate.DbInstance LoadThreadMessage: assignedEntry.keyid]];
+    [messages addObjectsFromArray: [delegate.UDbInstance LoadThreadMessage: assignedEntry.keyid]];
     [self.tableView reloadData];
+    
+    NSIndexPath * ndxPath= [NSIndexPath indexPathForRow:[messages count]-1 inSection:0];
+    @try {
+        [self.tableView scrollToRowAtIndexPath:ndxPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
+    @catch (NSException *exception) {
+    }
+    @finally {
+    }
+    
+    // update thread view
+    [parentView UpdateThread];
 }
 
 - (void)viewDidUnload
@@ -106,15 +136,60 @@
 {
     [super viewWillAppear:animated];
     [messages removeAllObjects];
-    [messages setArray:[delegate.UDbInstance LoadThreadMessage: assignedEntry.keyid]];
-    [messages addObjectsFromArray: [delegate.DbInstance LoadThreadMessage: assignedEntry.keyid]];
+    [messages setArray:[delegate.DbInstance LoadThreadMessage: assignedEntry.keyid]];
+    [messages addObjectsFromArray: [delegate.UDbInstance LoadThreadMessage: assignedEntry.keyid]];
     [self.tableView reloadData];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShown:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+    
+    NSIndexPath * ndxPath= [NSIndexPath indexPathForRow:[messages count]-1 inSection:0];
+    @try {
+        [self.tableView scrollToRowAtIndexPath:ndxPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
+    @catch (NSException *exception) {
+    }
+    @finally {
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillShowNotification
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillHideNotification
+                                                  object:nil];
+    
     [super viewWillDisappear:animated];
     [actWindow.view removeFromSuperview];
+}
+
+- (void)keyboardWillShown:(NSNotification *)notification
+{
+    // adjust view due to keyboard
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+        CGFloat keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
+        CGFloat offset = self.tableView.contentSize.height+InstanceMessage.frame.size.height+keyboardSize-self.view.frame.size.height;
+        if(offset>0)
+        {
+            [self.tableView setContentOffset:CGPointMake(0.0, offset) animated:YES];
+        }
+    }
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    
 }
 
 -(IBAction)unwindToMessageView:(UIStoryboardSegue *)unwindSegue
@@ -183,6 +258,7 @@
                      [actWindow.view removeFromSuperview];
                      [[[[iToast makeText: NSLocalizedString(@"error_ServerNotResponding", @"No response from server.")]
                         setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+                     [InstanceBtn setEnabled:YES];
                  });
              }else{
                  // general errors
@@ -190,6 +266,7 @@
                      [actWindow.view removeFromSuperview];
                      [[[[iToast makeText: [NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessageCStr", @"Server Message: '%@'"), [error localizedDescription]]]
                         setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+                     [InstanceBtn setEnabled:YES];
                  });
              }
          }else{
@@ -217,6 +294,7 @@
                          [actWindow.view removeFromSuperview];
                          [[[[iToast makeText: error_msg]
                             setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+                         [InstanceBtn setEnabled:YES];
                      });
                  }
              }
@@ -226,10 +304,6 @@
 
 -(void)SaveText: (NSData*)msgid
 {
-    dispatch_async(dispatch_get_main_queue(), ^(void) {
-        [actWindow.view removeFromSuperview];
-    });
-    
     ContactEntry *recipient = [[ContactEntry alloc]init];
     // assign necessary information
     recipient.keyid = assignedEntry.keyid;
@@ -244,7 +318,7 @@
     MsgEntry *NewMsg = [[MsgEntry alloc]
                         InitOutgoingMsg:msgid
                         Recipient:recipient
-                        Message:instanceMsg
+                        Message:InstanceMessage.text
                         FileName:nil
                         FileType:nil
                         FileData:nil];
@@ -252,14 +326,22 @@
     if([delegate.DbInstance InsertMessage: NewMsg])
     {
         // reload the view
-        [[[[iToast makeText: NSLocalizedString(@"state_FileSent", @"Message sent.")]
-           setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-        [self ReloadTable];
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            [actWindow.view removeFromSuperview];
+            [[[[iToast makeText: NSLocalizedString(@"state_FileSent", @"Message sent.")]
+               setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+            [self ReloadTable];
+            [InstanceBtn setEnabled:YES];
+        });
     }else{
-        [[[[iToast makeText: NSLocalizedString(@"error_UnableToSaveMessageInDB", @"Unable to save to the message database.")]
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            [actWindow.view removeFromSuperview];
+            [[[[iToast makeText: NSLocalizedString(@"error_UnableToSaveMessageInDB", @"Unable to save to the message database.")]
            setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+            [InstanceBtn setEnabled:YES];
+        });
     }
-    instanceMsg = nil;
+    
 }
 
 #pragma mark - Table view data source
@@ -346,6 +428,7 @@
             [[[[iToast makeText: [NSString stringWithFormat:NSLocalizedString(@"state_MessagesDeleted", @"%d messages deleted."), 1]]
                setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
             [self.tableView reloadData];
+            [parentView UpdateThread];
         }else{
             [[[[iToast makeText: NSLocalizedString(@"error_UnableToUpdateMessageInDB", @"Unable to update the message database.")]
                setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
@@ -408,7 +491,6 @@
                 else
                     imageView = [[UIImageView alloc] initWithImage:b_img];
                 cell.accessoryView = imageView;
-                
             }else{
                 // From message
                 if(thread_img)
@@ -823,31 +905,32 @@
 	return 1;
 }
 
--(IBAction)SendInstantMessage:(id)sender
+-(IBAction)sendshortmsg:(id)sender
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"label_ComposeHint", @"Compose Message")
-                                                    message: nil
-                                                   delegate: self
-                                          cancelButtonTitle: NSLocalizedString(@"btn_Cancel", @"Cancel")
-                                          otherButtonTitles: NSLocalizedString(@"title_SendFile", @"Send"), nil];
-    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-    [alert show];
-    alert = nil;
+    [InstanceMessage resignFirstResponder];
+    [self sendSecureText:[InstanceMessage text]];
+    [InstanceBtn setEnabled:NO];
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+#pragma UITextFieldDelegate Methods
+- (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    if(buttonIndex!=alertView.cancelButtonIndex)
-    {
-        // Send Message
-        UITextField *textField = [alertView textFieldAtIndex:0];
-        if([textField.text length]>0)
-        {
-            // send it out
-            instanceMsg = textField.text;
-            [self sendSecureText:instanceMsg];
-        }
-    }
+    self.navigationItem.leftBarButtonItem = CancelBtn;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    self.navigationItem.leftBarButtonItem = BackBtn;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    return YES;
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return NO;
 }
 
 

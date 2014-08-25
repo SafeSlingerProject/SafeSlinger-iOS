@@ -311,12 +311,10 @@
 					NSString *currentType = [[types objectAtIndex: i] uppercaseString];
 					if ([currentType isEqualToString: @"HOME"])
 					{
-                        DEBUGMSG(@"Found HOME ADD");
 						typeString = kABHomeLabel;
 					}
 					else if ([currentType isEqualToString: @"WORK"])
 					{
-                        DEBUGMSG(@"Found WORK ADD");
 						typeString = kABWorkLabel;
 					}
 				}
@@ -344,7 +342,6 @@
             while ([tokens lastObject]!=nil) {
                 // add information one by one
                 NSString* add = [tokens objectAtIndex: 0];
-                DEBUGMSG(@"ADD ADDR BY LINE: %@\n", add);
                 add = [add stringByReplacingOccurrencesOfString:@"\\n" withString:@" "];
                 CFDictionarySetValue(address, (const CFStringRef)[addrInfo objectAtIndex:ItemIdx], (__bridge const void *)(add));
                 [tokens removeObjectAtIndex: 0];
@@ -391,7 +388,6 @@
                 continue;
             }
             
-			DEBUGMSG(@"Email: %@(%@)", typeString, [tokens objectAtIndex: 0]);
 			ABMultiValueAddValueAndLabel(allEmails, (__bridge CFTypeRef)([tokens objectAtIndex: 0]), typeString, nil);
 		}
 #pragma mark IMPP

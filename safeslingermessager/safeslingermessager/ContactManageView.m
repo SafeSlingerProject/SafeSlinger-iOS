@@ -258,7 +258,6 @@
 
 - (void)ReturnFromEditView
 {
-    DEBUGMSG(@"ReturnFromEditView");
     // check name if it existed
     CFErrorRef error = NULL;
     ABAddressBookRef aBook = NULL;
@@ -342,7 +341,6 @@
     {
         NSString* FN = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonFirstNameProperty));
         NSString* LN = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonLastNameProperty));
-        DEBUGMSG(@"FN = %@, LN = %@", FN, LN);
         if (!FN&&!LN)
         {
             [[[[iToast makeText: NSLocalizedString(@"error_ContactNameMissing", @"This contact is missing a name, please edit.")]

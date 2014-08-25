@@ -44,7 +44,7 @@
 
 @implementation ComposeView
 
-@synthesize AttachBtn, RecipientBtn, SelfBtn, Content, SendBtn, DoneBtn;
+@synthesize AttachBtn, RecipientBtn, SelfBtn, Content, SendBtn, CancelBtn, LogoutBtn;
 @synthesize selectedUser;
 @synthesize delegate;
 @synthesize attachFile;
@@ -76,21 +76,23 @@
                                               target:self
                                               action:@selector(SendMsg)];
     
-    DoneBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"btn_Done", @"Done")
+    CancelBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"btn_Cancel", @"Cancel")
                                                style:UIBarButtonItemStyleDone
                                               target:self
                                               action:@selector(DismissKeyboard)];
+    
+    LogoutBtn = self.parentViewController.navigationItem.leftBarButtonItem;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    DEBUGMSG(@"Compoase viewWillAppear");
     [Content resignFirstResponder];
     
     // Change Title and Help Button
     self.parentViewController.navigationItem.title = NSLocalizedString(@"menu_TagComposeMessage", @"Compose");
     self.parentViewController.navigationItem.hidesBackButton = YES;
-    self.parentViewController.navigationItem.rightBarButtonItem = nil;
+    self.parentViewController.navigationItem.rightBarButtonItem = SendBtn;
+    
     ProgressHint.text = nil;
     [ProgressView stopAnimating];
     
@@ -126,11 +128,21 @@
 {
     // make it scrollable
     ScrollView.contentSize=CGSizeMake(_originalFrame.size.width,_originalFrame.size.height*1.5);
+    
+    // get the size of the keyboard
+    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    if(_originalFrame.size.height - (keyboardSize.height+Content.frame.origin.y+Content.frame.size.height) < 0)
+    {
+        // covered by keyboard, left the view and scroll it
+        CGFloat offset = 20.0+(keyboardSize.height+Content.frame.origin.y+Content.frame.size.height)-_originalFrame.size.height;
+        [ScrollView setContentOffset:CGPointMake(0.0, offset) animated:YES];
+    }
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
     ScrollView.contentSize=CGSizeMake(_originalFrame.size.width,_originalFrame.size.height);
+    [ScrollView setContentOffset:CGPointMake(0.0, 0.0) animated:YES];
 }
 
 
@@ -142,9 +154,6 @@
 
 - (IBAction)unwindToCompose:(UIStoryboardSegue *)unwindSegue
 {
-    DEBUGMSG(@"[unwindSegue identifier] = %@", [unwindSegue identifier]);
-    DEBUGMSG(@"unwindSegue.sourceViewController = %@", unwindSegue.sourceViewController);
-    
     if([[unwindSegue identifier]isEqualToString:@"FinishRecording"])
     {
         AudioRecordView *view = [unwindSegue sourceViewController];
@@ -227,7 +236,6 @@
 {
     if(attachFile)
     {
-        DEBUGMSG(@"attachFile = %@", attachFile);
         attachFileRawBytes = [NSData dataWithContentsOfURL:attachFile];
         if([attachFileRawBytes length]==0)
         {
@@ -357,7 +365,6 @@
 
 - (void) sendSecureMessage
 {
-    DEBUGMSG(@"sendSecureMessage");
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         //Background Thread
         dispatch_async(dispatch_get_main_queue(), ^(void){
@@ -434,7 +441,7 @@
                  {
                      // Error Message
                      NSString* error_msg = [NSString TranlsateErrorMessage:[NSString stringWithUTF8String: msgchar+4]];
-                     DEBUGMSG(@"ERROR: error_msg = %@", error_msg);
+                     [ErrorLogger ERRORDEBUG:error_msg];
                      dispatch_async(dispatch_get_main_queue(), ^(void) {
                          [self PrintErrorOnUI:error_msg];
                      });
@@ -594,17 +601,6 @@
     [AttachBtn setTitle:sizeinfo forState:UIControlStateNormal];
     attachFileRawBytes = imgdata;
     [self dismissViewControllerAnimated:YES completion:nil];
-    [self DisplaySendBtn];
-}
-
-- (void)DisplaySendBtn
-{
-    if(Content.text==nil&&attachFile==nil)
-    {
-        self.parentViewController.navigationItem.rightBarButtonItem = nil;
-    }else{
-        self.parentViewController.navigationItem.rightBarButtonItem = DoneBtn;
-    }
 }
 
 #pragma UITextViewDelegate Methods
@@ -620,12 +616,12 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    [self DisplaySendBtn];
+    self.parentViewController.navigationItem.leftBarButtonItem = CancelBtn;
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
-    self.parentViewController.navigationItem.rightBarButtonItem = SendBtn;
+    self.parentViewController.navigationItem.leftBarButtonItem = LogoutBtn;
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text

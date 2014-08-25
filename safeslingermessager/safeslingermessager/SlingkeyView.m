@@ -91,7 +91,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    DEBUGMSG(@"title = %@", self.tabBarItem.title);
     
     // Change Title and Help Button
     self.parentViewController.navigationItem.title = NSLocalizedString(@"menu_TagExchange", @"Sling Keys");
@@ -109,7 +108,6 @@
     
     if([[NSUserDefaults standardUserDefaults]integerForKey: kShowExchangeHint]==TurnOn)
     {
-        DEBUGMSG(@"ShowHelp");
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             [self performSegueWithIdentifier:@"ShowExchangeHelp" sender:self];
         });
@@ -138,13 +136,11 @@
             break;
         case NonLink:
             // Read Profile from database
-            DEBUGMSG(@"%@", delegate.IdentityName);
             [ContactChangeBtn setTitle: delegate.IdentityName forState: UIControlStateNormal];
             [ContactImage setImage: [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"blank_contact" ofType:@"png"]]];
             [ExchangeBtn setEnabled:YES];
             break;
         default:
-            DEBUGMSG(@"%@", delegate.IdentityName);
             [ContactChangeBtn setTitle: delegate.IdentityName forState: UIControlStateNormal];
             if(![self ParseContact:contactID])
             {
@@ -167,7 +163,6 @@
     // check with mike here
     if([UAirship shared].deviceToken)
     {
-        DEBUGMSG(@"device token = %@", [[UAPush shared]deviceToken]);
         [contact_labels addObject: @"SafeSlinger-Push"];
         [contact_values addObject: @""];
         [contact_selections addObject:[NSNumber numberWithBool:YES]];
@@ -481,8 +476,7 @@
                                   NSLocalizedString(@"menu_Help", @"Help"),
                                   NSLocalizedString(@"menu_sendFeedback", @"Send Feedback"),
                                   nil];
-    
-    [actionSheet showFromTabBar: self.tabBarController.tabBar];
+    [actionSheet showFromBarButtonItem:self.parentViewController.navigationItem.rightBarButtonItem animated:YES];
     actionSheet = nil;
 }
 
@@ -622,7 +616,6 @@
 #pragma SafeSlingerDelegate Methods
 - (void)EndExchange:(int)status_code ErrorString:(NSString*)error_str ExchangeSet: (NSArray*)exchange_set
 {
-    DEBUGMSG(@"EndExchange.");
     switch(status_code)
     {
         case RESULT_EXCHANGE_OK:
@@ -671,7 +664,6 @@
 {
     if ([[segue identifier]isEqualToString:@"EndExchange"]) {
         // Get destination view
-        DEBUGMSG(@"EndExchange");
         EndExchangeView *saveView = [segue destinationViewController];
         saveView.contactList = GatherList;
     }

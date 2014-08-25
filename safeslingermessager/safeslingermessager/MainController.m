@@ -54,7 +54,6 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    DEBUGMSG(@"Program starts here...");
     AppDelegate* app = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     if([app checkIdentity])
     {

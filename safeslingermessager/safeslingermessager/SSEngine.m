@@ -73,10 +73,8 @@
 	
 	if (keydate&&keyid&&encpri&&encpub&&signpri&&signpub)
 	{
-		DEBUGMSG(@"key files are complete.\n");
         return YES;
 	}else{
-        DEBUGMSG(@"Key files are missing!!\n");
         return NO;
     }
 }
@@ -96,8 +94,6 @@
         default:
             break;
     }
-    
-    DEBUGMSG(@"encrypted cipher size = %lu", (unsigned long)[cipher length]);
 }
 
 +(NSData*)UnlockPrivateKey: (NSString*)Passphase Size:(int)plen Type:(int)type
@@ -113,22 +109,15 @@
     NSData* cprikey1 = [self getPrivateKey:ENC_PRI];
     NSData* cprikey2 = [self getPrivateKey:SIGN_PRI];
     
-    DEBUGMSG(@"cprikey1 = %@, cprikey2 = %@", cprikey1, cprikey2);
-    
     cprikey1 = [self AESDecrypt:cprikey1 withAESKey:[NSData dataWithBytes:[Passphase UTF8String] length:[Passphase lengthOfBytesUsingEncoding:NSUTF8StringEncoding]] withPlen:plen1];
     cprikey2 = [self AESDecrypt:cprikey2 withAESKey:[NSData dataWithBytes:[Passphase UTF8String] length:[Passphase lengthOfBytesUsingEncoding:NSUTF8StringEncoding]] withPlen:plen2];
-    
-    DEBUGMSG(@"cprikey1 = %s, cprikey2 = %s", [cprikey1 bytes], [cprikey2 bytes]);
     
     // key verification
     NSString* key_a = [[NSString alloc]initWithBytes:[cprikey1 bytes] length:[cprikey1 length] encoding:NSASCIIStringEncoding];
     NSString* key_b = [[NSString alloc]initWithBytes:[cprikey2 bytes] length:[cprikey2 length] encoding:NSASCIIStringEncoding];
     
-    DEBUGMSG(@"%lu %lu", (unsigned long)[key_a length], (unsigned long)[key_b length]);
-    
     if([key_a length]>0&&[key_b length]>0)
     {
-        DEBUGMSG(@"DECRYPTED KEYS: %@\n\n%@", key_a, key_b);
         return YES;
     }else{
         return NO;
@@ -273,7 +262,6 @@
     {
         return [[NSData alloc] initWithBytes:buf length:ENTROPY_BLOCK_SIZE];
     }else{
-        DEBUGMSG(@"Gen Random AES key failed!\n");
         return nil;
     }
 }
@@ -438,9 +426,6 @@
     }
     CC_SHA1_Final(hash, &ctx);
     
-    //DEBUGMSG( @"\n Verify Hash value: \n");
-    //for( i = 0; i < 20; i++ ) DEBUGMSG(@"%02X", hash[i]);
-    
     if( ( ret = RSA_verify(NID_sha1, hash, 20, sig_buf, sigsize, pubKey) ) == -1 )
     {
         DEBUGMSG( @" failed\n  ! RSA_verify returned %d\n\n", ret );
@@ -485,7 +470,6 @@
     plen = (int)[text length];
     p = (unsigned char*)[text bytes];
     j = (int)ceil((float)(plen/1024.0f));
-    DEBUGMSG( @"\n Plintext has %d blocks", j);
     
     CC_SHA1_Init(&ctx);
     for( i = 0; i < j; i++)
@@ -498,9 +482,6 @@
             CC_SHA1_Update(&ctx, p, plen);
     }
     CC_SHA1_Final(hash, &ctx);
-    
-    //DEBUGMSG( @"\n Signed Hash value: \n");
-    //for( i = 0; i < 20; i++ ) DEBUGMSG(@"%02X", hash[i]);
     
     if( ( ret = RSA_sign(NID_sha1, hash, 20, buf, &sig_size, priKey) ) == -1 )
     {
@@ -847,11 +828,6 @@
     CC_SHA1_Update( &ctx, (const unsigned char*)[pubkey cStringUsingEncoding:NSASCIIStringEncoding], (CC_LONG)[pubkey lengthOfBytesUsingEncoding:NSASCIIStringEncoding] );
     CC_SHA1_Final( hash, &ctx);
     
-    //int i;
-    //DEBUGMSG( @"\n Hash value in Packmessage: \n");
-    //for( i = 0; i < 20; i++ ) DEBUGMSG(@"%02X", hash[i]);
-    //DEBUGMSG( @"\n\n");
-    
     [pack appendBytes:hash length:20];
     
     // sign again
@@ -975,8 +951,6 @@
     NSString* username = [NSString humanreadable: [delegate.DbInstance QueryStringInTokenTableByKeyID:keyid Field:@"pid"]];
     int devtype = [delegate.DbInstance GetDeviceType: keyid];
     
-    DEBUGMSG(@"token = %@, username = %@, devtype = %d", token, username, devtype);
-    
     // encrypt the file first if necessary
     if(FileName){
         encryptFile = [SSEngine PackMessage:rawFile PubKey:[delegate.DbInstance GetRawKey: keyid] Prikey:SignKey];
@@ -1072,8 +1046,6 @@
     }
     
     // Encrypt/Sign/Encrypt
-    DEBUGMSG(@"pub = %@", [delegate.DbInstance GetRawKey: keyid]);
-    DEBUGMSG(@"pri = %s", [SignKey bytes]);
     encryptMsg = [SSEngine PackMessage:msgchunk PubKey:[delegate.DbInstance GetRawKey: keyid] Prikey:SignKey];
     
     [cipher setLength:0];

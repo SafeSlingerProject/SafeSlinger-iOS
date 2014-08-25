@@ -228,7 +228,7 @@
     
     free(selections);
     
-    DEBUGMSG(@"importedcount = %d", importedcount);
+    DEBUGMSG(@"imported count = %d", importedcount);
     
     [[[[iToast makeText: [NSString stringWithFormat: NSLocalizedString(@"state_SomeContactsImported", @"%@ contacts imported."), [NSString stringWithFormat:@"%d", importedcount]]]
        setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];

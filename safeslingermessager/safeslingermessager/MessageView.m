@@ -53,6 +53,13 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [self UpdateThread];
+    UIBarButtonItem *addBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action: @selector(createNewThread:)];
+    [self.parentViewController.navigationItem setRightBarButtonItem:addBtn];
+}
+
+- (void)UpdateThread
+{
     // Messages from universal database
     NSMutableDictionary *list = [NSMutableDictionary dictionary];
     
@@ -67,9 +74,6 @@
     [MessageList setArray: [list allValues]];
     
     [self.tableView reloadData];
-    
-    UIBarButtonItem *addBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action: @selector(createNewThread:)];
-    [self.parentViewController.navigationItem setRightBarButtonItem:addBtn];
 }
 
 -(IBAction)unwindToThreadView:(UIStoryboardSegue *)unwindSegue
@@ -93,11 +97,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)UpdateTitle
-{
-    
 }
 
 #pragma mark - Table view data source
@@ -222,6 +221,7 @@
     {
         // assign entry...
         MessageDetailView *detail = (MessageDetailView*)[segue destinationViewController];
+        detail.parentView = self;
         detail.assignedEntry = [MessageList objectAtIndex:[self.tableView indexPathForSelectedRow].row];
     }
 }

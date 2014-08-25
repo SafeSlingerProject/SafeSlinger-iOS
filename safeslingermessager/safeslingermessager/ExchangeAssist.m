@@ -79,7 +79,6 @@
 
 -(IBAction)SwitchChanges:(id)sender
 {
-    DEBUGMSG(@"PreferenceSwitch.on: %d", PreferenceSwitch.on);
     if(PreferenceSwitch.on)
         [[NSUserDefaults standardUserDefaults]setInteger:TurnOn forKey:kShowExchangeHint];
     else

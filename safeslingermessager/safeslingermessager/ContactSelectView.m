@@ -327,7 +327,6 @@
     if([safeslingers count]>0) {
         customView = [[UIView alloc] initWithFrame:CGRectMake(10.0, 0.0, 300.0, 80.0)];
         
-        DEBUGMSG(@"restorationIdentifier = %@", self.restorationIdentifier);
         if([self.restorationIdentifier isEqualToString:@"ContactSelectForIntroduce"])
         {
             [Hint setText: NSLocalizedString(@"label_InstSendInvite", @"Pick recipients to introduce securely:")];

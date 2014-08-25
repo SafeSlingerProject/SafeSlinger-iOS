@@ -302,8 +302,6 @@
 "help_Messages" = "이 화면에는 과거에 교환했던 다운로드 가능한 메시지와 파일들을 표시합니다.";
 /* 'Use this screen to login to the application with your passphrase. If you have forgotten your passphrase, you may generate a new key protected by a new passphrase by tapping the Forgot Passphrase? button. Tap the user name to switch between multiple keys.' is a help message (sentence case, period); used via Help button on the Passphrase screen to describe in more detail what the Passphrase screen does. */
 "help_passphrase" = "당신의 암호를 사용하여 응용 프로그램에 로그인이 화면을 사용합니다. 당신은 당신의 암호를 잊어 버린 경우에는 분실 암호 구문을 눌러 새 암호에 의해 보호되는 새 키를 생성 할 수있다? 버튼을 누릅니다. 여러 개의 키 사이를 전환 할 사용자 이름을 누릅니다.";
-/* 'Use this screen to login to the application with your passphrase. If you have forgotten your passphrase, you may generate a new key protected by a new passphrase by tapping the Forgot Passphrase? button. Tap the user name to switch between multiple keys.' is a help message (sentence case, period); used via Help button on the Passphrase screen to describe in more detail what the Passphrase screen does. */
-"help_passphrase" = "당신의 암호 를 사용하여 응용 프로그램 에 로그인 이 화면을 사용합니다. 당신은 당신의 암호를 잊어 버린 경우, 완료 버 튼을 문구 를 잊으셨습니까?을 눌러 새 암호 에 의해 보호되는 새 키를 생성 할 수있다 버튼을 누릅니다. 여러 개의 키 사이를 전환 할 사용자 이름을 누릅니다.";
 /* 'Use this screen to change your passphrase by entering your last passphrase for confirmation and the new passphrase.' is a help message (sentence case, period); used via Help button on the Change Passphrase screen to describe in more detail what the Change Passphrase screen does. */
 "help_passphrase_change" = "확인하고 새 암호에 대한 마지막 암호를 입력하여 암호를 변경하려면이 화면을 사용합니다.";
 /* 'Contacts with SafeSlinger keys are displayed here, select one to send your message to.' is a help message (sentence case, period); used via Help button on the Recipients list screen to describe in more detail what the Recipients list screen does. */
@@ -742,8 +740,6 @@
 "text_KeywordKey" = "키";
 /* 'Messaging' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordMessaging" = "메시징";
-/* 'Privacy' is an application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordPrivacy" = "개인 정보 보호 정책";
 /* 'Privacy' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordPrivacy" = "개인 정보 보호 정책";
 /* 'Security' is an application description (sentence case); one of many keywords to use when searching related terms. */
