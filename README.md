@@ -17,69 +17,69 @@ Repository iOS Projects
 =======
 
 - **/safeslingerexchange** contains the library project you can add to your own iOS applications. Both the safeslinger-demo and safeslinger-messenger application projects utilize this library to execute the exchange.
-- **/safeslingerdemo** contains the simple SafeSlinger Exchange Demo application project (will release on App Store soon!) which shows the minimum requirements to run a safeslinger secure exchange.
+- **/safeslingerdemo** contains the simple SafeSlinger Exchange Developer application project (will release on App Store soon!) which shows the minimum requirements to run a safeslinger secure exchange.
 - **/safeslingermessenger** contains the full application project source for the [SafeSlinger Messenger](http://itunes.apple.com/app/safeslinger/id493529867) application. This project is a very rich implementation of a safeslinger secure exchange if you want an example of how to use the exchange to verify public keys in your own applications.
 - **/airship_lib** contains the client [Urban Airship](http://www.urbanairship.com) library for managing push messages.
 - **/localizations** contains localization support used in iOS platform.
 - **/openssl-ios** contains the complied [OpenSSL](http://www.openssl.org) library.
 - **/sha3-ios-binary** contains only the Keccak portions of the [sphlib 3.0](http://www.saphir2.com/sphlib) library.
 
-Running the Demo on Xcode
+Running the Developer's App on Xcode
 ========
 
-Demo Requirements:
+Developer's App Requirements:
 
 1. Must be installed on a minimum of 2 devices.
 2. An Internet connection must be active.
-3. 'Server Host Name' can be your own server, OR use ours: `slinger-demo.appspot.com`
-4. 'My Secret' can be any information since it is just a demo.
+3. 'Server Host Name' can be your own server, OR use ours: `https://slinger-dev.appspot.com`
+4. 'My Secret' can be any information.
 
-![Demo Main Screen](https://www.andrew.cmu.edu/user/tenma/ios_help/github/demo-1.png)
+![Developer's App Main Screen](https://www.andrew.cmu.edu/user/tenma/ios_help/github/demo-1.png)
 
-To execute demo app using Xcode and iPhone simulator:
+To execute SafeSlinger Exchange Developer app using Xcode and iPhone simulator:
 
 1. Install Xcode (at least 5.x) on your Mac OS.
 2. Download the whole source code tree from SafeSlinger iOS Project.
 3. Open safeslingerdemo project using Xcode and select iPhone simulator as your build target.
-4. Build and Run demo on iPhone simulator.
+4. Build and Run the SafeSlinger Exchange Developer's app on iPhone simulator.
 
 
 Add Secure Exchange to your iOS App
 ========
 ## Xcode Setup
 
-- Add safeslingerexchange project as a subproject into your project.
+- Add the safeslingerexchange project as a subproject into your project.
 
 ![AddLibrary1](https://www.andrew.cmu.edu/user/tenma/ios_help/github/addlibrary-1.png)
 
-- Add **-ObjC** to *Other Linker Flags* to your target setting.
+- Add **-ObjC** to *Other Linker Flags* in your target settings.
 
 ![AddLibrary2](https://www.andrew.cmu.edu/user/tenma/ios_help/github/addlibrary-2.png)
 
-- Add compiled static library **libsafeslingerexchange.a** to link library in your project.
+- Add the compiled static library **libsafeslingerexchange.a** to link to the library in your project.
 
 ![AddLibrary3](https://www.andrew.cmu.edu/user/tenma/ios_help/github/addlibrary-3.png)
 
-- Drag **exchangeui** bundle from safeslingerexchange subproject to your Bundle resource as well.
+- Drag the **exchangeui** bundle from the safeslingerexchange subproject to your Bundle resource as well.
 
 ![AddLibrary4](https://www.andrew.cmu.edu/user/tenma/ios_help/github/addlibrary-4.png)
 
 - Select building target as safeslingerexchange static library and then build.
 
-- Make sure your ui controller is embedded in navigation controller, for example, you can add navigation controller to your UI through clicking *Edit* -> *Embed In* -> *Navigation Controller*.
+- Make sure your UI controller is embedded in the navigation controller. For example, you can add a navigation controller to your UI through clicking *Edit* -> *Embed In* -> *Navigation Controller*.
 
 ![AddLibrary5](https://www.andrew.cmu.edu/user/tenma/ios_help/github/addlibrary-5.png)
 
 ## Delegate Implemetation
-Implement SafeSlinger delegate function on your UI controller, e.g., ViewController.
+Implement the SafeSlinger delegate function on your UI controller, e.g., ViewController.
 
-- Import SafeSlinger header into your project.
+- Import the SafeSlinger header into your project.
 
 ```
 #import <safeslingerexchange/safeslingerexchange.h>
 ```
 
-- Add SafeSlinger protocol object into your UIViewController, e.g.,
+- Add the SafeSlinger protocol object into your UIViewController, e.g.,
 
 ```
 @interface ViewController : UIViewController <SafeSlingerDelegate>
@@ -90,19 +90,19 @@ Implement SafeSlinger delegate function on your UI controller, e.g., ViewControl
 @property (nonatomic, retain) safeslingerexchange *proto;
 ```
 
-- To being SafeSlinger exchange, you can initialize SafeSlinger protocol with **SetupExchange** method and begin the exchange through calling **BeginExchange**, e.g., 
+- To begin a SafeSlinger exchange, you can initialize the SafeSlinger protocol with the **SetupExchange** method and begin the exchange through calling **BeginExchange**, e.g., 
 
 ```
 -(IBAction)BegineExchange:(id)sender
 {
     proto = [[safeslingerexchange alloc]init];
     
-    // ServerHost: safeslinger exchange server, e.g., https://slinger-demo.appspot.com by default
+    // ServerHost: safeslinger exchange server, e.g., https://slinger-dev.appspot.com by default
     // Version Number: current minimum protocol version is 1.7.0
     // Return YES when setup is correct.
     
     NSString *_data = @"This is a secret.";
-    NSString *_host = @"https://slinger-demo.appspot.com";
+    NSString *_host = @"https://slinger-dev.appspot.com";
     
     if([proto SetupExchange: self ServerHost:_host VersionNumber:@"1.7.0"])
         [proto BeginExchange: [_data dataUsingEncoding:NSUTF8StringEncoding]];
@@ -111,9 +111,9 @@ Implement SafeSlinger delegate function on your UI controller, e.g., ViewControl
 }
 ```
 
-- After calling **BeginExchange**, proto Object will navigate your UI to exchange GUI through embedded navigation controller.
+- After calling **BeginExchange**, the proto Object will navigate your UI to the exchange GUI through the embedded navigation controller.
 
-- After SafeSlinger exchange, your UI has to implement SafeSlingerDelegate protocol to handle either gathered data from other participants when exchange finishes successfully or errors when protocol fails.
+- After a SafeSlinger exchange, your UI has to implement SafeSlingerDelegate protocol to handle either gathered data from other participants when the exchange finishes successfully, or errors when the protocol fails.
 
 ```
 #pragma SafeSlingerDelegate Methods
