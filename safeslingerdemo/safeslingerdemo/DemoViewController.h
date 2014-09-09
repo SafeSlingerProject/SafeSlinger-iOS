@@ -35,6 +35,7 @@
 }
 
 @property (nonatomic, readwrite) CGRect originalFrame;
+@property (nonatomic, readwrite) CGFloat textfieldOffset;
 @property (nonatomic, strong) IBOutlet UITextView *infoPanel;
 @property (nonatomic, strong) IBOutlet UIButton *exchangeButton;
 @property (nonatomic, strong) IBOutlet UITextField *hostField;

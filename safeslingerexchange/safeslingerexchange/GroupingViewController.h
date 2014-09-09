@@ -27,18 +27,18 @@
 @class safeslingerexchange;
 
 @interface GroupingViewController : UIViewController <UIAlertViewDelegate> {
-	UILabel *AssignedID, *HintLabel, *CompareLabel;
-	UITextField *LowestID;
-	UIButton *SubmitID;
+	
 }
 
+@property (nonatomic, readwrite) CGFloat textfieldOffset;
 @property (nonatomic, readwrite) CGRect originalFrame;
+@property (nonatomic, strong) NSString *UniqueID;
 @property (nonatomic, assign) safeslingerexchange *delegate;
-@property (nonatomic, retain) IBOutlet UILabel *AssignedID;
-@property (nonatomic, retain) IBOutlet UILabel *HintLabel;
-@property (nonatomic, retain) IBOutlet UILabel *CompareLabel;
-@property (nonatomic, retain) IBOutlet UITextField *LowestID;
-@property (nonatomic, retain) IBOutlet UIButton *SubmitID;
+@property (nonatomic, strong) IBOutlet UILabel *AssignedID;
+@property (nonatomic, strong) IBOutlet UILabel *HintLabel;
+@property (nonatomic, strong) IBOutlet UILabel *CompareLabel;
+@property (nonatomic, strong) IBOutlet UITextField *LowestID;
+@property (nonatomic, strong) IBOutlet UIButton *SubmitID;
 
 // Action method when user submits lowest ID for grouping
 -(IBAction)SubmitLowestID;

@@ -47,7 +47,9 @@
     else{
         mController = mainController;
         // set to default if null string
-        if([host length]==0) host = DEFAULT_SERVER;
+        if(![host hasPrefix:@"http"])
+            host = [NSString stringWithFormat:@"https://%@", host];
+        
         // parse version number
         NSArray *versionArray = [vNum componentsSeparatedByString:@"."];
         int version = 0;
@@ -138,7 +140,7 @@
     [mController.navigationController pushViewController:sizePicker animated:YES];
 }
 
--(void)BeginGrouping: (int)NumOfUsers
+-(void)RequestUniqueID: (int)NumOfUsers
 {
     // start overall counter
     pro_expire = [NSTimer scheduledTimerWithTimeInterval: PROTOCOLTIMEOUT
@@ -149,8 +151,14 @@
     // start sending data to server when only user finish select group size
     [protocol startProtocol: exchangeInput];
     protocol.users = NumOfUsers;
-    
+    DEBUGMSG(@"NumOfUsers = %d", NumOfUsers);
+}
+
+-(void)BeginGrouping: (NSString*)UserID
+{
+    DEBUGMSG(@"BeginGrouping: %@", UserID);
     // push view
+    groupView.UniqueID = UserID;
     [mController.navigationController pushViewController:groupView animated:YES];
 }
 

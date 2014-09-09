@@ -29,7 +29,7 @@
 
 @implementation GroupingViewController
 
-@synthesize AssignedID, LowestID, SubmitID, HintLabel, CompareLabel, delegate;
+@synthesize AssignedID, LowestID, SubmitID, HintLabel, CompareLabel, delegate, UniqueID;
 
 
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -98,9 +98,11 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    AssignedID.text = UniqueID;
+     _textfieldOffset = LowestID.frame.size.height + LowestID.frame.origin.y;
     // decide after user input
     [CompareLabel setText:[NSString stringWithFormat: NSLocalizedStringFromBundle(delegate.res, @"label_CompareScreensNDevices", @"Compare screens on %@ devices.."), [NSString stringWithFormat:@"%d", delegate.protocol.users]]];
-    [LowestID resignFirstResponder];
+    [LowestID becomeFirstResponder];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShown:)
@@ -126,12 +128,17 @@
 
 - (void)keyboardWillShown:(NSNotification *)notification
 {
+    DEBUGMSG(@"offset %f %f %f", [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height, _originalFrame.size.height, _textfieldOffset);
     UIScrollView* scrollView = (UIScrollView*)self.view;
-    // make it scrollable
-    if(self.view.frame.size.height<568.0f)
-        scrollView.contentSize=CGSizeMake(_originalFrame.size.width,_originalFrame.size.height*1.2);
-    else
-        scrollView.contentSize=CGSizeMake(_originalFrame.size.width,_originalFrame.size.height*1.1);
+    scrollView.contentSize = CGSizeMake(_originalFrame.size.width,_originalFrame.size.height*1.2);
+    // get height of the keyboard
+    CGFloat offset = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height+_textfieldOffset-_originalFrame.size.height+60.0f;
+    DEBUGMSG(@"offset = %f", offset);
+    if( offset > 0)
+    {
+        // covered by keyboard, left the view and scroll it
+        [scrollView setContentOffset:CGPointMake(0.0, offset) animated:YES];
+    }
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
@@ -139,7 +146,6 @@
     UIScrollView* scrollView = (UIScrollView*)self.view;
     scrollView.contentSize=CGSizeMake(_originalFrame.size.width,_originalFrame.size.height);
 }
-
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.

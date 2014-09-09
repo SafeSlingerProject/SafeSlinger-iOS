@@ -26,6 +26,7 @@
 #import "SafeSlinger.h"
 #import "safeslingerexchange.h"
 #import "iToast.h"
+#import "Utility.h"
 #import <sha3/sha3.h>
 
 #include <stdlib.h>
@@ -168,8 +169,7 @@
             foundUser = YES;
         }
             
-        unsigned char *buf = malloc(HASHLEN + 1); 
-        // unsigned char *hash = malloc(HASHLEN);
+        unsigned char *buf = malloc(HASHLEN + 1);
             
         *(unsigned char *)(buf) = (unsigned char) count;
         

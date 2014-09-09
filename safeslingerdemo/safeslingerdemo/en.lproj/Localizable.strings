@@ -39,7 +39,7 @@
 /* dev; Title of hostname field. */
 "dev_hostname_title" = "Server Host Name";
 /* dev; Instructions for use. */
-"dev_instruct" = "USAGE:\nYou may build and run your own server, OR use ours: slinger-demo.appspot.com. A host name and a secret are required.";
+"dev_instruct" = "USAGE:\nYou may build and run your own server, OR use ours: slinger-dev.appspot.com. A host name and a secret are required.";
 /* dev; Menu text to configure NFC settings. */
 "dev_menu_nfc_settings" = "NFC Settings";
 /* dev; Reminder text that this is a developer tool app-only. iOS-only. */

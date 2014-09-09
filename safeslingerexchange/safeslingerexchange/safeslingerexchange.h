@@ -76,7 +76,8 @@ enum ReturnStatus
 // Public interfaces
 -(BOOL)SetupExchange: (UIViewController<SafeSlingerDelegate>*)mainController ServerHost: (NSString*) host VersionNumber:(NSString*)vNum;
 -(void)BeginExchange: (NSData*)input;
--(void)BeginGrouping: (int)NumOfUsers;
+-(void)RequestUniqueID: (int)NumOfUsers;
+-(void)BeginGrouping: (NSString*)UserID;
 -(void)BeginVerifying;
 -(void)DisplayMessage: (NSString*)showMessage;
 

@@ -18,6 +18,6 @@
 #define MAX_USERS 10
 #define MIN_USERS 2
 #define MAX_RETRY 15
-#define DEFAULT_SERVER @"https://slinger-demo.appspot.com"
+#define DEFAULT_SERVER @"https://slinger-dev.appspot.com"
 
 #endif

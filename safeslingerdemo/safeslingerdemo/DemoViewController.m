@@ -68,8 +68,11 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [hostField resignFirstResponder];
-    [secretData resignFirstResponder];
+    NSString *server = [[NSUserDefaults standardUserDefaults] stringForKey: @"DEFAULT_SERVER"];
+    NSString *secret = [[NSUserDefaults standardUserDefaults] stringForKey: @"DEFAULT_SECRET"];
+    
+    if(server) [hostField setText:server];
+    if(secret) [secretData setText:secret];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShown:)
@@ -80,13 +83,13 @@
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+    
+    [hostField resignFirstResponder];
+    [secretData resignFirstResponder];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [hostField resignFirstResponder];
-    [secretData resignFirstResponder];
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIKeyboardWillShowNotification
                                                   object:nil];
@@ -94,11 +97,21 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIKeyboardWillHideNotification
                                                   object:nil];
+    
+    [hostField resignFirstResponder];
+    [secretData resignFirstResponder];
 }
 
 - (void)keyboardWillShown:(NSNotification *)notification
 {
-    scrollView.contentSize = CGSizeMake(_originalFrame.size.width,_originalFrame.size.height*1.5);
+    scrollView.contentSize = CGSizeMake(_originalFrame.size.width,_originalFrame.size.height*1.3);
+    // get height of the keyboard
+    CGFloat offset = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height+_textfieldOffset-_originalFrame.size.height+60.0f;
+    if( offset > 0)
+    {
+        // covered by keyboard, left the view and scroll it
+        [scrollView setContentOffset:CGPointMake(0.0, offset) animated:YES];
+    }
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
@@ -110,7 +123,12 @@
 {
     proto = [[safeslingerexchange alloc]init];
     if([proto SetupExchange: self ServerHost:hostField.text VersionNumber:@"1.7.0"])
+    {
         [proto BeginExchange: [secretData.text dataUsingEncoding:NSUTF8StringEncoding]];
+        // save parameters
+        [[NSUserDefaults standardUserDefaults] setObject:hostField.text forKey: @"DEFAULT_SERVER"];
+        [[NSUserDefaults standardUserDefaults] setObject:secretData.text forKey: @"DEFAULT_SECRET"];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -122,7 +140,7 @@
 #pragma UITextFieldDelegate Methods
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    
+    _textfieldOffset = textField.frame.size.height + textField.frame.origin.y;
 }
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {

@@ -27,3 +27,7 @@
 @interface NSString (CustomComparator)
 -(NSComparisonResult) compareUID: (id) obj;
 @end
+
+@interface NSData (HexString)
+- (NSString *)hexadecimalString;
+@end

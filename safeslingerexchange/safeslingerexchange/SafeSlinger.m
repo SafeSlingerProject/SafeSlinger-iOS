@@ -35,6 +35,7 @@
 #import "safeslingerexchange.h"
 #import "GroupingViewController.h"
 #import "ActivityWindow.h"
+#import "GroupSizePicker.h"
 
 #import <openssl/rand.h>
 #import <openssl/err.h>
@@ -231,13 +232,13 @@
 
 -(void) startProtocol: (NSData*)input
 {
-	DEBUGMSG(@"Start SafeSlinger Exchange Protocol.");
-	
+    [delegate.actWindow DisplayMessage: NSLocalizedStringFromBundle(delegate.res, @"lib_name", @"SafeSlinger Exchange") Detail:NSLocalizedStringFromBundle(delegate.res, @"prog_RequestingUserId", @"requesting membership...")];
+    [delegate.sizePicker.view addSubview:delegate.actWindow.view];
+    
     // produce correct & wrong nonces
     [self generateNonce];
     // encrypt contact data
     [self generateData: input];
-    
     DEBUGMSG(@"ENCRYPTED DATA %@", self.encrypted_data);
     
     // oroduce hash Hmi'
@@ -276,9 +277,6 @@
 	*(int *)ptr = htonl(version);
 	[data_commitment getBytes: ptr + 4];
     
-    [delegate.actWindow DisplayMessage: NSLocalizedStringFromBundle(delegate.res, @"lib_name", @"SafeSlinger Exchange") Detail:NSLocalizedStringFromBundle(delegate.res, @"prog_RequestingUserId", @"requesting membership...")];
-    [delegate.groupView.view addSubview:delegate.actWindow.view];
-    
 	self.state = AssignUser;
 	[self doPostToPage: @"assignUser" withBody: [NSData dataWithBytes: ptr length: HASHLEN + 4]];
 	free(ptr);
@@ -314,8 +312,7 @@
         [wrongHashSet setObject: wrong_hash forKey: userID];
         
         // Display assigned unique ID
-        delegate.groupView.AssignedID.text = userID;
-        [delegate.groupView.LowestID becomeFirstResponder];
+        [delegate BeginGrouping: self.userID];
     }
 }
 
@@ -333,7 +330,6 @@
     NSString *title = [NSString stringWithFormat:@"%@, %@",
                        [NSString stringWithFormat: NSLocalizedStringFromBundle(delegate.res, @"choice_NumUsers", @"%d users"), users],
                        [NSString stringWithFormat: @"%@ %d", NSLocalizedStringFromBundle(delegate.res, @"label_UserIdHint", @"Lowest"), minID]];
-    // NSLocalizedString(@"prog_CollectingOthersItems", @"waiting for all users to join...") ];
     NSString *detail = [NSString stringWithFormat:@"%@\n%@",
                        NSLocalizedStringFromBundle(delegate.res, @"prog_CollectingOthersItems", @"waiting for all users to join..."),
                         [NSString stringWithFormat: NSLocalizedStringFromBundle(delegate.res, @"label_ReceivedNItems", @"Recievd %d Items"), 1]];
@@ -347,8 +343,6 @@
 
 -(void) handleSyncUsers
 {
-    DEBUGMSG(@"handleSyncUsers, data: %@", serverResponse);
-    
 	char *response = [serverResponse mutableBytes];
 	self.serverVersion = ntohl(*(int *)response);
 	self.minVersion = ntohl(*(int *)(response + 4));
@@ -364,6 +358,7 @@
 	
 	// number of users
     int count = ntohl(*(int *)(response + 12));
+    DEBUGMSG(@"count = %d, users = %d", count, users);
     if (count >= users) {
         state = ProtocolFail;
         [self.delegate DisplayMessage: NSLocalizedStringFromBundle(delegate.res, @"error_MoreDataThanUsers", @"Unexpected data found in exchange. Begin the exchange again.")];
@@ -461,7 +456,6 @@
 
 -(void) handleSyncData
 {
-	DEBUGMSG(@"handleSyncData, data: %@", serverResponse);
 	char *response = [serverResponse mutableBytes];
 	self.serverVersion = ntohl(*(int *)response);
 	int total = ntohl(*(int *)(response + 4));
@@ -488,6 +482,7 @@
         // parse data
 		ptr += 4;
 		int len = ntohl(*(int *)ptr);
+        DEBUGMSG(@"len = %d", len);
 		ptr += 4;
         
         NSData *pc = [NSData dataWithBytes: ptr length: HASHLEN];
@@ -631,7 +626,8 @@
         // user id
 		NSString *uid = [NSString stringWithFormat: @"%d", ntohl(*(int *)ptr)];
 		ptr += 4;
-		//int len = ntohl(*(int *)ptr);
+		int len = ntohl(*(int *)ptr);
+        DEBUGMSG(@"len = %d", len);
 		ptr += 4;
         
         //first hash Nmh, change to sha3
@@ -655,7 +651,6 @@
         // also make sure that neither is nil
         if (cPC != nil && rPC != nil && [cPC isEqualToData:rPC]) 
         {
-            DEBUGMSG(@"Word List Match");
             [matchExtraHashSet setObject:Nmh forKey:uid];
             [wrongHashSet setObject:wH forKey:uid];
             [matchHashSet setObject:Sha1Nmh forKey:uid];
@@ -716,6 +711,8 @@
         }
     }
     
+    DEBUGMSG(@"position = %d", position);
+    
     /* If position 1 or 0 */
     if(position < 2){
         /* If 1 set keynode 1 to be pubkey 0 and vice versa */
@@ -765,8 +762,7 @@
         
         /* Storing generated shared key in DH struct for key node */
         assert(BN_bin2bn(sharedKey, DH_size(diffieHellmanKeys), currentKeynode->priv_key)!=NULL);
-        
-        // [ErrorLogger ERRORDEBUG: [NSString stringWithFormat:@"ERROR: %s", ERR_error_string(ERR_get_error(),NULL)]];
+        // DEBUGMSG(@"Error: %@", [NSString stringWithFormat:@"ERROR: %s", ERR_error_string(ERR_get_error(),NULL)]);
 
         /* If position 1 or 0 */
         if((position < 2) && (currentKeyNodeNumber < [userIDs count]))
@@ -788,7 +784,7 @@
     
     // compute group DH key
     self.groupKey = [NSData dataWithBytes:sharedKey length: DH_size(diffieHellmanKeys)];
-    DEBUGMSG(@"Group key %@", groupKey);
+    DEBUGMSG(@"Group key: %@", [groupKey hexadecimalString]);
     
     BN_CTX_free(expContext);
     BN_free(pubKey);
@@ -808,7 +804,6 @@
     NSData *encryptionKey = [sha3 Keccak256HMAC:groupKey withKey:keyHMAC];
     match_nonce = [match_nonce AES256EncryptWithKey:encryptionKey matchNonce:groupKey];
     
-    
     int len = 4 + 4 + 4 + 4 + (int)[match_nonce length];
 	char buf[len];
     *(int *)buf = htonl(version);
@@ -817,8 +812,6 @@
 	*(int *)(buf + 8) = htonl(1);
     // same user id
 	*(int *)(buf + 12) = *(int *)(buf + 4);
-    
-    
     [match_nonce getBytes: buf + 16 length:[match_nonce length]];
     
     self.state = SyncMatch;
@@ -846,6 +839,7 @@
         DEBUGMSG(@"keyNodeFound = %d", keyNodeFound);
         if(keyNodeFound){
             int length = ntohl(*(int *)(response + 8));
+            DEBUGMSG(@"keyNode size = %d", length);
             NSData *keyNode = [NSData dataWithBytes:response + 12 length:length];
             [self.keyNodes setObject:keyNode forKey:[NSNumber numberWithInt:position]];
             [self syncKeyNodes];
@@ -906,6 +900,7 @@
 		ptr += 4;
         // length
         int length = ntohl(*(int *)ptr);
+        DEBUGMSG(@"length2 = %d", length);
 		ptr += 4;
         
         NSString *k = @"1";
@@ -918,7 +913,6 @@
         keyNonce = [keyNonce AES256DecryptWithKey:decryptionKey matchNonce: groupKey];
         NSData *nh = [sha3 Keccak256Digest: keyNonce];
         NSData *meh = [matchExtraHashSet objectForKey:uid];
-        
         
         // verify if match
         // SHA1 of nonce match equals matchExtraHash
@@ -933,6 +927,7 @@
 		else
 		{
             // Marked by Tenma, this line might be reached while users >= 9
+            self.state = ProtocolCancel;
             [self.delegate DisplayMessage: NSLocalizedStringFromBundle(delegate.res, @"error_InvalidCommitVerify", @"An error occurred during commitment verification.")];
             return;
 		}
@@ -1020,7 +1015,7 @@
         
         //get key to decrypt contact data. Using SHA3
         NSData *decryptionKey = [sha3 Keccak256HMAC:mN withKey:keyHMAC];
-        [GatherDataSet addObject:[exchangeData AES256DecryptWithKey:decryptionKey matchNonce:mN] ];
+        [GatherDataSet addObject:[exchangeData AES256DecryptWithKey:decryptionKey matchNonce:mN]];
     }
     
     // stop the activity window.
@@ -1094,8 +1089,7 @@
 {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	const char *buf = [serverResponse bytes];
-	DEBUGMSG(@"Response length: %lu", (unsigned long)[serverResponse length]);
-    
+	
     int statusCode = ntohl(*(int *)buf);
 	if(statusCode==0)
 	{

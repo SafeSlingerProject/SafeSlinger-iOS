@@ -36,7 +36,6 @@
 		18FA4C0C192E8FB700734976 /* SafeSlinger.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FA4C04192E8FB600734976 /* SafeSlinger.m */; };
 		18FA4C0D192E8FB700734976 /* GroupingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FA4C07192E8FB700734976 /* GroupingViewController.m */; };
 		18FA4C0E192E8FB700734976 /* GroupSizePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FA4C0A192E8FB700734976 /* GroupSizePicker.m */; };
-		C9A85DAB19900A6400466DD3 /* GroupSizePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = C9A85DAA19900A6400466DD3 /* GroupSizePicker.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -185,7 +184,6 @@
 		18FA4C09192E8FB700734976 /* GroupSizePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupSizePicker.xib; sourceTree = "<group>"; };
 		18FA4C0A192E8FB700734976 /* GroupSizePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupSizePicker.m; sourceTree = "<group>"; };
 		18FA4C0B192E8FB700734976 /* GroupSizePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupSizePicker.h; sourceTree = "<group>"; };
-		C9A85DAA19900A6400466DD3 /* GroupSizePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupSizePicker.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -300,7 +298,6 @@
 				18FA4C07192E8FB700734976 /* GroupingViewController.m */,
 				18FA4C08192E8FB700734976 /* GroupingViewController.h */,
 				18FA4C0A192E8FB700734976 /* GroupSizePicker.m */,
-				C9A85DAA19900A6400466DD3 /* GroupSizePicker.m */,
 				18FA4C0B192E8FB700734976 /* GroupSizePicker.h */,
 				18FA4C01192E8FAB00734976 /* WordListViewController.m */,
 				18FA4C02192E8FAB00734976 /* WordListViewController.h */,
@@ -525,7 +522,6 @@
 			files = (
 				184A3B32192FC08E008C64FF /* Base64.m in Sources */,
 				184A3B2E192FBF32008C64FF /* NSDataEncryption.m in Sources */,
-				C9A85DAB19900A6400466DD3 /* GroupSizePicker.m in Sources */,
 				18FA4C03192E8FAB00734976 /* WordListViewController.m in Sources */,
 				1860572A19450859002DD149 /* Reachability.m in Sources */,
 				18F8BDF219368C3000497D36 /* iToast.m in Sources */,

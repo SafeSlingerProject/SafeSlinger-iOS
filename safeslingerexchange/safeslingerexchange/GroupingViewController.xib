@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GroupingViewController">
             <connections>
-                <outlet property="AssignedID" destination="36" id="oOR-ur-RJU"/>
+                <outlet property="AssignedID" destination="36" id="qg2-cO-1G7"/>
                 <outlet property="CompareLabel" destination="jvq-SF-GpY" id="2gL-wi-Hzc"/>
                 <outlet property="HintLabel" destination="23" id="i1s-yu-TdK"/>
                 <outlet property="LowestID" destination="6" id="hmA-RE-CqR"/>

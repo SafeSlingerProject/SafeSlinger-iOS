@@ -449,8 +449,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(inherited)",
@@ -473,7 +473,7 @@
 					"-lstdc++",
 				);
 				PRODUCT_NAME = "SafeSlinger Exchange Dev";
-				PROVISIONING_PROFILE = "9e1d5386-a94c-4255-9507-30e790d6b700";
+				PROVISIONING_PROFILE = "ad4c1c39-394f-4607-960f-744c568e445f";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				WRAPPER_EXTENSION = app;
@@ -489,7 +489,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Carnegie Mellon University (27LU3HGQJP)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Carnegie Mellon University (27LU3HGQJP)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
@@ -513,7 +513,7 @@
 					"-lstdc++",
 				);
 				PRODUCT_NAME = "SafeSlinger Exchange Dev";
-				PROVISIONING_PROFILE = "9e1d5386-a94c-4255-9507-30e790d6b700";
+				PROVISIONING_PROFILE = "ad4c1c39-394f-4607-960f-744c568e445f";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				WRAPPER_EXTENSION = app;

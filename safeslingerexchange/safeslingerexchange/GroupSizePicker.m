@@ -76,9 +76,8 @@
            setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
         return;
     }
-    
     // start grouping
-    [delegate BeginGrouping: (int)([GroupPicker selectedRowInComponent: 0] + 1)];
+    [delegate RequestUniqueID: (int)([GroupPicker selectedRowInComponent: 0] + 1)];
     // adjust picker default value
     [GroupPicker selectRow:0 inComponent:0 animated:NO];
 }

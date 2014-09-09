@@ -160,7 +160,7 @@
 /* dev; Title of hostname field. */
 "dev_hostname_title" = "Server Host Name";
 /* dev; Instructions for use. */
-"dev_instruct" = "USAGE:\nYou may build and run your own server, OR use ours: slinger-demo.appspot.com. A host name and a secret are required.";
+"dev_instruct" = "USAGE:\nYou may build and run your own server, OR use ours: slinger-dev.appspot.com. A host name and a secret are required.";
 /* dev; Menu text to configure NFC settings. */
 "dev_menu_nfc_settings" = "NFC Settings";
 /* dev; Reminder text that this is a developer tool app-only. iOS-only. */
@@ -649,6 +649,8 @@
 "menu_ContactInviteSms" = "Text from Contacts";
 /* menu option (title case); used to show a new empty contact in the address book for editing as the users' current identity via the Personal Contact dialog. */
 "menu_CreateNew" = "Create New";
+/* menu option (title case); used to show a debug option for message delivery. */
+"menu_debugTranscript" = "Debug Transcript";
 /* menu option (title case); used to delete the current item from the list context menu. */
 "menu_delete" = "Delete";
 /* menu option (title case); used to delete all messages from this person via the message list context menu. %s = the name of a person. */

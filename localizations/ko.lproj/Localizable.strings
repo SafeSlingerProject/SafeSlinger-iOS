@@ -172,29 +172,29 @@
 /* 'Too many applications are registered for Push. Please uninstall some other applications and retry.' is an error message (sentence case, period); used to warn during push registration: The user has too many applications registered. The application should tell the user to uninstall some other applications, let user retry manually. Fix on the device side. Android-only. */
 "error_C2DMRegTooManyRegistrations" = "너무 많은 응용 프로그램이 푸시에 등록되었습니다. 다른 응용 프로그램을 제거한 후 다시 시도하십시오.";
 /* 'Cannot send an empty attachment.' is an error message (sentence case, period); used to warn when use attempts to attach an empty file to the message. */
-"error_CannotSendEmptyFile" = "비어있는 파일을 보낼 수 없습니다.";
+"error_CannotSendEmptyFile" = "비어있는 파일은 보낼 수 없습니다.";
 /* 'Cannot send attachments greater than %d bytes in size.' is an error message (sentence case, period); used to warn when the message and attachment (if any) exceed the current quota limits for the App Engine service we use. %d the maximum limit in bytes of the entire message plus attachments that the App Engine service will allow us to upload. */
-"error_CannotSendFilesOver" = "%d 바이트보다 큰 용량의 파일을 보낼 수 없습니다.";
+"error_CannotSendFilesOver" = "%d 바이트보다 큰 용량의 파일은 보낼 수 없습니다.";
 /* 'Cannot send a null attachment.' is an error message (sentence case, period); used to warn when use attempts to attach an empty file to the message. */
-"error_CannotSendNullFile" = "공파일을 전송할 수 없습니다.";
+"error_CannotSendNullFile" = "공파일은 전송할 수 없습니다.";
 /* 'Contact creation failed.' is an error message (sentence case, period); used to warn when failing to insert new contact data. */
 "error_contactCreationFailure" = "연락처 생성에 실패했습니다.";
 /* 'Contact insert failed.' is an error message (sentence case, period); used to warn when failing to insert new contact data. */
 "error_ContactInsertFailed" = "연락처 삽입에 실패했습니다.";
 /* 'This contact is missing a name, please edit.' is an error message (sentence case, period); used to warn when the matching contact found on the Setup screen does not have a name. */
-"error_ContactNameMissing" = "이 연락처에는 이름이 누락되어 있으니 수정해 주십시오.";
+"error_ContactNameMissing" = "이 연락처는 이름이 누락되어 있으니 수정해 주십시오.";
 /* 'This contact is missing a name, please reselect.' is an error message (sentence case, period); used to warn when the matching contact found on the Setup screen does not have a name. */
-"error_ContactNameMissing2" = "이 연락처에는 이름이 누락되어 있으니 다시 선택해주세요.";
+"error_ContactNameMissing2" = "이 연락처는 이름이 누락되어 있으니 다시 선택해 주십시오.";
 /* 'Contact update failed.' is an error message (sentence case, period); used to warn when failing to merge contact data after an exchange. */
 "error_ContactUpdateFailed" = "연락처 업데이트에 실패했습니다.";
 /* 'Internet not available, check your settings.' is an error message (sentence case, period); used to warn when the user attempts to communicate with a server and the device cannot detect a path to the Internet. */
-"error_CorrectYourInternetConnection" = "인터넷에 접속할 수 없습니다. 설정을 확인해주세요.";
+"error_CorrectYourInternetConnection" = "인터넷에 접속할 수 없습니다. 설정을 확인해 주십시오.";
 /* 'Could not extract private key.' is an error message (sentence case, period); used to warn when the user is not able to extract the private key from the encrypted private key stored on the device. */
 "error_couldNotExtractPrivateKey" = "개인 키를 추출할 수 없습니다.";
 /* 'Exchange timeout exceeded. Begin the exchange again.' is an error message (sentence case, period); used to warn when users have waited too long, 10 minutes, before completing the exchange protocol. */
-"error_ExchangeProtocolTimeoutExceeded" = "환율 의 제한 시간이 초과했습니다. 다시 교환을 시작합니다.";
+"error_ExchangeProtocolTimeoutExceeded" = "제한 시간을 초과했습니다. 교환을 다시 시작해 주십시오.";
 /* '%s is not supported on %s at this time.' is an error message (sentence case, period); used to warn when a specific capability is not supported by a specific platform. */
-"error_FeatureIsNotSupport" = "%@이 시간에 %@에서 지원되지 않습니다.";
+"error_FeatureIsNotSupport" = "지금은 %@에서 %@이 지원되지 않습니다.";
 /* 'Unable to save %s.' is an error message (sentence case, period); used to warn when there was disk error attempting to save an attachment to the users' device. %s = the name of the file that failed to save. */
 "error_FileSave" = "%@을(를) 저장할 수 없습니다.";
 /* 'File storage is not available.' is an error message (sentence case, period); used to warn when attempting to read/write to attachment storage becomes unavailable. */
