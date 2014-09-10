@@ -17,7 +17,7 @@ Repository iOS Projects
 =======
 
 - **/safeslingerexchange** contains the library project you can add to your own iOS applications. Both the safeslinger-demo and safeslinger-messenger application projects utilize this library to execute the exchange.
-- **/safeslingerdemo** contains the simple SafeSlinger Exchange Developer application project (will release on App Store soon!) which shows the minimum requirements to run a safeslinger secure exchange.
+- **/safeslingerdemo** contains the simple [SafeSlinger Exchange Developer application](https://itunes.apple.com/app/safeslinger-exchange-for-developers/id909442873) project which shows the minimum requirements to run a safeslinger secure exchange.
 - **/safeslingermessenger** contains the full application project source for the [SafeSlinger Messenger](http://itunes.apple.com/app/safeslinger/id493529867) application. This project is a very rich implementation of a safeslinger secure exchange if you want an example of how to use the exchange to verify public keys in your own applications.
 - **/airship_lib** contains the client [Urban Airship](http://www.urbanairship.com) library for managing push messages.
 - **/localizations** contains localization support used in iOS platform.
