@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="MZK-Wx-VW0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="MZK-Wx-VW0">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
-        <!--Compose View - Compose-->
+        <!--Compose-->
         <scene sceneID="W3I-pn-N6e">
             <objects>
                 <viewController title="Compose" id="CZ4-MO-1fc" customClass="ComposeView" sceneMemberID="viewController">
@@ -171,7 +171,7 @@
             </objects>
             <point key="canvasLocation" x="-1323" y="-369"/>
         </scene>
-        <!--Contact Select View - ContactSelectView-->
+        <!--ContactSelectView-->
         <scene sceneID="DXP-iR-GB0">
             <objects>
                 <tableViewController storyboardIdentifier="ContactSelectForCompose" title="ContactSelectView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="O4u-Yf-FbI" customClass="ContactSelectView" sceneMemberID="viewController">
@@ -268,7 +268,7 @@
             </objects>
             <point key="canvasLocation" x="204" y="120"/>
         </scene>
-        <!--Audio Record View - AudioRecordView-->
+        <!--AudioRecordView-->
         <scene sceneID="4O3-zF-lMh">
             <objects>
                 <viewController title="AudioRecordView" modalTransitionStyle="flipHorizontal" id="QgW-jC-qQD" customClass="AudioRecordView" sceneMemberID="viewController">
@@ -368,7 +368,7 @@
             </objects>
             <point key="canvasLocation" x="196" y="-649"/>
         </scene>
-        <!--Passphase - Passphase-->
+        <!--Passphase-->
         <scene sceneID="kNW-OJ-D2Z">
             <objects>
                 <viewController title="Passphase" id="Xxp-n1-1Gd" customClass="Passphase" sceneMemberID="viewController">
@@ -538,7 +538,7 @@
             </objects>
             <point key="canvasLocation" x="-3273" y="949"/>
         </scene>
-        <!--Key Selection View - KeySelection-->
+        <!--KeySelection-->
         <scene sceneID="hBW-La-hK2">
             <objects>
                 <tableViewController title="KeySelection" id="ux2-IS-5nN" customClass="KeySelectionView" sceneMemberID="viewController">
@@ -588,7 +588,7 @@
             </objects>
             <point key="canvasLocation" x="-2815" y="1862"/>
         </scene>
-        <!--Config View - Configuration-->
+        <!--Configuration-->
         <scene sceneID="hZl-EQ-qSp">
             <objects>
                 <tableViewController title="Configuration" id="m7S-7d-zqb" customClass="ConfigView" sceneMemberID="viewController">
@@ -642,7 +642,7 @@
             </objects>
             <point key="canvasLocation" x="-2489" y="3062"/>
         </scene>
-        <!--Time Picker - TimePicker-->
+        <!--TimePicker-->
         <scene sceneID="dbw-Xj-efF">
             <objects>
                 <tableViewController title="TimePicker" id="aHu-hj-dQH" customClass="TimePicker" sceneMemberID="viewController">
@@ -692,7 +692,7 @@
             </objects>
             <point key="canvasLocation" x="-946" y="3062"/>
         </scene>
-        <!--About View - AboutView-->
+        <!--AboutView-->
         <scene sceneID="ujD-Kv-w0B">
             <objects>
                 <viewController title="AboutView" id="4QP-XY-RhF" customClass="AboutView" sceneMemberID="viewController">
@@ -731,7 +731,7 @@
             </objects>
             <point key="canvasLocation" x="-1472" y="2312"/>
         </scene>
-        <!--End Exchange View - EndExchangeView-->
+        <!--EndExchangeView-->
         <scene sceneID="FPl-cG-lz2">
             <objects>
                 <viewController title="EndExchangeView" id="oIT-Kt-SZZ" customClass="EndExchangeView" sceneMemberID="viewController">
@@ -822,7 +822,7 @@
             </objects>
             <point key="canvasLocation" x="378" y="3026"/>
         </scene>
-        <!--Slingkey View - SlingkeyView-->
+        <!--SlingkeyView-->
         <scene sceneID="DEM-pa-UdR">
             <objects>
                 <viewController title="SlingkeyView" id="d1f-cX-BQx" customClass="SlingkeyView" sceneMemberID="viewController">
@@ -964,7 +964,7 @@
             </objects>
             <point key="canvasLocation" x="-202" y="3026"/>
         </scene>
-        <!--Help Assist - HelpAssist-->
+        <!--HelpAssist-->
         <scene sceneID="RIM-wq-Nnw">
             <objects>
                 <viewController title="HelpAssist" id="b1y-Xd-fsu" customClass="HelpAssist" sceneMemberID="viewController">
@@ -978,7 +978,6 @@
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FTr-Xa-9ES">
                                 <rect key="frame" x="0.0" y="20" width="320" height="537"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </webView>
                         </subviews>
@@ -1001,7 +1000,7 @@
             </objects>
             <point key="canvasLocation" x="-874" y="1729"/>
         </scene>
-        <!--Exchange Assist - ExchangeAssist-->
+        <!--ExchangeAssist-->
         <scene sceneID="7Ux-eZ-ecn">
             <objects>
                 <viewController title="ExchangeAssist" id="eWc-yb-foc" customClass="ExchangeAssist" sceneMemberID="viewController">
@@ -1062,7 +1061,7 @@
             </objects>
             <point key="canvasLocation" x="-360" y="1906"/>
         </scene>
-        <!--Contact Manage View - ContactManage-->
+        <!--ContactManage-->
         <scene sceneID="2JU-5V-75M">
             <objects>
                 <tableViewController title="ContactManage" id="B1D-b8-eTN" customClass="ContactManageView" sceneMemberID="viewController">
@@ -1132,7 +1131,7 @@
             </objects>
             <point key="canvasLocation" x="722" y="1474"/>
         </scene>
-        <!--Introduce View - Introduction-->
+        <!--Introduction-->
         <scene sceneID="s7G-Wl-fv4">
             <objects>
                 <viewController title="Introduction" id="TIc-1a-0xa" customClass="IntroduceView" sceneMemberID="viewController">
@@ -1296,7 +1295,7 @@
             </objects>
             <point key="canvasLocation" x="-1323" y="794"/>
         </scene>
-        <!--Message View - Messages-->
+        <!--Messages-->
         <scene sceneID="jqO-qx-v32">
             <objects>
                 <tableViewController id="q2R-Ey-DJ5" customClass="MessageView" sceneMemberID="viewController">
@@ -1354,7 +1353,7 @@
             </objects>
             <point key="canvasLocation" x="-1323" y="-1354"/>
         </scene>
-        <!--Message Detail View - MessageDetailView-->
+        <!--MessageDetailView-->
         <scene sceneID="EXO-NJ-J2c">
             <objects>
                 <tableViewController title="MessageDetailView" id="o1C-fE-r9V" customClass="MessageDetailView" sceneMemberID="viewController">
@@ -1368,7 +1367,6 @@
                             <subviews>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Yx1-oA-3q4">
                                     <rect key="frame" x="8" y="8" width="247" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                     <connections>
@@ -1377,7 +1375,6 @@
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y0I-Io-mhP">
                                     <rect key="frame" x="263" y="7" width="46" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" title="Button">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
@@ -1433,7 +1430,7 @@
             </objects>
             <point key="canvasLocation" x="-756" y="-1354"/>
         </scene>
-        <!--Invitation View - InvitationView-->
+        <!--InvitationView-->
         <scene sceneID="vMZ-1I-YJb">
             <objects>
                 <viewController title="InvitationView" id="I3B-Od-oYK" customClass="InvitationView" sceneMemberID="viewController">
@@ -1570,7 +1567,7 @@
             </objects>
             <point key="canvasLocation" x="-208" y="-1354"/>
         </scene>
-        <!--Function View - Main-->
+        <!--Main-->
         <scene sceneID="Vex-rW-GRa">
             <objects>
                 <tabBarController title="Main" id="8YX-ce-x5E" customClass="FunctionView" sceneMemberID="viewController">
@@ -1604,7 +1601,7 @@
             </objects>
             <point key="canvasLocation" x="-2420" y="949"/>
         </scene>
-        <!--Setup View - SteupView-->
+        <!--SteupView-->
         <scene sceneID="5cr-Dp-lv4">
             <objects>
                 <viewController title="SteupView" id="pnp-7W-pge" customClass="SetupView" sceneMemberID="viewController">
@@ -1741,7 +1738,6 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZUS-pI-LVX">
                                         <rect key="frame" x="213" y="281" width="100" height="17"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <state key="normal" title="Help">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1843,7 +1839,7 @@
             </objects>
             <point key="canvasLocation" x="-3026" y="-965"/>
         </scene>
-        <!--Main Controller - MainController-->
+        <!--MainController-->
         <scene sceneID="T2t-zM-4DE">
             <objects>
                 <viewController title="MainController" id="rcE-D0-3cz" customClass="MainController" sceneMemberID="viewController">
@@ -1885,7 +1881,7 @@
             </objects>
             <point key="canvasLocation" x="-4681" y="2"/>
         </scene>
-        <!--Update Passphrase - UpdatePassphrase-->
+        <!--UpdatePassphrase-->
         <scene sceneID="bJJ-02-Eu0">
             <objects>
                 <viewController title="UpdatePassphrase" id="vgD-DM-NJA" customClass="UpdatePassphrase" sceneMemberID="viewController">
@@ -1897,7 +1893,7 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W5j-gK-tWo">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W5j-gK-tWo">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="8" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="r9N-A5-otV">
@@ -2039,7 +2035,7 @@
             </objects>
             <point key="canvasLocation" x="-360" y="120"/>
         </scene>
-        <!--Contact Select View - ContactSelectView-->
+        <!--ContactSelectView-->
         <scene sceneID="DXJ-ja-NpS">
             <objects>
                 <tableViewController storyboardIdentifier="ContactSelectForIntroduce" title="ContactSelectView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vGs-fk-dpd" customClass="ContactSelectView" sceneMemberID="viewController">
@@ -2154,7 +2150,7 @@
             </objects>
             <point key="canvasLocation" x="-352" y="794"/>
         </scene>
-        <!--Contact Manage View - ContactManage-->
+        <!--ContactManage-->
         <scene sceneID="MAW-2s-3mL">
             <objects>
                 <tableViewController title="ContactManage" id="EEZ-yz-t13" customClass="ContactManageView" sceneMemberID="viewController">

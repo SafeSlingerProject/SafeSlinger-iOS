@@ -89,7 +89,7 @@
     if(row==0)
         return [NSString stringWithFormat:@""];
     else
-        return [NSString stringWithFormat:@"%ld", row+1];
+        return [NSString stringWithFormat:@"%ld", (row+1)];
 }
 
 #pragma mark UIPickerViewDataSource

@@ -50,13 +50,19 @@
         if(![host hasPrefix:@"http"])
             host = [NSString stringWithFormat:@"https://%@", host];
         
-        // parse version number
-        NSArray *versionArray = [vNum componentsSeparatedByString:@"."];
         int version = 0;
-        for(int i=0;i<[versionArray count];i++)
+        if(vNum)
         {
-            NSString* tmp = [versionArray objectAtIndex:i];
-            version = version | ([tmp intValue] << (8*(3-i)));
+            // parse version number
+            NSArray *versionArray = [vNum componentsSeparatedByString:@"."];
+            for(int i=0;i<[versionArray count];i++)
+            {
+                NSString* tmp = [versionArray objectAtIndex:i];
+                version = version | ([tmp intValue] << (8*(3-i)));
+            }
+        }else{
+            // default version
+            version = MINICVERSION;
         }
         
         protocol = [[SafeSlingerExchange alloc]init:host version:version];
@@ -112,13 +118,6 @@
             }
         }
     }
-    
-}
-
-
-- (void)configureTextField:(UITextField *)textField imageView:(UIImageView *)imageView reachability:(Reachability *)reachability
-{
-    
 }
 
 -(void)BeginExchange: (NSData*)input
@@ -151,12 +150,10 @@
     // start sending data to server when only user finish select group size
     [protocol startProtocol: exchangeInput];
     protocol.users = NumOfUsers;
-    DEBUGMSG(@"NumOfUsers = %d", NumOfUsers);
 }
 
 -(void)BeginGrouping: (NSString*)UserID
 {
-    DEBUGMSG(@"BeginGrouping: %@", UserID);
     // push view
     groupView.UniqueID = UserID;
     [mController.navigationController pushViewController:groupView animated:YES];

@@ -26,7 +26,6 @@
 #import <safeslingerexchange/safeslingerexchange.h>
 
 #define _NEWLINE @"\n"
-#define SAFESLINGER_DEBUG
 
 @interface DemoViewController : UIViewController <UITextFieldDelegate, SafeSlingerDelegate>
 {

@@ -43,7 +43,7 @@
 #import "Base64.h"
 #import <sha3/sha3.h>
 
-#define DH_PRIME "B028E9B70DEE5D3C1EACA1E0FACE73ECC89B9B90B106062BDA9D622C58CB47D4FEFD539DE528B68B90B8A93E9142735AFAD0D2D8D67B32528306D0E66AF77BB3"
+#define DH_PRIME "FFFFFFFFFFFFFFFFC90FDAA22168C234C4C6628B80DC1CD129024E088A67CC74020BBEA63B139B22514A08798E3404DDEF9519B3CD3A431B302B0A6DF25F14374FE1356D6D51C245E485B576625E7EC6F44C42E9A637ED6B0BFF5CB6F406B7EDEE386BFB5A899FA5AE9F24117C4B1FE649286651ECE45B3DC2007CB8A163BF0598DA48361C55D39A69163FA8FD24CF5F83655D23DCA3AD961C62F356208552BB9ED529077096966D670C354E4ABC9804F1746C08CA237327FFFFFFFFFFFFFFFF"
 #define DH_GENERATOR "02"
 
 @implementation SafeSlingerExchange
@@ -119,6 +119,7 @@
 
 -(void) generateData: (NSData*)exchangeData
 {
+    // key = sha3(1||match_nonce)
     NSString *k = @"1";
     NSData* encryptionKey = [sha3 Keccak256HMAC:match_nonce withKey:[k dataUsingEncoding:NSUTF8StringEncoding]];
     self.encrypted_data = [exchangeData AES256EncryptWithKey:encryptionKey matchNonce: match_nonce];
@@ -285,15 +286,14 @@
 -(void) handleAssignUser
 {
 	[delegate.actWindow.view removeFromSuperview];
-	
     const char *response = [serverResponse bytes];
 	self.serverVersion = ntohl(*(int *)response);
-    if(ntohl(*(int *)(response + 4))==0)
+    if(self.serverVersion==0)
     {
-        NSString *msg = [NSString stringWithFormat: NSLocalizedStringFromBundle(delegate.res, @"error_ServerAppMessage", @"Server message: '%@'"), response + 8];
+        NSString *msg = [NSString stringWithFormat: NSLocalizedStringFromBundle(delegate.res, @"error_ServerAppMessage", @"Server Message: %@"),
+                         [NSString stringWithCString:response+8 encoding:NSUTF8StringEncoding]];
         state = NetworkFailure;
         [self.delegate DisplayMessage: msg];
-        
     }else{
         self.userID = [NSString stringWithFormat: @"%d", ntohl(*(int *)(response + 4))];
         
@@ -345,40 +345,51 @@
 {
 	char *response = [serverResponse mutableBytes];
 	self.serverVersion = ntohl(*(int *)response);
-	self.minVersion = ntohl(*(int *)(response + 4));
-    DEBUGMSG(@"serverVersion = %02X, minVersion = %02X", serverVersion, minVersion);
-	
+    if(self.serverVersion==0)
+    {
+        NSString *msg = [NSString stringWithFormat: NSLocalizedStringFromBundle(delegate.res, @"error_ServerAppMessage", @"Server Message: %@"),
+                         [NSString stringWithCString:response+8 encoding:NSUTF8StringEncoding]];
+        state = NetworkFailure;
+        [self.delegate DisplayMessage: msg];
+        return;
+    }
+    
+    self.minVersion = ntohl(*(int *)(response + 4));
 	if (minVersion < MINICVERSION)
 	{
-        NSString* formatstring = [NSString stringWithFormat: NSLocalizedStringFromBundle(delegate.res, @"error_AllMembersMustUpgrade", @"Some members are using an older version, all members must at least use %d."), self.version];
         state = NetworkFailure;
-		[self.delegate DisplayMessage:formatstring];
+		[self.delegate DisplayMessage:NSLocalizedStringFromBundle(delegate.res, @"error_AllMembersMustUpgrade", @"Some members are using an older version; all members must upgrade to the least version.")];
 		return;
 	}
 	
-	// number of users
-    int count = ntohl(*(int *)(response + 12));
-    DEBUGMSG(@"count = %d, users = %d", count, users);
-    if (count >= users) {
+    // skip # of totla users from the server since user already enter the number
+    int count = ntohl(*(int *)(response + 8));
+	// number of items
+    int delta_count = ntohl(*(int *)(response + 12));
+    
+    if (delta_count > users || count > users) {
         state = ProtocolFail;
         [self.delegate DisplayMessage: NSLocalizedStringFromBundle(delegate.res, @"error_MoreDataThanUsers", @"Unexpected data found in exchange. Begin the exchange again.")];
 		return;
     }
     
     // Collect all data commitments Ci from other users
-	char *ptr = response + 16;
-	for (int i = 0; i < count; i++)
-	{
-		int uid = ntohl(*(int *)ptr);
-		if (uid != [userID intValue])
-			[allUsers addObject: [NSString stringWithFormat: @"%d", uid]];
-		ptr += 4;
-		int commitLen = ntohl(*(int *)ptr);
-        ptr += 4;
-        NSData *dC = [NSData dataWithBytes:ptr length:HASHLEN];
-        [dataCommitmentSet setObject:dC forKey:[NSString stringWithFormat:@"%d",uid]];
-		ptr += commitLen;
-	}
+    if(delta_count>0)
+    {
+        char *ptr = response + 16;
+        for (int i = 0; i < delta_count; i++)
+        {
+            int uid = ntohl(*(int *)ptr);
+            if (uid != [userID intValue])
+                [allUsers addObject: [NSString stringWithFormat: @"%d", uid]];
+            ptr += 4;
+            int commitLen = ntohl(*(int *)ptr);
+            ptr += 4;
+            NSData *dC = [NSData dataWithBytes:ptr length:HASHLEN];
+            [dataCommitmentSet setObject:dC forKey:[NSString stringWithFormat:@"%d",uid]];
+            ptr += commitLen;
+        }
+    }
 	
     // Retrieve if necessary
 	if ([allUsers count] < users)
@@ -458,49 +469,60 @@
 {
 	char *response = [serverResponse mutableBytes];
 	self.serverVersion = ntohl(*(int *)response);
-	int total = ntohl(*(int *)(response + 4));
-	if (total == 0)
-	{
-		NSString *msg = [NSString stringWithFormat: NSLocalizedStringFromBundle(delegate.res, @"error_ServerAppMessageCStr", @"Server Message: '%s'"), response + 8];
+    if(self.serverVersion==0)
+    {
+        NSString *msg = [NSString stringWithFormat: NSLocalizedStringFromBundle(delegate.res, @"error_ServerAppMessage", @"Server Message: %@"),
+                         [NSString stringWithCString:response+8 encoding:NSUTF8StringEncoding]];
         state = NetworkFailure;
-        [self.delegate DisplayMessage:msg];
-		return;
-	}
+        [self.delegate DisplayMessage: msg];
+        return;
+    }
     
-	int count = ntohl(*(int *)(response + 8));
-	char *ptr = response + 12;
-	for (int i = 0; i < count; i++)
-	{
-		NSString *uid = [NSString stringWithFormat: @"%d", ntohl(*(int *)ptr)];
-        
-        if ([uid isEqualToString: userID])
+    int count = ntohl(*(int *)(response + 4));
+    // number of items
+    int delta_count = ntohl(*(int *)(response + 8));
+    
+    if (delta_count > users || count > users) {
+        state = ProtocolFail;
+        [self.delegate DisplayMessage: NSLocalizedStringFromBundle(delegate.res, @"error_MoreDataThanUsers", @"Unexpected data found in exchange. Begin the exchange again.")];
+        return;
+    }
+    
+    if(delta_count>0)
+    {
+        char *ptr = response + 12;
+        for (int i = 0; i < delta_count; i++)
         {
-            // shouldn't happen
-            continue;
+            NSString *uid = [NSString stringWithFormat: @"%d", ntohl(*(int *)ptr)];
+            
+            if ([uid isEqualToString: userID])
+            {
+                // shouldn't happen
+                continue;
+            }
+            
+            // parse data
+            ptr += 4;
+            int len = ntohl(*(int *)ptr);
+            ptr += 4;
+            
+            NSData *pc = [NSData dataWithBytes: ptr length: HASHLEN];
+            ptr += HASHLEN;
+            
+            // Extracting public key value
+            int DHPubKeySize = DH_size(diffieHellmanKeys);
+            NSData* remoteDHPubKey = [NSData dataWithBytes:ptr length:DHPubKeySize];
+            ptr+=DHPubKeySize;
+            
+            NSData *enc_contact = [NSData dataWithBytes: ptr length: len - HASHLEN - DHPubKeySize];
+            ptr += len - HASHLEN - DHPubKeySize;
+            
+            [allUsers addObject: uid];
+            [DHPubKeySet setObject:remoteDHPubKey forKey:uid];
+            [protocolCommitmentSet setObject: pc forKey: uid];
+            [encrypted_dataSet setObject: enc_contact forKey: uid];
         }
-        
-        // parse data
-		ptr += 4;
-		int len = ntohl(*(int *)ptr);
-        DEBUGMSG(@"len = %d", len);
-		ptr += 4;
-        
-        NSData *pc = [NSData dataWithBytes: ptr length: HASHLEN];
-		ptr += HASHLEN;
-        
-        // Extracting public key value
-        int DHPubKeySize = DH_size(diffieHellmanKeys);
-        NSData* remoteDHPubKey = [NSData dataWithBytes:ptr length:DHPubKeySize];
-        ptr+=DHPubKeySize;
-        
-		NSData *enc_contact = [NSData dataWithBytes: ptr length: len - HASHLEN - DHPubKeySize];
-		ptr += len - HASHLEN - DHPubKeySize;
-        
-        [allUsers addObject: uid];
-        [DHPubKeySet setObject:remoteDHPubKey forKey:uid];
-        [protocolCommitmentSet setObject: pc forKey: uid];
-		[encrypted_dataSet setObject: enc_contact forKey: uid];
-	}
+    }
 	
     // retry condition
 	if ([allUsers count] < users)
@@ -608,63 +630,72 @@
 	char *response = [serverResponse mutableBytes];
 	self.serverVersion = ntohl(*(int *)response);
     
-    // total signatures 
-	int total = ntohl(*(int *)(response + 4));
-	if (total == 0)
-	{
-        NSString *msg = [NSString stringWithFormat: NSLocalizedStringFromBundle(delegate.res, @"error_ServerAppMessageCStr", @"Server Message: '%s'"), response + 8];
+    if(self.serverVersion==0)
+    {
+        NSString *msg = [NSString stringWithFormat: NSLocalizedStringFromBundle(delegate.res, @"error_ServerAppMessage", @"Server Message: %@"),
+                         [NSString stringWithCString:response+8 encoding:NSUTF8StringEncoding]];
         state = NetworkFailure;
-		[self.delegate DisplayMessage: msg];
-		return;
-	}
+        [self.delegate DisplayMessage: msg];
+        return;
+    }
     
-    // count of entries
-	int count = ntohl(*(int *)(response + 8));
-	char *ptr = response + 12;
-	for (int i = 0; i < count; i++)
-	{
-        // user id
-		NSString *uid = [NSString stringWithFormat: @"%d", ntohl(*(int *)ptr)];
-		ptr += 4;
-		int len = ntohl(*(int *)ptr);
-        DEBUGMSG(@"len = %d", len);
-		ptr += 4;
-        
-        //first hash Nmh, change to sha3
-        NSData *Nmh = [NSData dataWithBytes:ptr length:HASHLEN];
-        
-        ptr += HASHLEN;
-
-        NSData *Sha1Nmh = [sha3 Keccak256Digest: Nmh];
-        NSData *wH = [NSData dataWithBytes:ptr length:HASHLEN];
-
-        ptr += HASHLEN;
-        
-        NSMutableData *buffer = [NSMutableData data];
-        [buffer appendData: Sha1Nmh];
-        [buffer appendData: wH];
-        
-        NSData *cPC = [sha3 Keccak256Digest: buffer];
-        NSData *rPC = [protocolCommitmentSet objectForKey:uid];
+    int count = ntohl(*(int *)(response + 4));
+    // number of items
+    int delta_count = ntohl(*(int *)(response + 8));
+    if (delta_count > users || count > users) {
+        state = ProtocolFail;
+        [self.delegate DisplayMessage: NSLocalizedStringFromBundle(delegate.res, @"error_MoreDataThanUsers", @"Unexpected data found in exchange. Begin the exchange again.")];
+        return;
+    }
     
-        // verify if protocol commitments match
-        // also make sure that neither is nil
-        if (cPC != nil && rPC != nil && [cPC isEqualToData:rPC]) 
+    if(delta_count>0)
+    {
+        char *ptr = response + 12;
+        for (int i = 0; i < delta_count; i++)
         {
-            [matchExtraHashSet setObject:Nmh forKey:uid];
-            [wrongHashSet setObject:wH forKey:uid];
-            [matchHashSet setObject:Sha1Nmh forKey:uid];
-		}
-        else
-		{
-            state = ProtocolFail;
-            [delegate DisplayMessage: NSLocalizedStringFromBundle(delegate.res, @"error_OtherGroupCommitDiffer", @"Someone reported a difference in phrases. Begin the exchange again.")];
-            return;
+            // user id
+            NSString *uid = [NSString stringWithFormat: @"%d", ntohl(*(int *)ptr)];
+            ptr += 4;
+            int len = ntohl(*(int *)ptr);
+            DEBUGMSG(@"len = %d", len);
+            ptr += 4;
+            
+            //first hash Nmh, change to sha3
+            NSData *Nmh = [NSData dataWithBytes:ptr length:HASHLEN];
+            
+            ptr += HASHLEN;
+            
+            NSData *Sha1Nmh = [sha3 Keccak256Digest: Nmh];
+            NSData *wH = [NSData dataWithBytes:ptr length:HASHLEN];
+            
+            ptr += HASHLEN;
+            
+            NSMutableData *buffer = [NSMutableData data];
+            [buffer appendData: Sha1Nmh];
+            [buffer appendData: wH];
+            
+            NSData *cPC = [sha3 Keccak256Digest: buffer];
+            NSData *rPC = [protocolCommitmentSet objectForKey:uid];
+            
+            // verify if protocol commitments match
+            // also make sure that neither is nil
+            if (cPC != nil && rPC != nil && [cPC isEqualToData:rPC])
+            {
+                [matchExtraHashSet setObject:Nmh forKey:uid];
+                [wrongHashSet setObject:wH forKey:uid];
+                [matchHashSet setObject:Sha1Nmh forKey:uid];
+            }
+            else
+            {
+                state = ProtocolFail;
+                [delegate DisplayMessage: NSLocalizedStringFromBundle(delegate.res, @"error_OtherGroupCommitDiffer", @"Someone reported a difference in phrases. Begin the exchange again.")];
+                return;
+            }
+            
+            if (![uid isEqualToString: userID])
+                [allUsers addObject: uid];
         }
-        
-		if (![uid isEqualToString: userID])
-			[allUsers addObject: uid];
-	}
+    }
 	
 	if ([allUsers count] < users)
 	{
@@ -795,12 +826,9 @@
     [allUsers removeAllObjects];
 	[allUsers addObject: userID];
     
-    
+    // key = sha3(1||groupKey)
     NSString *k = @"1";
-    //for HMAC-SHA1
     NSData *keyHMAC = [k dataUsingEncoding:NSUTF8StringEncoding];
-    
-    // using sha3
     NSData *encryptionKey = [sha3 Keccak256HMAC:groupKey withKey:keyHMAC];
     match_nonce = [match_nonce AES256EncryptWithKey:encryptionKey matchNonce:groupKey];
     
@@ -832,10 +860,20 @@
         return;
     }
     else{
+        
         response = [serverResponse mutableBytes];
         self.serverVersion = ntohl(*(int *)response);
-        int keyNodeFound = ntohl(*(int *)(response + 4));
         
+        if(self.serverVersion==0)
+        {
+            NSString *msg = [NSString stringWithFormat: NSLocalizedStringFromBundle(delegate.res, @"error_ServerAppMessage", @"Server Message: %@"),
+                             [NSString stringWithCString:response+8 encoding:NSUTF8StringEncoding]];
+            state = NetworkFailure;
+            [self.delegate DisplayMessage: msg];
+            return;
+        }
+        
+        int keyNodeFound = ntohl(*(int *)(response + 4));
         DEBUGMSG(@"keyNodeFound = %d", keyNodeFound);
         if(keyNodeFound){
             int length = ntohl(*(int *)(response + 8));
@@ -879,62 +917,71 @@
 	char *response = [serverResponse mutableBytes];
 	self.serverVersion = ntohl(*(int *)response);
     
-    // total signatures 
-	int total = ntohl(*(int *)(response + 4));
-	if (total == 0)
-	{
-		NSString *msg = [NSString stringWithFormat: NSLocalizedStringFromBundle(delegate.res, @"error_ServerAppMessageCStr", @"Server Message: '%s'"), response + 8];
+    if(self.serverVersion==0)
+    {
+        NSString *msg = [NSString stringWithFormat: NSLocalizedStringFromBundle(delegate.res, @"error_ServerAppMessage", @"Server Message: %@"),
+                         [NSString stringWithCString:response+8 encoding:NSUTF8StringEncoding]];
         state = NetworkFailure;
-		[self.delegate DisplayMessage: msg];
-		return;
-	}
+        [self.delegate DisplayMessage: msg];
+        return;
+    }
+    
+    int count = ntohl(*(int *)(response + 4));
+    // number of items
+    int delta_count = ntohl(*(int *)(response + 8));
+    
+    if (delta_count > users || count > users) {
+        state = ProtocolFail;
+        [self.delegate DisplayMessage: NSLocalizedStringFromBundle(delegate.res, @"error_MoreDataThanUsers", @"Unexpected data found in exchange. Begin the exchange again.")];
+        return;
+    }
     
     // count of entries
-	int count = ntohl(*(int *)(response + 8));
-    char *ptr = response + 12;
-	for (int i = 0; i < count; i++)
-	{
-        // user id
-		NSString *uid = [NSString stringWithFormat: @"%d", ntohl(*(int *)ptr)];
-
-		ptr += 4;
-        // length
-        int length = ntohl(*(int *)ptr);
-        DEBUGMSG(@"length2 = %d", length);
-		ptr += 4;
-        
-        NSString *k = @"1";
-        //for HMAC-SHA1
-        NSData *keyHMAC = [k dataUsingEncoding:NSUTF8StringEncoding];
-        
-        //get key to decrypt contact data.
-        NSData *decryptionKey = [sha3 Keccak256HMAC:self.groupKey withKey:keyHMAC];
-        NSData* keyNonce = [NSData dataWithBytes:ptr length:length];
-        keyNonce = [keyNonce AES256DecryptWithKey:decryptionKey matchNonce: groupKey];
-        NSData *nh = [sha3 Keccak256Digest: keyNonce];
-        NSData *meh = [matchExtraHashSet objectForKey:uid];
-        
-        // verify if match
-        // SHA1 of nonce match equals matchExtraHash
-        // Also make sure that neither is nil
-        if (meh != nil && nh != nil && [meh isEqualToData:nh]) 
+    if(delta_count>0)
+    {
+        char *ptr = response + 12;
+        for (int i = 0; i < delta_count; i++)
         {
-			//NSData *mn = [NSData dataWithBytes: ptr length: NONCELEN];
-			ptr += length;
-			[matchNonceSet setValue: keyNonce forKey: uid];
-		}
-        // if not match
-		else
-		{
-            // Marked by Tenma, this line might be reached while users >= 9
-            self.state = ProtocolCancel;
-            [self.delegate DisplayMessage: NSLocalizedStringFromBundle(delegate.res, @"error_InvalidCommitVerify", @"An error occurred during commitment verification.")];
-            return;
-		}
-        
-		if (![uid isEqualToString: userID])
-			[allUsers addObject: uid];
-	}
+            // user id
+            NSString *uid = [NSString stringWithFormat: @"%d", ntohl(*(int *)ptr)];
+            
+            ptr += 4;
+            // length
+            int length = ntohl(*(int *)ptr);
+            ptr += 4;
+            
+            NSString *k = @"1";
+            //for HMAC-SHA1
+            NSData *keyHMAC = [k dataUsingEncoding:NSUTF8StringEncoding];
+            
+            //get key to decrypt contact data.
+            NSData *decryptionKey = [sha3 Keccak256HMAC:self.groupKey withKey:keyHMAC];
+            NSData* keyNonce = [NSData dataWithBytes:ptr length:length];
+            keyNonce = [keyNonce AES256DecryptWithKey:decryptionKey matchNonce: groupKey];
+            NSData *nh = [sha3 Keccak256Digest: keyNonce];
+            NSData *meh = [matchExtraHashSet objectForKey:uid];
+            
+            // verify if match
+            // SHA1 of nonce match equals matchExtraHash
+            // Also make sure that neither is nil
+            if (meh != nil && nh != nil && [meh isEqualToData:nh])
+            {
+                ptr += length;
+                [matchNonceSet setValue: keyNonce forKey: uid];
+            }
+            // if not match
+            else
+            {
+                // Marked by Tenma, this line might be reached while users >= 9
+                self.state = ProtocolCancel;
+                [self.delegate DisplayMessage: NSLocalizedStringFromBundle(delegate.res, @"error_InvalidCommitVerify", @"An error occurred during commitment verification.")];
+                return;
+            }
+            
+            if (![uid isEqualToString: userID])
+                [allUsers addObject: uid];
+        }
+    }
 	
 	if ([allUsers count] < users)
 	{

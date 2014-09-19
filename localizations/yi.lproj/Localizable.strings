@@ -139,8 +139,6 @@
 /* 'Up' is a choice (sentence case); used in the File Manager dialog to navigate up to a parent directory. */
 "choice_Up" = "אַרויף";
 
-/* 'Some members are using an older version; all members must at least use %s.' is an error message (sentence case, period); used to warn when some members of the key exchange protocol are using less than the minimum version. Used for backward-compatibility in some cases. %s = the minimum cross-platform version number of SafeSlinger, usually expressed as x.x. */
-"error_AllMembersMustUpgrade" = "עטלעכע מיטגלידער זענען ניצן אַ עלטער ווערסיע, אַלע מיטגלידער מוזן בייַ מינדסטער נוצן %@.";
 /* 'All members must upgrade, some are using older key formats.' is an error message (sentence case, period); used to warn when the key format is incorrect after an exchange and perhaps used an old format. */
 "error_AllMembersMustUpgradeBadKeyFormat" = "אַלע מיטגלידער מוזן אַפּגרייד, עטלעכע זענען ניצן עלטער שליסל פֿאָרמאַטירונגען.";
 /* 'All members must upgrade, some are using older push registration formats.' is an error message (sentence case, period); used to warn when the push registration format is incorrect or corrupted. */
@@ -265,10 +263,8 @@
 "error_ReminderToSlingKeysToUseApp" = "צו אָנהייבן, וואַרפלקע קיז מיט אנדערן טעלעפאָנירן אין דער זעלביקער צייַט.";
 /* 'You need an attachment or a text message to send.' is an error message (sentence case, period); used to warn when the user has not attached a file or typed any text message to send to the recipient after using the 'Send' button. */
 "error_selectDataToSend" = "איר דאַרפֿן אַ אַטאַטשמאַנט אָדער אַ טעקסט אָנזאָג צו שיקן.";
-/* 'Server Message: %s' is an error message (sentence case, period); used to warn when the server has an error message to send back to the client. %s = an English (non-localized) error message sent by our App Engine server code. Android-only. */
+/* 'Server Message: %s' is an error message (sentence case, period); used to warn when the server has an error message to send back to the client. %s = an English (non-localized) error message sent by our App Engine server code. */
 "error_ServerAppMessage" = "סערווירער אָנזאָג:%@";
-/* 'Server Message: %s' is an error message (sentence case, period); this is a duplicate message with alternate formatting for iOS, see error_ServerAppMessage. iOS-only. */
-"error_ServerAppMessageCStr" = "סערווירער אָנזאָג:%@";
 /* 'No response from server.' is an error message (sentence case, period); used to warn when the server timeout occurs, usually after 30 seconds and did not respond to the client. */
 "error_ServerNotResponding" = "ניט קיין ענטפער פון סערווירער.";
 /* 'Cannot remove the shared file.' is an error message (sentence case, period); used to warn when the shared file cannot be deleted. iOS-only. */

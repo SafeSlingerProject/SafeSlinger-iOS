@@ -184,8 +184,8 @@
 /* dev; Title of secret data field. */
 "dev_secret_title" = "My Secret";
 
-/* error message (sentence case, period); used to warn when some members of the key exchange protocol are using less than the minimum version. Used for backward-compatibility in some cases. %s = the minimum cross-platform version number of SafeSlinger, usually expressed as x.x. */
-"error_AllMembersMustUpgrade" = "Some members are using an older version; all members must at least use %@.";
+/* error message (sentence case, period); used to warn when some members of the key exchange protocol are using less than the minimum version. Used for backward-compatibility in some cases. */
+"error_AllMembersMustUpgrade" = "Some members are using an older version; all members must upgrade to the newest version.";
 /* error message (sentence case, period); used to warn when the key format is incorrect after an exchange and perhaps used an old format. */
 "error_AllMembersMustUpgradeBadKeyFormat" = "All members must upgrade, some are using older key formats.";
 /* error message (sentence case, period); used to warn when the push registration format is incorrect or corrupted. */
@@ -310,10 +310,8 @@
 "error_ReminderToSlingKeysToUseApp" = "To start, Sling Keys with another user at the same time.";
 /* error message (sentence case, period); used to warn when the user has not attached a file or typed any text message to send to the recipient after using the 'Send' button. */
 "error_selectDataToSend" = "You need an attachment or a text message to send.";
-/* error message (sentence case, period); used to warn when the server has an error message to send back to the client. %s = an English (non-localized) error message sent by our App Engine server code. Android-only. */
+/* error message (sentence case, period); used to warn when the server has an error message to send back to the client. %s = an English (non-localized) error message sent by our App Engine server code. */
 "error_ServerAppMessage" = "Server Message: %@";
-/* error message (sentence case, period); this is a duplicate message with alternate formatting for iOS, see error_ServerAppMessage. iOS-only. */
-"error_ServerAppMessageCStr" = "Server Message: %@";
 /* error message (sentence case, period); used to warn when the server timeout occurs, usually after 30 seconds and did not respond to the client. */
 "error_ServerNotResponding" = "No response from server.";
 /* error message (sentence case, period); used to warn when the shared file cannot be deleted. iOS-only. */

@@ -10,7 +10,8 @@
 #define safeslingerexchange_Config_h
 
 // For Key exchange part
-#define MINICVERSION 0x01060000 // Client minimum version
+#define MINICVERSION 0x01080000 // Client minimum version
+#define MINICVERSIONSTR @"1.8.0" // Client minimum version
 #define NONCELEN 32 // for keccak256
 #define HASHLEN 32  // for keccak256
 #define RETRYTIMEOUT 1

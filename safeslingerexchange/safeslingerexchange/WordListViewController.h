@@ -55,6 +55,7 @@ enum UserChoice
 @property (nonatomic, retain) IBOutlet UIPickerView *WordListRoller;
 @property (nonatomic, retain) NSArray *word_lists, *even_words, *odd_words;
 @property (nonatomic, retain) NSMutableArray *wordlist_labels, *numberlist_labels;
+@property (nonatomic, retain) NSString *PreferredLanguage;
 @property (nonatomic) int correct_index, selected_index;
 
 @property (nonatomic, retain) safeslingerexchange *delegate;

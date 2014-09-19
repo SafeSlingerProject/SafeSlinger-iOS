@@ -172,7 +172,6 @@
 		18FA4BDD192E8DFF00734976 /* safeslingerexchange-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "safeslingerexchange-Prefix.pch"; sourceTree = "<group>"; };
 		18FA4BDE192E8DFF00734976 /* safeslingerexchange.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = safeslingerexchange.h; sourceTree = "<group>"; };
 		18FA4BE0192E8DFF00734976 /* safeslingerexchange.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = safeslingerexchange.m; sourceTree = "<group>"; };
-		18FA4BE7192E8DFF00734976 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		18FA4C00192E8FAB00734976 /* WordListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WordListViewController.xib; sourceTree = "<group>"; };
 		18FA4C01192E8FAB00734976 /* WordListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordListViewController.m; sourceTree = "<group>"; };
 		18FA4C02192E8FAB00734976 /* WordListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordListViewController.h; sourceTree = "<group>"; };
@@ -271,7 +270,6 @@
 				1897938C19350AC5004C4409 /* libcrypto.a */,
 				1897938A19350AAE004C4409 /* libsha3-ios.a */,
 				18FA4BD9192E8DFF00734976 /* Foundation.framework */,
-				18FA4BE7192E8DFF00734976 /* XCTest.framework */,
 				189793B219351DE3004C4409 /* CoreFoundation.framework */,
 			);
 			name = Frameworks;
@@ -389,7 +387,7 @@
 		18FA4BCE192E8DFF00734976 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = CyLab;
 			};
 			buildConfigurationList = 18FA4BD1192E8DFF00734976 /* Build configuration list for PBXProject "safeslingerexchange" */;
@@ -638,12 +636,6 @@
 		189793BC19351DE3004C4409 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					armv7,
-					armv7s,
-					arm64,
-				);
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -658,7 +650,7 @@
 				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos7.1;
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = bundle;
@@ -668,12 +660,6 @@
 		189793BD19351DE3004C4409 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					armv7,
-					armv7s,
-					arm64,
-				);
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -684,7 +670,7 @@
 				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos7.1;
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = bundle;
@@ -724,9 +710,9 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "CA2BF723-E398-4BE9-B4F5-5FD9FB36FC1F";
-				SDKROOT = iphoneos7.1;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -759,7 +745,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = NO;
 				PROVISIONING_PROFILE = "CA2BF723-E398-4BE9-B4F5-5FD9FB36FC1F";
-				SDKROOT = iphoneos7.1;
+				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

@@ -35,7 +35,7 @@
 
 @synthesize correct_index, selected_index, word_lists, even_words, odd_words, wordlist_labels, numberlist_labels;
 @synthesize delegate;
-@synthesize HintLabel, MatchBtn, NotmatchBtn, WordListRoller, CompareLabel;
+@synthesize HintLabel, MatchBtn, NotmatchBtn, WordListRoller, CompareLabel, PreferredLanguage;
 
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -318,6 +318,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    PreferredLanguage = [[NSLocale preferredLanguages] objectAtIndex:0];
     [CompareLabel setText:[NSString stringWithFormat: NSLocalizedStringFromBundle(delegate.res, @"label_CompareScreensNDevices", @"Compare screens on %@ devices.."), [NSString stringWithFormat:@"%d", delegate.protocol.users]]];
     [self generateWordList: [delegate.protocol generateHashForPhrases]];
 }
@@ -336,7 +337,11 @@
         [pickerLabel setNumberOfLines:0];
     }
     
-    NSString *label = [NSString stringWithFormat:@"%@\n%@", [wordlist_labels objectAtIndex: row], [numberlist_labels objectAtIndex:row]];
+    NSString *label = nil;
+    if([PreferredLanguage isEqualToString:@"en"])
+        label = [NSString stringWithFormat:@"%@\n%@", [wordlist_labels objectAtIndex: row], [numberlist_labels objectAtIndex:row]];
+    else
+        label = [NSString stringWithFormat:@"%@\n%@", [numberlist_labels objectAtIndex: row], [wordlist_labels objectAtIndex:row]];
     
     [pickerLabel setText:label];
     return pickerLabel;

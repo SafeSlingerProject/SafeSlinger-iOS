@@ -61,7 +61,7 @@
     UIBarButtonItem *HomeButton = [[UIBarButtonItem alloc] initWithCustomView: infoButton];
     [self.navigationItem setRightBarButtonItem:HomeButton];
     
-    _originalFrame = self.view.frame;
+    _originalFrame = self.navigationController.view.frame;
 }
 
 -(void) ExitProtocol: (id)sender
@@ -100,6 +100,13 @@
 {
     AssignedID.text = UniqueID;
      _textfieldOffset = LowestID.frame.size.height + LowestID.frame.origin.y;
+    DEBUGMSG(@"NSFoundationVersionNumber = %f", NSFoundationVersionNumber);
+    if (NSFoundationVersionNumber < NSFoundationVersionNumber_iOS_7_0)
+    {
+        DEBUGMSG(@"iOS 6.x");
+        _textfieldOffset += 70.0f;
+    }
+    
     // decide after user input
     [CompareLabel setText:[NSString stringWithFormat: NSLocalizedStringFromBundle(delegate.res, @"label_CompareScreensNDevices", @"Compare screens on %@ devices.."), [NSString stringWithFormat:@"%d", delegate.protocol.users]]];
     [LowestID becomeFirstResponder];
@@ -128,12 +135,10 @@
 
 - (void)keyboardWillShown:(NSNotification *)notification
 {
-    DEBUGMSG(@"offset %f %f %f", [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height, _originalFrame.size.height, _textfieldOffset);
     UIScrollView* scrollView = (UIScrollView*)self.view;
     scrollView.contentSize = CGSizeMake(_originalFrame.size.width,_originalFrame.size.height*1.2);
     // get height of the keyboard
-    CGFloat offset = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height+_textfieldOffset-_originalFrame.size.height+60.0f;
-    DEBUGMSG(@"offset = %f", offset);
+    CGFloat offset = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height+_textfieldOffset-_originalFrame.size.height+20.0f;
     if( offset > 0)
     {
         // covered by keyboard, left the view and scroll it

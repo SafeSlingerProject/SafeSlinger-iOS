@@ -122,7 +122,8 @@
 -(IBAction)BegineExchange:(id)sender
 {
     proto = [[safeslingerexchange alloc]init];
-    if([proto SetupExchange: self ServerHost:hostField.text VersionNumber:@"1.7.0"])
+    // use default client version
+    if([proto SetupExchange: self ServerHost:hostField.text VersionNumber: nil])
     {
         [proto BeginExchange: [secretData.text dataUsingEncoding:NSUTF8StringEncoding]];
         // save parameters
@@ -144,7 +145,8 @@
 }
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    
+    if([textField isEqual:hostField])
+        [secretData becomeFirstResponder];
 }
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
