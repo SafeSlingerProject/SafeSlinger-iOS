@@ -29,6 +29,7 @@
 #import "Utility.h"
 #import "ErrorLogger.h"
 #import "BackupCloud.h"
+#import "TimePicker.h"
 
 #import <UAPush.h>
 #import <UAirship.h>
@@ -74,20 +75,12 @@
     }
 }
 
-- (IBAction)unwindToConfig:(UIStoryboardSegue *)unwindSegue
-{
-    if([[unwindSegue identifier]isEqualToString:@"FinishTimePick"])
-    {
-        [self.tableView reloadData];
-    }
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     // Custom initialization
-    delegate = [[UIApplication sharedApplication]delegate];
+    delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     // Custom initialization
     SectionHeader = [NSArray arrayWithObjects:
                      NSLocalizedString(@"title_passphrase", @"Passphrase"),
@@ -275,7 +268,9 @@
         case BackupSec:
         {
             switch (indexPath.row) {
+                    
                 case BackupReminder:
+                {
                     cell.textLabel.text = NSLocalizedString(@"label_RemindBackupDelay", @"Backup Reminder");
                     cell.detailTextLabel.text = NSLocalizedString(@"label_summary_remind_backup_delay", @"Receive notification when backup is offline.");
                     if([[NSUserDefaults standardUserDefaults] integerForKey:kRemindBackup]==TurnOn)
@@ -284,6 +279,7 @@
                     }else{
                         cell.accessoryType = UITableViewCellAccessoryNone;
                     }
+                }
                     break;
                 case BackupURL:
                 {
@@ -328,7 +324,7 @@
                     break;
                 case LicenseURL:
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                    cell.textLabel.text = NSLocalizedString(@"menu_License", @""License"");
+                    cell.textLabel.text = NSLocalizedString(@"menu_License", @"License");
                     cell.detailTextLabel.text = nil;
                     break;
                 case PrivacyURL:
@@ -573,7 +569,7 @@
         {
             switch (indexPath.row) {
                 case About:
-                    [self performSegueWithIdentifier:@"DisplayAbout" sender:self];
+                    [self performSegueWithIdentifier: @"DisplayAbout" sender:self];
                     break;
                 case PrivacyURL:
                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString: kPrivacyURL]];
@@ -636,11 +632,15 @@
                 UITextField *textField = [alertView textFieldAtIndex:0];
                 if([textField.text length]>0)
                 {
-                    [delegate.DbInstance InsertOrUpdateConfig:[textField.text dataUsingEncoding:NSUTF8StringEncoding] withTag:@"Profile_FN"];
                     [delegate saveConactData:delegate.IdentityNum Firstname:textField.text Lastname:[delegate.DbInstance GetStringConfig:@"Profile_LN"]];
                 }else{
-                    [delegate.DbInstance RemoveConfigTag:@"Profile_FN"];
-                    [delegate saveConactData:delegate.IdentityNum Firstname:nil Lastname:[delegate.DbInstance GetStringConfig:@"Profile_LN"]];
+                    if([delegate.DbInstance GetConfig:@"Profile_LN"])
+                    {
+                        [delegate saveConactData:delegate.IdentityNum Firstname:nil Lastname:[delegate.DbInstance GetStringConfig:@"Profile_LN"]];
+                    }else{
+                        [[[[iToast makeText: NSLocalizedString(@"error_ContactNameMissing", @"This contact is missing a name, please edit.")]
+                           setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+                    }
                 }
                 
             }
@@ -650,11 +650,15 @@
                 UITextField *textField = [alertView textFieldAtIndex:0];
                 if([textField.text length]>0)
                 {
-                    [delegate.DbInstance InsertOrUpdateConfig:[textField.text dataUsingEncoding:NSUTF8StringEncoding] withTag:@"Profile_LN"];
                     [delegate saveConactData:delegate.IdentityNum Firstname:[delegate.DbInstance GetStringConfig:@"Profile_FN"] Lastname:textField.text];
                 }else{
-                    [delegate.DbInstance RemoveConfigTag:@"Profile_LN"];
-                    [delegate saveConactData:delegate.IdentityNum Firstname:[delegate.DbInstance GetStringConfig:@"Profile_FN"] Lastname:nil];
+                    if([delegate.DbInstance GetConfig:@"Profile_FN"])
+                    {
+                        [delegate saveConactData:delegate.IdentityNum Firstname:[delegate.DbInstance GetStringConfig:@"Profile_FN"] Lastname:nil];
+                    }else{
+                        [[[[iToast makeText: NSLocalizedString(@"error_ContactNameMissing", @"This contact is missing a name, please edit.")]
+                           setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+                    }
                 }
             }
                 break;
@@ -671,14 +675,14 @@
     }
 }
 
-/*
-#pragma mark - Navigation
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if([segue.identifier isEqualToString:@"PickTime"])
+    {
+        TimePicker* dest = (TimePicker*)segue.destinationViewController;
+        dest.selectValue = [[NSUserDefaults standardUserDefaults]integerForKey: kPasshpraseCacheTime];
+        dest.parent = self;
+    }
 }
-*/
 
 @end

@@ -62,21 +62,8 @@
     self.navigationItem.title = NSLocalizedString(@"title_find", @"Setup");
     _originalFrame = self.view.frame;
     
-    delegate = [[UIApplication sharedApplication]delegate];
+    delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     _bg_queue = dispatch_queue_create("safeslinger.background.queue", NULL);
-    
-    
-    if(![[NSUserDefaults standardUserDefaults] boolForKey: kRequirePushNotification])
-    {
-        UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
-                                                          message: NSLocalizedString(@"iOS_RequestPermissionNotifications", @"SafeSlinger is an encrypted messaging application and cannot function without allowing incoming messages from Notifications. To enable incoming messages, you must allow SafeSlinger to send you Notifications when asked.")
-                                                         delegate: self
-                                                cancelButtonTitle: NSLocalizedString(@"btn_Exit", @"Exit")
-                                                otherButtonTitles: NSLocalizedString(@"btn_Continue", @"Continue"), nil];
-        message.tag = PushNotificationConfirm;
-        [message show];
-        message = nil;
-    }
     
     [delegate.BackupSys RecheckCapability];
     if(delegate.BackupSys.CloudEnabled){
@@ -155,6 +142,22 @@
     }else{
         [[[[iToast makeText: NSLocalizedString(@"error_BackupNotFound", @"No backup to restore.")]setGravity:iToastGravityCenter] setDuration:iToastDurationLong] show];
         backinfo.text = NSLocalizedString(@"label_iCloudEnable", @"SafeSlinger iCloud is enabled. Tap the 'Done' button when finished.");
+        [self TriggerNotificationRequire];
+    }
+}
+
+- (void)TriggerNotificationRequire
+{
+    if(![[NSUserDefaults standardUserDefaults] boolForKey: kRequirePushNotification])
+    {
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
+                                                          message: NSLocalizedString(@"iOS_RequestPermissionNotifications", @"SafeSlinger is an encrypted messaging application and cannot function without allowing incoming messages from Notifications. To enable incoming messages, you must allow SafeSlinger to send you Notifications when asked.")
+                                                         delegate: self
+                                                cancelButtonTitle: NSLocalizedString(@"btn_Exit", @"Exit")
+                                                otherButtonTitles: NSLocalizedString(@"btn_Continue", @"Continue"), nil];
+        message.tag = PushNotificationConfirm;
+        [message show];
+        message = nil;
     }
 }
 
@@ -163,18 +166,22 @@
     if(!newkeycreated)
     {
         // first setup, try to fecth backup
-        self.navigationItem.hidesBackButton = YES;
+        
         [delegate.BackupSys RecheckCapability];
+        
         if(delegate.BackupSys.CloudEnabled){
             delegate.BackupSys.Responder = self;
             // genkey first, locked all components
             [self SetComponentsLocked: YES];
             [backinfo setText:NSLocalizedString(@"prog_SearchingForBackup", @"searching for backup...")];
-            
             dispatch_async(dispatch_get_main_queue(), ^(void) {
+                [self.navigationItem setHidesBackButton:YES];
                 [self updateprogress];
                 [delegate.BackupSys PerformRecovery];
             });
+        }else{
+            [self.navigationItem setHidesBackButton:YES];
+            [self TriggerNotificationRequire];
         }
     }
     
@@ -260,7 +267,10 @@
 
 - (void)SetComponentsLocked:(BOOL)lock
 {
-    self.navigationItem.backBarButtonItem.enabled = DoneBtn.enabled = Fnamefield.enabled = Lnamefield.enabled = PassField.enabled = RepassField.enabled = !lock;
+    if(lock) [self.navigationItem setHidesBackButton:YES];
+    else [self.navigationItem setHidesBackButton:NO];
+    
+    DoneBtn.enabled = Fnamefield.enabled = Lnamefield.enabled = PassField.enabled = RepassField.enabled = !lock;
     keygenProgress.hidden = keygenIndicator.hidden = !lock;
     if(lock)
     {

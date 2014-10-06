@@ -81,6 +81,5 @@ typedef enum AboutSet{
 @property (nonatomic, retain) AppDelegate *delegate;
 
 - (void)UpdateView;
-- (IBAction)unwindToConfig:(UIStoryboardSegue *)unwindSegue;
 
 @end

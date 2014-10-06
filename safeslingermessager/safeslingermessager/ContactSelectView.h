@@ -42,11 +42,14 @@
 @interface ContactSelectView : UITableViewController <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate>
 {
     // used for show peers, each entry is a SSContactEntry object
-    AppDelegate* delegate;
+    AppDelegate *delegate;
     UIAlertView *UserInfo;
+    UIViewController *parent;
 }
 
+
 @property (nonatomic, retain) AppDelegate *delegate;
+@property (nonatomic, retain) UIViewController *parent;
 @property (nonatomic, strong) NSMutableArray *safeslingers;
 @property (nonatomic, strong) UISwitch *showRecent;
 @property (nonatomic, strong) UILabel *Hint, *SwitchHint;

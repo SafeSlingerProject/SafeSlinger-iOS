@@ -24,10 +24,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class Passphase;
+
 @interface KeySelectionView : UITableViewController
 
 @property (nonatomic, strong) NSMutableArray *keyitem;
 @property (nonatomic, strong) NSMutableArray *keylist;
-@property (nonatomic, readwrite) BOOL keyChanged;
+@property (nonatomic, retain) Passphase *parent;
 
 @end

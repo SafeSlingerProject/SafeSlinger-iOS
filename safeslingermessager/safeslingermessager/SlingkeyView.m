@@ -58,7 +58,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    delegate = [[UIApplication sharedApplication]delegate];
+    delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     
     self.contact_labels = [[NSMutableArray alloc] init];
     self.contact_values = [[NSMutableArray alloc] init];
@@ -101,7 +101,6 @@
     UIBarButtonItem *HomeButton = [[UIBarButtonItem alloc] initWithCustomView: infoButton];
     [self.parentViewController.navigationItem setRightBarButtonItem:HomeButton];
     
-    [self processContactWithID: delegate.IdentityNum];
     DescriptionLabel.text = NSLocalizedString(@"label_Home", @"Check items you wish to share and tap 'Begin Exchange' when others are ready to exchange.");
     DescriptionLabel.adjustsFontSizeToFitWidth = YES;
     [ExchangeBtn setTitle: NSLocalizedString(@"btn_BeginExchangeProximity", @"Begin Exchange") forState:UIControlStateNormal];
@@ -112,11 +111,12 @@
             [self performSegueWithIdentifier:@"ShowExchangeHelp" sender:self];
         });
     }
+    [self ProcessProfile];
 }
 
--(void) processContactWithID: (int)contactID
+-(void) ProcessProfile
 {
-	DEBUGMSG(@"processContactWithID: %d", contactID);
+	DEBUGMSG(@"processContactWithID: %d", delegate.IdentityNum);
 	
     // clean up
     [contact_labels removeAllObjects];
@@ -127,7 +127,7 @@
     ContactImage.image = nil;
     delegate.IdentityName = [delegate.DbInstance GetProfileName];
     
-    switch (contactID) {
+    switch (delegate.IdentityNum) {
         case NonExist:
             [ContactChangeBtn setTitle:NSLocalizedString(@"label_undefinedTypeLabel", @"Unknown") forState:UIControlStateNormal];
             [[[[iToast makeText: NSLocalizedString(@"error_InvalidContactName", @"A valid Contact Name is required.")]
@@ -142,7 +142,7 @@
             break;
         default:
             [ContactChangeBtn setTitle: delegate.IdentityName forState: UIControlStateNormal];
-            if(![self ParseContact:contactID])
+            if(![self ParseContact:delegate.IdentityNum])
             {
                 // if permission is disabled
                 [ContactImage setImage: [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"blank_contact" ofType:@"png"]]];
@@ -170,50 +170,50 @@
     }
     
 	//Load the fields read in so far into the selection list
-	[ContactInfoTable reloadData];
-}
-
-- (IBAction)unwindToSlingkey:(UIStoryboardSegue *)unwindSegue
-{
-    if([[unwindSegue identifier]isEqualToString:@"FinishEditContact"])
-    {
-        [self viewWillAppear:YES];
-    }
+    [self.view setNeedsDisplay];
+    [self.ContactInfoTable reloadData];
 }
 
 -(IBAction) EditContact
 {
-    // allow users to pick photos from multiple locations
-    if([UtilityFunc checkContactPermission])
-    {
+    ABAuthorizationStatus status = ABAddressBookGetAuthorizationStatus();
+    if(status == kABAuthorizationStatusNotDetermined) {
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
+                                                          message: NSLocalizedString(@"iOS_RequestPermissionContacts", @"You can select your contact card to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Contacts when asked.")
+                                                         delegate: self
+                                                cancelButtonTitle: NSLocalizedString(@"btn_NotNow", @"Not Now")
+                                                otherButtonTitles: NSLocalizedString(@"btn_Continue", @"Continue"), nil];
+        message.tag = AskPerm;
+        [message show];
+        message = nil;
+    }
+    else if(status == kABAuthorizationStatusDenied || status == kABAuthorizationStatusRestricted) {
+        NSString* buttontitle = nil;
+        NSString* description = nil;
+        if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+            buttontitle = NSLocalizedString(@"menu_Help", @"Help");
+            description = [NSString stringWithFormat: NSLocalizedString(@"iOS_contactError", @"Contacts permission is required for securely sharing contact cards. Tap the %@ button for SafeSlinger Contacts permission details."), buttontitle];
+        } else {
+            buttontitle = NSLocalizedString(@"menu_Settings", @"menu_Settings");
+            description = [NSString stringWithFormat: NSLocalizedString(@"iOS_contactError", @"Contacts permission is required for securely sharing contact cards. Tap the %@ button for SafeSlinger Contacts permission details."), buttontitle];
+        }
+        
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
+                                                          message: description
+                                                         delegate: self
+                                                cancelButtonTitle: NSLocalizedString(@"btn_Cancel", @"Cancel")
+                                                otherButtonTitles: buttontitle, nil];
+        message.tag = HelpContact;
+        [message show];
+        message = nil;
+    }
+    else if(status == kABAuthorizationStatusAuthorized) {
         if(delegate.IdentityNum!=NonExist)
         {
             [self performSegueWithIdentifier:@"EditContact" sender:self];
         }
-    }else{
-        
-        if(![[NSUserDefaults standardUserDefaults] boolForKey: kRequireContactPrivacy])
-        {
-            UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
-                                                              message: NSLocalizedString(@"iOS_RequestPermissionContacts", @"You can select your contact card to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Contacts when asked.")
-                                                             delegate: self
-                                                    cancelButtonTitle: NSLocalizedString(@"btn_NotNow", @"Not Now")
-                                                    otherButtonTitles: NSLocalizedString(@"btn_Continue", @"Continue"), nil];
-            message.tag = AskPerm;
-            [message show];
-            message = nil;
-        }else{
-            
-            UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"title_Warn", @"Warning")
-                                                              message: NSLocalizedString(@"iOS_contactError", @"Contacts permission required. Please go to iOS Settings to enable Contacts permissions.")
-                                                             delegate:self
-                                                    cancelButtonTitle:NSLocalizedString(@"btn_Close", @"Close")
-                                                    otherButtonTitles:NSLocalizedString(@"menu_Help", @"Help"), nil];
-            message.tag = HelpContact;
-            [message show];
-            message = nil;
-        }
     }
+    
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -222,40 +222,68 @@
     {
         if(alertView.tag==AskPerm)
         {
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kRequireContactPrivacy];
             [UtilityFunc TriggerContactPermission];
         }else if(alertView.tag==HelpContact)
         {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kContactHelpURL]];
+            if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kContactHelpURL]];
+            } else {
+                // iOS8
+                NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                [[UIApplication sharedApplication] openURL:url];
+            }
         }else if(alertView.tag==HelpNotification)
         {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kPushNotificationHelpURL]];
+            if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kPushNotificationHelpURL]];
+            } else {
+                // iOS8
+                NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                [[UIApplication sharedApplication] openURL:url];
+            }
         }
     }
 }
 
 -(IBAction) BeginExchange
 {
+    NSString* buttontitle = nil;
+    NSString* description = nil;
+    
     // check notification permission
-    NSString* msginfo = nil;
-    if ([[UIApplication sharedApplication] enabledRemoteNotificationTypes] == UIRemoteNotificationTypeNone || [[UIApplication sharedApplication] enabledRemoteNotificationTypes] != [UAPush shared].notificationTypes)
-    {
-        msginfo = NSLocalizedString(@"iOS_notificationError1", @"Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the Help button for SafeSlinger Notification permission details.");
-    }
-        
-    if(msginfo)
-    {
-            UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"title_Warn", @"Warning")
-                                                              message:msginfo
-                                                             delegate:self
-                                                    cancelButtonTitle:NSLocalizedString(@"btn_Close", @"Close")
-                                                    otherButtonTitles:NSLocalizedString(@"menu_Help", @"Help"), nil];
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+        if ([[UIApplication sharedApplication] enabledRemoteNotificationTypes] != (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert))
+        {
+            buttontitle = NSLocalizedString(@"menu_Help", @"Help");
+            description = [NSString stringWithFormat: NSLocalizedString(@"iOS_notificationError1", @"Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the %@ button for SafeSlinger Notification permission details."), buttontitle];
+            
+            UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
+                                                              message: description
+                                                             delegate: self
+                                                    cancelButtonTitle: NSLocalizedString(@"btn_Cancel", @"Cancel")
+                                                    otherButtonTitles: buttontitle, nil];
             message.tag = HelpNotification;
             [message show];
             message = nil;
             return;
+        }
+    } else {
+        if (![[UIApplication sharedApplication] isRegisteredForRemoteNotifications] || [UIApplication sharedApplication].currentUserNotificationSettings.types != (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert))
+        {
+            buttontitle = NSLocalizedString(@"menu_Settings", @"menu_Settings");
+            description = [NSString stringWithFormat: NSLocalizedString(@"iOS_notificationError1", @"Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the %@ button for SafeSlinger Notification permission details."), buttontitle];
+            
+            UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
+                                                              message: description
+                                                             delegate: self
+                                                    cancelButtonTitle: NSLocalizedString(@"btn_Cancel", @"Cancel")
+                                                    otherButtonTitles: buttontitle, nil];
+            message.tag = HelpNotification;
+            [message show];
+            message = nil;
+            return;
+        }
     }
-    
     
     NSString* vCard;
     if(delegate.IdentityNum==NonLink)
@@ -287,7 +315,7 @@
 - (BOOL) ParseContact: (int)contactID
 {
     // load contact
-    if(![UtilityFunc checkContactPermission])
+    if(ABAddressBookGetAuthorizationStatus()!=kABAuthorizationStatusAuthorized)
     {
         return NO;
     }
@@ -314,22 +342,23 @@
 	}
     
     // Parse Photo
-	CFDataRef photo = ABPersonCopyImageData(aRecord);
-	if (photo)
-	{
-		UIImage *image = [[UIImage imageWithData: (__bridge NSData *)photo]scaleToSize:CGSizeMake(45.0f, 45.0f)];
-		[ContactImage setImage:image];
-		
+    if(ABPersonHasImageData(aRecord))
+    {
+        CFDataRef photo = ABPersonCopyImageDataWithFormat(aRecord, kABPersonImageFormatThumbnail);
+        UIImage *image = [UIImage imageWithData: (__bridge NSData *)photo];
+        [ContactImage setImage:image];
+        
         // update cache image
         NSData* img = (NSData*)UIImageJPEGRepresentation(image, 0.9);
-		NSString *encodedPhoto = [Base64 encode: img];
+        NSString *encodedPhoto = [Base64 encode: img];
         [contact_labels addObject: @"Photo"];
-		[contact_values addObject: encodedPhoto];
+        [contact_values addObject: encodedPhoto];
         [contact_selections addObject:[NSNumber numberWithBool:YES]];
         [contact_category addObject:[NSNumber numberWithInt:Photo]];
         
         CFRelease(photo);
-	}else{
+    }
+	else{
         [ContactImage setImage: [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"blank_contact" ofType:@"png"]]];
     }
     
@@ -366,7 +395,6 @@
         CFStringRef url = ABMultiValueCopyValueAtIndex(webpage, i);
         CFStringRef uLabel = ABMultiValueCopyLabelAtIndex(webpage, i);
         NSString *urlLabel = [label_dictionary objectForKey:(__bridge NSString*)uLabel];
-        
         if(urlLabel)
         {
             [contact_labels addObject: urlLabel];
@@ -389,7 +417,6 @@
         CFStringRef phoneNumber = ABMultiValueCopyValueAtIndex(phone, i);
         CFStringRef pLabel = ABMultiValueCopyLabelAtIndex(phone, i);
         NSString *phoneLabel = [label_dictionary objectForKey:(__bridge NSString*)pLabel];
-        
         if([(__bridge NSString*)phoneNumber IsValidPhoneNumber])
         {
             if(phoneLabel)
@@ -666,6 +693,10 @@
         // Get destination view
         EndExchangeView *saveView = [segue destinationViewController];
         saveView.contactList = GatherList;
+    }else if([segue.identifier isEqualToString:@"EditContact"])
+    {
+        ContactManageView* dest = (ContactManageView*)segue.destinationViewController;
+        dest.parent = self;
     }
 }
 

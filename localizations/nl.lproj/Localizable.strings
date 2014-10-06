@@ -27,8 +27,6 @@
 
 /* 'SafeSlinger' is an application name (title case); used for home screen icons, at the top of many screens, and many other places in the application. */
 "app_name" = "SafeSlinger";
-/* 'Michael W Farb' is a language editor (title case); the name of the individual who translated it and/or reviewed this localization. */
-"app_TranslatorName" = "Google Translate";
 
 /* 'Backup is disabled. Do you want to adjust backup settings and keep this reminder?' is a question message (sentence case, question mark); used to warn when the backup is off to confirm we should keep reminding the user. Used with Forget and Remind buttons. */
 "ask_BackupDisabledRemindLater" = "Backup is uitgeschakeld. Wilt u een back-up instellingen aan te passen en houd deze herinnering?";
@@ -39,7 +37,7 @@
 /* 'Without a Google Account you will only be able to send, NOT receive messages. Do you want to add a Google account?' is a question message (sentence case, question mark); used to warn when a Google account has not been setup, if the user intends to receive messages. Android-only. */
 "ask_GoogleAccountToReceiveMsgs" = "Zonder een Google-account kunt u alleen in staat zijn om berichten te verzenden, niet ontvangen. Wilt u een Google-account toe te voegen?";
 /* 'Quit? Are you sure?' is a question message (sentence case, question mark); is a confirmation question that occurs when the user chooses to end the exchange protocol prematurely. */
-"ask_QuitConfirmation" = "Stoppen? Weet je het zeker?";
+"ask_QuitConfirmation" = "Beëindigen? Ben je zeker?";
 /* 'We'd like your help improving SafeSlinger. Would you like to automatically send any errors to us?' is a question message (sentence case, question mark); is a question that occurs when the user encounters an unhandled exception and are asked if they want to upload this error log and any future error logs. */
 "ask_SendErrorData" = "We willen graag uw hulp verbeteren SafeSlinger. Wilt u eventuele fouten automatisch sturen naar ons?";
 
@@ -72,7 +70,7 @@
 /* 'No' is a button (title case); the No button is paired with the Yes button, and is used to indicate a negative answer to a Yes/No question. */
 "btn_No" = "Geen";
 /* 'No Match' is a button (title case); the No Match button is used if the user cannot find the same batting screen on another user's device during the exchange critical care. */
-"btn_NoMatch" = "No Match";
+"btn_NoMatch" = "Geen overeenstemming";
 /* 'Not Now' is a button (title case); the Not Now button is used as a negative button to decline an offered service or permission. */
 "btn_NotNow" = "Not Now";
 /* 'Forget' is a button (title case); the Forget button is paired with the Remind button and is used to indicate the user wishes to dismiss the current reminder of a potential error state, such as having backup or notification settings turned off, and not be reminded again. */
@@ -139,6 +137,8 @@
 /* 'Up' is a choice (sentence case); used in the File Manager dialog to navigate up to a parent directory. */
 "choice_Up" = "Omhoog";
 
+/* 'Some members are using an older version; all members must upgrade to the newest version.' is an error message (sentence case, period); used to warn when some members of the key exchange protocol are using less than the minimum version. Used for backward-compatibility in some cases. */
+"error_AllMembersMustUpgrade" = "Sommige leden zijn met behulp van een oudere versie; Alle leden moeten upgraden naar de nieuwste versie.";
 /* 'All members must upgrade, some are using older key formats.' is an error message (sentence case, period); used to warn when the key format is incorrect after an exchange and perhaps used an old format. */
 "error_AllMembersMustUpgradeBadKeyFormat" = "Alle leden moeten upgraden, wat gebruik maakt van oudere belangrijke formaten.";
 /* 'All members must upgrade, some are using older push registration formats.' is an error message (sentence case, period); used to warn when the push registration format is incorrect or corrupted. */
@@ -149,8 +149,8 @@
 "error_AudioPlayerError" = "Kunt de opnameduur niet afspelen.";
 /* 'Audio recorder encoding error.' is an error message (sentence case, period); used to warn when attempting to record an audio message fails to encode properly. iOS-only. */
 "error_AudioRecorderEncodeError" = "Audiorecorder codering fout.";
-/* 'Microphone permission is required to record a secure voice message. Tap the Help button for SafeSlinger Microphone permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Microphone permission. iOS-only. */
-"error_AudioRecorderPermissionError" = "Microfoon toestemming is nodig om een veilige spraakbericht. Tik op de knop Help voor SafeSlinger Microfoon toestemming details.";
+/* 'Microphone permission is required to record a secure voice message. Tap the %s button for SafeSlinger Microphone permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Microphone permission. iOS-only. */
+"error_AudioRecorderPermissionError" = "Microfoon toestemming is nodig om een veilige spraakbericht opnemen. Tik op de knop voor %@ SafeSlinger Microfoon toestemming details.";
 /* 'No backup to restore.' is an error message (sentence case, period); used to warn at application setup, when there is no pre-existing backup to restore and warn the user that any previous keys have not been restored. */
 "error_BackupNotFound" = "Geen back-up te herstellen.";
 /* 'Device does not support backup restore.' is an error message (sentence case, period); used to warn when the device hardware does not support restoration from backup. */
@@ -202,7 +202,7 @@
 /* 'Incorrect data found in exchange. Begin the exchange again.' is an error message (sentence case, period); used to warn when some item received from another group member during the key exchange did not hash correctly to the previously committed value. */
 "error_InvalidCommitVerify" = "Onjuiste gegevens gevonden in ruil. Begin de uitwisseling weer.";
 /* 'Please enter a positive integer.' is an error message (sentence case, period); used to warn when the user attempted to type in a group ID on the Grouping screen that was zero, negative, or empty. */
-"error_InvalidCommonUserId" = "Geef een positief geheel getal.";
+"error_InvalidCommonUserId" = "A.u.b.vul een positief geheel getal in.";
 /* 'A valid contact name is required.' is an error message (sentence case, period); used to warn when the user completes Setup without typing a name, or the name includes 3rd-person words we cannot allow, such as: 'Me', 'Contact', 'Foo',… */
 "error_InvalidContactName" = "Een geldige naam van de contactpersoon is vereist.";
 /* 'Bad incoming message format.' is an error message (sentence case, period); used to warn when the incoming message was not formatted properly. */
@@ -234,7 +234,7 @@
 /* 'No passphrase entered.' is an error message (sentence case, period); used to warn when a user generates or changes a passphrase and they have entered a blank password, which is not acceptable. */
 "error_noPassPhrase" = "Geen wachtwoord ingevoerd.";
 /* 'You must select one of the phrases before proceeding.' is an error message (sentence case, period); used to warn when the user attempts to proceed past the word phrase Verify screen during the exchange protocol and they have not selected, which of the three phrases match with the other users'. */
-"error_NoWordListSelected" = "U moet een van de zinnen te selecteren voordat u verder gaat.";
+"error_NoWordListSelected" = "U moet een van de combinaties kiezen voordat U verder gaat.";
 /* 'Someone reported a difference in phrases. Begin the exchange again.' is an error message (sentence case, period); used to warn when at least one other member of the group during the exchange protocol pressed the 'No Match' button. */
 "error_OtherGroupCommitDiffer" = "Iemand rapporteerde een verschil in zinnen. Begin de uitwisseling weer.";
 /* 'Memory is too low to complete this operation.' is an error message (sentence case, period); used to warn when a request for memory is made that cannot be satisfied using the available platform resources. Such a request may be made by both the running application or by an internal function of the VM. */
@@ -264,13 +264,13 @@
 /* 'You need an attachment or a text message to send.' is an error message (sentence case, period); used to warn when the user has not attached a file or typed any text message to send to the recipient after using the 'Send' button. */
 "error_selectDataToSend" = "U moet een bijlage of een tekstbericht te sturen.";
 /* 'Server Message: %s' is an error message (sentence case, period); used to warn when the server has an error message to send back to the client. %s = an English (non-localized) error message sent by our App Engine server code. */
-"error_ServerAppMessage" = "Server Message: %@";
+"error_ServerAppMessage" = "Server bericht: %@";
 /* 'No response from server.' is an error message (sentence case, period); used to warn when the server timeout occurs, usually after 30 seconds and did not respond to the client. */
 "error_ServerNotResponding" = "Geen reactie van server.";
 /* 'Cannot remove the shared file.' is an error message (sentence case, period); used to warn when the shared file cannot be deleted. iOS-only. */
 "error_ShareFileDelError" = "Kan het gedeelde bestand niet verwijderen.";
 /* 'Timeout waiting for some group members to add data.' is an error message (sentence case, period); used to warn during the key exchange protocol when at least one of the members of the group has not submitted their data to the server or client itself is not able to retrieve the data within the timeout window, currently 2 minutes. */
-"error_TimeoutWaitingForAllMembers" = "Timeout wachten voor sommige groepsleden om gegevens toe te voegen.";
+"error_TimeoutWaitingForAllMembers" = "Time-out wacht op sommige groep leden om gegevens toe te voegen.";
 /* 'Unable to match public key to private key in crypto provider.' is an error message (sentence case, period); used to warn when the public encryption key used in the message received is not currently the same private key used, the user should probably Sling Keys to update again. */
 "error_UnableFindPubKey" = "Kan openbare sleutel tot persoonlijke sleutel in crypto provider overeenkomen.";
 /* 'Unable to save to the message database.' is an error message (sentence case, period); used to warn when there is database error inserting a new message. */
@@ -286,7 +286,7 @@
 /* 'Contact data was formatted incorrectly.' is an error message (sentence case, period); used to warn when the vCard format used to exchange contact fields during key exchange are improperly formatted. */
 "error_VcardParseFailure" = "Contact gegevens onjuist geformatteerd.";
 /* 'User canceled server request.' is an error message (sentence case, period); used to warn when the user exited the key exchange protocol or messaging transmission before it was finished. */
-"error_WebCancelledByUser" = "Gebruiker geannuleerd server aanvraag.";
+"error_WebCancelledByUser" = "Bewerking geannuleerd door gebruiker.";
 
 /* 'Use this screen to set your name to exchange with others, and a passphrase to protect your data. Tap the Done button when finished.' is a help message (sentence case, period); used via Help button on the Setup screen to describe in more detail what the Setup screen does. */
 "help_find" = "Gebruik dit scherm om uw naam in te stellen uit te wisselen met anderen, en een wachtwoord om uw gegevens te beschermen. Tik op de knop Gereed als u klaar bent.";
@@ -313,18 +313,22 @@
 /* 'Select the number of people who are attempting to exchange data together and press OK.' is a help message (sentence case, period); used via Help button on the Group Size screen and also the key exchange walkthrough tutorial to describe in more detail what the Group Size screen does. */
 "help_size" = "Selecteer het aantal mensen die proberen om gegevens samen en druk op OK te wisselen.";
 /* 'This number on this screen is used to create a unique group of users. Review the numbers on all users' screens, then all users should enter the same lowest number and press OK.' is a help message (sentence case, period); used via Help button on the Grouping screen and also the key exchange walkthrough tutorial to describe in more detail what the Grouping screen does. */
-"help_userid" = "Dit nummer op dit scherm wordt gebruikt om een ​​unieke groep gebruikers te creëren. Geef je mening over de nummers op de schermen van alle gebruikers, dan zullen alle gebruikers moeten hetzelfde laagste nummer in te voeren en druk op OK.";
+"help_userid" = "Dit nummer op deze scherm wordt gebruikt om een unieke gebruiker groep te maken.Vindt de laagste gemeenschappelijke nummer van de schermen van alle gebruikers, dan moeten alle gebruikers deze nummer ingeven en OK drukken.";
 /* 'Now, you must match one of these 3-word phrases with all users. Every user must select the same common phrase, and press Next.' is a help message (sentence case, period); used via Help button on the Verify screen and also the key exchange walkthrough tutorial to describe in more detail what the Verify screen does. */
-"help_verify" = "Nu, moet u een van deze 3-woord zinnen overeenkomen met alle gebruikers. Elke gebruiker moet dezelfde gemeenschappelijke uitdrukking te selecteren en druk op Volgende.";
+"help_verify" = "Nu moet een van deze 3 woord combinaties met alle gebruikers overeenstemmen.Iedere gebruiker moet dezelfde gemeenschappelijke combinatie kiezen, en druk op.";
 
-/* 'Contacts permission is required for securely sharing contact cards. Tap the Help button for SafeSlinger Contacts permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Contacts permission. iOS-only. */
-"iOS_contactError" = "Contacten toestemming is vereist voor het veilig delen van contact kaarten. Tik op de knop Help voor SafeSlinger Contacten toestemming details.";
+/* 'Camera permission is required to attach snapshots to secure messages. Tap the %s button for SafeSlinger Camera permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Camera permission. iOS-only. */
+"iOS_cameraError" = "Camera toestemming is vereist om snapshots om berichten veilig te hechten. Tik op de knop voor %@ SafeSlinger Camera toestemming details.";
+/* 'Contacts permission is required for securely sharing contact cards. Tap the %s button for SafeSlinger Contacts permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Contacts permission. iOS-only. */
+"iOS_contactError" = "Contacten toestemming is vereist voor het veilig delen van relatiekaarten. Tik op de knop voor %@ SafeSlinger Contacten toestemming details.";
 /* 'Push registration is missing.' is an error message (sentence case, period); used to warn the user the push registration is missing. iOS-only. */
 "iOS_errorpushtoken" = "Push registratie ontbreekt.";
-/* 'Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the Help button for SafeSlinger Notification permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Notifications permission. iOS-only. */
-"iOS_notificationError1" = "Kennisgeving toestemming voor zowel waarschuwingen of banners, en kenteken nummers, zijn nodig voor een veilige messaging. Tik op de knop Help voor SafeSlinger Notification toestemming details.";
+/* 'Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the %s button for SafeSlinger Notification permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Notifications permission. iOS-only. */
+"iOS_notificationError1" = "Kennisgeving toestemming voor zowel waarschuwingen of banners, en badge nummers, zijn nodig voor een veilige messaging. Tik op de knop voor %@ SafeSlinger Notification toestemming details.";
 /* 'SafeSlinger is not optimized for iOS 5.x devices. SafeSlinger requires iOS 6 or higher.' is an informational message (sentence case, period); message for dialog popups when a user still uses an old iOS device. iOS-only. */
 "iOS_oldOSWarn" = "SafeSlinger is niet geoptimaliseerd voor iOS 5.x apparaten. SafeSlinger vereist iOS 6 of hoger.";
+/* 'Photo Library permission is required to attach pictures to secure messages. Tap the %s button for SafeSlinger Photo Library permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Photo Library permission. iOS-only. */
+"iOS_photolibraryError" = "Photo Library toestemming nodig om foto's te berichten te beveiligen hechten. Tik op de knop voor %@ SafeSlinger fotobibliotheek toestemming details.";
 /* 'You can select your contact card to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Contacts when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Contacts permission. iOS-only. */
 "iOS_RequestPermissionContacts" = "U kunt uw visitekaartje selecteren om je vrienden te sturen en SafeSlinger zal het te versleutelen voor u. Om deze functie te activeren, moet u SafeSlinger toegang tot uw Contactpersonen staan ​​wanneer gevraagd.";
 /* 'You can record a voice message to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Microphone when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Microphone permission. iOS-only. */
@@ -537,7 +541,7 @@
 /* 'User Name' is a screen label (match English casing); used as a placeholder before the users' contact has been loaded. */
 "label_UserName" = "Gebruikers Naam";
 /* 'All phones must match one of the 3-word phrases. Compare, and then pick the matching phrase.' is a screen label (match English casing); used to instruct the user how to proceed on the Verify screen. */
-"label_VerifyInstruct" = "Alle telefoons moeten overeenkomen met een van de 3-woord zinnen. Vergelijken, en pak dan de matching zin.";
+"label_VerifyInstruct" = "Alle telefoons moeten overeenkomen met een van de 3 woord combinaties. Vergelijk, dan kies de passende combinatie.";
 /* 'To protect your data, SafeSlinger does not store your passphrase anywhere for recovery. You may only access recipients and messages created under the same passphrase login. However, you may generate a new key and passphrase, then repeat Sling Keys with your recipients.' is a screen label (match English casing); used to describe the reasons passphrases are not storeed and how to generate a new one. */
 "label_WarnForgotPassphrase" = "Om uw gegevens te beschermen, SafeSlinger niet uw wachtwoord ergens op te slaan voor herstel. U kunt alleen toegang krijgen tot de ontvangers en berichten gemaakt onder dezelfde wachtzin login. Echter, kunt u een nieuwe sleutel en wachtwoord genereren, herhaal Sling Toetsen met uw ontvangers.";
 /* 'The following keys will be deleted:' is a screen label (match English casing); used to begin list of keys that will be deleted. */
@@ -592,6 +596,8 @@
 "menu_Introduction" = "Introductie";
 /* 'Language' is a menu (title case); used as the settings menu option to change language */
 "menu_language" = "Taal";
+/* 'License' is a menu option (title case); used to show a dialog of the End User License Agreement. */
+"menu_License" = "Licentie";
 /* 'Add Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
 "menu_link_contact_add" = "Contactpersoon toevoegen Link";
 /* 'Change Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
@@ -606,6 +612,8 @@
 "menu_messageCopyText" = "Tekst kopiëren";
 /* 'Forward' is a menu option (title case); used to create a new message with the same text message/attachment via the message list context menu. */
 "menu_messageForward" = "Vooruit";
+/* 'Privacy Policy' is a menu option (title case); used to show a dialog of the Privacy Policy. */
+"menu_PrivacyPolicy" = "Privacybeleid";
 /* 'Remove' is a menu option (title case); used to remove the currently selected file attachment via the File Options dialog. */
 "menu_Remove" = "Verwijderen";
 /* 'Restore Default Settings' is a menu option (title case); used as Settings screen menu item for restoring all settings to default */
@@ -640,9 +648,9 @@
 "menu_vibrate" = "Trillen";
 
 /* 'waiting for verification from all members...' is a progress message (lower case, ellipsis); used to show progress while verifying data from all members hash equal to the initial commitment they sent. */
-"prog_CollectingOthersCommitVerify" = "wachten voor de verificatie van alle leden...";
+"prog_CollectingOthersCommitVerify" = "Wachten op verificatie van de alle leden...";
 /* 'waiting for all users to join...' is a progress message (lower case, ellipsis); used to show progress while waiting to collect all initial commitments from members who entered the same lowest number grouping ID. */
-"prog_CollectingOthersItems" = "wachten voor alle gebruikers uit te nodigen...";
+"prog_CollectingOthersItems" = "Wachten op alle leden zich aan te sluiten...";
 /* 'constructing group key...' is a progress message (lower case, ellipsis); used to show progress while generating the asymmetric shared group key tree and distributing the appropriate public tree nodes. */
 "prog_ConstructingGroupKey" = "construeren groeptoets...";
 /* 'decrypting...' is a progress message (lower case, ellipsis); used to show progress during message decryption (and currently signature verification as well). */
@@ -668,7 +676,7 @@
 /* 'requesting push registration...' is a progress message (lower case, ellipsis); used to show progress while waiting for Google or APNS to return a registration id for this phone to receive SafeSlinger-only push messages. */
 "prog_RequestingPushReg" = "verzoekende push registratie...";
 /* 'requesting membership...' is a progress message (lower case, ellipsis); used to show progress while waiting for the exchange server to return a grouping ID number. */
-"prog_RequestingUserId" = "vraagt ​​lidmaatschap...";
+"prog_RequestingUserId" = "Aanvragen van het lidmaatschap...";
 /* 'updating address book...' is a progress message (lower case, ellipsis); used to show progress while newly exchanged contact data is added to the users' address book. */
 "prog_SavingContactsToAddressBook" = "updating adresboek...";
 /* 'updating key database...' is a progress message (lower case, ellipsis); used to show progress while newly exchanged keys are added to the local database. */
@@ -722,6 +730,8 @@
 "text_About2" = "Veilig sling teksten, foto's, om het even wat!";
 /* 'Strong cryptography protects your information' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
 "text_About3" = "Sterke cryptografie beschermt uw informatie";
+/* 'SafeSlinger: Speak 3 words and forever chat in peace.' is an application description (sentence case); used in the about box and app store listing to describe the application features. Short form: 80 character max, should be exciting. */
+"text_About_Short" = "SafeSlinger: Spreek 3 woorden en voor altijd een praatje in vrede.";
 /* 'email: %s' is an application description (sentence case); used in the app store listing, %s = SafeSlinger support email address. */
 "text_AboutEmail" = "e-mail: %@";
 /* 'Features:' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
@@ -816,7 +826,7 @@
 /* 'Sharing Folder' is a menu option (title case); used in the Select File Option menu to select a file from the sharing folder on iOS. */
 "title_sharingfolder" = "Folder sharing";
 /* 'How many users in the exchange?' is a title (title case); used at the top of the group size selection screen. */
-"title_size" = "Hoeveel gebruikers in de uitwisseling?";
+"title_size" = "Hoeveel gebruikers in de ruil?";
 /* 'Sound Recorder' is a menu option (title case); used in the Select File Option menu to create a voice recording on iOS. */
 "title_soundrecoder" = "Sound Recorder";
 /* 'SafeSlinger Invitation' is a title (title case); used as the Subject field of an email or text message sent by the Share Application menu option. */

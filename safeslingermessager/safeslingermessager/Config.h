@@ -71,13 +71,17 @@
 #define kBackupReqDate @"BackupReqDate"
 #define kBackupURL @"BackupURL"
 #define kAPPVERSION @"APP_VERSION"
-#define kRequireContactPrivacy @"RequireContactPrivacy"
+
 #define kRequireMicrophonePrivacy @"RequireMicrophonePrivacy"
 #define kRequirePushNotification @"RequirePushNotification"
+
 #define kPushNotificationHelpURL @"https://www.cylab.cmu.edu/safeslinger/help/h1.html"
 #define kContactHelpURL @"https://www.cylab.cmu.edu/safeslinger/help/h2.html"
 #define kiCloudHelpURL @"https://www.cylab.cmu.edu/safeslinger/help/h3.html"
 #define kMicrophoneHelpURL @"https://www.cylab.cmu.edu/safeslinger/help/h4.html"
+#define kPhotoHelpURL @"https://www.cylab.cmu.edu/safeslinger/help/h5.html"
+#define kCameraHelpURL @"https://www.cylab.cmu.edu/safeslinger/help/h6.html"
+
 #define kPrivacyURL @"http://www.cylab.cmu.edu/safeslinger/privacy.html"
 #define kLicenseURL @"http://www.cylab.cmu.edu/safeslinger/eula.html"
 
@@ -85,6 +89,8 @@ typedef enum PermDialog {
     AskPerm = 100,
 	HelpContact,
 	HelpNotification,
+    HelpPhotoLibrary,
+    HelpCamera,
     HelpMicrophone
 }PermDialog;
 

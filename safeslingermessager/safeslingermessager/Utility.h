@@ -34,7 +34,6 @@
 + (void) RemoveDuplicates: (ABAddressBookRef)aBook AdressList:(CFArrayRef)allPeople CompareArray:(NSMutableDictionary*)compared;
 + (NSComparisonResult)CompareDate: (NSString*)basedate Target:(NSString*)targetdate;
 + (void) TriggerContactPermission;
-+ (BOOL) checkContactPermission;
 
 @end
 

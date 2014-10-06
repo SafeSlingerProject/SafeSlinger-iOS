@@ -29,6 +29,7 @@
 #import "ContactCellView.h"
 #import "IntroduceView.h"
 #import "ComposeView.h"
+#import "IntroduceView.h"
 #import "FunctionView.h"
 #import "BackupCloud.h"
 
@@ -73,7 +74,7 @@
             [detail appendString:@"DEV: iOS\n"];
             break;
         default:
-            [detail appendFormat:@"DEV: %d\n", devType];
+            [detail appendFormat:@"DEV: %d", devType];
             break;
     }
     
@@ -92,6 +93,7 @@
 @synthesize delegate, UserInfo, showRecent;
 @synthesize Hint, SwitchHint;
 @synthesize selectedUser;
+@synthesize parent;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -106,13 +108,13 @@
 {
     [super viewDidLoad];
     
-    delegate = [[UIApplication sharedApplication]delegate];
+    delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     
     // Hints
     Hint = [[UILabel alloc] initWithFrame:CGRectZero];
     Hint.backgroundColor = [UIColor clearColor];
     Hint.opaque = NO;
-    Hint.frame = CGRectMake(10.0, 0.0, 300.0, 80.0);
+    Hint.frame = CGRectMake(10.0, 0.0, self.view.frame.size.width-20.0, 80.0);
     Hint.lineBreakMode = NSLineBreakByWordWrapping;
     Hint.numberOfLines = 0;
     
@@ -191,7 +193,7 @@
 
 -(void)DisplayTitle
 {
-    if([UtilityFunc checkContactPermission])
+    if(ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized)
     {
         CFErrorRef error = NULL;
         ABAddressBookRef aBook = NULL;
@@ -341,7 +343,8 @@
         [customView addSubview: SwitchHint];
     }
     else {
-        customView = [[UIView alloc] initWithFrame:CGRectMake(10.0, 0.0, 300.0, 150.0)];
+        
+        customView = [[UIView alloc] initWithFrame:CGRectMake(10.0, 0.0, self.view.frame.size.width-20.0, 150.0)];
         // no slingers
         [Hint setText: NSLocalizedString(@"label_InstNoRecipients", @"To add recipients, you must first Sling Keys with one or more other users at the same time. You may also send a Sling Keys contact invitation from the menu.")];
     }
@@ -380,8 +383,25 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath: indexPath animated: YES];
-    selectedUser = [safeslingers objectAtIndex: indexPath.row];
-    [self performSegueWithIdentifier:@"FinishContactSelect" sender:self];
+    
+    if([self.restorationIdentifier isEqualToString:@"ContactSelectForIntroduce"])
+    {
+        if(parent)
+        {
+            IntroduceView* introduction = (IntroduceView*) parent;
+            if([introduction EvaluateContact: [safeslingers objectAtIndex: indexPath.row]])
+                [introduction SetupContact:[safeslingers objectAtIndex: indexPath.row]];
+        }
+    }else if([self.restorationIdentifier isEqualToString:@"ContactSelectForCompose"]){
+        if(parent)
+        {
+            ComposeView* compose = (ComposeView*)parent;
+            compose.selectedUser = [safeslingers objectAtIndex: indexPath.row];
+            [compose UpdateRecipient];
+        }
+    }
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

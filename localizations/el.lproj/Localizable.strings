@@ -23,21 +23,19 @@
 */
 
 /* 'Add a Sling Keys contact invitation via...' is an action title (sentence case, ellipsis); this title is used during Add Contact Invitation in a dialog of message choices, which can send an installation URL for SafeSlinger along with instructions. */
-"action_NewUserRequest" = "Προσθέστε μια σφεντόνα Keys επαφή πρόσκληση μέσω...";
+"action_NewUserRequest" = "Προσθέστε μια Sling Keys πρόσκληση επαφής μέσω...";
 
 /* 'SafeSlinger' is an application name (title case); used for home screen icons, at the top of many screens, and many other places in the application. */
 "app_name" = "SafeSlinger";
-/* 'Michael W Farb' is a language editor (title case); the name of the individual who translated it and/or reviewed this localization. */
-"app_TranslatorName" = "Elli Fragkaki";
 
 /* 'Backup is disabled. Do you want to adjust backup settings and keep this reminder?' is a question message (sentence case, question mark); used to warn when the backup is off to confirm we should keep reminding the user. Used with Forget and Remind buttons. */
-"ask_BackupDisabledRemindLater" = "Δημιουργία αντιγράφων ασφαλείας είναι απενεργοποιημένη. Μήπως θέλετε να προσαρμόσετε τις ρυθμίσεις αντιγράφων ασφαλείας και να διατηρήσουν αυτό υπενθύμιση;";
+"ask_BackupDisabledRemindLater" = "Η δημιουργία αντιγράφων ασφαλείας είναι απενεργοποιημένη. Μήπως θέλετε να προσαρμόσετε τις ρυθμίσεις αντιγράφων ασφαλείας και να διατηρήσετε αυτήν την υπενθύμιση;";
 /* '%s has a more recent device or key, are you sure you want to use this older one?' is a question message (sentence case, question mark); is a confirmation question that occurs when the user selected a recipient with more recent information in the database. */
-"ask_ConfirmUseOlderDeviceOrKey" = "%@ έχει μια πιο πρόσφατη συσκευή ή το πλήκτρο, είναι Είστε βέβαιοι ότι θέλετε να χρησιμοποιήσετε αυτό το παλαιότερο;";
+"ask_ConfirmUseOlderDeviceOrKey" = "%@ έχει μια πιο πρόσφατη έκδοση ή κλειδί, είστε βέβαιοι ότι θέλετε να χρησιμοποιήσετε την παλαιότερη έκδοση;";
 /* 'File name %s already exists. Overwrite?' is a question message (sentence case, question mark); is a question that occurs when the user attempts to save a file with the same name as an existing file in the same location. %s = the file name of the attachment. */
-"ask_FileExistsOverwrite" = "Όνομα αρχείου %@ υπάρχει ήδη. Αντικατάσταση;";
+"ask_FileExistsOverwrite" = "Το όνομα αρχείου %@ υπάρχει ήδη. Αντικατάσταση;";
 /* 'Without a Google Account you will only be able to send, NOT receive messages. Do you want to add a Google account?' is a question message (sentence case, question mark); used to warn when a Google account has not been setup, if the user intends to receive messages. Android-only. */
-"ask_GoogleAccountToReceiveMsgs" = "Χωρίς έναν Λογαριασμό Google, θα είναι σε θέση να αποστέλλουν, να λάβετε μηνύματα. Θέλετε να προσθέσετε ένα λογαριασμό Google;";
+"ask_GoogleAccountToReceiveMsgs" = "Χωρίς λογαριασμό Google, θα είστε σε θέση να αποστέλλετε,αλλά όχι να λάβετε μηνύματα. Θέλετε να προσθέσετε ένα λογαριασμό Google;";
 /* 'Quit? Are you sure?' is a question message (sentence case, question mark); is a confirmation question that occurs when the user chooses to end the exchange protocol prematurely. */
 "ask_QuitConfirmation" = "Κλείσιμο; Είσαι σίγουρος;";
 /* 'We'd like your help improving SafeSlinger. Would you like to automatically send any errors to us?' is a question message (sentence case, question mark); is a question that occurs when the user encounters an unhandled exception and are asked if they want to upload this error log and any future error logs. */
@@ -56,7 +54,7 @@
 /* 'Create New Key' is a button (title case); the Create New Key button is paired with the Cancel button, and is used to affirm the creation of a new key and passphrase. */
 "btn_CreateNewKey" = "Δημιουργία νέου κλειδιού";
 /* 'Delete Keys' is a button (title case); the Create New Key button is paired with the Cancel button, and is used to affirm the deletion of more recent keys. */
-"btn_DeleteKeys" = "Διαγραφή Keys";
+"btn_DeleteKeys" = "Διαγραφή Κλειδιών";
 /* 'Discard' is a button (title case); the Discard button is used to indicate the user wishes to exit the current screen without saving data, such as a voice memo. For non-Android use only, since Android uses the Back hardware button instead. */
 "btn_discard" = "Απόρριψη";
 /* 'Done' is a button (title case); the Done button is used to allow the user to complete a current multi-step process. */
@@ -121,179 +119,181 @@
 /* 'Large' is a choice (sentence case); used in the settings to choose a large font size. */
 "choice_font_large" = "Μεγάλο";
 /* 'Medium' is a choice (sentence case); used in the settings to choose a medium font size. */
-"choice_font_medium" = "Μέσον";
+"choice_font_medium" = "Μεσαίο";
 /* 'Very Small' is a choice (sentence case); used in the settings to choose a tiny font size. */
-"choice_font_micro" = "Πολύ Μικρές";
+"choice_font_micro" = "Πολύ Μικρό";
 /* 'Small' is a choice (sentence case); used in the settings to choose a small font size. */
 "choice_font_small" = "Μικρό";
 /* 'Internal Storage' is a choice (sentence case); used to set the attachment root path to an internal source. Android-only. */
 "choice_internal_storage" = "Εσωτερικός χώρος αποθήκευσης";
 /* 'No Limit' is a choice (sentence case); used to remove the timeout for the password. */
-"choice_nolimit" = "No Limit";
+"choice_nolimit" = "Χωρίς όριο";
 /* '%d users' is a choice (sentence case); used to describe the number of users currently attempting to exchange keys. %d = number of users in the exchange. */
 "choice_NumUsers" = "%d χρήστες";
 /* 'Save Directory' is a choice (sentence case); used when the user chooses to change the directory of the attachment before saving. */
-"choice_SaveDirectory" = "Αποθήκευση Directory";
+"choice_SaveDirectory" = "Αποθήκευση Φακέλου";
 /* 'Save file' is a choice (sentence case); used when the user chooses to change the filename of the attachment before saving. */
 "choice_SaveFile" = "Αποθήκευση αρχείου";
 /* 'Up' is a choice (sentence case); used in the File Manager dialog to navigate up to a parent directory. */
 "choice_Up" = "Πάνω";
 
+/* 'Some members are using an older version; all members must upgrade to the newest version.' is an error message (sentence case, period); used to warn when some members of the key exchange protocol are using less than the minimum version. Used for backward-compatibility in some cases. */
+"error_AllMembersMustUpgrade" = "Μερικά μέλη χρησιμοποιώντας μια παλαιότερη έκδοση? όλα τα μέλη πρέπει να αναβαθμίσουν στην τελευταία έκδοση.";
 /* 'All members must upgrade, some are using older key formats.' is an error message (sentence case, period); used to warn when the key format is incorrect after an exchange and perhaps used an old format. */
 "error_AllMembersMustUpgradeBadKeyFormat" = "Όλα τα μέλη πρέπει να αναβαθμίσουν, ορισμένα χρησιμοποιούν παλαιότερες μορφές κλειδιού.";
 /* 'All members must upgrade, some are using older push registration formats.' is an error message (sentence case, period); used to warn when the push registration format is incorrect or corrupted. */
-"error_AllMembersMustUpgradeBadPushToken" = "Όλα τα μέλη πρέπει να αναβαθμίσουν, ορισμένοι χρησιμοποιούν μεγαλύτερα ώθηση μορφές εγγραφής.";
+"error_AllMembersMustUpgradeBadPushToken" = "Όλα τα μέλη πρέπει να αναβαθμίσουν, ορισμένα χρησιμοποιούν παλαιότερη έκδοση push registration.";
 /* 'Audio player decoding error.' is an error message (sentence case, period); used to warn when attempting to play an audio message fails to decode properly. iOS-only. */
 "error_AudioPlayerDecodeError" = "Audio player σφάλμα αποκωδικοποίησης.";
 /* 'Cannot play the recording.' is an error message (sentence case, period); used to warn when the voice recording received cannot be played. iOS-only. */
 "error_AudioPlayerError" = "Δεν είναι δυνατή η αναπαραγωγή της ηχογράφησης.";
 /* 'Audio recorder encoding error.' is an error message (sentence case, period); used to warn when attempting to record an audio message fails to encode properly. iOS-only. */
 "error_AudioRecorderEncodeError" = "Σφάλμα κωδικοποίησης της εγγραφής ήχου.";
-/* 'Microphone permission is required to record a secure voice message. Tap the Help button for SafeSlinger Microphone permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Microphone permission. iOS-only. */
-"error_AudioRecorderPermissionError" = "Άδεια μικρόφωνο είναι υποχρεωμένος να καταγράφει ένα ασφαλές φωνητικό μήνυμα. Πατήστε το κουμπί Βοήθεια για SafeSlinger μικρόφωνο λεπτομέρειες άδεια.";
+/* 'Microphone permission is required to record a secure voice message. Tap the %s button for SafeSlinger Microphone permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Microphone permission. iOS-only. */
+"error_AudioRecorderPermissionError" = "Άδεια μικροφώνου απαιτείται για να καταγράψει ένα ασφαλές φωνητικό μήνυμα. Πατήστε το κουμπί %@ για SafeSlinger Μικρόφωνο λεπτομέρειες άδεια.";
 /* 'No backup to restore.' is an error message (sentence case, period); used to warn at application setup, when there is no pre-existing backup to restore and warn the user that any previous keys have not been restored. */
-"error_BackupNotFound" = "Δεν βρέθηκε αντίγραφο ασφαλείας για επαναφορά.";
+"error_BackupNotFound" = "Δε βρέθηκε αντίγραφο ασφαλείας για επαναφορά.";
 /* 'Device does not support backup restore.' is an error message (sentence case, period); used to warn when the device hardware does not support restoration from backup. */
 "error_BackupNotSupportedDevice" = "Η συσκευή δεν υποστηρίζει επαναφορά αντιγράφων ασφαλείας.";
 /* 'Due to a bug in Android 4.1, you will have to uninstall and reinstall SafeSlinger.' is an error message (sentence case, period); used to warn when unable to load native libraries due to a Google Play copy-protection bug, which can corrupt installations for users upgrading to Android 4.1. Android-only. */
-"error_BadCopyProtectUpgrade" = "Λόγω ενός bug στο Android 4.1, θα έχετε απεγκατάσταση και επανεγκατάσταση SafeSlinger.";
+"error_BadCopyProtectUpgrade" = "Λόγω ενός bug στο Android 4.1, χρειάζεται να απεγκαταστήσετε και επανεγκαταστήσετε το SafeSlinger.";
 /* 'A Google account is required. Please open the account manager and add a Google account.' is an error message (sentence case, period); used to warn during push registration: There is no Google account on the phone. The application should ask the user to open the account manager and add a Google account. Fix on the device side. Android-only. */
-"error_C2DMRegAccountMissing" = "Ένας λογαριασμός Google είναι υποχρεωμένη. Παρακαλούμε ανοίξτε το διαχειριστή του λογαριασμού και να προσθέσετε ένα λογαριασμό Google.";
+"error_C2DMRegAccountMissing" = "Ένας λογαριασμός Google είναι απαραίτητος. Παρακαλούμε ανοίξτε το διαχειριστή λογαριασμών και προσθέστε ένα λογαριασμό Google.";
 /* 'Registration not authenticated, please retry manually later.' is an error message (sentence case, period); used to warn during push registration: Bad password. The application should ask the user to enter his/her password, and let user retry manually later. Fix on the device side. Android-only. */
-"error_C2DMRegAuthenticationFailed" = "Εγγραφή δεν κυρώθηκε, δοκιμάστε ξανά το χέρι αργότερα.";
+"error_C2DMRegAuthenticationFailed" = "Η εγγραφή δεν ολοκληρώθηκε, δοκιμάστε ξανά αργότερα.";
 /* 'Registration is not available for this version, please check for an updated version.' is an error message (sentence case, period); used to warn during push registration: The sender account is not recognized. Android-only. */
 "error_C2DMRegInvalidSender" = "Η εγγραφή δεν είναι διαθέσιμη για αυτήν την έκδοση, παρακαλούμε να ελέγξετε για μια ενημερωμένη έκδοση.";
 /* 'Incorrect device registration with Google. This device does not currently support push messaging.' is an error message (sentence case, period); used to warn during push registration: Incorrect phone registration with Google. This phone doesn't currently support C2DM. Android-only. */
-"error_C2DMRegPhoneRegistrationError" = "Εσφαλμένη εγγραφή της συσκευής με το Google. Αυτή η συσκευή δεν υποστηρίζει μηνυμάτων ώθηση.";
+"error_C2DMRegPhoneRegistrationError" = "Εσφαλμένη εγγραφή της συσκευής με τη Google. Αυτή η συσκευή δεν υποστηρίζει push messaging.";
 /* 'Push registration service not available, scheduling retry in %d seconds.' is an error message (sentence case, period); used to warn during push registration: The device can't read the response, or there was a 500/503 from the server that can be retried later. The application should use exponential back off and retry. %d = the current number of seconds until the next push registration attempt. Android-only. */
-"error_C2DMRegServiceNotAvailable" = "Σπρώξτε υπηρεσία εγγραφής δεν είναι διαθέσιμο, ο προγραμματισμός ξανά σε %d δευτερόλεπτα.";
+"error_C2DMRegServiceNotAvailable" = "H υπηρεσία push registration δεν είναι διαθέσιμη, επανάληψη σε %d δευτερόλεπτα.";
 /* 'Too many applications are registered for Push. Please uninstall some other applications and retry.' is an error message (sentence case, period); used to warn during push registration: The user has too many applications registered. The application should tell the user to uninstall some other applications, let user retry manually. Fix on the device side. Android-only. */
-"error_C2DMRegTooManyRegistrations" = "Πάρα πολλές εφαρμογές εγγραφεί για Push. Παρακαλούμε απεγκαταστήσετε μερικές άλλες εφαρμογές και δοκιμάστε ξανά.";
+"error_C2DMRegTooManyRegistrations" = "Πάρα πολλές εφαρμογές έχουν εγγραφεί για Push. Παρακαλούμε απεγκαταστήσετε μερικές άλλες εφαρμογές και δοκιμάστε ξανά.";
 /* 'Cannot send an empty attachment.' is an error message (sentence case, period); used to warn when use attempts to attach an empty file to the message. */
 "error_CannotSendEmptyFile" = "Δεν μπορείτε να στείλετε ένα άδειο αρχείο.";
 /* 'Cannot send attachments greater than %d bytes in size.' is an error message (sentence case, period); used to warn when the message and attachment (if any) exceed the current quota limits for the App Engine service we use. %d the maximum limit in bytes of the entire message plus attachments that the App Engine service will allow us to upload. */
-"error_CannotSendFilesOver" = "Δεν μπορείτε να στείλετε τα αρχεία μεγαλύτερη από %d bytes σε μέγεθος.";
+"error_CannotSendFilesOver" = "Δεν μπορείτε να στείλετε τα αρχεία μεγαλύτερα από %d bytes σε μέγεθος.";
 /* 'Cannot send a null attachment.' is an error message (sentence case, period); used to warn when use attempts to attach an empty file to the message. */
-"error_CannotSendNullFile" = "Δεν μπορείτε να στείλετε ένα αρχείο null.";
+"error_CannotSendNullFile" = "Δεν μπορείτε να στείλετε ένα άδειο αρχείο.";
 /* 'Contact creation failed.' is an error message (sentence case, period); used to warn when failing to insert new contact data. */
-"error_contactCreationFailure" = "Δημιουργία Επικοινωνία απέτυχε.";
+"error_contactCreationFailure" = "Δημιουργία επαφής απέτυχε.";
 /* 'Contact insert failed.' is an error message (sentence case, period); used to warn when failing to insert new contact data. */
-"error_ContactInsertFailed" = "Επικοινωνία εισάγετε απέτυχε.";
+"error_ContactInsertFailed" = "Εισάγωγή επαφής απέτυχε.";
 /* 'This contact is missing a name, please edit.' is an error message (sentence case, period); used to warn when the matching contact found on the Setup screen does not have a name. */
-"error_ContactNameMissing" = "Αυτή η επαφή λείπει ένα όνομα, μπορείτε να επεξεργαστείτε.";
+"error_ContactNameMissing" = "Αυτή η επαφή δεν έχει όνομα, προσθέστε ένα.";
 /* 'This contact is missing a name, please reselect.' is an error message (sentence case, period); used to warn when the matching contact found on the Setup screen does not have a name. */
-"error_ContactNameMissing2" = "Αυτή η επαφή λείπει ένα όνομα, μπορείτε να επιλέξετε ξανά.";
+"error_ContactNameMissing2" = "Αυτή η επαφή δεν έχει όνομα, επιλέξετε κάποια άλλη.";
 /* 'Contact update failed.' is an error message (sentence case, period); used to warn when failing to merge contact data after an exchange. */
-"error_ContactUpdateFailed" = "Επικοινωνήστε ενημέρωση απέτυχε.";
+"error_ContactUpdateFailed" = "Ενημέρωση επαφής απέτυχε.";
 /* 'Internet not available, check your settings.' is an error message (sentence case, period); used to warn when the user attempts to communicate with a server and the device cannot detect a path to the Internet. */
-"error_CorrectYourInternetConnection" = "Internet δεν είναι διαθέσιμη, ελέγξτε τις ρυθμίσεις σας.";
+"error_CorrectYourInternetConnection" = "Το internet δεν είναι διαθέσιμo, ελέγξτε τις ρυθμίσεις σας.";
 /* 'Could not extract private key.' is an error message (sentence case, period); used to warn when the user is not able to extract the private key from the encrypted private key stored on the device. */
-"error_couldNotExtractPrivateKey" = "Δεν ήταν δυνατή η εξαγωγή ιδιωτικό κλειδί.";
+"error_couldNotExtractPrivateKey" = "Δεν ήταν δυνατή η εξαγωγή ιδιωτικού κλειδιού.";
 /* 'Exchange timeout exceeded. Begin the exchange again.' is an error message (sentence case, period); used to warn when users have waited too long, 10 minutes, before completing the exchange protocol. */
-"error_ExchangeProtocolTimeoutExceeded" = "Χρονικού ορίου Exchange υπέρβαση. Ξεκινήστε πάλι την ανταλλαγή.";
+"error_ExchangeProtocolTimeoutExceeded" = "Υπέρβαση χρονικού ορίου ανταλλαγής.Προσπαθήστε ξανά.";
 /* '%s is not supported on %s at this time.' is an error message (sentence case, period); used to warn when a specific capability is not supported by a specific platform. */
 "error_FeatureIsNotSupport" = "%@ δεν υποστηρίζεται σε %@ αυτή τη στιγμή.";
 /* 'Unable to save %s.' is an error message (sentence case, period); used to warn when there was disk error attempting to save an attachment to the users' device. %s = the name of the file that failed to save. */
 "error_FileSave" = "Δεν είναι δυνατή η αποθήκευση %@.";
 /* 'File storage is not available.' is an error message (sentence case, period); used to warn when attempting to read/write to attachment storage becomes unavailable. */
-"error_FileStorageUnavailable" = "Αποθήκευση αρχείων δεν είναι διαθέσιμη.";
+"error_FileStorageUnavailable" = "Δεν έιναι διαθέσιμη η αποθήκευση αρχείων.";
 /* 'Server HTTP Error: %d' is an error message (sentence case, period); used to warn when the key exchange or messaging servers encountered an error and need to notify the user. %d = the HTTP status line code is case of an error, like 404 (file not found). 500 is common for uncaught Python run-time errors. */
-"error_HttpCode" = "Διακομιστή HTTP Error: %d";
+"error_HttpCode" = "Σφάλμα ΗΤΤP διακομιστή: %d";
 /* 'Incorrect data found in exchange. Begin the exchange again.' is an error message (sentence case, period); used to warn when some item received from another group member during the key exchange did not hash correctly to the previously committed value. */
-"error_InvalidCommitVerify" = "Εσφαλμένα δεδομένα που βρέθηκαν σε αντάλλαγμα. Ξεκινήστε πάλι την ανταλλαγή.";
+"error_InvalidCommitVerify" = "Εσφαλμένα δεδομένα βρέθηκαν στην ανταλλαγή. Προσπαθήστε ξανά.";
 /* 'Please enter a positive integer.' is an error message (sentence case, period); used to warn when the user attempted to type in a group ID on the Grouping screen that was zero, negative, or empty. */
 "error_InvalidCommonUserId" = "Παρακαλούμε εισάγετε ένα θετικό ακέραιο.";
 /* 'A valid contact name is required.' is an error message (sentence case, period); used to warn when the user completes Setup without typing a name, or the name includes 3rd-person words we cannot allow, such as: 'Me', 'Contact', 'Foo',… */
-"error_InvalidContactName" = "Ένα έγκυρο Όνομα Επικοινωνίας απαιτείται.";
+"error_InvalidContactName" = "Ένα έγκυρο όνομα επαφής απαιτείται.";
 /* 'Bad incoming message format.' is an error message (sentence case, period); used to warn when the incoming message was not formatted properly. */
 "error_InvalidIncomingMessage" = "Bad εισερχόμενη μορφή του μηνύματος.";
 /* 'Bad message format.' is an error message (sentence case, period); used to warn when the outgoing message was not formatted properly. */
-"error_InvalidMsg" = "Bad μορφή του μηνύματος.";
+"error_InvalidMsg" = "Λάθος μορφή μηνύματος.";
 /* 'Invalid recipient.' is an error message (sentence case, period); used to warn when the user has not selected 1 recipient to send a message on the Compose Message screen, also when the user has not selected 2 recipients to send introductions to on the Secure Introduction screen. */
-"error_InvalidRecipient" = "Μη έγκυρο παραλήπτη.";
+"error_InvalidRecipient" = "Μη έγκυρος παραλήπτης.";
 /* 'You have reported a difference in phrases. Begin the exchange again.' is an error message (sentence case, period); used to warn when the user presses the 'No Match' button that they are aborting the protocol for the group and sending a non-match signature to others. */
-"error_LocalGroupCommitDiffer" = "Έχετε ανέφεραν διαφορά φράσεις. Ξεκινήστε πάλι την ανταλλαγή.";
+"error_LocalGroupCommitDiffer" = "Έχετε ανέφερει διαφορετικές φράσεις. Ξεκινήστε πάλι την ανταλλαγή.";
 /* 'The peer key format is invalid.' is an error message (sentence case, period); used to warn when the public key we used for this recipient does not exist or is improperly formatted. */
-"error_MessageInvalidPeerKeyFormat" = "Η ομότιμη βασικό σχήμα δεν είναι έγκυρη.";
+"error_MessageInvalidPeerKeyFormat" = "Η μορφή του κλειδιού του παραλήπτη δεν είναι έγκυρη.";
 /* 'Signature verification failed.' is an error message (sentence case, period); used to warn when key used to generate an incoming message signature is not in the key database. */
-"error_MessageSignatureVerificationFails" = "Έλεγχος της υπογραφής απέτυχε.";
+"error_MessageSignatureVerificationFails" = "Απαίτυχε ο έλεγχος της υπογραφής.";
 /* 'Passphrases require at least %d characters.' is an error message (sentence case, period); used to warn when a user has setup a passphrase, which does not fit the minimum required length. %d = current requirement is at least 8 characters. */
 "error_minPassphraseRequire" = "Συνθηματικές φράσεις απαιτούν τουλάχιστον %d χαρακτήρες.";
 /* 'A minimum of %d members are required to exchange data.' is an error message (sentence case, period); used to warn when attempting to leave the Group Size screen without choosing a group size. %d = the minimum number of users to complete the exchange protocol, 2 usually. */
-"error_MinUsersRequired" = "Ένα ελάχιστο από %d μέλη απαιτείται για την ανταλλαγή δεδομένων.";
+"error_MinUsersRequired" = "Το λιγότερο %d μέλη απαιτείτούνται για την ανταλλαγή δεδομένων.";
 /* 'SafeSlinger did not detect NDK support on this device, which is required.' is an error message (sentence case, period); used to warn when device has no Native Development Kit support installed. Android-only. */
-"error_MissingNdk" = "SafeSlinger δεν ανιχνεύει NDK στήριξη σε αυτή τη συσκευή, η οποία απαιτείται.";
+"error_MissingNdk" = "SafeSlinger δεν ανιχνεύει NDK υποστήριξη σε αυτή τη συσκευή, η οποία απαιτείται.";
 /* 'Unexpected data found in exchange. Begin the exchange again.' is an error message (sentence case, period); used to warn when a user has entered a group size number that is too low during the exchange protocol or possibly a Man-in-The-Middle (MiTM) attack where a malicious outsider attempts to join the group. */
-"error_MoreDataThanUsers" = "Απροσδόκητη στοιχεία που βρέθηκαν σε αντάλλαγμα. Ξεκινήστε πάλι την ανταλλαγή.";
+"error_MoreDataThanUsers" = "Απροσδόκητα δεδομένα βρέθηκαν στην ανταλλαγή. Προσπαθήστε ξανά.";
 /* 'You are attempting to send multiple items. At this time, SafeSlinger only supports sending one item at a time.' is an error message (sentence case, period); used to warn when the user attempts to select multiple attachments to send when we only allow one attachment for now. */
-"error_MultipleSendNotSupported" = "Προσπαθείτε να στείλετε πολλά στοιχεία. Προς το παρόν, μόνο SafeSlinger σήμερα υποστηρίζει την αποστολή ενός στοιχείου σε μια στιγμή.";
+"error_MultipleSendNotSupported" = "Προσπαθείτε να στείλετε πολλά στοιχεία. Προς το παρόν, το SafeSlinger υποστηρίζει την αποστολή ενός μόνο στοιχείου.";
 /* 'The exchange is missing required data.' is an error message (sentence case, period); used to warn when exchange is missing some parameter or data to complete. */
-"error_NoDataToExchange" = "Η ανταλλαγή λείπει απαιτούμενα στοιχεία.";
+"error_NoDataToExchange" = "Η ανταλλαγή δεν περιέχει απαιτούμενα στοιχεία.";
 /* 'Email account is not setup!' is an error message (sentence case, period); used to warn that a user did not have an email account when he/she tries to send out comments to administrator account. iOS-only. */
-"error_NoEmailAccount" = "Λογαριασμό ηλεκτρονικού ταχυδρομείου δεν είναι setup!";
+"error_NoEmailAccount" = "Ο λογαριασμό ηλεκτρονικού ταχυδρομείου δεν είναι ενεργοποιημένος!";
 /* 'No passphrase entered.' is an error message (sentence case, period); used to warn when a user generates or changes a passphrase and they have entered a blank password, which is not acceptable. */
-"error_noPassPhrase" = "Δεν τέθηκε φράση πρόσβασης.";
+"error_noPassPhrase" = "Δε βρέθηκε φράση πρόσβασης.";
 /* 'You must select one of the phrases before proceeding.' is an error message (sentence case, period); used to warn when the user attempts to proceed past the word phrase Verify screen during the exchange protocol and they have not selected, which of the three phrases match with the other users'. */
-"error_NoWordListSelected" = "Μπορείτε να επιλέξετε μία από τις φράσεις πριν προχωρήσετε.";
+"error_NoWordListSelected" = "Πρέπει να επιλέξετε μία από τις φράσεις πριν προχωρήσετε.";
 /* 'Someone reported a difference in phrases. Begin the exchange again.' is an error message (sentence case, period); used to warn when at least one other member of the group during the exchange protocol pressed the 'No Match' button. */
-"error_OtherGroupCommitDiffer" = "Κάποιος ανέφερε τη διαφορά στις φράσεις. Ξεκινήστε πάλι την ανταλλαγή.";
+"error_OtherGroupCommitDiffer" = "Κάποιος ανέφερε διαφορά στις φράσεις. Ξεκινήστε πάλι την ανταλλαγή.";
 /* 'Memory is too low to complete this operation.' is an error message (sentence case, period); used to warn when a request for memory is made that cannot be satisfied using the available platform resources. Such a request may be made by both the running application or by an internal function of the VM. */
 "error_OutOfMemoryError" = "Η μνήμη είναι πολύ χαμηλή για να ολοκληρωθεί αυτή η λειτουργία.";
 /* 'Passphrases do not match.' is an error message (sentence case, period); used to warn when the user creates or changes their passphrase and the confirmation second entry did not match the first. */
-"error_passPhrasesDoNotMatch" = "Πέρασμα φράσεις δεν ταιριάζουν.";
+"error_passPhrasesDoNotMatch" = "Οι φράσεις πρόσβασης δεν ταιριάζουν.";
 /* 'You have exceeded the message quota for that recipient. Please retry later.' is an error message (sentence case, period): used to warn when sending messages to device and the message quota for all applications on the device is full. */
-"error_PushMsgDeviceQuotaExceeded" = "Έχετε υπερβεί το επιτρεπόμενο πλήθος για το συγκεκριμένο παραλήπτη. Παρακαλώ δοκιμάστε ξανά αργότερα.";
+"error_PushMsgDeviceQuotaExceeded" = "Έχετε υπερβεί το επιτρεπόμενο όριο μηνυμάτων για το συγκεκριμένο παραλήπτη. Παρακαλώ δοκιμάστε ξανά αργότερα.";
 /* 'That recipient has a missing or bad push registration. You should stop sending messages to this device.' is an error message (sentence case, period); used to warn when sending messages to device and the recipient registration was never registered with the push service. */
-"error_PushMsgInvalidRegistration" = "Αυτό παραλήπτης λείπει μία ή κακή εγγραφή ώθηση. Θα πρέπει να σταματήσει να στέλνει μηνύματα σε αυτήν τη συσκευή.";
+"error_PushMsgInvalidRegistration" = "Αυτός ο παραλήπτης έχει κακό push registration. Πρέπει να σταματήσετε να στέλνετε μηνύματα σε αυτήν τη συσκευή.";
 /* 'Message expired.' is an error message (sentence case, period); used to warn when getting messages, the message id cannot be found and it has likely been scrubbed from the server. */
-"error_PushMsgMessageNotFound" = "Μήνυμα λήξει.";
+"error_PushMsgMessageNotFound" = "Το μήνυμα έχει λήξει.";
 /* 'The message is too big. Reduce the size of the message.' is an error message (sentence case, period); used to warn when sending messages to device and the initial push exceeds 1024 bytes. Unlikely, since the initial push only contains the message hash identifier, which is 32 bytes plus a bit more of meta data. */
 "error_PushMsgMessageTooBig" = "Το μήνυμα είναι πολύ μεγάλο. Μειώστε το μέγεθος του μηνύματος.";
 /* 'That recipient's push registration is no longer valid. The recipient may have uninstalled SafeSlinger or turned off notifications. You should stop sending messages to this device.' is an error message (sentence case, period); used to warn when sending messages to device and the recipient is no longer registered. */
-"error_PushMsgNotRegistered" = "Εγγραφή ώθηση αυτού του παραλήπτη δεν είναι πλέον έγκυρη. Ο παραλήπτης μπορεί να απεγκατασταθεί SafeSlinger ή να απενεργοποιηθεί ειδοποιήσεις. Θα πρέπει να σταματήσει να στέλνει μηνύματα σε αυτήν τη συσκευή.";
+"error_PushMsgNotRegistered" = " Το push registration αυτού του παραλήπτη δεν είναι πλέον έγκυρo. Ο παραλήπτης μπορεί να απεγκατέστησε το SafeSlinger ή να απενεργοποίησε τις ειδοποιήσεις. Θα πρέπει να σταματήσει να στέλνετε μηνύματα σε αυτήν τη συσκευή.";
 /* 'There was an error communicating with the push notification service.' is an error message (sentence case, period); used to warn when sending messages to device and the push service replies incorrect HTTP status code. */
-"error_PushMsgNotSucceed" = "Υπήρξε ένα σφάλμα κατά την επικοινωνία με το πάτημα υπηρεσία ειδοποίησης.";
+"error_PushMsgNotSucceed" = "Υπήρξε ένα σφάλμα κατά την επικοινωνία με το push notification service.";
 /* 'You have exceeded the message quota for this device. Please retry later.' is an error message (sentence case, period); used to warn when sending messages to device and the message quota for SafeSlinger on the device is full. */
-"error_PushMsgQuotaExceeded" = "Έχετε υπερβεί την ποσόστωση μηνυμάτων για τη συγκεκριμένη συσκευή. Παρακαλώ δοκιμάστε ξανά αργότερα.";
+"error_PushMsgQuotaExceeded" = "Έχετε υπερβεί τo όριο μηνυμάτων για τη συγκεκριμένη συσκευή. Παρακαλώ δοκιμάστε ξανά αργότερα.";
 /* 'Notification service is not available this time. Please try to send the message later.' is an error message (sentence case, period); used to warn when sending messages to device and the push service has no response for push messages. */
-"error_PushMsgServiceFail" = "Υπηρεσία ειδοποίησης δεν είναι διαθέσιμη αυτή τη στιγμή. Παρακαλώ δοκιμάστε να στείλετε το μήνυμα αργότερα.";
+"error_PushMsgServiceFail" = "Η υπηρεσία ειδοποίησης δεν είναι διαθέσιμη αυτή τη στιγμή. Παρακαλώ δοκιμάστε να στείλετε το μήνυμα αργότερα.";
 /* 'Cannot prepare the audio recorder.' is an error message (sentence case, period); used to warn when the audio recorder is unavailable from the system to record an audio message. iOS-only. */
-"error_RecoderError" = "Δεν είναι δυνατή η προετοιμασία του ήχου εγγραφής.";
+"error_RecoderError" = "Δεν είναι δυνατή η προετοιμασία εγγραφής ήχου.";
 /* 'To start, Sling Keys with another user at the same time.' is an error message (sentence case, period); used to remind in a notification message that the user should exchange keys with at least one other user to make the app useful to them. */
-"error_ReminderToSlingKeysToUseApp" = "Για να ξεκινήσετε, Τα κλειδιά Sling με άλλο τηλέφωνο ταυτόχρονα.";
+"error_ReminderToSlingKeysToUseApp" = "Για να ξεκινήσετε, Sling κλειδιά με άλλο χρήστη ταυτόχρονα.";
 /* 'You need an attachment or a text message to send.' is an error message (sentence case, period); used to warn when the user has not attached a file or typed any text message to send to the recipient after using the 'Send' button. */
 "error_selectDataToSend" = "Χρειάζεται ένα αρχείο ή ένα μήνυμα κειμένου για να στείλετε.";
 /* 'Server Message: %s' is an error message (sentence case, period); used to warn when the server has an error message to send back to the client. %s = an English (non-localized) error message sent by our App Engine server code. */
 "error_ServerAppMessage" = "Μήνυμα διακομιστή: %@";
 /* 'No response from server.' is an error message (sentence case, period); used to warn when the server timeout occurs, usually after 30 seconds and did not respond to the client. */
-"error_ServerNotResponding" = "Διακομιστή δεν απάντησε.";
+"error_ServerNotResponding" = "Ο διακομιστής δεν απάντησε.";
 /* 'Cannot remove the shared file.' is an error message (sentence case, period); used to warn when the shared file cannot be deleted. iOS-only. */
 "error_ShareFileDelError" = "Δεν είναι δυνατή η αφαίρεση του κοινόχρηστου αρχείου.";
 /* 'Timeout waiting for some group members to add data.' is an error message (sentence case, period); used to warn during the key exchange protocol when at least one of the members of the group has not submitted their data to the server or client itself is not able to retrieve the data within the timeout window, currently 2 minutes. */
 "error_TimeoutWaitingForAllMembers" = "Χρονικό όριο αναμονής για κάποια μέλη της ομάδας για να προσθέσετε δεδομένα.";
 /* 'Unable to match public key to private key in crypto provider.' is an error message (sentence case, period); used to warn when the public encryption key used in the message received is not currently the same private key used, the user should probably Sling Keys to update again. */
-"error_UnableFindPubKey" = "Δεν είναι δυνατή για να ταιριάζει με το δημόσιο κλειδί για το ιδιωτικό κλειδί κρυπτογράφησης σε πάροχο.";
+"error_UnableFindPubKey" = "Το δημόσιο κλειδί δεν ταιριάζει με το ιδιωτικό κλειδί.";
 /* 'Unable to save to the message database.' is an error message (sentence case, period); used to warn when there is database error inserting a new message. */
-"error_UnableToSaveMessageInDB" = "Δεν είναι δυνατή η αποθήκευση στη βάση δεδομένων του μηνύματος.";
+"error_UnableToSaveMessageInDB" = "Δεν είναι δυνατή η αποθήκευση του μηνύματος.";
 /* 'Unable to save to the recipient database.' is an error message (sentence case, period); used to warn when there is database error inserting a new recipient key/registration . */
-"error_UnableToSaveRecipientInDB" = "Δεν είναι δυνατή η αποθήκευση στη βάση δεδομένων παραλήπτη.";
+"error_UnableToSaveRecipientInDB" = "Δεν είναι δυνατή η αποθήκευση παραλήπτη.";
 /* 'Unable to update the message database.' is an error message (sentence case, period); used to warn when there is database error updating a message. */
-"error_UnableToUpdateMessageInDB" = "Δεν είναι δυνατή η ενημέρωση της βάσης δεδομένων μήνυμα.";
+"error_UnableToUpdateMessageInDB" = "Δεν είναι δυνατή η ενημέρωση του μηνύματος.";
 /* 'Unable to update the recipient database.' is an error message (sentence case, period); used to warn when there is database error updating a recipient key/registration . */
-"error_UnableToUpdateRecipientInDB" = "Δεν είναι δυνατή η ενημέρωση της βάσης δεδομένων παραλήπτη.";
+"error_UnableToUpdateRecipientInDB" = "Δεν είναι δυνατή η ενημέρωση του παραλήπτη.";
 /* 'SafeSlinger error, please restart.' is an error message (sentence case, period); used to warn when an unhandled exception or application fault has occurred. */
 "error_UncaughtExceptionOccured" = "SafeSlinger σφάλμα, παρακαλώ κάντε επανεκκίνηση.";
 /* 'Contact data was formatted incorrectly.' is an error message (sentence case, period); used to warn when the vCard format used to exchange contact fields during key exchange are improperly formatted. */
-"error_VcardParseFailure" = "Στοιχεία επαφής μορφοποιηθεί σωστά.";
+"error_VcardParseFailure" = "Λανθασμένη μορφή των στοιχείων επαφής.";
 /* 'User canceled server request.' is an error message (sentence case, period); used to warn when the user exited the key exchange protocol or messaging transmission before it was finished. */
-"error_WebCancelledByUser" = "Ο χρήστης ακύρωσε αίτημα διακομιστή.";
+"error_WebCancelledByUser" = "Ο χρήστης ακύρωσε το αίτημα διακομιστή.";
 
 /* 'Use this screen to set your name to exchange with others, and a passphrase to protect your data. Tap the Done button when finished.' is a help message (sentence case, period); used via Help button on the Setup screen to describe in more detail what the Setup screen does. */
 "help_find" = "Χρησιμοποιήστε αυτήν την οθόνη για να ρυθμίσετε το όνομά σας για να ανταλλάξουν με άλλους, και ένα συνθηματικό για την προστασία των δεδομένων σας. Πατήστε το κουμπί Τέλος όταν τελειώσετε.";
 /* 'To exchange identity data, ensure all users are nearby or on the phone. The Begin Exchange button will exchange only the checked contact data.' is a help message (sentence case, period); used via Help button on the Begin Exchange screen and also the key exchange walkthrough tutorial to describe in more detail what the Begin Exchange screen does. */
 "help_home" = "Για την ανταλλαγή δεδομένων ταυτότητας, βεβαιωθείτε ότι όλοι οι χρήστες είναι κοντά ή στο τηλέφωνο. Το πλήκτρο Αρχίστε Ανταλλαγή θα ανταλλάξει μόνο τα επιλεγμένα στοιχεία επικοινωνίας.";
 /* 'You may also change personal data about your identity on this screen by tapping on the button with your name. This will display a menu allowing you to Edit your contact, Create New contact, or Use Another contact.' is a help message (sentence case, period); Additional help text, which is appended to the Help button text on the Compose and Begin Exchange screens. */
-"help_identity_menu" = "Μπορείτε να αλλάξετε χρήσιμα δεδομένα προσωπικού χαρακτήρα σχετικά με την ταυτότητά σας σε αυτή την οθόνη πατώντας το κουμπί με το όνομά σας. Αυτό θα εμφανίσει ένα μενού που σας επιτρέπει να Επεξεργασία σας πινελιά, Δημιουργία νέου επαφής, ή Χρήση άλλο επαφής.";
+"help_identity_menu" = "Μπορείτε να αλλάξετε τα δεδομένα της ταυτότητάς σας σε αυτή την οθόνη πατώντας το κουμπί με το όνομά σας. Θα εμφανιστεί ένα μενού που σας επιτρέπει την Επεξεργασία επαφής, Δημιουργία νέας επαφής, ή Χρήση άλλης επαφής.";
 /* 'This screen displays all past messages, and attachments that are still available for download.' is a help message (sentence case, period); used via Help button on the Messages list screen to describe in more detail what the Messages list screen does. */
 "help_Messages" = "Αυτή η οθόνη εμφανίζει όλα τα προηγούμενα μηνύματα, και τα αρχεία που είναι ακόμα διαθέσιμα για λήψη.";
 /* 'Use this screen to login to the application with your passphrase. If you have forgotten your passphrase, you may generate a new key protected by a new passphrase by tapping the Forgot Passphrase? button. Tap the user name to switch between multiple keys.' is a help message (sentence case, period); used via Help button on the Passphrase screen to describe in more detail what the Passphrase screen does. */
@@ -317,14 +317,18 @@
 /* 'Now, you must match one of these 3-word phrases with all users. Every user must select the same common phrase, and press Next.' is a help message (sentence case, period); used via Help button on the Verify screen and also the key exchange walkthrough tutorial to describe in more detail what the Verify screen does. */
 "help_verify" = "Τώρα πρέπει να βρείτε την κοινή ομάδα 3 λέξεων μεταξύ όλων των χρηστών. Κάθε χρήστης πρέπει να επιλέξει την ίδια κοινή φράση, και να πατήσει Επόμενο.";
 
-/* 'Contacts permission is required for securely sharing contact cards. Tap the Help button for SafeSlinger Contacts permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Contacts permission. iOS-only. */
-"iOS_contactError" = "Επαφές απαιτείται άδεια για την ασφαλή κοινή χρήση καρτών επαφών. Πατήστε το κουμπί Βοήθεια για SafeSlinger λεπτομέρειες Επαφές άδεια.";
+/* 'Camera permission is required to attach snapshots to secure messages. Tap the %s button for SafeSlinger Camera permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Camera permission. iOS-only. */
+"iOS_cameraError" = "Άδεια Κάμερα υποχρεούται να επισυνάψει στιγμιότυπα για να εξασφαλίσει τα μηνύματα. Πατήστε το κουμπί %@ για SafeSlinger λεπτομέρειες άδεια κάμερα.";
+/* 'Contacts permission is required for securely sharing contact cards. Tap the %s button for SafeSlinger Contacts permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Contacts permission. iOS-only. */
+"iOS_contactError" = "Επαφές απαιτείται άδεια για την ασφαλή ανταλλαγή των καρτών επαφών. Πατήστε το κουμπί %@ για SafeSlinger λεπτομέρειες Επαφές άδεια.";
 /* 'Push registration is missing.' is an error message (sentence case, period); used to warn the user the push registration is missing. iOS-only. */
-"iOS_errorpushtoken" = "Εγγραφή Push λείπει.";
-/* 'Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the Help button for SafeSlinger Notification permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Notifications permission. iOS-only. */
-"iOS_notificationError1" = "Ειδοποίηση άδεια είτε για προειδοποιήσεις ή banners, και οι αριθμοί σήμα, που απαιτούνται για την ασφαλή αποστολή μηνύματος. Πατήστε το κουμπί Βοήθεια για SafeSlinger λεπτομέρειες άδεια κοινοποίησης.";
+"iOS_errorpushtoken" = "Λείπει το Push registration.";
+/* 'Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the %s button for SafeSlinger Notification permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Notifications permission. iOS-only. */
+"iOS_notificationError1" = "Άδεια Γνωστοποίηση είτε για ειδοποιήσεις ή banners, και οι αριθμοί σήμα, που απαιτούνται για την ασφαλή ανταλλαγή μηνυμάτων. Πατήστε το κουμπί %@ για SafeSlinger λεπτομέρειες άδεια κοινοποίησης.";
 /* 'SafeSlinger is not optimized for iOS 5.x devices. SafeSlinger requires iOS 6 or higher.' is an informational message (sentence case, period); message for dialog popups when a user still uses an old iOS device. iOS-only. */
-"iOS_oldOSWarn" = "SafeSlinger δεν είναι βελτιστοποιημένη για συσκευές iOS 5.x. SafeSlinger απαιτεί iOS 6 ή νεότερη έκδοση.";
+"iOS_oldOSWarn" = "Η εφαρμογή SafeSlinger δεν είναι βελτιστοποιημένη για συσκευές iOS 5.x. Το SafeSlinger απαιτεί iOS 6 ή νεότερη έκδοση.";
+/* 'Photo Library permission is required to attach pictures to secure messages. Tap the %s button for SafeSlinger Photo Library permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Photo Library permission. iOS-only. */
+"iOS_photolibraryError" = "Άδεια Photo Library απαιτείται να επισυνάψετε εικόνες για να εξασφαλίσει τα μηνύματα. Πατήστε το κουμπί %@ για SafeSlinger Photo Library λεπτομέρειες άδεια.";
 /* 'You can select your contact card to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Contacts when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Contacts permission. iOS-only. */
 "iOS_RequestPermissionContacts" = "Μπορείτε να επιλέξετε την κάρτα επαφής σας για να στείλετε τους φίλους σας και SafeSlinger θα κρυπτογραφήσει για σας. Για να ενεργοποιήσετε αυτήν τη δυνατότητα, θα πρέπει να επιτρέπουν την πρόσβαση σε SafeSlinger Επαφές σας όταν σας ζητηθεί.";
 /* 'You can record a voice message to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Microphone when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Microphone permission. iOS-only. */
@@ -341,9 +345,9 @@
 /* 'Backup URL' is a screen label (match English casing); used on the Settings screen above the URL used for iCloud backups. iOS-only. */
 "label_backupURL" = "URL αντιγράφων ασφαλείας";
 /* 'Touch to review your %d messages' is a screen label (match English casing); used in the notification drop down window to indicate what will happen when received messages notification is touched. %d = the number of unseen messages received. */
-"label_ClickForNMsgs" = "Πατήστε για να δείτε τα %d μηνύματα σας";
+"label_ClickForNMsgs" = "Πατήστε για να δείτε τα %d μηνύματά σας";
 /* 'Compare screens on %s devices.' is a screen label (match English casing); used with arrows and phone graphics to remind user to compare mutiple views, not just their own. %s = the number of users. */
-"label_CompareScreensNDevices" = "Συγκρίνετε τις οθόνες σε συσκευές %@.";
+"label_CompareScreensNDevices" = "Συγκρίνετε τις οθόνες σε %@ συσκευές.";
 /* 'Compose Message' is a screen label (match English casing); used as a text box hint on the Compose Message screen where the user can type a message in the box. */
 "label_ComposeHint" = "Σύνθεση μηνύματος";
 /* 'Your Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current user name (first and last) to use. Android-only. */
@@ -353,15 +357,15 @@
 /* 'Device:' is a screen label (match English casing); used to prefix a push registration in the recipients list screen as a device ID. */
 "label_Device" = "Συσκευή:";
 /* 'Send-only mode' is a screen label (match English casing); used in many UIs to show that receiving push messages is not supported. */
-"label_DeviceInSendOnlyMode" = "Αποστολή-only mode";
+"label_DeviceInSendOnlyMode" = "Αποστολή-μόνο";
 /* 'Your key has changed: Sling Keys again.' is an error message (sentence case, period); used to warn the user that the key in the Recipients list screen has been exchanged once before with a different key from this user. */
-"label_DisabledExchSourceKeyChange" = "Το κλειδί σας έχει αλλάξει: Sling κλειδιά πάλι.";
+"label_DisabledExchSourceKeyChange" = "Το κλειδί σας έχει αλλάξει: Ανταλλάξτε κλειδιά πάλι.";
 /* 'To begin messaging, Sling Keys with this user at the same time.' is a screen label (match English casing); used to remind users that an invite is only the beginning, and to Sling Keys before communicating. */
-"label_DisabledNextSlingKeysWithThisPerson" = "Για να ξεκινήσει μηνυμάτων, και οι δύο χρήστες πρέπει Sling Keys ταυτόχρονα.";
+"label_DisabledNextSlingKeysWithThisPerson" = "Για να ξεκινήσετε ανταλλαγή μηνυμάτων, και οι δύο χρήστες πρέπειανταλλάξουν κλειδιά ταυτόχρονα.";
 /* 'DRAFT' is a screen label (match English casing); used to label a message in the Messages list that has been saved in progress but not yet sent. */
 "label_Draft" = "ΠΡΟΧΕΙΡΟ";
 /* 'Key format deprecated: Sling Keys again.' is an error message (sentence case, period); used on the Recipient list screen to warn users that older key formats have been deprecated. Android-only. */
-"label_EnabledKeyFormatDeprecated" = "Παλιό είδος κλειδιού: Sling κλειδιά πάλι.";
+"label_EnabledKeyFormatDeprecated" = "Παλιό είδος κλειδιού: Ανταλλάξτε κλειδιά πάλι.";
 /* 'exchanged' is a screen label (match English casing); used to indicate 0-hop or direct trust from a key exchange in the Recipient list screen. */
 "label_exchanged" = "ανταλλάχθηκε";
 /* 'expired' is a screen label (match English casing); used on the Messages list for message attachment that has not been downloaded more than 24 hours after it was originally sent. */
@@ -377,29 +381,29 @@
 /* 'First Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current first name to use. iOS-only. */
 "label_FirstName" = "Όνομα";
 /* 'Tap your name to add or remove contact data, check items you wish to share, and tap Begin Exchange when others are ready to exchange:' is a screen label (match English casing); used to instruct the user how to proceed on the Begin Exchange screen. */
-"label_Home" = "Πατήστε το όνομά σας για να προσθέσετε ή να αφαιρέσετε στοιχεία επικοινωνίας, ελέγξτε τα στοιχεία που θέλετε να μοιραστείτε, και επιλέξτε «Ξεκινήστε Ανταλλαγής» όταν οι άλλοι είναι έτοιμοι να ανταλλάσσουν:";
+"label_Home" = "Πατήστε το όνομά σας για να προσθέσετε ή να αφαιρέσετε στοιχεία επικοινωνίας, επιλέγξτε τα στοιχεία που θέλετε να στείλετε, και επιλέξτε 'Ξεκινήστε Ανταλλαγή' όταν οι άλλοι είναι έτοιμοι για ανταλλαγή:";
 /* 'Home' is a screen label (match English casing); used to denote a 'home' type of email or phone contact type. iOS-only. */
 "label_hometag" = "Σπίτι";
 /* '%d hours' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole hours. */
 "label_hours" = "%d ώρες";
 /* 'SafeSlinger iCloud is enabled. Tap the Done button when finished.' is a screen label (match English casing); used to indicate the backup will occur while on the Setup screen. iOS-only. */
-"label_iCloudEnable" = "SafeSlinger iCloud είναι ενεργοποιημένη. Πατήστε το κουμπί Τέλος όταν τελειώσετε.";
+"label_iCloudEnable" = "SafeSlinger iCloud είναι ενεργοποιημένο. Πατήστε το κουμπί Τέλος όταν τελειώσετε.";
 /* 'No messages. You may send a message from the Compose tab.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. */
-"label_InstNoMessages" = "Δεν υπάρχουν μηνύματα. Μπορείτε να στείλετε ένα μήνυμα πατώντας το κουμπί Σύνθεση μηνύματος από το μενού Σπίτι.";
+"label_InstNoMessages" = "Δεν υπάρχουν μηνύματα. Μπορείτε να στείλετε ένα μήνυμα πατώντας το κουμπί Σύνθεση Μηνύματος.";
 /* 'To add recipients, you must first Sling Keys with one or more other users at the same time. You may also send a Sling Keys contact invitation from the menu.' is a screen label (match English casing); used to instruct the user how to proceed on the Recipient list screen is case of no recipients. */
-"label_InstNoRecipients" = "Για να προσθέσετε παραλήπτες, πρέπει πρώτα να Sling Keys με έναν ή περισσότερους άλλους χρήστες ταυτόχρονα. Μπορείτε επίσης να στείλετε ένα Sling Κλειδιά επαφή πρόσκληση από το μενού.";
+"label_InstNoRecipients" = "Για να προσθέσετε παραλήπτες, πρέπει πρώτα να ανταλλάξετε κλειδιά με έναν ή περισσότερους άλλους χρήστες ταυτόχρονα. Μπορείτε επίσης να στείλετε μια πρόσκληση ανταλλαγής κλειδιών από το μενού.";
 /* 'No shared file. Connect your device with iTunes and drag files to the shared folder.' is a screen label (match English casing); used to instruct the user how to proceed on the Shared Files screen is case of no files to share. iOS-only. */
 "label_InstNoSharedFile" = "Δεν υπάρχει κοινόχρηστο αρχείο. Συνδέστε τη συσκευή σας με το iTunes και εισάγετε αρχεία στον κοινόχρηστο φάκελο.";
 /* 'Pick a recipient to send a message to:' is a screen label (match English casing); used to instruct the user how to proceed on the Pick Recipients list screen. */
 "label_InstRecipients" = "Επιλέξτε έναν παραλήπτη για να στείλετε ένα μήνυμα:";
 /* 'Pick recipients to introduce securely:' is a screen label (match English casing); used to instruct the user how to proceed on the Secure Introduction Recipients list screen. */
-"label_InstSendInvite" = "Διαλέξτε παραλήπτες για να γνωρίσετε μεταξύ τους με ασφάλεια:";
+"label_InstSendInvite" = "Επιλέξτε παραλήπτες για να γνωρίσετε μεταξύ τους με ασφάλεια:";
 /* 'Pick a file to attach:' is a screen label (match English casing); used as a title for a list of files that could be attached to the message. */
 "label_InstSharedFile" = "Επιλέξτε ένα αρχείο για επισύναψη:";
 /* 'introduced' is a screen label (match English casing); used to indicate 1-hop trust from a secure introduction in the Recipient list screen. */
-"label_introduced" = "γνωρίστηκε";
+"label_introduced" = "γνωρισμένος";
 /* 'Invited' is a screen label (match English casing); used on the recipient list to denote when a user has sent an invitation to Sling Keys via emailed or text. */
-"label_inviteSent" = "Κληθείς";
+"label_inviteSent" = "Καλεσμένος";
 /* 'Key:' is a screen label (match English casing); used to prefix the key generation date in the Recipients list and on the Compose Message screen. */
 "label_Key" = "Κλειδί:";
 /* 'Last Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current last name to use. iOS-only. */
@@ -411,21 +415,21 @@
 /* 'SafeSlinger app: %s' is a screen label (match English casing); used as message text to show a user how to install SafeSlinger. %s = the main installation url for mobile devices */
 "label_messageInviteInstall" = "SafeSlinger app: %@";
 /* 'To setup a secure messaging connection, we can meet or phone each other at the same time, and then Sling Keys just once to verify the connection.' is a screen label (match English casing); used as message text to show a user how to begin secure messaging. */
-"label_messageInviteSetupInst" = "Για να ρυθμίσετε μια ασφαλή σύνδεση μηνυμάτων, μπορούμε να ανταποκριθούμε ή το τηλέφωνο ο ένας τον άλλο την ίδια στιγμή, και στη συνέχεια Sling Κλειδιά μόνο μία φορά για να ελέγξει τη σύνδεση.";
+"label_messageInviteSetupInst" = "Για να ρυθμίσουμε μια ασφαλή επικοινωνία μέσω μηνυμάτων, μπορούμε να ανταλλάξουμε κλειδιά από κοντά ή μέσω τηλεφώνου. Αυτό θα χρειαστεί μόνο μία φορά για να επικυρώσει την επικοινωνία.";
 /* 'Can we start secure messaging with the open source SafeSlinger iPhone or Android app?' is a screen label (match English casing); used as message text to invite a contact to begin secure messaging. */
-"label_messageInviteStartMsg" = "Μπορούμε να ξεκινήσουμε ασφαλή ανταλλαγή μηνυμάτων με το open source SafeSlinger iPhone ή Android app;";
+"label_messageInviteStartMsg" = "Μπορούμε να ξεκινήσουμε ασφαλή ανταλλαγή μηνυμάτων με την iPhone ή Android εφαρμογή SafeSlinger (ελεύθερο λογισμικό);";
 /* '%d minutes' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole minutes. */
 "label_minutes" = "%d λεπτά";
 /* 'Mobile' is a screen label (match English casing); used to denote a 'mobile' type of email or phone contact type. iOS-only. */
-"label_mobiletag" = "Κινητός";
+"label_mobiletag" = "Κινητό";
 /* 'Most recent only' is a screen label (match English casing); used as a label for the boolean toggle switching between all or recent-only recipients on recipient list. */
-"label_MostRecentOnly" = "Η πιο πρόσφατη μόνο";
+"label_MostRecentOnly" = "Μόνο πιο πρόσφατες";
 /* 'My updated SafeSlinger credentials are attached.' is a screen label (match English casing); used as default message attached to a credential update. */
-"label_MsgSendUpdate" = "Επισυνάπτονται στην παρούσα έκθεση ενημερώθηκε διαπιστευτήρια SafeSlinger μου.";
+"label_MsgSendUpdate" = "Επισυνάπτονται τα ενημερωμένα διαπιστευτήρια SafeSlinger μου.";
 /* 'None' is a screen label (match English casing); used to indicate the local, non-synchronized contacts account name on the phone when picking a Save Account. */
 "label_None" = "Κανένας";
 /* 'Non-English' is a screen label (match English casing); used to instruct the user how to switch on Numeric mode while doing comparison. */
-"label_NumericModeHint" = "Non-English";
+"label_NumericModeHint" = "Όχι λέξεις";
 /* '%d Files to Share:' is a screen label (match English casing); used on the Sharing Folder screen. %d = the number of files to share. iOS-only. */
 "label_numsharedfiles" = "%d αρχεία για ανταλλαγή:";
 /* 'Old Threads' is a screen label (match English casing); used for the old thread (iOS only). */
@@ -435,17 +439,17 @@
 /* 'Retry' is a screen label (match English casing); used in the Passphrase screen text box as a prefix hint combined with a time measurement when, which is exponentially backed off on invalid passphrase entry, such as 'Retry in 14 seconds'. Used during back off while all user controls have been disabled. */
 "label_PassHintBackoff" = "Επανάληψη";
 /* 'Updated Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint to create a replacement passphrase. */
-"label_PassHintChange" = "Ανανέωση Passphrase";
+"label_PassHintChange" = "Ανανέωση κρυφή φράσης";
 /* 'Create Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint to create a new passphrase. */
-"label_PassHintCreate" = "Δημιουργία Passphrase";
+"label_PassHintCreate" = "Δημιουργία κρυφή φράσης";
 /* 'Current Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint to confirm the current passphrase. */
-"label_PassHintCurrent" = "Τρέχουσα Passphrase";
+"label_PassHintCurrent" = "Τρέχουσα κρυφή φράση";
 /* 'Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint enter the passphrase. */
-"label_PassHintEnter" = "Passphrase";
+"label_PassHintEnter" = "Κρυφή Φράση";
 /* 'Repeat Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint to confirm the passphrase again. */
-"label_PassHintRepeat" = "Επαναλάβετε Passphrase";
+"label_PassHintRepeat" = "Επαναλάβετε την κρυφή φράση";
 /* 'Passphrase Cache' is a screen label (match English casing); used on the Settings screen to above the display of the users' passphrase timeout period. */
-"label_passPhraseCacheTtl" = "Εισάγετε Cache φράση";
+"label_passPhraseCacheTtl" = "Εισάγετε cache κρυφής φράσης";
 /* 'Passphrase cached' is a screen label (match English casing); used in the notification window when a passphrase has been cached. Android-only. */
 "label_PassPhraseIsCached" = "Φράση πρόσβασης cached";
 /* 'phone-only' is a screen label (match English casing); used to indicate the local, non-synchronized contacts account type on the phone when picking a Save Account. */
@@ -453,7 +457,7 @@
 /* 'Photo' is a screen label (match English casing); used on the Begin Exchange screen to toggle sending the users' photo during the exchange. */
 "label_Photo" = "Φωτογραφία";
 /* 'This number is used to create a unique group of users. Compare, and then enter the lowest number among all users.' is a screen label (match English casing); used to instruct the user how to proceed on the Grouping screen. */
-"label_PromptInstruct" = "Αυτός ο αριθμός χρησιμοποιείται για να δημιουργήσει μια μοναδική ομάδα χρηστών. Συγκρίνετε τους αριθμούς και πληκτρολογήστε το μικρότερο αριθμό μεταξύ όλων των χρηστών.";
+"label_PromptInstruct" = "Αυτός ο αριθμός χρησιμοποιείται για να διακρίνει μια μοναδική ομάδα χρηστών. Συγκρίνετε τους αριθμούς και πληκτρολογήστε το μικρότερο αριθμό μεταξύ όλων των χρηστών.";
 /* 'Key ID' is a screen label (match English casing); used on the Settings, Compose Message, and Recipients list screens as a label above the base-64 encoded key IDs for sender and recipients. */
 "label_PublicKeyID" = "Αναγνωριστικό κλειδιού";
 /* 'Push Registration ID' is a screen label (match English casing); used on the Settings screen as a label above the push registration for this user. */
@@ -592,6 +596,8 @@
 "menu_Introduction" = "Εισαγωγή";
 /* 'Language' is a menu (title case); used as the settings menu option to change language */
 "menu_language" = "Γλώσσα";
+/* 'License' is a menu option (title case); used to show a dialog of the End User License Agreement. */
+"menu_License" = "License";
 /* 'Add Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
 "menu_link_contact_add" = "Προσθήκη επαφής Σύνδεσμος";
 /* 'Change Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
@@ -606,6 +612,8 @@
 "menu_messageCopyText" = "Αντιγραφή κειμένου";
 /* 'Forward' is a menu option (title case); used to create a new message with the same text message/attachment via the message list context menu. */
 "menu_messageForward" = "Προς τα εμπρός";
+/* 'Privacy Policy' is a menu option (title case); used to show a dialog of the Privacy Policy. */
+"menu_PrivacyPolicy" = "Πολιτική Προστασίας Προσωπικών Δεδομένων";
 /* 'Remove' is a menu option (title case); used to remove the currently selected file attachment via the File Options dialog. */
 "menu_Remove" = "Κατάργηση";
 /* 'Restore Default Settings' is a menu option (title case); used as Settings screen menu item for restoring all settings to default */
@@ -722,6 +730,8 @@
 "text_About2" = "Ασφαλής ανταλλαγή κείμεένων, φωτογραφίών, ο,τιδήποτε!";
 /* 'Strong cryptography protects your information' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
 "text_About3" = "Ισχυρή κρυπτογράφηση προστατεύει τις πληροφορίες σας";
+/* 'SafeSlinger: Speak 3 words and forever chat in peace.' is an application description (sentence case); used in the about box and app store listing to describe the application features. Short form: 80 character max, should be exciting. */
+"text_About_Short" = "SafeSlinger: Μίλα 3 λέξεις και πάντα να συνομιλήσετε με ειρήνη.";
 /* 'email: %s' is an application description (sentence case); used in the app store listing, %s = SafeSlinger support email address. */
 "text_AboutEmail" = "email: %@";
 /* 'Features:' is an application description (sentence case); used in the about box and app store listing to describe the application features. */

@@ -43,20 +43,16 @@
 @property (nonatomic, strong) IBOutlet UIImageView *ContactImage;
 @property (nonatomic, strong) IBOutlet UIButton *ExchangeBtn;
 @property (nonatomic, strong) IBOutlet UILabel *DescriptionLabel;
-
 @property (nonatomic, strong) NSMutableArray *contact_labels, *contact_values, *contact_selections, *contact_category;
 @property (nonatomic, strong) NSMutableDictionary *label_dictionary;
-
 @property (nonatomic, retain) AppDelegate *delegate;
 @property (nonatomic, retain) safeslingerexchange *proto;
-
 @property (nonatomic, readwrite) BOOL EndExchangeAlready;
 @property (nonatomic, strong) NSMutableArray *GatherList;
 
 // Action method when user presses Exchange Button
 -(IBAction) BeginExchange;
 -(IBAction) EditContact;
-
-- (IBAction)unwindToSlingkey:(UIStoryboardSegue *)unwindSegue;
+-(void) ProcessProfile;
 
 @end

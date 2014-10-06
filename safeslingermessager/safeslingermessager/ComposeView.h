@@ -80,6 +80,8 @@ typedef enum AttachCategory{
 -(IBAction) SelectRecipient:(id)sender;
 -(IBAction) SelectAttach:(id)sender;
 
-- (IBAction)unwindToCompose:(UIStoryboardSegue *)unwindSegue;
+-(void) UpdateSelf;
+-(void) UpdateAttachment;
+-(void) UpdateRecipient;
 
 @end

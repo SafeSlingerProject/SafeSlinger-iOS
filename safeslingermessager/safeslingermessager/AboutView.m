@@ -51,7 +51,7 @@
     self.navigationItem.title = NSLocalizedString(@"title_About", @"About");
     self.navigationItem.rightBarButtonItem = nil;
     
-    AppDelegate *delegate = [[UIApplication sharedApplication]delegate];
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     
     NSString* msgHead = [NSString stringWithFormat: @"%@ v%@", NSLocalizedString(@"app_name", @"SafeSlinger"), delegate.getVersionNumber];
     NSString* msgAbout = NSLocalizedString(@"text_About", @"SafeSlinger is designed to easily share identity data, in person or over the phone, authenticated, private, and intact.");
@@ -77,15 +77,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

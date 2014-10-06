@@ -63,7 +63,7 @@
 
 +(BOOL)checkCredentialExist
 {
-    AppDelegate *delegate = [[UIApplication sharedApplication]delegate];
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     NSData *keyid = [delegate.DbInstance GetConfig:@"KEYID"];
     NSData *keydate = [delegate.DbInstance GetConfig:@"KEYGENDATE"];
     NSData *encpub = [delegate.DbInstance GetConfig:@"ENCPUB"];
@@ -83,7 +83,7 @@
 {
     // infostr did not exist, encrypt anayway
     NSData* cipher = [self AESEncrypt:plaintext withAESKey:[NSData dataWithBytes:[Passphase UTF8String] length:[Passphase lengthOfBytesUsingEncoding:NSUTF8StringEncoding]]];
-    AppDelegate *delegate = [[UIApplication sharedApplication]delegate];
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     switch (keytype) {
         case ENC_PRI:
             [delegate.DbInstance InsertOrUpdateConfig:cipher withTag:@"ENCPRI"];
@@ -127,7 +127,7 @@
 
 +(NSString*)getSelfKeyID
 {
-    AppDelegate *delegate = [[UIApplication sharedApplication]delegate];
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     NSData* keyid = [delegate.DbInstance GetConfig:@"KEYID"];
     
     if (keyid)
@@ -140,7 +140,7 @@
 
 +(NSString*)getSelfGenKeyDate
 {
-    AppDelegate *delegate = [[UIApplication sharedApplication]delegate];
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     NSData* keygendate = [delegate.DbInstance GetConfig:@"KEYGENDATE"];
     
     if (keygendate)
@@ -154,7 +154,7 @@
 +(NSData*)getPackPubKeys
 {
     //NSError *error;
-    AppDelegate *delegate = [[UIApplication sharedApplication]delegate];
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     
     NSMutableData *pkeydata = [[NSMutableData alloc]initWithCapacity:0];
     
@@ -201,7 +201,7 @@
 {
     NSData *pkey = nil;
     
-    AppDelegate *delegate = [[UIApplication sharedApplication]delegate];
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     
     switch (keytype) {
         case ENC_PUB:
@@ -221,7 +221,7 @@
 {
     NSData *rkey = nil;
     
-    AppDelegate *delegate = [[UIApplication sharedApplication]delegate];
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     
     switch (keytype) {
         case ENC_PRI:
@@ -240,7 +240,7 @@
 +(int)getSelfPrivateKeySize: (int)keytype
 {
     int keysize = -1;
-    AppDelegate *delegate = [[UIApplication sharedApplication]delegate];
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     switch (keytype) {
         case ENC_PRI:
             keysize = (int)[[delegate.DbInstance GetConfig:@"ENCPRI"]length];
@@ -503,7 +503,7 @@
     RSA *rsa = NULL;
     BIGNUM *e = NULL;
     
-    AppDelegate *delegate = [[UIApplication sharedApplication]delegate];
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     
     rsa = RSA_new();
     e = BN_new();
@@ -593,7 +593,7 @@
     [dateFormat setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
     NSString *dateString = [dateFormat stringFromDate:today];
     
-    AppDelegate *delegate = [[UIApplication sharedApplication]delegate];
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     [delegate.DbInstance InsertOrUpdateConfig:[dateString dataUsingEncoding:NSUTF8StringEncoding] withTag: @"KEYGENDATE"];
     
     return ret;
@@ -611,7 +611,7 @@
         ret = YES;
     }
     
-    AppDelegate *delegate = [[UIApplication sharedApplication]delegate];
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     
     NSData *pkey = [delegate.DbInstance GetConfig:@"ENCPUB"];
     NSData *spkey = [delegate.DbInstance GetConfig:@"SIGNPRI"];
@@ -837,7 +837,7 @@
     [pack setLength:0];
     
     // pack keyid, SHA-512 hash
-	AppDelegate *delegate = [[UIApplication sharedApplication]delegate];
+	AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     NSData* keyid = [delegate.DbInstance GetConfig:@"KEYID"];
     
     [pack appendData:[NSData dataWithBytes:[keyid bytes] length:[keyid length]]];
@@ -939,7 +939,7 @@
     NSData* encryptMsg = nil;
     NSData* encryptFile = nil;
     
-    AppDelegate *delegate = [[UIApplication sharedApplication]delegate];
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     
     // get Sign private key
     int PRIKEY_STORE_FORSIGN_SIZE = 0;

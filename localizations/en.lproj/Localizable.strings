@@ -27,8 +27,8 @@
 
 /* application name (title case); used for home screen icons, at the top of many screens, and many other places in the application. */
 "app_name" = "SafeSlinger";
-/* language editor (title case); the name of the individual who translated it and/or reviewed this localization. */
-"app_TranslatorName" = "Michael W Farb";
+/* application description (sentence case); the names of the individuals who translated and/or reviewed localizations. */
+"app_TranslatorName" = "\nAdrian Perrig\nAkira Yamada\nAlbert Stroucken\nElli Fragkaki\nEmmanuel Owusu\nIrina Fudrow\nJens Höfflinger\nMichael Stroucken\nNicolas Christin\nSteve Matsumoto\nYeon Yim\nYue-Hsun Lin";
 
 /* question message (sentence case, question mark); used to warn when the backup is off to confirm we should keep reminding the user. Used with Forget and Remind buttons. */
 "ask_BackupDisabledRemindLater" = "Backup is disabled. Do you want to adjust backup settings and keep this reminder?";
@@ -197,7 +197,7 @@
 /* error message (sentence case, period); used to warn when attempting to record an audio message fails to encode properly. iOS-only. */
 "error_AudioRecorderEncodeError" = "Audio recorder encoding error.";
 /* error message (sentence case, period); used as a Post-Request-Denied Notice for Microphone permission. iOS-only. */
-"error_AudioRecorderPermissionError" = "Microphone permission is required to record a secure voice message. Tap the Help button for SafeSlinger Microphone permission details.";
+"error_AudioRecorderPermissionError" = "Microphone permission is required to record a secure voice message. Tap the %@ button for SafeSlinger Microphone permission details.";
 /* error message (sentence case, period); used to warn at application setup, when there is no pre-existing backup to restore and warn the user that any previous keys have not been restored. */
 "error_BackupNotFound" = "No backup to restore.";
 /* error message (sentence case, period); used to warn when the device hardware does not support restoration from backup. */
@@ -364,14 +364,18 @@
 /* help message (sentence case, period); used via Help button on the Verify screen and also the key exchange walkthrough tutorial to describe in more detail what the Verify screen does. */
 "help_verify" = "Now, you must match one of these 3-word phrases with all users. Every user must select the same common phrase, and press Next.";
 
+/* error message (sentence case, period); used as a Post-Request-Denied Notice for Camera permission. iOS-only. */
+"iOS_cameraError" = "Camera permission is required to attach snapshots to secure messages. Tap the %@ button for SafeSlinger Camera permission details.";
 /* error message (sentence case, period); used as a Post-Request-Denied Notice for Contacts permission. iOS-only. */
-"iOS_contactError" = "Contacts permission is required for securely sharing contact cards. Tap the Help button for SafeSlinger Contacts permission details.";
+"iOS_contactError" = "Contacts permission is required for securely sharing contact cards. Tap the %@ button for SafeSlinger Contacts permission details.";
 /* error message (sentence case, period); used to warn the user the push registration is missing. iOS-only. */
 "iOS_errorpushtoken" = "Push registration is missing.";
 /* error message (sentence case, period); used as a Post-Request-Denied Notice for Notifications permission. iOS-only. */
-"iOS_notificationError1" = "Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the Help button for SafeSlinger Notification permission details.";
+"iOS_notificationError1" = "Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the %@ button for SafeSlinger Notification permission details.";
 /* informational message (sentence case, period); message for dialog popups when a user still uses an old iOS device. iOS-only. */
 "iOS_oldOSWarn" = "SafeSlinger is not optimized for iOS 5.x devices. SafeSlinger requires iOS 6 or higher.";
+/* error message (sentence case, period); used as a Post-Request-Denied Notice for Photo Library permission. iOS-only. */
+"iOS_photolibraryError" = "Photo Library permission is required to attach pictures to secure messages. Tap the %@ button for SafeSlinger Photo Library permission details.";
 /* informational message (sentence case, period); used as a Pre-Request Notice for Contacts permission. iOS-only. */
 "iOS_RequestPermissionContacts" = "You can select your contact card to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Contacts when asked.";
 /* informational message (sentence case, period); used as a Pre-Request Notice for Microphone permission. iOS-only. */
@@ -689,7 +693,7 @@
 "menu_messageCopyText" = "Copy Text";
 /* menu option (title case); used to create a new message with the same text message/attachment via the message list context menu. */
 "menu_messageForward" = "Forward";
-/* menu option (title case); used to show a dialog of the End User License Agreement. */
+/* menu option (title case); used to show a dialog of the Privacy Policy. */
 "menu_PrivacyPolicy" = "Privacy Policy";
 /* menu option (title case); used to remove the currently selected file attachment via the File Options dialog. */
 "menu_Remove" = "Remove";

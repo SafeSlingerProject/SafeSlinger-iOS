@@ -24,8 +24,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class ConfigView;
+
 @interface TimePicker : UITableViewController
 
+@property (nonatomic, retain) ConfigView *parent;
+@property (nonatomic, readwrite) NSInteger selectValue;
 @property (nonatomic, strong) NSDictionary *cachetimes;
 @property (nonatomic, strong) NSArray *sortkeys;
 

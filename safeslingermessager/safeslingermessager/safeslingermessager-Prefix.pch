@@ -37,7 +37,7 @@
     #import <sha3/sha3.h>
 
 /* BETA test version flag */
-#define BETA
+// #define BETA
 
 #import "Config.h"
 

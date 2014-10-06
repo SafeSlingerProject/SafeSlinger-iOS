@@ -24,6 +24,7 @@
 
 #import "TimePicker.h"
 #import "IdleHandler.h"
+#import "ConfigView.h"
 
 @interface TimePicker ()
 
@@ -31,7 +32,7 @@
 
 @implementation TimePicker
 
-@synthesize cachetimes, sortkeys;
+@synthesize cachetimes, sortkeys, parent;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -74,6 +75,11 @@
                      }];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.navigationController.title = NSLocalizedString(@"label_passPhraseCacheTtl", @"Pass Phrase Cache");
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -103,6 +109,8 @@
     }
     // Configure the cell...
     cell.textLabel.text = [cachetimes objectForKey:[sortkeys objectAtIndex:indexPath.row]];
+    if (_selectValue==[[sortkeys objectAtIndex:indexPath.row]integerValue])
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
     return cell;
 }
 
@@ -115,7 +123,9 @@
     [[NSUserDefaults standardUserDefaults]setInteger:period forKey:kPasshpraseCacheTime];
     IdleHandler *handler = (IdleHandler*)[UIApplication sharedApplication];
     [handler resetIdleTimer];
-    [self performSegueWithIdentifier:@"FinishTimePick" sender:self];
+    if(parent) [parent UpdateView];
+    [self.navigationController popViewControllerAnimated:YES];
 }
+
 
 @end

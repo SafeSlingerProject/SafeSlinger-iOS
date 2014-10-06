@@ -27,8 +27,6 @@
 
 /* 'SafeSlinger' is an application name (title case); used for home screen icons, at the top of many screens, and many other places in the application. */
 "app_name" = "SafeSlinger";
-/* 'Michael W Farb' is a language editor (title case); the name of the individual who translated it and/or reviewed this localization. */
-"app_TranslatorName" = "Jens Höfflinger, Adrian Perrig, Michael Stroucken";
 
 /* 'Backup is disabled. Do you want to adjust backup settings and keep this reminder?' is a question message (sentence case, question mark); used to warn when the backup is off to confirm we should keep reminding the user. Used with Forget and Remind buttons. */
 "ask_BackupDisabledRemindLater" = "Sicherungen sind deaktiviert. Wollen Sie Sicherungs-Einstellungen anpassen und weiterhin erinnert werden?";
@@ -139,6 +137,8 @@
 /* 'Up' is a choice (sentence case); used in the File Manager dialog to navigate up to a parent directory. */
 "choice_Up" = "Hinauf";
 
+/* 'Some members are using an older version; all members must upgrade to the newest version.' is an error message (sentence case, period); used to warn when some members of the key exchange protocol are using less than the minimum version. Used for backward-compatibility in some cases. */
+"error_AllMembersMustUpgrade" = "Einige Mitglieder sind mit einer älteren Version; Alle Mitglieder müssen auf die neueste Version zu aktualisieren.";
 /* 'All members must upgrade, some are using older key formats.' is an error message (sentence case, period); used to warn when the key format is incorrect after an exchange and perhaps used an old format. */
 "error_AllMembersMustUpgradeBadKeyFormat" = "Alle Teilnehmer müssen die Software aktualisieren, manche verwenden ein älteres Schlüsselformat.";
 /* 'All members must upgrade, some are using older push registration formats.' is an error message (sentence case, period); used to warn when the push registration format is incorrect or corrupted. */
@@ -149,8 +149,8 @@
 "error_AudioPlayerError" = "Die Aufnahme kann nicht abgespielt werden.";
 /* 'Audio recorder encoding error.' is an error message (sentence case, period); used to warn when attempting to record an audio message fails to encode properly. iOS-only. */
 "error_AudioRecorderEncodeError" = "Audio Recorder Codierungsfehler.";
-/* 'Microphone permission is required to record a secure voice message. Tap the Help button for SafeSlinger Microphone permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Microphone permission. iOS-only. */
-"error_AudioRecorderPermissionError" = "Mikrofon Erlaubnis ist erforderlich, um eine sichere Sprachnachricht aufzuzeichnen. Tippen Sie auf die Hilfe-Taste für Mikrofon SafeSlinger Berechtigungsdetails.";
+/* 'Microphone permission is required to record a secure voice message. Tap the %s button for SafeSlinger Microphone permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Microphone permission. iOS-only. */
+"error_AudioRecorderPermissionError" = "Mikrofon Erlaubnis ist erforderlich, um eine sichere Sprachnachricht aufzuzeichnen. Tippen Sie auf die Taste für %@ SafeSlinger Mikrofon Berechtigungsdetails.";
 /* 'No backup to restore.' is an error message (sentence case, period); used to warn at application setup, when there is no pre-existing backup to restore and warn the user that any previous keys have not been restored. */
 "error_BackupNotFound" = "Keine Sicherung zur Wiederherstellung vorhanden.";
 /* 'Device does not support backup restore.' is an error message (sentence case, period); used to warn when the device hardware does not support restoration from backup. */
@@ -317,14 +317,18 @@
 /* 'Now, you must match one of these 3-word phrases with all users. Every user must select the same common phrase, and press Next.' is a help message (sentence case, period); used via Help button on the Verify screen and also the key exchange walkthrough tutorial to describe in more detail what the Verify screen does. */
 "help_verify" = "Nur einer der 3-Wort-Sätze oder Zahlen ist identisch mit allen anderen Teilnehmern. Bitte wählen sie den passenden Satz aus und drücken Sie auf Weiter.";
 
-/* 'Contacts permission is required for securely sharing contact cards. Tap the Help button for SafeSlinger Contacts permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Contacts permission. iOS-only. */
-"iOS_contactError" = "Kontakte Genehmigung ist für die sichere gemeinsame Nutzung von Kontaktkarten erforderlich. Tippen Sie auf die Hilfe-Taste für SafeSlinger Kontakte Berechtigungsdetails.";
+/* 'Camera permission is required to attach snapshots to secure messages. Tap the %s button for SafeSlinger Camera permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Camera permission. iOS-only. */
+"iOS_cameraError" = "Kamera Erlaubnis ist erforderlich, um Schnappschüsse, um Nachrichten zu sichern befestigen. Tippen Sie auf die Taste für %@ SafeSlinger Kamera Berechtigungsdetails.";
+/* 'Contacts permission is required for securely sharing contact cards. Tap the %s button for SafeSlinger Contacts permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Contacts permission. iOS-only. */
+"iOS_contactError" = "Kontakte Genehmigung ist für die sichere gemeinsame Nutzung von Kontaktkarten erforderlich. Tippen Sie auf die Taste für %@ SafeSlinger Kontakte Berechtigungsdetails.";
 /* 'Push registration is missing.' is an error message (sentence case, period); used to warn the user the push registration is missing. iOS-only. */
 "iOS_errorpushtoken" = "Push-Registrierung fehlt.";
-/* 'Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the Help button for SafeSlinger Notification permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Notifications permission. iOS-only. */
-"iOS_notificationError1" = "Benachrichtigung Erlaubnis entweder Warnungen oder Banner und Ausweisnummern sind für das Secure Messaging erforderlich. Tippen Sie auf die Hilfe-Taste für SafeSlinger Mitteilung Berechtigungsdetails.";
+/* 'Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the %s button for SafeSlinger Notification permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Notifications permission. iOS-only. */
+"iOS_notificationError1" = "Benachrichtigung Erlaubnis entweder Warnungen oder Banner und Ausweisnummern, sind für Secure Messaging erforderlich. Tippen Sie auf die Taste für %@ SafeSlinger Mitteilung Berechtigungsdetails.";
 /* 'SafeSlinger is not optimized for iOS 5.x devices. SafeSlinger requires iOS 6 or higher.' is an informational message (sentence case, period); message for dialog popups when a user still uses an old iOS device. iOS-only. */
 "iOS_oldOSWarn" = "SafeSlinger ist nicht für iOS 5.x Geräte optimiert. SafeSlinger erfordert iOS 6 oder höher.";
+/* 'Photo Library permission is required to attach pictures to secure messages. Tap the %s button for SafeSlinger Photo Library permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Photo Library permission. iOS-only. */
+"iOS_photolibraryError" = "Photo Library Erlaubnis ist erforderlich, um Bilder, um Nachrichten zu sichern befestigen. Tippen Sie auf die Taste für %@ SafeSlinger Photo Library Berechtigungsdetails.";
 /* 'You can select your contact card to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Contacts when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Contacts permission. iOS-only. */
 "iOS_RequestPermissionContacts" = "Sie können Ihre Kontaktkarte auswählen, um Ihre Freunde zu schicken und SafeSlinger wird es für Sie zu verschlüsseln. Um diese Funktion zu aktivieren, müssen Sie SafeSlinger Zugriff auf Ihre Kontakte zu ermöglichen, wenn gefragt.";
 /* 'You can record a voice message to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Microphone when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Microphone permission. iOS-only. */
@@ -592,6 +596,8 @@
 "menu_Introduction" = "Vorstellen";
 /* 'Language' is a menu (title case); used as the settings menu option to change language */
 "menu_language" = "Sprache";
+/* 'License' is a menu option (title case); used to show a dialog of the End User License Agreement. */
+"menu_License" = "Lizenz";
 /* 'Add Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
 "menu_link_contact_add" = "Contact Link hinzufügen";
 /* 'Change Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
@@ -606,6 +612,8 @@
 "menu_messageCopyText" = "Text kopieren";
 /* 'Forward' is a menu option (title case); used to create a new message with the same text message/attachment via the message list context menu. */
 "menu_messageForward" = "Weiterleiten";
+/* 'Privacy Policy' is a menu option (title case); used to show a dialog of the Privacy Policy. */
+"menu_PrivacyPolicy" = "Datenschutz-Bestimmungen";
 /* 'Remove' is a menu option (title case); used to remove the currently selected file attachment via the File Options dialog. */
 "menu_Remove" = "Entfernen";
 /* 'Restore Default Settings' is a menu option (title case); used as Settings screen menu item for restoring all settings to default */
@@ -722,6 +730,8 @@
 "text_About2" = "Sicheres Senden von Texten, Bildern, uvm.";
 /* 'Strong cryptography protects your information' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
 "text_About3" = "Starke Kryptographie schützt Ihre Informationen.";
+/* 'SafeSlinger: Speak 3 words and forever chat in peace.' is an application description (sentence case); used in the about box and app store listing to describe the application features. Short form: 80 character max, should be exciting. */
+"text_About_Short" = "SafeSlinger: Sprechen 3 Worte und für immer in Frieden zu plaudern.";
 /* 'email: %s' is an application description (sentence case); used in the app store listing, %s = SafeSlinger support email address. */
 "text_AboutEmail" = "email: %@";
 /* 'Features:' is an application description (sentence case); used in the about box and app store listing to describe the application features. */

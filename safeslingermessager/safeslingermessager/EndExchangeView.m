@@ -52,7 +52,7 @@
 {
     [super viewDidLoad];
     
-    delegate = [[UIApplication sharedApplication]delegate];
+    delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     
     // Do any additional setup after loading the view.
     [ImportBtn setTitle:NSLocalizedString(@"btn_Import", @"Import") forState: UIControlStateNormal];
@@ -149,10 +149,10 @@
         
         // get photo if possible
         NSString* imageData = nil;
-        CFDataRef photo = ABPersonCopyImageData(aRecord);
-        if(photo)
+        if(ABPersonHasImageData(aRecord))
         {
-            imageData = [Base64 encode: UIImageJPEGRepresentation([UIImage imageWithData:(__bridge NSData *)photo], 0.3)];
+            CFDataRef photo = ABPersonCopyImageDataWithFormat(aRecord, kABPersonImageFormatThumbnail);
+            imageData = [Base64 encode: UIImageJPEGRepresentation([UIImage imageWithData:(__bridge NSData *)photo], 0.9)];
             CFRelease(photo);
         }
         
@@ -185,7 +185,7 @@
         
     }// end of for
     
-	if([UtilityFunc checkContactPermission])
+	if(ABAddressBookGetAuthorizationStatus()==kABAuthorizationStatusAuthorized)
     {
         // contact permission is enabled, update address book.
         CFErrorRef error = NULL;
@@ -268,7 +268,7 @@
 -(void) tableView: (UITableView *)tableView didSelectRowAtIndexPath: (NSIndexPath *)indexPath
 {
 	[tableView deselectRowAtIndexPath: [tableView indexPathForSelectedRow] animated: NO];
-    if([UtilityFunc checkContactPermission])
+    if(ABAddressBookGetAuthorizationStatus()==kABAuthorizationStatusAuthorized)
     {
         NSInteger row = [indexPath row];
         UITableViewCell *cell = [tableView cellForRowAtIndexPath: indexPath];
@@ -312,17 +312,18 @@
     NSString* ln = (__bridge NSString*)ABRecordCopyValue(aRecord, kABPersonLastNameProperty);
     cell.textLabel.text = [NSString composite_name:fn withLastName:ln];
 	
-	CFDataRef imageData = ABPersonCopyImageData(aRecord);
-	if (imageData)
-	{
-		UIImage *image = [UIImage imageWithData: (__bridge NSData *)imageData];
-		cell.imageView.image = image;
-    	CFRelease(imageData);
-	}else{
+    if(ABPersonHasImageData(aRecord))
+    {
+        CFDataRef imageData = ABPersonCopyImageDataWithFormat(aRecord, kABPersonImageFormatThumbnail);
+        UIImage *image = [UIImage imageWithData: (__bridge NSData *)imageData];
+        cell.imageView.image = image;
+        CFRelease(imageData);
+    }
+	else{
         [cell.imageView setImage: [UIImage imageNamed:@"blank_contact.png"]];
     }
     
-    if([UtilityFunc checkContactPermission])
+    if(ABAddressBookGetAuthorizationStatus()==kABAuthorizationStatusAuthorized)
     {
         if (selections[row]) cell.accessoryType = UITableViewCellAccessoryCheckmark;
         else cell.accessoryType = UITableViewCellAccessoryNone;

@@ -116,7 +116,7 @@
 
 -(void) ReEncryptPrivetKeys: (NSString*)newpassphrase OldPassword:(NSString*)oldpassphrase
 {
-    AppDelegate *delegate = [[UIApplication sharedApplication]delegate];
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     
     // unlock
     int PRIKEY_STORE_SIZE = 0;
@@ -132,7 +132,7 @@
         
         [SSEngine LockPrivateKeys:newpassphrase RawData:dEncKey Type:ENC_PRI];
         [SSEngine LockPrivateKeys:newpassphrase RawData:dSignKey Type:SIGN_PRI];
-        [self performSegueWithIdentifier: @"UpdatePassphraseFinish" sender:self];
+        [self.navigationController popViewControllerAnimated:YES];
     }else{
         [[[[iToast makeText: NSLocalizedString(@"error_couldNotExtractPrivateKey", @"Could not extract private key.")]
            setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
@@ -199,16 +199,5 @@
     [textField resignFirstResponder];
     return NO;
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

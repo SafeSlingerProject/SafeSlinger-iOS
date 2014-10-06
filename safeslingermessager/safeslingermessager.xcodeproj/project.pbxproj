@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02AC528819CCD29800A98073 /* libUAirship-5.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02AC528719CCD29800A98073 /* libUAirship-5.0.0.a */; };
 		180975EB19691F260073795C /* exchangeui.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 18D6C1FF194610C6000909F4 /* exchangeui.bundle */; };
 		180D25BF195A6A64002C34DC /* UniversalDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 180D25BE195A6A64002C34DC /* UniversalDB.m */; };
 		180D25C2195A6A85002C34DC /* ExchangeAssist.m in Sources */ = {isa = PBXBuildFile; fileRef = 180D25C1195A6A85002C34DC /* ExchangeAssist.m */; };
@@ -23,6 +24,7 @@
 		182E22111950B5E700F5997A /* MessageDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182E22101950B5E700F5997A /* MessageDetailView.m */; };
 		182EF414195626FF00CDA2D4 /* TimePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 182EF413195626FF00CDA2D4 /* TimePicker.m */; };
 		1846A16D196221C6008C6A00 /* InvitationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1846A16C196221C6008C6A00 /* InvitationView.m */; };
+		185CEC3E19DB6B2900A9EF65 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 185CEC3D19DB6B2900A9EF65 /* AssetsLibrary.framework */; };
 		185D6FF2196606C300A2B1B8 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 185D6FF1196606C300A2B1B8 /* Crashlytics.framework */; };
 		1860573919451001002DD149 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1860573819451001002DD149 /* Foundation.framework */; };
 		1860573B19451001002DD149 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1860573A19451001002DD149 /* CoreGraphics.framework */; };
@@ -49,7 +51,6 @@
 		18D6C21519461E71000909F4 /* VCardParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D6C21319461E71000909F4 /* VCardParser.m */; };
 		18D6C21B19462622000909F4 /* libsafeslingerexchange.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D6C1FD194610C6000909F4 /* libsafeslingerexchange.a */; };
 		18D6C21D19462634000909F4 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D6C21C19462634000909F4 /* libsqlite3.dylib */; };
-		18D6C22C19462C0B000909F4 /* libUAirship-4.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D6C22B19462C0B000909F4 /* libUAirship-4.0.0.a */; };
 		18D6C22F19462CA7000909F4 /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18D6C22E19462CA7000909F4 /* AirshipConfig.plist */; };
 		18D6C23119462D59000909F4 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D6C23019462D59000909F4 /* CFNetwork.framework */; };
 		18D6C23319462D71000909F4 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D6C23219462D71000909F4 /* MobileCoreServices.framework */; };
@@ -105,6 +106,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		02AC528719CCD29800A98073 /* libUAirship-5.0.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libUAirship-5.0.0.a"; path = "../Airship_lib/libUAirship-5.0.0.a"; sourceTree = "<group>"; };
 		180D25BD195A6A64002C34DC /* UniversalDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversalDB.h; sourceTree = "<group>"; };
 		180D25BE195A6A64002C34DC /* UniversalDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversalDB.m; sourceTree = "<group>"; };
 		180D25C0195A6A85002C34DC /* ExchangeAssist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExchangeAssist.h; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 		182EF413195626FF00CDA2D4 /* TimePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimePicker.m; sourceTree = "<group>"; };
 		1846A16B196221C6008C6A00 /* InvitationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationView.h; sourceTree = "<group>"; };
 		1846A16C196221C6008C6A00 /* InvitationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationView.m; sourceTree = "<group>"; };
+		185CEC3D19DB6B2900A9EF65 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		185D6FF1196606C300A2B1B8 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		1860573519451001002DD149 /* SafeSlinger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SafeSlinger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1860573819451001002DD149 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -139,7 +142,6 @@
 		1860574719451001002DD149 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1860574819451001002DD149 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		1860575319451001002DD149 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		1860575A19451001002DD149 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		186057751945174B002DD149 /* IntroduceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroduceView.h; sourceTree = "<group>"; };
 		186057761945174B002DD149 /* IntroduceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroduceView.m; sourceTree = "<group>"; };
 		18605778194518D6002DD149 /* ComposeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeView.h; sourceTree = "<group>"; };
@@ -178,7 +180,6 @@
 		18D6C21C19462634000909F4 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		18D6C21F1946267B000909F4 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		18D6C22119462685000909F4 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
-		18D6C22B19462C0B000909F4 /* libUAirship-4.0.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libUAirship-4.0.0.a"; path = "../Airship_lib/libUAirship-4.0.0.a"; sourceTree = "<group>"; };
 		18D6C22E19462CA7000909F4 /* AirshipConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = AirshipConfig.plist; sourceTree = "<group>"; };
 		18D6C23019462D59000909F4 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		18D6C23219462D71000909F4 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -301,12 +302,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				185CEC3E19DB6B2900A9EF65 /* AssetsLibrary.framework in Frameworks */,
+				02AC528819CCD29800A98073 /* libUAirship-5.0.0.a in Frameworks */,
 				18EE9A131948D58800445D63 /* UIKit.framework in Frameworks */,
 				18D6C25E19464CEE000909F4 /* AddressBook.framework in Frameworks */,
 				185D6FF2196606C300A2B1B8 /* Crashlytics.framework in Frameworks */,
 				18D6C24819462F41000909F4 /* CoreData.framework in Frameworks */,
 				18D6C21B19462622000909F4 /* libsafeslingerexchange.a in Frameworks */,
-				18D6C22C19462C0B000909F4 /* libUAirship-4.0.0.a in Frameworks */,
 				18D6C23919462DA7000909F4 /* libz.dylib in Frameworks */,
 				18D6C21D19462634000909F4 /* libsqlite3.dylib in Frameworks */,
 				18D6C24619462ED2000909F4 /* MessageUI.framework in Frameworks */,
@@ -444,6 +446,8 @@
 		1860573719451001002DD149 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				185CEC3D19DB6B2900A9EF65 /* AssetsLibrary.framework */,
+				02AC528719CCD29800A98073 /* libUAirship-5.0.0.a */,
 				185D6FF1196606C300A2B1B8 /* Crashlytics.framework */,
 				18D6C24719462F41000909F4 /* CoreData.framework */,
 				18D6C24219462E37000909F4 /* MapKit.framework */,
@@ -456,14 +460,12 @@
 				18D6C23419462D83000909F4 /* Security.framework */,
 				18D6C23219462D71000909F4 /* MobileCoreServices.framework */,
 				18D6C23019462D59000909F4 /* CFNetwork.framework */,
-				18D6C22B19462C0B000909F4 /* libUAirship-4.0.0.a */,
 				18D6C22119462685000909F4 /* AddressBookUI.framework */,
 				18D6C21F1946267B000909F4 /* AddressBook.framework */,
 				18D6C21C19462634000909F4 /* libsqlite3.dylib */,
 				1860573819451001002DD149 /* Foundation.framework */,
 				1860573A19451001002DD149 /* CoreGraphics.framework */,
 				1860573C19451001002DD149 /* UIKit.framework */,
-				1860575A19451001002DD149 /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -601,11 +603,11 @@
 		1860572D19451000002DD149 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = CyLab;
 				TargetAttributes = {
 					1860573419451001002DD149 = {
-						DevelopmentTeam = SKAXY92CB2;
+						DevelopmentTeam = 27LU3HGQJP;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -951,8 +953,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: YUEH-HSUN LIN (Y286MJ43EP)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: YUEH-HSUN LIN (Y286MJ43EP)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yue-Hsun Lin (X6U2B9ZV7E)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yue-Hsun Lin (X6U2B9ZV7E)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -976,12 +978,12 @@
 					"${SRCROOT}/../sha3-ios-binary/include",
 					"$(SRCROOT)/../Airship_lib/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/../Airship_lib",
 					"$(SRCROOT)/../openssl-ios/lib",
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 			};
@@ -1003,8 +1005,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: YUEH-HSUN LIN (Y286MJ43EP)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: YUEH-HSUN LIN (Y286MJ43EP)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1022,11 +1024,12 @@
 					"${SRCROOT}/../sha3-ios-binary/include",
 					"$(SRCROOT)/../Airship_lib/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/../Airship_lib",
 					"$(SRCROOT)/../openssl-ios/lib",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -1039,9 +1042,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = safeslingermessager/SafeSlinger.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Yue-Hsun Lin (X6U2B9ZV7E)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yue-Hsun Lin (X6U2B9ZV7E)";
-				DEPLOYMENT_LOCATION = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEPLOYMENT_LOCATION = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1053,18 +1056,16 @@
 					"${SRCROOT}/../safeslingerexchange/**",
 					"${SRCROOT}/../openssl-ios/include",
 					"${SRCROOT}/../sha3-ios-binary/include",
-					"$(SRCROOT)/../Airship_lib/**",
 				);
 				INFOPLIST_FILE = "safeslingermessager/safeslingermessager-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../Airship_lib",
-				);
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = SafeSlinger;
-				PROVISIONING_PROFILE = "5fd824fe-b187-4005-a14b-1e7017ed3679";
-				VALID_ARCHS = "$(ARCHS_STANDARD)";
+				PROVISIONING_PROFILE = "87d1c1ef-a19b-48f4-825c-eaa8d76004b0";
+				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = "$(ARCHS_STANDARD) armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1075,9 +1076,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = safeslingermessager/SafeSlinger.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEPLOYMENT_LOCATION = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Carnegie Mellon University (27LU3HGQJP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Carnegie Mellon University (27LU3HGQJP)";
+				DEPLOYMENT_LOCATION = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1089,18 +1090,16 @@
 					"${SRCROOT}/../safeslingerexchange/**",
 					"${SRCROOT}/../openssl-ios/include",
 					"${SRCROOT}/../sha3-ios-binary/include",
-					"$(SRCROOT)/../Airship_lib/**",
 				);
 				INFOPLIST_FILE = "safeslingermessager/safeslingermessager-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../Airship_lib",
-				);
-				ONLY_ACTIVE_ARCH = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = SafeSlinger;
-				PROVISIONING_PROFILE = "5fd824fe-b187-4005-a14b-1e7017ed3679";
-				VALID_ARCHS = "$(ARCHS_STANDARD)";
+				PROVISIONING_PROFILE = "87d1c1ef-a19b-48f4-825c-eaa8d76004b0";
+				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = "$(ARCHS_STANDARD) armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

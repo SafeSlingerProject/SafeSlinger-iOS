@@ -112,7 +112,7 @@
 	
 #pragma mark FN
 	CFStringRef compositeName = ABRecordCopyCompositeName(record);
-	if (!compositeName)
+	if (compositeName!=NULL)
 	{
 		[vCard appendFormat: @"FN:%@\n", compositeName];
 		CFRelease(compositeName);
@@ -363,7 +363,6 @@
 		{
 			CFStringRef typeString = kABOtherLabel;
 			int min = [[tokens objectAtIndex: 0] length] > 4 ? 4 : (int)[[tokens objectAtIndex: 0] length];
-            
 			while ([[[tokens objectAtIndex: 0] substringToIndex: min] caseInsensitiveCompare: @"TYPE"] == NSOrderedSame)
 			{
 				NSString *typeList = [[tokens objectAtIndex: 0] substringFromIndex: 5];
@@ -577,30 +576,23 @@
 #pragma mark URL //@"URL;TYPE=%@:%@\n"
 		else if ([item caseInsensitiveCompare: @"URL"] == NSOrderedSame)
 		{
-            if ([tokens count] > 1)
+            if ([tokens count] == 2)
             {
                 CFStringRef typeString = kABOtherLabel;
-                if ([tokens count] == 2)
+                if ([[tokens objectAtIndex: 0] hasPrefix:@"TYPE"])
                 {
-                    if ([[tokens objectAtIndex: 0]hasPrefix:@"TYPE"] == NSOrderedSame)
+                    NSString *currentType = [[tokens objectAtIndex: 0] uppercaseString];
+                    if ([currentType hasSuffix: @"HOMEPAGE"])
                     {
-                        NSString *currentType = [[tokens objectAtIndex: 1] uppercaseString];
-                        if ([currentType hasSuffix: @"HOMEPAGE"])
-                        {
-                            typeString = kABHomeLabel;
-                        }
-                        else if ([currentType hasSuffix: @"HOME"])
-                        {
-                            typeString = kABWorkLabel;
-                        }
-                        else if ([currentType hasSuffix: @"WORK"])
-                        {
-                            typeString = kABWorkLabel;
-                        }
-                        else if ([currentType hasSuffix: @"OTHER"])
-                        {
-                            typeString = kABOtherLabel;
-                        }
+                        typeString = kABPersonHomePageLabel;
+                    }
+                    else if ([currentType hasSuffix: @"HOME"])
+                    {
+                        typeString = kABHomeLabel;
+                    }
+                    else if ([currentType hasSuffix: @"WORK"])
+                    {
+                        typeString = kABWorkLabel;
                     }
                 }
                 ABMultiValueAddValueAndLabel(allWebpages, (__bridge CFTypeRef)([tokens objectAtIndex: [tokens count]-1]), typeString, nil);

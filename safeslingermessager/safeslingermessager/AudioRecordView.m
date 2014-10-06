@@ -26,6 +26,7 @@
 #import "AudioRecordView.h"
 #import "AppDelegate.h"
 #import "ErrorLogger.h"
+#import "ComposeView.h"
 #import <safeslingerexchange/iToast.h>
 
 @interface AudioRecordView ()
@@ -34,7 +35,7 @@
 
 @implementation AudioRecordView
 
-@synthesize PlayBtn, RecordBtn, SaveBtn, StopBtn, polling_timer, delegate, DiscardBtn, TimeLabel, audio_recorder;
+@synthesize PlayBtn, RecordBtn, SaveBtn, StopBtn, polling_timer, parent, DiscardBtn, TimeLabel, audio_recorder;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -48,15 +49,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    delegate = [[UIApplication sharedApplication]delegate];
-    
     // self.navigationItem.hidesBackButton = YES;
     // Do any additional setup after loading the view from its nib.
     [DiscardBtn.titleLabel setText: NSLocalizedString(@"btn_discard", @"Discard")];
     [SaveBtn.titleLabel setText: NSLocalizedString(@"btn_Done", @"Done")];
     self.navigationItem.title = NSLocalizedString(@"title_soundrecoder", @"Sound Recorder");
-    
     
     // check mic permission
     if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1)
@@ -76,8 +73,6 @@
             [message show];
             message = nil;
         }
-        
-        
     }else{
         PlayBtn.enabled = StopBtn.enabled = NO;
         [self PrepareAudioRecorder];
@@ -102,11 +97,22 @@
             self.TimeLabel.text = @"--:--";
             [ErrorLogger ERRORDEBUG: NSLocalizedString(@"error_AudioRecorderPermissionError", @"Microphone Permission required. Please go to Settings to turn on Microphone privacy access.")];
             
+            NSString* buttontitle = nil;
+            NSString* description = nil;
+            
+            if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+                buttontitle = NSLocalizedString(@"menu_Help", @"Help");
+                description = [NSString stringWithFormat: NSLocalizedString(@"error_AudioRecorderPermissionError", @"Microphone permission is required to record a secure voice message. Tap the %@ button for SafeSlinger Microphone permission details."), buttontitle];
+            } else {
+                buttontitle = NSLocalizedString(@"menu_Settings", @"menu_Settings");
+                description = [NSString stringWithFormat: NSLocalizedString(@"error_AudioRecorderPermissionError", @"Microphone permission is required to record a secure voice message. Tap the %@ button for SafeSlinger Microphone permission details."), buttontitle];
+            }
+            
             UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
-                                                              message: NSLocalizedString(@"error_AudioRecorderPermissionError", @"Microphone Permission required. Please go to Settings to turn on Microphone privacy access.")
-                                                             delegate:self
-                                                    cancelButtonTitle:NSLocalizedString(@"btn_Close", @"Close")
-                                                    otherButtonTitles:NSLocalizedString(@"menu_Help", @"Help"), nil];
+                                                              message: description
+                                                             delegate: self
+                                                    cancelButtonTitle: NSLocalizedString(@"btn_Cancel", @"Cancel")
+                                                    otherButtonTitles: buttontitle, nil];
             message.tag = HelpMicrophone;
             [message show];
             message = nil;
@@ -120,15 +126,22 @@
     {
         if(buttonIndex==alertView.cancelButtonIndex)
         {
-            [self performSegueWithIdentifier:@"FinishRecording" sender:self];
+            [self.navigationController popViewControllerAnimated:YES];
         }else{
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kMicrophoneHelpURL]];
+            if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kMicrophoneHelpURL]];
+                [self.navigationController popViewControllerAnimated:YES];
+            } else {
+                // iOS8
+                NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                [[UIApplication sharedApplication] openURL:url];
+            }
         }
     }else if(alertView.tag==AskPerm)
     {
         if(buttonIndex==alertView.cancelButtonIndex)
         {
-            [self performSegueWithIdentifier:@"FinishRecording" sender:self];
+            [self.navigationController popViewControllerAnimated:YES];
         }else{
             // reguest microphone permission
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kRequireMicrophonePrivacy];
@@ -149,46 +162,38 @@
     if([[NSFileManager defaultManager] fileExistsAtPath: soundFilePath])
         [[NSFileManager defaultManager] removeItemAtPath:soundFilePath error:nil];
     
-    NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
     NSDictionary *recordSettings = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    [NSNumber numberWithInt:AVAudioQualityMin],
-                                    AVEncoderAudioQualityKey,
-                                    [NSNumber numberWithInt: kAudioFormatMPEG4AAC],
-                                    AVFormatIDKey,
-                                    [NSNumber numberWithInt:16],
-                                    AVEncoderBitRateKey,
-                                    [NSNumber numberWithInt: 2],
-                                    AVNumberOfChannelsKey,
-                                    [NSNumber numberWithFloat:44100.0],
-                                    AVSampleRateKey,
+                                    [NSNumber numberWithInt: kAudioFormatMPEG4AAC], AVFormatIDKey,
+                                    [NSNumber numberWithInt: 2], AVNumberOfChannelsKey,
+                                    [NSNumber numberWithFloat: 44100.0], AVSampleRateKey,
                                     nil];
     NSError *error = nil;
-    
     audio_recorder = [[AVAudioRecorder alloc]
-                      initWithURL:soundFileURL
+                      initWithURL:[NSURL fileURLWithPath:soundFilePath]
                       settings:recordSettings
                       error:&error];
+    audio_recorder.delegate = self;
+    audio_recorder.meteringEnabled = YES;
     
     if (error)
     {
         [[[[iToast makeText: NSLocalizedString(@"error_RecoderError", @"Cannot prepare the audio recorder.")]
-           setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+           setGravity:iToastGravityCenter] setDuration:iToastDurationLong] show];
         [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"Error: %@", [error localizedDescription]]];
         PlayBtn.enabled = StopBtn.enabled = RecordBtn.enabled = NO;
         self.TimeLabel.text = @"--:--";
-    } else {
-        [audio_recorder prepareToRecord];
     }
 }
 
 -(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
     StopBtn.enabled = NO;
+    PlayBtn.enabled = YES;
 }
 -(void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error
 {
     [[[[iToast makeText: NSLocalizedString(@"error_AudioPlayerDecodeError", @"Audio Player Decoding Error.")]
-       setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+       setGravity:iToastGravityCenter] setDuration:iToastDurationLong] show];
     [ErrorLogger ERRORDEBUG: @"ERROR: AudioPlayer Decode Error."];
 }
 
@@ -202,7 +207,7 @@
                                   error:(NSError *)error
 {
     [[[[iToast makeText: NSLocalizedString(@"error_AudioRecorderEncodeError", @"Audio Recorder Encoding Error.")]
-       setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+       setGravity:iToastGravityCenter] setDuration:iToastDurationLong] show];
     [ErrorLogger ERRORDEBUG: @"ERROR: AudioPlayer Encode Error."];
 }
 
@@ -210,20 +215,21 @@
 {
     if (!audio_recorder.recording)
     {
+        PlayBtn.enabled = NO;
         StopBtn.enabled = YES;
         RecordBtn.enabled = NO;
+        NSError *error;
         
         if (audio_player) audio_player = nil;
-        NSError *error;
         audio_player = [[AVAudioPlayer alloc]
-                        initWithContentsOfURL:audio_recorder.url
-                        error:&error];
+                        initWithContentsOfURL:audio_recorder.url error:&error];
         audio_player.delegate = self;
+        audio_player.volume = 1.0f;
         
         if (error)
         {
             [[[[iToast makeText: NSLocalizedString(@"error_AudioPlayerError", @"Cannot Play The Recodring.")]
-               setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+               setGravity:iToastGravityCenter] setDuration:iToastDurationLong] show];
             [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"Error: %@", [error localizedDescription]]];
         }else {
             TimeLabel.text = @"00:00";
@@ -233,6 +239,7 @@
                                                             userInfo:nil
                                                              repeats:YES];
             polling_timer = timer;
+            [audio_player prepareToPlay];
             [audio_player play];
         }
     }
@@ -248,6 +255,7 @@
     [SaveBtn setHidden:YES];
     
     [audio_recorder stop];
+    [audio_recorder deleteRecording];
     // audio_recorder = nil;
 }
 
@@ -255,8 +263,9 @@
 {
     [DiscardBtn setHidden:YES];
     [SaveBtn setHidden:YES];
-    
-    [self performSegueWithIdentifier:@"FinishRecording" sender:self];
+    parent.attachFile = self.audio_recorder.url;
+    [parent UpdateAttachment];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction) record
@@ -270,13 +279,18 @@
         RecordBtn.enabled = NO;
         PlayBtn.enabled = NO;
         StopBtn.enabled = YES;
-        [audio_recorder record];
+        
+        AVAudioSession *session = [AVAudioSession sharedInstance];
+        [session setActive:YES error:nil];
+        
         NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1.0f
                                                           target:self
                                                         selector:@selector(CalRECTime)
                                                         userInfo:nil
                                                          repeats:YES];
         polling_timer = timer;
+        [audio_recorder prepareToRecord];
+        [audio_recorder record];
     }
 }
 
@@ -291,6 +305,8 @@
     if (audio_recorder.recording)
     {
         [audio_recorder stop];
+        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+        [audioSession setActive:NO error:nil];
         [DiscardBtn setHidden:NO];
         [SaveBtn setHidden:NO];
     } else if (audio_player.playing) {

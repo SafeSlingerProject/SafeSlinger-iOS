@@ -26,6 +26,9 @@
 #import "AppDelegate.h"
 #import "SafeSlingerDB.h"
 #import "Utility.h"
+#import "ComposeView.h"
+#import "SlingkeyView.h"
+#import "FunctionView.h"
 #import <safeslingerexchange/iToast.h>
 
 @interface ContactManageView ()
@@ -34,13 +37,13 @@
 
 @implementation ContactManageView
 
-@synthesize delegate, user_actions, contact_index, contact_photos;
+@synthesize delegate, user_actions, contact_index, contact_photos, parent;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    delegate = [[UIApplication sharedApplication]delegate];
+    delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     
     // All cache time entries
     self.navigationItem.title = NSLocalizedString(@"title_MyIdentity", @"My Identity");
@@ -97,15 +100,17 @@
                 [self.contact_index addObject:[NSNumber numberWithInteger:ABRecordGetRecordID(aRecord)]];
                 
                 // Parse Photo
-                CFDataRef photo = ABPersonCopyImageData(aRecord);
-                if (photo)
+                if(ABPersonHasImageData(aRecord))
                 {
-                    UIImage *image = [[UIImage imageWithData: (__bridge NSData *)photo]scaleToSize:CGSizeMake(45.0f, 45.0f)];
+                    CFDataRef photo = ABPersonCopyImageDataWithFormat(aRecord, kABPersonImageFormatThumbnail);
+                    UIImage *image = [UIImage imageWithData: (__bridge NSData *)photo];
                     [self.contact_photos addObject: image];
                     CFRelease(photo);
-                }else{
+                }
+                else{
                     [self.contact_photos addObject: [UIImage imageNamed: @"blank_contact.png"]];
                 }
+                
                 index++;
             }
         }
@@ -209,7 +214,16 @@
             delegate.IdentityNum = NonLink;
             // remove contact file if necessary
             [delegate removeContactLink];
-            [self performSegueWithIdentifier:@"FinishEditContact" sender:self];
+            if([self.restorationIdentifier isEqualToString:@"ContacEditForCompose"])
+            {
+                ComposeView *compose = (ComposeView*)parent;
+                [compose UpdateSelf];
+            }else if([self.restorationIdentifier isEqualToString:@"ContacEditForSling"])
+            {
+                SlingkeyView *sling = (SlingkeyView*)parent;
+                [sling ProcessProfile];
+            }
+            [self.navigationController popViewControllerAnimated:YES];
             break;
         case EditOld:
             [self editOldContact];
@@ -222,8 +236,17 @@
             break;
         default:
             // other contacts with the same name
-            [delegate saveConactDataWithoutChaningName: (int)[[contact_index objectAtIndex:key]integerValue] ];
-            [self performSegueWithIdentifier:@"FinishEditContact" sender:self];
+            [delegate saveConactDataWithoutChaningName: (int)[[contact_index objectAtIndex:key]integerValue]];
+            if([self.restorationIdentifier isEqualToString:@"ContacEditForCompose"])
+            {
+                ComposeView *compose = (ComposeView*)parent;
+                [compose UpdateSelf];
+            }else if([self.restorationIdentifier isEqualToString:@"ContacEditForSling"])
+            {
+                SlingkeyView *sling = (SlingkeyView*)parent;
+                [sling ProcessProfile];
+            }
+            [self.navigationController popViewControllerAnimated:YES];
             break;
     }
 }
@@ -278,7 +301,27 @@
     }else
     {
         [delegate saveConactData: delegate.IdentityNum Firstname:FN Lastname:LN];
-        [self.navigationController popViewControllerAnimated:YES];
+        if([self.restorationIdentifier isEqualToString:@"ContacEditForCompose"])
+        {
+            ComposeView *compose = (ComposeView*)parent;
+            [compose UpdateSelf];
+        }else if([self.restorationIdentifier isEqualToString:@"ContacEditForSling"])
+        {
+            SlingkeyView *sling = (SlingkeyView*)parent;
+            [sling ProcessProfile];
+        }
+        
+        FunctionView *main = nil;
+        for (UIViewController *view in [self.navigationController childViewControllers])
+        {
+            if([view isMemberOfClass:[FunctionView class]])
+            {
+                main = (FunctionView*)view;
+                break;
+            }
+        }
+        [self.navigationController popToViewController:main animated: YES];
+        
     }
     if(aBook)CFRelease(aBook);
 }
@@ -317,16 +360,57 @@
            setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
     }else{
         [delegate saveConactData: ABRecordGetRecordID(person) Firstname:FN Lastname:LN];
-        [self performSegueWithIdentifier:@"FinishEditContact" sender:self];
+        if([self.restorationIdentifier isEqualToString:@"ContacEditForCompose"])
+        {
+            ComposeView *compose = (ComposeView*)parent;
+            [compose UpdateSelf];
+        }else if([self.restorationIdentifier isEqualToString:@"ContacEditForSling"])
+        {
+            SlingkeyView *sling = (SlingkeyView*)parent;
+            [sling ProcessProfile];
+        }
+        [peoplePicker dismissViewControllerAnimated:YES completion:nil];
+        [self.navigationController popViewControllerAnimated:YES];
     }
 	return NO;
 }
 
 -(BOOL) peoplePickerNavigationController: (ABPeoplePickerNavigationController *)peoplePicker
-	  shouldContinueAfterSelectingPerson: (ABRecordRef)person property: (ABPropertyID)property identifier: (ABMultiValueIdentifier)identifier
+      shouldContinueAfterSelectingPerson: (ABRecordRef)person property: (ABPropertyID)property identifier: (ABMultiValueIdentifier)identifier
 {
-	return NO;
+    return NO;
 }
+
+- (void)peoplePickerNavigationController:(ABPeoplePickerNavigationController*)peoplePicker didSelectPerson:(ABRecordRef)person
+{
+    DEBUGMSG(@"didSelectPerson");
+    if (person)
+    {
+        // check name field is existed.
+        NSString* FN = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonFirstNameProperty));
+        NSString* LN = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonLastNameProperty));
+        if(!FN&&!LN)
+        {
+            [[[[iToast makeText: NSLocalizedString(@"error_ContactNameMissing2", @"This contact is missing a name, please reselect.")]
+               setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+        }else{
+            [delegate saveConactData: ABRecordGetRecordID(person) Firstname:FN Lastname:LN];
+            if([self.restorationIdentifier isEqualToString:@"ContacEditForCompose"])
+            {
+                ComposeView *compose = (ComposeView*)parent;
+                [compose UpdateSelf];
+            }else if([self.restorationIdentifier isEqualToString:@"ContacEditForSling"])
+            {
+                SlingkeyView *sling = (SlingkeyView*)parent;
+                [sling ProcessProfile];
+            }
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }else{
+        [peoplePicker dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
 
 #pragma mark ABPersonViewControllerDelegate
 -(BOOL) personViewController: (ABPersonViewController *)personViewController shouldPerformDefaultActionForPerson: (ABRecordRef)person property: (ABPropertyID)property identifier: (ABMultiValueIdentifier)identifierForValue
@@ -347,21 +431,21 @@
                setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
         }else{
             [delegate saveConactData: ABRecordGetRecordID(person) Firstname:FN Lastname:LN];
-            [self performSegueWithIdentifier:@"FinishEditContact" sender:self];
+            if([self.restorationIdentifier isEqualToString:@"ContacEditForCompose"])
+            {
+                ComposeView *compose = (ComposeView*)parent;
+                [compose UpdateSelf];
+            }else if([self.restorationIdentifier isEqualToString:@"ContacEditForSling"])
+            {
+                SlingkeyView *sling = (SlingkeyView*)parent;
+                [sling ProcessProfile];
+            }
+            [newPersonViewController dismissViewControllerAnimated:YES completion:nil];
+            [self.navigationController popViewControllerAnimated:YES];
         }
     }else{
         [newPersonViewController dismissViewControllerAnimated:YES completion:nil];
     }
 }
-
-/*
-#pragma mark - Navigation
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

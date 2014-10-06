@@ -652,7 +652,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
@@ -672,7 +672,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
@@ -693,7 +693,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Carnegie Mellon University (27LU3HGQJP)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yue-Hsun Lin (X6U2B9ZV7E)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -711,7 +711,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "CA2BF723-E398-4BE9-B4F5-5FD9FB36FC1F";
+				PROVISIONING_PROFILE = "45d3d25d-9281-45f2-995f-505cdaeeed27";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -732,7 +732,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Carnegie Mellon University (27LU3HGQJP)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yue-Hsun Lin (X6U2B9ZV7E)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -744,7 +744,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "CA2BF723-E398-4BE9-B4F5-5FD9FB36FC1F";
+				PROVISIONING_PROFILE = "45d3d25d-9281-45f2-995f-505cdaeeed27";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -770,7 +770,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "$(ARCHS_STANDARD)";
+				VALID_ARCHS = "$(ARCHS_STANDARD) armv7s";
 			};
 			name = Debug;
 		};
@@ -794,7 +794,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "$(ARCHS_STANDARD)";
+				VALID_ARCHS = "$(ARCHS_STANDARD) armv7s";
 			};
 			name = Release;
 		};

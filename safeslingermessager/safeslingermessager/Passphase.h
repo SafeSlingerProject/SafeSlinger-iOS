@@ -47,8 +47,7 @@
 
 -(IBAction)PressHelp:(id)sender;
 -(IBAction)Login:(id)sender;
-
-- (IBAction)unwindToLogin:(UIStoryboardSegue *)unwindSegue;
+-(void)SelectDifferentKey;
 
 @end
 

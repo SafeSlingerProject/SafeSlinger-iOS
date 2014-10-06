@@ -32,15 +32,14 @@
 @interface ContactManageView : UITableViewController <ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, ABNewPersonViewControllerDelegate, MFMailComposeViewControllerDelegate>
 {
     int default_menu_index;
-    NSMutableArray *contact_index;
-    NSMutableArray *contact_photos;
-    NSMutableDictionary *user_actions;
     AppDelegate *delegate;
+    UIViewController *parent;
 }
 
-@property (nonatomic, retain) NSMutableArray *contact_index;
-@property (nonatomic, retain) NSMutableArray *contact_photos;
-@property (nonatomic, retain) NSMutableDictionary *user_actions;
+@property (nonatomic, retain) UIViewController *parent;
+@property (nonatomic, strong) NSMutableArray *contact_index;
+@property (nonatomic, strong) NSMutableArray *contact_photos;
+@property (nonatomic, strong) NSMutableDictionary *user_actions;
 @property (nonatomic, retain) AppDelegate *delegate;
 
 - (IBAction) DisplayHow: (id)sender;

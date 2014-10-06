@@ -27,8 +27,6 @@
 
 /* 'SafeSlinger' is an application name (title case); used for home screen icons, at the top of many screens, and many other places in the application. */
 "app_name" = "SafeSlinger";
-/* 'Michael W Farb' is a language editor (title case); the name of the individual who translated it and/or reviewed this localization. */
-"app_TranslatorName" = "Akira Yamada";
 
 /* 'Backup is disabled. Do you want to adjust backup settings and keep this reminder?' is a question message (sentence case, question mark); used to warn when the backup is off to confirm we should keep reminding the user. Used with Forget and Remind buttons. */
 "ask_BackupDisabledRemindLater" = "バックアップが無効になっています。 バックアップ設定を調整し、この通知を保存しますか？";
@@ -123,11 +121,11 @@
 /* 'Medium' is a choice (sentence case); used in the settings to choose a medium font size. */
 "choice_font_medium" = "メディア";
 /* 'Very Small' is a choice (sentence case); used in the settings to choose a tiny font size. */
-"choice_font_micro" = "非常に小さい";
+"choice_font_micro" = "極小";
 /* 'Small' is a choice (sentence case); used in the settings to choose a small font size. */
 "choice_font_small" = "小";
 /* 'Internal Storage' is a choice (sentence case); used to set the attachment root path to an internal source. Android-only. */
-"choice_internal_storage" = "内部記憶装置";
+"choice_internal_storage" = "内部ストレージ";
 /* 'No Limit' is a choice (sentence case); used to remove the timeout for the password. */
 "choice_nolimit" = "制限なし";
 /* '%d users' is a choice (sentence case); used to describe the number of users currently attempting to exchange keys. %d = number of users in the exchange. */
@@ -139,6 +137,8 @@
 /* 'Up' is a choice (sentence case); used in the File Manager dialog to navigate up to a parent directory. */
 "choice_Up" = "上";
 
+/* 'Some members are using an older version; all members must upgrade to the newest version.' is an error message (sentence case, period); used to warn when some members of the key exchange protocol are using less than the minimum version. Used for backward-compatibility in some cases. */
+"error_AllMembersMustUpgrade" = "最新のバージョンを使用していないメンバーがいます。メンバー全員が最新のバージョンを使用する必要があります。";
 /* 'All members must upgrade, some are using older key formats.' is an error message (sentence case, period); used to warn when the key format is incorrect after an exchange and perhaps used an old format. */
 "error_AllMembersMustUpgradeBadKeyFormat" = "一部のユーザが古いバージョンのの鍵を使用しているため、すべてのユーザはアップグレードする必要があります。";
 /* 'All members must upgrade, some are using older push registration formats.' is an error message (sentence case, period); used to warn when the push registration format is incorrect or corrupted. */
@@ -149,8 +149,8 @@
 "error_AudioPlayerError" = "音声を再生できません。";
 /* 'Audio recorder encoding error.' is an error message (sentence case, period); used to warn when attempting to record an audio message fails to encode properly. iOS-only. */
 "error_AudioRecorderEncodeError" = "録音エンコードエラー";
-/* 'Microphone permission is required to record a secure voice message. Tap the Help button for SafeSlinger Microphone permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Microphone permission. iOS-only. */
-"error_AudioRecorderPermissionError" = "マイクの許可がセキュリティで保護された音声メッセージを録音する必要があります。 SafeSlingerマイク権限の詳細については、[ヘルプ]ボタンをタップします。";
+/* 'Microphone permission is required to record a secure voice message. Tap the %s button for SafeSlinger Microphone permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Microphone permission. iOS-only. */
+"error_AudioRecorderPermissionError" = "マイク許可がセキュアな音声メッセージを録音するために必要とされている。 SafeSlingerマイク権限の詳細については%@ボタンをタップします。";
 /* 'No backup to restore.' is an error message (sentence case, period); used to warn at application setup, when there is no pre-existing backup to restore and warn the user that any previous keys have not been restored. */
 "error_BackupNotFound" = "復元のためのバックアップがありません。";
 /* 'Device does not support backup restore.' is an error message (sentence case, period); used to warn when the device hardware does not support restoration from backup. */
@@ -317,14 +317,18 @@
 /* 'Now, you must match one of these 3-word phrases with all users. Every user must select the same common phrase, and press Next.' is a help message (sentence case, period); used via Help button on the Verify screen and also the key exchange walkthrough tutorial to describe in more detail what the Verify screen does. */
 "help_verify" = "これらの3単語のいずれかとすべてのユーザーとが一致する必要があります。すべてのユーザが同じ共通のフレーズを選択し、 次へを押す必要があります。";
 
-/* 'Contacts permission is required for securely sharing contact cards. Tap the Help button for SafeSlinger Contacts permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Contacts permission. iOS-only. */
-"iOS_contactError" = "コンタクト許可が確実に接触カードを共有するために必要です。 SafeSlingerコンタクト許可の詳細については、[ヘルプ]ボタンをタップします。";
+/* 'Camera permission is required to attach snapshots to secure messages. Tap the %s button for SafeSlinger Camera permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Camera permission. iOS-only. */
+"iOS_cameraError" = "カメラの許可がメッセージを保護するためにスナップショットを添付することが要求される。 SafeSlingerカメラ権限の詳細については%@ボタンをタップします。";
+/* 'Contacts permission is required for securely sharing contact cards. Tap the %s button for SafeSlinger Contacts permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Contacts permission. iOS-only. */
+"iOS_contactError" = "コンタクト許可が確実に連絡カードを共有するために必要です。 SafeSlingerコンタクト許可の詳細については%@ボタンをタップします。";
 /* 'Push registration is missing.' is an error message (sentence case, period); used to warn the user the push registration is missing. iOS-only. */
 "iOS_errorpushtoken" = "プッシュの登録がありません。";
-/* 'Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the Help button for SafeSlinger Notification permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Notifications permission. iOS-only. */
-"iOS_notificationError1" = "警告やバナー、バッジ番号のどちらかの通知許可は、セキュアなメッセージングのために必要とされる。 SafeSlinger通知許可の詳細については、[ヘルプ]ボタンをタップします。";
+/* 'Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the %s button for SafeSlinger Notification permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Notifications permission. iOS-only. */
+"iOS_notificationError1" = "アラートやバナー、バッジ番号のいずれかの通知許可は、セキュアなメッセージングのために必要とされる。 SafeSlinger通知許可の詳細については%@ボタンをタップします。";
 /* 'SafeSlinger is not optimized for iOS 5.x devices. SafeSlinger requires iOS 6 or higher.' is an informational message (sentence case, period); message for dialog popups when a user still uses an old iOS device. iOS-only. */
 "iOS_oldOSWarn" = "SafeSlingerはのiOS5.xのデバイス用に最適化されていません。 SafeSlingerをiOS6以降が必要です。";
+/* 'Photo Library permission is required to attach pictures to secure messages. Tap the %s button for SafeSlinger Photo Library permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Photo Library permission. iOS-only. */
+"iOS_photolibraryError" = "フォトライブラリ許可がメッセージを保護するために写真を添付する必要があります。 SafeSlingerフォトライブラリ権限の詳細については%@ボタンをタップします。";
 /* 'You can select your contact card to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Contacts when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Contacts permission. iOS-only. */
 "iOS_RequestPermissionContacts" = "あなたはあなたの友人を送信するためにあなたの連絡先カードを選択することができますし、SafeSlingerはあなたのためにそれを暗号化します。尋ねられたとき、この機能を有効にするには、連絡先にSafeSlingerアクセスを許可する必要があります。";
 /* 'You can record a voice message to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Microphone when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Microphone permission. iOS-only. */
@@ -592,6 +596,8 @@
 "menu_Introduction" = "はじめに";
 /* 'Language' is a menu (title case); used as the settings menu option to change language */
 "menu_language" = "言語";
+/* 'License' is a menu option (title case); used to show a dialog of the End User License Agreement. */
+"menu_License" = "ライセンス";
 /* 'Add Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
 "menu_link_contact_add" = "連絡先リンクを追加";
 /* 'Change Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
@@ -601,17 +607,19 @@
 /* 'Manage Passphrases' is a menu option (title case); used on the settings screen to allow users to remove newer keys if created by users without orignial user authorization. */
 "menu_ManagePassphrases" = "パスフレーズを管理";
 /* 'Message Font Size' is a menu (title case); used as the settings menu option to change message font size */
-"menu_message_font_size" = "メッセージフォントサイズ";
+"menu_message_font_size" = "フォントサイズ";
 /* 'Copy Text' is a menu option (title case); used to copy the message text into the clipboard via the message list context menu. */
-"menu_messageCopyText" = "テキストのコピー";
+"menu_messageCopyText" = "コピー";
 /* 'Forward' is a menu option (title case); used to create a new message with the same text message/attachment via the message list context menu. */
 "menu_messageForward" = "フォワード";
+/* 'Privacy Policy' is a menu option (title case); used to show a dialog of the Privacy Policy. */
+"menu_PrivacyPolicy" = "プライバシー・ポリシー";
 /* 'Remove' is a menu option (title case); used to remove the currently selected file attachment via the File Options dialog. */
 "menu_Remove" = "削除する";
 /* 'Restore Default Settings' is a menu option (title case); used as Settings screen menu item for restoring all settings to default */
 "menu_restore_default" = "デフォルト設定を復元する";
 /* 'Sound' is a menu option (title case); used as Settings item for entering ringtone selection screen */
-"menu_ringtone" = "聞こえる";
+"menu_ringtone" = "着信メロディ";
 /* 'Add Contact Invitation' is a menu option (title case); used to send an email or text message containing an installation link for SafeSlinger. */
 "menu_SelectShareApp" = "お問い合わせへの招待を追加";
 /* 'Send Feedback' is a menu option (title case); used to send an email with support data for feedback. */
@@ -637,7 +645,7 @@
 /* 'Use Profile %s' is a menu option (title case); used to select the main profile contact as the users' main identity via the Personal Contact dialog. */
 "menu_UseProfilePerson" = "プロファイル%@を使用";
 /* 'Vibrate' is a menu option (title case); used as Settings item for boolean option to vibrate during message notification */
-"menu_vibrate" = "振動する";
+"menu_vibrate" = "振動";
 
 /* 'waiting for verification from all members...' is a progress message (lower case, ellipsis); used to show progress while verifying data from all members hash equal to the initial commitment they sent. */
 "prog_CollectingOthersCommitVerify" = "すべてのメンバーからの確認を待っています...";
@@ -722,6 +730,8 @@
 "text_About2" = "テキスト、写真などの安全な共有";
 /* 'Strong cryptography protects your information' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
 "text_About3" = "強力な暗号による情報の保護";
+/* 'SafeSlinger: Speak 3 words and forever chat in peace.' is an application description (sentence case); used in the about box and app store listing to describe the application features. Short form: 80 character max, should be exciting. */
+"text_About_Short" = "SafeSlinger: 言葉三つの紹介で、内緒にチャット。";
 /* 'email: %s' is an application description (sentence case); used in the app store listing, %s = SafeSlinger support email address. */
 "text_AboutEmail" = "email: %@";
 /* 'Features:' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
@@ -774,7 +784,7 @@
 /* 'Setup' is a title (title case); used at the top of the setup screen. */
 "title_find" = "セットアップ";
 /* 'Select a font size' is a title (title case); used as the settings title when changing font size */
-"title_font_size" = "フォントサイズを選択する";
+"title_font_size" = "フォントサイズ";
 /* 'Begin Exchange' is a title (title case); used at the top of the begin exchange screen to start the exchange protocol. */
 "title_home" = "Exchangeを開始";
 /* 'Home' is a title (title case); used at the top of the home screen on iOS. */
@@ -784,7 +794,7 @@
 /* 'Messages' is a title (title case); used at the top of the message list screen. */
 "title_Messages" = "メッセージ";
 /* 'Personal Contact' is a title (title case); used at the top of a menu when choosing to alter the users' contact: Edit, Create New, or Use Another. */
-"title_MyIdentity" = "個人的な接触";
+"title_MyIdentity" = "コンタクト";
 /* 'SafeSlinger Message Available' is a title (title case); used as the title of an incoming message in the notification window. */
 "title_NotifyFileAvailable" = "SafeSlingerによるメッセージ利用可能";
 /* '%d SafeSlinger Messages Available' is a title (title case); used as the title of multiple incoming messages in the notification window. iOS-only. */
@@ -810,7 +820,7 @@
 /* 'Secure Introduction Invitation!' is a title (title case); used at the top of the confirmation dialog when receiving a secure introduction. */
 "title_SecureIntroductionInvite" = "安全な自己紹介への招待";
 /* 'Sending Options:' is a title (title case); used to denote the dialog for user to pickup sender source options. */
-"title_SelectSource" = "オプションの送信：";
+"title_SelectSource" = "送信オプション";
 /* 'Send' is a title (title case); used at the top of compose message screen. */
 "title_SendFile" = "送信";
 /* 'Sharing Folder' is a menu option (title case); used in the Select File Option menu to select a file from the sharing folder on iOS. */

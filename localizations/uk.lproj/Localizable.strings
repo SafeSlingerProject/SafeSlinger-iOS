@@ -27,70 +27,68 @@
 
 /* 'SafeSlinger' is an application name (title case); used for home screen icons, at the top of many screens, and many other places in the application. */
 "app_name" = "SafeSlinger";
-/* 'Michael W Farb' is a language editor (title case); the name of the individual who translated it and/or reviewed this localization. */
-"app_TranslatorName" = "Google Translate";
 
 /* 'Backup is disabled. Do you want to adjust backup settings and keep this reminder?' is a question message (sentence case, question mark); used to warn when the backup is off to confirm we should keep reminding the user. Used with Forget and Remind buttons. */
 "ask_BackupDisabledRemindLater" = "Резервне копіювання відключена. Ви хочете, щоб налаштувати параметри резервного копіювання і тримати це нагадування?";
 /* '%s has a more recent device or key, are you sure you want to use this older one?' is a question message (sentence case, question mark); is a confirmation question that occurs when the user selected a recipient with more recent information in the database. */
-"ask_ConfirmUseOlderDeviceOrKey" = "%@ має більш свіжий пристрій або ключ, ви впевнені, що ви хочете використовувати цей старий друг?";
+"ask_ConfirmUseOlderDeviceOrKey" = "%@ має більш свіжий пристрій або ключ, ви впевнені, що ви хочете використовувати цей старший?";
 /* 'File name %s already exists. Overwrite?' is a question message (sentence case, question mark); is a question that occurs when the user attempts to save a file with the same name as an existing file in the same location. %s = the file name of the attachment. */
 "ask_FileExistsOverwrite" = "Файл %@ вже існує. Переписати?";
 /* 'Without a Google Account you will only be able to send, NOT receive messages. Do you want to add a Google account?' is a question message (sentence case, question mark); used to warn when a Google account has not been setup, if the user intends to receive messages. Android-only. */
-"ask_GoogleAccountToReceiveMsgs" = "Без аккаунт Google, ви зможете тільки відправляти, НЕ приймати повідомлення. Хочете додати обліковий запис Google?";
+"ask_GoogleAccountToReceiveMsgs" = "Без аккаунт Google ви зможете тільки послати, НЕ приймати повідомлення. Хочете додати обліковий запис Google?";
 /* 'Quit? Are you sure?' is a question message (sentence case, question mark); is a confirmation question that occurs when the user chooses to end the exchange protocol prematurely. */
-"ask_QuitConfirmation" = "Вийти? Ви впевнені?";
+"ask_QuitConfirmation" = "Кинути? Ти впевнений?";
 /* 'We'd like your help improving SafeSlinger. Would you like to automatically send any errors to us?' is a question message (sentence case, question mark); is a question that occurs when the user encounters an unhandled exception and are asked if they want to upload this error log and any future error logs. */
-"ask_SendErrorData" = "Ми хотіли б вашої допомоги поліпшення SafeSlinger. Хочете автоматично відправляти будь-які помилки для нас?";
+"ask_SendErrorData" = "Ми хотіли б вашої допомоги поліпшення SafeSlinger. Хочете автоматично відправляти будь-які помилки з нами?";
 
 /* 'Accept' is a button (title case); the Accept button is paired with the Refuse button to indicate user acceptance of a secure introduction. */
-"btn_Accept" = "Приймати";
+"btn_Accept" = "Прийняти";
 /* 'Begin Exchange' is a button (title case); the Begin Exchange button is used to begin the SafeSlinger exchange protocol. */
 "btn_BeginExchangeProximity" = "Почніть Обмін";
 /* 'Cancel' is a button (title case); the Cancel button is used to indicate the user wishes to exit the current screen without saving data. For non-Android use only, since Android uses the Back hardware button instead. */
 "btn_Cancel" = "Скасувати";
 /* 'Close' is a button (title case); the Close button is used to allow the user to dismiss a dialog. */
-"btn_Close" = "Близько";
+"btn_Close" = "Закрити";
 /* 'Continue' is a button (title case); the Continue button is used to remind the user that there is another step to complete. */
-"btn_Continue" = "Продовжувати";
+"btn_Continue" = "Продовжити";
 /* 'Create New Key' is a button (title case); the Create New Key button is paired with the Cancel button, and is used to affirm the creation of a new key and passphrase. */
 "btn_CreateNewKey" = "Створити новий ключ";
 /* 'Delete Keys' is a button (title case); the Create New Key button is paired with the Cancel button, and is used to affirm the deletion of more recent keys. */
-"btn_DeleteKeys" = "Видаляти ключі";
+"btn_DeleteKeys" = "Видалити ключі";
 /* 'Discard' is a button (title case); the Discard button is used to indicate the user wishes to exit the current screen without saving data, such as a voice memo. For non-Android use only, since Android uses the Back hardware button instead. */
-"btn_discard" = "Відкидати";
+"btn_discard" = "Відмовтеся";
 /* 'Done' is a button (title case); the Done button is used to allow the user to complete a current multi-step process. */
-"btn_Done" = "Зроблений";
+"btn_Done" = "Готово";
 /* 'Exit' is a button (title case); the Exit button is used to close the application. For non-Android use only, since Android uses the Back hardware button instead. */
 "btn_Exit" = "Вихід";
 /* 'Import' is a button (title case); the Import button is used to import a set of contacts on after an unsuccessful exchange protocol has finished. */
 "btn_Import" = "Імпорт";
 /* 'Introduce' is a button (title case); the Introduce button is used to send a secure introduction to the two users selected on the Secure Introduction screen. */
-"btn_Introduce" = "Вводити";
+"btn_Introduce" = "Уявіть";
 /* 'Next' is a button (title case); the Next button is used to remind the user that there is another step to complete. */
-"btn_Match" = "Наступний";
+"btn_Match" = "Наступна";
 /* 'No' is a button (title case); the No button is paired with the Yes button, and is used to indicate a negative answer to a Yes/No question. */
-"btn_No" = "Ні";
+"btn_No" = "Немає";
 /* 'No Match' is a button (title case); the No Match button is used if the user cannot find the same batting screen on another user's device during the exchange critical care. */
-"btn_NoMatch" = "Ні Матч";
+"btn_NoMatch" = "Немає відповідності";
 /* 'Not Now' is a button (title case); the Not Now button is used as a negative button to decline an offered service or permission. */
 "btn_NotNow" = "Не зараз";
 /* 'Forget' is a button (title case); the Forget button is paired with the Remind button and is used to indicate the user wishes to dismiss the current reminder of a potential error state, such as having backup or notification settings turned off, and not be reminded again. */
-"btn_NotRemind" = "Забувати";
+"btn_NotRemind" = "Забудьте";
 /* 'OK' is a button (title case); the OK button is affirmation button used to indicate the user accepts the data entered on the current screen. */
 "btn_OK" = "добре";
 /* 'Refuse' is a button (title case); the Refuse button is paired with the Accept button to indicate user refusal of a secure introduction. */
-"btn_Refuse" = "Відмовлятися";
+"btn_Refuse" = "Відмовитися";
 /* 'Remind' is a button (title case); the Remind button is paired with the Forget button and is used to indicate the user wishes to dismiss the current reminder of a potential error state, such as having backup or notification settings turned off, and does want to be reminded again later. */
-"btn_Remind" = "Нагадувати";
+"btn_Remind" = "Нагадати";
 /* 'Save' is a button (title case); the Save button is used to indicate the data in question should be saved and persisted. */
-"btn_Save" = "Економити";
+"btn_Save" = "Зберегти";
 /* 'Add Attachment' is a button (title case); the Add Attachment button is used on the Compose screen to allow the user to select the source of an attachment to the current message. */
 "btn_SelectFile" = "Додати вкладення";
 /* 'Send' is a button (title case); the Send button will secure the current text message and attachment, if any, and send the message to the selected recipient. */
-"btn_SendFile" = "Послати";
+"btn_SendFile" = "Відправити";
 /* 'Yes' is a button (title case); the Yes button is paired with the No button, and is used to indicate an affirmative answer to a Yes/No question. */
-"btn_Yes" = "Так";
+"btn_Yes" = "Та";
 
 /* '10 minutes' is a choice (sentence case); used to set the password timeout to 10 minutes. */
 "choice_10mins" = "10 хвилин";
@@ -103,7 +101,7 @@
 /* '2 hours' is a choice (sentence case); used to set the password timeout to 2 hours. */
 "choice_2hours" = "2 hours";
 /* '3 minutes' is a choice (sentence case); used to set the password timeout to 3 minutes. */
-"choice_3mins" = "3 хвилини";
+"choice_3mins" = "3 хвилин";
 /* '40 minutes' is a choice (sentence case); used to set the password timeout to 40 minutes. */
 "choice_40mins" = "40 хвилин";
 /* '4 hours' is a choice (sentence case); used to set the password timeout to 4 hours. */
@@ -115,21 +113,21 @@
 /* 'Default Storage' is a choice (sentence case); used to set the attachment root path to the default source. Android-only. */
 "choice_auto_storage" = "Сховище за замовчуванням";
 /* 'Default' is a choice (sentence case); used in any menu to denote the default choice. */
-"choice_default" = "Дефолт";
+"choice_default" = "За замовчуванням";
 /* 'External Storage' is a choice (sentence case); used to set the attachment root path to an external source. Android-only. */
-"choice_external_storage" = "Зовнішні накопичувачі";
+"choice_external_storage" = "Зовнішні системи зберігання даних";
 /* 'Large' is a choice (sentence case); used in the settings to choose a large font size. */
 "choice_font_large" = "Великий";
 /* 'Medium' is a choice (sentence case); used in the settings to choose a medium font size. */
-"choice_font_medium" = "Середа";
+"choice_font_medium" = "Середній";
 /* 'Very Small' is a choice (sentence case); used in the settings to choose a tiny font size. */
 "choice_font_micro" = "Дуже маленький";
 /* 'Small' is a choice (sentence case); used in the settings to choose a small font size. */
-"choice_font_small" = "Невеликий";
+"choice_font_small" = "Малий";
 /* 'Internal Storage' is a choice (sentence case); used to set the attachment root path to an internal source. Android-only. */
-"choice_internal_storage" = "Ємність внутрішньої системи зберігання";
+"choice_internal_storage" = "Система зберігання даних";
 /* 'No Limit' is a choice (sentence case); used to remove the timeout for the password. */
-"choice_nolimit" = "Ні Обмеження";
+"choice_nolimit" = "* No Limit";
 /* '%d users' is a choice (sentence case); used to describe the number of users currently attempting to exchange keys. %d = number of users in the exchange. */
 "choice_NumUsers" = "%d користувачів";
 /* 'Save Directory' is a choice (sentence case); used when the user chooses to change the directory of the attachment before saving. */
@@ -137,56 +135,58 @@
 /* 'Save file' is a choice (sentence case); used when the user chooses to change the filename of the attachment before saving. */
 "choice_SaveFile" = "Зберегти файл";
 /* 'Up' is a choice (sentence case); used in the File Manager dialog to navigate up to a parent directory. */
-"choice_Up" = "Вгору";
+"choice_Up" = "До";
 
+/* 'Some members are using an older version; all members must upgrade to the newest version.' is an error message (sentence case, period); used to warn when some members of the key exchange protocol are using less than the minimum version. Used for backward-compatibility in some cases. */
+"error_AllMembersMustUpgrade" = "Деякі члени використовуєте стару версію; всі члени повинні оновити до останньої версії.";
 /* 'All members must upgrade, some are using older key formats.' is an error message (sentence case, period); used to warn when the key format is incorrect after an exchange and perhaps used an old format. */
-"error_AllMembersMustUpgradeBadKeyFormat" = "Всі члени повинні оновити, деякі використовують старі ключові формати.";
+"error_AllMembersMustUpgradeBadKeyFormat" = "Всі члени повинні оновити, деякі використовують застарілі основні формати.";
 /* 'All members must upgrade, some are using older push registration formats.' is an error message (sentence case, period); used to warn when the push registration format is incorrect or corrupted. */
-"error_AllMembersMustUpgradeBadPushToken" = "Всі члени повинні оновити, деякі використовують старі формати реєстрації поштовх.";
+"error_AllMembersMustUpgradeBadPushToken" = "Всі члени повинні оновити, деякі використовують старі формати реєстраційні поштовху.";
 /* 'Audio player decoding error.' is an error message (sentence case, period); used to warn when attempting to play an audio message fails to decode properly. iOS-only. */
-"error_AudioPlayerDecodeError" = "Аудіо плеєр помилка декодування.";
+"error_AudioPlayerDecodeError" = "Аудіо помилка декодування гравець.";
 /* 'Cannot play the recording.' is an error message (sentence case, period); used to warn when the voice recording received cannot be played. iOS-only. */
-"error_AudioPlayerError" = "Неможливо відтворити запис.";
+"error_AudioPlayerError" = "Не можете відтворити запис.";
 /* 'Audio recorder encoding error.' is an error message (sentence case, period); used to warn when attempting to record an audio message fails to encode properly. iOS-only. */
-"error_AudioRecorderEncodeError" = "Аудіо помилка кодування рекордер.";
-/* 'Microphone permission is required to record a secure voice message. Tap the Help button for SafeSlinger Microphone permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Microphone permission. iOS-only. */
-"error_AudioRecorderPermissionError" = "Дозвіл мікрофон потрібно для запису безпечне голосове повідомлення. Натисніть кнопку Довідка для SafeSlinger мікрофон деталей дозволів.";
+"error_AudioRecorderEncodeError" = "Аудіо помилок кодування рекордер.";
+/* 'Microphone permission is required to record a secure voice message. Tap the %s button for SafeSlinger Microphone permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Microphone permission. iOS-only. */
+"error_AudioRecorderPermissionError" = "Дозвіл мікрофон потрібно для запису безпечне голосове повідомлення. Натисніть кнопку %@ для SafeSlinger мікрофона деталей дозволів.";
 /* 'No backup to restore.' is an error message (sentence case, period); used to warn at application setup, when there is no pre-existing backup to restore and warn the user that any previous keys have not been restored. */
-"error_BackupNotFound" = "Ні резервного копіювання для відновлення.";
+"error_BackupNotFound" = "Ні резервної копії для відновлення.";
 /* 'Device does not support backup restore.' is an error message (sentence case, period); used to warn when the device hardware does not support restoration from backup. */
-"error_BackupNotSupportedDevice" = "Пристрій не підтримує відновлення резервної копії.";
+"error_BackupNotSupportedDevice" = "Пристрій не підтримує відновити резервного копіювання.";
 /* 'Due to a bug in Android 4.1, you will have to uninstall and reinstall SafeSlinger.' is an error message (sentence case, period); used to warn when unable to load native libraries due to a Google Play copy-protection bug, which can corrupt installations for users upgrading to Android 4.1. Android-only. */
-"error_BadCopyProtectUpgrade" = "Через помилку в Android 4.1, вам доведеться видалити і перевстановити SafeSlinger.";
+"error_BadCopyProtectUpgrade" = "У зв'язку з помилкою в Android 4.1, вам доведеться видалити і перевстановити SafeSlinger.";
 /* 'A Google account is required. Please open the account manager and add a Google account.' is an error message (sentence case, period); used to warn during push registration: There is no Google account on the phone. The application should ask the user to open the account manager and add a Google account. Fix on the device side. Android-only. */
-"error_C2DMRegAccountMissing" = "Обліковий запис Google не потрібно. Будь ласка, відкрийте менеджеру та додати обліковий запис Google.";
+"error_C2DMRegAccountMissing" = "Обліковий запис Google потрібно. Будь ласка, відкрийте менеджеру та додати обліковий запис Google.";
 /* 'Registration not authenticated, please retry manually later.' is an error message (sentence case, period); used to warn during push registration: Bad password. The application should ask the user to enter his/her password, and let user retry manually later. Fix on the device side. Android-only. */
-"error_C2DMRegAuthenticationFailed" = "Реєстрація не пройшов перевірку автентичності, повторіть спробу пізніше вручну.";
+"error_C2DMRegAuthenticationFailed" = "Реєстрація не пройшов перевірку автентичності, будь ласка, повторіть пізніше вручну.";
 /* 'Registration is not available for this version, please check for an updated version.' is an error message (sentence case, period); used to warn during push registration: The sender account is not recognized. Android-only. */
-"error_C2DMRegInvalidSender" = "Реєстрація абсолютно недоступна для цієї версії, будь ласка, перевірте для оновленої версії.";
+"error_C2DMRegInvalidSender" = "Реєстрація доступна не для цієї версії, будь ласка, перевірте для оновленої версії.";
 /* 'Incorrect device registration with Google. This device does not currently support push messaging.' is an error message (sentence case, period); used to warn during push registration: Incorrect phone registration with Google. This phone doesn't currently support C2DM. Android-only. */
-"error_C2DMRegPhoneRegistrationError" = "Реєстрація Неправильний пристрій з Google. Цей пристрій в даний час не підтримує поштовх повідомленнями.";
+"error_C2DMRegPhoneRegistrationError" = "Реєстрація Неправильний пристрій з Google. Це пристрій в даний час не підтримує поштовх повідомленнями.";
 /* 'Push registration service not available, scheduling retry in %d seconds.' is an error message (sentence case, period); used to warn during push registration: The device can't read the response, or there was a 500/503 from the server that can be retried later. The application should use exponential back off and retry. %d = the current number of seconds until the next push registration attempt. Android-only. */
 "error_C2DMRegServiceNotAvailable" = "Натисніть реєстраційна служба не доступна, планування повторити в %d секунд.";
 /* 'Too many applications are registered for Push. Please uninstall some other applications and retry.' is an error message (sentence case, period); used to warn during push registration: The user has too many applications registered. The application should tell the user to uninstall some other applications, let user retry manually. Fix on the device side. Android-only. */
-"error_C2DMRegTooManyRegistrations" = "Занадто багато додатки реєструються для Push. Будь ласка, видаліть деякі інші програми і повторіть спробу.";
+"error_C2DMRegTooManyRegistrations" = "Занадто багато додатки реєструються для Push. Будь ласка, видаліть деякі інші додатки і повторіть спробу.";
 /* 'Cannot send an empty attachment.' is an error message (sentence case, period); used to warn when use attempts to attach an empty file to the message. */
-"error_CannotSendEmptyFile" = "Не можете відправити порожнє вкладення.";
+"error_CannotSendEmptyFile" = "Не можете відправити пусте вкладення.";
 /* 'Cannot send attachments greater than %d bytes in size.' is an error message (sentence case, period); used to warn when the message and attachment (if any) exceed the current quota limits for the App Engine service we use. %d the maximum limit in bytes of the entire message plus attachments that the App Engine service will allow us to upload. */
-"error_CannotSendFilesOver" = "Не можете відправляти вкладення, що перевищують %d байт.";
+"error_CannotSendFilesOver" = "Не можете відправляти вкладення більш ніж %d байт.";
 /* 'Cannot send a null attachment.' is an error message (sentence case, period); used to warn when use attempts to attach an empty file to the message. */
 "error_CannotSendNullFile" = "Не вдається відправити пусте вкладення.";
 /* 'Contact creation failed.' is an error message (sentence case, period); used to warn when failing to insert new contact data. */
 "error_contactCreationFailure" = "Створення Контакт не вдалося.";
 /* 'Contact insert failed.' is an error message (sentence case, period); used to warn when failing to insert new contact data. */
-"error_ContactInsertFailed" = "Контактна вставка не вдалася.";
+"error_ContactInsertFailed" = "Зв'язатися вставка не вдалася.";
 /* 'This contact is missing a name, please edit.' is an error message (sentence case, period); used to warn when the matching contact found on the Setup screen does not have a name. */
-"error_ContactNameMissing" = "Цей контакт відсутній ім'я, будь ласка редагування.";
+"error_ContactNameMissing" = "Цей контакт відсутній ім'я, будь ласка, змініть.";
 /* 'This contact is missing a name, please reselect.' is an error message (sentence case, period); used to warn when the matching contact found on the Setup screen does not have a name. */
 "error_ContactNameMissing2" = "Цей контакт відсутній ім'я, будь ласка повторно.";
 /* 'Contact update failed.' is an error message (sentence case, period); used to warn when failing to merge contact data after an exchange. */
 "error_ContactUpdateFailed" = "Зв'язатися оновлення не вдалося.";
 /* 'Internet not available, check your settings.' is an error message (sentence case, period); used to warn when the user attempts to communicate with a server and the device cannot detect a path to the Internet. */
-"error_CorrectYourInternetConnection" = "Інтернет не доступний, перевірте налаштування.";
+"error_CorrectYourInternetConnection" = "Інтернет не доступний, перевірте настройки.";
 /* 'Could not extract private key.' is an error message (sentence case, period); used to warn when the user is not able to extract the private key from the encrypted private key stored on the device. */
 "error_couldNotExtractPrivateKey" = "Не вдалося витягти секретний ключ.";
 /* 'Exchange timeout exceeded. Begin the exchange again.' is an error message (sentence case, period); used to warn when users have waited too long, 10 minutes, before completing the exchange protocol. */
@@ -196,27 +196,27 @@
 /* 'Unable to save %s.' is an error message (sentence case, period); used to warn when there was disk error attempting to save an attachment to the users' device. %s = the name of the file that failed to save. */
 "error_FileSave" = "Неможливо зберегти %@.";
 /* 'File storage is not available.' is an error message (sentence case, period); used to warn when attempting to read/write to attachment storage becomes unavailable. */
-"error_FileStorageUnavailable" = "Зберігання файлів не доступний.";
+"error_FileStorageUnavailable" = "Зберігання файлів не буде доступною.";
 /* 'Server HTTP Error: %d' is an error message (sentence case, period); used to warn when the key exchange or messaging servers encountered an error and need to notify the user. %d = the HTTP status line code is case of an error, like 404 (file not found). 500 is common for uncaught Python run-time errors. */
 "error_HttpCode" = "Сервер Помилка HTTP: %d";
 /* 'Incorrect data found in exchange. Begin the exchange again.' is an error message (sentence case, period); used to warn when some item received from another group member during the key exchange did not hash correctly to the previously committed value. */
-"error_InvalidCommitVerify" = "Неправильні дані, знайдені в результаті обмінних операцій. Почніть обмін знову.";
+"error_InvalidCommitVerify" = "Неправильні дані знайдені в обмін. Почніть обмін знову.";
 /* 'Please enter a positive integer.' is an error message (sentence case, period); used to warn when the user attempted to type in a group ID on the Grouping screen that was zero, negative, or empty. */
 "error_InvalidCommonUserId" = "Будь ласка, введіть позитивне ціле число.";
 /* 'A valid contact name is required.' is an error message (sentence case, period); used to warn when the user completes Setup without typing a name, or the name includes 3rd-person words we cannot allow, such as: 'Me', 'Contact', 'Foo',… */
-"error_InvalidContactName" = "Припустиме ім'я контакту не вимагається.";
+"error_InvalidContactName" = "Припустиме ім'я контакту потрібно.";
 /* 'Bad incoming message format.' is an error message (sentence case, period); used to warn when the incoming message was not formatted properly. */
-"error_InvalidIncomingMessage" = "Поганий входить формат повідомлення.";
+"error_InvalidIncomingMessage" = "Поганий вхідний формат повідомлення.";
 /* 'Bad message format.' is an error message (sentence case, period); used to warn when the outgoing message was not formatted properly. */
-"error_InvalidMsg" = "Поганий формат повідомлення.";
+"error_InvalidMsg" = "Невірний формат повідомлення.";
 /* 'Invalid recipient.' is an error message (sentence case, period); used to warn when the user has not selected 1 recipient to send a message on the Compose Message screen, also when the user has not selected 2 recipients to send introductions to on the Secure Introduction screen. */
 "error_InvalidRecipient" = "Невірний одержувач.";
 /* 'You have reported a difference in phrases. Begin the exchange again.' is an error message (sentence case, period); used to warn when the user presses the 'No Match' button that they are aborting the protocol for the group and sending a non-match signature to others. */
-"error_LocalGroupCommitDiffer" = "Ви заявили різницю у фрази. Почніть обмін знову.";
+"error_LocalGroupCommitDiffer" = "Ви заявили різницю в фрази. Почніть обмін знову.";
 /* 'The peer key format is invalid.' is an error message (sentence case, period); used to warn when the public key we used for this recipient does not exist or is improperly formatted. */
-"error_MessageInvalidPeerKeyFormat" = "Ключ формату однолітків є недійсним.";
+"error_MessageInvalidPeerKeyFormat" = "Формат ключ однолітків є недійсним.";
 /* 'Signature verification failed.' is an error message (sentence case, period); used to warn when key used to generate an incoming message signature is not in the key database. */
-"error_MessageSignatureVerificationFails" = "Підпис верифікація не вдалася.";
+"error_MessageSignatureVerificationFails" = "Перевірка підпису не пройшла.";
 /* 'Passphrases require at least %d characters.' is an error message (sentence case, period); used to warn when a user has setup a passphrase, which does not fit the minimum required length. %d = current requirement is at least 8 characters. */
 "error_minPassphraseRequire" = "Секретні фрази вимагають щонайменше %d символів.";
 /* 'A minimum of %d members are required to exchange data.' is an error message (sentence case, period); used to warn when attempting to leave the Group Size screen without choosing a group size. %d = the minimum number of users to complete the exchange protocol, 2 usually. */
@@ -224,11 +224,11 @@
 /* 'SafeSlinger did not detect NDK support on this device, which is required.' is an error message (sentence case, period); used to warn when device has no Native Development Kit support installed. Android-only. */
 "error_MissingNdk" = "SafeSlinger не виявлено підтримки NDK на цьому пристрої, який потрібно.";
 /* 'Unexpected data found in exchange. Begin the exchange again.' is an error message (sentence case, period); used to warn when a user has entered a group size number that is too low during the exchange protocol or possibly a Man-in-The-Middle (MiTM) attack where a malicious outsider attempts to join the group. */
-"error_MoreDataThanUsers" = "Несподівані дані, знайдені в результаті обмінних операцій. Почніть обмін знову.";
+"error_MoreDataThanUsers" = "Несподівані дані знайдені в обмін. Почніть обмін знову.";
 /* 'You are attempting to send multiple items. At this time, SafeSlinger only supports sending one item at a time.' is an error message (sentence case, period); used to warn when the user attempts to select multiple attachments to send when we only allow one attachment for now. */
-"error_MultipleSendNotSupported" = "Ви намагаєтеся відправити кілька елементів. У цей час, SafeSlinger підтримує відправку одного елемента за один раз тільки.";
+"error_MultipleSendNotSupported" = "Ви намагаєтеся відправити кілька елементів. В цей час, SafeSlinger підтримує відправку одного пункту на час тільки.";
 /* 'The exchange is missing required data.' is an error message (sentence case, period); used to warn when exchange is missing some parameter or data to complete. */
-"error_NoDataToExchange" = "Обмін відсутні необхідні дані.";
+"error_NoDataToExchange" = "Обмін відсутній необхідні дані.";
 /* 'Email account is not setup!' is an error message (sentence case, period); used to warn that a user did not have an email account when he/she tries to send out comments to administrator account. iOS-only. */
 "error_NoEmailAccount" = "Обліковий запис електронної пошти не налаштований!";
 /* 'No passphrase entered.' is an error message (sentence case, period); used to warn when a user generates or changes a passphrase and they have entered a blank password, which is not acceptable. */
@@ -236,7 +236,7 @@
 /* 'You must select one of the phrases before proceeding.' is an error message (sentence case, period); used to warn when the user attempts to proceed past the word phrase Verify screen during the exchange protocol and they have not selected, which of the three phrases match with the other users'. */
 "error_NoWordListSelected" = "Ви повинні вибрати один з фраз, перш ніж приступити.";
 /* 'Someone reported a difference in phrases. Begin the exchange again.' is an error message (sentence case, period); used to warn when at least one other member of the group during the exchange protocol pressed the 'No Match' button. */
-"error_OtherGroupCommitDiffer" = "Хтось повідомив різницю у фрази. Почніть обмін знову.";
+"error_OtherGroupCommitDiffer" = "Деякі кажуть, різницю в фрази. Почніть обмін знову.";
 /* 'Memory is too low to complete this operation.' is an error message (sentence case, period); used to warn when a request for memory is made that cannot be satisfied using the available platform resources. Such a request may be made by both the running application or by an internal function of the VM. */
 "error_OutOfMemoryError" = "Пам'ять є занадто низьким для завершення цієї операції.";
 /* 'Passphrases do not match.' is an error message (sentence case, period); used to warn when the user creates or changes their passphrase and the confirmation second entry did not match the first. */
@@ -244,154 +244,158 @@
 /* 'You have exceeded the message quota for that recipient. Please retry later.' is an error message (sentence case, period): used to warn when sending messages to device and the message quota for all applications on the device is full. */
 "error_PushMsgDeviceQuotaExceeded" = "Ви перевищили квоту повідомлення для цього одержувача. Будь ласка, спробуйте пізніше.";
 /* 'That recipient has a missing or bad push registration. You should stop sending messages to this device.' is an error message (sentence case, period); used to warn when sending messages to device and the recipient registration was never registered with the push service. */
-"error_PushMsgInvalidRegistration" = "Це одержувач має відсутній або несправний реєстрації поштовх. Ви повинні зупинити відправку повідомлення на цьому пристрої.";
+"error_PushMsgInvalidRegistration" = "Це одержувач має відсутній або несправний реєстрації провайдера. Ви повинні зупинити відправку повідомлення на цьому пристрої.";
 /* 'Message expired.' is an error message (sentence case, period); used to warn when getting messages, the message id cannot be found and it has likely been scrubbed from the server. */
 "error_PushMsgMessageNotFound" = "Повідомлення закінчився.";
 /* 'The message is too big. Reduce the size of the message.' is an error message (sentence case, period); used to warn when sending messages to device and the initial push exceeds 1024 bytes. Unlikely, since the initial push only contains the message hash identifier, which is 32 bytes plus a bit more of meta data. */
-"error_PushMsgMessageTooBig" = "Повідомлення занадто великий. Зменшіть розмір повідомлення.";
+"error_PushMsgMessageTooBig" = "Повідомлення занадто велике. Зменшіть розмір повідомлення.";
 /* 'That recipient's push registration is no longer valid. The recipient may have uninstalled SafeSlinger or turned off notifications. You should stop sending messages to this device.' is an error message (sentence case, period); used to warn when sending messages to device and the recipient is no longer registered. */
-"error_PushMsgNotRegistered" = "Чи не поштовх реєстрації, які одержувача більше не дійсний. Отримувач може видалили SafeSlinger або виключений повідомлення. Ви повинні зупинити відправку повідомлення на цьому пристрої.";
+"error_PushMsgNotRegistered" = "Чи не поштовх до реєстрації, які одержувача більше не дійсний. Одержувач може видалили SafeSlinger або виключений повідомлення. Ви повинні зупинити відправку повідомлення на цьому пристрої.";
 /* 'There was an error communicating with the push notification service.' is an error message (sentence case, period); used to warn when sending messages to device and the push service replies incorrect HTTP status code. */
-"error_PushMsgNotSucceed" = "Був помилка зв'язку зі службою Push Notification.";
+"error_PushMsgNotSucceed" = "Був помилка при зв'язку зі службою Push Notification.";
 /* 'You have exceeded the message quota for this device. Please retry later.' is an error message (sentence case, period); used to warn when sending messages to device and the message quota for SafeSlinger on the device is full. */
 "error_PushMsgQuotaExceeded" = "Ви перевищили квоту повідомлення для цього пристрою. Будь ласка, спробуйте пізніше.";
 /* 'Notification service is not available this time. Please try to send the message later.' is an error message (sentence case, period); used to warn when sending messages to device and the push service has no response for push messages. */
-"error_PushMsgServiceFail" = "Сервіс повідомлень не доступна на цей раз. Будь ласка, спробуйте відправити повідомлення пізніше.";
+"error_PushMsgServiceFail" = "Служба повідомлень не доступний цей раз. Будь ласка, спробуйте відправити повідомлення пізніше.";
 /* 'Cannot prepare the audio recorder.' is an error message (sentence case, period); used to warn when the audio recorder is unavailable from the system to record an audio message. iOS-only. */
-"error_RecoderError" = "Не можете підготувати аудіо-рекордер.";
+"error_RecoderError" = "Не можете підготувати диктофон.";
 /* 'To start, Sling Keys with another user at the same time.' is an error message (sentence case, period); used to remind in a notification message that the user should exchange keys with at least one other user to make the app useful to them. */
-"error_ReminderToSlingKeysToUseApp" = "Для початку, Слінг ключів з іншого телефону в той же час.";
+"error_ReminderToSlingKeysToUseApp" = "Для початку, Sling ключів з іншим користувачем в той же час.";
 /* 'You need an attachment or a text message to send.' is an error message (sentence case, period); used to warn when the user has not attached a file or typed any text message to send to the recipient after using the 'Send' button. */
-"error_selectDataToSend" = "Вам потрібно вкладення або текстове повідомлення, щоб відправити.";
+"error_selectDataToSend" = "Вам необхідно вкладення або текстове повідомлення, щоб відправити.";
 /* 'Server Message: %s' is an error message (sentence case, period); used to warn when the server has an error message to send back to the client. %s = an English (non-localized) error message sent by our App Engine server code. */
-"error_ServerAppMessage" = "Повідомлення Сервер: %@";
+"error_ServerAppMessage" = "Повідомлення сервера: %@";
 /* 'No response from server.' is an error message (sentence case, period); used to warn when the server timeout occurs, usually after 30 seconds and did not respond to the client. */
 "error_ServerNotResponding" = "Немає відповіді від сервера.";
 /* 'Cannot remove the shared file.' is an error message (sentence case, period); used to warn when the shared file cannot be deleted. iOS-only. */
-"error_ShareFileDelError" = "Неможливо видалити загальний файл.";
+"error_ShareFileDelError" = "Неможливо видалити файл розділяє.";
 /* 'Timeout waiting for some group members to add data.' is an error message (sentence case, period); used to warn during the key exchange protocol when at least one of the members of the group has not submitted their data to the server or client itself is not able to retrieve the data within the timeout window, currently 2 minutes. */
 "error_TimeoutWaitingForAllMembers" = "Тайм-аут в очікуванні деякі члени групи, щоб додати дані.";
 /* 'Unable to match public key to private key in crypto provider.' is an error message (sentence case, period); used to warn when the public encryption key used in the message received is not currently the same private key used, the user should probably Sling Keys to update again. */
-"error_UnableFindPubKey" = "Неможливо, щоб відповідати відкритий ключ секретним ключем у крипто-провайдера.";
+"error_UnableFindPubKey" = "Неможливо, щоб відповідати відкритий ключ секретним ключем в крипто-провайдера.";
 /* 'Unable to save to the message database.' is an error message (sentence case, period); used to warn when there is database error inserting a new message. */
 "error_UnableToSaveMessageInDB" = "Неможливо зберегти в базі даних повідомлень.";
 /* 'Unable to save to the recipient database.' is an error message (sentence case, period); used to warn when there is database error inserting a new recipient key/registration . */
 "error_UnableToSaveRecipientInDB" = "Неможливо зберегти в базі даних одержувача.";
 /* 'Unable to update the message database.' is an error message (sentence case, period); used to warn when there is database error updating a message. */
-"error_UnableToUpdateMessageInDB" = "Не вдалося оновити базу даних повідомлень.";
+"error_UnableToUpdateMessageInDB" = "Не вдається оновити базу даних повідомлень.";
 /* 'Unable to update the recipient database.' is an error message (sentence case, period); used to warn when there is database error updating a recipient key/registration . */
-"error_UnableToUpdateRecipientInDB" = "Не вдалося оновити базу даних одержувачів.";
+"error_UnableToUpdateRecipientInDB" = "Неможливо обновити базу даних одержувачів.";
 /* 'SafeSlinger error, please restart.' is an error message (sentence case, period); used to warn when an unhandled exception or application fault has occurred. */
-"error_UncaughtExceptionOccured" = "SafeSlinger помилка, перезавантажте.";
+"error_UncaughtExceptionOccured" = "SafeSlinger помилку, будь ласка, перезавантажте.";
 /* 'Contact data was formatted incorrectly.' is an error message (sentence case, period); used to warn when the vCard format used to exchange contact fields during key exchange are improperly formatted. */
 "error_VcardParseFailure" = "Контактні дані відформатована неправильно.";
 /* 'User canceled server request.' is an error message (sentence case, period); used to warn when the user exited the key exchange protocol or messaging transmission before it was finished. */
 "error_WebCancelledByUser" = "Користувач скасував запит сервера.";
 
 /* 'Use this screen to set your name to exchange with others, and a passphrase to protect your data. Tap the Done button when finished.' is a help message (sentence case, period); used via Help button on the Setup screen to describe in more detail what the Setup screen does. */
-"help_find" = "Використовуйте цей екран, щоб встановити своє ім'я для обміну з іншими, і ключову фразу для захисту ваших даних. Натисніть кнопку Готово.";
+"help_find" = "Використовуйте цей екран, щоб встановити своє ім'я для обміну з іншими, і ключові фрази для захисту ваших даних. Натисніть кнопку Готово.";
 /* 'To exchange identity data, ensure all users are nearby or on the phone. The Begin Exchange button will exchange only the checked contact data.' is a help message (sentence case, period); used via Help button on the Begin Exchange screen and also the key exchange walkthrough tutorial to describe in more detail what the Begin Exchange screen does. */
-"help_home" = "Для обміну даними посвідчень, гарантувати, що всі користувачі знаходяться неподалік або по телефону. Почніть кнопку валютний обміняються тільки перевірені контактні дані.";
+"help_home" = "Для обміну даними посвідчень, забезпечити всі користувачі знаходяться неподалік або по телефону. Кнопка Почати валюти будуть обмінюватися тільки перевірені контактні дані.";
 /* 'You may also change personal data about your identity on this screen by tapping on the button with your name. This will display a menu allowing you to Edit your contact, Create New contact, or Use Another contact.' is a help message (sentence case, period); Additional help text, which is appended to the Help button text on the Compose and Begin Exchange screens. */
-"help_identity_menu" = "Ви також можете змінити особисті дані про вашої особистості на цьому екрані, натиснувши на кнопку з вашим ім'ям. Це відобразить меню дозволяє редагувати ваші контакти, створити новий контакт, або використовуйте інший контакт.";
+"help_identity_menu" = "Ви також можете змінити особисті дані про вашої особистості на цьому екрані, натиснувши на кнопку з вашим ім'ям. Це відобразить меню, що дозволяє Редагувати контакт, Створити новий контакт, або використовуйте інший контакт.";
 /* 'This screen displays all past messages, and attachments that are still available for download.' is a help message (sentence case, period); used via Help button on the Messages list screen to describe in more detail what the Messages list screen does. */
-"help_Messages" = "На цьому екрані відображається всі минулі повідомлення та вкладення, які все ще доступні для скачування.";
+"help_Messages" = "Цей екран відображає всі старі повідомлення та вкладення, які все ще доступні для скачування.";
 /* 'Use this screen to login to the application with your passphrase. If you have forgotten your passphrase, you may generate a new key protected by a new passphrase by tapping the Forgot Passphrase? button. Tap the user name to switch between multiple keys.' is a help message (sentence case, period); used via Help button on the Passphrase screen to describe in more detail what the Passphrase screen does. */
-"help_passphrase" = "Використовуйте цей екран для входу в додаток з вашим пароль. Якщо ви забули свій фразу, ви можете створити новий ключ, захищений нової пральний фрази по натиснувши Забули парольний фразу? Кнопка. Натисніть на ім'я користувача перемикатися між кількома ключами.";
+"help_passphrase" = "Використовуйте цей екран для входу в додаток з вашої ключової фрази. Якщо ви забули свій ключової фрази, ви можете створити новий ключ, захищений нової пральний фрази, натиснувши на Забули парольний фразу? Кнопка. Натисніть на ім'я користувача перемикатися між декількома ключами.";
 /* 'Use this screen to change your passphrase by entering your last passphrase for confirmation and the new passphrase.' is a help message (sentence case, period); used via Help button on the Change Passphrase screen to describe in more detail what the Change Passphrase screen does. */
-"help_passphrase_change" = "Використовуйте цей екран, щоб змінити свою фразу, ввівши свій останній фразу для підтвердження і нового пароля.";
+"help_passphrase_change" = "Використовуйте цей екран для зміни ключову фразу, ввівши свій останній фразу для підтвердження і нової пральний фрази.";
 /* 'Contacts with SafeSlinger keys are displayed here, select one to send your message to.' is a help message (sentence case, period); used via Help button on the Recipients list screen to describe in more detail what the Recipients list screen does. */
-"help_PickRecip" = "Контакти з SafeSlinger ключів відображаються тут, то виберіть його, щоб відправити повідомлення.";
+"help_PickRecip" = "Контакти з SafeSlinger ключів відображаються тут, виберіть один, щоб відправити повідомлення.";
 /* 'When finished, the protocol will reveal a list of the identity data exchanged. Select the contacts you wish to save and press Import.' is a help message (sentence case, period); used via Help button on the End Exchange screen and also the key exchange walkthrough tutorial to describe in more detail what the End Exchange screen does. */
-"help_save" = "Коли закінчите, протокол покаже список ідентифікаційних даних обмінюваних. Виберіть контакти, які ви хочете зберегти і натисніть Імпорт.";
+"help_save" = "Коли закінчите, протокол покаже список ідентифікаційних даних обмінюваних. Виберіть контакти, які ви хочете зберегти і натисніть кнопку Import.";
 /* 'This screen allows you to select two people you have slung keys with before to securely send their keys to each other. Simply press Introduce when ready.' is a help message (sentence case, period); used via Help button on the Secure Introduction screen to describe in more detail what the Secure Introduction screen does. */
-"help_SecureIntroduction" = "Цей екран дозволяє вибрати один з двох людей, яких ви перекинув ключі с до безпечно відправляти свої ключі один до одного. Просто натисніть Уявіть, коли будете готові.";
+"help_SecureIntroduction" = "Цей екран дозволяє вибрати один з двох людей ви посадкою ключі с до безпечно відправляти свої ключі один до одного. Просто натисніть Уявіть, коли будете готові.";
 /* 'This screen allows you to select some data and a recipient to send to. Simply press Send when ready.' is a help message (sentence case, period); used via Help button on the Compose Message screen to describe in more detail what the Compose Message screen does. */
-"help_Send" = "Цей екран дозволяє вибрати деякі дані і одержувача для відправки. Просто натисніть Надіслати коли будете готові.";
+"help_Send" = "Цей екран дозволяє вибрати деякі дані і одержувача для відправки. Просто натисніть Відправити, коли будете готові.";
 /* 'This screen allows you to change the default settings for the application.' is a help message (sentence case, period); used via Help button on the Settings screen to describe in more detail what the Settings screen does. */
 "help_settings" = "Цей екран дозволяє змінити настройки за замовчуванням для програми.";
 /* 'Select the number of people who are attempting to exchange data together and press OK.' is a help message (sentence case, period); used via Help button on the Group Size screen and also the key exchange walkthrough tutorial to describe in more detail what the Group Size screen does. */
-"help_size" = "Виберіть кількість людей, які намагаються обмінюватися даними один з одним і натисніть ОК.";
+"help_size" = "Виберіть кількість людей, які намагаються обмінюватися даними разом і натисніть кнопку ОК.";
 /* 'This number on this screen is used to create a unique group of users. Review the numbers on all users' screens, then all users should enter the same lowest number and press OK.' is a help message (sentence case, period); used via Help button on the Grouping screen and also the key exchange walkthrough tutorial to describe in more detail what the Grouping screen does. */
-"help_userid" = "Це число на цьому екрані використовується, щоб створити унікальний групу користувачів. Перегляньте номера на екранах всіх користувачів, то всі користувачі повинні ввести той же найнижчий номер і натисніть ОК.";
+"help_userid" = "Це число на цьому екрані використовується, щоб створити унікальний групу користувачів. Перегляньте номера на екранах усіх користувачів, то всі користувачі повинні ввести той же низький номер і натисніть ОК.";
 /* 'Now, you must match one of these 3-word phrases with all users. Every user must select the same common phrase, and press Next.' is a help message (sentence case, period); used via Help button on the Verify screen and also the key exchange walkthrough tutorial to describe in more detail what the Verify screen does. */
-"help_verify" = "Тепер ви повинні відповідати одному з цих фраз 3-слів з ​​усіма користувачами. Кожен користувач повинен вибрати один і той же загальний фразу та натисніть Далі.";
+"help_verify" = "Тепер, ви повинні відповідати одному з цих 3-словосполучень з усіма користувачами. Кожен користувач повинен вибрати один і той же загальний фразу і натисніть Далі.";
 
-/* 'Contacts permission is required for securely sharing contact cards. Tap the Help button for SafeSlinger Contacts permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Contacts permission. iOS-only. */
-"iOS_contactError" = "Контакти потрібен дозвіл для надійного обміну карток контактів. Натисніть кнопку Довідка для SafeSlinger деталей Контакти дозволів.";
+/* 'Camera permission is required to attach snapshots to secure messages. Tap the %s button for SafeSlinger Camera permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Camera permission. iOS-only. */
+"iOS_cameraError" = "Дозвіл камери потрібно докласти знімки для забезпечення повідомлення. Натисніть кнопку %@ для SafeSlinger деталей дозволу камери.";
+/* 'Contacts permission is required for securely sharing contact cards. Tap the %s button for SafeSlinger Contacts permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Contacts permission. iOS-only. */
+"iOS_contactError" = "Контакти потрібен дозвіл для безпечного обміну карток контактів. Натисніть кнопку %@ для SafeSlinger деталей Контакти дозволів.";
 /* 'Push registration is missing.' is an error message (sentence case, period); used to warn the user the push registration is missing. iOS-only. */
 "iOS_errorpushtoken" = "Реєстрація Натисніть відсутня.";
-/* 'Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the Help button for SafeSlinger Notification permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Notifications permission. iOS-only. */
-"iOS_notificationError1" = "Дозвіл Повідомлення або попереджень або банери та номери жетонів, необхідні для безпечного обміну повідомленнями. Натисніть кнопку Довідка для SafeSlinger деталей дозволів Повідомлення.";
+/* 'Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the %s button for SafeSlinger Notification permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Notifications permission. iOS-only. */
+"iOS_notificationError1" = "Дозвіл Повідомлення яких попереджень або банери, і номера жетонів, необхідні для безпечного обміну повідомленнями. Натисніть кнопку %@ для SafeSlinger деталей дозволу Уведомление.";
 /* 'SafeSlinger is not optimized for iOS 5.x devices. SafeSlinger requires iOS 6 or higher.' is an informational message (sentence case, period); message for dialog popups when a user still uses an old iOS device. iOS-only. */
-"iOS_oldOSWarn" = "SafeSlinger НЕ оптимізований для iOS 5.x пристроїв. SafeSlinger вимагається iOS 6 або вище.";
+"iOS_oldOSWarn" = "SafeSlinger не оптимізовані для iOS 5.x пристроїв. SafeSlinger вимагається iOS 6 або вище.";
+/* 'Photo Library permission is required to attach pictures to secure messages. Tap the %s button for SafeSlinger Photo Library permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Photo Library permission. iOS-only. */
+"iOS_photolibraryError" = "Дозвіл Photo Library потрібно докласти фотографії для забезпечення повідомлення. Натисніть кнопку %@ для SafeSlinger фотографія бібліотечних деталей дозволів.";
 /* 'You can select your contact card to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Contacts when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Contacts permission. iOS-only. */
-"iOS_RequestPermissionContacts" = "Ви можете вибрати свій картку контакту, щоб відправити своїм друзям і SafeSlinger шифрує його для вас. Щоб увімкнути цю функцію, необхідно дозволити SafeSlinger доступ до ваших Контакти, коли його запитали.";
+"iOS_RequestPermissionContacts" = "Ви можете вибрати свій картку контакту для відправки своїм друзям і SafeSlinger буде зашифрувати його для вас. Щоб включити цю функцію, необхідно дозволити SafeSlinger доступ до ваших Контакти, коли його запитали.";
 /* 'You can record a voice message to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Microphone when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Microphone permission. iOS-only. */
-"iOS_RequestPermissionMicrophone" = "Ви можете записати голосове повідомлення, щоб відправити своїм друзям і SafeSlinger буде зашифрувати його для вас. Щоб увімкнути цю функцію, необхідно дозволити SafeSlinger доступ до вашого мікрофон, коли його запитали.";
+"iOS_RequestPermissionMicrophone" = "Ви можете записати голосове повідомлення, щоб відправити своїм друзям і SafeSlinger буде зашифрувати його для вас. Щоб включити цю функцію, необхідно дозволити SafeSlinger доступ до вашої мікрофон, коли його запитали.";
 /* 'SafeSlinger is an encrypted messaging application and cannot function without allowing incoming messages from Notifications. To enable incoming messages, you must allow SafeSlinger to send you Notifications when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Notifications permission. iOS-only. */
-"iOS_RequestPermissionNotifications" = "SafeSlinger це додаток зашифрований повідомленнями і не може функціонувати, не дозволяючи вхідні повідомлення з повідомленням. Щоб включити вхідні повідомлення, необхідно дозволити SafeSlinger відправити вам Сповіщення коли його запитали.";
+"iOS_RequestPermissionNotifications" = "SafeSlinger це додаток зашифрований повідомленнями і не може функціонувати, не дозволяючи вхідні повідомлення з повідомленням. Щоб включити вхідні повідомлення, ви повинні дозволити SafeSlinger відправити вам повідомлення, коли запитав.";
 
 /* '%s ago' is a screen label (match English casing); used on the messages list screen and is used to describe how long ago a message was sent or received. %s = a time measurement, such as '5 minutes' or '2 hours'. */
 "label_ago" = "%@ назад";
 /* 'Last Backup Completed' is a screen label (match English casing); used on the Settings screen to indicate the time and date when the last backup was confirmed. */
-"label_backupCompleteDate" = "Останній Резервне копіювання завершено";
+"label_backupCompleteDate" = "Останні Резервне копіювання завершено";
 /* 'Last Backup Request' is a screen label (match English casing); used on the Settings screen to indicate when the user last edited data that should be backed up and the application requested a backup from the backup service. */
-"label_backupRequestDate" = "Останній Резервне копіювання Запит";
+"label_backupRequestDate" = "Останні Резервне копіювання Запит";
 /* 'Backup URL' is a screen label (match English casing); used on the Settings screen above the URL used for iCloud backups. iOS-only. */
 "label_backupURL" = "Резервне копіювання URL";
 /* 'Touch to review your %d messages' is a screen label (match English casing); used in the notification drop down window to indicate what will happen when received messages notification is touched. %d = the number of unseen messages received. */
 "label_ClickForNMsgs" = "Натисніть, щоб переглянути свої %d повідомлень";
 /* 'Compare screens on %s devices.' is a screen label (match English casing); used with arrows and phone graphics to remind user to compare mutiple views, not just their own. %s = the number of users. */
-"label_CompareScreensNDevices" = "Порівняння екранів на %@ пристроїв.";
+"label_CompareScreensNDevices" = "Порівняйте екрани на %@ пристроїв.";
 /* 'Compose Message' is a screen label (match English casing); used as a text box hint on the Compose Message screen where the user can type a message in the box. */
 "label_ComposeHint" = "Написати повідомлення";
 /* 'Your Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current user name (first and last) to use. Android-only. */
-"label_ContactName" = "Ваше ім'я";
+"label_ContactName" = "Твоє ім'я";
 /* '%d days' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole days. */
 "label_days" = "%d днів";
 /* 'Device:' is a screen label (match English casing); used to prefix a push registration in the recipients list screen as a device ID. */
-"label_Device" = "Пристрої:";
+"label_Device" = "Пристрій:";
 /* 'Send-only mode' is a screen label (match English casing); used in many UIs to show that receiving push messages is not supported. */
-"label_DeviceInSendOnlyMode" = "Режим Відправити тільки";
+"label_DeviceInSendOnlyMode" = "Відправити в режим тільки";
 /* 'Your key has changed: Sling Keys again.' is an error message (sentence case, period); used to warn the user that the key in the Recipients list screen has been exchanged once before with a different key from this user. */
-"label_DisabledExchSourceKeyChange" = "Ваш ключ змінився: Слінг Keys знову.";
+"label_DisabledExchSourceKeyChange" = "Ваш ключ змінилося: Sling Keys знову.";
 /* 'To begin messaging, Sling Keys with this user at the same time.' is a screen label (match English casing); used to remind users that an invite is only the beginning, and to Sling Keys before communicating. */
-"label_DisabledNextSlingKeysWithThisPerson" = "Для початку обміну повідомленнями, обидва користувачі повинні Слінг Ключі в той же час.";
+"label_DisabledNextSlingKeysWithThisPerson" = "Для початку обміну повідомленнями, Sling ключів з цього користувача одночасно.";
 /* 'DRAFT' is a screen label (match English casing); used to label a message in the Messages list that has been saved in progress but not yet sent. */
 "label_Draft" = "ПРОЕКТ";
 /* 'Key format deprecated: Sling Keys again.' is an error message (sentence case, period); used on the Recipient list screen to warn users that older key formats have been deprecated. Android-only. */
-"label_EnabledKeyFormatDeprecated" = "Ключ формат застарілим: Слінг Keys знову.";
+"label_EnabledKeyFormatDeprecated" = "Ключ формат застарів: Sling Keys знову.";
 /* 'exchanged' is a screen label (match English casing); used to indicate 0-hop or direct trust from a key exchange in the Recipient list screen. */
 "label_exchanged" = "обмін";
 /* 'expired' is a screen label (match English casing); used on the Messages list for message attachment that has not been downloaded more than 24 hours after it was originally sent. */
-"label_expired" = "минулий";
+"label_expired" = "минув";
 /* 'expires %s' is a screen label (match English casing); used on the message list to show how much time is left to download an attachment. %s = a time measurement, such as 'in 5 minutes' or 'in 2 hours'. Android-only. */
 "label_expires" = "закінчується %@";
 /* 'expires in' is a screen label (match English casing); used on the message list to show how much time is left to download an attachment; a time measurement, such as '5 minutes' or '2 hours' will be appended to this string. iOS-only. */
 "label_expiresIn" = "минає в";
 /* 'File Name' is a screen label (match English casing); used on the Save File As dialog as a hint in the file name text box when changing the file name. */
-"label_FileNameHint" = "Назва файлу";
+"label_FileNameHint" = "Файл";
 /* 'Enter your name and a passphrase to protect your data:' is a screen label (match English casing); used to instruct the user how to proceed on the Setup screen. */
-"label_FindInstruct" = "Введіть своє ім'я та пароль для захисту ваших даних:";
+"label_FindInstruct" = "Введіть ваше ім'я та ключову фразу для захисту даних:";
 /* 'First Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current first name to use. iOS-only. */
 "label_FirstName" = "Ім'я";
 /* 'Tap your name to add or remove contact data, check items you wish to share, and tap Begin Exchange when others are ready to exchange:' is a screen label (match English casing); used to instruct the user how to proceed on the Begin Exchange screen. */
-"label_Home" = "Натисніть на своє ім'я, щоб додати або видалити контактні дані, перевірити елементи, які ви хотіли б поділитися, і натисніть Почати Обмін коли інші готові обміну:";
+"label_Home" = "Натисніть на своє ім'я, щоб додати або видалити контактні дані, перевірити елементи, які ви хотіли б поділитися, і натисніть Почати Обмін коли інші готові валют:";
 /* 'Home' is a screen label (match English casing); used to denote a 'home' type of email or phone contact type. iOS-only. */
-"label_hometag" = "Додому";
+"label_hometag" = "Головна";
 /* '%d hours' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole hours. */
 "label_hours" = "%d годин";
 /* 'SafeSlinger iCloud is enabled. Tap the Done button when finished.' is a screen label (match English casing); used to indicate the backup will occur while on the Setup screen. iOS-only. */
 "label_iCloudEnable" = "SafeSlinger iCloud включена. Натисніть кнопку Готово.";
 /* 'No messages. You may send a message from the Compose tab.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. */
-"label_InstNoMessages" = "Немає повідомлень. Ви можете відправити повідомлення з кнопки створення повідомлень на меню.";
+"label_InstNoMessages" = "Немає повідомлень. Ви можете відправити повідомлення на вкладці Compose.";
 /* 'To add recipients, you must first Sling Keys with one or more other users at the same time. You may also send a Sling Keys contact invitation from the menu.' is a screen label (match English casing); used to instruct the user how to proceed on the Recipient list screen is case of no recipients. */
-"label_InstNoRecipients" = "Щоб додати одержувачів, необхідно спочатку Слінг ключів з одним або декількома іншими користувачами одночасно. Ви також можете відправити Слінг Ключі контактну запрошення від меню.";
+"label_InstNoRecipients" = "Щоб додати одержувачів, необхідно спочатку Sling ключів з одним або декількома іншими користувачами одночасно. Ви також можете відправити Слінг Ключі контактну запрошення від меню.";
 /* 'No shared file. Connect your device with iTunes and drag files to the shared folder.' is a screen label (match English casing); used to instruct the user how to proceed on the Shared Files screen is case of no files to share. iOS-only. */
-"label_InstNoSharedFile" = "Ні загальний файл. Підключіть пристрій з ITunes і перетягнути файли в загальну папку.";
+"label_InstNoSharedFile" = "Ні поділився файл. Підключіть пристрій з ITunes і перетягувати файли в загальній папці.";
 /* 'Pick a recipient to send a message to:' is a screen label (match English casing); used to instruct the user how to proceed on the Pick Recipients list screen. */
-"label_InstRecipients" = "Виберіть одержувача, щоб відправити повідомлення, щоб:";
+"label_InstRecipients" = "Виберіть одержувача послати повідомлення:";
 /* 'Pick recipients to introduce securely:' is a screen label (match English casing); used to instruct the user how to proceed on the Secure Introduction Recipients list screen. */
 "label_InstSendInvite" = "Виберіть одержувачів ввести надійно:";
 /* 'Pick a file to attach:' is a screen label (match English casing); used as a title for a list of files that could be attached to the message. */
@@ -405,13 +409,13 @@
 /* 'Last Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current last name to use. iOS-only. */
 "label_LastName" = "Прізвище";
 /* 'Me' is a screen label (match English casing); used on the secure introduction invitation dialog to indicate the one-hop trust relationship between the user (Me); the trusted person, and the new person. */
-"label_Me" = "Мене";
+"label_Me" = "Me";
 /* 'I would like to introduce %s to you.' is a screen label (match English casing); used as the text message when sending secure introduction invitations. %s = the name of a person. */
-"label_messageIntroduceNameToYou" = "Я хотів би представити %@ до вас.";
+"label_messageIntroduceNameToYou" = "Я хотів би представити %@ вам.";
 /* 'SafeSlinger app: %s' is a screen label (match English casing); used as message text to show a user how to install SafeSlinger. %s = the main installation url for mobile devices */
 "label_messageInviteInstall" = "SafeSlinger додаток: %@";
 /* 'To setup a secure messaging connection, we can meet or phone each other at the same time, and then Sling Keys just once to verify the connection.' is a screen label (match English casing); used as message text to show a user how to begin secure messaging. */
-"label_messageInviteSetupInst" = "Для налаштування з'єднання безпечне повідомленнями, ми можемо задовольнити або телефон одного в той же час, а потім Слінг Ключі тільки один раз для перевірки з'єднання.";
+"label_messageInviteSetupInst" = "Для установки зв'язку безпечному повідомленнями, ми можемо задовольнити або телефон одного в той же час, а потім Sling ключів тільки один раз для перевірки з'єднання.";
 /* 'Can we start secure messaging with the open source SafeSlinger iPhone or Android app?' is a screen label (match English casing); used as message text to invite a contact to begin secure messaging. */
 "label_messageInviteStartMsg" = "Чи можемо ми почати безпечного обміну повідомленнями з відкритим вихідним кодом SafeSlinger iPhone або Android додаток?";
 /* '%d minutes' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole minutes. */
@@ -425,19 +429,19 @@
 /* 'None' is a screen label (match English casing); used to indicate the local, non-synchronized contacts account name on the phone when picking a Save Account. */
 "label_None" = "Жоден";
 /* 'Non-English' is a screen label (match English casing); used to instruct the user how to switch on Numeric mode while doing comparison. */
-"label_NumericModeHint" = "Номери для Англійська";
+"label_NumericModeHint" = "Номери-англійський";
 /* '%d Files to Share:' is a screen label (match English casing); used on the Sharing Folder screen. %d = the number of files to share. iOS-only. */
-"label_numsharedfiles" = "%d Файли поділитися:";
+"label_numsharedfiles" = "%d Файли для Поділитися:";
 /* 'Old Threads' is a screen label (match English casing); used for the old thread (iOS only). */
 "label_OldThreads" = "Старі теми";
 /* 'Other' is a screen label (match English casing); used to denote a 'other' type of email or phone contact type. iOS-only. */
-"label_othertag" = "Інший";
+"label_othertag" = "Інші";
 /* 'Retry' is a screen label (match English casing); used in the Passphrase screen text box as a prefix hint combined with a time measurement when, which is exponentially backed off on invalid passphrase entry, such as 'Retry in 14 seconds'. Used during back off while all user controls have been disabled. */
 "label_PassHintBackoff" = "Повторити";
 /* 'Updated Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint to create a replacement passphrase. */
 "label_PassHintChange" = "Оновлено Ключова фраза";
 /* 'Create Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint to create a new passphrase. */
-"label_PassHintCreate" = "Створення парольний фразу";
+"label_PassHintCreate" = "Створити парольний фразу";
 /* 'Current Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint to confirm the current passphrase. */
 "label_PassHintCurrent" = "Поточний Ключова фраза";
 /* 'Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint enter the passphrase. */
@@ -445,45 +449,45 @@
 /* 'Repeat Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint to confirm the passphrase again. */
 "label_PassHintRepeat" = "Повторіть Ключова фраза";
 /* 'Passphrase Cache' is a screen label (match English casing); used on the Settings screen to above the display of the users' passphrase timeout period. */
-"label_passPhraseCacheTtl" = "Ключова фраза Кеш";
+"label_passPhraseCacheTtl" = "Ключова фраза Cache";
 /* 'Passphrase cached' is a screen label (match English casing); used in the notification window when a passphrase has been cached. Android-only. */
 "label_PassPhraseIsCached" = "Ключова фраза в кеші";
 /* 'phone-only' is a screen label (match English casing); used to indicate the local, non-synchronized contacts account type on the phone when picking a Save Account. */
-"label_phoneOnly" = "телефон тільки для";
+"label_phoneOnly" = "телефон тільки";
 /* 'Photo' is a screen label (match English casing); used on the Begin Exchange screen to toggle sending the users' photo during the exchange. */
 "label_Photo" = "Фото";
 /* 'This number is used to create a unique group of users. Compare, and then enter the lowest number among all users.' is a screen label (match English casing); used to instruct the user how to proceed on the Grouping screen. */
-"label_PromptInstruct" = "Цей номер використовується для створення унікального групу користувачів. Порівняти, а потім введіть найменшу кількість серед всіх користувачів.";
+"label_PromptInstruct" = "Цей номер використовується для створення унікального групу користувачів. Порівняйте, а потім введіть найменший номер серед всіх користувачів.";
 /* 'Key ID' is a screen label (match English casing); used on the Settings, Compose Message, and Recipients list screens as a label above the base-64 encoded key IDs for sender and recipients. */
-"label_PublicKeyID" = "Ідентифікатор ключа";
+"label_PublicKeyID" = "Ключ ID";
 /* 'Push Registration ID' is a screen label (match English casing); used on the Settings screen as a label above the push registration for this user. */
-"label_PushTokenID" = "Натисніть реєстрації ID";
+"label_PushTokenID" = "Натисніть Реєстрація ID";
 /* 'received %d items' is a screen label (match English casing); used to show the progress when collecting group members data during the key exchange protocol. %d = the number of members' data items received during the current phase of the exchange protocol. */
 "label_ReceivedNItems" = "отримав %d пунктів";
 /* 'Backup Reminder' is a screen label (match English casing); used on the Settings screen to toggle the reminder when pending backups do not execute in timely manner. */
-"label_RemindBackupDelay" = "Резервне копіювання нагадування";
+"label_RemindBackupDelay" = "Резервне копіювання Reminder";
 /* 'Reported inactive %s.' is an error message (sentence case, period); used on the Recipient list screen to warn users that the push registration has been reported not-registered or inactive by the push service. %s = a time measurement of how long it has been reported inactive: '2 days ago' and the like.. */
 "label_ReportedInactive" = "Повідомляється неактивний %@.";
 /* 'Last Restore Completed' is a screen label (match English casing); used above a time stamp on the Settings screen to indicate the last time backup settings were restored. */
-"label_restoreCompleteDate" = "Останній Відновлення Завершено";
+"label_restoreCompleteDate" = "Останні Відновлення завершено";
 /* 'SafeSlinger backup delayed' is a screen label (match English casing); used as a title of the notification when a backup request has been pending more than 1 hour. */
 "label_SafeSlingerBackupDelayed" = "SafeSlinger резервного копіювання з затримкою";
 /* '(SafeSlinger Direct Exchange)' is a screen label (match English casing); used on the Secure Introduction invitation dialog to denote the sender whom the user has performed a direct exchange with and holds direct trust. */
 "label_safeslingered" = "(SafeSlinger Прямий обмін)";
 /* 'Save Account' is a screen label (match English casing); used above the editable field on the End Exchange screen to showing the address book account to use when saving or updating contacts. */
-"label_SaveAccount" = "Зберегти запис";
+"label_SaveAccount" = "Зберегти аккаунт";
 /* 'Check contacts you want to update in your address book, then tap Import to save secure contacts:' is a screen label (match English casing); used to instruct the user how to proceed on the End Exchange screen. */
 "label_SaveInstruct" = "Перевірте контакти, які необхідно оновити у вашій адресній книзі, потім натисніть Імпортувати, щоб зберегти надійні контакти:";
 /* '%d seconds' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole seconds. */
 "label_seconds" = "%d секунд";
 /* 'Select Recipient' is a screen label (match English casing); used on the Compose Message screen recipient button before a recipient has been selected. */
-"label_SelectRecip" = "Виберіть Одержувач";
+"label_SelectRecip" = "Вибір одержувача";
 /* 'Send Error Data' is a screen label (match English casing); used on the Settings screen to toggle the automatic upload of error reports. */
-"label_sendErrorData" = "Надіслати Помилка даних";
+"label_sendErrorData" = "Відправити Помилка даних";
 /* 'From:' is a screen label (match English casing); used on the Compose Message screen to prefix the recipient's name. */
 "label_SendFrom" = "От:";
 /* 'To:' is a screen label (match English casing); used on the Compose Message screen to prefix the sender's name. */
-"label_SendTo" = "Кому:";
+"label_SendTo" = "Для:";
 /* 'Show this hint next time.' is a screen label (match English casing); used in the key exchange walkthrough dialog to toggle the display of the walkthrough at the next attempted key exchange. */
 "label_ShowHintAtLaunch" = "Показати цю підказку наступного разу.";
 /* 'Step 1' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
@@ -497,37 +501,37 @@
 /* 'Step 5' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
 "label_step_5" = "Крок 5";
 /* 'Automatically download message attachments when logged in.' is a screen label (match English casing); used as the settings summary to describe what Auto-retrieve attachments will do. */
-"label_summary_auto_attach_retrieval" = "Автоматично завантажувати вкладення, коли зайшли";
+"label_summary_auto_attach_retrieval" = "Автоматично завантажувати вкладення, коли увійшли в систему.";
 /* 'Automatically decrypt messages when logged in.' is a screen label (match English casing); used as the settings summary to describe what Auto-decrypt will do. */
-"label_summary_auto_decrypt" = "Автоматично розшифровки повідомлень, коли зайшли";
+"label_summary_auto_decrypt" = "Автоматично розшифровки повідомлень, коли увійшли в систему.";
 /* 'Receive notification when backup is offline.' is a screen label (match English casing); used as the settings summary to describe what Backup Reminder will do. */
-"label_summary_remind_backup_delay" = "Отримання повідомлення, коли резервне копіювання в автономному режимі.";
+"label_summary_remind_backup_delay" = "Отримання повідомлення, коли резервна копія форуму.";
 /* 'Show a tutorial before attempting to Sling Keys.' is a screen label (match English casing); used as the settings summary to describe what Show Walkthrough will do. */
-"label_summary_show_tutorial" = "Показати підручник, перш ніж намагатися Слінг-Кіш.";
+"label_summary_show_tutorial" = "Показати підручник перед спробі Слінг-Кіс.";
 /* 'Tap to decrypt file' is a screen label (match English casing); used to indicate tapping this message in the list will attempt to decrypt the attachment (if needed). */
 "label_TapToDecryptFile" = "Натисніть, щоб розшифрувати файл";
 /* 'Tap to decrypt' is a screen label (match English casing); used to indicate tapping this message in the list will attempt to decrypt it. */
 "label_TapToDecryptMessage" = "Натисніть, щоб розшифрувати";
 /* 'Tap to download file' is a screen label (match English casing); used to indicate tapping this message in the list will download the file (and attempt to decrypt it). */
-"label_TapToDownloadFile" = "Натисніть, щоб завантажити файл";
+"label_TapToDownloadFile" = "Натисніть, щоб скачати файл";
 /* 'Tap to download message' is a screen label (match English casing); used to indicate tapping this message in the list will download the message (if needed). */
-"label_TapToDownloadMessage" = "Натисніть, щоб завантажити повідомлення";
+"label_TapToDownloadMessage" = "Натисніть, щоб скачати повідомлення";
 /* 'Tap to open file' is a screen label (match English casing); used to indicate tapping this decrypted message in the list will attempt to view the decrypted attachment. */
 "label_TapToOpenFile" = "Натисніть, щоб відкрити файл";
 /* 'Tap to resume message draft' is a screen label (match English casing); used to indicate tapping this message in the list will take the user to the composition screen. */
-"label_TapToResumeDraft" = "Натисніть, щоб відновити сполучення проект";
+"label_TapToResumeDraft" = "Натисніть, щоб відновити набраний текст";
 /* 'Tap and hold to send credential update.' is a screen label (match English casing); used as a hint on the recipient list to help the user know if a credential update is needed. Android-only. */
 "label_TapToSendCredentialUpdate" = "Натисніть і утримуйте, щоб відправити облікових оновлення.";
 /* 'Tap to Sling Keys.' is a screen label (match English casing); used to remind the user that we can advance the user to the Sling Keys screen for convenience. */
-"label_TapToSlingKeys" = "Натисніть, щоб Слінг-Кіш.";
+"label_TapToSlingKeys" = "Натисніть, щоб Слінг-Кіс.";
 /* 'Contacts Account' is a screen label (match English casing); used above the editable field on the Settings screen to show the current address book account to use. */
-"label_targetAccountLabel" = "Контакти аккаунт";
+"label_targetAccountLabel" = "Контакти рахунки";
 /* 'You may optionally enable SafeSlinger iCloud backup in iOS Settings. Tap the Done button when finished.' is a screen label (match English casing); used on the Setup screen to remind the user that no backups will be restored on new installation. iOS-only. */
-"label_TouchToConfigureBackupSettings" = "Ви, можливо, може дозволити SafeSlinger iCloud резервну копію в налаштуваннях iOS. Натисніть кнопку Готово.";
+"label_TouchToConfigureBackupSettings" = "Ви, можливо, може включити SafeSlinger iCloud резервну копію в настройках iOS. Натисніть кнопку Готово.";
 /* 'Touch to configure backup settings.' is a screen label (match English casing); used in the notification window when the backup request has been pending over 1 hour. Android-only. */
 "label_TouchToConfigureBackupSettingsAndroid" = "Натисніть, щоб встановити настройки резервного копіювання.";
 /* 'Touch to configure cache timeout settings.' is a screen label (match English casing); used in the notification window when a passphrase has been cached. Android-only. */
-"label_TouchToConfigureCacheTimeout" = "Натисніть, щоб налаштувати параметри часу очікування кеша.";
+"label_TouchToConfigureCacheTimeout" = "Натисніть, щоб налаштувати параметри часу очікування кешу.";
 /* 'Unknown' is a screen label (match English casing); used in menu lists when unexpected type definitions are encountered. */
 "label_undefinedTypeLabel" = "Невідомий";
 /* 'Encrypted Sender' is a screen label (match English casing); used as the header for an encrypted message in the message list. */
@@ -535,31 +539,31 @@
 /* 'Lowest' is a screen label (match English casing); used as a text box hint on the Grouping screen when entering the lowest ID number. */
 "label_UserIdHint" = "Низька";
 /* 'User Name' is a screen label (match English casing); used as a placeholder before the users' contact has been loaded. */
-"label_UserName" = "Ім'я користувача";
+"label_UserName" = "Ім'я";
 /* 'All phones must match one of the 3-word phrases. Compare, and then pick the matching phrase.' is a screen label (match English casing); used to instruct the user how to proceed on the Verify screen. */
 "label_VerifyInstruct" = "Всі телефони повинні відповідати одному з фраз 3-слів. Порівняйте, а потім вибрати відповідний фразу.";
 /* 'To protect your data, SafeSlinger does not store your passphrase anywhere for recovery. You may only access recipients and messages created under the same passphrase login. However, you may generate a new key and passphrase, then repeat Sling Keys with your recipients.' is a screen label (match English casing); used to describe the reasons passphrases are not storeed and how to generate a new one. */
-"label_WarnForgotPassphrase" = "Для захисту даних, SafeSlinger не зберігає ключову фразу в будь-якому місці для відновлення. Ви можете отримати доступ тільки одержувачів та повідомлення, створені в рамках цього ж парольний фразу входу в систему. Однак, ви можете створити новий ключ і фразу, а потім повторіть Слінг ключів з одержувачів.";
+"label_WarnForgotPassphrase" = "Для захисту даних, SafeSlinger не зберігати ключову фразу в будь-якому місці для відновлення. Ви можете отримати доступ тільки одержувачів та повідомлення, створені відповідно до пральний фрази логіном. Однак, ви можете створити новий ключ і фразу, а потім повторіть Слінг Ключі з одержувачів.";
 /* 'The following keys will be deleted:' is a screen label (match English casing); used to begin list of keys that will be deleted. */
 "label_WarnManagePassFollowsAreRecent" = "Наступні ключі будуть видалені:";
 /* 'There are no more recent keys than yours.' is a screen label (match English casing); used to show there are no keys to delete. */
-"label_WarnManagePassNoMoreRecent" = "Там немає більш пізні ключі, ніж ваша.";
+"label_WarnManagePassNoMoreRecent" = "Є не більш недавні ключі, ніж ваша.";
 /* 'Only keys generated more recently than yours, generated on %s, may be deleted.' is a screen label (match English casing); used to show which keys may be deleted. %s = the key generation date of the current key */
-"label_WarnManagePassOnlyRecentDeleted" = "Тільки ключі генеруються пізніше, ніж ваш, створені на %@, можуть бути видалені.";
+"label_WarnManagePassOnlyRecentDeleted" = "Тільки ключі генеруються пізніше, ніж ваш, що генеруються на %@, можуть бути видалені.";
 /* 'Work' is a screen label (match English casing); used to denote a 'work' type of email or phone contact type. iOS-only. */
 "label_worktag" = "Робота";
 
 /* 'SafeSlinger Exchange' is an application name (title case); used for dialogs to show the user which that a SafeSlinger Exchange is in progress. */
-"lib_name" = "SafeSlinger біржа";
+"lib_name" = "SafeSlinger валюти";
 
 /* 'About' is a menu option (title case); used to show the about dialog via the Settings screen. */
-"menu_About" = "Про";
+"menu_About" = "Про це";
 /* 'Auto-retrieve attachments' is a menu option (title case); used to enable/disable automatically retrieving message attachments when logged in via the Settings screen. */
-"menu_auto_attach_retrieval" = "Отримувати автоматично вкладення";
+"menu_auto_attach_retrieval" = "Автополучение вкладення";
 /* 'Auto-decrypt' is a menu option (title case); used to enable/disable automatically decrypting messages when logged in via the Settings screen. */
 "menu_auto_decrypt" = "Авто-розшифровки";
 /* 'Change' is a menu option (title case); used to change the currently selected file attachment via the File Options dialog. */
-"menu_Change" = "Зміна";
+"menu_Change" = "Змінити";
 /* 'Change Passphrase' is a menu option (title case); used to confirm the current passphrase and create and new one via the Settings screen. */
 "menu_ChangePassphrase" = "Змінити Ключова фраза";
 /* 'Email from Contacts' is a menu option (title case); used when adding a contact invitaion via email. */
@@ -569,7 +573,7 @@
 /* 'Create New' is a menu option (title case); used to show a new empty contact in the address book for editing as the users' current identity via the Personal Contact dialog. */
 "menu_CreateNew" = "Створити новий";
 /* 'Delete' is a menu option (title case); used to delete the current item from the list context menu. */
-"menu_delete" = "Видаляти";
+"menu_delete" = "Видалити";
 /* 'Delete Thread %s' is a menu option (title case); used to delete all messages from this person via the message list context menu. %s = the name of a person. */
 "menu_deleteThread" = "Видалити %@ теми";
 /* 'View Detail' is a menu option (title case); used to show a dialog of more detail about the item via the message list context menu. */
@@ -587,43 +591,47 @@
 /* 'Forgot Passphrase?' is a menu option (title case); used on the passphrase screen to show users how to generate a new key after forgetting the passphrase that protects the old one. */
 "menu_ForgotPassphrase" = "Забули парольний фразу?";
 /* 'Help' is a menu option (title case); used to show a help dialog for the current screen. */
-"menu_Help" = "Допоможіть";
+"menu_Help" = "Допомога";
 /* 'Introduction' is a menu option (title case); used to show the secure introduction composition screen via the main home screen. */
 "menu_Introduction" = "Введення";
 /* 'Language' is a menu (title case); used as the settings menu option to change language */
 "menu_language" = "Мова";
+/* 'License' is a menu option (title case); used to show a dialog of the End User License Agreement. */
+"menu_License" = "Ліцензія";
 /* 'Add Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
 "menu_link_contact_add" = "Додати Зв'язатися Посилання";
 /* 'Change Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
-"menu_link_contact_change" = "Зміна контактної посиланням";
+"menu_link_contact_change" = "Зв`язатись Посилання";
 /* 'Logout' is a menu option (title case); used to remove the cached passphrase and force the user to login again. */
 "menu_Logout" = "Вихід";
 /* 'Manage Passphrases' is a menu option (title case); used on the settings screen to allow users to remove newer keys if created by users without orignial user authorization. */
 "menu_ManagePassphrases" = "Управління ключових фраз";
 /* 'Message Font Size' is a menu (title case); used as the settings menu option to change message font size */
-"menu_message_font_size" = "Повідомлення Розмір шрифту";
+"menu_message_font_size" = "Повідомлення Розмір шрифта";
 /* 'Copy Text' is a menu option (title case); used to copy the message text into the clipboard via the message list context menu. */
 "menu_messageCopyText" = "Копіювати текст";
 /* 'Forward' is a menu option (title case); used to create a new message with the same text message/attachment via the message list context menu. */
-"menu_messageForward" = "Уперед";
+"menu_messageForward" = "Вперед";
+/* 'Privacy Policy' is a menu option (title case); used to show a dialog of the Privacy Policy. */
+"menu_PrivacyPolicy" = "Політика конфіденційності";
 /* 'Remove' is a menu option (title case); used to remove the currently selected file attachment via the File Options dialog. */
-"menu_Remove" = "Видаляти";
+"menu_Remove" = "Видалити";
 /* 'Restore Default Settings' is a menu option (title case); used as Settings screen menu item for restoring all settings to default */
-"menu_restore_default" = "Відновити налаштування за замовчуванням";
+"menu_restore_default" = "Відновлення налаштувань за замовчуванням";
 /* 'Sound' is a menu option (title case); used as Settings item for entering ringtone selection screen */
 "menu_ringtone" = "Звук";
 /* 'Add Contact Invitation' is a menu option (title case); used to send an email or text message containing an installation link for SafeSlinger. */
 "menu_SelectShareApp" = "Додати Зв'язатися Запрошення";
 /* 'Send Feedback' is a menu option (title case); used to send an email with support data for feedback. */
-"menu_sendFeedback" = "Надіслати відгук";
+"menu_sendFeedback" = "Відправити відгук";
 /* 'Send Update' is a menu option (title case); used to send a credential update via the recipient list context menu. */
-"menu_SendUpdate" = "Надіслати оновлення";
+"menu_SendUpdate" = "Відправити оновлення";
 /* 'Settings' is a menu option (title case); used to show the settings screen. */
 "menu_Settings" = "Налаштування";
 /* 'Show Tutorial' is a menu option (title case); used to toggle the key exchange walkthrough when exchanging keys via the Settings screen. */
 "menu_ShowTutorial" = "Показати Підручник";
 /* 'Compose' is a menu option (title case); used at the title of the message composition tab for the home tab view. */
-"menu_TagComposeMessage" = "Писати";
+"menu_TagComposeMessage" = "Написати";
 /* 'Sling Keys' is a menu option (title case); used as the title of the key exchange tab for the home tab view. */
 "menu_TagExchange" = "Слінг Ключі";
 /* 'Messages' is a menu option (title case); used as the title of the message list tab for the home tab view. */
@@ -635,9 +643,9 @@
 /* 'Use Name Only' is a menu option (title case); used to select no contact as the users' main identity via the Personal Contact dialog. */
 "menu_UseNoContact" = "Використовувати ім'я тільки";
 /* 'Use Profile %s' is a menu option (title case); used to select the main profile contact as the users' main identity via the Personal Contact dialog. */
-"menu_UseProfilePerson" = "Використовуйте Профіль %@";
+"menu_UseProfilePerson" = "Використовуйте профілю %@";
 /* 'Vibrate' is a menu option (title case); used as Settings item for boolean option to vibrate during message notification */
-"menu_vibrate" = "Вібрувати";
+"menu_vibrate" = "Вібрація";
 
 /* 'waiting for verification from all members...' is a progress message (lower case, ellipsis); used to show progress while verifying data from all members hash equal to the initial commitment they sent. */
 "prog_CollectingOthersCommitVerify" = "чекає перевірки від усіх членів...";
@@ -658,7 +666,7 @@
 /* 'generating signature...' is a progress message (lower case, ellipsis); used to show progress during message signature generation. */
 "prog_generatingSignature" = "формування підпису...";
 /* 'loading content...' is a progress message (lower case, ellipsis); used to show progress during file preview loading. */
-"prog_loadingContent" = "завантаження контенту...";
+"prog_loadingContent" = "завантаження вмісту...";
 /* 'receiving encrypted file...' is a progress message (lower case, ellipsis); used to show progress while receiving the requested file. */
 "prog_ReceivingFile" = "отримання зашифрованого файлу...";
 /* 'requesting encrypted file...' is a progress message (lower case, ellipsis); used to show progress while waiting for the server to return the requested file. */
@@ -683,51 +691,53 @@
 "prog_verifyingSignature" = "перевірки підпису...";
 
 /* 'Advanced' is a preferences title (title case); used to sub-divide the Advanced section of the settings screen. */
-"section_advanced" = "Просунутий";
+"section_advanced" = "Розширений";
 /* 'Backup' is a preferences title (title case); used to sub-divide the Backup section of the settings screen. */
-"section_backup" = "Резервний";
+"section_backup" = "Резервне копіювання";
 /* 'General' is a preferences title (title case); used to sub-divide the General section of the settings screen. */
-"section_general" = "Загальний";
+"section_general" = "Загальне";
 /* 'Notifications' is a preferences title (title case); used to sub-divide the Notifications section of the settings screen. */
 "section_notification" = "Сповіщення";
 /* 'Storage' is a preferences title (title case); used to sub-divide the Storage section of the settings screen. */
 "section_storage" = "Зберігання";
 
 /* 'Backup restored.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm backup keys and settings have bee restored on re-install. */
-"state_BackupRestored" = "Резервне копіювання відновлена.";
+"state_BackupRestored" = "Резервне копіювання відновлені.";
 /* 'Deleted file %s.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that a file has been deleted. %s = the file name of the deleted file. */
-"state_FileDeleted" = "Віддалений файл %@.";
+"state_FileDeleted" = "Дистанційні файл %@.";
 /* 'Message sent.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that a message has been sent. */
 "state_FileSent" = "Повідомлення надіслано.";
 /* 'Invitation added.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the addition of a contact invitation. */
 "state_InvitationAdded" = "Запрошення додав.";
 /* 'Message saved as draft.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that an un-sent message has been saved. */
-"state_MessageSavedAsDraft" = "Повідомлення зберігається як чернетку.";
+"state_MessageSavedAsDraft" = "Повідомлення зберігається як чернетка.";
 /* '%d messages deleted.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the number of messages deleted. %d = the number of messages successfully deleted. */
-"state_MessagesDeleted" = "%d повідомлення, видалені.";
+"state_MessagesDeleted" = "%d повідомлення видалені.";
 /* 'Passphrase updated.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the change of password. */
-"state_PassphraseUpdated" = "Ключова фраза оновлюється.";
+"state_PassphraseUpdated" = "Ключова фраза оновлюються.";
 /* '%d recipients deleted.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the number of recipients deleted. %d the number of recipient's keys successfully deleted. */
-"state_RecipientsDeleted" = "%d одержувачів видалені.";
+"state_RecipientsDeleted" = "%d одержувачів видалений.";
 /* '%s contacts imported.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the number of contacts imported after exchange. %s the number of contacts imported, may be expressed as a ratio, such as 4/5 in case of a partial import. */
 "state_SomeContactsImported" = "%@ контакти імпортуються.";
 /* 'Text copied to clipboard.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the message text has been copied to the device native clipboard. */
 "state_TextCopiedToClipboard" = "Текст скопійований в буфер обміну.";
 
 /* 'SafeSlinger is designed to easily share identity data, in person or over the phone, authenticated, private, and intact. Each person you share with creates a secure end-to-end channel to send messages.' is an application description (sentence case); used at the beginning of the about box and app store listing to describe the application. Beginning of long form: 4000 character max. */
-"text_About" = "SafeSlinger призначений для легко спільне використання ідентифікаційних даних, особисто або по телефону, перевірка справжності, приватні та недоторканими. Кожна людина, якій ви поділитися з створює захищений канал кінця в кінець, щоб відправляти повідомлення.";
+"text_About" = "SafeSlinger призначений для легко обмінюватися даними, що засвідчує особу, особисто або по телефону, перевірку справжності, особисте, і недоторканими. Кожна людина, якій ви поділитися з створює захищений канал з кінця в кінець, щоб відправляти повідомлення.";
 /* 'Easily exchange contact information with others' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
 "text_About1" = "Легко обмінюватися контактною інформацією з іншими";
 /* 'Securely sling texts, photos, anything!' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
 "text_About2" = "Надійно слінг тексти, фото, нічого!";
 /* 'Strong cryptography protects your information' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
-"text_About3" = "Стійкі криптографічні алгоритми, захищає вашу інформацію";
+"text_About3" = "Сильний криптографія захищає вашу інформацію";
+/* 'SafeSlinger: Speak 3 words and forever chat in peace.' is an application description (sentence case); used in the about box and app store listing to describe the application features. Short form: 80 character max, should be exciting. */
+"text_About_Short" = "SafeSlinger: Говоріть 3 слова і назавжди прямо в світі.";
 /* 'email: %s' is an application description (sentence case); used in the app store listing, %s = SafeSlinger support email address. */
-"text_AboutEmail" = "адресу електронної пошти: %@";
+"text_AboutEmail" = "E-mail: %@";
 /* 'Features:' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
 "text_AboutFeat" = "Особливості:";
 /* 'web: %s' is an application description (sentence case); used in the app store listing, %s = SafeSlinger project web page address. */
-"text_AboutWeb" = "веб: %@";
+"text_AboutWeb" = "Веб-сайт: %@";
 /* 'Exchange' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordExchange" = "Обмін";
 /* 'Identity' is an application description (sentence case); one of many keywords to use when searching related terms. */
@@ -735,7 +745,7 @@
 /* 'Key' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordKey" = "Ключ";
 /* 'Messaging' is an application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordMessaging" = "Обмін повідомленнями";
+"text_KeywordMessaging" = "Повідомлень";
 /* 'Privacy' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordPrivacy" = "Конфіденційність";
 /* 'Security' is an application description (sentence case); one of many keywords to use when searching related terms. */
@@ -743,28 +753,28 @@
 /* 'Languages provided by:' is an application description (sentence case); used at the end of the about dialog to list the translators of SafeSlinger. */
 "text_LanguagesProvidedBy" = "Мови, надані:";
 /* 'Related Terms:' is an application description (sentence case); used in the app store listing to list related search terms to help users looking for secure key exchange and messaging. */
-"text_RelatedSearchTerms" = "Пов'язані терміни:";
+"text_RelatedSearchTerms" = "Схожі Умови:";
 /* 'Requirements:' is an application description (sentence case); used in the about box and app store listing to enumerate requirements. */
 "text_Requirements" = "Вимоги:";
 /* 'Must be installed on a minimum of 2 devices.' is an application description (sentence case); used in the about box and app store listing to enumerate requirements. */
 "text_Requirements1" = "Повинен бути встановлений на мінімум 2 пристрої.";
 /* 'An Internet connection must be active.' is an application description (sentence case); used in the about box and app store listing to enumerate requirements. */
-"text_Requirements2" = "Інтернет-з'єднання має бути активним.";
+"text_Requirements2" = "Інтернет-з'єднання повинно бути активним.";
 /* 'open source: %s' is an application description (sentence case); used in the app store listing to show the location of the open source code repository. %s = source code URL. */
 "text_SourceCodeRepo" = "з відкритим вихідним кодом: %@";
 /* 'Stability fixes.' is an application description (sentence case); used to list what changes have been made to updated versions. */
-"text_WhatsNew" = "Стійкість фіксує.";
+"text_WhatsNew" = "Стабільність виправлення.";
 
 /* 'About' is a title (title case); used as the */
-"title_About" = "Про";
+"title_About" = "Про це";
 /* 'Camera' is a menu option (title case); used in the Select File Option menu to take a picture with the camera on iOS. */
-"title_camera" = "Камера";
+"title_camera" = "Камери";
 /* 'Choose Directory' is a title (title case); used at the top of the menu when choosing a directory to load or save a file attachment. */
-"title_ChooseDirectory" = "Вибрати директорію";
+"title_ChooseDirectory" = "Choose Directory";
 /* 'Choose Your Attachment' is a title (title case); used at the top of the menu options when choosing among sources to pick an attachment. */
-"title_ChooseFileLoad" = "Обери свій Вкладень";
+"title_ChooseFileLoad" = "Виберіть Ваш У темі";
 /* 'Comments/Questions' is a title (title case); used as the Subject field of an email message for the user to send feedback to developers. Also used as the menu option to start the email. */
-"title_comments" = "Коментарі/Питання";
+"title_comments" = "Коментарі/Запитання";
 /* 'Error' is a title (title case); used at the top of the error dialog. */
 "title_Error" = "Помилка";
 /* 'Sling Keys Assistant' is a title (title case); used at the top of the dialog, which provides a walkthrough of the key exchange protocol. */
@@ -772,29 +782,29 @@
 /* 'Attachment Options' is a title (title case); used at the top of the menu when choosing whether to remove the current attachment or select a new one. */
 "title_FileOptions" = "Attachment Options";
 /* 'Setup' is a title (title case); used at the top of the setup screen. */
-"title_find" = "Установка";
+"title_find" = "Налаштування";
 /* 'Select a font size' is a title (title case); used as the settings title when changing font size */
 "title_font_size" = "Виберіть розмір шрифту";
 /* 'Begin Exchange' is a title (title case); used at the top of the begin exchange screen to start the exchange protocol. */
 "title_home" = "Почніть Обмін";
 /* 'Home' is a title (title case); used at the top of the home screen on iOS. */
-"title_HomePanel" = "Додому";
+"title_HomePanel" = "Головна";
 /* 'Message' is a title (title case); used at the top of the dialog when viewing message details. */
 "title_MessageDetail" = "Повідомлення";
 /* 'Messages' is a title (title case); used at the top of the message list screen. */
 "title_Messages" = "Повідомлення";
 /* 'Personal Contact' is a title (title case); used at the top of a menu when choosing to alter the users' contact: Edit, Create New, or Use Another. */
-"title_MyIdentity" = "Особистий контакт";
+"title_MyIdentity" = "Особиста Контакт";
 /* 'SafeSlinger Message Available' is a title (title case); used as the title of an incoming message in the notification window. */
 "title_NotifyFileAvailable" = "SafeSlinger Повідомлення Доступний";
 /* '%d SafeSlinger Messages Available' is a title (title case); used as the title of multiple incoming messages in the notification window. iOS-only. */
-"title_NotifyMulFileAvailable" = "%d SafeSlinger Повідомлення Доступні";
+"title_NotifyMulFileAvailable" = "%d SafeSlinger Повідомлень Доступні";
 /* 'Passphrase' is a title (title case); used at the top of the passphrase screen where user will login. */
 "title_passphrase" = "Ключова фраза";
 /* 'Photo Album' is a menu option (title case); used in the Select File Option menu to select a picture from the photo album on iOS. */
 "title_photoalbum" = "Фотоальбом";
 /* 'Photo Library' is a menu option (title case); used in the Select File Option menu to create a picture from the photo library on iOS. */
-"title_photolibary" = "Бібліотека фотографій";
+"title_photolibary" = "Photo Library";
 /* 'Recipients' is a title (title case); used at the top of the recipient list screen. */
 "title_PickRecipient" = "Одержувачі";
 /* 'Question' is a title (title case); used at the top question yes/no dialog. */
@@ -802,23 +812,23 @@
 /* 'Recipient Detail' is a title (title case); used at the top of the dialog when viewing recipient/key details. */
 "title_RecipientDetail" = "Одержувач Детально";
 /* 'End Exchange' is a title (title case); used at the top of the import contacts screen at the end of the exchange protocol. */
-"title_save" = "Кінець біржа";
+"title_save" = "Кінець валюти";
 /* 'Save File As' is a title (title case); used at the top of the File Manager when saving a file on Android. */
 "title_SaveFileAs" = "Save File As";
 /* 'Secure Introduction' is a title (title case); used at the top of the secure introduction composition screen. */
-"title_SecureIntroduction" = "Безпечний Введення";
+"title_SecureIntroduction" = "Secure Введення";
 /* 'Secure Introduction Invitation!' is a title (title case); used at the top of the confirmation dialog when receiving a secure introduction. */
 "title_SecureIntroductionInvite" = "Безпека Введення Запрошення!";
 /* 'Sending Options:' is a title (title case); used to denote the dialog for user to pickup sender source options. */
 "title_SelectSource" = "Параметри відправки:";
 /* 'Send' is a title (title case); used at the top of compose message screen. */
-"title_SendFile" = "Послати";
+"title_SendFile" = "Відправити";
 /* 'Sharing Folder' is a menu option (title case); used in the Select File Option menu to select a file from the sharing folder on iOS. */
-"title_sharingfolder" = "Загального доступу до папок";
+"title_sharingfolder" = "Спільне Папка";
 /* 'How many users in the exchange?' is a title (title case); used at the top of the group size selection screen. */
-"title_size" = "Скільки користувачів в обміні?";
+"title_size" = "Скільки користувачів в обмін?";
 /* 'Sound Recorder' is a menu option (title case); used in the Select File Option menu to create a voice recording on iOS. */
-"title_soundrecoder" = "Диктофон";
+"title_soundrecoder" = "Sound Recorder";
 /* 'SafeSlinger Invitation' is a title (title case); used as the Subject field of an email or text message sent by the Share Application menu option. */
 "title_TextInviteMsg" = "SafeSlinger Запрошення";
 /* 'Threads' is a title (title case); used at the top of the thread list screen. */
@@ -826,6 +836,6 @@
 /* 'Grouping' is a title (title case); used at the top of the entry screen for the lowest common number. */
 "title_userid" = "Угруповання";
 /* 'Verify' is a title (title case); used at the top of the word phrase verification screen. */
-"title_verify" = "Перевірити";
+"title_verify" = "Перевірте";
 /* 'Warning' is a title (title case); used at the top of the warning dialog. */
 "title_Warn" = "Попередження";

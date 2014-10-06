@@ -67,7 +67,7 @@
 
 -(void)idleTimerExceeded
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:KSDIdlingWindowTimeoutNotification object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName: KSDIdlingWindowTimeoutNotification object:nil];
 }
 
 @end

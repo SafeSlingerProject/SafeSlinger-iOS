@@ -86,6 +86,11 @@
     }
 }
 
+- (IBAction)Logout:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(buttonIndex!=alertView.cancelButtonIndex)

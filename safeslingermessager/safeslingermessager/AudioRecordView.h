@@ -26,18 +26,17 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
-@class AppDelegate;
+@class ComposeView;
 
 @interface AudioRecordView : UIViewController <AVAudioRecorderDelegate, AVAudioPlayerDelegate, UIAlertViewDelegate>
 {
     AVAudioRecorder *audio_recorder;
     AVAudioPlayer *audio_player;
     NSTimer *polling_timer;
-    AppDelegate* delegate;
+    ComposeView* parent;
 }
 
-@property (nonatomic, retain) AppDelegate *delegate;
-
+@property (nonatomic, retain) ComposeView *parent;
 @property (nonatomic, strong) IBOutlet UILabel *TimeLabel;
 @property (nonatomic, strong) IBOutlet UIButton *PlayBtn;
 @property (nonatomic, strong) IBOutlet UIButton *RecordBtn;
@@ -45,7 +44,6 @@
 @property (nonatomic, strong) IBOutlet UIButton *DiscardBtn;
 @property (nonatomic, strong) IBOutlet UIButton *SaveBtn;
 @property (nonatomic, strong) AVAudioRecorder *audio_recorder;
-
 @property (nonatomic, retain) NSTimer *polling_timer;
 
 // audio recorder/player button actions

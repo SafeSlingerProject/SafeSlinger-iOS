@@ -84,7 +84,7 @@
     if(ABPersonHasImageData(InviteeVCard))
     {
         // use Thumbnail image
-        [InviteeFacel setImage:[[UIImage imageWithData:(__bridge NSData *)ABPersonCopyImageDataWithFormat(InviteeVCard, kABPersonImageFormatThumbnail)]scaleToSize:CGSizeMake(45.0f, 45.0f)]];
+        [InviteeFacel setImage:[UIImage imageWithData:(__bridge NSData *)ABPersonCopyImageDataWithFormat(InviteeVCard, kABPersonImageFormatThumbnail)]];
     }else{
         [InviteeFacel setImage:[UIImage imageNamed: @"blank_contact.png"]];
     }
@@ -99,7 +99,7 @@
         {
             if(result>0)
             {
-                AppDelegate *delegate = [[UIApplication sharedApplication]delegate];
+                AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
                 // Try to backup
                 [delegate.BackupSys RecheckCapability];
                 [delegate.BackupSys PerformBackup];
@@ -173,14 +173,14 @@
     tokenstr = [tokenstr substringToIndex:tokenlen];
     
     // get photo if possible
-    CFDataRef photo = ABPersonCopyImageData(newRecord);
-    if(photo)
+    if(ABPersonHasImageData(newRecord))
     {
-        imageData = [Base64 encode: UIImageJPEGRepresentation([UIImage imageWithData:(__bridge NSData *)photo], 0.3)];
+        CFDataRef photo = ABPersonCopyImageDataWithFormat(newRecord, kABPersonImageFormatThumbnail);
+        imageData = [Base64 encode: UIImageJPEGRepresentation([UIImage imageWithData:(__bridge NSData *)photo], 0.9)];
         CFRelease(photo);
     }
     
-    AppDelegate *delegate = [[UIApplication sharedApplication]delegate];
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     NSMutableDictionary *mapping = [NSMutableDictionary dictionary];
     
     // introduction
@@ -218,7 +218,7 @@
         return -1;
     }
     
-    if([UtilityFunc checkContactPermission])
+    if(ABAddressBookGetAuthorizationStatus()==kABAuthorizationStatusAuthorized)
     {
         // contact permission is enabled, update address book.
         CFErrorRef error = NULL;

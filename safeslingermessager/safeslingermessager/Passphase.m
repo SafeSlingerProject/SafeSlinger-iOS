@@ -204,7 +204,7 @@
 {
     [super viewDidLoad];
     // Set delegate and get version number
-    delegate = [[UIApplication sharedApplication] delegate];
+    delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     VersionLabel.text = [delegate getVersionNumber];
     [DoneBtn setTitle:NSLocalizedString(@"btn_OK", @"OK") forState: UIControlStateNormal];
     [NewKeyBtn setTitle: NSLocalizedString(@"menu_ForgotPassphrase", @"Forgot Passphrase?")];
@@ -254,7 +254,6 @@
 {
     // make it scrollable
     Scrollview.contentSize=CGSizeMake(_originalFrame.size.width,_originalFrame.size.height*1.3);
-    
     // get the size of the keyboard
     CGFloat keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
     CGFloat offset = keyboardSize+PassField.frame.origin.y+PassField.frame.size.height-_originalFrame.size.height+60.0f;
@@ -296,19 +295,13 @@
     return NO;
 }
 
-- (IBAction)unwindToLogin:(UIStoryboardSegue *)unwindSegue
+-(void)SelectDifferentKey
 {
-    if([[unwindSegue identifier]isEqualToString:@"KeySelectionDone"])
-    {
-        KeySelectionView *view = (KeySelectionView*)[unwindSegue sourceViewController];
-        if(view.keyChanged)
-        {
-            [delegate.DbInstance CloseDB];
-            [delegate.DbInstance LoadDBFromStorage:[[[NSUserDefaults standardUserDefaults] stringArrayForKey: kDB_KEY] objectAtIndex:[[NSUserDefaults standardUserDefaults] integerForKey:kDEFAULT_DB_KEY]]];
-            [delegate checkIdentity];
-            [KeySelectBtn setTitle:delegate.IdentityName forState:UIControlStateNormal];
-        }
-    }
+    [delegate.DbInstance CloseDB];
+    [delegate.DbInstance LoadDBFromStorage:[[[NSUserDefaults standardUserDefaults] stringArrayForKey: kDB_KEY] objectAtIndex:[[NSUserDefaults standardUserDefaults] integerForKey:kDEFAULT_DB_KEY]]];
+    [delegate checkIdentity];
+    [KeySelectBtn setTitle:delegate.IdentityName forState:UIControlStateNormal];
+    [self.view setNeedsDisplay];
 }
 
 #pragma mark - Navigation
@@ -321,6 +314,10 @@
     {
         SetupView *setup = (SetupView*)[segue destinationViewController];
         setup.newkeycreated = YES;
+    }else if([[segue identifier]isEqualToString:@"KeySelection"])
+    {
+        KeySelectionView *keySelect = (KeySelectionView*)[segue destinationViewController];
+        keySelect.parent = self;
     }
 }
 

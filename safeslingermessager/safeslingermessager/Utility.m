@@ -76,7 +76,6 @@
             break;
         }
     }
-    
     if(mainview)[navigationController popToViewController:mainview animated:YES];
 }
 
@@ -96,7 +95,7 @@
         // copy out all fields in the old namecard
         CFStringRef f = ABRecordCopyValue(aRecord, kABPersonFirstNameProperty);
         CFStringRef l = ABRecordCopyValue(aRecord, kABPersonLastNameProperty);
-        CFDataRef photo = ABPersonCopyImageData(aRecord);
+        CFDataRef photo = ABPersonCopyImageDataWithFormat(aRecord, kABPersonImageFormatThumbnail);
         CFTypeRef allIMPP = ABRecordCopyValue(aRecord, kABPersonInstantMessageProperty);
         CFTypeRef allWebpages = ABRecordCopyValue(aRecord, kABPersonURLProperty);
         CFTypeRef allEmails = ABRecordCopyValue(aRecord, kABPersonEmailProperty);
@@ -215,17 +214,6 @@
     if(aBook)CFRelease(aBook);
 }
 
-+ (BOOL) checkContactPermission
-{
-    ABAuthorizationStatus status = ABAddressBookGetAuthorizationStatus();
-    if(status==kABAuthorizationStatusAuthorized)
-    {
-        return YES;
-    }else{
-        return NO;
-    }
-}
-
 @end
 
 @implementation NSString (Utility)
@@ -304,7 +292,7 @@
 {
     // Display Time
     NSString* result = nil;
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDateComponents *components = nil;
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -312,10 +300,10 @@
     [formatter setDateFormat: DATABASE_TIMESTR];
     NSDate *cDate = [formatter dateFromString: TStamp];
     
-    components = [calendar components:NSDayCalendarUnit
+    components = [calendar components: NSCalendarUnitDay
                              fromDate: cDate
                                toDate: [NSDate date]
-                              options:0];
+                              options: 0];
     // for efficiency
     if(components.day>0){
         result = [NSString ChangeGMT2Local: TStamp GMTFormat:DATABASE_TIMESTR LocalFormat:@"MMM dd"];
@@ -329,16 +317,16 @@
 {
     // Display Time
     NSString* result = nil;
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDateComponents *components = nil;
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
     [formatter setDateFormat: DATABASE_TIMESTR];
     NSDate *cDate = [formatter dateFromString: TStamp];
-    
     NSDate *plus1day = [cDate dateByAddingTimeInterval:60*60*24];
-    components = [calendar components:NSHourCalendarUnit|NSMinuteCalendarUnit
+    
+    components = [calendar components:NSCalendarUnitHour|NSCalendarUnitMinute
                              fromDate:[NSDate date]
                                toDate:plus1day
                               options:0];
@@ -366,7 +354,7 @@
 
 -(BOOL) IsValidPhoneNumber
 {
-    NSCharacterSet *charsToTrim = [NSCharacterSet characterSetWithCharactersInString:@" ()-"];
+    NSCharacterSet *charsToTrim = [NSCharacterSet characterSetWithCharactersInString:@" ()- "];
     NSString *telestr = [[self componentsSeparatedByCharactersInSet:charsToTrim] componentsJoinedByString:@""];
     NSCharacterSet *alphaNums = [NSCharacterSet decimalDigitCharacterSet];
     NSCharacterSet *inStringSet = [NSCharacterSet characterSetWithCharactersInString:telestr];

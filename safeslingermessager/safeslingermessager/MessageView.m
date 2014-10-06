@@ -46,7 +46,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    delegate = [[UIApplication sharedApplication]delegate];
+    delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     MessageList = [[NSMutableArray alloc]init];
     b_img = [UIImage imageNamed: @"blank_contact_small.png"];
 }
@@ -156,7 +156,7 @@
     NSString* face = [delegate.DbInstance QueryStringInTokenTableByKeyID: MsgListEntry.keyid Field:@"note"];
     [cell.imageView setImage: ([face length]==0) ? b_img : [[UIImage imageWithData: [Base64 decode:face]]scaleToSize:CGSizeMake(45.0f, 45.0f)]];
     
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier: NSCalendarIdentifierGregorian];
     NSDateComponents *components = nil;
     
     NSDate *lastSeen;
@@ -164,7 +164,7 @@
     [formatter setDateFormat: DATABASE_TIMESTR];
     lastSeen = [formatter dateFromString:MsgListEntry.lastSeen];
     
-    components = [calendar components:NSDayCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit
+    components = [calendar components:NSCalendarUnitDay|NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond
                              fromDate: lastSeen
                                toDate: [NSDate date]
                               options:0];

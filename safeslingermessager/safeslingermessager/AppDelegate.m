@@ -37,7 +37,6 @@
 #import <AddressBook/AddressBook.h>
 #import <Crashlytics/Crashlytics.h>
 #import <UAirship.h>
-#import <UAPush.h>
 #import <UAAnalytics.h>
 #import <UAConfig.h>
 
@@ -50,7 +49,7 @@
 -(NSString*) getVersionNumber
 {
 #ifdef BETA
-    return [NSString stringWithFormat:@"%@-beta", [[[NSBundle mainBundle] infoDictionary]objectForKey: @"CFBundleVersion"]];
+    return [NSString stringWithFormat:@"%@-beta", [[[NSBundle mainBundle] infoDictionary]objectForKey: @"CFBundleShortVersionString"]];
 #else
     return [[[NSBundle mainBundle] infoDictionary]objectForKey: @"CFBundleVersion"];
 #endif
@@ -93,7 +92,6 @@
     [UDbInstance LoadDBFromStorage];
     
     int oldver = (1 << 24) | (7 << 16);
-    
     if([DbInstance GetProfileName]&&[self getVersionNumberByInt]<oldver)
     {
         // version 1.6.x, apply 1.7 changes...
@@ -105,17 +103,28 @@
     
     [[NSUserDefaults standardUserDefaults] setInteger:[self getVersionNumberByInt] forKey: kAPPVERSION];
     
-    if ([[UIApplication sharedApplication] enabledRemoteNotificationTypes] != UIRemoteNotificationTypeNone)
+    BOOL PushIsRegistered = NO;
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1)
+    {
+        if ([[UIApplication sharedApplication] enabledRemoteNotificationTypes] != UIRemoteNotificationTypeNone)
+            PushIsRegistered = YES;
+    }
+    else
+    {
+        PushIsRegistered = [[UIApplication sharedApplication]isRegisteredForRemoteNotifications];
+    }
+    
+    if(PushIsRegistered)
     {
         [UAirship setLogLevel:UALogLevelTrace];
         UAConfig *config = [UAConfig defaultConfig];
-        
         // Call takeOff (which creates the UAirship singleton)
         [UAirship takeOff: config];
         [UAirship setLogLevel:UALogLevelError];
         [[UAPush shared]setAutobadgeEnabled:YES];
-        [UAPush shared].notificationTypes = (UIRemoteNotificationTypeBadge |
-                                             UIRemoteNotificationTypeAlert);
+        [UAPush shared].userNotificationTypes = (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert);
+        [UAPush shared].userPushNotificationsEnabled = YES;
+        [UAPush shared].registrationDelegate = self;
     }
     
     // message receiver
@@ -127,20 +136,28 @@
     return YES;
 }
 
+- (void)registrationSucceededForChannelID:(NSString *)channelID deviceToken:(NSString *)deviceToken
+{
+    // DEBUGMSG(@"channelID = %@, deviceToken = %@", channelID, deviceToken);
+}
+
+- (void)registrationFailed
+{
+    DEBUGMSG(@"registrationFailed");
+}
+
 - (void)registerPushToken
 {
     [UAirship setLogLevel:UALogLevelTrace];
-    
     UAConfig *config = [UAConfig defaultConfig];
-    DEBUGMSG(@"config: %@", [config description]);
-    
     // Call takeOff (which creates the UAirship singleton)
-    [UAirship takeOff: config];
+    [UAirship takeOff:config];
+    // Print out the application configuration for debugging (optional)
+    [UAPush shared].userNotificationTypes = (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert);
     [UAirship setLogLevel:UALogLevelError];
     [[UAPush shared]setAutobadgeEnabled:YES];
-    [UAPush shared].notificationTypes = (UIRemoteNotificationTypeBadge |
-                                         UIRemoteNotificationTypeAlert);
-    [[UAPush shared]registerForRemoteNotifications];
+    [UAPush shared].userPushNotificationsEnabled = YES;
+    [UAPush shared].registrationDelegate = self;
 }
 
 - (void) removeContactLink
@@ -167,7 +184,6 @@
 	if(ContactID == NonExist) return;
  
     NSString* oldValue = [DbInstance GetProfileName];
-                       
     if(FN)
     {
         [DbInstance InsertOrUpdateConfig:[FN dataUsingEncoding:NSUTF8StringEncoding] withTag:@"Profile_FN"];
@@ -301,7 +317,7 @@
 
 -(BOOL)checkIdentity
 {
-    BOOL ret = NO;
+    BOOL ret = YES;
     
     // Identity checking, check if conact is linked
     NSData* contact_data = [DbInstance GetConfig:@"IdentityNum"];
@@ -314,15 +330,14 @@
     
     switch (IdentityNum) {
         case NonExist:
+            ret = NO;
             break;
         case NonLink:
             IdentityName = [DbInstance GetProfileName];
-            ret = YES;
             break;
         default:
             IdentityName = [DbInstance GetProfileName];
-            // get self photo cache
-            if ([UtilityFunc checkContactPermission])
+            if (ABAddressBookGetAuthorizationStatus()==kABAuthorizationStatusAuthorized)
             {
                 // get self photo first, cached.
                 CFErrorRef error = NULL;
@@ -333,22 +348,23 @@
                 });
         
                 ABRecordRef aRecord = ABAddressBookGetPersonWithRecordID(aBook, IdentityNum);
-        
                 // set self photo
-                CFDataRef imgData = ABPersonCopyImageData(aRecord);
-                if(imgData)
+                if(ABPersonHasImageData(aRecord))
                 {
-                    IdentityImage = UIImageJPEGRepresentation([[UIImage imageWithData:(__bridge NSData *)imgData]scaleToSize: CGSizeMake(45.0f, 45.0f)], 0.9);
+                    CFDataRef imgData = ABPersonCopyImageDataWithFormat(aRecord, kABPersonImageFormatThumbnail);
+                    IdentityImage = UIImageJPEGRepresentation([[UIImage imageWithData:(__bridge NSData *)imgData]scaleToSize:CGSizeMake(45.0f, 45.0f)], 0.9);
                     CFRelease(imgData);
                 }
                 if(aBook)CFRelease(aBook);
-                ret = YES;
+            }else{
+                // contact privacy might be shut off
+                IdentityNum = NonLink;
+                [self saveConactDataWithoutChaningName:IdentityNum];
             }
             break;
     }
     
     DEBUGMSG(@"IdentityName = %@, IdentityNum = %d", IdentityName, IdentityNum);
-    
     return ret;
 }
 
@@ -380,27 +396,40 @@
 {
     UALOG(@"APN device token: %@", deviceToken);
     // Updates the device token and registers the token with UA
-    [[UAPush shared] registerDeviceToken:deviceToken];
+    [[UAPush shared] appRegisteredForRemoteNotificationsWithDeviceToken:deviceToken];
     // Sets the alias. It will be sent to the server on registration.
     [UAPush shared].alias = [UIDevice currentDevice].name;
     // Add AppVer tag
-    [[UAPush shared]addTagToCurrentDevice:[NSString stringWithFormat:@"AppVer = %@", [self getVersionNumber]]];
+    [[UAPush shared]addTag:[NSString stringWithFormat:@"AppVer = %@", [self getVersionNumber]]];
     [[UAPush shared]updateRegistration];
     
-    //Do something when notifications are disabled altogther
-    if ([app enabledRemoteNotificationTypes] == UIRemoteNotificationTypeNone) {
-        UALOG(@"iOS Registered a device token, but nothing is enabled!");
-        //only alert if this is the first registration, or if push has just been
-        //re-enabled
-        if ([UAirship shared].deviceToken != nil) { //already been set this session
-            [ErrorLogger ERRORDEBUG: NSLocalizedString(@"iOS_notificationError1", @"Unable to turn on notifications. Use the \"Settings\" app to enable notifications.")];
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1)
+    {
+        //Do something when notifications are disabled altogther
+        if( [app enabledRemoteNotificationTypes] != (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert) )
+        {
+            UALOG(@"iOS Registered a device token, but nothing is enabled!");
+            //only alert if this is the first registration, or if push has just been
+            //re-enabled
+            if ([UAirship shared].deviceToken != nil) { //already been set this session
+                [ErrorLogger ERRORDEBUG: NSLocalizedString(@"iOS_notificationError1", @"Unable to turn on notifications. Use the \"Settings\" app to enable notifications.")];
+            }
+            //Do something when some notification types are disabled
         }
-        //Do something when some notification types are disabled
-    } else if ([app enabledRemoteNotificationTypes] != [UAPush shared].notificationTypes) {
-        
-        [ErrorLogger ERRORDEBUG: @"ERROR: Failed to register a device token with the requested services. Your notifications may be turned off."];
-        //only alert if this is the first registration, or if push has just been
-        //re-enabled
+    }
+    else
+    {
+        //Do something when notifications are disabled altogther
+        if (![[UIApplication sharedApplication] isRegisteredForRemoteNotifications] || [UIApplication sharedApplication].currentUserNotificationSettings.types != (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert))
+        {
+            UALOG(@"iOS Registered a device token, but nothing is enabled!");
+            //only alert if this is the first registration, or if push has just been
+            //re-enabled
+            if ([UAirship shared].deviceToken != nil) { //already been set this session
+                [ErrorLogger ERRORDEBUG: NSLocalizedString(@"iOS_notificationError1", @"Unable to turn on notifications. Use the \"Settings\" app to enable notifications.")];
+            }
+            //Do something when some notification types are disabled
+        }
     }
 }
 
@@ -433,25 +462,36 @@
     
     if([self checkIdentity])
     {
+        // update push notification status
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidTimeout:) name:KSDIdlingWindowTimeoutNotification object:nil];
         
         if ([UIApplication sharedApplication].applicationIconBadgeNumber>0) {
             DEBUGMSG(@"Fetch %ld messages...", (long)[UIApplication sharedApplication].applicationIconBadgeNumber);
             [MessageInBox FetchMessageNonces: (int)[UIApplication sharedApplication].applicationIconBadgeNumber];
         }
+        
+        // Try to backup
+        [BackupSys RecheckCapability];
+        [BackupSys PerformBackup];
+        
+        // update push notificaiton registration
+        DEBUGMSG(@"updateRegistration..");
+        [[UAPush shared]updateRegistration];
+        
+        DEBUGMSG(@"token = %@", [UAPush shared].deviceToken);
+        DEBUGMSG(@"currentEnabledNotificationTypes = %lu", [UAPush shared].currentEnabledNotificationTypes);
     }
 }
 
 -(void)applicationDidTimeout: (NSNotification *)notification
 {
-    DEBUGMSG (@"time exceeded!!");
     if([self.window.rootViewController isMemberOfClass:[UINavigationController class]])
     {
         UINavigationController* nag = (UINavigationController*)self.window.rootViewController;
         if([nag.visibleViewController isMemberOfClass:[FunctionView class]])
         {
-            FunctionView* view = (FunctionView*)nag.visibleViewController;
-            [view performSegueWithIdentifier:@"Logout" sender:self];
+            // FunctionView* view = (FunctionView*)nag.visibleViewController;
+            [nag popViewControllerAnimated:YES];
         }
     }
 }

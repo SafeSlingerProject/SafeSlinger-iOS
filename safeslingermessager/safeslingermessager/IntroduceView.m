@@ -31,6 +31,7 @@
 #import "ErrorLogger.h"
 #import "FunctionView.h"
 #import "VCardParser.h"
+#import "ContactSelectView.h"
 
 @interface IntroduceView ()
 
@@ -40,21 +41,17 @@
 
 @synthesize delegate, User1Btn, User2Btn, User1Photo, User2Photo, IntroduceBtn, HintLabel;
 @synthesize messageForU1, messageForU2;
-@synthesize pickU1, pickU2, UserTag;
+@synthesize pickU1, pickU2, pickUser;
 @synthesize ProgressLabel, ProgressIndicator;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    delegate = [[UIApplication sharedApplication]delegate];
-    
+    delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     [HintLabel setText:NSLocalizedString(@"label_InstSendInvite", @"Pick recipients to introduce securely:")];
     [IntroduceBtn setTitle:NSLocalizedString(@"btn_Introduce", @"Introduce") forState:UIControlStateNormal];
-    
     [User1Btn setTitle:NSLocalizedString(@"label_SelectRecip", @"Select Recipient") forState:UIControlStateNormal];
     [User1Photo setImage: [UIImage imageNamed: @"blank_contact.png"]];
-    
     [User2Btn setTitle:NSLocalizedString(@"label_SelectRecip", @"Select Recipient") forState:UIControlStateNormal];
     [User2Photo setImage: [UIImage imageNamed: @"blank_contact.png"]];
 }
@@ -71,13 +68,9 @@
     
     [ProgressLabel setText:nil];
     [ProgressIndicator stopAnimating];
-    
-    messageForU1 = nil;
-    [User2Btn setTitle:NSLocalizedString(@"label_SelectRecip", @"Select Recipient") forState:UIControlStateNormal];
-    [User2Photo setImage: [UIImage imageNamed: @"blank_contact.png"]];
-    messageForU2 = nil;
-    [User1Btn setTitle:NSLocalizedString(@"label_SelectRecip", @"Select Recipient") forState:UIControlStateNormal];
-    [User1Photo setImage: [UIImage imageNamed: @"blank_contact.png"]];
+    UserTag = 0;
+    [self CleanSelectContact: User1Tag];
+    [self CleanSelectContact: User2Tag];
 }
 
 - (void)DisplayHow
@@ -99,10 +92,8 @@
 {
     switch (buttonIndex) {
         case Help:
-        {
             // show help
             [self performSegueWithIdentifier:@"ShowHelp" sender:self];
-        }
             break;
         case Feedback:
             [UtilityFunc SendOpts:self];
@@ -138,71 +129,49 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)unwindToIntroduction:(UIStoryboardSegue *)unwindSegue
+- (BOOL)EvaluateContact: (ContactEntry*)SelectContact
 {
-    if([[unwindSegue identifier]isEqualToString:@"FinishContactSelect"])
-    {
-        ContactSelectView *view = [unwindSegue sourceViewController];
-        switch (UserTag) {
-            case 1:
-                pickU1 = view.selectedUser;
-                break;
-            case 2:
-                pickU2 = view.selectedUser;
-                break;
-            default:
-                break;
-        }
-        
-        if(pickU2&&pickU1&&[pickU1.keyid isEqualToString: pickU2.keyid])
-        {
-            DEBUGMSG(@"Invalid recipient.");
-            // show dialog
-            [[[[iToast makeText: NSLocalizedString(@"error_InvalidRecipient", @"Invalid recipient.")]
-               setGravity:iToastGravityCenter] setDuration:iToastDurationShort] show];
-            // rest the selected one
-            switch (UserTag) {
-                case 1:
-                    pickU1 = nil;
-                    messageForU2 = nil;
-                    break;
-                case 2:
-                    pickU2 = nil;
-                    messageForU1 = nil;
-                    break;
-                default:
-                    break;
-            }
-        }
-        
-        switch (UserTag) {
-            case 1:
-            {
-                if(pickU1)
-                {
-                    messageForU2 = [NSString stringWithFormat:NSLocalizedString(@"label_messageIntroduceNameToYou", @"I would like to introduce %@ to you."), [NSString composite_name:pickU1.fname withLastName:pickU1.lname]];
-                    if([pickU1.photo length]>0) [User1Photo setImage:[UIImage imageWithData:pickU1.photo]];
-                    else [User1Photo setImage: [UIImage imageNamed: @"blank_contact.png"]];
-                    [User1Btn setTitle:[NSString stringWithFormat:@"%@ %@\n%@ %@", NSLocalizedString(@"label_SendTo", @"To:"), [NSString composite_name:pickU1.fname withLastName:pickU1.lname], NSLocalizedString(@"label_Key", @"Key:"), [NSString ChangeGMT2Local:pickU1.keygenDate GMTFormat:DATABASE_TIMESTR LocalFormat:@"dd/MMM/yyyy"]] forState:UIControlStateNormal];
-                }
-            }
-                break;
-            case 2:
-            {
-                if(pickU2)
-                {
-                    messageForU1 = [NSString stringWithFormat:NSLocalizedString(@"label_messageIntroduceNameToYou", @"I would like to introduce %@ to you."), [NSString composite_name:pickU2.fname withLastName:pickU2.lname]];
-                    
-                    if([pickU2.photo length]>0) [User2Photo setImage:[UIImage imageWithData:pickU2.photo]];
-                    else [User2Photo setImage: [UIImage imageNamed: @"blank_contact.png"]];
-                    
-                    [User2Btn setTitle:[NSString stringWithFormat:@"%@ %@\n%@ %@", NSLocalizedString(@"label_SendTo", @"To:"), [NSString composite_name:pickU2.fname withLastName:pickU2.lname], NSLocalizedString(@"label_Key", @"Key:"), [NSString ChangeGMT2Local:pickU2.keygenDate GMTFormat:DATABASE_TIMESTR LocalFormat:@"dd/MMM/yyyy"]] forState:UIControlStateNormal];
-                }
-            }
-                break;
-            default:
-                break;
-        }
+    BOOL _SafeSelect = YES;
+    
+    if(SelectContact==nil) return !_SafeSelect;
+    
+    switch (pickUser) {
+        case User1Tag:
+            if(pickU2&&[SelectContact.keyid isEqualToString: pickU2.keyid]) _SafeSelect = NO;
+            break;
+        case User2Tag:
+            if(pickU1&&[SelectContact.keyid isEqualToString: pickU1.keyid]) _SafeSelect = NO;
+            break;
+        default:
+            break;
+    }
+    
+    if(!_SafeSelect)
+        [[[[iToast makeText: NSLocalizedString(@"error_InvalidRecipient", @"Invalid recipient.")]
+           setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+    
+    return _SafeSelect;
+}
+
+- (void)SetupContact: (ContactEntry*)SelectContact
+{
+    switch (pickUser) {
+        case User1Tag:
+            pickU1 = SelectContact;
+            messageForU2 = [NSString stringWithFormat:NSLocalizedString(@"label_messageIntroduceNameToYou", @"I would like to introduce %@ to you."), [NSString composite_name:pickU1.fname withLastName:pickU1.lname]];
+            if([pickU1.photo length]>0) [User1Photo setImage:[UIImage imageWithData:pickU1.photo]];
+            else [User1Photo setImage: [UIImage imageNamed: @"blank_contact.png"]];
+            [User1Btn setTitle:[NSString stringWithFormat:@"%@ %@\n%@ %@", NSLocalizedString(@"label_SendTo", @"To:"), [NSString composite_name:pickU1.fname withLastName:pickU1.lname], NSLocalizedString(@"label_Key", @"Key:"), [NSString ChangeGMT2Local:pickU1.keygenDate GMTFormat:DATABASE_TIMESTR LocalFormat:@"dd/MMM/yyyy"]] forState:UIControlStateNormal];
+            break;
+        case User2Tag:
+            pickU2 = SelectContact;
+            messageForU1 = [NSString stringWithFormat:NSLocalizedString(@"label_messageIntroduceNameToYou", @"I would like to introduce %@ to you."), [NSString composite_name:pickU2.fname withLastName:pickU2.lname]];
+            if([pickU2.photo length]>0) [User2Photo setImage:[UIImage imageWithData:pickU2.photo]];
+            else [User2Photo setImage: [UIImage imageNamed: @"blank_contact.png"]];
+            [User2Btn setTitle:[NSString stringWithFormat:@"%@ %@\n%@ %@", NSLocalizedString(@"label_SendTo", @"To:"), [NSString composite_name:pickU2.fname withLastName:pickU2.lname], NSLocalizedString(@"label_Key", @"Key:"), [NSString ChangeGMT2Local:pickU2.keygenDate GMTFormat:DATABASE_TIMESTR LocalFormat:@"dd/MMM/yyyy"]] forState:UIControlStateNormal];
+            break;
+        default:
+            break;
     }
 }
 
@@ -237,7 +206,6 @@
     NSMutableData* pktdata2 = [[NSMutableData alloc]initWithCapacity:0];
     
     _nonce1 = [SSEngine BuildCipher: pickU1.keyid Message:messageForU1 Attach: @"introduction.vcf" RawFile:VCardForU1 MIMETYPE:@"SafeSlinger/SecureIntroduce" Cipher:pktdata1];
-    
     _nonce2 = [SSEngine BuildCipher: pickU2.keyid Message:messageForU2 Attach: @"introduction.vcf" RawFile:VCardForU2 MIMETYPE:@"SafeSlinger/SecureIntroduce" Cipher:pktdata2];
     
     // Send out U1 data
@@ -271,12 +239,18 @@
                  dispatch_async(dispatch_get_main_queue(), ^(void) {
                      [ProgressIndicator stopAnimating];
                      [ProgressLabel setText: NSLocalizedString(@"error_ServerNotResponding", @"No response from server.")];
+                     UserTag = 0;
+                     [self CleanSelectContact: User1Tag];
+                     [self CleanSelectContact: User2Tag];
                  });
              }else{
                  // general errors
                  dispatch_async(dispatch_get_main_queue(), ^(void) {
                      [ProgressLabel setText: [NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessageCStr", @"Server Message: '%@'"), [error localizedDescription]]];
                      [ProgressIndicator stopAnimating];
+                     UserTag = 0;
+                     [self CleanSelectContact: User1Tag];
+                     [self CleanSelectContact: User2Tag];
                  });
              }
          }else{
@@ -308,6 +282,9 @@
                      dispatch_async(dispatch_get_main_queue(), ^(void) {
                          [ProgressLabel setText: error_msg];
                          [ProgressIndicator stopAnimating];
+                         UserTag = 0;
+                         [self CleanSelectContact: User1Tag];
+                         [self CleanSelectContact: User2Tag];
                      });
                  }
              }
@@ -327,12 +304,18 @@
                  dispatch_async(dispatch_get_main_queue(), ^(void) {
                      [ProgressLabel setText: NSLocalizedString(@"error_ServerNotResponding", @"No response from server.")];
                      [ProgressIndicator stopAnimating];
+                     UserTag = 0;
+                     [self CleanSelectContact: User1Tag];
+                     [self CleanSelectContact: User2Tag];
                  });
              }else{
                  // general errors
                  dispatch_async(dispatch_get_main_queue(), ^(void) {
                      [ProgressLabel setText: [NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessageCStr", @"Server Message: '%@'"), [error localizedDescription]]];
                      [ProgressIndicator stopAnimating];
+                     UserTag = 0;
+                     [self CleanSelectContact: User1Tag];
+                     [self CleanSelectContact: User2Tag];
                  });
              }
          }else{
@@ -363,6 +346,9 @@
                      dispatch_async(dispatch_get_main_queue(), ^(void) {
                          [ProgressLabel setText: error_msg];
                          [ProgressIndicator stopAnimating];
+                         UserTag = 0;
+                         [self CleanSelectContact: User1Tag];
+                         [self CleanSelectContact: User2Tag];
                      });
                  }
                  
@@ -406,28 +392,57 @@
     [ProgressLabel setText:nil];
     _U1Sent = _U2Sent = NO;
     [IntroduceBtn setEnabled:YES];
+    
+    // clear contacts
+    UserTag = 0;
+    [self CleanSelectContact: User1Tag];
+    [self CleanSelectContact: User2Tag];
 }
 
--(IBAction)SelectRecipient:(id)sender
+- (IBAction)SelectContact:(id)sender
 {
-    if(sender==User1Btn)
-    {
-        UserTag = 1;
-        //tabview.SelectEntry1 = pickU1 = nil;
-        messageForU2 = nil;
-        [User1Photo setImage: [UIImage imageNamed: @"blank_contact.png"]];
-        [User1Btn setTitle:NSLocalizedString(@"label_SelectRecip", @"Select Recipient") forState:UIControlStateNormal];
-        
-    }else if(sender==User2Btn)
-    {
-        UserTag = 2;
-        //tabview.SelectEntry2 = pickU2 = nil;
-        messageForU1 = nil;
-        [User2Photo setImage: [UIImage imageNamed: @"blank_contact.png"]];
-        [User2Btn setTitle:NSLocalizedString(@"label_SelectRecip", @"Select Recipient") forState:UIControlStateNormal];
+    pickUser = [sender tag];
+    switch ([sender tag]) {
+        case User1Tag:
+            [self CleanSelectContact: User1Tag];
+            [self performSegueWithIdentifier:@"SelectContact" sender:self];
+            break;
+        case User2Tag:
+            [self CleanSelectContact: User2Tag];
+            [self performSegueWithIdentifier:@"SelectContact" sender:self];
+            break;
+        default:
+            break;
     }
-    
-    [self performSegueWithIdentifier:@"ContactSelectForIntro" sender:self];
+}
+
+- (void)CleanSelectContact: (int)index
+{
+    switch (index) {
+        case User1Tag:
+            messageForU2 = nil;
+            pickU1 = nil;
+            [User1Photo setImage: [UIImage imageNamed: @"blank_contact.png"]];
+            [User1Btn setTitle:NSLocalizedString(@"label_SelectRecip", @"Select Recipient") forState:UIControlStateNormal];
+            break;
+        case User2Tag:
+            messageForU1 = nil;
+            pickU2 = nil;
+            [User2Photo setImage: [UIImage imageNamed: @"blank_contact.png"]];
+            [User2Btn setTitle:NSLocalizedString(@"label_SelectRecip", @"Select Recipient") forState:UIControlStateNormal];
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([[segue identifier]isEqualToString:@"SelectContact"])
+    {
+        ContactSelectView *dest = (ContactSelectView*)segue.destinationViewController;
+        dest.parent = self;
+    }
 }
 
 @end

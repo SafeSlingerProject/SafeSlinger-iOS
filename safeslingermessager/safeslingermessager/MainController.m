@@ -63,18 +63,6 @@
     }
 }
 
-- (void) checkNotification
-{
-    UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
-    if (types != [UAPush shared].notificationTypes )
-    {
-        //delegate.hasNotificationEnabled = NO;
-    }else{
-        // notification enabled.
-        //delegate.hasNotificationEnabled = YES;
-    }
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

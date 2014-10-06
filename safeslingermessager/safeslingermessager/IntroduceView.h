@@ -28,6 +28,11 @@
 @class AppDelegate;
 @class ContactEntry;
 
+enum Dialogtype {
+    User1Tag = 1,
+    User2Tag
+}UserTag;
+
 @interface IntroduceView : UIViewController <MFMailComposeViewControllerDelegate, UIActionSheetDelegate>
 {
     AppDelegate *delegate;
@@ -47,10 +52,11 @@
 @property (nonatomic, strong) NSData *nonce1, *nonce2;
 @property (nonatomic, strong) NSString *messageForU1, *messageForU2;
 
-@property (nonatomic, readwrite) int UserTag;
+@property (nonatomic, readwrite) NSInteger pickUser;
 @property (atomic, readwrite) BOOL U1Sent, U2Sent;
 
--(IBAction)SelectRecipient:(id)sender;
-- (IBAction)unwindToIntroduction:(UIStoryboardSegue *)unwindSegue;
+- (IBAction)SelectContact:(id)sender;
+- (BOOL)EvaluateContact: (ContactEntry*)SelectContact;
+- (void)SetupContact: (ContactEntry*)SelectContact;
 
 @end

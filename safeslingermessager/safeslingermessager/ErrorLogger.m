@@ -60,18 +60,17 @@
     
     [debugstring appendFormat: @"iOS Model: %@\n", [UIDevice currentDevice].model];
     [debugstring appendFormat: @"iOS OS: %@ %@\n", [UIDevice currentDevice].systemName, [UIDevice currentDevice].systemVersion];
-    [debugstring appendFormat: @"localizedModel: %@\n", [UIDevice currentDevice].localizedModel];
+    [debugstring appendFormat: @"Localization: %@\n", [UIDevice currentDevice].localizedModel];
     
     NSArray *arr = [[NSArray alloc] initWithArray: NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)];
 	NSString* documentsPath = [arr objectAtIndex: 0];
-    NSString *logfile = [NSString stringWithFormat: ERRORLOGFILE, documentsPath];
-    
     NSError *fileError = nil;
-    [debugstring appendString: [NSString stringWithContentsOfFile:logfile
-                                                         encoding:NSUTF8StringEncoding
-                                                            error:&fileError]];
+    NSString* log = [NSString stringWithContentsOfFile:[NSString stringWithFormat: ERRORLOGFILE, documentsPath]
+                                             encoding:NSUTF8StringEncoding
+                                                 error:&fileError];
+    if(!fileError&&!log) [debugstring appendString: log];
     
-    return debugstring;
+    return [NSString stringWithString:debugstring];
 }
 
 +(void)CleanLogFile

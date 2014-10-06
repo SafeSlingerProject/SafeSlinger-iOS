@@ -24,6 +24,7 @@
 
 #import <MobileCoreServices/UTType.h>
 #import <Foundation/Foundation.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 #import "ComposeView.h"
 #import "AppDelegate.h"
 #import "SafeSlingerDB.h"
@@ -65,7 +66,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    delegate = [[UIApplication sharedApplication] delegate];
+    delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     _originalFrame = self.view.frame;
     
     Content.layer.borderWidth = 1.0f;
@@ -152,24 +153,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)unwindToCompose:(UIStoryboardSegue *)unwindSegue
-{
-    if([[unwindSegue identifier]isEqualToString:@"FinishRecording"])
-    {
-        AudioRecordView *view = [unwindSegue sourceViewController];
-        self.attachFile = view.audio_recorder.url;
-        [self UpdateAttachment];
-    }else if([[unwindSegue identifier]isEqualToString:@"FinishContactSelect"])
-    {
-        ContactSelectView *view = [unwindSegue sourceViewController];
-        self.selectedUser = view.selectedUser;
-        [self UpdateRecipient];
-    }else if([[unwindSegue identifier]isEqualToString:@"FinishEditContact"])
-    {
-        [self UpdateSelf];
-    }
-}
-
 - (void)UpdateRecipient
 {
     if(selectedUser)
@@ -179,12 +162,9 @@
         [RecipientBtn setTitle:btnStr forState:UIControlStateNormal];
         
         if(selectedUser.photo)
-        {
             [RecipientPhoto setImage: [UIImage imageWithData: selectedUser.photo]];
-        }else
-        {
+        else
             [RecipientPhoto setImage: [UIImage imageNamed: @"blank_contact.png"]];
-        }
     }else{
         // No select user
         [RecipientPhoto setImage: [UIImage imageNamed: @"blank_contact.png"]];
@@ -211,23 +191,25 @@
             }
         });
         
+        
         ABRecordRef aRecord = ABAddressBookGetPersonWithRecordID(aBook, delegate.IdentityNum);
         // set self photo
-        CFDataRef imgData = ABPersonCopyImageData(aRecord);
-        if(imgData)
+        if(ABPersonHasImageData(aRecord))
         {
-            UIImage *image = [[UIImage imageWithData:(__bridge NSData *)imgData]scaleToSize:CGSizeMake(45.0f, 45.0f)];
+            CFDataRef imgData = ABPersonCopyImageDataWithFormat(aRecord, kABPersonImageFormatThumbnail);
+            UIImage *image = [UIImage imageWithData:(__bridge NSData *)imgData];
             [SelfPhoto setImage:image];
             // update cache image
-            delegate.IdentityImage = (NSData*)UIImageJPEGRepresentation(image, 0.9);
+            delegate.IdentityImage = UIImageJPEGRepresentation([image scaleToSize:CGSizeMake(45.0f, 45.0f)], 0.9);
             CFRelease(imgData);
         }
-        else [SelfPhoto setImage:[UIImage imageNamed:@"blank_contact.png"]];
+        else
+            [SelfPhoto setImage:[UIImage imageNamed:@"blank_contact.png"]];
+        
         if(aBook)CFRelease(aBook);
     }
     
     NSString* btnStr = [NSString stringWithFormat:@"%@\n%@", [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"label_SendFrom", @"From:"), fulln], [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"label_Key", @"Key:"), [NSString ChangeGMT2Local:[SSEngine getSelfGenKeyDate] GMTFormat:DATABASE_TIMESTR LocalFormat:@"dd/MMM/yyyy"]]];
-    
     [SelfBtn setTitle:btnStr forState:UIControlStateNormal];
     
 }
@@ -302,48 +284,85 @@
 -(IBAction) SelectSender:(id)sender
 {
     // allow users to pick photos from multiple locations
-    if([UtilityFunc checkContactPermission])
+    ABAuthorizationStatus status = ABAddressBookGetAuthorizationStatus();
+    if(status == kABAuthorizationStatusNotDetermined)
+    {
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
+                                                          message: NSLocalizedString(@"iOS_RequestPermissionContacts", @"You can select your contact card to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Contacts when asked.")
+                                                         delegate: self
+                                                cancelButtonTitle: NSLocalizedString(@"btn_NotNow", @"Not Now")
+                                                otherButtonTitles: NSLocalizedString(@"btn_Continue", @"Continue"), nil];
+        message.tag = AskPerm;
+        [message show];
+        message = nil;
+    }
+    else if(status == kABAuthorizationStatusDenied || status == kABAuthorizationStatusRestricted)
+    {
+        NSString* buttontitle = nil;
+        NSString* description = nil;
+        if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+            buttontitle = NSLocalizedString(@"menu_Help", @"Help");
+            description = [NSString stringWithFormat: NSLocalizedString(@"iOS_contactError", @"Contacts permission is required for securely sharing contact cards. Tap the %@ button for SafeSlinger Contacts permission details."), buttontitle];
+        } else {
+            buttontitle = NSLocalizedString(@"menu_Settings", @"Settings");
+            description = [NSString stringWithFormat: NSLocalizedString(@"iOS_contactError", @"Contacts permission is required for securely sharing contact cards. Tap the %@ button for SafeSlinger Contacts permission details."), buttontitle];
+        }
+        
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
+                                                          message: description
+                                                         delegate: self
+                                                cancelButtonTitle: NSLocalizedString(@"btn_Cancel", @"Cancel")
+                                                otherButtonTitles: buttontitle, nil];
+        message.tag = HelpContact;
+        [message show];
+        message = nil;
+    }
+    else if(status == kABAuthorizationStatusAuthorized)
     {
         if(delegate.IdentityNum!=NonExist)
         {
             [self performSegueWithIdentifier:@"EditContact" sender:self];
         }
-    }else{
-        if(![[NSUserDefaults standardUserDefaults] boolForKey: kRequireContactPrivacy])
-        {
-            UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
-                                                              message: NSLocalizedString(@"iOS_RequestPermissionContacts", @"You can select your contact card to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Contacts when asked.")
-                                                             delegate: self
-                                                    cancelButtonTitle: NSLocalizedString(@"btn_NotNow", @"Not Now")
-                                                    otherButtonTitles: NSLocalizedString(@"btn_Continue", @"Continue"), nil];
-            message.tag = AskPerm;
-            [message show];
-            message = nil;
-        }else{
-            
-            UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"title_Warn", @"Warning")
-                                                              message: NSLocalizedString(@"iOS_contactError", @"Contacts permission required. Please go to iOS Settings to enable Contacts permissions.")
-                                                             delegate:self
-                                                    cancelButtonTitle:NSLocalizedString(@"btn_Close", @"Close")
-                                                    otherButtonTitles:NSLocalizedString(@"menu_Help", @"Help"), nil];
-            message.tag = HelpContact;
-            [message show];
-            message = nil;
-        }
     }
+    
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(buttonIndex!=alertView.cancelButtonIndex)
     {
-        if(alertView.tag==AskPerm)
-        {
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kRequireContactPrivacy];
-            [UtilityFunc TriggerContactPermission];
-        }else if(alertView.tag==HelpContact)
-        {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kContactHelpURL]];
+        NSString *helpurl = nil;
+        switch (alertView.tag) {
+            case HelpContact:
+                helpurl = kContactHelpURL;
+                break;
+            case HelpPhotoLibrary:
+                helpurl = kPhotoHelpURL;
+                break;
+            case HelpCamera:
+                helpurl = kCameraHelpURL;
+                break;
+            default:
+                break;
+        }
+        
+        switch (alertView.tag) {
+            case AskPerm:
+                [UtilityFunc TriggerContactPermission];
+                break;
+            case HelpContact:
+            case HelpPhotoLibrary:
+            case HelpCamera:
+                if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:helpurl]];
+                } else {
+                    // iOS8
+                    NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                    [[UIApplication sharedApplication] openURL:url];
+                }
+                break;
+            default:
+                break;
         }
     }
 }
@@ -360,6 +379,7 @@
 {
     // clean previous selection if necessary
     [RecipientBtn setTitle:NSLocalizedString(@"label_SelectRecip", @"Select Recipient") forState:UIControlStateNormal];
+    [RecipientPhoto setImage: [UIImage imageNamed: @"blank_contact.png"]];
     selectedUser = nil;
 }
 
@@ -369,7 +389,10 @@
         //Background Thread
         dispatch_async(dispatch_get_main_queue(), ^(void){
             //Run UI Updates
-            ProgressHint.text = NSLocalizedString(@"prog_encrypting", @"encrypting...");
+            if(attachFile)
+                ProgressHint.text = [NSString stringWithFormat: NSLocalizedString(@"prog_SendingFile", @"sending encrypted %@..."), [attachFile lastPathComponent]];
+            else
+                ProgressHint.text = NSLocalizedString(@"prog_encrypting", @"encrypting...");
             [ProgressView startAnimating];
         });
     });
@@ -510,6 +533,70 @@
     [actionSheet showInView: [self.navigationController view]];
 }
 
+- (BOOL) CheckPhotoPerm
+{
+    BOOL ret = NO;
+    ALAuthorizationStatus authStatus = [ALAssetsLibrary authorizationStatus];
+    if(authStatus == ALAuthorizationStatusNotDetermined) {
+        ret = YES; // wait to trigger it
+    } else if(authStatus == ALAuthorizationStatusRestricted || authStatus == ALAuthorizationStatusDenied){
+        // show indicator
+        NSString* buttontitle = nil;
+        NSString* description = nil;
+        
+        if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+            buttontitle = NSLocalizedString(@"menu_Help", @"Help");
+            description = [NSString stringWithFormat: NSLocalizedString(@"iOS_photolibraryError", @"Photo Library permission is required to attach pictures to secure messages. Tap the %@ button for SafeSlinger Photo Library permission details."), buttontitle];
+        } else {
+            buttontitle = NSLocalizedString(@"menu_Settings", @"menu_Settings");
+            description = [NSString stringWithFormat: NSLocalizedString(@"iOS_photolibraryError", @"Photo Library permission is required to attach pictures to secure messages. Tap the %@ button for SafeSlinger Photo Library permission details."), buttontitle];
+        }
+        
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
+                                                          message: description
+                                                         delegate: self
+                                                cancelButtonTitle: NSLocalizedString(@"btn_Cancel", @"Cancel")
+                                                otherButtonTitles: buttontitle, nil];
+        message.tag = HelpPhotoLibrary;
+        [message show];
+        message = nil;
+    } else if(authStatus == ALAuthorizationStatusAuthorized){
+        ret = YES;
+    }
+    return ret;
+}
+
+- (BOOL) CheckCameraPerm
+{
+    AVCaptureDevice *inputDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    AVCaptureDeviceInput *captureInput = [AVCaptureDeviceInput deviceInputWithDevice:inputDevice error:nil];
+    if (!captureInput) {
+        // show indicator
+        NSString* buttontitle = nil;
+        NSString* description = nil;
+        
+        if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+            buttontitle = NSLocalizedString(@"menu_Help", @"Help");
+            description = [NSString stringWithFormat: NSLocalizedString(@"iOS_cameraError", @"Camera permission is required to attach snapshots to secure messages. Tap the %@ button for SafeSlinger Camera permission details."), buttontitle];
+        } else {
+            buttontitle = NSLocalizedString(@"menu_Settings", @"menu_Settings");
+            description = [NSString stringWithFormat: NSLocalizedString(@"iOS_cameraError", @"Camera permission is required to attach snapshots to secure messages. Tap the %@ button for SafeSlinger Camera permission details."), buttontitle];
+        }
+        
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
+                                                          message: description
+                                                         delegate: self
+                                                cancelButtonTitle: NSLocalizedString(@"btn_Cancel", @"Cancel")
+                                                otherButtonTitles: buttontitle, nil];
+        message.tag = HelpCamera;
+        [message show];
+        message = nil;
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     // files
@@ -526,28 +613,48 @@
             }else {
                 // Dismiss First
                 [self dismissViewControllerAnimated:NO completion:nil];
-                // use new instread of using alloc, init call due to memory leaks
-                UIImagePickerController *imagePicker = [UIImagePickerController new];
-                [imagePicker setDelegate:self];
+                
+                BOOL _hasPerm = NO;
+                // check permission first
                 switch(buttonIndex)
                 {
                     case PhotoLibraryType:
-                        //Photo Library
-                        [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-                        break;
                     case PhotosAlbumType:
-                        [imagePicker setSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
+                        _hasPerm = [self CheckPhotoPerm];
                         break;
                     case CameraType:
-                        [imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
-                        [imagePicker setShowsCameraControls:YES];
+                        _hasPerm = [self CheckCameraPerm];
                         break;
                     default:
                         break;
                 }
-                [imagePicker setAllowsEditing:YES];
-                [self presentViewController:imagePicker animated:YES completion:nil];
-                imagePicker = nil;
+                
+                // use new instread of using alloc, init call due to memory leaks
+                if(_hasPerm)
+                {
+                    UIImagePickerController *imagePicker = [UIImagePickerController new];
+                    [imagePicker setDelegate:self];
+                    switch(buttonIndex)
+                    {
+                        case PhotoLibraryType:
+                            //Photo Library
+                            [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+                            break;
+                        case PhotosAlbumType:
+                            [imagePicker setSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
+                            break;
+                        case CameraType:
+                            [imagePicker setSourceType: UIImagePickerControllerSourceTypeCamera];
+                            [imagePicker setShowsCameraControls:YES];
+                            break;
+                        default:
+                            break;
+                    }
+                    [imagePicker setAllowsEditing:YES];
+                    [self presentViewController:imagePicker animated:YES completion:nil];
+                    imagePicker = nil;
+                }
+                
             }
         }
     }
@@ -568,7 +675,7 @@
         return;
     }else if([imgdata length]>9437184)
     {
-        NSString *msg = [NSString stringWithFormat: NSLocalizedString(@"error_CannotSendFilesOver", @"Cannot send files greater than %d megabytes in size."), 9437184];
+        NSString *msg = [NSString stringWithFormat: NSLocalizedString(@"error_CannotSendFilesOver", "Cannot send attachments greater than %d bytes in size."), 9437184];
         [self dismissViewControllerAnimated:YES completion:nil];
         [[[[iToast makeText: msg]
            setGravity:iToastGravityCenter] setDuration:iToastDurationShort] show];
@@ -601,6 +708,23 @@
     [AttachBtn setTitle:sizeinfo forState:UIControlStateNormal];
     attachFileRawBytes = imgdata;
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"AudioRecord"])
+    {
+        AudioRecordView* dest = (AudioRecordView*)segue.destinationViewController;
+        dest.parent = self;
+    }else if([segue.identifier isEqualToString:@"ContactSelectForCompose"])
+    {
+        ContactSelectView* dest = (ContactSelectView*)segue.destinationViewController;
+        dest.parent = self;
+    }else if([segue.identifier isEqualToString:@"EditContact"])
+    {
+        ContactManageView* dest = (ContactManageView*)segue.destinationViewController;
+        dest.parent = self;
+    }
 }
 
 #pragma UITextViewDelegate Methods

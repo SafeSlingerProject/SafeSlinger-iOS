@@ -38,7 +38,7 @@
     if ((self = [super initWithFileURL:url])) {
         DEBUGMSG(@"iCLoud document created with URL: %@", url);
 		self.datagram = nil;
-        self.delegate = [[UIApplication sharedApplication]delegate];
+        self.delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(DocumentStateChanged:) name:UIDocumentStateChangedNotification object:nil];
     }
     return self;
@@ -95,7 +95,7 @@
 {
     if (self = [super init])
     {
-        delegate = [[UIApplication sharedApplication]delegate];
+        delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     }
     return self;
 }

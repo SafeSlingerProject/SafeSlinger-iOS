@@ -54,7 +54,7 @@
 {
     [super viewDidLoad];
     
-    delegate = [[UIApplication sharedApplication]delegate];
+    delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     BackGroundQueue = dispatch_queue_create("safeslinger.background.queue", NULL);
     b_img = [UIImage imageNamed: @"blank_contact_small.png"];
     actWindow = [[ActivityWindow alloc] initWithNibName: @"ActivityWindow" bundle:[NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"exchangeui" withExtension:@"bundle"]]];
@@ -205,6 +205,15 @@
 
 - (void)sendSecureText: (NSString*)msgbody
 {
+    if([msgbody length]==0)
+    {
+        // empty message
+        [[[[iToast makeText: NSLocalizedString(@"error_selectDataToSend", @"You need an attachment or a text message to send.")]
+           setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+        return;
+    }
+    
+    
     NSData* packnonce = nil;
     NSMutableData* pktdata = nil;
     
@@ -214,8 +223,10 @@
         //Background Thread
         dispatch_async(dispatch_get_main_queue(), ^(void){
             //Run UI Updates
+            [InstanceBtn setEnabled:NO];
+            [InstanceMessage setEnabled:NO];
             [actWindow DisplayMessage: NSLocalizedString(@"prog_encrypting", @"encrypting...") Detail:nil];
-            [self.view addSubview: actWindow.view];
+            [self.navigationController.view addSubview: actWindow.view];
         });
     });
     
@@ -240,7 +251,7 @@
         dispatch_async(dispatch_get_main_queue(), ^(void){
             //Run UI Updates
             [actWindow DisplayMessage: NSLocalizedString(@"prog_FileSent", @"message sent, awaiting response...") Detail:nil];
-            [self.view addSubview: actWindow.view];
+            [self.navigationController.view addSubview: actWindow.view];
         });
     });
     
@@ -259,6 +270,8 @@
                      [[[[iToast makeText: NSLocalizedString(@"error_ServerNotResponding", @"No response from server.")]
                         setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
                      [InstanceBtn setEnabled:YES];
+                     [InstanceMessage setEnabled:YES];
+                     InstanceMessage.text = nil;
                  });
              }else{
                  // general errors
@@ -267,6 +280,8 @@
                      [[[[iToast makeText: [NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessageCStr", @"Server Message: '%@'"), [error localizedDescription]]]
                         setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
                      [InstanceBtn setEnabled:YES];
+                     [InstanceMessage setEnabled:YES];
+                     InstanceMessage.text = nil;
                  });
              }
          }else{
@@ -295,6 +310,8 @@
                          [[[[iToast makeText: error_msg]
                             setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
                          [InstanceBtn setEnabled:YES];
+                         [InstanceMessage setEnabled:YES];
+                         InstanceMessage.text = nil;
                      });
                  }
              }
@@ -322,26 +339,25 @@
                         FileName:nil
                         FileType:nil
                         FileData:nil];
+    NSString* ret = nil;
     
     if([delegate.DbInstance InsertMessage: NewMsg])
     {
-        // reload the view
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            [actWindow.view removeFromSuperview];
-            [[[[iToast makeText: NSLocalizedString(@"state_FileSent", @"Message sent.")]
-               setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-            [self ReloadTable];
-            [InstanceBtn setEnabled:YES];
-        });
+        ret = NSLocalizedString(@"state_FileSent", @"Message sent.");
     }else{
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            [actWindow.view removeFromSuperview];
-            [[[[iToast makeText: NSLocalizedString(@"error_UnableToSaveMessageInDB", @"Unable to save to the message database.")]
-           setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-            [InstanceBtn setEnabled:YES];
-        });
+        ret = NSLocalizedString(@"error_UnableToSaveMessageInDB", @"Unable to save to the message database.");
     }
     
+    // reload the view
+    dispatch_async(dispatch_get_main_queue(), ^(void) {
+        [actWindow.view removeFromSuperview];
+        [[[[iToast makeText: ret]
+           setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+        [self ReloadTable];
+        [InstanceBtn setEnabled:YES];
+        [InstanceMessage setEnabled:YES];
+        InstanceMessage.text = nil;
+    });
 }
 
 #pragma mark - Table view data source
@@ -909,7 +925,6 @@
 {
     [InstanceMessage resignFirstResponder];
     [self sendSecureText:[InstanceMessage text]];
-    [InstanceBtn setEnabled:NO];
 }
 
 #pragma UITextFieldDelegate Methods

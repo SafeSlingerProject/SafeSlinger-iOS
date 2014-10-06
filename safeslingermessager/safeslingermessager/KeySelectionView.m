@@ -26,6 +26,7 @@
 #import "SSEngine.h"
 #import "Utility.h"
 #import "AppDelegate.h"
+#import "Passphase.h"
 
 @interface KeySelectionView ()
 
@@ -33,7 +34,7 @@
 
 @implementation KeySelectionView
 
-@synthesize keyitem, keylist, keyChanged;
+@synthesize keyitem, keylist, parent;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -56,7 +57,6 @@
     // load all files in Share folder
     [keylist removeAllObjects];
     [keylist setArray: [[NSUserDefaults standardUserDefaults] stringArrayForKey: kDB_KEY]];
-    
     [keyitem removeAllObjects];
     [keyitem setArray: [[NSUserDefaults standardUserDefaults] stringArrayForKey: kDB_LIST]];
 }
@@ -110,12 +110,10 @@
     // load the database when user select
     if(indexPath.row!=[[NSUserDefaults standardUserDefaults] integerForKey:kDEFAULT_DB_KEY])
     {
-        keyChanged = YES;
         [[NSUserDefaults standardUserDefaults] setInteger:indexPath.row forKey:kDEFAULT_DB_KEY];
-    }else{
-        keyChanged = NO;
+        [parent SelectDifferentKey];
     }
-    [self performSegueWithIdentifier:@"KeySelectionDone" sender:self];
+    [self.navigationController popViewControllerAnimated: YES];
 }
 
 
