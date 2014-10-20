@@ -65,10 +65,12 @@
     NSString* msgReq = NSLocalizedString(@"text_Requirements", @"Requirements:");
     NSString* msgReq1 = NSLocalizedString(@"text_Requirements1", @"Must be installed on a minimum of 2 devices.");
     NSString* msgReq2 = NSLocalizedString(@"text_Requirements2", @"An Internet connection must be active.");
+    NSString* msgProg = NSLocalizedString(@"text_DevelopedBy", @"Developed by:");
+    NSString* msgDevs = NSLocalizedString(@"app_DeveloperName", @"Bruno Nunes\nGurtej Singh Chandok\nJason Lee\nManish Burman\nMichael W Farb (Android Lead)\nVinay Ramkrishnan\nYue-Hsun Lin (iOS Lead)\n");
     NSString* msgLang = NSLocalizedString(@"text_LanguagesProvidedBy", @"Languages provided by:");
-    NSString* msgTran = NSLocalizedString(@"app_TranslatorName", @"Michael Farb");
+    NSString* msgTran = NSLocalizedString(@"app_TranslatorName", @"Adrian Perrig\nAkira Yamada\nAlbert Stroucken\nElli Fragkaki\nEmmanuel Owusu\nIrina Fudrow\nJens Höfflinger\nMichael Stroucken\nNicolas Christin\nSteve Matsumoto\nYeon Yim\nYue-Hsun Lin\n");
     
-    [InfoLabel setText: [NSString stringWithFormat:@"%@\n\n%@\n\n%@\n- %@\n- %@\n- %@\n\n%@\n1. %@\n2. %@\n\n%@\n%@\n%@\n\n%@\n%@", msgHead, msgAbout, msgAbFeat, msgAb1, msgAb2, msgAb3, msgReq, msgReq1, msgReq2, msgEmail, msgWeb, msgSrc, msgLang, msgTran]];
+    [InfoLabel setText: [NSString stringWithFormat:@"%@\n\n%@\n\n%@\n- %@\n- %@\n- %@\n\n%@\n1. %@\n2. %@\n\n%@\n%@\n%@\n\n%@\n%@\n%@\n%@", msgHead, msgAbout, msgAbFeat, msgAb1, msgAb2, msgAb3, msgReq, msgReq1, msgReq2, msgEmail, msgWeb, msgSrc, msgLang, msgTran, msgProg, msgDevs]];
     [InfoLabel sizeToFit];
 }
 

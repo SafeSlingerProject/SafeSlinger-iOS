@@ -183,6 +183,8 @@
 		18FA4C09192E8FB700734976 /* GroupSizePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupSizePicker.xib; sourceTree = "<group>"; };
 		18FA4C0A192E8FB700734976 /* GroupSizePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupSizePicker.m; sourceTree = "<group>"; };
 		18FA4C0B192E8FB700734976 /* GroupSizePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupSizePicker.h; sourceTree = "<group>"; };
+		C921353619EDB5040047D9F0 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C970F3CA19EDBA3F00C2A312 /* af */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = af; path = af.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -475,6 +477,8 @@
 				"zh-Hans",
 				"zh-Hant",
 				zu,
+				zh,
+				af,
 			);
 			mainGroup = 18FA4BCD192E8DFF00734976;
 			productRefGroup = 18FA4BD7192E8DFF00734976 /* Products */;
@@ -626,6 +630,8 @@
 				18F32ABE19424FAB005B14EF /* zh-Hans */,
 				18F32ABF19424FAB005B14EF /* zh-Hant */,
 				18F32AC019424FAB005B14EF /* zu */,
+				C921353619EDB5040047D9F0 /* zh */,
+				C970F3CA19EDBA3F00C2A312 /* af */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
