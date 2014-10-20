@@ -25,10 +25,12 @@
 /* action title (sentence case, ellipsis); this title is used during Add Contact Invitation in a dialog of message choices, which can send an installation URL for SafeSlinger along with instructions. */
 "action_NewUserRequest" = "Add a Sling Keys contact invitation via...";
 
+/* application description (sentence case); the names of the individuals who helped develop the application. */
+"app_DeveloperName" = "Bruno Nunes\nGurtej Singh Chandok\nJason Lee\nManish Burman\nMichael W Farb (Android Lead)\nVinay Ramkrishnan\nYue-Hsun Lin (iOS Lead)\n";
 /* application name (title case); used for home screen icons, at the top of many screens, and many other places in the application. */
 "app_name" = "SafeSlinger";
 /* application description (sentence case); the names of the individuals who translated and/or reviewed localizations. */
-"app_TranslatorName" = "\nAdrian Perrig\nAkira Yamada\nAlbert Stroucken\nElli Fragkaki\nEmmanuel Owusu\nIrina Fudrow\nJens Höfflinger\nMichael Stroucken\nNicolas Christin\nSteve Matsumoto\nYeon Yim\nYue-Hsun Lin";
+"app_TranslatorName" = "Adrian Perrig\nAkira Yamada\nAlbert Stroucken\nElli Fragkaki\nEmmanuel Owusu\nIrina Fudrow\nJens Höfflinger\nMichael Stroucken\nNicolas Christin\nSteve Matsumoto\nYeon Yim\nYue-Hsun Lin\n";
 
 /* question message (sentence case, question mark); used to warn when the backup is off to confirm we should keep reminding the user. Used with Forget and Remind buttons. */
 "ask_BackupDisabledRemindLater" = "Backup is disabled. Do you want to adjust backup settings and keep this reminder?";
@@ -819,6 +821,8 @@
 "text_AboutFeat" = "Features:";
 /* application description (sentence case); used in the app store listing, %s = SafeSlinger project web page address. */
 "text_AboutWeb" = "web: %@";
+/* application description (sentence case); used at the end of the about dialog to list the developers of SafeSlinger. */
+"text_DevelopedBy" = "Developed by:";
 /* application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordAdHoc" = "ad hoc";
 /* application description (sentence case); one of many keywords to use when searching related terms. */
