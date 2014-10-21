@@ -52,15 +52,6 @@
 @synthesize attachFileRawBytes;
 @synthesize SelfPhoto, RecipientPhoto, ProgressHint, ProgressView, ScrollView;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -144,13 +135,6 @@
 {
     ScrollView.contentSize=CGSizeMake(_originalFrame.size.width,_originalFrame.size.height);
     [ScrollView setContentOffset:CGPointMake(0.0, 0.0) animated:YES];
-}
-
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)UpdateRecipient
@@ -712,22 +696,21 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if([segue.identifier isEqualToString:@"AudioRecord"])
-    {
+    if([segue.identifier isEqualToString:@"AudioRecord"]) {
         AudioRecordView* dest = (AudioRecordView*)segue.destinationViewController;
         dest.parent = self;
-    }else if([segue.identifier isEqualToString:@"ContactSelectForCompose"])
-    {
-        ContactSelectView* dest = (ContactSelectView*)segue.destinationViewController;
-        dest.parent = self;
-    }else if([segue.identifier isEqualToString:@"EditContact"])
-    {
+    } else if([segue.identifier isEqualToString:@"ContactSelectForCompose"]) {
+        ContactSelectView* dest = (ContactSelectView *)segue.destinationViewController;
+        dest.delegate = self;
+		dest.contactSelectionMode = ContactSelectionModeCompose;
+    } else if([segue.identifier isEqualToString:@"EditContact"]) {
         ContactManageView* dest = (ContactManageView*)segue.destinationViewController;
         dest.parent = self;
     }
 }
 
-#pragma UITextViewDelegate Methods
+#pragma mark - UITextViewDelegate methods
+
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
     return YES;
@@ -753,6 +736,11 @@
     return YES;
 }
 
+#pragma mark - ContactSelectViewDelegate methods
 
+- (void)contactSelected:(ContactEntry *)contact {
+	self.selectedUser = contact;
+	[self UpdateRecipient];
+}
 
 @end

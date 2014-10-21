@@ -25,6 +25,7 @@
 #import <UIKit/UIKit.h>
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
+#import "ContactSelectView.h"
 
 @class ContactEntry;
 @class AppDelegate;
@@ -42,7 +43,7 @@ typedef enum AttachCategory{
     ShareFolderType=4
 }AttachCategory;
 
-@interface ComposeView : UIViewController <UITextViewDelegate, UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIAlertViewDelegate>
+@interface ComposeView : UIViewController <UITextViewDelegate, UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIAlertViewDelegate, ContactSelectViewDelegate>
 {
     // SafeSlinger Selector
     ContactEntry *selectedUser;

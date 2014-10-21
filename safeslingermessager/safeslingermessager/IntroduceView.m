@@ -377,12 +377,11 @@
                          FileData:nil];
     
     // get self photo if necessary
-    if([delegate.DbInstance InsertMessage: NewMsg1]&&[delegate.DbInstance InsertMessage: NewMsg2])
-    {
+    if([delegate.DbInstance InsertMessage: NewMsg1]&&[delegate.DbInstance InsertMessage: NewMsg2]) {
         // reload the view
         [[[[iToast makeText: NSLocalizedString(@"state_FileSent", @"Message sent.")]
            setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-    }else{
+    } else {
         [[[[iToast makeText: NSLocalizedString(@"error_UnableToSaveMessageInDB", @"Unable to save to the message database.")]
            setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
     }
@@ -438,11 +437,19 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if([[segue identifier]isEqualToString:@"SelectContact"])
-    {
-        ContactSelectView *dest = (ContactSelectView*)segue.destinationViewController;
-        dest.parent = self;
+    if([[segue identifier]isEqualToString:@"SelectContact"]) {
+        ContactSelectView *dest = (ContactSelectView *)segue.destinationViewController;
+        dest.delegate = self;
+		dest.contactSelectionMode = ContactSelectionModeIntroduce;
     }
+}
+
+#pragma mark - ContactSelectViewDelegate methods
+
+- (void)contactSelected:(ContactEntry *)contact {
+	if([self EvaluateContact:contact]) {
+		[self SetupContact:contact];
+	}
 }
 
 @end

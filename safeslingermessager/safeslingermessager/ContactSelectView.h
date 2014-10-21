@@ -24,6 +24,8 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
+#import <AddressBook/AddressBook.h>
+#import <AddressBookUI/AddressBookUI.h>
 
 @class AppDelegate;
 @class ContactEntry;
@@ -39,22 +41,40 @@
 @end
 
 
-@interface ContactSelectView : UITableViewController <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate>
+
+@protocol ContactSelectViewDelegate <NSObject>
+
+- (void)contactSelected:(ContactEntry *)contact;
+
+@end
+
+
+typedef enum {
+	ContactSelectionModeCompose,
+	ContactSelectionModeIntroduce
+} ContactSelectionMode;
+
+
+@interface ContactSelectView : UITableViewController <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate, UIActionSheetDelegate, ABPeoplePickerNavigationControllerDelegate, MFMessageComposeViewControllerDelegate, UIAlertViewDelegate>
 {
     // used for show peers, each entry is a SSContactEntry object
-    AppDelegate *delegate;
     UIAlertView *UserInfo;
-    UIViewController *parent;
 }
 
-
-@property (nonatomic, retain) AppDelegate *delegate;
-@property (nonatomic, retain) UIViewController *parent;
+@property (nonatomic, retain) AppDelegate *appDelegate;
 @property (nonatomic, strong) NSMutableArray *safeslingers;
-@property (nonatomic, strong) UISwitch *showRecent;
-@property (nonatomic, strong) UILabel *Hint, *SwitchHint;
 @property (nonatomic, strong) UIAlertView *UserInfo;
 @property (nonatomic, strong) ContactEntry *selectedUser;
+
+@property (weak, nonatomic) IBOutlet UIView *tableHeaderView;
+@property (weak, nonatomic) IBOutlet UILabel *hintLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *hintLabelHeightConstraint;
+@property (weak, nonatomic) IBOutlet UISwitch *showRecentSwitch;
+@property (weak, nonatomic) IBOutlet UILabel *showRecentLabel;
+@property (weak, nonatomic) IBOutlet UIButton *addContactButton;
+
+@property (weak, nonatomic) id<ContactSelectViewDelegate> delegate;
+@property ContactSelectionMode contactSelectionMode;
 
 - (IBAction) DisplayHow: (id)sender;
 

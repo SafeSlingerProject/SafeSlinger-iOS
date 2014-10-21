@@ -24,6 +24,7 @@
 
 #import "AboutView.h"
 #import "AppDelegate.h"
+#import "Config.h"
 
 @interface AboutView ()
 
@@ -60,7 +61,7 @@
     NSString* msgAb2 = NSLocalizedString(@"text_About2", @"Securely sling texts, photos, anything!");
     NSString* msgAb3 = NSLocalizedString(@"text_About3", @"Strong cryptography protects your information");
     NSString* msgEmail = [NSString stringWithFormat: NSLocalizedString(@"text_AboutEmail", @"email: %@"), @"safeslingerapp@gmail.com"];
-    NSString* msgWeb = [NSString stringWithFormat: NSLocalizedString(@"text_AboutWeb", @"web: %@"), @"www.cylab.cmu.edu/safeslinger"];
+    NSString* msgWeb = [NSString stringWithFormat: NSLocalizedString(@"text_AboutWeb", @"web: %@"), kHelpURL];
     NSString* msgSrc = [NSString stringWithFormat: NSLocalizedString(@"text_SourceCodeRepo", @"open source: %@"), @"github.com/safeslingerproject"];
     NSString* msgReq = NSLocalizedString(@"text_Requirements", @"Requirements:");
     NSString* msgReq1 = NSLocalizedString(@"text_Requirements1", @"Must be installed on a minimum of 2 devices.");

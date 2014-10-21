@@ -65,8 +65,7 @@
                                                  NSLocalizedString(@"menu_UseAnother", @"Use Another"), [NSNumber numberWithInteger:ReSelect],
                                                  nil]];
     
-    if(delegate.IdentityNum>0)
-    {
+	if(delegate.IdentityNum>0) {
         [self.user_actions setObject: NSLocalizedString(@"menu_Edit", @"Edit") forKey:[NSNumber numberWithInteger:EditOld]];
     }
     
@@ -84,8 +83,7 @@
     
     int index = 0;
     CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(aBook);
-    for (int i = 0; i < CFArrayGetCount(allPeople); i++)
-    {
+    for (int i = 0; i < CFArrayGetCount(allPeople); i++) {
         ABRecordRef aRecord = CFArrayGetValueAtIndex(allPeople, i);
         if(ABRecordGetRecordType(aRecord) ==  kABPersonType) // this check execute if it is person group
         {
@@ -93,21 +91,18 @@
             NSString *lastname = (__bridge NSString*)ABRecordCopyValue(aRecord, kABPersonLastNameProperty);
             NSString* compositename = [NSString composite_name:firstname withLastName:lastname];
             // firstname and lastname matches
-            if([compositename isEqualToString:name_indb])
-            {
+            if([compositename isEqualToString:name_indb]) {
                 [self.user_actions setObject: [NSString stringWithFormat:NSLocalizedString(@"menu_UseContactPerson", @"Use Contact '%@'"),compositename]
                                       forKey:[NSNumber numberWithInteger:index]];
                 [self.contact_index addObject:[NSNumber numberWithInteger:ABRecordGetRecordID(aRecord)]];
                 
                 // Parse Photo
-                if(ABPersonHasImageData(aRecord))
-                {
+                if(ABPersonHasImageData(aRecord)) {
                     CFDataRef photo = ABPersonCopyImageDataWithFormat(aRecord, kABPersonImageFormatThumbnail);
                     UIImage *image = [UIImage imageWithData: (__bridge NSData *)photo];
                     [self.contact_photos addObject: image];
                     CFRelease(photo);
-                }
-                else{
+                } else {
                     [self.contact_photos addObject: [UIImage imageNamed: @"blank_contact.png"]];
                 }
                 
@@ -118,11 +113,6 @@
     
     if(allPeople)CFRelease(allPeople);
     if(aBook)CFRelease(aBook);
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    
 }
 
 - (IBAction) DisplayHow: (id)sender
@@ -138,16 +128,14 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(buttonIndex!=alertView.cancelButtonIndex)
-    {
+    if(buttonIndex!=alertView.cancelButtonIndex) {
         [UtilityFunc SendOpts:self];
     }
 }
 
 - (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
-    switch (result)
-    {
+    switch (result) {
         case MFMailComposeResultCancelled:
         case MFMailComposeResultSaved:
         case MFMailComposeResultSent:
@@ -164,19 +152,7 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - Table view data source
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    return 1;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -196,8 +172,7 @@
     cell.textLabel.text = [[user_actions allValues]objectAtIndex:indexPath.row];
     cell.detailTextLabel.text = nil;
     NSInteger key = [[[user_actions allKeys]objectAtIndex:indexPath.row]integerValue];
-    if(key>=0)
-    {
+    if(key >= 0) {
         [cell.imageView setImage:[contact_photos objectAtIndex:key]];
     }
     return cell;
@@ -214,12 +189,10 @@
             delegate.IdentityNum = NonLink;
             // remove contact file if necessary
             [delegate removeContactLink];
-            if([self.restorationIdentifier isEqualToString:@"ContacEditForCompose"])
-            {
+            if([self.restorationIdentifier isEqualToString:@"ContacEditForCompose"]) {
                 ComposeView *compose = (ComposeView*)parent;
                 [compose UpdateSelf];
-            }else if([self.restorationIdentifier isEqualToString:@"ContacEditForSling"])
-            {
+            } else if([self.restorationIdentifier isEqualToString:@"ContacEditForSling"]) {
                 SlingkeyView *sling = (SlingkeyView*)parent;
                 [sling ProcessProfile];
             }
@@ -237,12 +210,10 @@
         default:
             // other contacts with the same name
             [delegate saveConactDataWithoutChaningName: (int)[[contact_index objectAtIndex:key]integerValue]];
-            if([self.restorationIdentifier isEqualToString:@"ContacEditForCompose"])
-            {
+            if([self.restorationIdentifier isEqualToString:@"ContacEditForCompose"]) {
                 ComposeView *compose = (ComposeView*)parent;
                 [compose UpdateSelf];
-            }else if([self.restorationIdentifier isEqualToString:@"ContacEditForSling"])
-            {
+            } else if([self.restorationIdentifier isEqualToString:@"ContacEditForSling"]) {
                 SlingkeyView *sling = (SlingkeyView*)parent;
                 [sling ProcessProfile];
             }
@@ -266,8 +237,7 @@
     ABRecordRef person = ABAddressBookGetPersonWithRecordID(aBook, delegate.IdentityNum);
     ABPersonViewController *personView = [[ABPersonViewController alloc] init];
     
-    if(person)
-    {
+    if(person) {
         personView.personViewDelegate = self;
         personView.allowsEditing = YES;
         personView.displayedPerson = person;
@@ -294,28 +264,22 @@
     NSString* FN = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonFirstNameProperty));
     NSString* LN = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonLastNameProperty));
     
-    if ((!FN)&&(!LN))
-    {
+    if ((!FN)&&(!LN)) {
         [[[[iToast makeText: NSLocalizedString(@"error_ContactNameMissing", @"This contact is missing a name, please edit.")]
            setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-    }else
-    {
+    } else {
         [delegate saveConactData: delegate.IdentityNum Firstname:FN Lastname:LN];
-        if([self.restorationIdentifier isEqualToString:@"ContacEditForCompose"])
-        {
+        if([self.restorationIdentifier isEqualToString:@"ContacEditForCompose"]) {
             ComposeView *compose = (ComposeView*)parent;
             [compose UpdateSelf];
-        }else if([self.restorationIdentifier isEqualToString:@"ContacEditForSling"])
-        {
+        } else if([self.restorationIdentifier isEqualToString:@"ContacEditForSling"]) {
             SlingkeyView *sling = (SlingkeyView*)parent;
             [sling ProcessProfile];
         }
         
         FunctionView *main = nil;
-        for (UIViewController *view in [self.navigationController childViewControllers])
-        {
-            if([view isMemberOfClass:[FunctionView class]])
-            {
+        for (UIViewController *view in [self.navigationController childViewControllers]) {
+            if([view isMemberOfClass:[FunctionView class]]) {
                 main = (FunctionView*)view;
                 break;
             }
@@ -354,18 +318,15 @@
     // check name field is existed.
     NSString* FN = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonFirstNameProperty));
     NSString* LN = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonLastNameProperty));
-    if(!FN&&!LN)
-    {
+    if(!FN && !LN) {
         [[[[iToast makeText: NSLocalizedString(@"error_ContactNameMissing2", @"This contact is missing a name, please reselect.")]
            setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-    }else{
+    } else {
         [delegate saveConactData: ABRecordGetRecordID(person) Firstname:FN Lastname:LN];
-        if([self.restorationIdentifier isEqualToString:@"ContacEditForCompose"])
-        {
+        if([self.restorationIdentifier isEqualToString:@"ContacEditForCompose"]) {
             ComposeView *compose = (ComposeView*)parent;
             [compose UpdateSelf];
-        }else if([self.restorationIdentifier isEqualToString:@"ContacEditForSling"])
-        {
+        } else if([self.restorationIdentifier isEqualToString:@"ContacEditForSling"]) {
             SlingkeyView *sling = (SlingkeyView*)parent;
             [sling ProcessProfile];
         }
@@ -384,29 +345,25 @@
 - (void)peoplePickerNavigationController:(ABPeoplePickerNavigationController*)peoplePicker didSelectPerson:(ABRecordRef)person
 {
     DEBUGMSG(@"didSelectPerson");
-    if (person)
-    {
+    if (person) {
         // check name field is existed.
         NSString* FN = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonFirstNameProperty));
         NSString* LN = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonLastNameProperty));
-        if(!FN&&!LN)
-        {
+        if(!FN&&!LN) {
             [[[[iToast makeText: NSLocalizedString(@"error_ContactNameMissing2", @"This contact is missing a name, please reselect.")]
                setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-        }else{
+        } else {
             [delegate saveConactData: ABRecordGetRecordID(person) Firstname:FN Lastname:LN];
-            if([self.restorationIdentifier isEqualToString:@"ContacEditForCompose"])
-            {
+            if([self.restorationIdentifier isEqualToString:@"ContacEditForCompose"]) {
                 ComposeView *compose = (ComposeView*)parent;
                 [compose UpdateSelf];
-            }else if([self.restorationIdentifier isEqualToString:@"ContacEditForSling"])
-            {
+            } else if([self.restorationIdentifier isEqualToString:@"ContacEditForSling"]) {
                 SlingkeyView *sling = (SlingkeyView*)parent;
                 [sling ProcessProfile];
             }
             [self.navigationController popViewControllerAnimated:YES];
         }
-    }else{
+    } else {
         [peoplePicker dismissViewControllerAnimated:YES completion:nil];
     }
 }
@@ -421,29 +378,25 @@
 #pragma mark ABNewPersonViewControllerDelegate methods
 - (void)newPersonViewController:(ABNewPersonViewController *)newPersonViewController didCompleteWithNewPerson:(ABRecordRef)person
 {
-    if (person)
-    {
+    if (person) {
         NSString* FN = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonFirstNameProperty));
         NSString* LN = (__bridge NSString *)(ABRecordCopyValue(person, kABPersonLastNameProperty));
-        if (!FN&&!LN)
-        {
+        if (!FN && !LN) {
             [[[[iToast makeText: NSLocalizedString(@"error_ContactNameMissing", @"This contact is missing a name, please edit.")]
                setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-        }else{
+        } else {
             [delegate saveConactData: ABRecordGetRecordID(person) Firstname:FN Lastname:LN];
-            if([self.restorationIdentifier isEqualToString:@"ContacEditForCompose"])
-            {
+            if([self.restorationIdentifier isEqualToString:@"ContacEditForCompose"]) {
                 ComposeView *compose = (ComposeView*)parent;
                 [compose UpdateSelf];
-            }else if([self.restorationIdentifier isEqualToString:@"ContacEditForSling"])
-            {
+            } else if([self.restorationIdentifier isEqualToString:@"ContacEditForSling"]) {
                 SlingkeyView *sling = (SlingkeyView*)parent;
                 [sling ProcessProfile];
             }
             [newPersonViewController dismissViewControllerAnimated:YES completion:nil];
             [self.navigationController popViewControllerAnimated:YES];
         }
-    }else{
+    } else {
         [newPersonViewController dismissViewControllerAnimated:YES completion:nil];
     }
 }

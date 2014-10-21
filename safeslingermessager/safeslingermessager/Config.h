@@ -82,6 +82,8 @@
 #define kPhotoHelpURL @"https://www.cylab.cmu.edu/safeslinger/help/h5.html"
 #define kCameraHelpURL @"https://www.cylab.cmu.edu/safeslinger/help/h6.html"
 
+#define kHelpURL @"www.cylab.cmu.edu/safeslinger"
+
 #define kPrivacyURL @"http://www.cylab.cmu.edu/safeslinger/privacy.html"
 #define kLicenseURL @"http://www.cylab.cmu.edu/safeslinger/eula.html"
 

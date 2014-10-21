@@ -24,6 +24,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
+#import "ContactSelectView.h"
 
 @class AppDelegate;
 @class ContactEntry;
@@ -33,7 +34,7 @@ enum Dialogtype {
     User2Tag
 }UserTag;
 
-@interface IntroduceView : UIViewController <MFMailComposeViewControllerDelegate, UIActionSheetDelegate>
+@interface IntroduceView : UIViewController <MFMailComposeViewControllerDelegate, UIActionSheetDelegate, ContactSelectViewDelegate>
 {
     AppDelegate *delegate;
 }
