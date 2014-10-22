@@ -824,15 +824,9 @@
 /* application description (sentence case); used at the end of the about dialog to list the developers of SafeSlinger. */
 "text_DevelopedBy" = "Developed by:";
 /* application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordAdHoc" = "ad hoc";
-/* application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordExchange" = "Exchange";
 /* application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordIdentity" = "Identity";
-/* application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordIMessage" = "iMessage";
-/* application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordKakaoTalk" = "KakaoTalk";
 /* application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordKey" = "Key";
 /* application description (sentence case); one of many keywords to use when searching related terms. */
@@ -845,14 +839,10 @@
 "text_KeywordSecurity" = "Security";
 /* application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordSlinger" = "Slinger";
-/* application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordTextSecure" = "TextSecure";
-/* application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordThreema" = "Threema";
-/* application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordWhatsApp" = "WhatsApp";
 /* application description (sentence case); used at the end of the about dialog to list the translators of SafeSlinger. */
 "text_LanguagesProvidedBy" = "Languages provided by:";
+/* application description (sentence case); used in the app store listing, %s = SafeSlinger project localization repo. */
+"text_LocalizationRepo" = "translate: %@";
 /* application description (sentence case); used in the app store listing to list related search terms to help users looking for secure key exchange and messaging. */
 "text_RelatedSearchTerms" = "Related Terms:";
 /* application description (sentence case); used in the about box and app store listing to enumerate requirements. */
@@ -893,7 +883,7 @@
 /* title (title case); used at the top of the home screen on iOS. */
 "title_HomePanel" = "Home";
 /* title (title case); used as the settings title when changing language */
-"title_language" = "Select language. Help us translate by using Send Feedback.";
+"title_language" = "Select language. Help us on transifex.com.";
 /* title (title case); used at the top of the dialog when viewing message details. */
 "title_MessageDetail" = "Message";
 /* title (title case); used at the top of the message list screen. */
