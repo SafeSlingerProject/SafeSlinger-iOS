@@ -92,6 +92,7 @@ typedef enum {
 
 @property (nonatomic) InviteContactActionSheet selectedInviteType;
 @property (nonatomic, strong) ABPeoplePickerNavigationController *addressBookController;
+@property (nonatomic, strong) NSMutableArray *actionSheetButtons;
 
 @end
 
@@ -107,7 +108,7 @@ typedef enum {
     
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
 	
-	
+	[self setupActionSheetButtons];
 	[_showRecentLabel setText:NSLocalizedString(@"label_MostRecentOnly", @"Most recent only")];
 	
     safeslingers = [[NSMutableArray alloc]initWithCapacity:0];
@@ -128,6 +129,20 @@ typedef enum {
 	[safeslingers setArray: [appDelegate.DbInstance LoadRecentRecipients:NO]];
 	[self DisplayTitle];
 	[self reloadTable];
+}
+
+- (void)setupActionSheetButtons {
+	_actionSheetButtons = [NSMutableArray new];
+	
+	if([MFMessageComposeViewController canSendText]) {
+		[_actionSheetButtons addObject:NSLocalizedString(@"menu_ContactInviteSms", nil)];
+	}
+	
+	if([MFMailComposeViewController canSendMail]) {
+		[_actionSheetButtons addObject:NSLocalizedString(@"menu_ContactInviteEmail", nil)];
+	}
+	
+	[_actionSheetButtons addObject:NSLocalizedString(@"menu_UseAnother", nil)];
 }
 
 - (void)reloadTable {
@@ -323,48 +338,32 @@ typedef enum {
 - (IBAction)addContactTouched:(UIButton *)sender {
 	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"action_NewUserRequest", nil)
 															 delegate:self
-													cancelButtonTitle:NSLocalizedString(@"btn_Cancel", nil)
+													cancelButtonTitle:nil
 											   destructiveButtonTitle:nil
-													otherButtonTitles:NSLocalizedString(@"menu_ContactInviteSms", nil), NSLocalizedString(@"menu_ContactInviteEmail", nil), NSLocalizedString(@"menu_UseAnother", nil), nil];
+													otherButtonTitles:nil];
+	
+	for(NSString *button in _actionSheetButtons) {
+		[actionSheet addButtonWithTitle:button];
+	}
+	actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:NSLocalizedString(@"btn_Cancel", nil)];
+	
 	[actionSheet showFromRect:sender.frame inView:self.view animated:YES];
 }
 
 #pragma mark - UIActionSheetDelegate methods
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-	
-	switch (buttonIndex) {
-	  case InviteContactActionSheetTextFromContacts:
-			_selectedInviteType = InviteContactActionSheetTextFromContacts;
-			
-			if([MFMessageComposeViewController canSendText]) {
-				[self showAddressBook];
-			} else {
-				[self showMessage:NSLocalizedString(@"error_CannotSendMessage", nil) withTitle:NSLocalizedString(@"title_ActionNotAvailable", nil)];
-			}
-			
-			break;
-				
-	  case InviteContactActionSheetEmailFromContacts:
-			_selectedInviteType = InviteContactActionSheetEmailFromContacts;
-			
-			
-			if([MFMailComposeViewController canSendMail]) {
-				[self showAddressBook];
-			} else {
-				[self showMessage:NSLocalizedString(@"error_CannotSendEmail", nil) withTitle:NSLocalizedString(@"title_ActionNotAvailable", nil)];
-			}
-			
-			break;
-				
-		case InviteContactActionSheetUseAnother: {
-			UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:[NSArray arrayWithObject:[self shortInviteMessage]] applicationActivities:nil];
-			[self presentViewController:activityController animated:YES completion:nil];
-			
-			break;
-		}
-	  default:
-			break;
+	if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:NSLocalizedString(@"menu_ContactInviteSms", nil)]) {
+		_selectedInviteType = InviteContactActionSheetTextFromContacts;
+		
+		[self showAddressBook];
+	} else if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:NSLocalizedString(@"menu_ContactInviteEmail", nil)]) {
+		_selectedInviteType = InviteContactActionSheetEmailFromContacts;
+		
+		[self showAddressBook];
+	} else if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:NSLocalizedString(@"menu_UseAnother", nil)]) {
+		UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:[NSArray arrayWithObject:[self shortInviteMessage]] applicationActivities:nil];
+		[self presentViewController:activityController animated:YES completion:nil];
 	}
 }
 
@@ -446,7 +445,7 @@ typedef enum {
 }
 
 - (void)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker didSelectPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
-	[peoplePicker dismissViewControllerAnimated:YES completion:nil];
+	UIViewController *viewController;
 	
 	if(_selectedInviteType == InviteContactActionSheetTextFromContacts) {
 		
@@ -458,7 +457,7 @@ typedef enum {
 		controller.body = [self shortInviteMessage];
 		controller.recipients = [NSArray arrayWithObjects:phone, nil];
 		
-		[self presentViewController:controller animated:YES completion:nil];
+		viewController = controller;
 		
 	} else if(_selectedInviteType == InviteContactActionSheetEmailFromContacts) {
 		
@@ -478,10 +477,12 @@ typedef enum {
 		[mc setMessageBody:messageBody isHTML:NO];
 		[mc setToRecipients:toRecipents];
 		
-		// Present mail view controller on screen
-		[self presentViewController:mc animated:YES completion:NULL];
-		
+		viewController = mc;
 	}
+	
+	[peoplePicker dismissViewControllerAnimated:YES completion:^{
+		[self presentViewController:viewController animated:YES completion:nil];
+	}];
 }
 
 #pragma mark - MFMessageComposeViewControllerDelegate methods
