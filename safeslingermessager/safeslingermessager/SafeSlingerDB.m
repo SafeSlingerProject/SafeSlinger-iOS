@@ -636,8 +636,7 @@
 #pragma Recipients
 - (NSArray*)LoadRecipients:(BOOL)ExchangeOnly
 {
-    if(db==nil)
-    {
+    if(db == nil) {
         [ErrorLogger ERRORDEBUG:@"ERROR: DB Object is null or input is null."];
         return nil;
     }
@@ -646,68 +645,29 @@
     @try {
         
         tmpArray = [NSMutableArray arrayWithCapacity:0];
-        int rownum = 0;
         
         const char *sql = NULL;
-        if(ExchangeOnly)
+		if(ExchangeOnly) {
             sql = "SELECT * FROM tokenstore where ex_type = 0 ORDER BY pid COLLATE NOCASE DESC";
-        else
+		} else {
             sql = "SELECT * FROM tokenstore ORDER BY pid COLLATE NOCASE DESC";
-        
+		}
+		
         sqlite3_stmt *sqlStatement = nil;
-        if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK)
-        {
+        if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
             [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
-            tmpArray = nil;
         }
         
         while (sqlite3_step(sqlStatement)==SQLITE_ROW) {
-            
-            ContactEntry *sc = [[ContactEntry alloc]init];
-            
-            NSString *output = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 0)];
-            sc.pushtoken = output;
-            
-            output = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 1)];
-            
-            NSArray* namearray = [[output substringFromIndex:[output rangeOfString:@":"].location+1]componentsSeparatedByString:@";"];
-            if([[namearray objectAtIndex:1]length]>0) sc.fname = [namearray objectAtIndex:1];
-            if([[namearray objectAtIndex:0]length]>0) sc.lname = [namearray objectAtIndex:0];
-            
-            output = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 2)];
-            sc.exchangeDate = output;
-            sc.devType = sqlite3_column_int(sqlStatement, 3);
-            sc.ex_type = sqlite3_column_int(sqlStatement, 4);
-            
-            // setphoto
-            if(sqlite3_column_type(sqlStatement, 5)!=SQLITE_NULL)
-            {
-                output = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 5)];
-                sc.photo = [Base64 decode: output];
-            }
-            
-            // set keyid and pstamp
-            int rawLen = sqlite3_column_bytes(sqlStatement, 6);
-            if(rawLen>0) {
-                sc.keyid = [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 6)];
-            }
-            if(sqlite3_column_type(sqlStatement, 8)!=SQLITE_NULL)
-            {
-                sc.keygenDate = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 8)];
-            }
-            
-            [tmpArray addObject:sc];
-            sc = nil;
-            rownum++;
+            [tmpArray addObject:[self loadContactEntryFromStatement:sqlStatement]];
         }
         
-        if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
+        if(sqlite3_finalize(sqlStatement) != SQLITE_OK) {
             [ErrorLogger ERRORDEBUG: @"ERROR: Problem with finalize statement"];
         }
     }
     @catch (NSException *exception) {
         [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"An exception occured: %@", [exception reason]]];
-        tmpArray = nil;
     }
     @finally {
         return tmpArray;
@@ -716,27 +676,25 @@
 
 - (NSArray*)LoadRecentRecipients:(BOOL)ExchangeOnly
 {
-    if(db==nil)
-    {
+    if(db == nil) {
         [ErrorLogger ERRORDEBUG:@"ERROR: DB Object is null or input is null."];
         return nil;
     }
+	
     NSMutableArray *tmpArray = nil;
     @try {
         
         tmpArray = [NSMutableArray arrayWithCapacity:0];
-        int rownum = 0;
         const char *sql = NULL;
-        if(ExchangeOnly)
+		if(ExchangeOnly) {
             sql = "SELECT * FROM tokenstore where ex_type = 0 ORDER BY pid COLLATE NOCASE DESC, bdate DESC";
-        else
+		} else {
             sql = "SELECT * FROM tokenstore ORDER BY pid COLLATE NOCASE DESC, bdate DESC";
-        
+		}
+		
         sqlite3_stmt *sqlStatement = nil;
-        if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK)
-        {
+        if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
             [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
-            tmpArray = nil;
         }
         
         NSMutableSet *unqiueSet = [[NSMutableSet alloc]initWithCapacity:0];
@@ -746,49 +704,14 @@
             // try different device as different entries
             NSString* output = [NSString stringWithFormat:@"%@:%d", [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 0)], sqlite3_column_int(sqlStatement, 3)];
             
-            if([unqiueSet containsObject:output])
-            {
+            if([unqiueSet containsObject:output]) {
                 continue;
             }
             
             // add to set
             [unqiueSet addObject:output];
-            ContactEntry *sc = [[ContactEntry alloc]init];
-            
-            output = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 1)];
-            NSArray* namearray = [[output substringFromIndex:[output rangeOfString:@":"].location+1]componentsSeparatedByString:@";"];
-            if([[namearray objectAtIndex:1]length]>0) sc.fname = [namearray objectAtIndex:1];
-            if([[namearray objectAtIndex:0]length]>0) sc.lname = [namearray objectAtIndex:0];
-            
-            output = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 0)];
-            sc.pushtoken = output;
-            
-            output = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 2)];
-            sc.exchangeDate = output;
-            sc.devType = sqlite3_column_int(sqlStatement, 3);
-            sc.ex_type = sqlite3_column_int(sqlStatement, 4);
-            
-            // setphoto
-            if(sqlite3_column_type(sqlStatement, 5)!=SQLITE_NULL)
-            {
-                output = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 5)];
-                sc.photo = [Base64 decode: output];
-            }
-            
-            // set keyid and pstamp
-            int rawLen = sqlite3_column_bytes(sqlStatement, 6);
-            if(rawLen>0) {
-                sc.keyid = [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 6)];
-            }
-            
-            if(sqlite3_column_type(sqlStatement, 8)!=SQLITE_NULL)
-            {
-                sc.keygenDate = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 8)];
-            }
-            
-            [tmpArray addObject:sc];
-            sc = nil;
-            rownum++;
+			
+			[tmpArray addObject:[self loadContactEntryFromStatement:sqlStatement]];
         }
         
         if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
@@ -797,11 +720,47 @@
     }
     @catch (NSException *exception) {
         [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"An exception occured: %@", [exception reason]]];
-        tmpArray = nil;
     }
     @finally {
         return tmpArray;
     }
+}
+
+- (ContactEntry *)loadContactEntryFromStatement:(sqlite3_stmt *)sqlStatement {
+	ContactEntry *contact = [ContactEntry new];
+	
+	NSString *column = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 1)];
+	
+	NSArray* namearray = [[column substringFromIndex:[column rangeOfString:@":"].location+1]componentsSeparatedByString:@";"];
+	
+	if([[namearray objectAtIndex:1]length] > 0) {
+		contact.fname = [namearray objectAtIndex:1];
+	}
+	
+	if([[namearray objectAtIndex:0]length] > 0) {
+		contact.lname = [namearray objectAtIndex:0];
+	}
+	
+	contact.pushtoken = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 0)];
+	contact.exchangeDate = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 2)];
+	contact.devType = sqlite3_column_int(sqlStatement, 3);
+	contact.ex_type = sqlite3_column_int(sqlStatement, 4);
+	
+	// setphoto
+	if(sqlite3_column_type(sqlStatement, 5) != SQLITE_NULL) {
+		contact.photo = [Base64 decode:[NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 5)]];
+	}
+	
+	// set keyid and pstamp
+	if(sqlite3_column_bytes(sqlStatement, 6) > 0) {
+		contact.keyid = [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 6)];
+	}
+	
+	if(sqlite3_column_type(sqlStatement, 8) != SQLITE_NULL) {
+		contact.keygenDate = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 8)];
+	}
+	
+	return contact;
 }
 
 - (BOOL)AddNewRecipient: (NSData*)keyelement User:(NSString*)username Dev:(int)type Photo:(NSString*)UserPhoto Token:(NSString*)token ExchangeOrIntroduction: (BOOL)flag

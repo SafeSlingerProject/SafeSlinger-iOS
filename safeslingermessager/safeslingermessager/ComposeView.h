@@ -45,9 +45,6 @@ typedef enum AttachCategory{
 
 @interface ComposeView : UIViewController <UITextViewDelegate, UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIAlertViewDelegate, ContactSelectViewDelegate>
 {
-    // SafeSlinger Selector
-    ContactEntry *selectedUser;
-    
     // Delegate
     AppDelegate *delegate;
     
@@ -64,12 +61,11 @@ typedef enum AttachCategory{
 @property (nonatomic, strong) IBOutlet UITextView *Content;
 @property (nonatomic, strong) IBOutlet UILabel *ProgressHint;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *ProgressView;
-@property (nonatomic, strong) IBOutlet UIScrollView *ScrollView;
-@property (nonatomic, strong) UIBarButtonItem *SendBtn;
-@property (nonatomic, strong) UIBarButtonItem *CancelBtn;
+@property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *sendButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *cancelButton;
 @property (nonatomic, strong) UIBarButtonItem *LogoutBtn;
 
-@property (nonatomic, readwrite) CGRect originalFrame;
 @property (nonatomic, strong) ContactEntry *selectedUser;
 
 @property (nonatomic, retain) AppDelegate *delegate;
@@ -78,7 +74,6 @@ typedef enum AttachCategory{
 
 
 -(IBAction) SelectSender:(id)sender;
--(IBAction) SelectRecipient:(id)sender;
 -(IBAction) SelectAttach:(id)sender;
 
 -(void) UpdateSelf;
