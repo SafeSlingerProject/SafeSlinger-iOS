@@ -1,7 +1,7 @@
 {
 	inProduction = NO;
-	developmentAppKey = "3qBWQe_YRtKaEmnQd9RMyA";
-	developmentAppSecret = "62WHqvTATKy-wqj8yiUhEA";
-	productionAppKey = "u2gEsEQSTEmIXSfFZMX3Ig";
-	productionAppSecret = "KvrmHT-iTzG9ATSEveVXyQ";
+	developmentAppKey = "Secret Here.";
+	developmentAppSecret = "Secret Here.";
+	productionAppKey = "Secret Here.";
+	productionAppSecret = "Secret Here.";
 }
