@@ -41,30 +41,28 @@
 @synthesize VersionLabel, PassField, NewKeyBtn, error_t;
 @synthesize delegate, DoneBtn, KeySelectBtn, errTimer, tout_bound, Scrollview;
 
--(BOOL) CheckPassphase: (NSString*) passphrase
-{
+- (BOOL)CheckPassphase:(NSString *)passphrase {
     NSString* status_str = [delegate.DbInstance GetStringConfig:@"PRIKEY_STATUS"];
-    if([status_str isEqualToString:@"ENC"])
-    {
+	
+    if([status_str isEqualToString:@"ENC"]) {
         // unlock
         int PRIKEY_STORE_SIZE = 0;
         [[delegate.DbInstance GetConfig:@"PRIKEY_STORE_SIZE"] getBytes:&PRIKEY_STORE_SIZE length:sizeof(PRIKEY_STORE_SIZE)];
         int PRIKEY_STORE_FORSIGN_SIZE = 0;
         [[delegate.DbInstance GetConfig:@"PRIKEY_STORE_FORSIGN_SIZE"] getBytes:&PRIKEY_STORE_FORSIGN_SIZE length:sizeof(PRIKEY_STORE_FORSIGN_SIZE)];
-        if([SSEngine TestPassPhase:passphrase KeySize1:PRIKEY_STORE_SIZE KeySize2:PRIKEY_STORE_FORSIGN_SIZE])
-        {
+		
+        if([SSEngine TestPassPhase:passphrase KeySize1:PRIKEY_STORE_SIZE KeySize2:PRIKEY_STORE_FORSIGN_SIZE]) {
             delegate.tempralPINCode = passphrase;
             return YES;
-        }else{
+        } else {
             return NO;
         }
-    }
-    else
+	} else {
         return NO;
+	}
 }
 
-- (IBAction)CreateNewKey:(id)sender
-{
+- (IBAction)CreateNewKey:(id)sender {
     UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"title_passphrase", @"Passphrase")
                                                       message:NSLocalizedString(@"label_WarnForgotPassphrase", @"To protect your data, SafeSlinger does not store your passphrase anywhere for recovery. You may only access recipients and messages created under the same passphrase login. However, you may generate a new key and passphrase, then repeat Sling Keys with your recipients.")
                                                      delegate:self
@@ -75,44 +73,36 @@
     message = nil;
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(buttonIndex!=alertView.cancelButtonIndex)
-    {
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if(buttonIndex!=alertView.cancelButtonIndex) {
         // Create New Key
         [self performSegueWithIdentifier:@"CreateNewKey" sender:self];
     }
 }
 
-- (void) StartRetryTimer
-{
+- (void)StartRetryTimer {
     tout_bound++;
-    if(tout_bound>=PENALTY_TIME)
-    {
+    if(tout_bound>=PENALTY_TIME) {
         [self StopRetryTimer];
-    }else{
+    } else {
         [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(UpdateRetryTimer) userInfo:nil repeats:NO];
     }
 }
 
-- (void) UpdateRetryTimer
-{
+- (void)UpdateRetryTimer {
     PassField.placeholder = [NSString stringWithFormat:@"%@ (%@)", NSLocalizedString(@"label_PassHintBackoff", @"Retry"), [NSString stringWithFormat: NSLocalizedString(@"label_seconds", @"%d sec"), PENALTY_TIME-tout_bound]];
     [self StartRetryTimer];
 }
 
--(void) StopRetryTimer
-{
+- (void)StopRetryTimer {
     DoneBtn.enabled = YES;
     PassField.enabled = YES;
     [PassField setPlaceholder:NSLocalizedString(@"label_PassHintEnter", @"Passphrase")];
     tout_bound = error_t = 0;
 }
 
--(IBAction)Login:(id)sender
-{
-    if([self CheckPassphase: PassField.text])
-    {
+- (IBAction)Login:(id)sender {
+    if([self CheckPassphase: PassField.text]) {
         error_t = 0;
         // [delegate GainAccess];
         [self performSegueWithIdentifier: @"SwitchToMain" sender:self];
@@ -124,8 +114,7 @@
         error_t++;
     }
     
-    if(error_t>=MAX_PINCODE_RETRY)
-    {
+    if(error_t>=MAX_PINCODE_RETRY) {
         PassField.text = @"";
         PassField.enabled = NO;
         DoneBtn.enabled = NO;
@@ -133,8 +122,7 @@
     }
 }
 
--(IBAction)PressHelp:(id)sender
-{
+-(IBAction)PressHelp:(id)sender {
     UIActionSheet *actionSheet = [[UIActionSheet alloc]
                                   initWithTitle: nil
                                   delegate: self
@@ -151,11 +139,9 @@
     actionSheet = nil;
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
     switch (buttonIndex) {
-        case Help:
-        {
+        case Help: {
             UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"title_passphrase", @"Passphrase")
                                                               message:NSLocalizedString(@"help_passphrase", @"Use this screen to login to the application with your passphrase. If you have forgotten your passphrase, you may generate a new key protected by a new passphrase by tapping the Forgot Passphrase? button. Tap the user name to switch between multiple keys.")
                                                              delegate:self
@@ -180,10 +166,8 @@
     }
 }
 
-- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
-{
-    switch (result)
-    {
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    switch (result) {
         case MFMailComposeResultCancelled:
         case MFMailComposeResultSaved:
         case MFMailComposeResultSent:
@@ -200,8 +184,7 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     // Set delegate and get version number
     delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -216,19 +199,11 @@
     self.navigationItem.hidesBackButton = YES;
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     PassField.text = nil;
     [KeySelectBtn setTitle:delegate.IdentityName forState:UIControlStateNormal];
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShown:)
+                                             selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
     
@@ -238,8 +213,7 @@
                                                object:nil];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
     [PassField resignFirstResponder];
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIKeyboardWillShowNotification
@@ -250,44 +224,36 @@
                                                   object:nil];
 }
 
-- (void)keyboardWillShown:(NSNotification *)notification
-{
-    // make it scrollable
-    Scrollview.contentSize=CGSizeMake(_originalFrame.size.width,_originalFrame.size.height*1.3);
-    // get the size of the keyboard
-    CGFloat keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
-    CGFloat offset = keyboardSize+PassField.frame.origin.y+PassField.frame.size.height-_originalFrame.size.height+60.0f;
-    if(offset > 0)
-    {
-        [Scrollview setContentOffset:CGPointMake(0.0, offset) animated:YES];
-    }
+- (void)keyboardWillShow:(NSNotification *)notification {
+	NSDictionary* info = [notification userInfo];
+	CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+ 
+	UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+	Scrollview.contentInset = contentInsets;
+	Scrollview.scrollIndicatorInsets = contentInsets;
+ 
+	// If active text field is hidden by keyboard, scroll it so it's visible
+	CGRect rect = self.view.frame;
+	rect.size.height -= kbSize.height;
+	
+	CGPoint scrollPoint = PassField.frame.origin;
+	
+	if (!CGRectContainsPoint(rect, scrollPoint) ) {
+		[self.Scrollview scrollRectToVisible:PassField.frame animated:YES];
+	}
 }
 
-- (void)keyboardWillHide:(NSNotification *)notification
-{
-    Scrollview.contentSize=CGSizeMake(_originalFrame.size.width,_originalFrame.size.height);
+- (void)keyboardWillHide:(NSNotification *)notification {
+	UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+	Scrollview.contentInset = contentInsets;
+	Scrollview.scrollIndicatorInsets = contentInsets;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma UITextFieldDelegate Methods
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    
-}
-
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
-{
-    return YES;
-}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -295,8 +261,7 @@
     return NO;
 }
 
--(void)SelectDifferentKey
-{
+-(void)SelectDifferentKey {
     [delegate.DbInstance CloseDB];
     [delegate.DbInstance LoadDBFromStorage:[[[NSUserDefaults standardUserDefaults] stringArrayForKey: kDB_KEY] objectAtIndex:[[NSUserDefaults standardUserDefaults] integerForKey:kDEFAULT_DB_KEY]]];
     [delegate checkIdentity];
@@ -306,16 +271,13 @@
 
 #pragma mark - Navigation
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if([[segue identifier]isEqualToString:@"CreateNewKey"])
-    {
+    if([[segue identifier]isEqualToString:@"CreateNewKey"]) {
         SetupView *setup = (SetupView*)[segue destinationViewController];
         setup.newkeycreated = YES;
-    }else if([[segue identifier]isEqualToString:@"KeySelection"])
-    {
+    } else if([[segue identifier]isEqualToString:@"KeySelection"]) {
         KeySelectionView *keySelect = (KeySelectionView*)[segue destinationViewController];
         keySelect.parent = self;
     }

@@ -52,8 +52,7 @@
 @synthesize attachFileRawBytes;
 @synthesize SelfPhoto, RecipientPhoto, ProgressHint, ProgressView, scrollView;
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -63,12 +62,14 @@
 	
 	_sendButton.title = NSLocalizedString(@"btn_SendFile", @"Send");
 	_cancelButton.title = NSLocalizedString(@"btn_Cancel", @"Cancel");
-    
+	
+	[RecipientBtn setTitle:NSLocalizedString(@"label_SelectRecip", @"Select Recipient") forState:UIControlStateNormal];
+	[RecipientPhoto setImage: [UIImage imageNamed: @"blank_contact.png"]];
+	
     LogoutBtn = self.parentViewController.navigationItem.leftBarButtonItem;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [Content resignFirstResponder];
     
     // Change Title and Help Button
@@ -94,8 +95,9 @@
                                                object:nil];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	
     [Content resignFirstResponder];
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIKeyboardDidShowNotification
@@ -106,8 +108,7 @@
                                                   object:nil];
 }
 
-- (void)keyboardWasShown:(NSNotification *)notification
-{
+- (void)keyboardWasShown:(NSNotification *)notification {
 	NSDictionary* info = [notification userInfo];
 	CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
 	CGSize tabBarSize = self.tabBarController.tabBar.frame.size;
@@ -129,15 +130,13 @@
 	}
 }
 
-- (void)keyboardWillHide:(NSNotification *)notification
-{
+- (void)keyboardWillHide:(NSNotification *)notification {
 	UIEdgeInsets contentInsets = UIEdgeInsetsZero;
 	scrollView.contentInset = contentInsets;
 	scrollView.scrollIndicatorInsets = contentInsets;
 }
 
-- (void)UpdateRecipient
-{
+- (void)UpdateRecipient {
     if(_selectedUser) {
         NSString* btnStr = [NSString stringWithFormat:@"%@ %@\n%@ %@", NSLocalizedString(@"label_SendTo", @"To:"), [NSString composite_name:_selectedUser.fname withLastName:_selectedUser.lname], NSLocalizedString(@"label_Key", @"Key:"), [NSString ChangeGMT2Local:_selectedUser.keygenDate GMTFormat:DATABASE_TIMESTR LocalFormat:@"dd/MMM/yyyy"]];
         
@@ -155,8 +154,7 @@
     }
 }
 
-- (void)UpdateSelf
-{
+- (void)UpdateSelf {
     // get name from profile
     NSString* fulln = [delegate.DbInstance GetProfileName];
     if(delegate.IdentityNum==NonLink) {
@@ -195,8 +193,7 @@
     
 }
 
--(void)UpdateAttachment
-{
+- (void)UpdateAttachment {
     if(attachFile)
     {
         attachFileRawBytes = [NSData dataWithContentsOfURL:attachFile];
@@ -221,78 +218,11 @@
     }
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (IBAction)dismissKeyboard
-{
-    [Content resignFirstResponder];
-}
-
-- (IBAction)sendMessage {
-    [Content resignFirstResponder];
-    if([[self.RecipientBtn titleLabel].text isEqualToString: NSLocalizedString(@"label_SelectRecip", @"Select Recipient")]) {
-        // no user selected
-        [[[[iToast makeText: NSLocalizedString(@"error_InvalidRecipient", @"Invalid recipient.")]
-           setGravity:iToastGravityCenter] setDuration:iToastDurationShort] show];
-    } else {
-        // prepare cipher
-        NSString* text = self.Content.text;
-        if(!attachFile && ([text length]==0)) {
-            // no user selected
-            [[[[iToast makeText: NSLocalizedString(@"error_selectDataToSend", @"You need a file or a text message to send.")]setGravity:iToastGravityCenter] setDuration:iToastDurationShort] show];
-        } else {
-            // delivery message
-            [self sendSecureMessage];
-        }
-    }
-}
-
-- (IBAction)SelectSender:(id)sender
-{
-    // allow users to pick photos from multiple locations
-    ABAuthorizationStatus status = ABAddressBookGetAuthorizationStatus();
-    if(status == kABAuthorizationStatusNotDetermined)
-    {
-        UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
-                                                          message: NSLocalizedString(@"iOS_RequestPermissionContacts", @"You can select your contact card to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Contacts when asked.")
-                                                         delegate: self
-                                                cancelButtonTitle: NSLocalizedString(@"btn_NotNow", @"Not Now")
-                                                otherButtonTitles: NSLocalizedString(@"btn_Continue", @"Continue"), nil];
-        message.tag = AskPerm;
-        [message show];
-        message = nil;
-    } else if(status == kABAuthorizationStatusDenied || status == kABAuthorizationStatusRestricted) {
-        NSString* buttontitle = nil;
-        NSString* description = nil;
-        if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-            buttontitle = NSLocalizedString(@"menu_Help", @"Help");
-            description = [NSString stringWithFormat: NSLocalizedString(@"iOS_contactError", @"Contacts permission is required for securely sharing contact cards. Tap the %@ button for SafeSlinger Contacts permission details."), buttontitle];
-        } else {
-            buttontitle = NSLocalizedString(@"menu_Settings", @"Settings");
-            description = [NSString stringWithFormat: NSLocalizedString(@"iOS_contactError", @"Contacts permission is required for securely sharing contact cards. Tap the %@ button for SafeSlinger Contacts permission details."), buttontitle];
-        }
-        
-        UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
-                                                          message: description
-                                                         delegate: self
-                                                cancelButtonTitle: NSLocalizedString(@"btn_Cancel", @"Cancel")
-                                                otherButtonTitles: buttontitle, nil];
-        message.tag = HelpContact;
-        [message show];
-        message = nil;
-    } else if(status == kABAuthorizationStatusAuthorized) {
-        if(delegate.IdentityNum != NonExist) {
-            [self performSegueWithIdentifier:@"EditContact" sender:self];
-        }
-    }
-    
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if(buttonIndex!=alertView.cancelButtonIndex) {
         NSString *helpurl = nil;
         switch (alertView.tag) {
@@ -330,16 +260,14 @@
     }
 }
 
-- (void)CleanAttachment
-{
+- (void)CleanAttachment {
     // clean previous selection if necessary
     [AttachBtn setTitle:NSLocalizedString(@"btn_SelectFile", @"Select File") forState:UIControlStateNormal];
     attachFile = nil;
     attachFileRawBytes = nil;
 }
 
-- (void)sendSecureMessage
-{
+- (void)sendSecureMessage {
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         //Background Thread
         dispatch_async(dispatch_get_main_queue(), ^(void){
@@ -423,8 +351,7 @@
      }];
 }
 
-- (void)PrintErrorOnUI:(NSString*)error
-{
+- (void)PrintErrorOnUI:(NSString*)error {
     ProgressHint.text = nil;
     [ProgressView stopAnimating];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
@@ -432,8 +359,7 @@
        setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
 }
 
-- (void)SaveMessage: (NSData*)msgid
-{
+- (void)SaveMessage: (NSData*)msgid {
     // [delegate.activityView DisableProgress];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     
@@ -461,28 +387,7 @@
     }
 }
 
-- (IBAction)SelectAttach:(id)sender
-{
-    [self CleanAttachment];
-    // allow users to pick photos from multiple locations
-    UIActionSheet *actionSheet = [[UIActionSheet alloc]
-                                  initWithTitle: NSLocalizedString(@"title_ChooseFileLoad", @"Choose Your File")
-                                  delegate: self
-                                  cancelButtonTitle: NSLocalizedString(@"btn_Cancel", @"Cancel")
-                                  destructiveButtonTitle: nil
-                                  otherButtonTitles:
-                                  NSLocalizedString(@"title_photolibary", @"Photo Library"),
-                                  NSLocalizedString(@"title_photoalbum", @"Photo Album"),
-                                  NSLocalizedString(@"title_camera", @"Camera"),
-                                  NSLocalizedString(@"title_soundrecoder", @"Sound Recorder"),
-                                  nil];
-    
-    actionSheet.tag = AttachmentSelectionSheet;
-    [actionSheet showInView: [self.navigationController view]];
-}
-
-- (BOOL)CheckPhotoPerm
-{
+- (BOOL)CheckPhotoPerm {
     BOOL ret = NO;
     ALAuthorizationStatus authStatus = [ALAssetsLibrary authorizationStatus];
     if(authStatus == ALAuthorizationStatusNotDetermined) {
@@ -514,8 +419,7 @@
     return ret;
 }
 
-- (BOOL)CheckCameraPerm
-{
+- (BOOL)CheckCameraPerm {
     AVCaptureDevice *inputDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     AVCaptureDeviceInput *captureInput = [AVCaptureDeviceInput deviceInputWithDevice:inputDevice error:nil];
     if (!captureInput) {
@@ -545,8 +449,90 @@
     }
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
+#pragma mark - IBAction methods
+
+- (IBAction)dismissKeyboard {
+	[Content resignFirstResponder];
+}
+
+- (IBAction)sendMessage {
+	[Content resignFirstResponder];
+	if([[self.RecipientBtn titleLabel].text isEqualToString: NSLocalizedString(@"label_SelectRecip", @"Select Recipient")]) {
+		// no user selected
+		[[[[iToast makeText: NSLocalizedString(@"error_InvalidRecipient", @"Invalid recipient.")]
+		   setGravity:iToastGravityCenter] setDuration:iToastDurationShort] show];
+	} else {
+		// prepare cipher
+		NSString* text = self.Content.text;
+		if(!attachFile && ([text length]==0)) {
+			// no user selected
+			[[[[iToast makeText: NSLocalizedString(@"error_selectDataToSend", @"You need a file or a text message to send.")]setGravity:iToastGravityCenter] setDuration:iToastDurationShort] show];
+		} else {
+			// delivery message
+			[self sendSecureMessage];
+		}
+	}
+}
+
+- (IBAction)selectSender:(id)sender {
+	// allow users to pick photos from multiple locations
+	ABAuthorizationStatus status = ABAddressBookGetAuthorizationStatus();
+	if(status == kABAuthorizationStatusNotDetermined) {
+		UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
+														  message: NSLocalizedString(@"iOS_RequestPermissionContacts", @"You can select your contact card to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Contacts when asked.")
+														 delegate: self
+												cancelButtonTitle: NSLocalizedString(@"btn_NotNow", @"Not Now")
+												otherButtonTitles: NSLocalizedString(@"btn_Continue", @"Continue"), nil];
+		message.tag = AskPerm;
+		[message show];
+	} else if(status == kABAuthorizationStatusDenied || status == kABAuthorizationStatusRestricted) {
+		NSString* buttontitle = nil;
+		NSString* description = nil;
+		
+		if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+			buttontitle = NSLocalizedString(@"menu_Help", @"Help");
+			description = [NSString stringWithFormat: NSLocalizedString(@"iOS_contactError", @"Contacts permission is required for securely sharing contact cards. Tap the %@ button for SafeSlinger Contacts permission details."), buttontitle];
+		} else {
+			buttontitle = NSLocalizedString(@"menu_Settings", @"Settings");
+			description = [NSString stringWithFormat: NSLocalizedString(@"iOS_contactError", @"Contacts permission is required for securely sharing contact cards. Tap the %@ button for SafeSlinger Contacts permission details."), buttontitle];
+		}
+		
+		UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
+														  message: description
+														 delegate: self
+												cancelButtonTitle: NSLocalizedString(@"btn_Cancel", @"Cancel")
+												otherButtonTitles: buttontitle, nil];
+		message.tag = HelpContact;
+		[message show];
+	} else if(status == kABAuthorizationStatusAuthorized) {
+		if(delegate.IdentityNum != NonExist) {
+			[self performSegueWithIdentifier:@"EditContact" sender:self];
+		}
+	}
+}
+
+- (IBAction)selectAttachment:(id)sender {
+	[self CleanAttachment];
+	// allow users to pick photos from multiple locations
+	UIActionSheet *actionSheet = [[UIActionSheet alloc]
+								  initWithTitle: NSLocalizedString(@"title_ChooseFileLoad", @"Choose Your File")
+								  delegate: self
+								  cancelButtonTitle: NSLocalizedString(@"btn_Cancel", @"Cancel")
+								  destructiveButtonTitle: nil
+								  otherButtonTitles:
+								  NSLocalizedString(@"title_photolibary", @"Photo Library"),
+								  NSLocalizedString(@"title_photoalbum", @"Photo Album"),
+								  NSLocalizedString(@"title_camera", @"Camera"),
+								  NSLocalizedString(@"title_soundrecoder", @"Sound Recorder"),
+								  nil];
+	
+	actionSheet.tag = AttachmentSelectionSheet;
+	[actionSheet showInView: [self.navigationController view]];
+}
+
+#pragma mark - UIActionSheetDelegate methods
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
     // files
     if(buttonIndex==actionSheet.cancelButtonIndex) {
         // reset everything
@@ -605,9 +591,9 @@
     }
 }
 
-#pragma mark UIImagePickerControllerDelegate
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
+#pragma mark - UIImagePickerControllerDelegate methods
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [info valueForKey:UIImagePickerControllerReferenceURL];
     NSURL* urlstr = [info valueForKey:UIImagePickerControllerReferenceURL];
     NSData* imgdata = UIImageJPEGRepresentation([info valueForKey:UIImagePickerControllerOriginalImage], 1.0);
@@ -652,8 +638,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"AudioRecord"]) {
         AudioRecordView* dest = (AudioRecordView*)segue.destinationViewController;
         dest.parent = self;
@@ -669,13 +654,11 @@
 
 #pragma mark - UITextViewDelegate methods
 
-- (void)textViewDidBeginEditing:(UITextView *)textView
-{
+- (void)textViewDidBeginEditing:(UITextView *)textView {
     self.parentViewController.navigationItem.leftBarButtonItem = _cancelButton;
 }
 
-- (void)textViewDidEndEditing:(UITextView *)textView
-{
+- (void)textViewDidEndEditing:(UITextView *)textView {
     self.parentViewController.navigationItem.leftBarButtonItem = LogoutBtn;
 }
 

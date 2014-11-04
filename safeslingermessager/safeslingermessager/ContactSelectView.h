@@ -55,27 +55,24 @@ typedef enum {
 } ContactSelectionMode;
 
 
-@interface ContactSelectView : UITableViewController <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate, UIActionSheetDelegate, ABPeoplePickerNavigationControllerDelegate, MFMessageComposeViewControllerDelegate, UIAlertViewDelegate>
-{
+@interface ContactSelectView : UITableViewController <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate, UIActionSheetDelegate, ABPeoplePickerNavigationControllerDelegate, MFMessageComposeViewControllerDelegate, UIAlertViewDelegate, UISearchBarDelegate> {
     // used for show peers, each entry is a SSContactEntry object
     UIAlertView *UserInfo;
 }
 
 @property (nonatomic, retain) AppDelegate *appDelegate;
-@property (nonatomic, strong) NSMutableArray *safeslingers;
-@property (nonatomic, strong) UIAlertView *UserInfo;
-@property (nonatomic, strong) ContactEntry *selectedUser;
 
 @property (weak, nonatomic) IBOutlet UIView *tableHeaderView;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UILabel *hintLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *hintLabelHeightConstraint;
 @property (weak, nonatomic) IBOutlet UISwitch *showRecentSwitch;
 @property (weak, nonatomic) IBOutlet UILabel *showRecentLabel;
 @property (weak, nonatomic) IBOutlet UIButton *addContactButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *infoButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 
 @property (weak, nonatomic) id<ContactSelectViewDelegate> delegate;
 @property ContactSelectionMode contactSelectionMode;
-
-- (IBAction) DisplayHow: (id)sender;
 
 @end

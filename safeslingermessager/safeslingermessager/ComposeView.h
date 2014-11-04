@@ -72,10 +72,6 @@ typedef enum AttachCategory{
 @property (nonatomic, retain) NSURL *attachFile;
 @property (nonatomic, retain) NSData *attachFileRawBytes;
 
-
--(IBAction) SelectSender:(id)sender;
--(IBAction) SelectAttach:(id)sender;
-
 -(void) UpdateSelf;
 -(void) UpdateAttachment;
 -(void) UpdateRecipient;

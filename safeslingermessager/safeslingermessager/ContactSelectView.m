@@ -48,8 +48,7 @@ typedef enum {
 @implementation ContactEntry
 @synthesize fname, lname, photo, pushtoken, keyid, devType, keygenDate, exchangeDate, contact_id, ex_type;
 
--(NSString*)PrintContact
-{
+-(NSString*)PrintContact {
     // plaintext
     NSMutableString* detail = [NSMutableString stringWithCapacity:0];
     
@@ -94,41 +93,72 @@ typedef enum {
 @property (nonatomic, strong) ABPeoplePickerNavigationController *addressBookController;
 @property (nonatomic, strong) NSMutableArray *actionSheetButtons;
 
+@property (nonatomic, strong) NSMutableArray *contacts;
+@property (nonatomic, strong) NSMutableArray *filteredContacts;
+
 @end
 
 @implementation ContactSelectView
 
-@synthesize safeslingers;
-@synthesize appDelegate, UserInfo;
-@synthesize selectedUser;
+@synthesize appDelegate;
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
 	
 	[self setupActionSheetButtons];
+	[self DisplayTitle];
+	
 	[_showRecentLabel setText:NSLocalizedString(@"label_MostRecentOnly", @"Most recent only")];
 	
-    safeslingers = [[NSMutableArray alloc]initWithCapacity:0];
     
     UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-    lpgr.minimumPressDuration = 2.0; //seconds
+    lpgr.minimumPressDuration = 1.0; //seconds
     lpgr.delegate = self;
     [self.tableView addGestureRecognizer:lpgr];
-    
+	
     UserInfo = [[UIAlertView alloc]
                 initWithTitle: NSLocalizedString(@"title_RecipientDetail", @"Recipient Detail")
                 message:nil
                 delegate:self
-                cancelButtonTitle: NSLocalizedString(@"btn_Close", @"Close")
-                otherButtonTitles: nil];
+                cancelButtonTitle:NSLocalizedString(@"btn_Close", @"Close")
+                otherButtonTitles:NSLocalizedString(@"btn_Close", @"Close"), nil];
 	
 	_showRecentSwitch.on = YES;
-	[safeslingers setArray: [appDelegate.DbInstance LoadRecentRecipients:NO]];
-	[self DisplayTitle];
-	[self reloadTable];
+	
+	_contacts = [NSMutableArray new];
+	[_contacts setArray:[appDelegate.DbInstance LoadRecentRecipients:NO]];
+	_filteredContacts = [NSMutableArray new];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(keyboardWillShow:)
+												 name:UIKeyboardWillShowNotification
+											   object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(keyboardWillHide:)
+												 name:UIKeyboardWillHideNotification
+											   object:nil];
+	
+	// hack to fix UITableView initially not scrolling on iOS 6
+	[self searchBar:_searchBar textDidChange:_searchBar.text];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self
+													name:UIKeyboardWillShowNotification
+												  object:nil];
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self
+													name:UIKeyboardWillHideNotification
+												  object:nil];
 }
 
 - (void)setupActionSheetButtons {
@@ -151,56 +181,48 @@ typedef enum {
 }
 
 - (void)updateTableViewHeader {
-	if([safeslingers count] > 0) {
-		_showRecentSwitch.hidden = NO;
-		_showRecentLabel.hidden = NO;
-		
-		if (_contactSelectionMode == ContactSelectionModeCompose) {
-			[_hintLabel setText:NSLocalizedString(@"label_InstRecipients", @"Pick a recipient to send a message to:")];
+	CGFloat originalHintLabelHeight = CGRectGetHeight(_hintLabel.frame);
+	
+	if([_contacts count] > 0) {
+		if(_filteredContacts.count > 0) {
+			_showRecentSwitch.hidden = NO;
+			_showRecentLabel.hidden = NO;
+			
+			if (_contactSelectionMode == ContactSelectionModeCompose) {
+				[_hintLabel setText:NSLocalizedString(@"label_InstRecipients", nil)];
+			} else {
+				[_hintLabel setText: NSLocalizedString(@"label_InstSendInvite", nil)];
+			}
+			
+			[_hintLabel sizeToFit];
+			_hintLabelHeightConstraint.constant = CGRectGetHeight(_hintLabel.frame);
 		} else {
-			[_hintLabel setText: NSLocalizedString(@"label_InstSendInvite", @"Pick recipients to introduce securely:")];
+			_showRecentSwitch.hidden = YES;
+			_showRecentLabel.hidden = YES;
+			
+			[_hintLabel setText: NSLocalizedString(@"label_InstNoRecipientsMatchQuery", nil)];
+			
+			[_hintLabel sizeToFit];
+			_hintLabelHeightConstraint.constant = CGRectGetHeight(_hintLabel.frame);
 		}
-		
-		[_hintLabel sizeToFit];
-		_hintLabelHeightConstraint.constant = CGRectGetHeight(_hintLabel.frame);
 	} else {
 		_showRecentSwitch.hidden = YES;
 		_showRecentLabel.hidden = YES;
 		
-		[_hintLabel setText: NSLocalizedString(@"label_InstNoRecipients", @"To add recipients, you must first Sling Keys with one or more other users at the same time. You may also send a Sling Keys contact invitation from the menu.")];
+		[_hintLabel setText: NSLocalizedString(@"label_InstNoRecipients", nil)];
 		
 		[_hintLabel sizeToFit];
 		_hintLabelHeightConstraint.constant = CGRectGetHeight(_hintLabel.frame);
 	}
 	
 	CGRect frame = _tableHeaderView.frame;
-	frame.size.height = CGRectGetMaxY(_hintLabel.frame) + CGRectGetHeight(_addContactButton.frame) + 2*13;
+	frame.size.height += CGRectGetHeight(_hintLabel.frame) - originalHintLabelHeight;
 	_tableHeaderView.frame = frame;
 	
 	self.tableView.tableHeaderView = _tableHeaderView;
 }
 
-- (IBAction) DisplayHow: (id)sender
-{
-    UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"title_PickRecipient", @"Recipients")
-                                                      message:NSLocalizedString(@"help_PickRecip", @"Contacts with SafeSlinger keys are displayed here, select one to send your message to.")
-                                                     delegate:self
-                                            cancelButtonTitle:NSLocalizedString(@"btn_Close", @"Close")
-                                            otherButtonTitles:NSLocalizedString(@"menu_sendFeedback", @"Send Feedback"), nil];
-    [message show];
-}
-
-#pragma mark - UIAlertViewDelegate methods
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(buttonIndex!=alertView.cancelButtonIndex) {
-        [UtilityFunc SendOpts:self];
-    }
-}
-
-- (void)DisplayTitle
-{
+- (void)DisplayTitle {
     if(ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
         CFErrorRef error = NULL;
         ABAddressBookRef aBook = NULL;
@@ -216,37 +238,52 @@ typedef enum {
         if(allPeople)CFRelease(allPeople);
         if(aBook)CFRelease(aBook);
         
-        self.navigationItem.title = [NSString stringWithFormat: @"%@(%lu/%ld)", NSLocalizedString(@"title_PickRecipient", @"Recipients"), (unsigned long)[safeslingers count], total];
+        self.navigationItem.title = [NSString stringWithFormat: @"%@(%lu/%ld)", NSLocalizedString(@"title_PickRecipient", @"Recipients"), (unsigned long)[_contacts count], total];
     } else {
-        self.navigationItem.title = [NSString stringWithFormat: @"%@(%lu)", NSLocalizedString(@"title_PickRecipient", @"Recipients"), (unsigned long)[safeslingers count]];
+        self.navigationItem.title = [NSString stringWithFormat: @"%@(%lu)", NSLocalizedString(@"title_PickRecipient", @"Recipients"), (unsigned long)[_contacts count]];
     }
 }
 
--(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer
-{
+- (void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer {
     CGPoint p = [gestureRecognizer locationInView:self.tableView];
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:p];
     
     if (indexPath) {
-        ContactEntry *sc = [self.safeslingers objectAtIndex:indexPath.row];
+        ContactEntry *sc = _filteredContacts[indexPath.row];
         [UserInfo setMessage: [sc PrintContact]];
         [UserInfo show];
     }
 }
 
-#pragma mark - Table view data source
+#pragma mark - UIAlertViewDelegate methods
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [safeslingers count];
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+	if(buttonIndex!=alertView.cancelButtonIndex) {
+		[UtilityFunc SendOpts:self];
+	}
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+#pragma mark - Keyboard handling methods
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+	self.navigationItem.rightBarButtonItem = _doneButton;
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+	self.navigationItem.rightBarButtonItem = _infoButton;
+}
+
+#pragma mark - UITableViewDataSource methods
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return _filteredContacts.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"ContactCell";
     ContactCellView *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    ContactEntry *entry = [self.safeslingers objectAtIndex: indexPath.row];
+    ContactEntry *entry = _filteredContacts[indexPath.row];
     cell.NameLabel.text = [NSString composite_name:entry.fname withLastName:entry.lname];
     cell.KeyIDLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"label_PublicKeyID", @"Key ID"), entry.keyid];
     
@@ -262,11 +299,12 @@ typedef enum {
     
     cell.KeygenLabel.text = [NSString stringWithFormat: @"%@ %@", NSLocalizedString(@"label_Key", @"Key:"), gendate];
     
-    if(entry.ex_type==Exchanged)
+	if(entry.ex_type==Exchanged) {
         cell.ExchangeLabel.text = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"label_exchanged", @"exchanged"), exchangedate];
-    else
+	} else {
         cell.ExchangeLabel.text = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"label_introduced", @"introduced"), exchangedate];
-    
+	}
+	
     switch (entry.devType) {
         case Android:
             cell.DeviceLabel.text = NSLocalizedString(@"label_AndroidOS", @"Android");
@@ -288,66 +326,56 @@ typedef enum {
 	return cell;
 }
 
-- (IBAction)showRecentValueChanged:(UISwitch *)sender
-{
+- (IBAction)showRecentValueChanged:(UISwitch *)sender {
     // reload
-    [safeslingers removeAllObjects];
+    [_contacts removeAllObjects];
+	[_filteredContacts removeAllObjects];
 	
 	if(sender.on) {
-        [safeslingers addObjectsFromArray:[appDelegate.DbInstance LoadRecentRecipients:NO]];
+        [_contacts addObjectsFromArray:[appDelegate.DbInstance LoadRecentRecipients:NO]];
     } else {
-        [safeslingers addObjectsFromArray:[appDelegate.DbInstance LoadRecipients:NO]];
-    }
+        [_contacts addObjectsFromArray:[appDelegate.DbInstance LoadRecipients:NO]];
+	}
+	
+	[_filteredContacts addObjectsFromArray:_contacts];
 	
 	[self reloadTable];
 }
 
-#pragma mark - Table view delegate
+#pragma mark - UITableViewDelegate methods
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        ContactEntry *sc = [safeslingers objectAtIndex:indexPath.row];
+        ContactEntry *sc = _filteredContacts[indexPath.row];
         [appDelegate.DbInstance RemoveRecipient: sc.keyid];
-        [self.safeslingers removeObjectAtIndex:indexPath.row];
-		[self reloadTable];
-        [self DisplayTitle];
+        [_filteredContacts removeObjectAtIndex:indexPath.row];
+		[_contacts removeObject:sc];
         
         // show hint to user
         [[[[iToast makeText: [NSString stringWithFormat:NSLocalizedString(@"state_RecipientsDeleted", @"%d recipients deleted."), 1]] setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-        
+		
         // Try to backup
         [appDelegate.BackupSys RecheckCapability];
         [appDelegate.BackupSys PerformBackup];
+		
+		[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
+		
+		if (_contacts.count == 0) {
+			[self reloadTable];
+		}
+		
+		[self DisplayTitle];
     }
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 	
 	if(self.delegate) {
-		[self.delegate contactSelected:[safeslingers objectAtIndex: indexPath.row]];
+		[self.delegate contactSelected:[_filteredContacts objectAtIndex: indexPath.row]];
 	}
     
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-#pragma mark - IBAction methods
-
-- (IBAction)addContactTouched:(UIButton *)sender {
-	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"action_NewUserRequest", nil)
-															 delegate:self
-													cancelButtonTitle:nil
-											   destructiveButtonTitle:nil
-													otherButtonTitles:nil];
-	
-	for(NSString *button in _actionSheetButtons) {
-		[actionSheet addButtonWithTitle:button];
-	}
-	actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:NSLocalizedString(@"btn_Cancel", nil)];
-	
-	[actionSheet showFromRect:sender.frame inView:self.view animated:YES];
 }
 
 #pragma mark - UIActionSheetDelegate methods
@@ -519,6 +547,61 @@ typedef enum {
 
 - (NSString *)longInviteMessage {
 	return [NSString stringWithFormat:@"%@\n\n%@\n\n%@\n", NSLocalizedString(@"label_messageInviteStartMsg", nil), NSLocalizedString(@"label_messageInviteSetupInst", nil), [NSString stringWithFormat:NSLocalizedString(@"label_messageInviteInstall", nil), kHelpURL]];
+}
+
+#pragma mark - UISearchBarDelegate methods
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+	[_filteredContacts removeAllObjects];
+	
+	if(searchText.length == 0) {
+		[_filteredContacts addObjectsFromArray:_contacts];
+	} else {
+		for(ContactEntry *contact in _contacts) {
+			NSRange rangeFirstName = [contact.fname rangeOfString:searchText options:NSCaseInsensitiveSearch];
+			NSRange rangeLastName = [contact.lname rangeOfString:searchText options:NSCaseInsensitiveSearch];
+			
+			if(rangeFirstName.length != 0 || rangeLastName.length != 0) {
+				[_filteredContacts addObject:contact];
+			}
+		}
+	}
+	
+	[self reloadTable];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+	[searchBar resignFirstResponder];
+}
+
+#pragma mark - IBAction methods
+
+- (IBAction)addContactTouched:(UIButton *)sender {
+	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"action_NewUserRequest", nil)
+															 delegate:self
+													cancelButtonTitle:nil
+											   destructiveButtonTitle:nil
+													otherButtonTitles:nil];
+	
+	for(NSString *button in _actionSheetButtons) {
+		[actionSheet addButtonWithTitle:button];
+	}
+	actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:NSLocalizedString(@"btn_Cancel", nil)];
+	
+	[actionSheet showFromRect:sender.frame inView:self.view animated:YES];
+}
+
+- (IBAction)doneButtonTouched:(UIBarButtonItem *)sender {
+	[_searchBar resignFirstResponder];
+}
+
+- (IBAction)infoButtonTouched:(UIButton *)sender {
+	UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"title_PickRecipient", @"Recipients")
+													  message:NSLocalizedString(@"help_PickRecip", @"Contacts with SafeSlinger keys are displayed here, select one to send your message to.")
+													 delegate:self
+											cancelButtonTitle:NSLocalizedString(@"btn_Close", @"Close")
+											otherButtonTitles:NSLocalizedString(@"menu_sendFeedback", @"Send Feedback"), nil];
+	[message show];
 }
 
 #pragma mark - Utils

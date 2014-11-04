@@ -71,6 +71,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+	// Preloads keyboard so there's no lag on initial keyboard appearance.
+	UITextField *lagFreeField = [[UITextField alloc] init];
+	[self.window addSubview:lagFreeField];
+	[lagFreeField becomeFirstResponder];
+	[lagFreeField resignFirstResponder];
+	[lagFreeField removeFromSuperview];
+	
+	
     [Crashlytics startWithAPIKey:@"a9f2629c171299fa2ff44a07abafb7652f4e1d5c"];
     [[Crashlytics sharedInstance]setDebugMode:YES];
     
