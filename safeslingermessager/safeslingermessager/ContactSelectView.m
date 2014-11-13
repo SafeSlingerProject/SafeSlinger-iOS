@@ -41,51 +41,12 @@ typedef enum {
 	InviteContactActionSheetUseAnother
 } InviteContactActionSheet;
 
-@interface ContactEntry ()
-
-@end
-
-@implementation ContactEntry
-@synthesize fname, lname, photo, pushtoken, keyid, devType, keygenDate, exchangeDate, contact_id, ex_type;
-
--(NSString*)PrintContact {
-    // plaintext
-    NSMutableString* detail = [NSMutableString stringWithCapacity:0];
-    
-    [detail appendFormat:@"Name:%@\n", [NSString composite_name: fname withLastName: lname]];
-    [detail appendFormat:@"KeyID:%@\n", keyid];
-    [detail appendFormat:@"KeyGenDate:%@\n", keygenDate];
-    [detail appendFormat:@"PushToken:%@\n", pushtoken];
-    
-    switch (ex_type) {
-        case Exchanged:
-            [detail appendFormat:@"Type: %@\n", NSLocalizedString(@"label_exchanged", @"exchanged")];
-            break;
-        case Introduced:
-            [detail appendFormat:@"Type: %@\n", NSLocalizedString(@"label_introduced", @"introduced")];
-            break;
-        default:
-            break;
-    }
-    
-    [detail appendFormat:@"Exchange(Introduce) Date:%@\n", exchangeDate];
-    
-    switch (devType) {
-        case Android:
-            [detail appendString:@"DEV: Android\n"];
-            break;
-        case iOS:
-            [detail appendString:@"DEV: iOS\n"];
-            break;
-        default:
-            [detail appendFormat:@"DEV: %d", devType];
-            break;
-    }
-    
-    return detail;
-}
-
-@end
+typedef enum {
+	AlertViewRequestContactsPermission = 99,
+	AlertViewRequestContactsPermissionHelp,
+	AlertViewHelpInfo,
+	AlertViewContactInfo
+} AlertView;
 
 @interface ContactSelectView ()
 
@@ -96,39 +57,37 @@ typedef enum {
 @property (nonatomic, strong) NSMutableArray *contacts;
 @property (nonatomic, strong) NSMutableArray *filteredContacts;
 
+@property (nonatomic) NSUInteger selectedContactIndex;
+
 @end
 
 @implementation ContactSelectView
 
-@synthesize appDelegate;
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+	_appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
 	
 	[self setupActionSheetButtons];
-	[self DisplayTitle];
+	[self displayTitle];
 	
 	[_showRecentLabel setText:NSLocalizedString(@"label_MostRecentOnly", @"Most recent only")];
-	
     
     UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-    lpgr.minimumPressDuration = 1.0; //seconds
+    lpgr.minimumPressDuration = 2.0; //seconds
     lpgr.delegate = self;
     [self.tableView addGestureRecognizer:lpgr];
-	
-    UserInfo = [[UIAlertView alloc]
-                initWithTitle: NSLocalizedString(@"title_RecipientDetail", @"Recipient Detail")
-                message:nil
-                delegate:self
-                cancelButtonTitle:NSLocalizedString(@"btn_Close", @"Close")
-                otherButtonTitles:NSLocalizedString(@"btn_Close", @"Close"), nil];
 	
 	_showRecentSwitch.on = YES;
 	
 	_contacts = [NSMutableArray new];
-	[_contacts setArray:[appDelegate.DbInstance LoadRecentRecipients:NO]];
+	[_contacts setArray:[_appDelegate.DbInstance LoadRecentRecipients:NO]];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(contactEdited:)
+												 name:NSNotificationContactEdited
+											   object:nil];
+
 	_filteredContacts = [NSMutableArray new];
 }
 
@@ -159,6 +118,10 @@ typedef enum {
 	[[NSNotificationCenter defaultCenter] removeObserver:self
 													name:UIKeyboardWillHideNotification
 												  object:nil];
+}
+
+- (void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)setupActionSheetButtons {
@@ -222,7 +185,7 @@ typedef enum {
 	self.tableView.tableHeaderView = _tableHeaderView;
 }
 
-- (void)DisplayTitle {
+- (void)displayTitle {
     if(ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
         CFErrorRef error = NULL;
         ABAddressBookRef aBook = NULL;
@@ -238,28 +201,45 @@ typedef enum {
         if(allPeople)CFRelease(allPeople);
         if(aBook)CFRelease(aBook);
         
-        self.navigationItem.title = [NSString stringWithFormat: @"%@(%lu/%ld)", NSLocalizedString(@"title_PickRecipient", @"Recipients"), (unsigned long)[_contacts count], total];
+        self.navigationItem.title = [NSString stringWithFormat:@"%@(%lu/%ld)", NSLocalizedString(@"title_PickRecipient", @"Recipients"), (unsigned long)[_contacts count], total];
     } else {
-        self.navigationItem.title = [NSString stringWithFormat: @"%@(%lu)", NSLocalizedString(@"title_PickRecipient", @"Recipients"), (unsigned long)[_contacts count]];
+        self.navigationItem.title = [NSString stringWithFormat:@"%@(%lu)", NSLocalizedString(@"title_PickRecipient", @"Recipients"), (unsigned long)[_contacts count]];
     }
 }
 
 - (void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer {
+	if(gestureRecognizer.state != UIGestureRecognizerStateBegan) {
+		return;
+	}
     CGPoint p = [gestureRecognizer locationInView:self.tableView];
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:p];
     
     if (indexPath) {
         ContactEntry *sc = _filteredContacts[indexPath.row];
-        [UserInfo setMessage: [sc PrintContact]];
-        [UserInfo show];
+		_selectedContactIndex = [_contacts indexOfObject:sc];
+		
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_RecipientDetail", @"Recipient Detail")
+														message:[sc printContact]
+													   delegate:self
+											  cancelButtonTitle:NSLocalizedString(@"btn_Close", @"Close")
+											  otherButtonTitles:nil];
+		alert.tag = AlertViewContactInfo;
+		[alert show];
     }
 }
 
-#pragma mark - UIAlertViewDelegate methods
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+	if([segue.identifier isEqualToString:@"EditContactSegue"]) {
+		ContactManageView *viewController = (ContactManageView *)segue.destinationViewController;
+		viewController.editingContact = _contacts[_selectedContactIndex];
+	}
+}
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-	if(buttonIndex!=alertView.cancelButtonIndex) {
-		[UtilityFunc SendOpts:self];
+#pragma mark - NSNotification methods
+
+- (void)contactEdited:(NSNotification *)notification {
+	if(notification.userInfo[NSNotificationContactEditedObject]) {
+		[self reloadTable];
 	}
 }
 
@@ -284,8 +264,9 @@ typedef enum {
     ContactCellView *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     ContactEntry *entry = _filteredContacts[indexPath.row];
-    cell.NameLabel.text = [NSString composite_name:entry.fname withLastName:entry.lname];
-    cell.KeyIDLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"label_PublicKeyID", @"Key ID"), entry.keyid];
+    cell.NameLabel.text = [NSString compositeName:entry.firstName withLastName:entry.lastName];
+	
+	cell.contactInfoButton.tag = indexPath.row;
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:DATABASE_TIMESTR];
@@ -299,7 +280,7 @@ typedef enum {
     
     cell.KeygenLabel.text = [NSString stringWithFormat: @"%@ %@", NSLocalizedString(@"label_Key", @"Key:"), gendate];
     
-	if(entry.ex_type==Exchanged) {
+	if(entry.exchangeType == Exchanged) {
         cell.ExchangeLabel.text = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"label_exchanged", @"exchanged"), exchangedate];
 	} else {
         cell.ExchangeLabel.text = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"label_introduced", @"introduced"), exchangedate];
@@ -332,9 +313,9 @@ typedef enum {
 	[_filteredContacts removeAllObjects];
 	
 	if(sender.on) {
-        [_contacts addObjectsFromArray:[appDelegate.DbInstance LoadRecentRecipients:NO]];
+        [_contacts addObjectsFromArray:[_appDelegate.DbInstance LoadRecentRecipients:NO]];
     } else {
-        [_contacts addObjectsFromArray:[appDelegate.DbInstance LoadRecipients:NO]];
+        [_contacts addObjectsFromArray:[_appDelegate.DbInstance LoadRecipients:NO]];
 	}
 	
 	[_filteredContacts addObjectsFromArray:_contacts];
@@ -347,7 +328,7 @@ typedef enum {
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         ContactEntry *sc = _filteredContacts[indexPath.row];
-        [appDelegate.DbInstance RemoveRecipient: sc.keyid];
+        [_appDelegate.DbInstance RemoveRecipient: sc.keyId];
         [_filteredContacts removeObjectAtIndex:indexPath.row];
 		[_contacts removeObject:sc];
         
@@ -355,8 +336,8 @@ typedef enum {
         [[[[iToast makeText: [NSString stringWithFormat:NSLocalizedString(@"state_RecipientsDeleted", @"%d recipients deleted."), 1]] setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
 		
         // Try to backup
-        [appDelegate.BackupSys RecheckCapability];
-        [appDelegate.BackupSys PerformBackup];
+        [_appDelegate.BackupSys RecheckCapability];
+        [_appDelegate.BackupSys PerformBackup];
 		
 		[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
 		
@@ -364,7 +345,7 @@ typedef enum {
 			[self reloadTable];
 		}
 		
-		[self DisplayTitle];
+		[self displayTitle];
     }
 }
 
@@ -404,7 +385,7 @@ typedef enum {
 														 delegate: self
 												cancelButtonTitle: NSLocalizedString(@"btn_NotNow", nil)
 												otherButtonTitles: NSLocalizedString(@"btn_Continue", nil), nil];
-		message.tag = AskPerm;
+		message.tag = AlertViewRequestContactsPermission;
 		[message show];
 	} else if(status == kABAuthorizationStatusDenied || status == kABAuthorizationStatusRestricted) {
 		NSString* buttontitle = nil;
@@ -420,7 +401,7 @@ typedef enum {
 														 delegate: self
 												cancelButtonTitle: NSLocalizedString(@"btn_Cancel", nil)
 												otherButtonTitles: buttontitle, nil];
-		message.tag = HelpContact;
+		message.tag = AlertViewRequestContactsPermissionHelp;
 		[message show];
 	} else if(status == kABAuthorizationStatusAuthorized) {
 		_addressBookController = [[ABPeoplePickerNavigationController alloc] init];
@@ -442,17 +423,19 @@ typedef enum {
 	
 	if(buttonIndex != alertView.cancelButtonIndex){
 		switch (alertView.tag) {
-			case AskPerm:
+			case AlertViewRequestContactsPermission:
 				[UtilityFunc TriggerContactPermission];
 				break;
-			case HelpContact:
+			case AlertViewRequestContactsPermissionHelp:
 				if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
 					[[UIApplication sharedApplication] openURL:[NSURL URLWithString:kContactHelpURL]];
 				} else {
 					// iOS8
-					NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-					[[UIApplication sharedApplication] openURL:url];
+					[[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
 				}
+				break;
+			case AlertViewHelpInfo:
+				[UtilityFunc SendOpts:self];
 				break;
 			default:
 				break;
@@ -558,8 +541,8 @@ typedef enum {
 		[_filteredContacts addObjectsFromArray:_contacts];
 	} else {
 		for(ContactEntry *contact in _contacts) {
-			NSRange rangeFirstName = [contact.fname rangeOfString:searchText options:NSCaseInsensitiveSearch];
-			NSRange rangeLastName = [contact.lname rangeOfString:searchText options:NSCaseInsensitiveSearch];
+			NSRange rangeFirstName = [contact.firstName rangeOfString:searchText options:NSCaseInsensitiveSearch];
+			NSRange rangeLastName = [contact.lastName rangeOfString:searchText options:NSCaseInsensitiveSearch];
 			
 			if(rangeFirstName.length != 0 || rangeLastName.length != 0) {
 				[_filteredContacts addObject:contact];
@@ -596,12 +579,18 @@ typedef enum {
 }
 
 - (IBAction)infoButtonTouched:(UIButton *)sender {
-	UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"title_PickRecipient", @"Recipients")
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"title_PickRecipient", @"Recipients")
 													  message:NSLocalizedString(@"help_PickRecip", @"Contacts with SafeSlinger keys are displayed here, select one to send your message to.")
 													 delegate:self
 											cancelButtonTitle:NSLocalizedString(@"btn_Close", @"Close")
 											otherButtonTitles:NSLocalizedString(@"menu_sendFeedback", @"Send Feedback"), nil];
-	[message show];
+	alert.tag = AlertViewHelpInfo;
+	[alert show];
+}
+
+- (IBAction)contactInfoButtonTouched:(UIButton *)sender {
+	_selectedContactIndex = sender.tag;
+	[self performSegueWithIdentifier:@"EditContactSegue" sender:self];
 }
 
 #pragma mark - Utils
@@ -609,7 +598,7 @@ typedef enum {
 - (void)showMessage:(NSString *)message withTitle:(NSString *)title {
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
 													  message:message
-													 delegate:self
+													 delegate:nil
 											cancelButtonTitle:NSLocalizedString(@"btn_OK", nil)
 											otherButtonTitles:nil];
 	[alert show];

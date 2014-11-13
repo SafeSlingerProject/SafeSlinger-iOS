@@ -42,7 +42,7 @@
 	[vCard appendString: @"BEGIN:VCARD\n"];
 	[vCard appendString: @"VERSION:3.0\n"];
 #pragma mark FN
-	[vCard appendFormat: @"FN:%@\n", [NSString composite_name:FN withLastName:LN]];
+	[vCard appendFormat: @"FN:%@\n", [NSString compositeName:FN withLastName:LN]];
 #pragma mark N
 	[vCard appendString: @"N:"];
     if (LN)[vCard appendString: LN];
@@ -81,21 +81,21 @@
     NSMutableString *vCard = [[NSMutableString alloc] init];
 	[vCard appendString: @"BEGIN:VCARD\n"];
 	[vCard appendString: @"VERSION:3.0\n"];
-    [vCard appendString: [NSString vcardnstring:contact.fname withLastName:contact.lname]];
+    [vCard appendString: [NSString vcardnstring:contact.firstName withLastName:contact.lastName]];
     [vCard appendString: @"\n"];
     
     if(contact.photo) [vCard appendFormat: @"PHOTO;TYPE=JPEG;ENCODING=b:%@\n",[Base64 encode:contact.photo]];
     
-    NSString* Base64Enckey = [Base64 encode:[[NSString stringWithFormat:@"%@\n%@\n%@", contact.keyid, contact.keygenDate, Pubkey] dataUsingEncoding:NSASCIIStringEncoding]];
+    NSString* Base64Enckey = [Base64 encode:[[NSString stringWithFormat:@"%@\n%@\n%@", contact.keyId, contact.keygenDate, Pubkey] dataUsingEncoding:NSASCIIStringEncoding]];
     [vCard appendFormat: @"IMPP;SafeSlinger-PubKey:%@\n", Base64Enckey];
     
     // push token format: Base64EncodeByteArray(type | lentok | token)
     NSMutableData *encToken = [NSMutableData dataWithLength:0];
     int devtype = htonl(contact.devType);
-    int len = htonl([contact.pushtoken length]);
+    int len = htonl([contact.pushToken length]);
     [encToken appendData:[NSData dataWithBytes: &devtype length: 4]];
     [encToken appendData:[NSData dataWithBytes: &len length: 4]];
-    [encToken appendData:[contact.pushtoken dataUsingEncoding:NSASCIIStringEncoding]];
+    [encToken appendData:[contact.pushToken dataUsingEncoding:NSASCIIStringEncoding]];
     
     NSString* Base64Enctoken = [Base64 encode: encToken];
     [vCard appendFormat: @"IMPP;SafeSlinger-Push:%@\n", Base64Enctoken];

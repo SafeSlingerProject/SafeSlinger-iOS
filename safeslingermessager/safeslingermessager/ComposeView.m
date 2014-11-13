@@ -31,7 +31,7 @@
 #import "Utility.h"
 #import "SSEngine.h"
 #import "ErrorLogger.h"
-#import "ContactSelectView.h"
+#import "ContactEntry.h"
 #import "FunctionView.h"
 #import "ContactManageView.h"
 #import "AudioRecordView.h"
@@ -46,43 +46,41 @@
 
 @implementation ComposeView
 
-@synthesize AttachBtn, RecipientBtn, SelfBtn, Content, LogoutBtn;
-@synthesize delegate;
-@synthesize attachFile;
-@synthesize attachFileRawBytes;
-@synthesize SelfPhoto, RecipientPhoto, ProgressHint, ProgressView, scrollView;
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    _appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     
-    Content.layer.borderWidth = 1.0f;
-    Content.layer.borderColor = [[UIColor grayColor] CGColor];
+    _messageTextView.layer.borderWidth = 1.0f;
+    _messageTextView.layer.borderColor = [[UIColor grayColor] CGColor];
 	
 	_sendButton.title = NSLocalizedString(@"btn_SendFile", @"Send");
 	_cancelButton.title = NSLocalizedString(@"btn_Cancel", @"Cancel");
 	
-	[RecipientBtn setTitle:NSLocalizedString(@"label_SelectRecip", @"Select Recipient") forState:UIControlStateNormal];
-	[RecipientPhoto setImage: [UIImage imageNamed: @"blank_contact.png"]];
+	_logoutButton = self.parentViewController.navigationItem.leftBarButtonItem;
 	
-    LogoutBtn = self.parentViewController.navigationItem.leftBarButtonItem;
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(contactEdited:)
+												 name:NSNotificationContactEdited
+											   object:nil];
+	
+	[self updateReceiver];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [Content resignFirstResponder];
+    [_messageTextView resignFirstResponder];
     
     // Change Title and Help Button
     self.parentViewController.navigationItem.title = NSLocalizedString(@"menu_TagComposeMessage", @"Compose");
     self.parentViewController.navigationItem.hidesBackButton = YES;
     self.parentViewController.navigationItem.rightBarButtonItem = _sendButton;
 	
-    ProgressHint.text = nil;
-    [ProgressView stopAnimating];
+    _progressLabel.text = nil;
+    [_progressView stopAnimating];
     
-    [self UpdateSelf];
-    [self CleanAttachment];
-    Content.text = nil;
+    [self updateSelf];
+    [self cleanAttachment];
+    _messageTextView.text = nil;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWasShown:)
@@ -93,19 +91,46 @@
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(inputModeDidChange:)
+												 name:@"UITextInputCurrentInputModeDidChangeNotification"
+											   object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	
-    [Content resignFirstResponder];
+    [_messageTextView resignFirstResponder];
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIKeyboardDidShowNotification
                                                   object:nil];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIKeyboardWillHideNotification
-                                                  object:nil];
+												  object:nil];
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self
+													name:@"UITextInputCurrentInputModeDidChangeNotification"
+												  object:nil];
+}
+
+- (void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - NSNotification methods
+
+- (void)contactEdited:(NSNotification *)notification {
+	ContactEntry *editedContact = notification.userInfo[NSNotificationContactEditedObject];
+	if(editedContact) {
+		if([_selectedReceiver.pushToken isEqualToString:editedContact.pushToken]) {
+			_selectedReceiver = editedContact;
+			[self updateReceiver];
+		}
+	} else {
+		[self updateSelf];
+	}
 }
 
 - (void)keyboardWasShown:(NSNotification *)notification {
@@ -114,107 +139,143 @@
 	CGSize tabBarSize = self.tabBarController.tabBar.frame.size;
  
 	UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height - tabBarSize.height, 0.0);
-	scrollView.contentInset = contentInsets;
-	scrollView.scrollIndicatorInsets = contentInsets;
+	_scrollView.contentInset = contentInsets;
+	_scrollView.scrollIndicatorInsets = contentInsets;
  
 	// If active text field is hidden by keyboard, scroll it so it's visible
 	// Your app might not need or want this behavior.
 	CGRect rect = self.view.frame;
 	rect.size.height -= kbSize.height;
 	
-	CGPoint scrollPoint = Content.frame.origin;
+	CGPoint scrollPoint = _messageTextView.frame.origin;
 	scrollPoint.y += 100;
 	
 	if (!CGRectContainsPoint(rect, scrollPoint) ) {
-		[self.scrollView scrollRectToVisible:Content.frame animated:YES];
+		[self.scrollView scrollRectToVisible:_messageTextView.frame animated:YES];
 	}
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
 	UIEdgeInsets contentInsets = UIEdgeInsetsZero;
-	scrollView.contentInset = contentInsets;
-	scrollView.scrollIndicatorInsets = contentInsets;
+	_scrollView.contentInset = contentInsets;
+	_scrollView.scrollIndicatorInsets = contentInsets;
 }
 
-- (void)UpdateRecipient {
-    if(_selectedUser) {
-        NSString* btnStr = [NSString stringWithFormat:@"%@ %@\n%@ %@", NSLocalizedString(@"label_SendTo", @"To:"), [NSString composite_name:_selectedUser.fname withLastName:_selectedUser.lname], NSLocalizedString(@"label_Key", @"Key:"), [NSString ChangeGMT2Local:_selectedUser.keygenDate GMTFormat:DATABASE_TIMESTR LocalFormat:@"dd/MMM/yyyy"]];
+- (void)inputModeDidChange:(NSNotification *)notification {
+	// Allows us to block dictation
+	UITextInputMode *inputMode = [UITextInputMode currentInputMode];
+	NSString *modeIdentifier = [inputMode respondsToSelector:@selector(identifier)] ? (NSString *)[inputMode performSelector:@selector(identifier)] : nil;
+	
+	if([modeIdentifier isEqualToString:@"dictation"]) {
+		[UIView setAnimationsEnabled:NO];
+		[[NSNotificationCenter defaultCenter] removeObserver:self
+														name:UIKeyboardDidShowNotification
+													  object:nil];
+		
+		[[NSNotificationCenter defaultCenter] removeObserver:self
+														name:UIKeyboardWillHideNotification
+													  object:nil];
+		
+		// hide the keyboard and show again to cancel dictation
+		[_messageTextView resignFirstResponder];
+		[_messageTextView becomeFirstResponder];
+		
+		[UIView setAnimationsEnabled:YES];
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(keyboardWasShown:)
+													 name:UIKeyboardDidShowNotification
+												   object:nil];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(keyboardWillHide:)
+													 name:UIKeyboardWillHideNotification
+												   object:nil];
+		
+		UIAlertView *denyAlert = [[UIAlertView alloc] initWithTitle:nil
+															message:NSLocalizedString(@"label_SpeechRecognitionAlert", nil)
+														   delegate:nil
+												  cancelButtonTitle:NSLocalizedString(@"btn_OK", nil)
+												  otherButtonTitles:nil];
+		[denyAlert show];
+	}
+}
+
+- (void)updateReceiver {
+    if(_selectedReceiver) {
+        NSString* btnStr = [NSString stringWithFormat:@"%@ %@\n%@ %@", NSLocalizedString(@"label_SendTo", @"To:"), [NSString compositeName:_selectedReceiver.firstName withLastName:_selectedReceiver.lastName], NSLocalizedString(@"label_Key", @"Key:"), [NSString ChangeGMT2Local:_selectedReceiver.keygenDate GMTFormat:DATABASE_TIMESTR LocalFormat:@"dd/MMM/yyyy"]];
         
-        [RecipientBtn setTitle:btnStr forState:UIControlStateNormal];
+        [_receiverButton setTitle:btnStr forState:UIControlStateNormal];
         
-		if(_selectedUser.photo) {
-            [RecipientPhoto setImage: [UIImage imageWithData: _selectedUser.photo]];
+		if(_selectedReceiver.photo) {
+            [_receiverPhoto setImage: [UIImage imageWithData: _selectedReceiver.photo]];
 		} else {
-            [RecipientPhoto setImage: [UIImage imageNamed: @"blank_contact.png"]];
+            [_receiverPhoto setImage: [UIImage imageNamed: @"blank_contact.png"]];
 		}
     } else {
         // No select user
-        [RecipientPhoto setImage: [UIImage imageNamed: @"blank_contact.png"]];
-        [RecipientBtn setTitle:NSLocalizedString(@"label_SelectRecip", @"Select Recipient") forState:UIControlStateNormal];
+        [_receiverPhoto setImage:[UIImage imageNamed:@"blank_contact.png"]];
+        [_receiverButton setTitle:NSLocalizedString(@"label_SelectRecip", @"Select Recipient") forState:UIControlStateNormal];
     }
 }
 
-- (void)UpdateSelf {
-    // get name from profile
-    NSString* fulln = [delegate.DbInstance GetProfileName];
-    if(delegate.IdentityNum==NonLink) {
-        [SelfPhoto setImage:[UIImage imageNamed:@"blank_contact.png"]];
-    } else if(delegate.IdentityNum>0) {
-        CFErrorRef error = NULL;
-        ABAddressBookRef aBook = NULL;
-        aBook = ABAddressBookCreateWithOptions(NULL, &error);
-        ABAddressBookRequestAccessWithCompletion(aBook, ^(bool granted, CFErrorRef error) {
-            if (!granted) {
-                return;
-            }
-        });
-        
-        
-        ABRecordRef aRecord = ABAddressBookGetPersonWithRecordID(aBook, delegate.IdentityNum);
-        // set self photo
-        if(ABPersonHasImageData(aRecord)) {
-            CFDataRef imgData = ABPersonCopyImageDataWithFormat(aRecord, kABPersonImageFormatThumbnail);
-            UIImage *image = [UIImage imageWithData:(__bridge NSData *)imgData];
-            [SelfPhoto setImage:image];
-            // update cache image
-            delegate.IdentityImage = UIImageJPEGRepresentation([image scaleToSize:CGSizeMake(45.0f, 45.0f)], 0.9);
-            CFRelease(imgData);
+- (void)updateSelf {
+	// get name from profile
+	NSString* fulln = [_appDelegate.DbInstance GetProfileName];
+	if(_appDelegate.IdentityNum == NonLink) {
+		[_senderPhoto setImage:[UIImage imageNamed:@"blank_contact.png"]];
+	} else if(_appDelegate.IdentityNum > 0) {
+		CFErrorRef error = NULL;
+		ABAddressBookRef aBook = NULL;
+		aBook = ABAddressBookCreateWithOptions(NULL, &error);
+		ABAddressBookRequestAccessWithCompletion(aBook, ^(bool granted, CFErrorRef error) {
+			if (!granted) {
+				return;
+			}
+		});
+		
+		ABRecordRef aRecord = ABAddressBookGetPersonWithRecordID(aBook, _appDelegate.IdentityNum);
+		// set self photo
+		if(ABPersonHasImageData(aRecord)) {
+			CFDataRef imgData = ABPersonCopyImageDataWithFormat(aRecord, kABPersonImageFormatThumbnail);
+			UIImage *image = [UIImage imageWithData:(__bridge NSData *)imgData];
+			[_senderPhoto setImage:image];
+			// update cache image
+			_appDelegate.IdentityImage = UIImageJPEGRepresentation([image scaleToSize:CGSizeMake(45.0f, 45.0f)], 0.9);
+			CFRelease(imgData);
 		} else {
-            [SelfPhoto setImage:[UIImage imageNamed:@"blank_contact.png"]];
+			[_senderPhoto setImage:[UIImage imageNamed:@"blank_contact.png"]];
 		}
 		
 		if(aBook) {
 			CFRelease(aBook);
 		}
-    }
-    
-    NSString* btnStr = [NSString stringWithFormat:@"%@\n%@", [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"label_SendFrom", @"From:"), fulln], [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"label_Key", @"Key:"), [NSString ChangeGMT2Local:[SSEngine getSelfGenKeyDate] GMTFormat:DATABASE_TIMESTR LocalFormat:@"dd/MMM/yyyy"]]];
-    [SelfBtn setTitle:btnStr forState:UIControlStateNormal];
-    
+	}
+	
+	NSString* btnStr = [NSString stringWithFormat:@"%@\n%@", [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"label_SendFrom", @"From:"), fulln], [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"label_Key", @"Key:"), [NSString ChangeGMT2Local:[SSEngine getSelfGenKeyDate] GMTFormat:DATABASE_TIMESTR LocalFormat:@"dd/MMM/yyyy"]]];
+	[_senderButton setTitle:btnStr forState:UIControlStateNormal];
 }
 
 - (void)UpdateAttachment {
-    if(attachFile)
-    {
-        attachFileRawBytes = [NSData dataWithContentsOfURL:attachFile];
+    if(_attachFile) {
+        attachFileRawBytes = [NSData dataWithContentsOfURL:_attachFile];
         if([attachFileRawBytes length]==0) {
             [[[[iToast makeText: NSLocalizedString(@"error_CannotSendEmptyFile", @"Cannot send an empty file.")]
                setGravity:iToastGravityCenter] setDuration:iToastDurationShort] show];
             attachFileRawBytes = nil;
-            attachFile  = nil;
-            [AttachBtn setTitle:NSLocalizedString(@"btn_SelectFile", @"Select File") forState:UIControlStateNormal];
+            _attachFile  = nil;
+            [_addAttachmentButton setTitle:NSLocalizedString(@"btn_SelectFile", @"Select File") forState:UIControlStateNormal];
         } else if([attachFileRawBytes length]>9437184) {
             NSString *msg = [NSString stringWithFormat: NSLocalizedString(@"error_CannotSendFilesOver", @"Cannot send attachments greater than %d bytes in size."), 9437184];
             [[[[iToast makeText: msg]
                setGravity:iToastGravityCenter] setDuration:iToastDurationShort] show];
             attachFileRawBytes = nil;
-            attachFile  = nil;
-            [AttachBtn setTitle:NSLocalizedString(@"btn_SelectFile", @"Select File") forState:UIControlStateNormal];
+            _attachFile  = nil;
+            [_addAttachmentButton setTitle:NSLocalizedString(@"btn_SelectFile", @"Select File") forState:UIControlStateNormal];
         } else {
-            [AttachBtn setTitle:[NSString stringWithFormat:@"%@ (%@)", [attachFile lastPathComponent], [NSString CalculateMemorySize:(int)[attachFileRawBytes length]]] forState:UIControlStateNormal];
+            [_addAttachmentButton setTitle:[NSString stringWithFormat:@"%@ (%@)", [_attachFile lastPathComponent], [NSString CalculateMemorySize:(int)[attachFileRawBytes length]]] forState:UIControlStateNormal];
         }
     } else {
-        [AttachBtn setTitle:NSLocalizedString(@"btn_SelectFile", @"Select File") forState:UIControlStateNormal];
+        [_addAttachmentButton setTitle:NSLocalizedString(@"btn_SelectFile", @"Select File") forState:UIControlStateNormal];
     }
 }
 
@@ -260,10 +321,10 @@
     }
 }
 
-- (void)CleanAttachment {
+- (void)cleanAttachment {
     // clean previous selection if necessary
-    [AttachBtn setTitle:NSLocalizedString(@"btn_SelectFile", @"Select File") forState:UIControlStateNormal];
-    attachFile = nil;
+    [_addAttachmentButton setTitle:NSLocalizedString(@"btn_SelectFile", @"Select File") forState:UIControlStateNormal];
+    _attachFile = nil;
     attachFileRawBytes = nil;
 }
 
@@ -272,11 +333,12 @@
         //Background Thread
         dispatch_async(dispatch_get_main_queue(), ^(void){
             //Run UI Updates
-            if(attachFile)
-                ProgressHint.text = [NSString stringWithFormat: NSLocalizedString(@"prog_SendingFile", @"sending encrypted %@..."), [attachFile lastPathComponent]];
-            else
-                ProgressHint.text = NSLocalizedString(@"prog_encrypting", @"encrypting...");
-            [ProgressView startAnimating];
+			if(_attachFile) {
+                _progressLabel.text = [NSString stringWithFormat: NSLocalizedString(@"prog_SendingFile", @"sending encrypted %@..."), [_attachFile lastPathComponent]];
+			} else {
+                _progressLabel.text = NSLocalizedString(@"prog_encrypting", @"encrypting...");
+			}
+            [_progressView startAnimating];
         });
     });
     
@@ -285,10 +347,10 @@
     NSMutableData* pktdata = [[NSMutableData alloc]initWithCapacity:0];
     
     // get file type in MIME format
-    CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension,(__bridge CFStringRef)[[attachFile lastPathComponent] pathExtension] ,NULL);
+    CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension,(__bridge CFStringRef)[[_attachFile lastPathComponent] pathExtension] ,NULL);
     NSString* MimeType = (__bridge NSString*)UTTypeCopyPreferredTagWithClass(UTI,kUTTagClassMIMEType);
     
-    packnonce = [SSEngine BuildCipher:_selectedUser.keyid Message:Content.text Attach:[attachFile lastPathComponent] RawFile:attachFileRawBytes MIMETYPE:MimeType Cipher:pktdata];
+    packnonce = [SSEngine BuildCipher:_selectedReceiver.keyId Message:_messageTextView.text Attach:[_attachFile lastPathComponent] RawFile:attachFileRawBytes MIMETYPE:MimeType Cipher:pktdata];
     
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@/%@", HTTPURL_PREFIX, HTTPURL_HOST_MSG, POSTMSG]];;
     
@@ -302,8 +364,8 @@
         //Background Thread
         dispatch_async(dispatch_get_main_queue(), ^(void){
             //Run UI Updates
-            ProgressHint.text = NSLocalizedString(@"prog_FileSent", @"message sent, awaiting response...");
-            [ProgressView startAnimating];
+            _progressLabel.text = NSLocalizedString(@"prog_FileSent", @"message sent, awaiting response...");
+            [_progressView startAnimating];
         });
     });
     
@@ -352,31 +414,31 @@
 }
 
 - (void)PrintErrorOnUI:(NSString*)error {
-    ProgressHint.text = nil;
-    [ProgressView stopAnimating];
+    _progressLabel.text = nil;
+    [_progressView stopAnimating];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     [[[[iToast makeText: error]
        setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
 }
 
-- (void)SaveMessage: (NSData*)msgid {
-    // [delegate.activityView DisableProgress];
+- (void)SaveMessage:(NSData *)msgid {
+    // [_appDelegate.activityView DisableProgress];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     
     // filetype
-    CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension,(__bridge CFStringRef)[attachFile pathExtension],NULL);
-    NSString* fileType = (__bridge NSString*)UTTypeCopyPreferredTagWithClass(UTI, kUTTagClassMIMEType);
+    CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension,(__bridge CFStringRef)[_attachFile pathExtension],NULL);
+    NSString *fileType = (__bridge NSString *)UTTypeCopyPreferredTagWithClass(UTI, kUTTagClassMIMEType);
     if(UTI)CFRelease(UTI);
     
     MsgEntry *NewMsg = [[MsgEntry alloc]
                         InitOutgoingMsg:msgid
-                        Recipient:_selectedUser
-                        Message:Content.text
-                        FileName:[attachFile lastPathComponent]
+                        Recipient:_selectedReceiver
+                        Message:_messageTextView.text
+                        FileName:[_attachFile lastPathComponent]
                         FileType:fileType
                         FileData:attachFileRawBytes];
     
-    if([delegate.DbInstance InsertMessage: NewMsg]) {
+    if([_appDelegate.DbInstance InsertMessage:NewMsg]) {
         // reload the view
         [[[[iToast makeText: NSLocalizedString(@"state_FileSent", @"Message sent.")]
            setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
@@ -392,7 +454,7 @@
     ALAuthorizationStatus authStatus = [ALAssetsLibrary authorizationStatus];
     if(authStatus == ALAuthorizationStatusNotDetermined) {
         ret = YES; // wait to trigger it
-    } else if(authStatus == ALAuthorizationStatusRestricted || authStatus == ALAuthorizationStatusDenied){
+    } else if(authStatus == ALAuthorizationStatusRestricted || authStatus == ALAuthorizationStatusDenied) {
         // show indicator
         NSString* buttontitle = nil;
         NSString* description = nil;
@@ -452,19 +514,19 @@
 #pragma mark - IBAction methods
 
 - (IBAction)dismissKeyboard {
-	[Content resignFirstResponder];
+	[_messageTextView resignFirstResponder];
 }
 
 - (IBAction)sendMessage {
-	[Content resignFirstResponder];
-	if([[self.RecipientBtn titleLabel].text isEqualToString: NSLocalizedString(@"label_SelectRecip", @"Select Recipient")]) {
+	[_messageTextView resignFirstResponder];
+	if([[_receiverButton titleLabel].text isEqualToString: NSLocalizedString(@"label_SelectRecip", @"Select Recipient")]) {
 		// no user selected
 		[[[[iToast makeText: NSLocalizedString(@"error_InvalidRecipient", @"Invalid recipient.")]
 		   setGravity:iToastGravityCenter] setDuration:iToastDurationShort] show];
 	} else {
 		// prepare cipher
-		NSString* text = self.Content.text;
-		if(!attachFile && ([text length]==0)) {
+		NSString* text = _messageTextView.text;
+		if(!_attachFile && ([text length]==0)) {
 			// no user selected
 			[[[[iToast makeText: NSLocalizedString(@"error_selectDataToSend", @"You need a file or a text message to send.")]setGravity:iToastGravityCenter] setDuration:iToastDurationShort] show];
 		} else {
@@ -505,14 +567,14 @@
 		message.tag = HelpContact;
 		[message show];
 	} else if(status == kABAuthorizationStatusAuthorized) {
-		if(delegate.IdentityNum != NonExist) {
+		if(_appDelegate.IdentityNum != NonExist) {
 			[self performSegueWithIdentifier:@"EditContact" sender:self];
 		}
 	}
 }
 
 - (IBAction)selectAttachment:(id)sender {
-	[self CleanAttachment];
+	[self cleanAttachment];
 	// allow users to pick photos from multiple locations
 	UIActionSheet *actionSheet = [[UIActionSheet alloc]
 								  initWithTitle: NSLocalizedString(@"title_ChooseFileLoad", @"Choose Your File")
@@ -534,14 +596,14 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
     // files
-    if(buttonIndex==actionSheet.cancelButtonIndex) {
+    if(buttonIndex == actionSheet.cancelButtonIndex) {
         // reset everything
-		if(actionSheet.tag==AttachmentSelectionSheet) {
-			[self CleanAttachment];
+		if(actionSheet.tag == AttachmentSelectionSheet) {
+			[self cleanAttachment];
 		}
     } else {
-        if(actionSheet.tag==AttachmentSelectionSheet) {
-            if(buttonIndex==SoundRecoderType) {
+        if(actionSheet.tag == AttachmentSelectionSheet) {
+            if(buttonIndex == SoundRecoderType) {
                 // sound recorder
                 [self performSegueWithIdentifier:@"AudioRecord" sender:self];
             } else {
@@ -561,8 +623,7 @@
                     default:
                         break;
                 }
-                
-                // use new instread of using alloc, init call due to memory leaks
+				
                 if(_hasPerm) {
                     UIImagePickerController *imagePicker = [UIImagePickerController new];
                     [imagePicker setDelegate:self];
@@ -598,12 +659,12 @@
     NSURL* urlstr = [info valueForKey:UIImagePickerControllerReferenceURL];
     NSData* imgdata = UIImageJPEGRepresentation([info valueForKey:UIImagePickerControllerOriginalImage], 1.0);
     
-    if([imgdata length]==0) {
+    if(!imgdata.length) {
         [[[[iToast makeText: NSLocalizedString(@"error_CannotSendEmptyFile", @"Cannot send an empty file.")]
            setGravity:iToastGravityCenter] setDuration:iToastDurationShort] show];
         [self dismissViewControllerAnimated:YES completion:nil];
         return;
-    } else if([imgdata length]>9437184) {
+    } else if(imgdata.length > 9437184) {
         NSString *msg = [NSString stringWithFormat: NSLocalizedString(@"error_CannotSendFilesOver", "Cannot send attachments greater than %d bytes in size."), 9437184];
         [self dismissViewControllerAnimated:YES completion:nil];
         [[[[iToast makeText: msg]
@@ -619,7 +680,7 @@
         NSDate *now = [[NSDate alloc] init];
         NSString *dateString = [format stringFromDate:now];
         FN = [NSString stringWithFormat:@"cam-%@.jpg", dateString];
-        attachFile = [NSURL URLWithString:FN];
+        _attachFile = [NSURL URLWithString:FN];
     } else {
         // has id
         NSRange range, idrange;
@@ -628,27 +689,24 @@
         range = [[urlstr absoluteString] rangeOfString:@"&ext="];
         idrange.length = range.location - idrange.location;
         FN = [NSString stringWithFormat:@"%@.%@", [[urlstr absoluteString]substringWithRange:idrange], [[urlstr absoluteString]substringFromIndex:range.location+range.length]];
-        attachFile = [NSURL URLWithString:FN];
+        _attachFile = [NSURL URLWithString:FN];
     }
     NSString *sizeinfo = [NSString stringWithFormat:@"%@ (%@).", FN,
                           [NSString stringWithFormat:NSLocalizedString(@"label_kb",@"%.0f kb"), [imgdata length]/1024.0f]
                           ];
-    [AttachBtn setTitle:sizeinfo forState:UIControlStateNormal];
+    [_addAttachmentButton setTitle:sizeinfo forState:UIControlStateNormal];
     attachFileRawBytes = imgdata;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"AudioRecord"]) {
-        AudioRecordView* dest = (AudioRecordView*)segue.destinationViewController;
+        AudioRecordView *dest = (AudioRecordView *)segue.destinationViewController;
         dest.parent = self;
     } else if([segue.identifier isEqualToString:@"ContactSelectForCompose"]) {
-        ContactSelectView* dest = (ContactSelectView *)segue.destinationViewController;
+        ContactSelectView *dest = (ContactSelectView *)segue.destinationViewController;
         dest.delegate = self;
 		dest.contactSelectionMode = ContactSelectionModeCompose;
-    } else if([segue.identifier isEqualToString:@"EditContact"]) {
-        ContactManageView* dest = (ContactManageView*)segue.destinationViewController;
-        dest.parent = self;
     }
 }
 
@@ -659,15 +717,20 @@
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
-    self.parentViewController.navigationItem.leftBarButtonItem = LogoutBtn;
+    self.parentViewController.navigationItem.leftBarButtonItem = _logoutButton;
+}
+
+#pragma mark - ContactManageViewDelegate methods
+
+- (void)contactManagerViewDidFinishEditingContact:(ContactEntry *)contact {
+	[self updateSelf];
 }
 
 #pragma mark - ContactSelectViewDelegate methods
 
 - (void)contactSelected:(ContactEntry *)contact {
-	// needs to be self.selectedUser to call custom setter
-	self.selectedUser = contact;
-	[self UpdateRecipient];
+	_selectedReceiver = contact;
+	[self updateReceiver];
 }
 
 @end

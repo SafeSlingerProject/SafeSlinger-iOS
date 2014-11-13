@@ -38,9 +38,9 @@
 @end
 
 @interface NSString (NameHandler)
-+(NSString*) composite_name:(NSString*)fname withLastName:(NSString*)lname;
-+(NSString*) vcardnstring:(NSString*)fname withLastName:(NSString*)lname;
-+(NSString*) humanreadable:(NSString*)databasename;
++ (NSString *)compositeName:(NSString *)fname withLastName:(NSString *)lname;
++ (NSString *)vcardnstring:(NSString *)fname withLastName:(NSString *)lname;
++ (NSString *)humanreadable:(NSString *)databasename;
 @end
 
 @interface NSString (Utility)

@@ -129,7 +129,7 @@
         if(username)
         {
             NSArray* namearray = [[username substringFromIndex:[username rangeOfString:@":"].location+1]componentsSeparatedByString:@";"];
-            display = [NSString composite_name:[namearray objectAtIndex:1] withLastName:[namearray objectAtIndex:0]];
+            display = [NSString compositeName:[namearray objectAtIndex:1] withLastName:[namearray objectAtIndex:0]];
             [cell.imageView setAlpha: 1.0f];
         }else{
             // disable

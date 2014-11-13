@@ -137,10 +137,10 @@
     
     switch (pickUser) {
         case User1Tag:
-            if(pickU2&&[SelectContact.keyid isEqualToString: pickU2.keyid]) _SafeSelect = NO;
+            if(pickU2&&[SelectContact.keyId isEqualToString: pickU2.keyId]) _SafeSelect = NO;
             break;
         case User2Tag:
-            if(pickU1&&[SelectContact.keyid isEqualToString: pickU1.keyid]) _SafeSelect = NO;
+            if(pickU1&&[SelectContact.keyId isEqualToString: pickU1.keyId]) _SafeSelect = NO;
             break;
         default:
             break;
@@ -158,17 +158,17 @@
     switch (pickUser) {
         case User1Tag:
             pickU1 = SelectContact;
-            messageForU2 = [NSString stringWithFormat:NSLocalizedString(@"label_messageIntroduceNameToYou", @"I would like to introduce %@ to you."), [NSString composite_name:pickU1.fname withLastName:pickU1.lname]];
+            messageForU2 = [NSString stringWithFormat:NSLocalizedString(@"label_messageIntroduceNameToYou", @"I would like to introduce %@ to you."), [NSString compositeName:pickU1.firstName withLastName:pickU1.lastName]];
             if([pickU1.photo length]>0) [User1Photo setImage:[UIImage imageWithData:pickU1.photo]];
             else [User1Photo setImage: [UIImage imageNamed: @"blank_contact.png"]];
-            [User1Btn setTitle:[NSString stringWithFormat:@"%@ %@\n%@ %@", NSLocalizedString(@"label_SendTo", @"To:"), [NSString composite_name:pickU1.fname withLastName:pickU1.lname], NSLocalizedString(@"label_Key", @"Key:"), [NSString ChangeGMT2Local:pickU1.keygenDate GMTFormat:DATABASE_TIMESTR LocalFormat:@"dd/MMM/yyyy"]] forState:UIControlStateNormal];
+            [User1Btn setTitle:[NSString stringWithFormat:@"%@ %@\n%@ %@", NSLocalizedString(@"label_SendTo", @"To:"), [NSString compositeName:pickU1.firstName withLastName:pickU1.lastName], NSLocalizedString(@"label_Key", @"Key:"), [NSString ChangeGMT2Local:pickU1.keygenDate GMTFormat:DATABASE_TIMESTR LocalFormat:@"dd/MMM/yyyy"]] forState:UIControlStateNormal];
             break;
         case User2Tag:
             pickU2 = SelectContact;
-            messageForU1 = [NSString stringWithFormat:NSLocalizedString(@"label_messageIntroduceNameToYou", @"I would like to introduce %@ to you."), [NSString composite_name:pickU2.fname withLastName:pickU2.lname]];
+            messageForU1 = [NSString stringWithFormat:NSLocalizedString(@"label_messageIntroduceNameToYou", @"I would like to introduce %@ to you."), [NSString compositeName:pickU2.firstName withLastName:pickU2.lastName]];
             if([pickU2.photo length]>0) [User2Photo setImage:[UIImage imageWithData:pickU2.photo]];
             else [User2Photo setImage: [UIImage imageNamed: @"blank_contact.png"]];
-            [User2Btn setTitle:[NSString stringWithFormat:@"%@ %@\n%@ %@", NSLocalizedString(@"label_SendTo", @"To:"), [NSString composite_name:pickU2.fname withLastName:pickU2.lname], NSLocalizedString(@"label_Key", @"Key:"), [NSString ChangeGMT2Local:pickU2.keygenDate GMTFormat:DATABASE_TIMESTR LocalFormat:@"dd/MMM/yyyy"]] forState:UIControlStateNormal];
+            [User2Btn setTitle:[NSString stringWithFormat:@"%@ %@\n%@ %@", NSLocalizedString(@"label_SendTo", @"To:"), [NSString compositeName:pickU2.firstName withLastName:pickU2.lastName], NSLocalizedString(@"label_Key", @"Key:"), [NSString ChangeGMT2Local:pickU2.keygenDate GMTFormat:DATABASE_TIMESTR LocalFormat:@"dd/MMM/yyyy"]] forState:UIControlStateNormal];
             break;
         default:
             break;
@@ -199,14 +199,14 @@
     [IntroduceBtn setEnabled:NO];
     _U1Sent = _U2Sent = NO;
     
-    NSData* VCardForU2 = [VCardParser GetSimpleVCard: pickU1 RawPubkey: [delegate.DbInstance GetRawKey: pickU1.keyid]];
-    NSData* VCardForU1 = [VCardParser GetSimpleVCard: pickU2 RawPubkey: [delegate.DbInstance GetRawKey: pickU2.keyid]];
+    NSData* VCardForU2 = [VCardParser GetSimpleVCard: pickU1 RawPubkey: [delegate.DbInstance GetRawKey: pickU1.keyId]];
+    NSData* VCardForU1 = [VCardParser GetSimpleVCard: pickU2 RawPubkey: [delegate.DbInstance GetRawKey: pickU2.keyId]];
     
     NSMutableData* pktdata1 = [[NSMutableData alloc]initWithCapacity:0];
     NSMutableData* pktdata2 = [[NSMutableData alloc]initWithCapacity:0];
     
-    _nonce1 = [SSEngine BuildCipher: pickU1.keyid Message:messageForU1 Attach: @"introduction.vcf" RawFile:VCardForU1 MIMETYPE:@"SafeSlinger/SecureIntroduce" Cipher:pktdata1];
-    _nonce2 = [SSEngine BuildCipher: pickU2.keyid Message:messageForU2 Attach: @"introduction.vcf" RawFile:VCardForU2 MIMETYPE:@"SafeSlinger/SecureIntroduce" Cipher:pktdata2];
+    _nonce1 = [SSEngine BuildCipher: pickU1.keyId Message:messageForU1 Attach: @"introduction.vcf" RawFile:VCardForU1 MIMETYPE:@"SafeSlinger/SecureIntroduce" Cipher:pktdata1];
+    _nonce2 = [SSEngine BuildCipher: pickU2.keyId Message:messageForU2 Attach: @"introduction.vcf" RawFile:VCardForU2 MIMETYPE:@"SafeSlinger/SecureIntroduce" Cipher:pktdata2];
     
     // Send out U1 data
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@/%@", HTTPURL_PREFIX, HTTPURL_HOST_MSG, POSTMSG]];

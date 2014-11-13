@@ -82,11 +82,6 @@ typedef enum ProtectType {
     Encrypted
 }ProtectType;
 
-typedef enum ExchangeType {
-    Exchanged = 0,
-    Introduced
-}ExchangeType;
-
 typedef enum DirectionType {
     ToMsg = 1,
     FromMsg
@@ -144,24 +139,26 @@ typedef enum DirectionType {
 }
 
 - (BOOL)PatchForTokenStoreTable;
+- (BOOL)patchForContactsFromAddressBook;
 
 // basic database operation
-- (BOOL)LoadDBFromStorage: (NSString*)specific_path;
-- (BOOL)TrimTable: (NSString*)table_name;
+- (BOOL)LoadDBFromStorage:(NSString *)specific_path;
+- (BOOL)TrimTable:(NSString *)table_name;
 - (void)DumpUsage;
 - (BOOL)CloseDB;
 
 // for recipients
-- (NSArray*)LoadRecipients:(BOOL)ExchangeOnly;
-- (NSArray*)LoadRecentRecipients:(BOOL)ExchangeOnly;
-- (BOOL)RemoveRecipient: (NSString*)KEYID;
-- (BOOL)AddNewRecipient: (NSData*)keyelement User:(NSString*)username Dev:(int)type Photo:(NSString*)UserPhoto Token: (NSString*)token ExchangeOrIntroduction: (BOOL)flag;
+- (NSArray *)LoadRecipients:(BOOL)ExchangeOnly;
+- (NSArray *)LoadRecentRecipients:(BOOL)ExchangeOnly;
+- (BOOL)updateContactDetails:(ContactEntry *)contact;
+- (BOOL)RemoveRecipient:(NSString *)KEYID;
+- (BOOL)addNewRecipient:(ContactEntry *)contact;
 
 // for Message Thread
-- (void)GetThreads: (NSMutableDictionary*)threadlist;
-- (NSArray*)LoadThreadMessage: (NSString*)KEYID;
-- (int)ThreadMessageCount: (NSString*)KEYID;
-- (BOOL)DeleteThread: (NSString*)KEYID;
+- (void)GetThreads:(NSMutableDictionary *)threadlist;
+- (NSArray *)LoadThreadMessage:(NSString *)KEYID;
+- (int)ThreadMessageCount:(NSString *)KEYID;
+- (BOOL)DeleteThread:(NSString *)KEYID;
 
 // for single message
 - (BOOL)InsertMessage: (MsgEntry*)MSG;

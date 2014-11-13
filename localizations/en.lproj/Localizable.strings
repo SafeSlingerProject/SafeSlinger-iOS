@@ -571,6 +571,8 @@
 "label_SendTo" = "To:";
 /* screen label (match English casing); used in the key exchange walkthrough dialog to toggle the display of the walkthrough at the next attempted key exchange. */
 "label_ShowHintAtLaunch" = "Show this hint next time.";
+/* screen label (match English casing); used to alert the user about possible information leak on the use of speech recognition when the user tries tu use this feature */
+"label_SpeechRecognitionAlert" = "Using speech recognition is disabled because it might cause information leak";
 /* screen label (match English casing); used in the key exchange walkthrough dialog. */
 "label_step_1" = "Step 1";
 /* screen label (match English casing); used in the key exchange walkthrough dialog. */

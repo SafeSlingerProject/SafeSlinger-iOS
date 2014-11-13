@@ -377,7 +377,7 @@
     if(!newkeycreated) {
         NSArray *arr = [NSArray arrayWithObjects: DATABASE_NAME, nil];
         [[NSUserDefaults standardUserDefaults] setObject:arr forKey: kDB_KEY];
-        NSString *keyinfo = [NSString stringWithFormat:@"%@\n%@ %@", [NSString composite_name:Fnamefield.text withLastName:Lnamefield.text], NSLocalizedString(@"label_Key", @"Key:"), [NSString ChangeGMT2Local:[SSEngine getSelfGenKeyDate] GMTFormat:DATABASE_TIMESTR LocalFormat: @"yyyy-MM-dd HH:mm:ss"]];
+        NSString *keyinfo = [NSString stringWithFormat:@"%@\n%@ %@", [NSString compositeName:Fnamefield.text withLastName:Lnamefield.text], NSLocalizedString(@"label_Key", @"Key:"), [NSString ChangeGMT2Local:[SSEngine getSelfGenKeyDate] GMTFormat:DATABASE_TIMESTR LocalFormat: @"yyyy-MM-dd HH:mm:ss"]];
         arr = [NSArray arrayWithObjects: keyinfo, nil];
         [[NSUserDefaults standardUserDefaults] setObject:arr forKey: kDB_LIST];
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: kDEFAULT_DB_KEY];
@@ -385,7 +385,7 @@
     } else {
         NSArray *infoarr = [[NSUserDefaults standardUserDefaults] stringArrayForKey: kDB_LIST];
         NSMutableArray *arr = [NSMutableArray arrayWithArray:infoarr];
-        NSString *keyinfo = [NSString stringWithFormat:@"%@\n%@ %@", [NSString composite_name:Fnamefield.text withLastName:Lnamefield.text], NSLocalizedString(@"label_Key", @"Key:"), [NSString ChangeGMT2Local:[SSEngine getSelfGenKeyDate] GMTFormat:DATABASE_TIMESTR LocalFormat: @"yyyy-MM-dd HH:mm:ss"]];
+        NSString *keyinfo = [NSString stringWithFormat:@"%@\n%@ %@", [NSString compositeName:Fnamefield.text withLastName:Lnamefield.text], NSLocalizedString(@"label_Key", @"Key:"), [NSString ChangeGMT2Local:[SSEngine getSelfGenKeyDate] GMTFormat:DATABASE_TIMESTR LocalFormat: @"yyyy-MM-dd HH:mm:ss"]];
         [arr addObject: keyinfo];
         [[NSUserDefaults standardUserDefaults] setObject:arr forKey: kDB_LIST];
         // Set key index to the newest profile

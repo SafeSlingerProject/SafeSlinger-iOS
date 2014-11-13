@@ -26,6 +26,7 @@
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import "ContactSelectView.h"
+#import "ContactManageView.h"
 
 @class ContactEntry;
 @class AppDelegate;
@@ -43,37 +44,31 @@ typedef enum AttachCategory{
     ShareFolderType=4
 }AttachCategory;
 
-@interface ComposeView : UIViewController <UITextViewDelegate, UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIAlertViewDelegate, ContactSelectViewDelegate>
-{
-    // Delegate
-    AppDelegate *delegate;
-    
-    // Attachment
-    NSURL *attachFile;
+@interface ComposeView : UIViewController <UITextViewDelegate, UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIAlertViewDelegate, ContactSelectViewDelegate> {
+
     NSData *attachFileRawBytes;
 }
 
-@property (nonatomic, strong) IBOutlet UIButton *AttachBtn;
-@property (nonatomic, strong) IBOutlet UIButton *SelfBtn;
-@property (nonatomic, strong) IBOutlet UIButton *RecipientBtn;
-@property (nonatomic, strong) IBOutlet UIImageView *SelfPhoto;
-@property (nonatomic, strong) IBOutlet UIImageView *RecipientPhoto;
-@property (nonatomic, strong) IBOutlet UITextView *Content;
-@property (nonatomic, strong) IBOutlet UILabel *ProgressHint;
-@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *ProgressView;
+@property (nonatomic, strong) IBOutlet UIImageView *senderPhoto;
+@property (nonatomic, strong) IBOutlet UIButton *senderButton;
+@property (nonatomic, strong) IBOutlet UIImageView *receiverPhoto;
+@property (nonatomic, strong) IBOutlet UIButton *receiverButton;
+@property (nonatomic, strong) IBOutlet UIButton *addAttachmentButton;
+@property (nonatomic, strong) IBOutlet UITextView *messageTextView;
+@property (nonatomic, strong) IBOutlet UILabel *progressLabel;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *progressView;
 @property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *sendButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *cancelButton;
-@property (nonatomic, strong) UIBarButtonItem *LogoutBtn;
+@property (nonatomic, strong) UIBarButtonItem *logoutButton;
 
-@property (nonatomic, strong) ContactEntry *selectedUser;
+@property (nonatomic, strong) ContactEntry *selectedReceiver;
 
-@property (nonatomic, retain) AppDelegate *delegate;
-@property (nonatomic, retain) NSURL *attachFile;
-@property (nonatomic, retain) NSData *attachFileRawBytes;
+@property (nonatomic, retain) AppDelegate *appDelegate;
 
--(void) UpdateSelf;
--(void) UpdateAttachment;
--(void) UpdateRecipient;
+// Attachment
+@property (nonatomic, strong) NSURL *attachFile;
+
+- (void)UpdateAttachment;
 
 @end

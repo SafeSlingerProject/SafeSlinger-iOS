@@ -26,22 +26,24 @@
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import <MessageUI/MessageUI.h>
+#import "ContactEntry.h"
+
+#define NSNotificationContactEdited @"ContactEditedNotification"
+#define NSNotificationContactEditedObject @"EditedContactEntry"
 
 @class AppDelegate;
 
-@interface ContactManageView : UITableViewController <ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, ABNewPersonViewControllerDelegate, MFMailComposeViewControllerDelegate>
-{
+@interface ContactManageView : UITableViewController <ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, ABNewPersonViewControllerDelegate, MFMailComposeViewControllerDelegate> {
     int default_menu_index;
-    AppDelegate *delegate;
-    UIViewController *parent;
+	
+	NSMutableArray *contact_index;
+	NSMutableArray *contact_photos;
+	NSMutableDictionary *user_actions;
 }
 
-@property (nonatomic, retain) UIViewController *parent;
-@property (nonatomic, strong) NSMutableArray *contact_index;
-@property (nonatomic, strong) NSMutableArray *contact_photos;
-@property (nonatomic, strong) NSMutableDictionary *user_actions;
-@property (nonatomic, retain) AppDelegate *delegate;
+@property (nonatomic, retain) AppDelegate *appDelegate;
 
-- (IBAction) DisplayHow: (id)sender;
+// contact to be edited for the ViewController. If nil, edit user profile
+@property (nonatomic, strong) ContactEntry *editingContact;
 
 @end

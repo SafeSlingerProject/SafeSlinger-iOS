@@ -38,18 +38,7 @@
 @synthesize selectionTable, contactList, selections;
 @synthesize delegate, Hint, ImportBtn;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-        
-    }
-    return self;
-}
-
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
@@ -61,8 +50,7 @@
     [Hint setText: NSLocalizedString(@"label_SaveInstruct", @"Exchange Complete!  Select member data to save to your Address Book:")];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated{
 	if (selections != NULL) free(selections);
 	selections = malloc(sizeof(BOOL) * [contactList count]);
 	for (int i = 0; i < [contactList count]; i++)
@@ -70,36 +58,67 @@
 	[selectionTable reloadData];
 }
 
-- (IBAction)DisplayHow: (id)sender
-{
+- (IBAction)DisplayHow:(id)sender {
     UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"title_save", @"End Exchange")
                                                       message:NSLocalizedString(@"help_save", @"When finished, the protocol will reveal a list of the identity data exchanged. Select the contacts you wish to save and press 'Import'.";)
                                                      delegate:nil
                                             cancelButtonTitle:NSLocalizedString(@"btn_Close", @"Close")
                                             otherButtonTitles:nil];
     [message show];
-    message = nil;
 }
 
--(IBAction) Import: (id)sender {
-    
-    //[delegate.activityView EnableProgress:NSLocalizedString(@"prog_SavingContactsToKeyDatabase", @"updating key database...") SecondMeesage:nil ProgessBar:YES];
-    
+- (IBAction)Import:(id)sender {
     NSMutableDictionary *mapping = [NSMutableDictionary dictionary];
     int importedcount = 0;
-    
+	
+	
+	if(ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
+		// contact permission is enabled, update address book.
+		CFErrorRef error = NULL;
+		ABAddressBookRef aBook = NULL;
+		aBook = ABAddressBookCreateWithOptions(NULL, &error);
+		ABAddressBookRequestAccessWithCompletion(aBook, ^(bool granted, CFErrorRef error) {
+			if (!granted) {
+			}
+		});
+		
+		CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(aBook);
+		// remove old duplicates
+		
+		[UtilityFunc RemoveDuplicates:aBook AdressList:allPeople CompareArray:mapping];
+		
+		// add one by one
+		if (selections) {
+			for (int i = 0; i < [contactList count]; i++) {
+				if (selections[i]) {
+					if(![UtilityFunc AddContactEntry:aBook TargetRecord:(__bridge ABRecordRef)([contactList objectAtIndex:i])]) {
+						[[[[iToast makeText: NSLocalizedString(@"error_ContactInsertFailed", @"Contact insert failed.")]
+						   setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+					}
+				}
+			}
+		}
+		
+		if(!ABAddressBookSave(aBook, &error)) {
+			[ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"ERROR: Unable to Save ABAddressBook. Error = %@", CFErrorCopyDescription(error)]];
+		}
+		
+		if(allPeople)CFRelease(allPeople);
+		if(aBook)CFRelease(aBook);
+	}
+	
     // update keys and tokens
-    for (int i = 0; i < [contactList count]; i++)
-    {
+    for (int i = 0; i < [contactList count]; i++) {
+		ContactEntry *contact = [ContactEntry new];
         NSData *keyelement = nil;
         NSData *token = nil;
         NSString *comparedtoken = nil;
-        
+		
         ABRecordRef aRecord = (__bridge ABRecordRef)[contactList objectAtIndex:i];
-        NSString *firstname = (__bridge NSString*)ABRecordCopyValue(aRecord, kABPersonFirstNameProperty);
-        NSString *lastname = (__bridge NSString*)ABRecordCopyValue(aRecord, kABPersonLastNameProperty);
-        if(firstname==nil&&lastname==nil)
-        {
+        contact.firstName = (__bridge_transfer NSString*)ABRecordCopyValue(aRecord, kABPersonFirstNameProperty);
+        contact.lastName = (__bridge_transfer NSString*)ABRecordCopyValue(aRecord, kABPersonLastNameProperty);
+		contact.recordId = ABRecordGetRecordID(aRecord);
+        if(contact.firstName == nil && contact.lastName == nil) {
             [[[[iToast makeText: NSLocalizedString(@"error_VcardParseFailure", @"vCard parse failed.")]
                setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
             continue;
@@ -107,25 +126,24 @@
         
         // Get SafeSlinger Fields
         ABMultiValueRef allIMPP = ABRecordCopyValue(aRecord, kABPersonInstantMessageProperty);
-        for (CFIndex i = 0; i < ABMultiValueGetCount(allIMPP); i++)
-        {
+        for (CFIndex i = 0; i < ABMultiValueGetCount(allIMPP); i++) {
             CFDictionaryRef anIMPP = ABMultiValueCopyValueAtIndex(allIMPP, i);
             CFStringRef service = CFDictionaryGetValue(anIMPP, kABPersonInstantMessageServiceKey);
-            if ([(__bridge NSString*)service caseInsensitiveCompare:@"SafeSlinger-PubKey"] == NSOrderedSame)
-            {
+			
+            if ([(__bridge NSString*)service caseInsensitiveCompare:@"SafeSlinger-PubKey"] == NSOrderedSame) {
                 keyelement = [Base64 decode:(NSString *)CFDictionaryGetValue(anIMPP, kABPersonInstantMessageUsernameKey)];
                 keyelement = [NSData dataWithBytes:[keyelement bytes] length:[keyelement length]];
-            }else if([(__bridge NSString*)service caseInsensitiveCompare:@"SafeSlinger-Push"] == NSOrderedSame)
-            {
+            } else if([(__bridge NSString*)service caseInsensitiveCompare:@"SafeSlinger-Push"] == NSOrderedSame) {
                 comparedtoken = (NSString *)CFDictionaryGetValue(anIMPP, kABPersonInstantMessageUsernameKey);
                 token = [Base64 decode:comparedtoken];
             }
+			
             if(anIMPP)CFRelease(anIMPP);
         }
+		
         if(allIMPP)CFRelease(allIMPP);
         
-        if([keyelement length]==0)
-        {
+        if([keyelement length]==0) {
             [[[[iToast makeText: NSLocalizedString(@"error_AllMembersMustUpgradeBadKeyFormat", @"All members must upgrade, some are using older key formats.")] setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
             continue;
         }
@@ -134,39 +152,33 @@
             [[[[iToast makeText: NSLocalizedString(@"error_AllMembersMustUpgradeBadPushToken", @"All members must upgrade, some are using older push token formats.")] setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
             continue;
         }
+		
+		[contact setKeyInfo:keyelement];
         
-        int devtype = 0, offset = 0, tokenlen = 0;
+        int offset = 0, tokenlen = 0;
         const char* p = [token bytes];
-        
-        devtype = ntohl(*(int *)(p+offset));
+		
+		contact.devType = ntohl(*(int *)(p+offset));
         offset += 4;
         
         tokenlen = ntohl(*(int *)(p+offset));
         offset += 4;
-        
-        NSString* tokenstr = [NSString stringWithCString:[[NSData dataWithBytes:p+offset length:tokenlen]bytes] encoding:NSASCIIStringEncoding];
-        tokenstr = [tokenstr substringToIndex:tokenlen];
+		
+        contact.pushToken = [[NSString stringWithCString:[[NSData dataWithBytes:p+offset length:tokenlen]bytes] encoding:NSASCIIStringEncoding] substringToIndex:tokenlen];
         
         // get photo if possible
-        NSString* imageData = nil;
-        if(ABPersonHasImageData(aRecord))
-        {
+        if(ABPersonHasImageData(aRecord)) {
             CFDataRef photo = ABPersonCopyImageDataWithFormat(aRecord, kABPersonImageFormatThumbnail);
-            imageData = [Base64 encode: UIImageJPEGRepresentation([UIImage imageWithData:(__bridge NSData *)photo], 0.9)];
+            contact.photo = UIImageJPEGRepresentation([UIImage imageWithData:(__bridge NSData *)photo], 0.9);
             CFRelease(photo);
         }
-        
-        NSString* name = [NSString vcardnstring:firstname withLastName:lastname];
-        if(firstname)CFRelease((__bridge CFTypeRef)(firstname));
-        if(lastname)CFRelease((__bridge CFTypeRef)(lastname));
+		
+		contact.exchangeType = Exchanged;
         
         // update token
-        if(tokenstr)
-        {
+        if(contact.pushToken) {
             // update or insert entry for new recipient
-            if(![delegate.DbInstance AddNewRecipient:keyelement User:name Dev:devtype Photo:imageData Token:tokenstr ExchangeOrIntroduction:YES])
-            {
-                
+            if(![delegate.DbInstance addNewRecipient:contact]) {
                 [[[[iToast makeText: NSLocalizedString(@"error_UnableToUpdateRecipientInDB", @"Unable to update the recipient database.")]
                    setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
                 continue;
@@ -174,56 +186,15 @@
             
             importedcount++;
             // add to temp structure for address book update
-            if (selections[i])
-                [mapping setObject:name forKey:comparedtoken];
-        }else{
+			if (selections[i]) {
+                [mapping setObject:[NSString vcardnstring:contact.firstName withLastName:contact.lastName] forKey:comparedtoken];
+			}
+        } else {
             DEBUGMSG(@"recipient's token is missing.");
             [[[[iToast makeText: NSLocalizedString(@"error_UnableToUpdateRecipientInDB", @"Unable to update the recipient database.")]
                setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
             continue;
         }
-        
-    }// end of for
-    
-	if(ABAddressBookGetAuthorizationStatus()==kABAuthorizationStatusAuthorized)
-    {
-        // contact permission is enabled, update address book.
-        CFErrorRef error = NULL;
-        ABAddressBookRef aBook = NULL;
-        aBook = ABAddressBookCreateWithOptions(NULL, &error);
-        ABAddressBookRequestAccessWithCompletion(aBook, ^(bool granted, CFErrorRef error) {
-            if (!granted) {
-            }
-        });
-        
-        CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(aBook);
-        // remove old duplicates
-        
-        [UtilityFunc RemoveDuplicates:aBook AdressList:allPeople CompareArray:mapping];
-        
-        // add one by one
-        if (selections)
-        {
-            for (int i = 0; i < [contactList count]; i++)
-            {
-                if (selections[i])
-                {
-                    if(![UtilityFunc AddContactEntry:aBook TargetRecord:(__bridge ABRecordRef)([contactList objectAtIndex:i])])
-                    {
-                        [[[[iToast makeText: NSLocalizedString(@"error_ContactInsertFailed", @"Contact insert failed.")]
-                           setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-                    }
-                }
-            }
-        }
-        
-        if(!ABAddressBookSave(aBook, &error))
-        {
-            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"ERROR: Unable to Save ABAddressBook. Error = %@", CFErrorCopyDescription(error)]];
-        }
-        
-        if(allPeople)CFRelease(allPeople);
-        if(aBook)CFRelease(aBook);
     }
     
     free(selections);
@@ -233,8 +204,7 @@
     [[[[iToast makeText: [NSString stringWithFormat: NSLocalizedString(@"state_SomeContactsImported", @"%@ contacts imported."), [NSString stringWithFormat:@"%d", importedcount]]]
        setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
     
-    if(importedcount>0)
-    {
+    if(importedcount>0) {
         // Try to backup
         [delegate.BackupSys RecheckCapability];
         [delegate.BackupSys PerformBackup];
@@ -243,21 +213,17 @@
     [UtilityFunc PopToMainPanel:self.navigationController];
 }
 
--(IBAction) Cancel: (id)sender
-{
+- (IBAction)Cancel:(id)sender {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_Question", @"Question")
                                                     message: NSLocalizedString(@"ask_QuitConfirmation", @"Quit? Are you sure?")
                                                    delegate: self
                                           cancelButtonTitle: NSLocalizedString(@"btn_No", @"No")
                                           otherButtonTitles: NSLocalizedString(@"btn_Yes", @"Yes"), nil];
     [alert show];
-    alert = nil;
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(buttonIndex!=alertView.cancelButtonIndex)
-    {
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if(buttonIndex!=alertView.cancelButtonIndex) {
         contactList = nil;
         free(selections);
         [UtilityFunc PopToMainPanel:self.navigationController];
@@ -265,20 +231,16 @@
 }
 
 #pragma mark UITableViewDelegate
--(void) tableView: (UITableView *)tableView didSelectRowAtIndexPath: (NSIndexPath *)indexPath
-{
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[tableView deselectRowAtIndexPath: [tableView indexPathForSelectedRow] animated: NO];
-    if(ABAddressBookGetAuthorizationStatus()==kABAuthorizationStatusAuthorized)
-    {
+    if(ABAddressBookGetAuthorizationStatus()==kABAuthorizationStatusAuthorized) {
         NSInteger row = [indexPath row];
         UITableViewCell *cell = [tableView cellForRowAtIndexPath: indexPath];
-        if (cell.accessoryType == UITableViewCellAccessoryNone)
-        {
+        if (cell.accessoryType == UITableViewCellAccessoryNone) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
             selections[row] = YES;
-        }
-        else if (cell.accessoryType == UITableViewCellAccessoryCheckmark)
-        {
+        } else if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
             cell.accessoryType = UITableViewCellAccessoryNone;
             selections[row] = NO;
         }
@@ -286,18 +248,12 @@
 }
 
 #pragma mark UITableViewDataSource
--(NSInteger) numberOfSectionsInTableView: (UITableView *)tableView
-{
-	return 1;
-}
 
--(NSInteger) tableView: (UITableView *)tableView numberOfRowsInSection: (NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	return [contactList count];
 }
 
--(UITableViewCell *) tableView: (UITableView *)tableView cellForRowAtIndexPath: (NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"SaveSelectionIdentifier";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -310,34 +266,28 @@
 	
     NSString* fn = (__bridge NSString*)ABRecordCopyValue(aRecord, kABPersonFirstNameProperty);
     NSString* ln = (__bridge NSString*)ABRecordCopyValue(aRecord, kABPersonLastNameProperty);
-    cell.textLabel.text = [NSString composite_name:fn withLastName:ln];
+    cell.textLabel.text = [NSString compositeName:fn withLastName:ln];
 	
-    if(ABPersonHasImageData(aRecord))
-    {
+    if(ABPersonHasImageData(aRecord)) {
         CFDataRef imageData = ABPersonCopyImageDataWithFormat(aRecord, kABPersonImageFormatThumbnail);
         UIImage *image = [UIImage imageWithData: (__bridge NSData *)imageData];
         cell.imageView.image = image;
         CFRelease(imageData);
-    }
-	else{
+    } else {
         [cell.imageView setImage: [UIImage imageNamed:@"blank_contact.png"]];
     }
     
-    if(ABAddressBookGetAuthorizationStatus()==kABAuthorizationStatusAuthorized)
-    {
-        if (selections[row]) cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        else cell.accessoryType = UITableViewCellAccessoryNone;
-    }else{
+    if(ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
+		if (selections[row]) {
+			cell.accessoryType = UITableViewCellAccessoryCheckmark;
+		} else {
+			cell.accessoryType = UITableViewCellAccessoryNone;
+		}
+    } else {
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
     
 	return cell;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

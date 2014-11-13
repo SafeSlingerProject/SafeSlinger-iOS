@@ -27,11 +27,11 @@
 #import <AddressBookUI/AddressBookUI.h>
 #import <safeslingerexchange/safeslingerexchange.h>
 #import <MessageUI/MessageUI.h>
+#import "ContactManageView.h"
 
 @class AppDelegate;
 
-@interface SlingkeyView : UIViewController <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, UIAlertViewDelegate, SafeSlingerDelegate, MFMailComposeViewControllerDelegate>
-{
+@interface SlingkeyView : UIViewController <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, UIAlertViewDelegate, SafeSlingerDelegate, MFMailComposeViewControllerDelegate> {
     AppDelegate *delegate;
     
     // safeslinger exchange object
@@ -49,10 +49,5 @@
 @property (nonatomic, retain) safeslingerexchange *proto;
 @property (nonatomic, readwrite) BOOL EndExchangeAlready;
 @property (nonatomic, strong) NSMutableArray *GatherList;
-
-// Action method when user presses Exchange Button
--(IBAction) BeginExchange;
--(IBAction) EditContact;
--(void) ProcessProfile;
 
 @end

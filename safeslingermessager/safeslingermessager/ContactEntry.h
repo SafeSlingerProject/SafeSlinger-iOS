@@ -22,15 +22,28 @@
  * THE SOFTWARE.
  */
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-@interface ContactCellView : UITableViewCell
+typedef enum ExchangeType {
+	Exchanged = 0,
+	Introduced
+} ExchangeType;
 
-@property (nonatomic, strong) IBOutlet UILabel *NameLabel;
-@property (nonatomic, strong) IBOutlet UIImageView *UserPhoto;
-@property (nonatomic, strong) IBOutlet UILabel *KeygenLabel;
-@property (nonatomic, strong) IBOutlet UILabel *ExchangeLabel;
-@property (nonatomic, retain) IBOutlet UILabel *DeviceLabel;
-@property (strong, nonatomic) IBOutlet UIButton *contactInfoButton;
+@interface ContactEntry : NSObject
+
+@property (nonatomic, strong) NSString *pushToken;
+@property (nonatomic, strong) NSString *firstName;
+@property (nonatomic, strong) NSString *lastName;
+@property (nonatomic, strong) NSString *exchangeDate;
+@property (nonatomic, readwrite) int devType;
+@property (nonatomic, readwrite) ExchangeType exchangeType;
+@property (nonatomic, strong) NSData *photo;
+@property (nonatomic, strong) NSString *keyId;
+@property (nonatomic, strong) NSString *keyString;
+@property (nonatomic, strong) NSString *keygenDate;
+@property (nonatomic, readwrite) int recordId;
+
+- (NSString *)printContact;
+- (BOOL)setKeyInfo:(NSData *)key;
 
 @end

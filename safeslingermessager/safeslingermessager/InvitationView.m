@@ -41,15 +41,6 @@
 @synthesize AcceptBtn;
 @synthesize InviteeVCard, InviterFaceImg, InviterName;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -59,15 +50,13 @@
     self.navigationItem.title = NSLocalizedString(@"title_SecureIntroductionInvite", @"Secure Introduction Invitation!");
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     // Invitee
-    NSString *InviteeName = [NSString composite_name: (__bridge NSString *)(ABRecordCopyValue(InviteeVCard, kABPersonFirstNameProperty)) withLastName:(__bridge NSString *)(ABRecordCopyValue(InviteeVCard, kABPersonLastNameProperty))];
+    NSString *InviteeName = [NSString compositeName: (__bridge NSString *)(ABRecordCopyValue(InviteeVCard, kABPersonFirstNameProperty)) withLastName:(__bridge NSString *)(ABRecordCopyValue(InviteeVCard, kABPersonLastNameProperty))];
     
-    if(!InviteeName)
-    {
+    if(!InviteeName) {
         [[[[iToast makeText: NSLocalizedString(@"error_InvalidContactName", @"A valid Contact Name is required.")]
            setGravity:iToastGravityCenter] setDuration:iToastDurationShort] show];
     }
@@ -81,24 +70,19 @@
     
     [InviterFace setImage:InviterFaceImg];
     
-    if(ABPersonHasImageData(InviteeVCard))
-    {
+    if(ABPersonHasImageData(InviteeVCard)) {
         // use Thumbnail image
         [InviteeFacel setImage:[UIImage imageWithData:(__bridge NSData *)ABPersonCopyImageDataWithFormat(InviteeVCard, kABPersonImageFormatThumbnail)]];
-    }else{
+    } else {
         [InviteeFacel setImage:[UIImage imageNamed: @"blank_contact.png"]];
     }
 }
 
--(IBAction) BeginImport: (id)sender
-{
-    if(InviteeVCard)
-    {
+- (IBAction)BeginImport:(id)sender {
+    if(InviteeVCard) {
         int result = [self AddNewContact:InviteeVCard];
-        if(result>=0)
-        {
-            if(result>0)
-            {
+        if(result>=0) {
+            if(result>0) {
                 AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
                 // Try to backup
                 [delegate.BackupSys RecheckCapability];
@@ -109,7 +93,7 @@
             [[[[iToast makeText: [NSString stringWithFormat:NSLocalizedString(@"state_SomeContactsImported", @"%@ contacts imported."), [NSString stringWithFormat:@"%d", result]]] setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
         }
         InviteeVCard = NULL;
-    }else{
+    } else {
         // Record is null
         [ErrorLogger ERRORDEBUG: @"ERROR: The record is a null object."];
         [[[[iToast makeText: NSLocalizedString(@"error_VcardParseFailure", @"vCard parse failed.")] setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
@@ -121,36 +105,32 @@
 /*
  Return value error or WrongFormat(-1), failOverwrite(0), success(1)
  */
-- (int)AddNewContact: (ABRecordRef)newRecord
-{
-    NSString* comparedtoken = nil;
+- (int)AddNewContact:(ABRecordRef)newRecord {
+	ContactEntry *contact = [ContactEntry new];
     NSData *keyelement = nil;
     NSData *token = nil;
-    NSString* imageData = nil;
-    int ex_type = -1;
-    
-    NSString* username = [NSString vcardnstring:(__bridge NSString *)(ABRecordCopyValue(newRecord, kABPersonFirstNameProperty)) withLastName:(__bridge NSString *)(ABRecordCopyValue(newRecord, kABPersonLastNameProperty))];
+	NSString *comparedtoken = nil;
+	
+	contact.firstName = (__bridge_transfer NSString *)ABRecordCopyValue(newRecord, kABPersonFirstNameProperty);
+	contact.lastName = (__bridge_transfer NSString *)ABRecordCopyValue(newRecord, kABPersonLastNameProperty);
     
     // Get SafeSlinger Fields
     ABMultiValueRef allIMPP = ABRecordCopyValue(newRecord, kABPersonInstantMessageProperty);
-    for (CFIndex i = 0; i < ABMultiValueGetCount(allIMPP); i++)
-    {
+    for (CFIndex i = 0; i < ABMultiValueGetCount(allIMPP); i++) {
         CFDictionaryRef anIMPP = ABMultiValueCopyValueAtIndex(allIMPP, i);
-        if ([(NSString *)CFDictionaryGetValue(anIMPP, kABPersonInstantMessageServiceKey) caseInsensitiveCompare:@"SafeSlinger-PubKey"] == NSOrderedSame)
-        {
+        if ([(NSString *)CFDictionaryGetValue(anIMPP, kABPersonInstantMessageServiceKey) caseInsensitiveCompare:@"SafeSlinger-PubKey"] == NSOrderedSame) {
             keyelement = [Base64 decode:(NSString *)CFDictionaryGetValue(anIMPP, kABPersonInstantMessageUsernameKey)];
             keyelement = [NSData dataWithBytes:[keyelement bytes] length:[keyelement length]];
-        }else if([(NSString *)CFDictionaryGetValue(anIMPP, kABPersonInstantMessageServiceKey) caseInsensitiveCompare:@"SafeSlinger-Push"] == NSOrderedSame)
-        {
+        } else if([(NSString *)CFDictionaryGetValue(anIMPP, kABPersonInstantMessageServiceKey) caseInsensitiveCompare:@"SafeSlinger-Push"] == NSOrderedSame) {
             comparedtoken = (NSString *)CFDictionaryGetValue(anIMPP, kABPersonInstantMessageUsernameKey);
             token = [Base64 decode:comparedtoken];
         }
         if(anIMPP)CFRelease(anIMPP);
     }
+	
     if(allIMPP)CFRelease(allIMPP);
     
-    if([keyelement length]==0)
-    {
+    if([keyelement length]==0) {
         [[[[iToast makeText: NSLocalizedString(@"error_AllMembersMustUpgradeBadKeyFormat", @"All members must upgrade, some are using older key formats.")] setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
         return -1;
     }
@@ -159,24 +139,24 @@
         [[[[iToast makeText: NSLocalizedString(@"error_AllMembersMustUpgradeBadPushToken", @"All members must upgrade, some are using older push token formats.")] setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
         return -1;
     }
-    
-    int devtype = 0, offset = 0, tokenlen = 0;
+	
+	[contact setKeyInfo:keyelement];
+	
+    int offset = 0, tokenlen = 0;
     const char* p = [token bytes];
     
-    devtype = ntohl(*(int *)(p+offset));
+    contact.devType = ntohl(*(int *)(p+offset));
     offset += 4;
     
     tokenlen = ntohl(*(int *)(p+offset));
     offset += 4;
-    
-    NSString* tokenstr = [NSString stringWithCString:[[NSData dataWithBytes:p+offset length:tokenlen]bytes] encoding:NSASCIIStringEncoding];
-    tokenstr = [tokenstr substringToIndex:tokenlen];
+	
+    contact.pushToken = [[NSString stringWithCString:[[NSData dataWithBytes:p+offset length:tokenlen]bytes] encoding:NSASCIIStringEncoding] substringToIndex:tokenlen];
     
     // get photo if possible
-    if(ABPersonHasImageData(newRecord))
-    {
-        CFDataRef photo = ABPersonCopyImageDataWithFormat(newRecord, kABPersonImageFormatThumbnail);
-        imageData = [Base64 encode: UIImageJPEGRepresentation([UIImage imageWithData:(__bridge NSData *)photo], 0.9)];
+    if(ABPersonHasImageData(newRecord)) {
+		CFDataRef photo = ABPersonCopyImageDataWithFormat(newRecord, kABPersonImageFormatThumbnail);
+		contact.photo = UIImageJPEGRepresentation([UIImage imageWithData:(__bridge NSData *)photo], 0.9);
         CFRelease(photo);
     }
     
@@ -193,33 +173,24 @@
         return -1;
     }
     
-    ex_type = [delegate.DbInstance GetExchangeType: [keyarray objectAtIndex:0]];
-    if(ex_type==Exchanged)
-    {
+    contact.exchangeType = [delegate.DbInstance GetExchangeType: [keyarray objectAtIndex:0]];
+    if(contact.exchangeType == Exchanged) {
         // do not overwirte it
         [ErrorLogger ERRORDEBUG: @"ERROR: Already Exchanged Before, Do Not Overwrite."];
         return 0;
     }
+	
+	contact.exchangeType = Introduced;
     
     // update token
-    if(tokenstr)
-    {
-        // update or insert entry for new recipient
-        if(![delegate.DbInstance AddNewRecipient:keyelement User:username Dev:devtype Photo:imageData Token:tokenstr ExchangeOrIntroduction:NO])
-        {
-            
-            [[[[iToast makeText: NSLocalizedString(@"error_UnableToUpdateRecipientInDB", @"Unable to update the recipient database.")]
-               setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-            return -1;
-        }
-        [mapping setObject:username forKey:comparedtoken];
-    }else{
-        [ErrorLogger ERRORDEBUG: @"ERROR: recipient's token is missing."];
-        return -1;
-    }
-    
-    if(ABAddressBookGetAuthorizationStatus()==kABAuthorizationStatusAuthorized)
-    {
+	if(!contact.pushToken) {
+		[ErrorLogger ERRORDEBUG: @"ERROR: recipient's token is missing."];
+		return -1;
+	}
+	
+	[mapping setObject:[NSString vcardnstring:contact.firstName withLastName:contact.lastName] forKey:comparedtoken];
+	
+    if(ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
         // contact permission is enabled, update address book.
         CFErrorRef error = NULL;
         ABAddressBookRef aBook = NULL;
@@ -233,28 +204,26 @@
         // remove old duplicates
         [UtilityFunc RemoveDuplicates:aBook AdressList:allPeople CompareArray:mapping];
         // add one by one
-        [UtilityFunc AddContactEntry:aBook TargetRecord: InviteeVCard];
+        [UtilityFunc AddContactEntry:aBook TargetRecord:newRecord];
         
-        if(!ABAddressBookSave(aBook, &error))
-        {
+		if(!ABAddressBookSave(aBook, &error)) {
             [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"ERROR: Unable to Save ABAddressBook. Error = %@", CFErrorCopyDescription(error)]];
         }
         
         if(allPeople)CFRelease(allPeople);
         if(aBook)CFRelease(aBook);
-    }else{
-        return 0;
-    }
-    
+	}
+	
+	contact.recordId = ABRecordGetRecordID(newRecord);
+	
+	// update or insert entry for new recipient
+	if(![delegate.DbInstance addNewRecipient:contact]) {
+		[[[[iToast makeText: NSLocalizedString(@"error_UnableToUpdateRecipientInDB", @"Unable to update the recipient database.")]
+		   setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+		return -1;
+	}
+	
     return 1;
 }
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
 
 @end

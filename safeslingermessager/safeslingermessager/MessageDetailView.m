@@ -41,17 +41,7 @@
 
 @synthesize messages, delegate, b_img, thread_img, assignedEntry, OperationLock, actWindow, InstanceMessage, InstanceBtn, CancelBtn, BackBtn, InstanceBox, parentView;
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
@@ -100,13 +90,11 @@
     [InstanceBtn setTitle: NSLocalizedString(@"title_SendFile", @"Send") forState: UIControlStateNormal];
 }
 
-- (void)DismissKeyboard
-{
+- (void)DismissKeyboard {
     [InstanceMessage resignFirstResponder];
 }
 
-- (void)ReloadTable
-{
+- (void)ReloadTable {
     [messages removeAllObjects];
     [messages setArray:[delegate.DbInstance LoadThreadMessage: assignedEntry.keyid]];
     [messages addObjectsFromArray: [delegate.UDbInstance LoadThreadMessage: assignedEntry.keyid]];
@@ -125,15 +113,13 @@
     [parentView UpdateThread];
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [super viewDidLoad];
     [messages removeAllObjects];
     [super viewDidUnload];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [messages removeAllObjects];
     [messages setArray:[delegate.DbInstance LoadThreadMessage: assignedEntry.keyid]];
@@ -141,15 +127,20 @@
     [self.tableView reloadData];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShown:)
-                                                 name:UIKeyboardWillShowNotification
+                                             selector:@selector(keyboardDidShow:)
+                                                 name:UIKeyboardDidShowNotification
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
-                                               object:nil];
-    
+											   object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(inputModeDidChange:)
+												 name:@"UITextInputCurrentInputModeDidChangeNotification"
+											   object:nil];
+	
     NSIndexPath * ndxPath= [NSIndexPath indexPathForRow:[messages count]-1 inSection:0];
     @try {
         [self.tableView scrollToRowAtIndexPath:ndxPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
@@ -160,22 +151,24 @@
     }
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIKeyboardWillShowNotification
                                                   object:nil];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIKeyboardWillHideNotification
-                                                  object:nil];
-    
+												  object:nil];
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self
+													name:@"UITextInputCurrentInputModeDidChangeNotification"
+												  object:nil];
+	
     [super viewWillDisappear:animated];
     [actWindow.view removeFromSuperview];
 }
 
-- (void)keyboardWillShown:(NSNotification *)notification
-{
+- (void)keyboardDidShow:(NSNotification *)notification {
     // adjust view due to keyboard
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
         CGFloat keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
@@ -187,20 +180,52 @@
     }
 }
 
-- (void)keyboardWillHide:(NSNotification *)notification
-{
+- (void)keyboardWillHide:(NSNotification *)notification {
     
+}
+
+- (void)inputModeDidChange:(NSNotification *)notification {
+	// Allows us to block dictation
+	UITextInputMode *inputMode = [UITextInputMode currentInputMode];
+	NSString *modeIdentifier = [inputMode respondsToSelector:@selector(identifier)] ? (NSString *)[inputMode performSelector:@selector(identifier)] : nil;
+	
+	if([modeIdentifier isEqualToString:@"dictation"]) {
+		[UIView setAnimationsEnabled:NO];
+		[[NSNotificationCenter defaultCenter] removeObserver:self
+														name:UIKeyboardDidShowNotification
+													  object:nil];
+		
+		[[NSNotificationCenter defaultCenter] removeObserver:self
+														name:UIKeyboardWillHideNotification
+													  object:nil];
+		
+		// hide the keyboard and show again to cancel dictation
+		[InstanceMessage resignFirstResponder];
+		[InstanceMessage becomeFirstResponder];
+		
+		[UIView setAnimationsEnabled:YES];
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(keyboardDidShow:)
+													 name:UIKeyboardDidShowNotification
+												   object:nil];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(keyboardWillHide:)
+													 name:UIKeyboardWillHideNotification
+												   object:nil];
+		
+		UIAlertView *denyAlert = [[UIAlertView alloc] initWithTitle:nil
+															message:NSLocalizedString(@"label_SpeechRecognitionAlert", nil)
+														   delegate:nil
+												  cancelButtonTitle:NSLocalizedString(@"btn_OK", nil)
+												  otherButtonTitles:nil];
+		[denyAlert show];
+	}
 }
 
 -(IBAction)unwindToMessageView:(UIStoryboardSegue *)unwindSegue
 {
     
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)sendSecureText: (NSString*)msgbody
@@ -236,7 +261,7 @@
     
     NSString* username = [delegate.DbInstance QueryStringInTokenTableByKeyID: assignedEntry.keyid Field:@"pid"];
     NSArray* namearray = [[username substringFromIndex:[username rangeOfString:@":"].location+1]componentsSeparatedByString:@";"];
-    username = [NSString composite_name:[namearray objectAtIndex:1] withLastName:[namearray objectAtIndex:0]];
+    username = [NSString compositeName:[namearray objectAtIndex:1] withLastName:[namearray objectAtIndex:0]];
     
     packnonce = [SSEngine BuildCipher:assignedEntry.keyid Message:msgbody Attach:nil RawFile:nil MIMETYPE:nil Cipher:pktdata];
     
@@ -323,14 +348,14 @@
 {
     ContactEntry *recipient = [[ContactEntry alloc]init];
     // assign necessary information
-    recipient.keyid = assignedEntry.keyid;
+    recipient.keyId = assignedEntry.keyid;
     
     NSString* name = [delegate.DbInstance QueryStringInTokenTableByKeyID:assignedEntry.keyid Field:@"pid"];
     NSArray* namearray = [[name substringFromIndex:[name rangeOfString:@":"].location+1]componentsSeparatedByString:@";"];
-    if([[namearray objectAtIndex:1]length]>0) recipient.fname = [namearray objectAtIndex:1];
-    if([[namearray objectAtIndex:0]length]>0) recipient.lname = [namearray objectAtIndex:0];
+    if([[namearray objectAtIndex:1]length]>0) recipient.firstName = [namearray objectAtIndex:1];
+    if([[namearray objectAtIndex:0]length]>0) recipient.lastName = [namearray objectAtIndex:0];
     
-    recipient.pushtoken = [delegate.DbInstance QueryStringInTokenTableByKeyID:assignedEntry.keyid Field:@"ptoken"];
+    recipient.pushToken = [delegate.DbInstance QueryStringInTokenTableByKeyID:assignedEntry.keyid Field:@"ptoken"];
     
     MsgEntry *NewMsg = [[MsgEntry alloc]
                         InitOutgoingMsg:msgid
@@ -826,7 +851,6 @@
     len = ntohl(*(int *)(p+offset));
     offset += 4;
     
-    const char* localdate = [[NSData dataWithBytes:p+offset length:len]bytes];
     offset = offset+len;
     
     flen = (unsigned int)ntohl(*(int *)(p+offset));
@@ -911,43 +935,36 @@
     });
 }
 
-- (id <QLPreviewItem>)previewController: (QLPreviewController *)controller previewItemAtIndex:(NSInteger)index
-{
+- (id <QLPreviewItem>)previewController: (QLPreviewController *)controller previewItemAtIndex:(NSInteger)index {
 	return _preview_cache_page;
 }
 
-- (NSInteger) numberOfPreviewItemsInPreviewController: (QLPreviewController *) controller
-{
+- (NSInteger) numberOfPreviewItemsInPreviewController: (QLPreviewController *) controller {
 	return 1;
 }
 
--(IBAction)sendshortmsg:(id)sender
-{
+-(IBAction)sendshortmsg:(id)sender {
     [InstanceMessage resignFirstResponder];
     [self sendSecureText:[InstanceMessage text]];
 }
 
 #pragma UITextFieldDelegate Methods
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
     self.navigationItem.leftBarButtonItem = CancelBtn;
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
+- (void)textFieldDidEndEditing:(UITextField *)textField {
     self.navigationItem.leftBarButtonItem = BackBtn;
 }
 
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
-{
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     return YES;
 }
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return NO;
 }
-
 
 #pragma mark - Navigation
 // In a storyboard-based application, you will often want to do a little preparation before navigation

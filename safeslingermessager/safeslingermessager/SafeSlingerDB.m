@@ -42,9 +42,9 @@
     // msgid
     self.msgid = newmsgid;
     self.dir = ToMsg;
-    self.sender = [NSString composite_name:user.fname withLastName:user.lname];
-    self.token = user.pushtoken;
-    self.keyid = user.keyid;
+    self.sender = [NSString compositeName:user.firstName withLastName:user.lastName];
+    self.token = user.pushToken;
+    self.keyid = user.keyId;
     self.rTime = self.cTime = [NSString GetGMTString:DATABASE_TIMESTR];
     
     if([message length]>0) self.msgbody = [message dataUsingEncoding:NSUTF8StringEncoding];
@@ -87,27 +87,23 @@
 @implementation SafeSlingerDB
 
 // private method
-- (BOOL) LoadDBFromStorage : (NSString*)specific_path
-{
+- (BOOL)LoadDBFromStorage:(NSString *)specific_path {
     BOOL success = YES;
-	@try{
-        
+	@try {
         NSFileManager *fileManager = [NSFileManager defaultManager];
         NSError *error;
         NSString *writableDBPath = nil;
         
         if(specific_path) {
             writableDBPath = [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent: [NSString stringWithFormat:@"%@.db", specific_path]];
-        }
-        else {
+        } else {
             // default
             writableDBPath = [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent: [NSString stringWithFormat:@"%@.db", DATABASE_NAME]];
         }
         
         DEBUGMSG(@"writableDBPath = %@", writableDBPath);
         
-        if (![fileManager fileExistsAtPath:writableDBPath])
-        {
+        if (![fileManager fileExistsAtPath:writableDBPath]) {
             // The writable database does not exist, so copy the default to the appropriate location.
             NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.db", DATABASE_NAME]];
             if (![fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error]) {
@@ -116,15 +112,15 @@
             }
         }
         
-        if(!(sqlite3_open([writableDBPath UTF8String], &db) == SQLITE_OK)){
+        if(!(sqlite3_open([writableDBPath UTF8String], &db) == SQLITE_OK)) {
             [ErrorLogger ERRORDEBUG:@"ERROR: Unable to open database."];
             success = NO;
         }
         
-    }@catch (NSException *exception) {
+    } @catch (NSException *exception) {
         [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: An exception occured, %@", [exception reason]]];
         success = NO;
-    }@finally {
+    } @finally {
         return success;
     }
 }
@@ -507,17 +503,15 @@
 
 
 #pragma Utility
-- (NSString*)GetProfileName
-{
+- (NSString *)GetProfileName {
     if(db==nil) return nil;
     // profile only
     NSString* fname = [self GetStringConfig: @"Profile_FN"];
     NSString* lname = [self GetStringConfig: @"Profile_LN"];
-    return [NSString composite_name:fname withLastName:lname];
+    return [NSString compositeName:fname withLastName:lname];
 }
 
-- (NSString*)GetRawKey: (NSString*)KEYID
-{
+- (NSString *)GetRawKey:(NSString *)KEYID {
     if(db==nil||KEYID==nil)
     {
         [ErrorLogger ERRORDEBUG:@"ERROR: DB Object is null or input is null."];
@@ -555,8 +549,7 @@
     }
 }
 
-- (int)GetDeviceType: (NSString*)KEYID
-{
+- (int)GetDeviceType:(NSString *)KEYID {
     if(db==nil||KEYID==nil)
     {
         [ErrorLogger ERRORDEBUG:@"ERROR: DB Object is null or input is null."];
@@ -594,9 +587,7 @@
     }
 }
 
-
-- (int)GetExchangeType: (NSString*)KEYID
-{    
+- (int)GetExchangeType:(NSString *)KEYID {
     if(db==nil||KEYID==nil)
     {
         [ErrorLogger ERRORDEBUG:@"ERROR: DB Object is null or input is null."];
@@ -634,8 +625,8 @@
 }
 
 #pragma Recipients
-- (NSArray*)LoadRecipients:(BOOL)ExchangeOnly
-{
+
+- (NSArray*)LoadRecipients:(BOOL)ExchangeOnly {
     if(db == nil) {
         [ErrorLogger ERRORDEBUG:@"ERROR: DB Object is null or input is null."];
         return nil;
@@ -674,8 +665,7 @@
     }
 }
 
-- (NSArray*)LoadRecentRecipients:(BOOL)ExchangeOnly
-{
+- (NSArray*)LoadRecentRecipients:(BOOL)ExchangeOnly {
     if(db == nil) {
         [ErrorLogger ERRORDEBUG:@"ERROR: DB Object is null or input is null."];
         return nil;
@@ -733,18 +723,18 @@
 	
 	NSArray* namearray = [[column substringFromIndex:[column rangeOfString:@":"].location+1]componentsSeparatedByString:@";"];
 	
-	if([[namearray objectAtIndex:1]length] > 0) {
-		contact.fname = [namearray objectAtIndex:1];
+	if([namearray[1] length] > 0) {
+		contact.firstName = [namearray objectAtIndex:1];
 	}
 	
-	if([[namearray objectAtIndex:0]length] > 0) {
-		contact.lname = [namearray objectAtIndex:0];
+	if([namearray[0] length] > 0) {
+		contact.lastName = [namearray objectAtIndex:0];
 	}
 	
-	contact.pushtoken = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 0)];
+	contact.pushToken = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 0)];
 	contact.exchangeDate = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 2)];
 	contact.devType = sqlite3_column_int(sqlStatement, 3);
-	contact.ex_type = sqlite3_column_int(sqlStatement, 4);
+	contact.exchangeType = sqlite3_column_int(sqlStatement, 4);
 	
 	// setphoto
 	if(sqlite3_column_type(sqlStatement, 5) != SQLITE_NULL) {
@@ -753,150 +743,180 @@
 	
 	// set keyid and pstamp
 	if(sqlite3_column_bytes(sqlStatement, 6) > 0) {
-		contact.keyid = [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 6)];
+		contact.keyId = [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 6)];
 	}
 	
 	if(sqlite3_column_type(sqlStatement, 8) != SQLITE_NULL) {
 		contact.keygenDate = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 8)];
 	}
 	
+	contact.recordId = sqlite3_column_int(sqlStatement, 10);
+	
 	return contact;
 }
 
-- (BOOL)AddNewRecipient: (NSData*)keyelement User:(NSString*)username Dev:(int)type Photo:(NSString*)UserPhoto Token:(NSString*)token ExchangeOrIntroduction: (BOOL)flag
-{
-    if(db==nil||keyelement==nil)
-    {
+- (BOOL)updateContactDetails:(ContactEntry *)contact {
+	if (db == nil || contact == nil) {
+		[ErrorLogger ERRORDEBUG:@"ERROR: DB Object is null or input is null."];
+		return NO;
+	}
+	
+	BOOL result = YES;
+	
+	@try {
+		// update
+		const char *sql = "UPDATE tokenstore SET pid=?, note=?, ABRecordID=? WHERE ptoken=?";
+		sqlite3_stmt *sqlStatement;
+			
+		if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
+			[ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
+			result = NO;
+		}
+		
+		// bind pid
+		sqlite3_bind_text(sqlStatement, 1, [[NSString vcardnstring:contact.firstName withLastName:contact.lastName] UTF8String], -1, SQLITE_TRANSIENT);
+		
+		// bind photo
+		if (contact.photo != nil) {
+			sqlite3_bind_text(sqlStatement, 2, [[Base64 encode:contact.photo] UTF8String], -1, SQLITE_TRANSIENT);
+		} else {
+			sqlite3_bind_null(sqlStatement, 2);
+		}
+		
+		// bind ABRecordID
+		sqlite3_bind_int(sqlStatement, 3, contact.recordId);
+		
+		// bind ptoken
+		sqlite3_bind_text(sqlStatement, 4, [contact.pushToken UTF8String], -1, SQLITE_TRANSIENT);
+	
+		if(SQLITE_DONE != sqlite3_step(sqlStatement)) {
+			[ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"Error while inserting peer. '%s'", sqlite3_errmsg(db)]];
+			result = NO;
+		}
+		
+		if(sqlite3_finalize(sqlStatement) != SQLITE_OK) {
+			[ErrorLogger ERRORDEBUG: @"ERROR: Problem with finalize statement"];
+			result = NO;
+		}
+	}
+	@catch (NSException *exception) {
+		[ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"An exception occured: %@", [exception reason]]];
+		result = NO;
+	}
+	@finally {
+		return result;
+	}
+}
+
+- (BOOL)addNewRecipient:(ContactEntry *)contact {
+    if (!db || !contact || !contact.keyId || !contact.keygenDate || !contact.keyString) {
         [ErrorLogger ERRORDEBUG:@"ERROR: DB Object is null or input is null."];
         return NO;
     }
-    
-    //  search possible entry
-    NSString* rawdata = [NSString stringWithCString:[keyelement bytes] encoding:NSASCIIStringEncoding];
-    rawdata = [rawdata substringToIndex:[keyelement length]];
-    
-    NSArray* keyarray = [rawdata componentsSeparatedByString:@"\n"];
-    if([keyarray count]!=3) {
-        [ErrorLogger ERRORDEBUG: (@"ERROR: Exchange public key is not well-formated!")];
-        return NO;
-    }
-    
+	
     BOOL result = YES;
-    
+	
     @try {
         const char *sql = "SELECT pid FROM tokenstore WHERE keyid=?";
         sqlite3_stmt *sqlStatement;
-        if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK)
-        {
+        if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
             [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
             result = NO;
         }
-        
-        NSString* keyid = [keyarray objectAtIndex:0];
+		
         NSString* ptoken = nil;
-        sqlite3_bind_blob(sqlStatement, 1, [keyid cStringUsingEncoding:NSUTF8StringEncoding], (int)[keyid lengthOfBytesUsingEncoding:NSUTF8StringEncoding], SQLITE_TRANSIENT);
+        sqlite3_bind_blob(sqlStatement, 1, [contact.keyId cStringUsingEncoding:NSUTF8StringEncoding], (int)[contact.keyId lengthOfBytesUsingEncoding:NSUTF8StringEncoding], SQLITE_TRANSIENT);
         
-        if (sqlite3_step(sqlStatement)==SQLITE_ROW) {
+        if (sqlite3_step(sqlStatement) == SQLITE_ROW) {
             ptoken = [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 0)];
         }
         
-        if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
+        if(sqlite3_finalize(sqlStatement) != SQLITE_OK) {
             [ErrorLogger ERRORDEBUG: @"ERROR: Problem with finalize statement"];
             result = NO;
         }
         
         NSString* now = [NSString GetLocalTimeString:DATABASE_TIMESTR];
-        if(ptoken)
-        {
+		
+        if(ptoken) {
             // update
             sql = "UPDATE tokenstore SET pid=?, dev=?, bdate=?, note=?, ex_type=?, ptoken=?, pkey=?, pstamp=? WHERE keyid=?";
             
-            if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK)
-            {
+            if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
                 [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
                 result = NO;
             }
             
             // bind pid
-            sqlite3_bind_text(sqlStatement, 1, [username UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(sqlStatement, 1, [[NSString vcardnstring:contact.firstName withLastName:contact.lastName] UTF8String], -1, SQLITE_TRANSIENT);
             // bind dev
-            sqlite3_bind_int(sqlStatement, 2, type);
+            sqlite3_bind_int(sqlStatement, 2, contact.devType);
             // bind date
             sqlite3_bind_text(sqlStatement, 3, [now UTF8String], -1, SQLITE_TRANSIENT);
             // bind photo
-            if(UserPhoto!=nil){
-                sqlite3_bind_text(sqlStatement, 4, [UserPhoto UTF8String], -1, SQLITE_TRANSIENT);
-            }else{
+            if (contact.photo != nil) {
+                sqlite3_bind_text(sqlStatement, 4, [[Base64 encode: UIImageJPEGRepresentation([UIImage imageWithData:contact.photo], 0.9)] UTF8String], -1, SQLITE_TRANSIENT);
+            } else {
                 sqlite3_bind_null(sqlStatement, 4);
             }
-            
             // bind ex_type
-            if(flag)sqlite3_bind_int(sqlStatement, 5, 0);
-            else sqlite3_bind_int(sqlStatement, 5, 1);
-            
+			sqlite3_bind_int(sqlStatement, 5, contact.exchangeType);
             // bind ptoken
-            sqlite3_bind_text(sqlStatement, 6, [token UTF8String], -1, SQLITE_TRANSIENT);
-            
+            sqlite3_bind_text(sqlStatement, 6, [contact.pushToken UTF8String], -1, SQLITE_TRANSIENT);
             // pkey
-            NSString* keystr = [keyarray objectAtIndex:2];
-            sqlite3_bind_text(sqlStatement, 7, [keystr UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(sqlStatement, 7, [contact.keyString UTF8String], -1, SQLITE_TRANSIENT);
             // pstamp
-            NSString* stamp = [keyarray objectAtIndex:1];
-            sqlite3_bind_text( sqlStatement, 8, [stamp UTF8String], -1, SQLITE_TRANSIENT);
-            
+            sqlite3_bind_text(sqlStatement, 8, [contact.keygenDate UTF8String], -1, SQLITE_TRANSIENT);
             // bind keyid
-            sqlite3_bind_blob(sqlStatement, 9, [keyid cStringUsingEncoding:NSUTF8StringEncoding], (int)[keyid lengthOfBytesUsingEncoding:NSUTF8StringEncoding], SQLITE_TRANSIENT);
+            sqlite3_bind_blob(sqlStatement, 9, [contact.keyId cStringUsingEncoding:NSUTF8StringEncoding], (int)[contact.keyId lengthOfBytesUsingEncoding:NSUTF8StringEncoding], SQLITE_TRANSIENT);
             
-            if(SQLITE_DONE != sqlite3_step(sqlStatement)){
+            if(SQLITE_DONE != sqlite3_step(sqlStatement)) {
                 [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"Error while inserting peer. '%s'", sqlite3_errmsg(db)]];
                 result = NO;
             }
             
-            if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
+            if(sqlite3_finalize(sqlStatement) != SQLITE_OK) {
                 [ErrorLogger ERRORDEBUG: @"ERROR: Problem with finalize statement"];
                 result = NO;
             }
+        } else {
+            sql = "INSERT INTO tokenstore (ptoken, pid, bdate, dev, ex_type, note, keyid, pkey, pstamp, ABRecordID) Values (?,?,?,?,?,?,?,?,?,?)";
             
-        }else{
-            
-            sql = "INSERT INTO tokenstore (ptoken, pid, bdate, dev, ex_type, note, keyid, pkey, pstamp) Values (?,?,?,?,?,?,?,?,?)";
-            
-            if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK)
-            {
+            if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
                 [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
                 result = NO;
             }
             // bind ptoken
-            sqlite3_bind_text(sqlStatement, 1, [token UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(sqlStatement, 1, [contact.pushToken UTF8String], -1, SQLITE_TRANSIENT);
             // bind pid
-            sqlite3_bind_text(sqlStatement, 2, [username UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(sqlStatement, 2, [[NSString vcardnstring:contact.firstName withLastName:contact.lastName] UTF8String], -1, SQLITE_TRANSIENT);
             // binf date
             sqlite3_bind_text(sqlStatement, 3, [now UTF8String], -1, SQLITE_TRANSIENT);
             // bind dev
-            sqlite3_bind_int(sqlStatement, 4, type);
-            // bind ex_type
-            if(flag)sqlite3_bind_int(sqlStatement, 5, 0);
-            else sqlite3_bind_int(sqlStatement, 5, 1);
+			sqlite3_bind_int(sqlStatement, 4, contact.devType);
+			// bind ex_type
+			sqlite3_bind_int(sqlStatement, 5, contact.exchangeType);
             // bind photo
-            if(UserPhoto!=nil)sqlite3_bind_text(sqlStatement, 6, [UserPhoto UTF8String], -1, SQLITE_TRANSIENT);
-            else sqlite3_bind_null(sqlStatement, 6);
-            
+			if (contact.photo != nil) {
+				sqlite3_bind_text(sqlStatement, 6, [[Base64 encode: UIImageJPEGRepresentation([UIImage imageWithData:contact.photo], 0.9)] UTF8String], -1, SQLITE_TRANSIENT);
+			} else {
+				sqlite3_bind_null(sqlStatement, 6);
+			}
             // bind keyid
-            sqlite3_bind_blob(sqlStatement, 7, [keyid cStringUsingEncoding:NSUTF8StringEncoding], (int)[keyid lengthOfBytesUsingEncoding:NSUTF8StringEncoding], SQLITE_TRANSIENT);
-            
+            sqlite3_bind_blob(sqlStatement, 7, [contact.keyId cStringUsingEncoding:NSUTF8StringEncoding], (int)[contact.keyId lengthOfBytesUsingEncoding:NSUTF8StringEncoding], SQLITE_TRANSIENT);
             // pkey
-            NSString* keystr = [keyarray objectAtIndex:2];
-            sqlite3_bind_text(sqlStatement, 8, [keystr UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(sqlStatement, 8, [contact.keyString UTF8String], -1, SQLITE_TRANSIENT);
             // pstamp
-            NSString* stamp = [keyarray objectAtIndex:1];
-            sqlite3_bind_text( sqlStatement, 9, [stamp UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(sqlStatement, 9, [contact.keygenDate UTF8String], -1, SQLITE_TRANSIENT);
+			// ABRecordID
+			sqlite3_bind_int(sqlStatement, 10, contact.recordId);
             
-            if(SQLITE_DONE != sqlite3_step(sqlStatement)){
+            if (SQLITE_DONE != sqlite3_step(sqlStatement)) {
                 [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"Error while inserting peer. '%s'", sqlite3_errmsg(db)]];
                 result = NO;
             }
             
-            if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
+            if (sqlite3_finalize(sqlStatement) != SQLITE_OK) {
                 [ErrorLogger ERRORDEBUG: @"ERROR: Problem with finalize statement"];
                 result = NO;
             }
@@ -912,8 +932,7 @@
     }
 }
 
-- (BOOL)RemoveRecipient: (NSString*)KEYID
-{
+- (BOOL)RemoveRecipient:(NSString *)KEYID {
     if(db==nil||KEYID==nil){
         [ErrorLogger ERRORDEBUG:@"ERROR: DB Object is null or input is null."];
         return NO;
@@ -954,9 +973,7 @@
     }
 }
 
-
-- (BOOL)PatchForTokenStoreTable
-{
+- (BOOL)PatchForTokenStoreTable {
     // patch for 1.7
     DEBUGMSG(@"database patch to change tokenstore.");
     
@@ -1090,27 +1107,56 @@
     }
 }
 
+- (BOOL)patchForContactsFromAddressBook {
+	// patch for 1.8
+	BOOL ret = YES;
+	@try {
+		// for configuration table
+		sqlite3_stmt *sqlStatement;
+		const char *sql = "ALTER TABLE tokenstore ADD COLUMN ABRecordID int;";
+		
+		if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK){
+			DEBUGMSG(@"Error while preparing statement. '%s'\n", sqlite3_errmsg(db));
+			ret = NO;
+		}
+		
+		if(sqlite3_step(sqlStatement) != SQLITE_OK) {
+			ret = NO;
+		}
+		
+		DEBUGMSG(@"Update Done.");
+		
+	}
+	@catch (NSException *exception) {
+		DEBUGMSG(@"ERROR: An exception occured, %@", [exception reason]);
+		ret = NO;
+	}
+	@finally {
+		return ret;
+	}
+}
+
 - (void) GetThreads: (NSMutableDictionary*)threadlist
 {
     if(db==nil&&threadlist==nil)
     {
         [ErrorLogger ERRORDEBUG:@"ERROR: DB Object is null or input is null."];
     }
-    
+	
     @try {
-        
+		
         [threadlist removeAllObjects];
         const char *sql = NULL;
         sqlite3_stmt *sqlStatement;
-        
+		
         // New Thread Only
         sql = "SELECT receipt, cTime, count(msgid) FROM msgtable GROUP BY receipt order by cTime desc";
-        
+		
         if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK)
         {
             [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
         }
-        
+		
         while (sqlite3_step(sqlStatement)==SQLITE_ROW) {
             MsgListEntry *listEnt = [[MsgListEntry alloc]init];
             listEnt.keyid = [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 0)];

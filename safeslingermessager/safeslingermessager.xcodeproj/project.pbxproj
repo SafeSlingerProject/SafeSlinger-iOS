@@ -79,6 +79,7 @@
 		18FBD720194A0EED006CA09C /* MessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBD71F194A0EED006CA09C /* MessageView.m */; };
 		18FBD723194A2243006CA09C /* FunctionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBD722194A2243006CA09C /* FunctionView.m */; };
 		18FBD727194A4478006CA09C /* EndExchangeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBD726194A4478006CA09C /* EndExchangeView.m */; };
+		41AE90721A0ADDAC009E08C4 /* ContactEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 41AE90711A0ADDAC009E08C4 /* ContactEntry.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -294,6 +295,8 @@
 		18FBD722194A2243006CA09C /* FunctionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FunctionView.m; sourceTree = "<group>"; };
 		18FBD725194A4478006CA09C /* EndExchangeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EndExchangeView.h; sourceTree = "<group>"; };
 		18FBD726194A4478006CA09C /* EndExchangeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndExchangeView.m; sourceTree = "<group>"; };
+		41AE90701A0ADDAC009E08C4 /* ContactEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactEntry.h; sourceTree = "<group>"; };
+		41AE90711A0ADDAC009E08C4 /* ContactEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactEntry.m; sourceTree = "<group>"; };
 		C9CFD8FC1950EA2C0048857E /* af */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = af; path = af.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -420,6 +423,8 @@
 				18DE7101194BA54C00C43F84 /* ContactCellView.m */,
 				188EF472194F91290022E6C3 /* KeySelectionView.h */,
 				188EF473194F91290022E6C3 /* KeySelectionView.m */,
+				41AE90701A0ADDAC009E08C4 /* ContactEntry.h */,
+				41AE90711A0ADDAC009E08C4 /* ContactEntry.m */,
 			);
 			name = ContactManagement;
 			sourceTree = "<group>";
@@ -802,6 +807,7 @@
 				1869D6601948CAEF00B186D3 /* ContactManageView.m in Sources */,
 				182E22111950B5E700F5997A /* MessageDetailView.m in Sources */,
 				18605791194534BB002DD149 /* SetupView.m in Sources */,
+				41AE90721A0ADDAC009E08C4 /* ContactEntry.m in Sources */,
 				1860574919451001002DD149 /* AppDelegate.m in Sources */,
 				18DE7102194BA54C00C43F84 /* ContactCellView.m in Sources */,
 				1860577A194518D6002DD149 /* ComposeView.m in Sources */,

@@ -26,21 +26,10 @@
 #import <MessageUI/MessageUI.h>
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
+#import "ContactEntry.h"
+#import "ContactManageView.h"
 
 @class AppDelegate;
-@class ContactEntry;
-
-@interface ContactEntry : NSObject
-
-@property (nonatomic, strong) NSString *fname, *lname, *keyid, *pushtoken, *keygenDate, *exchangeDate;
-@property (nonatomic, strong) NSData *photo;
-@property (nonatomic, readwrite) int devType, contact_id, ex_type;
-
--(NSString*)PrintContact;
-
-@end
-
-
 
 @protocol ContactSelectViewDelegate <NSObject>
 
@@ -56,8 +45,7 @@ typedef enum {
 
 
 @interface ContactSelectView : UITableViewController <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate, UIActionSheetDelegate, ABPeoplePickerNavigationControllerDelegate, MFMessageComposeViewControllerDelegate, UIAlertViewDelegate, UISearchBarDelegate> {
-    // used for show peers, each entry is a SSContactEntry object
-    UIAlertView *UserInfo;
+	
 }
 
 @property (nonatomic, retain) AppDelegate *appDelegate;
