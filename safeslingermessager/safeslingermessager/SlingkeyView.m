@@ -75,7 +75,12 @@
     
     // safeslinger exchange protocol
     proto = [[safeslingerexchange alloc]init];
-    GatherList = [NSMutableArray array];
+	GatherList = [NSMutableArray array];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(contactEdited:)
+												 name:NSNotificationContactEdited
+											   object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -101,16 +106,9 @@
     }
 	
     [self processProfile];
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(contactEdited:)
-												 name:NSNotificationContactEdited
-											   object:nil];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-	
+- (void)dealloc {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -171,8 +169,7 @@
     [self.ContactInfoTable reloadData];
 }
 
--(IBAction) EditContact
-{
+-(IBAction) EditContact {
     ABAuthorizationStatus status = ABAddressBookGetAuthorizationStatus();
     if(status == kABAuthorizationStatusNotDetermined) {
         UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
@@ -183,8 +180,7 @@
         message.tag = AskPerm;
         [message show];
         message = nil;
-    }
-    else if(status == kABAuthorizationStatusDenied || status == kABAuthorizationStatusRestricted) {
+    } else if(status == kABAuthorizationStatusDenied || status == kABAuthorizationStatusRestricted) {
         NSString* buttontitle = nil;
         NSString* description = nil;
         if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
@@ -203,10 +199,8 @@
         message.tag = HelpContact;
         [message show];
         message = nil;
-    }
-    else if(status == kABAuthorizationStatusAuthorized) {
-        if(delegate.IdentityNum!=NonExist)
-        {
+    } else if(status == kABAuthorizationStatusAuthorized) {
+        if(delegate.IdentityNum != NonExist) {
             [self performSegueWithIdentifier:@"EditContact" sender:self];
         }
     }

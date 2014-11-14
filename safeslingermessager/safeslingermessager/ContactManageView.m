@@ -242,7 +242,7 @@
         }
     });
     
-    ABRecordRef person = ABAddressBookGetPersonWithRecordID(aBook, _appDelegate.IdentityNum);
+    ABRecordRef person = ABAddressBookGetPersonWithRecordID(aBook, _editingContact ? _editingContact.recordId : _appDelegate.IdentityNum);
 	
 	if([self updateContact:person]){
         FunctionView *main = nil;
@@ -264,8 +264,7 @@
     [self presentViewController:navigation animated:YES completion:nil];
 }
 
-- (void)selectAnotherContact
-{
+- (void)selectAnotherContact {
     ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
     picker.peoplePickerDelegate = self;
     [self presentViewController:picker animated:YES completion:nil];
