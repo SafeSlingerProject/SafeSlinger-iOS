@@ -705,7 +705,7 @@
 "state_BackupRestored" = "காப்பு மீண்டும்.";
 /* 'Deleted file %s.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that a file has been deleted. %s = the file name of the deleted file. */
 "state_FileDeleted" = "நீக்கப்பட்ட கோப்பில் %@.";
-/* 'Message sent.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that a message has been sent. */
+/* 'Message sent.' is an informational message (sentence case, period); TODO: This should be deprecated in favor 1 message push to messages tab (single thread) and >1 messages push to messages tab (all threads) with a toast of state_MessagesSent. */
 "state_FileSent" = "செய்தி அனுப்பப்பட்டது.";
 /* 'Invitation added.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the addition of a contact invitation. */
 "state_InvitationAdded" = "அழைப்பிதழ் சேர்ந்தது.";

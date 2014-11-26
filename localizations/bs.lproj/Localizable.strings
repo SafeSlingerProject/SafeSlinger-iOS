@@ -705,7 +705,7 @@
 "state_BackupRestored" = "Backup obnovljena.";
 /* 'Deleted file %s.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that a file has been deleted. %s = the file name of the deleted file. */
 "state_FileDeleted" = "Izbrisano file %@.";
-/* 'Message sent.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that a message has been sent. */
+/* 'Message sent.' is an informational message (sentence case, period); TODO: This should be deprecated in favor 1 message push to messages tab (single thread) and >1 messages push to messages tab (all threads) with a toast of state_MessagesSent. */
 "state_FileSent" = "Poruka poslana.";
 /* 'Invitation added.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the addition of a contact invitation. */
 "state_InvitationAdded" = "Dodao poziva.";

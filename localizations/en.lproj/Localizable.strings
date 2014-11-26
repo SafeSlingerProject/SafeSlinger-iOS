@@ -30,7 +30,7 @@
 /* application name (title case); used for home screen icons, at the top of many screens, and many other places in the application. */
 "app_name" = "SafeSlinger";
 /* application description (sentence case); the names of the individuals who translated and/or reviewed localizations. */
-"app_TranslatorName" = "Adrian Perrig\nAkira Yamada\nAlbert Stroucken\nElli Fragkaki\nEmmanuel Owusu\nIrina Fudrow\nJens Höfflinger\nMichael Stroucken\nNicolas Christin\nSteve Matsumoto\nYeon Yim\nYue-Hsun Lin\n";
+"app_TranslatorName" = "Adrian Perrig\nAkira Yamada\nAlbert Stroucken\nElli Fragkaki\nEmmanuel Owusu\nIrina Fudrow\nJens Höfflinger\nMatthias Beckerle\nMichael Stroucken\nNicolas Christin\nSteve Matsumoto\nYeon Yim\nYue-Hsun Lin\n";
 
 /* question message (sentence case, question mark); used to warn when the backup is off to confirm we should keep reminding the user. Used with Forget and Remind buttons. */
 "ask_BackupDisabledRemindLater" = "Backup is disabled. Do you want to adjust backup settings and keep this reminder?";
@@ -499,6 +499,8 @@
 "label_messageInviteSetupInst" = "To setup a secure messaging connection, we can meet or phone each other at the same time, and then Sling Keys just once to verify the connection.";
 /* screen label (match English casing); used as message text to invite a contact to begin secure messaging. */
 "label_messageInviteStartMsg" = "Can we start secure messaging with the open source SafeSlinger iPhone or Android app?";
+/* screen label (match English casing); used as the text message completing sling keys. %s = the name of a recipient. */
+"label_messageYouAreVerified" = "%@, you are verified.";
 /* screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole minutes. */
 "label_minutes" = "%d minutes";
 /* screen label (match English casing); used to denote a 'mobile' type of email or phone contact type. iOS-only. */
@@ -559,6 +561,8 @@
 "label_SaveAccount" = "Save Account";
 /* screen label (match English casing); used to instruct the user how to proceed on the End Exchange screen. */
 "label_SaveInstruct" = "Check contacts you want to update in your address book, then tap Import to save secure contacts:";
+/* screen label (match English casing); used on the Recipients screen to provide a hint to search for contacts. */
+"label_search_contacts_hint" = "Search contacts";
 /* screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole seconds. */
 "label_seconds" = "%d seconds";
 /* screen label (match English casing); used on the Compose Message screen recipient button before a recipient has been selected. */
@@ -571,8 +575,8 @@
 "label_SendTo" = "To:";
 /* screen label (match English casing); used in the key exchange walkthrough dialog to toggle the display of the walkthrough at the next attempted key exchange. */
 "label_ShowHintAtLaunch" = "Show this hint next time.";
-/* screen label (match English casing); used to alert the user about possible information leak on the use of speech recognition when the user tries tu use this feature */
-"label_SpeechRecognitionAlert" = "Using speech recognition is disabled because it might cause information leak";
+/* screen label (match English casing); used to alert the user about possible information leak on the use of speech recognition when the user tries to use this feature */
+"label_SpeechRecognitionAlert" = "Using speech recognition is disabled because it might cause an information leak";
 /* screen label (match English casing); used in the key exchange walkthrough dialog. */
 "label_step_1" = "Step 1";
 /* screen label (match English casing); used in the key exchange walkthrough dialog. */
@@ -756,6 +760,8 @@
 "prog_generatingSignature" = "generating signature...";
 /* progress message (lower case, ellipsis); used to show progress during file preview loading. */
 "prog_loadingContent" = "loading content...";
+/* progress message (lower case, ellipsis); used to show progress during queued message while waiting to act */
+"prog_pending" = "pending...";
 /* progress message (lower case, ellipsis); used to show progress while receiving the requested file. */
 "prog_ReceivingFile" = "receiving encrypted file...";
 /* progress message (lower case, ellipsis); used to show progress while waiting for the server to return the requested file. */
@@ -794,7 +800,7 @@
 "state_BackupRestored" = "Backup restored.";
 /* informational message (sentence case, period); used in an auto-dismissed message to confirm that a file has been deleted. %s = the file name of the deleted file. */
 "state_FileDeleted" = "Deleted file %@.";
-/* informational message (sentence case, period); used in an auto-dismissed message to confirm that a message has been sent. */
+/* informational message (sentence case, period); TODO: This should be deprecated in favor 1 message push to messages tab (single thread) and >1 messages push to messages tab (all threads) with a toast of state_MessagesSent. */
 "state_FileSent" = "Message sent.";
 /* informational message (sentence case, period); used in an auto-dismissed message to confirm the addition of a contact invitation. */
 "state_InvitationAdded" = "Invitation added.";
@@ -802,6 +808,8 @@
 "state_MessageSavedAsDraft" = "Message saved as draft.";
 /* informational message (sentence case, period); used in an auto-dismissed message to confirm the number of messages deleted. %d = the number of messages successfully deleted. */
 "state_MessagesDeleted" = "%d messages deleted.";
+/* informational message (sentence case, period); used in an auto-dismissed message to confirm that N messages has been sent used on all threads views. */
+"state_MessagesSent" = "%d messages sent.";
 /* informational message (sentence case, period); used in an auto-dismissed message to confirm the change of password. */
 "state_PassphraseUpdated" = "Passphrase updated.";
 /* informational message (sentence case, period); used in an auto-dismissed message to confirm the number of recipients deleted. %d the number of recipient's keys successfully deleted. */
@@ -830,15 +838,9 @@
 /* application description (sentence case); used at the end of the about dialog to list the developers of SafeSlinger. */
 "text_DevelopedBy" = "Developed by:";
 /* application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordAdHoc" = "ad hoc";
-/* application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordExchange" = "Exchange";
 /* application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordIdentity" = "Identity";
-/* application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordIMessage" = "iMessage";
-/* application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordKakaoTalk" = "KakaoTalk";
 /* application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordKey" = "Key";
 /* application description (sentence case); one of many keywords to use when searching related terms. */
@@ -851,14 +853,10 @@
 "text_KeywordSecurity" = "Security";
 /* application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordSlinger" = "Slinger";
-/* application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordTextSecure" = "TextSecure";
-/* application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordThreema" = "Threema";
-/* application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordWhatsApp" = "WhatsApp";
 /* application description (sentence case); used at the end of the about dialog to list the translators of SafeSlinger. */
 "text_LanguagesProvidedBy" = "Languages provided by:";
+/* application description (sentence case); used in the app store listing, %s = SafeSlinger project localization repo. */
+"text_LocalizationRepo" = "translate: %@";
 /* application description (sentence case); used in the app store listing to list related search terms to help users looking for secure key exchange and messaging. */
 "text_RelatedSearchTerms" = "Related Terms:";
 /* application description (sentence case); used in the about box and app store listing to enumerate requirements. */
@@ -899,7 +897,7 @@
 /* title (title case); used at the top of the home screen on iOS. */
 "title_HomePanel" = "Home";
 /* title (title case); used as the settings title when changing language */
-"title_language" = "Select language. Help us translate by using Send Feedback.";
+"title_language" = "Select language. Help us on transifex.com.";
 /* title (title case); used at the top of the dialog when viewing message details. */
 "title_MessageDetail" = "Message";
 /* title (title case); used at the top of the message list screen. */

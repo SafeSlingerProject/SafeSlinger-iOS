@@ -113,13 +113,13 @@
 /* 'Default Storage' is a choice (sentence case); used to set the attachment root path to the default source. Android-only. */
 "choice_auto_storage" = "Standardspeicher";
 /* 'Default' is a choice (sentence case); used in any menu to denote the default choice. */
-"choice_default" = "Default";
+"choice_default" = "Voreinstellung";
 /* 'External Storage' is a choice (sentence case); used to set the attachment root path to an external source. Android-only. */
 "choice_external_storage" = "Externer Speicher";
 /* 'Large' is a choice (sentence case); used in the settings to choose a large font size. */
 "choice_font_large" = "Groß";
 /* 'Medium' is a choice (sentence case); used in the settings to choose a medium font size. */
-"choice_font_medium" = "Medium";
+"choice_font_medium" = "Mittel";
 /* 'Very Small' is a choice (sentence case); used in the settings to choose a tiny font size. */
 "choice_font_micro" = "Sehr klein";
 /* 'Small' is a choice (sentence case); used in the settings to choose a small font size. */
@@ -150,7 +150,7 @@
 /* 'Audio recorder encoding error.' is an error message (sentence case, period); used to warn when attempting to record an audio message fails to encode properly. iOS-only. */
 "error_AudioRecorderEncodeError" = "Audio Recorder Codierungsfehler.";
 /* 'Microphone permission is required to record a secure voice message. Tap the %s button for SafeSlinger Microphone permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Microphone permission. iOS-only. */
-"error_AudioRecorderPermissionError" = "Mikrofon Erlaubnis ist erforderlich, um eine sichere Sprachnachricht aufzuzeichnen. Tippen Sie auf die Taste für %@ SafeSlinger Mikrofon Berechtigungsdetails.";
+"error_AudioRecorderPermissionError" = "Mikrofon-Zugriffserlaubnis ist erforderlich, um eine sichere Sprachnachricht aufzuzeichnen. Tippen Sie auf die Taste %@ für SafeSlinger Mikrofon Berechtigungsdetails.";
 /* 'No backup to restore.' is an error message (sentence case, period); used to warn at application setup, when there is no pre-existing backup to restore and warn the user that any previous keys have not been restored. */
 "error_BackupNotFound" = "Keine Sicherung zur Wiederherstellung vorhanden.";
 /* 'Device does not support backup restore.' is an error message (sentence case, period); used to warn when the device hardware does not support restoration from backup. */
@@ -289,11 +289,11 @@
 "error_WebCancelledByUser" = "Benutzer brach Serveranfrage ab.";
 
 /* 'Use this screen to set your name to exchange with others, and a passphrase to protect your data. Tap the Done button when finished.' is a help message (sentence case, period); used via Help button on the Setup screen to describe in more detail what the Setup screen does. */
-"help_find" = "Verwenden Sie diesen Bildschirm, um Ihren Namen eingestellt, um mit anderen, und einer Passphrase auszutauschen, um Ihre Daten zu schützen. Tippen Sie auf die Schaltfläche Fertig, wenn Sie fertig sind.";
+"help_find" = "Verwenden Sie diesen Bildschirm um Ihren Anzeigenamen sowie Ihr Passwort zum Schutz ihrer Daten festzulegen. Tippen Sie abschließend auf die Schaltfläche Fertig um Ihre Eingabe zu bestätigen.";
 /* 'To exchange identity data, ensure all users are nearby or on the phone. The Begin Exchange button will exchange only the checked contact data.' is a help message (sentence case, period); used via Help button on the Begin Exchange screen and also the key exchange walkthrough tutorial to describe in more detail what the Begin Exchange screen does. */
 "help_home" = "Um Identitätsdaten auszutauschen, vergewissern Sie sich zuerst, dass alle Benutzer mit ihrem Handy bereit sind. Durch die Schaltfläche Austauschen werden nur die ausgewählten Kontaktdaten ausgetauscht.";
 /* 'You may also change personal data about your identity on this screen by tapping on the button with your name. This will display a menu allowing you to Edit your contact, Create New contact, or Use Another contact.' is a help message (sentence case, period); Additional help text, which is appended to the Help button text on the Compose and Begin Exchange screens. */
-"help_identity_menu" = "Sie können auch Ihre personenbezogenen Identitätsdaten auf dieser Seite ändern, indem Sie auf die Schaltfläche mit Ihrem Namen tippen. es wird ein Menü angezeigt, auf dem Sie Ihren Kontakt editieren, einen neuen Kontakt anlegen oder einen anderen verwenden können.";
+"help_identity_menu" = "Sie können auch Ihre personenbezogenen Identitätsdaten auf dieser Seite ändern, indem Sie auf die Schaltfläche mit Ihrem Namen tippen. Es wird ein Menü angezeigt, auf dem Sie Ihren Kontakt editieren, einen neuen Kontakt anlegen oder einen Anderen verwenden können.";
 /* 'This screen displays all past messages, and attachments that are still available for download.' is a help message (sentence case, period); used via Help button on the Messages list screen to describe in more detail what the Messages list screen does. */
 "help_Messages" = "Dieses Fenster zeigt alle bisherigen Nachrichten und Dateien, die noch zum Download zur Verfügung sind.";
 /* 'Use this screen to login to the application with your passphrase. If you have forgotten your passphrase, you may generate a new key protected by a new passphrase by tapping the Forgot Passphrase? button. Tap the user name to switch between multiple keys.' is a help message (sentence case, period); used via Help button on the Passphrase screen to describe in more detail what the Passphrase screen does. */
@@ -477,7 +477,7 @@
 /* 'Save Account' is a screen label (match English casing); used above the editable field on the End Exchange screen to showing the address book account to use when saving or updating contacts. */
 "label_SaveAccount" = "Konto Speichern";
 /* 'Check contacts you want to update in your address book, then tap Import to save secure contacts:' is a screen label (match English casing); used to instruct the user how to proceed on the End Exchange screen. */
-"label_SaveInstruct" = "Überprüfen Sie Kontakte, die Sie in Ihrem Adressbuch aktualisieren möchten, tippen Sie dann auf Importieren, um sichere Kontakte sparen:";
+"label_SaveInstruct" = "Markieren sie die Kontakte, die Sie in Ihrem Adressbuch aktualisieren möchten. Tippen Sie dann auf Importieren, um diese zu sichern:";
 /* '%d seconds' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole seconds. */
 "label_seconds" = "%d Sekunden";
 /* 'Select Recipient' is a screen label (match English casing); used on the Compose Message screen recipient button before a recipient has been selected. */
@@ -543,7 +543,7 @@
 /* 'All phones must match one of the 3-word phrases. Compare, and then pick the matching phrase.' is a screen label (match English casing); used to instruct the user how to proceed on the Verify screen. */
 "label_VerifyInstruct" = "Alle Handys zeigen 3 Sätze mit je 3 Wörtern und Zahlen an. Suchen Sie den passenden Satz, der auf allen Handys übereinstimmt, und wählen Sie dann den gleichen Satz.";
 /* 'To protect your data, SafeSlinger does not store your passphrase anywhere for recovery. You may only access recipients and messages created under the same passphrase login. However, you may generate a new key and passphrase, then repeat Sling Keys with your recipients.' is a screen label (match English casing); used to describe the reasons passphrases are not storeed and how to generate a new one. */
-"label_WarnForgotPassphrase" = "Um Ihre Daten zu schützen, SafeSlinger nicht Ihre Passphrase überall speichern für die Verwertung. Sie können nur auf Empfänger und Nachrichten unter dem gleichen Login-Passphrase erstellt. Sie können jedoch einen neuen Schlüssel und Passwort erzeugen, dann wiederholen Sling Tasten mit Ihren Empfängern.";
+"label_WarnForgotPassphrase" = "Um Ihre Daten zu schützen speichert SafeSlinger Ihr Passwort in keiner Weise. Bei Verlust der Login-Daten, verlieren sie auch den Zugriff auf alle damit verbundenen Nachrichten. Sie können aber ein neues Passwort und einen neuen Sling Key erstellen und diesen anschlissend erneut mit ihren Empfängern teilen.";
 /* 'The following keys will be deleted:' is a screen label (match English casing); used to begin list of keys that will be deleted. */
 "label_WarnManagePassFollowsAreRecent" = "Die folgenden Tasten werden gelöscht:";
 /* 'There are no more recent keys than yours.' is a screen label (match English casing); used to show there are no keys to delete. */
@@ -589,7 +589,7 @@
 /* 'File Manager' is a menu option (title case); used to show a custom file system navigation menu via the Choose Your File dialog. Android-only. */
 "menu_FileManager" = "Datei Manager";
 /* 'Forgot Passphrase?' is a menu option (title case); used on the passphrase screen to show users how to generate a new key after forgetting the passphrase that protects the old one. */
-"menu_ForgotPassphrase" = "Passphrase vergessen?";
+"menu_ForgotPassphrase" = "Passwort vergessen?";
 /* 'Help' is a menu option (title case); used to show a help dialog for the current screen. */
 "menu_Help" = "Hilfe";
 /* 'Introduction' is a menu option (title case); used to show the secure introduction composition screen via the main home screen. */
@@ -699,16 +699,16 @@
 /* 'Notifications' is a preferences title (title case); used to sub-divide the Notifications section of the settings screen. */
 "section_notification" = "Benachrichtigungen";
 /* 'Storage' is a preferences title (title case); used to sub-divide the Storage section of the settings screen. */
-"section_storage" = "Lagerung";
+"section_storage" = "Dateispeicher";
 
 /* 'Backup restored.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm backup keys and settings have bee restored on re-install. */
 "state_BackupRestored" = "Sicherung wiederhergestellt.";
 /* 'Deleted file %s.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that a file has been deleted. %s = the file name of the deleted file. */
 "state_FileDeleted" = "Datei %@ gelöscht.";
-/* 'Message sent.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that a message has been sent. */
+/* 'Message sent.' is an informational message (sentence case, period); TODO: This should be deprecated in favor 1 message push to messages tab (single thread) and >1 messages push to messages tab (all threads) with a toast of state_MessagesSent. */
 "state_FileSent" = "Nachricht gesendet.";
 /* 'Invitation added.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the addition of a contact invitation. */
-"state_InvitationAdded" = "Einladung aufgenommen.";
+"state_InvitationAdded" = "Einladung hinzugefügt.";
 /* 'Message saved as draft.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that an un-sent message has been saved. */
 "state_MessageSavedAsDraft" = "Nachricht als Entwurf gespeichert.";
 /* '%d messages deleted.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the number of messages deleted. %d = the number of messages successfully deleted. */
@@ -731,13 +731,15 @@
 /* 'Strong cryptography protects your information' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
 "text_About3" = "Starke Kryptographie schützt Ihre Informationen.";
 /* 'SafeSlinger: Speak 3 words and forever chat in peace.' is an application description (sentence case); used in the about box and app store listing to describe the application features. Short form: 80 character max, should be exciting. */
-"text_About_Short" = "SafeSlinger: Sprechen 3 Worte und für immer in Frieden zu plaudern.";
+"text_About_Short" = "SafeSlinger: Sprich 3 Wörter und plauder für immer in Frieden.";
 /* 'email: %s' is an application description (sentence case); used in the app store listing, %s = SafeSlinger support email address. */
 "text_AboutEmail" = "email: %@";
 /* 'Features:' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
 "text_AboutFeat" = "Funktionen:";
 /* 'web: %s' is an application description (sentence case); used in the app store listing, %s = SafeSlinger project web page address. */
 "text_AboutWeb" = "web: %@";
+/* 'Developed by:' is an application description (sentence case); used at the end of the about dialog to list the developers of SafeSlinger. */
+"text_DevelopedBy" = "Entwickelt von:";
 /* 'Exchange' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordExchange" = "Austausch";
 /* 'Identity' is an application description (sentence case); one of many keywords to use when searching related terms. */
@@ -747,7 +749,7 @@
 /* 'Messaging' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordMessaging" = "Nachrichten";
 /* 'Privacy' is an application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordPrivacy" = "Ruhe";
+"text_KeywordPrivacy" = "Privatheit";
 /* 'Security' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordSecurity" = "Sicherheit";
 /* 'Languages provided by:' is an application description (sentence case); used at the end of the about dialog to list the translators of SafeSlinger. */
