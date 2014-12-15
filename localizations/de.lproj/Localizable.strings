@@ -59,6 +59,8 @@
 "btn_discard" = "Verwerfen";
 /* 'Done' is a button (title case); the Done button is used to allow the user to complete a current multi-step process. */
 "btn_Done" = "Fertig";
+/* 'Edit' is a button (title case); the Edit button is used to show a screen where the user can edit a contact. */
+"btn_Edit" = "Bearbeiten";
 /* 'Exit' is a button (title case); the Exit button is used to close the application. For non-Android use only, since Android uses the Back hardware button instead. */
 "btn_Exit" = "Beenden";
 /* 'Import' is a button (title case); the Import button is used to import a set of contacts on after an unsuccessful exchange protocol has finished. */
@@ -392,6 +394,8 @@
 "label_InstNoMessages" = "Keine Nachrichten. Sie können eine Nachricht senden mit der Nachricht verfassen Schaltfläche auf dem Start-Menü.";
 /* 'To add recipients, you must first Sling Keys with one or more other users at the same time. You may also send a Sling Keys contact invitation from the menu.' is a screen label (match English casing); used to instruct the user how to proceed on the Recipient list screen is case of no recipients. */
 "label_InstNoRecipients" = "Um Empfänger hinzuzufügen, müssen Sie zuerst Sling Keys mit einem oder mehreren anderen Usern gleichzeitig. Sie können auch senden Sling Keys Kontakt Einladung aus dem Menü.";
+/* 'None of your current recipients match your search query. Please try a different query or invite a new contact.' is a screen label (match English casing); used to inform the user that no recipients match the search query. */
+"label_InstNoRecipientsMatchQuery" = "Keine Ihrer aktuellen Empfänger entsprechen Ihren Suchkriterien. Bitte versuchen Sie eine andere Abfrage oder laden Sie einen neuen Kontakt.";
 /* 'No shared file. Connect your device with iTunes and drag files to the shared folder.' is a screen label (match English casing); used to instruct the user how to proceed on the Shared Files screen is case of no files to share. iOS-only. */
 "label_InstNoSharedFile" = "Keine gemeinsame Datei. Verbinden Sie Ihr Gerät mit iTunes und bewegen Sie Dateien in den gemeinsamen Ordner.";
 /* 'Pick a recipient to send a message to:' is a screen label (match English casing); used to instruct the user how to proceed on the Pick Recipients list screen. */
@@ -418,6 +422,8 @@
 "label_messageInviteSetupInst" = "So richten Sie eine sichere Messaging-Verbindung, die wir in der gleichen Zeit treffen können oder Telefon gegenseitig, und dann Sling Keys nur einmal, um die Verbindung zu überprüfen.";
 /* 'Can we start secure messaging with the open source SafeSlinger iPhone or Android app?' is a screen label (match English casing); used as message text to invite a contact to begin secure messaging. */
 "label_messageInviteStartMsg" = "Können wir beginnen Secure Messaging mit dem Open-Source-SafeSlinger iPhone oder Android-App?";
+/* '%s, you are verified.' is a screen label (match English casing); used as the text message completing sling keys. %s = the name of a recipient. */
+"label_messageYouAreVerified" = "%@, werden Sie überprüft.";
 /* '%d minutes' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole minutes. */
 "label_minutes" = "%d Minuten";
 /* 'Mobile' is a screen label (match English casing); used to denote a 'mobile' type of email or phone contact type. iOS-only. */
@@ -478,6 +484,8 @@
 "label_SaveAccount" = "Konto Speichern";
 /* 'Check contacts you want to update in your address book, then tap Import to save secure contacts:' is a screen label (match English casing); used to instruct the user how to proceed on the End Exchange screen. */
 "label_SaveInstruct" = "Markieren sie die Kontakte, die Sie in Ihrem Adressbuch aktualisieren möchten. Tippen Sie dann auf Importieren, um diese zu sichern:";
+/* 'Search contacts' is a screen label (match English casing); used on the Recipients screen to provide a hint to search for contacts. */
+"label_search_contacts_hint" = "Suche nach Kontakten";
 /* '%d seconds' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole seconds. */
 "label_seconds" = "%d Sekunden";
 /* 'Select Recipient' is a screen label (match English casing); used on the Compose Message screen recipient button before a recipient has been selected. */
@@ -490,6 +498,8 @@
 "label_SendTo" = "An:";
 /* 'Show this hint next time.' is a screen label (match English casing); used in the key exchange walkthrough dialog to toggle the display of the walkthrough at the next attempted key exchange. */
 "label_ShowHintAtLaunch" = "Hilfetext nächstes Mal wieder anzeigen.";
+/* 'Using speech recognition is disabled because it might cause an information leak' is a screen label (match English casing); used to alert the user about possible information leak on the use of speech recognition when the user tries to use this feature */
+"label_SpeechRecognitionAlert" = "Verwenden der Spracherkennung ist deaktiviert, da diese eine Informationsleck verursachen";
 /* 'Step 1' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
 "label_step_1" = "Schritt 1";
 /* 'Step 2' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
@@ -667,6 +677,8 @@
 "prog_generatingSignature" = "Signatur wird erzeugt...";
 /* 'loading content...' is a progress message (lower case, ellipsis); used to show progress during file preview loading. */
 "prog_loadingContent" = "Inhalt wird geladen...";
+/* 'pending...' is a progress message (lower case, ellipsis); used to show progress during queued message while waiting to act */
+"prog_pending" = "anhängig...";
 /* 'receiving encrypted file...' is a progress message (lower case, ellipsis); used to show progress while receiving the requested file. */
 "prog_ReceivingFile" = "Verschlüsselte Datei wird empfangen...";
 /* 'requesting encrypted file...' is a progress message (lower case, ellipsis); used to show progress while waiting for the server to return the requested file. */
@@ -713,6 +725,8 @@
 "state_MessageSavedAsDraft" = "Nachricht als Entwurf gespeichert.";
 /* '%d messages deleted.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the number of messages deleted. %d = the number of messages successfully deleted. */
 "state_MessagesDeleted" = "%d Nachrichten gelöscht.";
+/* '%d messages sent.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that N messages has been sent used on all threads views. */
+"state_MessagesSent" = "%d Mitteilungen gesendet.";
 /* 'Passphrase updated.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the change of password. */
 "state_PassphraseUpdated" = "Passwort aktualisiert.";
 /* '%d recipients deleted.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the number of recipients deleted. %d the number of recipient's keys successfully deleted. */
@@ -754,6 +768,8 @@
 "text_KeywordSecurity" = "Sicherheit";
 /* 'Languages provided by:' is an application description (sentence case); used at the end of the about dialog to list the translators of SafeSlinger. */
 "text_LanguagesProvidedBy" = "Übersetzer:";
+/* 'translate: %s' is an application description (sentence case); used in the app store listing, %s = SafeSlinger project localization repo. */
+"text_LocalizationRepo" = "übersetzen: %@";
 /* 'Related Terms:' is an application description (sentence case); used in the app store listing to list related search terms to help users looking for secure key exchange and messaging. */
 "text_RelatedSearchTerms" = "Verwandte Begriffe:";
 /* 'Requirements:' is an application description (sentence case); used in the about box and app store listing to enumerate requirements. */

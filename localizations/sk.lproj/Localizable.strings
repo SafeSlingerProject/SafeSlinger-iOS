@@ -29,60 +29,62 @@
 "app_name" = "SafeSlinger";
 
 /* 'Backup is disabled. Do you want to adjust backup settings and keep this reminder?' is a question message (sentence case, question mark); used to warn when the backup is off to confirm we should keep reminding the user. Used with Forget and Remind buttons. */
-"ask_BackupDisabledRemindLater" = "Backup je zakázané. Chcete upraviť nastavenia zálohovania a udržať túto pripomienku?";
+"ask_BackupDisabledRemindLater" = "Backup je zakázané. Chcete upraviť nastavenia zálohovania a udržať toto pripomenutie?";
 /* '%s has a more recent device or key, are you sure you want to use this older one?' is a question message (sentence case, question mark); is a confirmation question that occurs when the user selected a recipient with more recent information in the database. */
 "ask_ConfirmUseOlderDeviceOrKey" = "%@ má novšie zariadenie alebo tlačidlá, sú si istí, že chcete použiť staršie?";
 /* 'File name %s already exists. Overwrite?' is a question message (sentence case, question mark); is a question that occurs when the user attempts to save a file with the same name as an existing file in the same location. %s = the file name of the attachment. */
 "ask_FileExistsOverwrite" = "Názov súboru %@ už existuje. Prepísať?";
 /* 'Without a Google Account you will only be able to send, NOT receive messages. Do you want to add a Google account?' is a question message (sentence case, question mark); used to warn when a Google account has not been setup, if the user intends to receive messages. Android-only. */
-"ask_GoogleAccountToReceiveMsgs" = "Bez účtu Google budete môcť len odosielať, nie je schopný prijímať správy. Ak chcete pridať účet Google?";
+"ask_GoogleAccountToReceiveMsgs" = "Bez účtu Google budete môcť len odosielať, nie prijímať správy. Ak chcete pridať účet Google?";
 /* 'Quit? Are you sure?' is a question message (sentence case, question mark); is a confirmation question that occurs when the user chooses to end the exchange protocol prematurely. */
-"ask_QuitConfirmation" = "Prestať? Ste si istí?";
+"ask_QuitConfirmation" = "Ukončiť? Ste si istí?";
 /* 'We'd like your help improving SafeSlinger. Would you like to automatically send any errors to us?' is a question message (sentence case, question mark); is a question that occurs when the user encounters an unhandled exception and are asked if they want to upload this error log and any future error logs. */
-"ask_SendErrorData" = "Radi by sme vašu pomoc zlepšuje SafeSlinger. Chceli by ste, aby sa automaticky poslať nejaké chyby na nás?";
+"ask_SendErrorData" = "Radi by sme vašu pomoc zlepšuje SafeSlinger. Chcete automaticky odoslať všetky chyby na nás?";
 
 /* 'Accept' is a button (title case); the Accept button is paired with the Refuse button to indicate user acceptance of a secure introduction. */
-"btn_Accept" = "Prijať";
+"btn_Accept" = "Akceptovať";
 /* 'Begin Exchange' is a button (title case); the Begin Exchange button is used to begin the SafeSlinger exchange protocol. */
 "btn_BeginExchangeProximity" = "Začnite Exchange";
 /* 'Cancel' is a button (title case); the Cancel button is used to indicate the user wishes to exit the current screen without saving data. For non-Android use only, since Android uses the Back hardware button instead. */
 "btn_Cancel" = "Zrušiť";
 /* 'Close' is a button (title case); the Close button is used to allow the user to dismiss a dialog. */
-"btn_Close" = "Close";
+"btn_Close" = "Zavrieť";
 /* 'Continue' is a button (title case); the Continue button is used to remind the user that there is another step to complete. */
 "btn_Continue" = "Pokračovať";
 /* 'Create New Key' is a button (title case); the Create New Key button is paired with the Cancel button, and is used to affirm the creation of a new key and passphrase. */
 "btn_CreateNewKey" = "Vytvorte nový kľúč";
 /* 'Delete Keys' is a button (title case); the Create New Key button is paired with the Cancel button, and is used to affirm the deletion of more recent keys. */
-"btn_DeleteKeys" = "Odstránenie kľúče";
+"btn_DeleteKeys" = "Zmazať kľúče";
 /* 'Discard' is a button (title case); the Discard button is used to indicate the user wishes to exit the current screen without saving data, such as a voice memo. For non-Android use only, since Android uses the Back hardware button instead. */
-"btn_discard" = "Zlikvidujte";
+"btn_discard" = "Vyradiť";
 /* 'Done' is a button (title case); the Done button is used to allow the user to complete a current multi-step process. */
-"btn_Done" = "Hotovo";
+"btn_Done" = "Hotový";
+/* 'Edit' is a button (title case); the Edit button is used to show a screen where the user can edit a contact. */
+"btn_Edit" = "Edit";
 /* 'Exit' is a button (title case); the Exit button is used to close the application. For non-Android use only, since Android uses the Back hardware button instead. */
-"btn_Exit" = "Koniec";
+"btn_Exit" = "Východ";
 /* 'Import' is a button (title case); the Import button is used to import a set of contacts on after an unsuccessful exchange protocol has finished. */
-"btn_Import" = "Dovoz";
+"btn_Import" = "Import";
 /* 'Introduce' is a button (title case); the Introduce button is used to send a secure introduction to the two users selected on the Secure Introduction screen. */
 "btn_Introduce" = "Zaviesť";
 /* 'Next' is a button (title case); the Next button is used to remind the user that there is another step to complete. */
-"btn_Match" = "Ďalšie";
+"btn_Match" = "Ďalší";
 /* 'No' is a button (title case); the No button is paired with the Yes button, and is used to indicate a negative answer to a Yes/No question. */
 "btn_No" = "Nie";
 /* 'No Match' is a button (title case); the No Match button is used if the user cannot find the same batting screen on another user's device during the exchange critical care. */
 "btn_NoMatch" = "No Match";
 /* 'Not Now' is a button (title case); the Not Now button is used as a negative button to decline an offered service or permission. */
-"btn_NotNow" = "Not Now";
+"btn_NotNow" = "Teraz nie";
 /* 'Forget' is a button (title case); the Forget button is paired with the Remind button and is used to indicate the user wishes to dismiss the current reminder of a potential error state, such as having backup or notification settings turned off, and not be reminded again. */
-"btn_NotRemind" = "Zabudnite na";
+"btn_NotRemind" = "Zabudnúť";
 /* 'OK' is a button (title case); the OK button is affirmation button used to indicate the user accepts the data entered on the current screen. */
 "btn_OK" = "OK";
 /* 'Refuse' is a button (title case); the Refuse button is paired with the Accept button to indicate user refusal of a secure introduction. */
 "btn_Refuse" = "Odmietnuť";
 /* 'Remind' is a button (title case); the Remind button is paired with the Forget button and is used to indicate the user wishes to dismiss the current reminder of a potential error state, such as having backup or notification settings turned off, and does want to be reminded again later. */
-"btn_Remind" = "Pripomeňte";
+"btn_Remind" = "Pripomenúť";
 /* 'Save' is a button (title case); the Save button is used to indicate the data in question should be saved and persisted. */
-"btn_Save" = "Uložiť";
+"btn_Save" = "Save";
 /* 'Add Attachment' is a button (title case); the Add Attachment button is used on the Compose screen to allow the user to select the source of an attachment to the current message. */
 "btn_SelectFile" = "Pridať prílohu";
 /* 'Send' is a button (title case); the Send button will secure the current text message and attachment, if any, and send the message to the selected recipient. */
@@ -113,82 +115,82 @@
 /* 'Default Storage' is a choice (sentence case); used to set the attachment root path to the default source. Android-only. */
 "choice_auto_storage" = "Predvolené úložisko";
 /* 'Default' is a choice (sentence case); used in any menu to denote the default choice. */
-"choice_default" = "Predvolené";
+"choice_default" = "Štandardné";
 /* 'External Storage' is a choice (sentence case); used to set the attachment root path to an external source. Android-only. */
-"choice_external_storage" = "Externá pamäť";
+"choice_external_storage" = "Externé úložisko";
 /* 'Large' is a choice (sentence case); used in the settings to choose a large font size. */
 "choice_font_large" = "Veľký";
 /* 'Medium' is a choice (sentence case); used in the settings to choose a medium font size. */
 "choice_font_medium" = "Stredná";
 /* 'Very Small' is a choice (sentence case); used in the settings to choose a tiny font size. */
-"choice_font_micro" = "Veľmi malé";
+"choice_font_micro" = "Veľmi malá";
 /* 'Small' is a choice (sentence case); used in the settings to choose a small font size. */
-"choice_font_small" = "Small";
+"choice_font_small" = "Malý";
 /* 'Internal Storage' is a choice (sentence case); used to set the attachment root path to an internal source. Android-only. */
 "choice_internal_storage" = "Interné úložisko";
 /* 'No Limit' is a choice (sentence case); used to remove the timeout for the password. */
 "choice_nolimit" = "No Limit";
 /* '%d users' is a choice (sentence case); used to describe the number of users currently attempting to exchange keys. %d = number of users in the exchange. */
-"choice_NumUsers" = "%d užívatelia";
+"choice_NumUsers" = "%d užívateľov";
 /* 'Save Directory' is a choice (sentence case); used when the user chooses to change the directory of the attachment before saving. */
-"choice_SaveDirectory" = "Uložiť Directory";
+"choice_SaveDirectory" = "Save Directory";
 /* 'Save file' is a choice (sentence case); used when the user chooses to change the filename of the attachment before saving. */
 "choice_SaveFile" = "Uložiť súbor";
 /* 'Up' is a choice (sentence case); used in the File Manager dialog to navigate up to a parent directory. */
 "choice_Up" = "Hore";
 
 /* 'Some members are using an older version; all members must upgrade to the newest version.' is an error message (sentence case, period); used to warn when some members of the key exchange protocol are using less than the minimum version. Used for backward-compatibility in some cases. */
-"error_AllMembersMustUpgrade" = "Niektorí členovia používate staršiu verziu; všetci členovia musia vykonať aktualizáciu na najnovšiu verziu.";
+"error_AllMembersMustUpgrade" = "Niektorí členovia sú používate staršiu verziu; všetci členovia nutné vykonať upgrade na najnovšiu verziu.";
 /* 'All members must upgrade, some are using older key formats.' is an error message (sentence case, period); used to warn when the key format is incorrect after an exchange and perhaps used an old format. */
-"error_AllMembersMustUpgradeBadKeyFormat" = "Všetci členovia sa musia aktualizovať, niektorí využívajú staršie kľúčových formátov.";
+"error_AllMembersMustUpgradeBadKeyFormat" = "Všetci členovia musia inovovať, niektorí využívajú staršie kľúčových formátov.";
 /* 'All members must upgrade, some are using older push registration formats.' is an error message (sentence case, period); used to warn when the push registration format is incorrect or corrupted. */
-"error_AllMembersMustUpgradeBadPushToken" = "Všetci členovia sa musia aktualizovať, niektorí používajú staršie formáty registračné Push.";
+"error_AllMembersMustUpgradeBadPushToken" = "Všetci členovia musia inovovať, niektorí využívajú staršie formáty registráciu Push.";
 /* 'Audio player decoding error.' is an error message (sentence case, period); used to warn when attempting to play an audio message fails to decode properly. iOS-only. */
-"error_AudioPlayerDecodeError" = "Audio prehrávač chyba dekódovania.";
+"error_AudioPlayerDecodeError" = "Audio chyba player dekódovanie.";
 /* 'Cannot play the recording.' is an error message (sentence case, period); used to warn when the voice recording received cannot be played. iOS-only. */
-"error_AudioPlayerError" = "Nedajú prehrávať záznam.";
+"error_AudioPlayerError" = "Nemožno prehrať záznam.";
 /* 'Audio recorder encoding error.' is an error message (sentence case, period); used to warn when attempting to record an audio message fails to encode properly. iOS-only. */
-"error_AudioRecorderEncodeError" = "Audio Chyba kódovania záznamník.";
+"error_AudioRecorderEncodeError" = "Audio chyba kódovania záznamník.";
 /* 'Microphone permission is required to record a secure voice message. Tap the %s button for SafeSlinger Microphone permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Microphone permission. iOS-only. */
-"error_AudioRecorderPermissionError" = "Povolenie Mikrofón je nutné nahrať bezpečnú hlasovú správu. Kliknite na tlačidlo %@ pre SafeSlinger mikrofónov podrobnosti oprávnenia.";
+"error_AudioRecorderPermissionError" = "Povolenie Mikrofón je nutné nahrať bezpečnú hlasovú správu. Kliknite na tlačidlo %@ pre SafeSlinger Mikrofónny podrobnosti oprávnenie.";
 /* 'No backup to restore.' is an error message (sentence case, period); used to warn at application setup, when there is no pre-existing backup to restore and warn the user that any previous keys have not been restored. */
-"error_BackupNotFound" = "Žiadna záloha obnoviť.";
+"error_BackupNotFound" = "No záloha obnoviť.";
 /* 'Device does not support backup restore.' is an error message (sentence case, period); used to warn when the device hardware does not support restoration from backup. */
 "error_BackupNotSupportedDevice" = "Zariadenie nepodporuje obnovenie zálohy.";
 /* 'Due to a bug in Android 4.1, you will have to uninstall and reinstall SafeSlinger.' is an error message (sentence case, period); used to warn when unable to load native libraries due to a Google Play copy-protection bug, which can corrupt installations for users upgrading to Android 4.1. Android-only. */
-"error_BadCopyProtectUpgrade" = "Kvôli chybe v Android 4.1, budete musieť odinštalovať a znovu nainštalovať SafeSlinger.";
+"error_BadCopyProtectUpgrade" = "Kvôli chybe v Androide 4.1, budete musieť odinštalovať a znovu nainštalovať SafeSlinger.";
 /* 'A Google account is required. Please open the account manager and add a Google account.' is an error message (sentence case, period); used to warn during push registration: There is no Google account on the phone. The application should ask the user to open the account manager and add a Google account. Fix on the device side. Android-only. */
-"error_C2DMRegAccountMissing" = "Je nutné konto Google. Prosím, otvorte správcu účtu a pridať konto Google.";
+"error_C2DMRegAccountMissing" = "Je vyžadovaný účet Google. Prosím, otvorte správcu účtu a pridať účet Google.";
 /* 'Registration not authenticated, please retry manually later.' is an error message (sentence case, period); used to warn during push registration: Bad password. The application should ask the user to enter his/her password, and let user retry manually later. Fix on the device side. Android-only. */
 "error_C2DMRegAuthenticationFailed" = "Registrácia nie je overený, skúste to znova neskôr ručne.";
 /* 'Registration is not available for this version, please check for an updated version.' is an error message (sentence case, period); used to warn during push registration: The sender account is not recognized. Android-only. */
-"error_C2DMRegInvalidSender" = "Registrácia nie je k dispozícii pre túto verziu, prosím, skontrolujte, či aktualizovanú verziu.";
+"error_C2DMRegInvalidSender" = "Registrácia nie je k dispozícii pre túto verziu, prosím skontrolujte aktualizovanú verziu.";
 /* 'Incorrect device registration with Google. This device does not currently support push messaging.' is an error message (sentence case, period); used to warn during push registration: Incorrect phone registration with Google. This phone doesn't currently support C2DM. Android-only. */
-"error_C2DMRegPhoneRegistrationError" = "Nesprávna registrácia zariadenie s firmou Google. Toto zariadenie v súčasnosti nepodporuje Push správy.";
+"error_C2DMRegPhoneRegistrationError" = "Nesprávna registrácia zariadenia s firmou Google. Toto zariadenie v súčasnosti nepodporuje Push správ.";
 /* 'Push registration service not available, scheduling retry in %d seconds.' is an error message (sentence case, period); used to warn during push registration: The device can't read the response, or there was a 500/503 from the server that can be retried later. The application should use exponential back off and retry. %d = the current number of seconds until the next push registration attempt. Android-only. */
 "error_C2DMRegServiceNotAvailable" = "Push registrácia služba nie je k dispozícii, plánovanie znova za %d sekúnd.";
 /* 'Too many applications are registered for Push. Please uninstall some other applications and retry.' is an error message (sentence case, period); used to warn during push registration: The user has too many applications registered. The application should tell the user to uninstall some other applications, let user retry manually. Fix on the device side. Android-only. */
-"error_C2DMRegTooManyRegistrations" = "Príliš mnoho aplikácií sú registrované pre Push. Odinštalujte niektoré ďalšie aplikácie a skúste znova.";
+"error_C2DMRegTooManyRegistrations" = "Príliš veľa aplikácií sú registrované pre Push. Prosím odinštalujte niektoré ďalšie aplikácie a skúste to znova.";
 /* 'Cannot send an empty attachment.' is an error message (sentence case, period); used to warn when use attempts to attach an empty file to the message. */
 "error_CannotSendEmptyFile" = "Nemožno odoslať prázdny prílohu.";
 /* 'Cannot send attachments greater than %d bytes in size.' is an error message (sentence case, period); used to warn when the message and attachment (if any) exceed the current quota limits for the App Engine service we use. %d the maximum limit in bytes of the entire message plus attachments that the App Engine service will allow us to upload. */
-"error_CannotSendFilesOver" = "Nemôžete odosielať prílohy väčšie ako %d bytov.";
+"error_CannotSendFilesOver" = "Nemožno odosielať prílohy väčšie ako %d bajtov.";
 /* 'Cannot send a null attachment.' is an error message (sentence case, period); used to warn when use attempts to attach an empty file to the message. */
 "error_CannotSendNullFile" = "Nemožno odoslať null prílohu.";
 /* 'Contact creation failed.' is an error message (sentence case, period); used to warn when failing to insert new contact data. */
-"error_contactCreationFailure" = "Kontaktujte nebolo vytvorené.";
+"error_contactCreationFailure" = "Kontakt vytvorenie zlyhalo.";
 /* 'Contact insert failed.' is an error message (sentence case, period); used to warn when failing to insert new contact data. */
-"error_ContactInsertFailed" = "Kontaktujte vloženie zlyhalo.";
+"error_ContactInsertFailed" = "Kontakt vložka zlyhalo.";
 /* 'This contact is missing a name, please edit.' is an error message (sentence case, period); used to warn when the matching contact found on the Setup screen does not have a name. */
 "error_ContactNameMissing" = "Tento kontakt chýba názov, upravte.";
 /* 'This contact is missing a name, please reselect.' is an error message (sentence case, period); used to warn when the matching contact found on the Setup screen does not have a name. */
-"error_ContactNameMissing2" = "Tento kontakt chýba meno, prosím, vyberte znova.";
+"error_ContactNameMissing2" = "Tento kontakt chýba meno, prosím vyberte znova.";
 /* 'Contact update failed.' is an error message (sentence case, period); used to warn when failing to merge contact data after an exchange. */
-"error_ContactUpdateFailed" = "Spoj sa aktualizácie zlyhala.";
+"error_ContactUpdateFailed" = "Kontakt aktualizácie zlyhala.";
 /* 'Internet not available, check your settings.' is an error message (sentence case, period); used to warn when the user attempts to communicate with a server and the device cannot detect a path to the Internet. */
-"error_CorrectYourInternetConnection" = "Internet nie je k dispozícii, skontrolujte nastavenie.";
+"error_CorrectYourInternetConnection" = "Internet nie je k dispozícii, skontrolujte nastavenia.";
 /* 'Could not extract private key.' is an error message (sentence case, period); used to warn when the user is not able to extract the private key from the encrypted private key stored on the device. */
-"error_couldNotExtractPrivateKey" = "Nemožno extrahovať súkromný kľúč.";
+"error_couldNotExtractPrivateKey" = "Nie je možné extrahovať súkromný kľúč.";
 /* 'Exchange timeout exceeded. Begin the exchange again.' is an error message (sentence case, period); used to warn when users have waited too long, 10 minutes, before completing the exchange protocol. */
 "error_ExchangeProtocolTimeoutExceeded" = "Exchange timeout prekročená. Začnite výmenu znova.";
 /* '%s is not supported on %s at this time.' is an error message (sentence case, period); used to warn when a specific capability is not supported by a specific platform. */
@@ -196,23 +198,23 @@
 /* 'Unable to save %s.' is an error message (sentence case, period); used to warn when there was disk error attempting to save an attachment to the users' device. %s = the name of the file that failed to save. */
 "error_FileSave" = "Nemožno uložiť %@.";
 /* 'File storage is not available.' is an error message (sentence case, period); used to warn when attempting to read/write to attachment storage becomes unavailable. */
-"error_FileStorageUnavailable" = "Ukladanie súborov nie je k dispozícii.";
+"error_FileStorageUnavailable" = "Skladovanie Súbor nie je k dispozícii.";
 /* 'Server HTTP Error: %d' is an error message (sentence case, period); used to warn when the key exchange or messaging servers encountered an error and need to notify the user. %d = the HTTP status line code is case of an error, like 404 (file not found). 500 is common for uncaught Python run-time errors. */
 "error_HttpCode" = "Server HTTP Chyba: %d";
 /* 'Incorrect data found in exchange. Begin the exchange again.' is an error message (sentence case, period); used to warn when some item received from another group member during the key exchange did not hash correctly to the previously committed value. */
-"error_InvalidCommitVerify" = "Nesprávne údaje nájdete v burze. Začnite výmenu znova.";
+"error_InvalidCommitVerify" = "Nesprávne údaje našiel výmenou. Začnite výmenu znova.";
 /* 'Please enter a positive integer.' is an error message (sentence case, period); used to warn when the user attempted to type in a group ID on the Grouping screen that was zero, negative, or empty. */
-"error_InvalidCommonUserId" = "Prosím, zadajte kladné číslo.";
+"error_InvalidCommonUserId" = "Prosím, zadajte kladné celé číslo.";
 /* 'A valid contact name is required.' is an error message (sentence case, period); used to warn when the user completes Setup without typing a name, or the name includes 3rd-person words we cannot allow, such as: 'Me', 'Contact', 'Foo',… */
-"error_InvalidContactName" = "Je potrebný platný názov kontaktu.";
+"error_InvalidContactName" = "Je vyžadovaný platný názov kontaktu.";
 /* 'Bad incoming message format.' is an error message (sentence case, period); used to warn when the incoming message was not formatted properly. */
-"error_InvalidIncomingMessage" = "Bad formát prichádzajúce správy.";
+"error_InvalidIncomingMessage" = "Bad formáte prichádzajúce správy.";
 /* 'Bad message format.' is an error message (sentence case, period); used to warn when the outgoing message was not formatted properly. */
 "error_InvalidMsg" = "Bad formát správy.";
 /* 'Invalid recipient.' is an error message (sentence case, period); used to warn when the user has not selected 1 recipient to send a message on the Compose Message screen, also when the user has not selected 2 recipients to send introductions to on the Secure Introduction screen. */
 "error_InvalidRecipient" = "Neplatný príjemcu.";
 /* 'You have reported a difference in phrases. Begin the exchange again.' is an error message (sentence case, period); used to warn when the user presses the 'No Match' button that they are aborting the protocol for the group and sending a non-match signature to others. */
-"error_LocalGroupCommitDiffer" = "Ste vykázala rozdiel fráz. Začnite výmenu znova.";
+"error_LocalGroupCommitDiffer" = "Ste hlásené rozdiel v fráz. Začnite výmenu znova.";
 /* 'The peer key format is invalid.' is an error message (sentence case, period); used to warn when the public key we used for this recipient does not exist or is improperly formatted. */
 "error_MessageInvalidPeerKeyFormat" = "Formát peer kľúč je neplatný.";
 /* 'Signature verification failed.' is an error message (sentence case, period); used to warn when key used to generate an incoming message signature is not in the key database. */
@@ -220,41 +222,41 @@
 /* 'Passphrases require at least %d characters.' is an error message (sentence case, period); used to warn when a user has setup a passphrase, which does not fit the minimum required length. %d = current requirement is at least 8 characters. */
 "error_minPassphraseRequire" = "Frázy je potreba najmenej %d znakov.";
 /* 'A minimum of %d members are required to exchange data.' is an error message (sentence case, period); used to warn when attempting to leave the Group Size screen without choosing a group size. %d = the minimum number of users to complete the exchange protocol, 2 usually. */
-"error_MinUsersRequired" = "Sú potrebné minimálne %d členov pre výmenu dát.";
+"error_MinUsersRequired" = "Je potrebných minimálne %d členov pre výmenu dát.";
 /* 'SafeSlinger did not detect NDK support on this device, which is required.' is an error message (sentence case, period); used to warn when device has no Native Development Kit support installed. Android-only. */
-"error_MissingNdk" = "SafeSlinger nezistil podporu NDK na tomto zariadení, ktoré je potrebné.";
+"error_MissingNdk" = "SafeSlinger nezistil podporu NDK v tomto zariadení, ktoré je potrebné.";
 /* 'Unexpected data found in exchange. Begin the exchange again.' is an error message (sentence case, period); used to warn when a user has entered a group size number that is too low during the exchange protocol or possibly a Man-in-The-Middle (MiTM) attack where a malicious outsider attempts to join the group. */
-"error_MoreDataThanUsers" = "Neočakávané údaje nájdete v burze. Začnite výmenu znova.";
+"error_MoreDataThanUsers" = "Neočakávané údaje našiel výmenou. Začnite výmenu znova.";
 /* 'You are attempting to send multiple items. At this time, SafeSlinger only supports sending one item at a time.' is an error message (sentence case, period); used to warn when the user attempts to select multiple attachments to send when we only allow one attachment for now. */
-"error_MultipleSendNotSupported" = "Pokúšate sa odoslať viac položiek. V tomto okamihu, SafeSlinger podporuje len odosielanie jednu položku naraz.";
+"error_MultipleSendNotSupported" = "Pokúšate sa odoslať viac položiek. V tomto okamihu, SafeSlinger podporuje iba odosielanie jednu položku naraz.";
 /* 'The exchange is missing required data.' is an error message (sentence case, period); used to warn when exchange is missing some parameter or data to complete. */
 "error_NoDataToExchange" = "Výmena chýbajú potrebné údaje.";
 /* 'Email account is not setup!' is an error message (sentence case, period); used to warn that a user did not have an email account when he/she tries to send out comments to administrator account. iOS-only. */
-"error_NoEmailAccount" = "E-mailový účet nie je inštalácia!";
+"error_NoEmailAccount" = "E-mailový účet nie je nastavenie!";
 /* 'No passphrase entered.' is an error message (sentence case, period); used to warn when a user generates or changes a passphrase and they have entered a blank password, which is not acceptable. */
-"error_noPassPhrase" = "Žiadne heslo zadať.";
+"error_noPassPhrase" = "No heslo vstúpil.";
 /* 'You must select one of the phrases before proceeding.' is an error message (sentence case, period); used to warn when the user attempts to proceed past the word phrase Verify screen during the exchange protocol and they have not selected, which of the three phrases match with the other users'. */
 "error_NoWordListSelected" = "Musíte vybrať jednu z viet pred pokračovaním.";
 /* 'Someone reported a difference in phrases. Begin the exchange again.' is an error message (sentence case, period); used to warn when at least one other member of the group during the exchange protocol pressed the 'No Match' button. */
-"error_OtherGroupCommitDiffer" = "Niekto vykázala rozdiel fráz. Začnite výmenu znova.";
+"error_OtherGroupCommitDiffer" = "Niekto hlásené rozdiel v fráz. Začnite výmenu znova.";
 /* 'Memory is too low to complete this operation.' is an error message (sentence case, period); used to warn when a request for memory is made that cannot be satisfied using the available platform resources. Such a request may be made by both the running application or by an internal function of the VM. */
 "error_OutOfMemoryError" = "Pamäť je príliš nízka na dokončenie tejto operácie.";
 /* 'Passphrases do not match.' is an error message (sentence case, period); used to warn when the user creates or changes their passphrase and the confirmation second entry did not match the first. */
 "error_passPhrasesDoNotMatch" = "Prístupové heslá sa nezhodujú.";
 /* 'You have exceeded the message quota for that recipient. Please retry later.' is an error message (sentence case, period): used to warn when sending messages to device and the message quota for all applications on the device is full. */
-"error_PushMsgDeviceQuotaExceeded" = "Prekročili ste kvótu správy za príjemcu. Skúste to znova neskôr.";
+"error_PushMsgDeviceQuotaExceeded" = "Prekročili ste kvótu správy za príjemcu. Skúste to prosím neskôr.";
 /* 'That recipient has a missing or bad push registration. You should stop sending messages to this device.' is an error message (sentence case, period); used to warn when sending messages to device and the recipient registration was never registered with the push service. */
-"error_PushMsgInvalidRegistration" = "Že príjemca má chýbajúce alebo zlé registráciu tlačidla. Mali by ste prestať posielať správy na toto zariadenie.";
+"error_PushMsgInvalidRegistration" = "To má príjemca chýbajúce alebo zlé registráciu tlačidla. Mali by ste prestať posielať správy do tohto zariadenia.";
 /* 'Message expired.' is an error message (sentence case, period); used to warn when getting messages, the message id cannot be found and it has likely been scrubbed from the server. */
 "error_PushMsgMessageNotFound" = "Správa vypršala.";
 /* 'The message is too big. Reduce the size of the message.' is an error message (sentence case, period); used to warn when sending messages to device and the initial push exceeds 1024 bytes. Unlikely, since the initial push only contains the message hash identifier, which is 32 bytes plus a bit more of meta data. */
-"error_PushMsgMessageTooBig" = "Správa je príliš veľká. Zmenšite veľkosť správy.";
+"error_PushMsgMessageTooBig" = "Správa je príliš veľká. Znížiť veľkosť správy.";
 /* 'That recipient's push registration is no longer valid. The recipient may have uninstalled SafeSlinger or turned off notifications. You should stop sending messages to this device.' is an error message (sentence case, period); used to warn when sending messages to device and the recipient is no longer registered. */
-"error_PushMsgNotRegistered" = "Registrácia stlačenie tohto príjemca už nie je platný. Príjemca môže odinštalovať SafeSlinger alebo vypnutie oznámenia. Mali by ste prestať posielať správy na toto zariadenie.";
+"error_PushMsgNotRegistered" = "Registrácia tlak tomuto príjemcovi už nie je platný. Príjemca môže mať odinštalovať SafeSlinger alebo vypnúť oznámenia. Mali by ste prestať posielať správy do tohto zariadenia.";
 /* 'There was an error communicating with the push notification service.' is an error message (sentence case, period); used to warn when sending messages to device and the push service replies incorrect HTTP status code. */
-"error_PushMsgNotSucceed" = "Nastala chyba pri komunikácii so oznamovacej Push služby.";
+"error_PushMsgNotSucceed" = "Došlo k chybe pri komunikácii s oznamovacej Push služby.";
 /* 'You have exceeded the message quota for this device. Please retry later.' is an error message (sentence case, period); used to warn when sending messages to device and the message quota for SafeSlinger on the device is full. */
-"error_PushMsgQuotaExceeded" = "Prekročili ste kvótu správu pre toto zariadenie. Skúste to znova neskôr.";
+"error_PushMsgQuotaExceeded" = "Prekročili ste kvótu správy pre toto zariadenie. Skúste to prosím neskôr.";
 /* 'Notification service is not available this time. Please try to send the message later.' is an error message (sentence case, period); used to warn when sending messages to device and the push service has no response for push messages. */
 "error_PushMsgServiceFail" = "Oznámenia služba nie je k dispozícii tentoraz. Prosím, skúste odoslať správu neskôr.";
 /* 'Cannot prepare the audio recorder.' is an error message (sentence case, period); used to warn when the audio recorder is unavailable from the system to record an audio message. iOS-only. */
@@ -262,7 +264,7 @@
 /* 'To start, Sling Keys with another user at the same time.' is an error message (sentence case, period); used to remind in a notification message that the user should exchange keys with at least one other user to make the app useful to them. */
 "error_ReminderToSlingKeysToUseApp" = "Ak chcete začať, Sling kľúče s iným užívateľom súčasne.";
 /* 'You need an attachment or a text message to send.' is an error message (sentence case, period); used to warn when the user has not attached a file or typed any text message to send to the recipient after using the 'Send' button. */
-"error_selectDataToSend" = "Musíte prílohu alebo textovú správu odoslať.";
+"error_selectDataToSend" = "Potrebujete prílohu alebo textovú správu na odoslanie.";
 /* 'Server Message: %s' is an error message (sentence case, period); used to warn when the server has an error message to send back to the client. %s = an English (non-localized) error message sent by our App Engine server code. */
 "error_ServerAppMessage" = "Server Message: %@";
 /* 'No response from server.' is an error message (sentence case, period); used to warn when the server timeout occurs, usually after 30 seconds and did not respond to the client. */
@@ -270,84 +272,84 @@
 /* 'Cannot remove the shared file.' is an error message (sentence case, period); used to warn when the shared file cannot be deleted. iOS-only. */
 "error_ShareFileDelError" = "Nemožno odstrániť zdieľaný súbor.";
 /* 'Timeout waiting for some group members to add data.' is an error message (sentence case, period); used to warn during the key exchange protocol when at least one of the members of the group has not submitted their data to the server or client itself is not able to retrieve the data within the timeout window, currently 2 minutes. */
-"error_TimeoutWaitingForAllMembers" = "Timeout čakania na niektorých členov skupiny pridať dáta.";
+"error_TimeoutWaitingForAllMembers" = "Timeout čakanie na niektorých členov skupiny pridať dáta.";
 /* 'Unable to match public key to private key in crypto provider.' is an error message (sentence case, period); used to warn when the public encryption key used in the message received is not currently the same private key used, the user should probably Sling Keys to update again. */
-"error_UnableFindPubKey" = "Nemožno, aby zodpovedali verejný kľúč k súkromnému kľúču v kryptografických poskytovateľ.";
+"error_UnableFindPubKey" = "Nemožno, aby zodpovedali verejný kľúč k súkromnému kľúču na šifrovacie poskytovateľa.";
 /* 'Unable to save to the message database.' is an error message (sentence case, period); used to warn when there is database error inserting a new message. */
 "error_UnableToSaveMessageInDB" = "Nemožno uložiť do databázy správ.";
 /* 'Unable to save to the recipient database.' is an error message (sentence case, period); used to warn when there is database error inserting a new recipient key/registration . */
 "error_UnableToSaveRecipientInDB" = "Nemožno uložiť do databázy príjemcov.";
 /* 'Unable to update the message database.' is an error message (sentence case, period); used to warn when there is database error updating a message. */
-"error_UnableToUpdateMessageInDB" = "Nemožno aktualizovať databázu správu.";
+"error_UnableToUpdateMessageInDB" = "Nemožno aktualizovať databázu správy.";
 /* 'Unable to update the recipient database.' is an error message (sentence case, period); used to warn when there is database error updating a recipient key/registration . */
-"error_UnableToUpdateRecipientInDB" = "Nemožno aktualizovať databázu príjemcov.";
+"error_UnableToUpdateRecipientInDB" = "Nemožno aktualizovať databázu príjemcu.";
 /* 'SafeSlinger error, please restart.' is an error message (sentence case, period); used to warn when an unhandled exception or application fault has occurred. */
 "error_UncaughtExceptionOccured" = "SafeSlinger chyba, prosím reštartujte.";
 /* 'Contact data was formatted incorrectly.' is an error message (sentence case, period); used to warn when the vCard format used to exchange contact fields during key exchange are improperly formatted. */
 "error_VcardParseFailure" = "Kontaktné údaje formátovania nesprávne.";
 /* 'User canceled server request.' is an error message (sentence case, period); used to warn when the user exited the key exchange protocol or messaging transmission before it was finished. */
-"error_WebCancelledByUser" = "Užívateľ zrušil požiadavku serveru.";
+"error_WebCancelledByUser" = "Používateľ zrušil požiadavku serveru.";
 
 /* 'Use this screen to set your name to exchange with others, and a passphrase to protect your data. Tap the Done button when finished.' is a help message (sentence case, period); used via Help button on the Setup screen to describe in more detail what the Setup screen does. */
-"help_find" = "Na tejto obrazovke môžete nastaviť svoje meno na výmenu s ostatnými a heslo pre ochranu vašich dát. Po dokončení kliknite na tlačidlo Hotovo.";
+"help_find" = "Pomocou tejto obrazovky nastaviť meno vymieňať s ostatnými, a heslo pre ochranu vašich dát. Po dokončení Kliknite na tlačidlo Hotovo.";
 /* 'To exchange identity data, ensure all users are nearby or on the phone. The Begin Exchange button will exchange only the checked contact data.' is a help message (sentence case, period); used via Help button on the Begin Exchange screen and also the key exchange walkthrough tutorial to describe in more detail what the Begin Exchange screen does. */
-"help_home" = "K výmene údajov o totožnosti, zaistiť všetci užívatelia sú v blízkosti, alebo na telefóne. Tlačidlo Začnite Exchange budú vymieňať iba zaškrtnuté kontaktné údaje.";
+"help_home" = "Pri výmene údajov o totožnosti, zaistenie všetci užívatelia sú v blízkosti, alebo na telefóne. Tlačidlo Začnite Exchange vymenia iba zaškrtnuté kontaktné údaje.";
 /* 'You may also change personal data about your identity on this screen by tapping on the button with your name. This will display a menu allowing you to Edit your contact, Create New contact, or Use Another contact.' is a help message (sentence case, period); Additional help text, which is appended to the Help button text on the Compose and Begin Exchange screens. */
-"help_identity_menu" = "Môžete tiež zmeniť osobné údaje o svojej totožnosti na tejto obrazovke kliknutím na tlačidlo s Vašim menom. Tým sa zobrazí menu umožňuje upraviť svoj ​​kontakt Vytvoriť nový kontakt, alebo použite iný kontakt.";
+"help_identity_menu" = "Môžete tiež zmeniť osobné údaje o svojej totožnosti na tejto obrazovke kliknutím na tlačidlo s Vaším menom. Tým sa zobrazí menu umožňuje upraviť svoj kontakt, Vytvoriť nový kontakt, alebo použite iný kontakt.";
 /* 'This screen displays all past messages, and attachments that are still available for download.' is a help message (sentence case, period); used via Help button on the Messages list screen to describe in more detail what the Messages list screen does. */
 "help_Messages" = "Táto obrazovka zobrazuje všetky minulé správy a prílohy, ktoré sú stále k dispozícii na stiahnutie.";
 /* 'Use this screen to login to the application with your passphrase. If you have forgotten your passphrase, you may generate a new key protected by a new passphrase by tapping the Forgot Passphrase? button. Tap the user name to switch between multiple keys.' is a help message (sentence case, period); used via Help button on the Passphrase screen to describe in more detail what the Passphrase screen does. */
-"help_passphrase" = "Na tejto obrazovke pre prihlásenie do aplikácie sa Vaše heslo. Ak ste zabudli svoje prístupové heslo, môžete vygenerovať nový kľúč chráneného nové prístupové heslo poklepaním Zabudli ste prístupové heslo? tlačidlo. Kliknite na meno používateľa pre prepínanie medzi viacerými kľúčov.";
+"help_passphrase" = "Na tejto obrazovke pre prihlásenie do aplikácie sa vášho hesla. Ak ste zabudli svoje heslo, môžete vygenerovať nový kľúč chránený novým prístupovým heslom poklepaním Zabudli ste prístupové heslo? tlačidlo. Kliknite na používateľské meno pre prepínanie medzi viacerými kľúčov.";
 /* 'Use this screen to change your passphrase by entering your last passphrase for confirmation and the new passphrase.' is a help message (sentence case, period); used via Help button on the Change Passphrase screen to describe in more detail what the Change Passphrase screen does. */
-"help_passphrase_change" = "Na tejto obrazovke môžete zmeniť prístupové heslo zadaním posledného prístupové heslo pre potvrdenie a nové prístupové heslo.";
+"help_passphrase_change" = "Pomocou tejto obrazovky zmeniť prístupové heslo zadaním svojej poslednej prístupové heslo pre potvrdenie a nového hesla.";
 /* 'Contacts with SafeSlinger keys are displayed here, select one to send your message to.' is a help message (sentence case, period); used via Help button on the Recipients list screen to describe in more detail what the Recipients list screen does. */
-"help_PickRecip" = "Tu sa zobrazujú kontakty s SafeSlinger kľúčov, vyberte jednu správu odoslať do.";
+"help_PickRecip" = "Tu sa zobrazujú kontakty s SafeSlinger kľúče, vyberte, kto správu odoslať.";
 /* 'When finished, the protocol will reveal a list of the identity data exchanged. Select the contacts you wish to save and press Import.' is a help message (sentence case, period); used via Help button on the End Exchange screen and also the key exchange walkthrough tutorial to describe in more detail what the End Exchange screen does. */
-"help_save" = "Po dokončení bude protokol odhalí zoznam údajov o totožnosti vymenené. Vyberte kontakty, ktoré chcete uložiť a stlačte tlačidlo Importovať.";
+"help_save" = "Po dokončení bude protokol odhalí zoznam údajov o totožnosti vymenené. Vyberte kontakty, ktoré chcete uložiť, a stlačte Import.";
 /* 'This screen allows you to select two people you have slung keys with before to securely send their keys to each other. Simply press Introduce when ready.' is a help message (sentence case, period); used via Help button on the Secure Introduction screen to describe in more detail what the Secure Introduction screen does. */
-"help_SecureIntroduction" = "Táto obrazovka umožňuje vybrať dvoch ľudí, ktoré ste si prehodil klávesov s predtým, ako bezpečne poslať svoje kľúče k sebe navzájom. Stačí stlačiť Zaviesť až budete pripravení.";
+"help_SecureIntroduction" = "Táto obrazovka umožňuje vybrať dvoch ľudí, ktoré ste si prehodil kľúče sa pred bezpečne poslať svoje kľúče k sebe navzájom. Stačí stlačiť Zaviesť až budete pripravení.";
 /* 'This screen allows you to select some data and a recipient to send to. Simply press Send when ready.' is a help message (sentence case, period); used via Help button on the Compose Message screen to describe in more detail what the Compose Message screen does. */
-"help_Send" = "Táto obrazovka umožňuje vybrať niektoré údaje a príjemcu odoslať. Stačí stlačiť Poslať až budete pripravení.";
+"help_Send" = "Táto obrazovka umožňuje vybrať niektoré údaje a príjemcu odoslať. Stačí stlačiť Odoslať až budete pripravení.";
 /* 'This screen allows you to change the default settings for the application.' is a help message (sentence case, period); used via Help button on the Settings screen to describe in more detail what the Settings screen does. */
-"help_settings" = "Táto obrazovka umožňuje zmeniť predvolené nastavenia pre danú aplikáciu.";
+"help_settings" = "Táto obrazovka umožňuje zmeniť predvolené nastavenia aplikácie.";
 /* 'Select the number of people who are attempting to exchange data together and press OK.' is a help message (sentence case, period); used via Help button on the Group Size screen and also the key exchange walkthrough tutorial to describe in more detail what the Group Size screen does. */
 "help_size" = "Vyberte počet ľudí, ktorí sa snažia výmenu dát dohromady a stlačte tlačidlo OK.";
 /* 'This number on this screen is used to create a unique group of users. Review the numbers on all users' screens, then all users should enter the same lowest number and press OK.' is a help message (sentence case, period); used via Help button on the Grouping screen and also the key exchange walkthrough tutorial to describe in more detail what the Grouping screen does. */
-"help_userid" = "Toto číslo na tejto obrazovke sa používa na vytvorenie unikátnej skupinu užívateľov. Prejdite si čísla na obrazovkách všetkých užívateľov, potom by všetci používatelia mali zadať rovnakú najnižšie číslo a stlačte tlačidlo OK.";
+"help_userid" = "Toto číslo na tejto obrazovke sa používa na vytvorenie jedinečného skupinu užívateľov. Prejdite si čísla na obrazovkách všetkých užívateľov, potom všetci užívatelia by mali vstúpiť rovnakú najnižšie číslo a stlačte tlačidlo OK.";
 /* 'Now, you must match one of these 3-word phrases with all users. Every user must select the same common phrase, and press Next.' is a help message (sentence case, period); used via Help button on the Verify screen and also the key exchange walkthrough tutorial to describe in more detail what the Verify screen does. */
-"help_verify" = "Teraz musíte zhodovať s jedným z týchto 3-slovo frázy so všetkými užívateľmi. Každý užívateľ musí zvoliť rovnaký spoločný frázu a stlačte tlačidlo Ďalej.";
+"help_verify" = "Teraz musíte zodpovedať jednému z týchto 3 slovách so všetkými užívateľmi. Každý užívateľ musí zvoliť rovnaký spoločný frázu a stlačte tlačidlo Ďalej.";
 
 /* 'Camera permission is required to attach snapshots to secure messages. Tap the %s button for SafeSlinger Camera permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Camera permission. iOS-only. */
-"iOS_cameraError" = "Povolenie Fotoaparát je povinný priložiť zábery na zabezpečenie správy. Kliknite na tlačidlo %@ pre SafeSlinger podrobnosti oprávnenia fotoaparátu.";
+"iOS_cameraError" = "Povolenie Camera je nutné priložiť zábery na zabezpečených správ. Kliknite na tlačidlo %@ pre SafeSlinger podrobnosti oprávnenie Camera.";
 /* 'Contacts permission is required for securely sharing contact cards. Tap the %s button for SafeSlinger Contacts permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Contacts permission. iOS-only. */
-"iOS_contactError" = "Kontakty sa vyžaduje povolenie pre bezpečné zdieľanie kontaktné karty. Kliknite na tlačidlo %@ pre SafeSlinger podrobnosti Kontakty oprávnenie.";
+"iOS_contactError" = "Kontakty povolenia je nutné pre bezpečné zdieľanie kontaktné karty. Kliknite na tlačidlo %@ pre SafeSlinger podrobnosti Kontakty oprávnenie.";
 /* 'Push registration is missing.' is an error message (sentence case, period); used to warn the user the push registration is missing. iOS-only. */
-"iOS_errorpushtoken" = "Registrácia Push chýba.";
+"iOS_errorpushtoken" = "Registrácia push chýba.";
 /* 'Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the %s button for SafeSlinger Notification permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Notifications permission. iOS-only. */
-"iOS_notificationError1" = "Oznámenia povolenia buď pre upozornenia alebo bannery a čísla preukazov, sú nutné pre bezpečné spracovanie správ. Kliknite na tlačidlo %@ pre SafeSlinger podrobnosti oprávnenia oznámenia.";
+"iOS_notificationError1" = "Oznámenie povolenie buď pre upozornenie alebo bannery, a čísla odznaku, sú nutné pre bezpečné spracovanie správ. Kliknite na tlačidlo %@ pre SafeSlinger podrobnosti oprávnenie oznámenia.";
 /* 'SafeSlinger is not optimized for iOS 5.x devices. SafeSlinger requires iOS 6 or higher.' is an informational message (sentence case, period); message for dialog popups when a user still uses an old iOS device. iOS-only. */
-"iOS_oldOSWarn" = "SafeSlinger nie je optimalizovaný pre iOS 5.x zariadení. SafeSlinger vyžaduje iOS 6 alebo vyššia.";
+"iOS_oldOSWarn" = "SafeSlinger nie optimalizovaný pre iOS 5.x zariadení. SafeSlinger vyžaduje iOS 6 alebo vyššej.";
 /* 'Photo Library permission is required to attach pictures to secure messages. Tap the %s button for SafeSlinger Photo Library permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Photo Library permission. iOS-only. */
-"iOS_photolibraryError" = "Povolenie Photo Library je nutné priložiť obrázky na zabezpečenie správy. Kliknite na tlačidlo %@ pre SafeSlinger Foto detaily Knižnica oprávnenia.";
+"iOS_photolibraryError" = "Povolenie Photo Library je nutné priložiť fotografie na zabezpečenie správ. Kliknite na tlačidlo %@ pre SafeSlinger Photo detaily Knižnica oprávnenie.";
 /* 'You can select your contact card to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Contacts when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Contacts permission. iOS-only. */
-"iOS_RequestPermissionContacts" = "Môžete zvoliť kontaktné karty poslať svojich priateľov a SafeSlinger zašifruje ho pre vás. Ak chcete povoliť túto funkciu, je potrebné povoliť SafeSlinger prístup ku kontaktom keď spýtal sa.";
+"iOS_RequestPermissionContacts" = "Môžete si vybrať svoje kontaktné karty posielať svojich priateľov a SafeSlinger zašifruje za vás. Ak chcete túto funkciu, musíte povoliť SafeSlinger prístup ku kontaktom keď spýtal sa.";
 /* 'You can record a voice message to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Microphone when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Microphone permission. iOS-only. */
-"iOS_RequestPermissionMicrophone" = "Tu môžete nahrať hlasovú správu pre svojich priateľov a SafeSlinger zašifruje ho pre vás. Ak chcete povoliť túto funkciu, je potrebné povoliť SafeSlinger prístup k mikrofónu, keď spýtal sa.";
+"iOS_RequestPermissionMicrophone" = "Môžete nahrať hlasovú správu pre svojich priateľov a SafeSlinger zašifruje za vás. Ak chcete túto funkciu, musíte povoliť SafeSlinger prístup k vášmu mikrofónu keď spýtal sa.";
 /* 'SafeSlinger is an encrypted messaging application and cannot function without allowing incoming messages from Notifications. To enable incoming messages, you must allow SafeSlinger to send you Notifications when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Notifications permission. iOS-only. */
-"iOS_RequestPermissionNotifications" = "SafeSlinger je aplikácia, šifrované správy, a nemôže fungovať bez toho, aby prichádzajúce správy z oznámenia. Ak chcete povoliť prichádzajúce správy, je potrebné povoliť SafeSlinger, aby vám poslal oznámenie, keď spýtal sa.";
+"iOS_RequestPermissionNotifications" = "SafeSlinger je aplikácia šifrované komunikáciu a nemôže fungovať bez toho, aby prichádzajúce správy z oznámenia. Ak chcete povoliť prichádzajúce správy, je potrebné povoliť SafeSlinger o zaslanie upozornenia, keď spýtal sa.";
 
 /* '%s ago' is a screen label (match English casing); used on the messages list screen and is used to describe how long ago a message was sent or received. %s = a time measurement, such as '5 minutes' or '2 hours'. */
 "label_ago" = "pred %@";
 /* 'Last Backup Completed' is a screen label (match English casing); used on the Settings screen to indicate the time and date when the last backup was confirmed. */
-"label_backupCompleteDate" = "Posledný zálohovanie bolo dokončené";
+"label_backupCompleteDate" = "Posledné zálohovanie bolo dokončené";
 /* 'Last Backup Request' is a screen label (match English casing); used on the Settings screen to indicate when the user last edited data that should be backed up and the application requested a backup from the backup service. */
-"label_backupRequestDate" = "Posledný Backup Dopyt";
+"label_backupRequestDate" = "Posledná Backup Dopyt";
 /* 'Backup URL' is a screen label (match English casing); used on the Settings screen above the URL used for iCloud backups. iOS-only. */
 "label_backupURL" = "Backup URL";
 /* 'Touch to review your %d messages' is a screen label (match English casing); used in the notification drop down window to indicate what will happen when received messages notification is touched. %d = the number of unseen messages received. */
-"label_ClickForNMsgs" = "Dotykom skontrolovať %d správ";
+"label_ClickForNMsgs" = "Dotykom skontrolovať až %d správ";
 /* 'Compare screens on %s devices.' is a screen label (match English casing); used with arrows and phone graphics to remind user to compare mutiple views, not just their own. %s = the number of users. */
-"label_CompareScreensNDevices" = "Porovnanie obrazoviek na %@ zariadení.";
+"label_CompareScreensNDevices" = "Porovnať obrazoviek na %@ zariadení.";
 /* 'Compose Message' is a screen label (match English casing); used as a text box hint on the Compose Message screen where the user can type a message in the box. */
 "label_ComposeHint" = "Napísať správu";
 /* 'Your Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current user name (first and last) to use. Android-only. */
@@ -357,23 +359,23 @@
 /* 'Device:' is a screen label (match English casing); used to prefix a push registration in the recipients list screen as a device ID. */
 "label_Device" = "Device:";
 /* 'Send-only mode' is a screen label (match English casing); used in many UIs to show that receiving push messages is not supported. */
-"label_DeviceInSendOnlyMode" = "Poslať režim iba";
+"label_DeviceInSendOnlyMode" = "Pošli iba pre režim";
 /* 'Your key has changed: Sling Keys again.' is an error message (sentence case, period); used to warn the user that the key in the Recipients list screen has been exchanged once before with a different key from this user. */
 "label_DisabledExchSourceKeyChange" = "Váš kľúč zmenil: Sling kľúče znova.";
 /* 'To begin messaging, Sling Keys with this user at the same time.' is a screen label (match English casing); used to remind users that an invite is only the beginning, and to Sling Keys before communicating. */
-"label_DisabledNextSlingKeysWithThisPerson" = "Ak chcete začať správ, Sling kľúče s týmto užívateľom súčasne.";
+"label_DisabledNextSlingKeysWithThisPerson" = "Pre začiatok správy, Sling kľúče s týmto užívateľom v rovnakom čase.";
 /* 'DRAFT' is a screen label (match English casing); used to label a message in the Messages list that has been saved in progress but not yet sent. */
 "label_Draft" = "NÁVRH";
 /* 'Key format deprecated: Sling Keys again.' is an error message (sentence case, period); used on the Recipient list screen to warn users that older key formats have been deprecated. Android-only. */
 "label_EnabledKeyFormatDeprecated" = "Formát kľúča zastarané: Sling kľúče znova.";
 /* 'exchanged' is a screen label (match English casing); used to indicate 0-hop or direct trust from a key exchange in the Recipient list screen. */
-"label_exchanged" = "k výmene";
+"label_exchanged" = "vymenili";
 /* 'expired' is a screen label (match English casing); used on the Messages list for message attachment that has not been downloaded more than 24 hours after it was originally sent. */
-"label_expired" = "vypršal";
+"label_expired" = "expirovaný";
 /* 'expires %s' is a screen label (match English casing); used on the message list to show how much time is left to download an attachment. %s = a time measurement, such as 'in 5 minutes' or 'in 2 hours'. Android-only. */
 "label_expires" = "vyprší %@";
 /* 'expires in' is a screen label (match English casing); used on the message list to show how much time is left to download an attachment; a time measurement, such as '5 minutes' or '2 hours' will be appended to this string. iOS-only. */
-"label_expiresIn" = "vyprší v";
+"label_expiresIn" = "vyprší za";
 /* 'File Name' is a screen label (match English casing); used on the Save File As dialog as a hint in the file name text box when changing the file name. */
 "label_FileNameHint" = "Názov súboru";
 /* 'Enter your name and a passphrase to protect your data:' is a screen label (match English casing); used to instruct the user how to proceed on the Setup screen. */
@@ -383,93 +385,97 @@
 /* 'Tap your name to add or remove contact data, check items you wish to share, and tap Begin Exchange when others are ready to exchange:' is a screen label (match English casing); used to instruct the user how to proceed on the Begin Exchange screen. */
 "label_Home" = "Kliknite na svoje meno pridať alebo odstrániť kontaktné údaje, skontrolujte položky, ktoré chcete zdieľať, a kliknite na tlačidlo Begin Exchange keď ostatné sú pripravené k výmene:";
 /* 'Home' is a screen label (match English casing); used to denote a 'home' type of email or phone contact type. iOS-only. */
-"label_hometag" = "Domov";
+"label_hometag" = "Domáce";
 /* '%d hours' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole hours. */
 "label_hours" = "%d hodín";
 /* 'SafeSlinger iCloud is enabled. Tap the Done button when finished.' is a screen label (match English casing); used to indicate the backup will occur while on the Setup screen. iOS-only. */
-"label_iCloudEnable" = "SafeSlinger iCloud je povolené. Po dokončení kliknite na tlačidlo Hotovo.";
+"label_iCloudEnable" = "SafeSlinger iCloud je povolené. Po dokončení Kliknite na tlačidlo Hotovo.";
 /* 'No messages. You may send a message from the Compose tab.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. */
-"label_InstNoMessages" = "Žiadne správy. Môžete poslať správu na karte Vytvoriť.";
+"label_InstNoMessages" = "Žiadne správy. Môžete poslať správu na karte Compose.";
 /* 'To add recipients, you must first Sling Keys with one or more other users at the same time. You may also send a Sling Keys contact invitation from the menu.' is a screen label (match English casing); used to instruct the user how to proceed on the Recipient list screen is case of no recipients. */
 "label_InstNoRecipients" = "Ak chcete pridať príjemcu, musíte najprv Sling kľúče s jedným alebo viacerými inými užívateľmi súčasne. Môžete tiež poslať Sling Keys kontaktné pozvanie z ponuky.";
+/* 'None of your current recipients match your search query. Please try a different query or invite a new contact.' is a screen label (match English casing); used to inform the user that no recipients match the search query. */
+"label_InstNoRecipientsMatchQuery" = "Žiadny zo súčasných príjemcov zodpovedajúce vášmu vyhľadávaniu dotazu. Prosím, skúste iný dotaz alebo pozvať nový kontakt.";
 /* 'No shared file. Connect your device with iTunes and drag files to the shared folder.' is a screen label (match English casing); used to instruct the user how to proceed on the Shared Files screen is case of no files to share. iOS-only. */
-"label_InstNoSharedFile" = "Zdieľaný súbor. Pripojte zariadenie k iTunes a pretiahnuť súbory do zdieľaného priečinka.";
+"label_InstNoSharedFile" = "No zdieľaný súbor. Pripojte zariadenie s iTunes a pretiahnuť súbory do zdieľanej zložky.";
 /* 'Pick a recipient to send a message to:' is a screen label (match English casing); used to instruct the user how to proceed on the Pick Recipients list screen. */
 "label_InstRecipients" = "Vyberte príjemcu odoslať správu:";
 /* 'Pick recipients to introduce securely:' is a screen label (match English casing); used to instruct the user how to proceed on the Secure Introduction Recipients list screen. */
-"label_InstSendInvite" = "Vyberte príjemcu bezpečne zaviesť:";
+"label_InstSendInvite" = "Vyberte príjemcu bezpečne predstaviť:";
 /* 'Pick a file to attach:' is a screen label (match English casing); used as a title for a list of files that could be attached to the message. */
 "label_InstSharedFile" = "Vyberte súbor, ktorý chcete pripojiť:";
 /* 'introduced' is a screen label (match English casing); used to indicate 1-hop trust from a secure introduction in the Recipient list screen. */
-"label_introduced" = "predstavil";
+"label_introduced" = "zavedená";
 /* 'Invited' is a screen label (match English casing); used on the recipient list to denote when a user has sent an invitation to Sling Keys via emailed or text. */
 "label_inviteSent" = "Pozvaný";
 /* 'Key:' is a screen label (match English casing); used to prefix the key generation date in the Recipients list and on the Compose Message screen. */
-"label_Key" = "Legenda:";
+"label_Key" = "Key:";
 /* 'Last Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current last name to use. iOS-only. */
 "label_LastName" = "Priezvisko";
 /* 'Me' is a screen label (match English casing); used on the secure introduction invitation dialog to indicate the one-hop trust relationship between the user (Me); the trusted person, and the new person. */
-"label_Me" = "Me";
+"label_Me" = "Ma";
 /* 'I would like to introduce %s to you.' is a screen label (match English casing); used as the text message when sending secure introduction invitations. %s = the name of a person. */
 "label_messageIntroduceNameToYou" = "Chcel by som predstaviť %@ na vás.";
 /* 'SafeSlinger app: %s' is a screen label (match English casing); used as message text to show a user how to install SafeSlinger. %s = the main installation url for mobile devices */
 "label_messageInviteInstall" = "SafeSlinger app: %@";
 /* 'To setup a secure messaging connection, we can meet or phone each other at the same time, and then Sling Keys just once to verify the connection.' is a screen label (match English casing); used as message text to show a user how to begin secure messaging. */
-"label_messageInviteSetupInst" = "Ak chcete nastaviť zabezpečené pripojenie správ sa môžeme stretnúť alebo telefón navzájom v rovnakom čase, a potom Sling kľúča iba raz pre overenie pripojenia.";
+"label_messageInviteSetupInst" = "Ak chcete nastaviť zabezpečené pripojenie správ, sa môžeme stretnúť alebo telefón navzájom v rovnakom čase, a potom Sling kľúče iba raz pre overenie pripojenia.";
 /* 'Can we start secure messaging with the open source SafeSlinger iPhone or Android app?' is a screen label (match English casing); used as message text to invite a contact to begin secure messaging. */
-"label_messageInviteStartMsg" = "Môžeme začať secure messaging s otvoreným zdrojovým kódom SafeSlinger iPhone alebo Android app?";
+"label_messageInviteStartMsg" = "Môžeme začať secure messaging s open source SafeSlinger iPhone alebo Android aplikácie?";
+/* '%s, you are verified.' is a screen label (match English casing); used as the text message completing sling keys. %s = the name of a recipient. */
+"label_messageYouAreVerified" = "%@, tie sú overené.";
 /* '%d minutes' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole minutes. */
 "label_minutes" = "%d minút";
 /* 'Mobile' is a screen label (match English casing); used to denote a 'mobile' type of email or phone contact type. iOS-only. */
-"label_mobiletag" = "Mobile";
+"label_mobiletag" = "Mobilné";
 /* 'Most recent only' is a screen label (match English casing); used as a label for the boolean toggle switching between all or recent-only recipients on recipient list. */
-"label_MostRecentOnly" = "Iba najnovšie";
+"label_MostRecentOnly" = "Iba Posledný";
 /* 'My updated SafeSlinger credentials are attached.' is a screen label (match English casing); used as default message attached to a credential update. */
-"label_MsgSendUpdate" = "Moja aktualizované poverenia SafeSlinger sú priložené.";
+"label_MsgSendUpdate" = "Moja aktualizované poverenia SafeSlinger sú pripojené.";
 /* 'None' is a screen label (match English casing); used to indicate the local, non-synchronized contacts account name on the phone when picking a Save Account. */
-"label_None" = "Žiadny";
+"label_None" = "Nikto";
 /* 'Non-English' is a screen label (match English casing); used to instruct the user how to switch on Numeric mode while doing comparison. */
-"label_NumericModeHint" = "Non-English";
+"label_NumericModeHint" = "Non-anglický";
 /* '%d Files to Share:' is a screen label (match English casing); used on the Sharing Folder screen. %d = the number of files to share. iOS-only. */
-"label_numsharedfiles" = "%d súborov pre zdieľanie:";
+"label_numsharedfiles" = "%d súbory zdieľať:";
 /* 'Old Threads' is a screen label (match English casing); used for the old thread (iOS only). */
 "label_OldThreads" = "Staré nite";
 /* 'Other' is a screen label (match English casing); used to denote a 'other' type of email or phone contact type. iOS-only. */
-"label_othertag" = "Ostatné";
+"label_othertag" = "Ďalší";
 /* 'Retry' is a screen label (match English casing); used in the Passphrase screen text box as a prefix hint combined with a time measurement when, which is exponentially backed off on invalid passphrase entry, such as 'Retry in 14 seconds'. Used during back off while all user controls have been disabled. */
-"label_PassHintBackoff" = "Skúsiť znova";
+"label_PassHintBackoff" = "Opakovať";
 /* 'Updated Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint to create a replacement passphrase. */
 "label_PassHintChange" = "Aktualizované Prístupové heslo";
 /* 'Create Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint to create a new passphrase. */
-"label_PassHintCreate" = "Vytvorte prístupové heslo";
+"label_PassHintCreate" = "Vytvoriť prístupové heslo";
 /* 'Current Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint to confirm the current passphrase. */
 "label_PassHintCurrent" = "Aktuálne Prístupové heslo";
 /* 'Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint enter the passphrase. */
 "label_PassHintEnter" = "Prístupové heslo";
 /* 'Repeat Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint to confirm the passphrase again. */
-"label_PassHintRepeat" = "Opakujte Prístupové heslo";
+"label_PassHintRepeat" = "Opakovanie Prístupové heslo";
 /* 'Passphrase Cache' is a screen label (match English casing); used on the Settings screen to above the display of the users' passphrase timeout period. */
 "label_passPhraseCacheTtl" = "Prístupové heslo Cache";
 /* 'Passphrase cached' is a screen label (match English casing); used in the notification window when a passphrase has been cached. Android-only. */
 "label_PassPhraseIsCached" = "Prístupové heslo medzipamäte";
 /* 'phone-only' is a screen label (match English casing); used to indicate the local, non-synchronized contacts account type on the phone when picking a Save Account. */
-"label_phoneOnly" = "telefón len";
+"label_phoneOnly" = "telefón iba";
 /* 'Photo' is a screen label (match English casing); used on the Begin Exchange screen to toggle sending the users' photo during the exchange. */
-"label_Photo" = "Foto";
+"label_Photo" = "Fotografie";
 /* 'This number is used to create a unique group of users. Compare, and then enter the lowest number among all users.' is a screen label (match English casing); used to instruct the user how to proceed on the Grouping screen. */
-"label_PromptInstruct" = "Toto číslo sa používa na vytvorenie unikátnej skupinu užívateľov. Porovnajte a zadajte najnižšie číslo medzi všetkými užívateľmi.";
+"label_PromptInstruct" = "Toto číslo sa používa na vytvorenie unikátnej skupinu užívateľov. Porovnajte, a potom zadajte najnižšie číslo medzi všetkými užívateľmi.";
 /* 'Key ID' is a screen label (match English casing); used on the Settings, Compose Message, and Recipients list screens as a label above the base-64 encoded key IDs for sender and recipients. */
-"label_PublicKeyID" = "ID kľúča";
+"label_PublicKeyID" = "Key ID";
 /* 'Push Registration ID' is a screen label (match English casing); used on the Settings screen as a label above the push registration for this user. */
-"label_PushTokenID" = "Push Registračné ID";
+"label_PushTokenID" = "Zatlačte Registrácia ID";
 /* 'received %d items' is a screen label (match English casing); used to show the progress when collecting group members data during the key exchange protocol. %d = the number of members' data items received during the current phase of the exchange protocol. */
 "label_ReceivedNItems" = "dostal %d položiek";
 /* 'Backup Reminder' is a screen label (match English casing); used on the Settings screen to toggle the reminder when pending backups do not execute in timely manner. */
-"label_RemindBackupDelay" = "Backup Reminder";
+"label_RemindBackupDelay" = "Backup Pripomenutie";
 /* 'Reported inactive %s.' is an error message (sentence case, period); used on the Recipient list screen to warn users that the push registration has been reported not-registered or inactive by the push service. %s = a time measurement of how long it has been reported inactive: '2 days ago' and the like.. */
 "label_ReportedInactive" = "Hlásené neaktívne %@.";
 /* 'Last Restore Completed' is a screen label (match English casing); used above a time stamp on the Settings screen to indicate the last time backup settings were restored. */
-"label_restoreCompleteDate" = "Posledný Obnovenie dokončené";
+"label_restoreCompleteDate" = "Posledná Obnoviť Dokončené";
 /* 'SafeSlinger backup delayed' is a screen label (match English casing); used as a title of the notification when a backup request has been pending more than 1 hour. */
 "label_SafeSlingerBackupDelayed" = "SafeSlinger zálohovanie meškanie";
 /* '(SafeSlinger Direct Exchange)' is a screen label (match English casing); used on the Secure Introduction invitation dialog to denote the sender whom the user has performed a direct exchange with and holds direct trust. */
@@ -477,23 +483,27 @@
 /* 'Save Account' is a screen label (match English casing); used above the editable field on the End Exchange screen to showing the address book account to use when saving or updating contacts. */
 "label_SaveAccount" = "Uložiť účet";
 /* 'Check contacts you want to update in your address book, then tap Import to save secure contacts:' is a screen label (match English casing); used to instruct the user how to proceed on the End Exchange screen. */
-"label_SaveInstruct" = "Skontrolujte, či kontakty, ktoré chcete aktualizovať vo vašom adresári, potom kliknite na Importovať uložiť bezpečné kontaktov:";
+"label_SaveInstruct" = "Skontrolujte, či kontakty, ktoré chcete aktualizovať vo vašom adresári, potom kliknite na položku Importovať pre uloženie zabezpečené kontaktov:";
+/* 'Search contacts' is a screen label (match English casing); used on the Recipients screen to provide a hint to search for contacts. */
+"label_search_contacts_hint" = "Vyhľadávanie kontaktov";
 /* '%d seconds' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole seconds. */
-"label_seconds" = "%d sekúnd";
+"label_seconds" = "%dsekunda";
 /* 'Select Recipient' is a screen label (match English casing); used on the Compose Message screen recipient button before a recipient has been selected. */
-"label_SelectRecip" = "Vybrať príjemcu";
+"label_SelectRecip" = "Vyberte príjemcu";
 /* 'Send Error Data' is a screen label (match English casing); used on the Settings screen to toggle the automatic upload of error reports. */
-"label_sendErrorData" = "Poslať Chyba dát";
+"label_sendErrorData" = "Odoslať Chyba dát";
 /* 'From:' is a screen label (match English casing); used on the Compose Message screen to prefix the recipient's name. */
 "label_SendFrom" = "Od:";
 /* 'To:' is a screen label (match English casing); used on the Compose Message screen to prefix the sender's name. */
 "label_SendTo" = "Ak chcete:";
 /* 'Show this hint next time.' is a screen label (match English casing); used in the key exchange walkthrough dialog to toggle the display of the walkthrough at the next attempted key exchange. */
-"label_ShowHintAtLaunch" = "Zobraziť na túto radu nabudúce.";
+"label_ShowHintAtLaunch" = "Zobraziť Táto nápoveda nabudúce.";
+/* 'Using speech recognition is disabled because it might cause an information leak' is a screen label (match English casing); used to alert the user about possible information leak on the use of speech recognition when the user tries to use this feature */
+"label_SpeechRecognitionAlert" = "Použitie rozpoznávania reči je zakázané, pretože by to mohlo viesť k úniku informácií";
 /* 'Step 1' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
 "label_step_1" = "Krok 1";
 /* 'Step 2' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
-"label_step_2" = "Krok 2";
+"label_step_2" = "Stupeň 2";
 /* 'Step 3' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
 "label_step_3" = "Krok 3";
 /* 'Step 4' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
@@ -503,55 +513,55 @@
 /* 'Automatically download message attachments when logged in.' is a screen label (match English casing); used as the settings summary to describe what Auto-retrieve attachments will do. */
 "label_summary_auto_attach_retrieval" = "Automaticky sťahovať prílohy správ pri prihlásení.";
 /* 'Automatically decrypt messages when logged in.' is a screen label (match English casing); used as the settings summary to describe what Auto-decrypt will do. */
-"label_summary_auto_decrypt" = "Automaticky dešifrovať správy pri prihlásení.";
+"label_summary_auto_decrypt" = "Automaticky dešifrovanie správ pri prihlásení.";
 /* 'Receive notification when backup is offline.' is a screen label (match English casing); used as the settings summary to describe what Backup Reminder will do. */
 "label_summary_remind_backup_delay" = "Príjem oznámenia, keď záloha je v režime offline.";
 /* 'Show a tutorial before attempting to Sling Keys.' is a screen label (match English casing); used as the settings summary to describe what Show Walkthrough will do. */
 "label_summary_show_tutorial" = "Zobraziť tutoriál pred pokusom o Sling Keys.";
 /* 'Tap to decrypt file' is a screen label (match English casing); used to indicate tapping this message in the list will attempt to decrypt the attachment (if needed). */
-"label_TapToDecryptFile" = "Kliknite pre dešifrovanie súboru";
+"label_TapToDecryptFile" = "Kliknite pre dešifrovanie súborov";
 /* 'Tap to decrypt' is a screen label (match English casing); used to indicate tapping this message in the list will attempt to decrypt it. */
 "label_TapToDecryptMessage" = "Kliknite pre dešifrovanie";
 /* 'Tap to download file' is a screen label (match English casing); used to indicate tapping this message in the list will download the file (and attempt to decrypt it). */
-"label_TapToDownloadFile" = "Kliknite na tlačidlo pre stiahnutie súboru";
+"label_TapToDownloadFile" = "Kliknite pre stiahnutie súboru";
 /* 'Tap to download message' is a screen label (match English casing); used to indicate tapping this message in the list will download the message (if needed). */
-"label_TapToDownloadMessage" = "Kliknite na tlačidlo pre stiahnutie správy";
+"label_TapToDownloadMessage" = "Kliknutím na tlačidlo Stiahnuť správu";
 /* 'Tap to open file' is a screen label (match English casing); used to indicate tapping this decrypted message in the list will attempt to view the decrypted attachment. */
 "label_TapToOpenFile" = "Kliknutím otvorte súbor";
 /* 'Tap to resume message draft' is a screen label (match English casing); used to indicate tapping this message in the list will take the user to the composition screen. */
-"label_TapToResumeDraft" = "Kliknite na tlačidlo obnoviť správy návrh";
+"label_TapToResumeDraft" = "Kliknutím na tlačidlo pokračovať správy návrhu";
 /* 'Tap and hold to send credential update.' is a screen label (match English casing); used as a hint on the recipient list to help the user know if a credential update is needed. Android-only. */
-"label_TapToSendCredentialUpdate" = "Kliknite a podržte pre odoslanie poverenia aktualizácie.";
+"label_TapToSendCredentialUpdate" = "Kliknutím a podržaním odoslať poverenia aktualizáciu.";
 /* 'Tap to Sling Keys.' is a screen label (match English casing); used to remind the user that we can advance the user to the Sling Keys screen for convenience. */
-"label_TapToSlingKeys" = "Kliknutím na tlačidlo Sling Keys.";
+"label_TapToSlingKeys" = "Kliknutím na Sling Keys.";
 /* 'Contacts Account' is a screen label (match English casing); used above the editable field on the Settings screen to show the current address book account to use. */
-"label_targetAccountLabel" = "Kontakty účet";
+"label_targetAccountLabel" = "Kontakty účtu";
 /* 'You may optionally enable SafeSlinger iCloud backup in iOS Settings. Tap the Done button when finished.' is a screen label (match English casing); used on the Setup screen to remind the user that no backups will be restored on new installation. iOS-only. */
-"label_TouchToConfigureBackupSettings" = "Voliteľne môžete povoliť SafeSlinger iCloud zálohu v iOS Nastavenia. Po dokončení kliknite na tlačidlo Hotovo.";
+"label_TouchToConfigureBackupSettings" = "Môžete voliteľne aktivovať SafeSlinger iCloud zálohu v iOS Nastavenia. Po dokončení Kliknite na tlačidlo Hotovo.";
 /* 'Touch to configure backup settings.' is a screen label (match English casing); used in the notification window when the backup request has been pending over 1 hour. Android-only. */
-"label_TouchToConfigureBackupSettingsAndroid" = "Dotknite sa pre konfiguráciu nastavení zálohovania.";
+"label_TouchToConfigureBackupSettingsAndroid" = "Dotykom konfigurovať nastavenia zálohovania.";
 /* 'Touch to configure cache timeout settings.' is a screen label (match English casing); used in the notification window when a passphrase has been cached. Android-only. */
-"label_TouchToConfigureCacheTimeout" = "Dotknite sa na konfiguráciu nastavenie časového limitu vyrovnávacej pamäte.";
+"label_TouchToConfigureCacheTimeout" = "Dotykom konfigurovať nastavenie časového limitu vyrovnávacej pamäte.";
 /* 'Unknown' is a screen label (match English casing); used in menu lists when unexpected type definitions are encountered. */
-"label_undefinedTypeLabel" = "Neznámy";
+"label_undefinedTypeLabel" = "Nevedno";
 /* 'Encrypted Sender' is a screen label (match English casing); used as the header for an encrypted message in the message list. */
 "label_UnknownSender" = "Šifrované Sender";
 /* 'Lowest' is a screen label (match English casing); used as a text box hint on the Grouping screen when entering the lowest ID number. */
-"label_UserIdHint" = "Najnižšia";
+"label_UserIdHint" = "Najnižšie";
 /* 'User Name' is a screen label (match English casing); used as a placeholder before the users' contact has been loaded. */
 "label_UserName" = "Užívateľské meno";
 /* 'All phones must match one of the 3-word phrases. Compare, and then pick the matching phrase.' is a screen label (match English casing); used to instruct the user how to proceed on the Verify screen. */
-"label_VerifyInstruct" = "Všetky telefóny sa musí zhodovať s jedným z 3-slovo frázy. Porovnajte a potom vybrať zodpovedajúce výraz.";
+"label_VerifyInstruct" = "Všetky telefóny sa musí zhodovať s jedným z 3-slovo frázy. Porovnajte, a potom vybrať zodpovedajúce výraz.";
 /* 'To protect your data, SafeSlinger does not store your passphrase anywhere for recovery. You may only access recipients and messages created under the same passphrase login. However, you may generate a new key and passphrase, then repeat Sling Keys with your recipients.' is a screen label (match English casing); used to describe the reasons passphrases are not storeed and how to generate a new one. */
-"label_WarnForgotPassphrase" = "Ak chcete chrániť svoje dáta, SafeSlinger neukladá vaše prístupové heslo kdekoľvek pre obnovu. Môžete mať prístup iba príjemcovi a správy vytvorené na rovnaký kľúč, prihlásenie. Avšak, môžete vygenerovať nový kľúč a prístupové heslo, opakujte Sling Keys so svojimi príjemcami.";
+"label_WarnForgotPassphrase" = "Ak chcete chrániť svoje dáta, SafeSlinger neukladá prístupové heslo kdekoľvek pre obnovu. Môžete mať prístup iba prijímateľom a správy vytvorené v rámci rovnakej prístupové heslo pre prihlásenie. Avšak, môžete vygenerovať nový kľúč a prístupové heslo, opakujte Sling Keys so svojimi príjemcami.";
 /* 'The following keys will be deleted:' is a screen label (match English casing); used to begin list of keys that will be deleted. */
-"label_WarnManagePassFollowsAreRecent" = "Nasledujúce kľúče budú zmazané:";
+"label_WarnManagePassFollowsAreRecent" = "Nasledujúce klávesy budú zmazané:";
 /* 'There are no more recent keys than yours.' is a screen label (match English casing); used to show there are no keys to delete. */
-"label_WarnManagePassNoMoreRecent" = "Nie sú k dispozícii žiadne novšie kľúča, ako je tá vaša.";
+"label_WarnManagePassNoMoreRecent" = "Nie sú žiadne ďalšie novšie kľúče, ako je tá vaša.";
 /* 'Only keys generated more recently than yours, generated on %s, may be deleted.' is a screen label (match English casing); used to show which keys may be deleted. %s = the key generation date of the current key */
-"label_WarnManagePassOnlyRecentDeleted" = "Iba kľúče generované v poslednej dobe ako tie, ktoré generuje na %@, môžu byť odstránené.";
+"label_WarnManagePassOnlyRecentDeleted" = "Iba kľúče generované viac nedávno ako tie, ktoré generuje na %@, môžu byť odstránené.";
 /* 'Work' is a screen label (match English casing); used to denote a 'work' type of email or phone contact type. iOS-only. */
-"label_worktag" = "Práce";
+"label_worktag" = "Práca";
 
 /* 'SafeSlinger Exchange' is an application name (title case); used for dialogs to show the user which that a SafeSlinger Exchange is in progress. */
 "lib_name" = "SafeSlinger Exchange";
@@ -559,39 +569,39 @@
 /* 'About' is a menu option (title case); used to show the about dialog via the Settings screen. */
 "menu_About" = "O";
 /* 'Auto-retrieve attachments' is a menu option (title case); used to enable/disable automatically retrieving message attachments when logged in via the Settings screen. */
-"menu_auto_attach_retrieval" = "Automatické načítanie príloh";
+"menu_auto_attach_retrieval" = "Automatické načítanie prílohy";
 /* 'Auto-decrypt' is a menu option (title case); used to enable/disable automatically decrypting messages when logged in via the Settings screen. */
-"menu_auto_decrypt" = "Auto-dešifrovanie";
+"menu_auto_decrypt" = "Auto-Decrypt";
 /* 'Change' is a menu option (title case); used to change the currently selected file attachment via the File Options dialog. */
-"menu_Change" = "Zmeniť";
+"menu_Change" = "Zmena";
 /* 'Change Passphrase' is a menu option (title case); used to confirm the current passphrase and create and new one via the Settings screen. */
-"menu_ChangePassphrase" = "Zmena prístupového hesla";
+"menu_ChangePassphrase" = "Zmena Prístupové heslo";
 /* 'Email from Contacts' is a menu option (title case); used when adding a contact invitaion via email. */
-"menu_ContactInviteEmail" = "E-mail z kontaktov";
+"menu_ContactInviteEmail" = "E-mail od Kontakty";
 /* 'Text from Contacts' is a menu option (title case); used when adding a contact invitaion via sms. */
-"menu_ContactInviteSms" = "Text z Kontaktov";
+"menu_ContactInviteSms" = "Text z kontaktov";
 /* 'Create New' is a menu option (title case); used to show a new empty contact in the address book for editing as the users' current identity via the Personal Contact dialog. */
 "menu_CreateNew" = "Vytvoriť nový";
 /* 'Delete' is a menu option (title case); used to delete the current item from the list context menu. */
-"menu_delete" = "Zmazať";
+"menu_delete" = "Vymazať";
 /* 'Delete Thread %s' is a menu option (title case); used to delete all messages from this person via the message list context menu. %s = the name of a person. */
 "menu_deleteThread" = "Zmazať konverzáciu %@";
 /* 'View Detail' is a menu option (title case); used to show a dialog of more detail about the item via the message list context menu. */
-"menu_Details" = "Zobraziť detaily";
+"menu_Details" = "Zobraziť detail";
 /* 'Download Directory' is a choice (sentence case); used when the user chooses to change the directory of the attachment before saving. */
 "menu_DownloadDirectory" = "Download Directory";
 /* 'Edit' is a menu option (title case); used to provide a generic edit menu option. */
-"menu_Edit" = "Upraviť";
+"menu_Edit" = "Edit";
 /* 'Edit Contact' is a menu option (title case); used to show the users' current contact in the address book for editing via the Personal Contact dialog. */
-"menu_EditContact" = "Upraviť kontakt";
+"menu_EditContact" = "Edit Kontakt";
 /* 'Edit Name' is a menu option (title case); used to show the Settings dialog to change the preferred name. */
-"menu_EditName" = "Upraviť názov";
+"menu_EditName" = "Edit Name";
 /* 'File Manager' is a menu option (title case); used to show a custom file system navigation menu via the Choose Your File dialog. Android-only. */
 "menu_FileManager" = "Správca súborov";
 /* 'Forgot Passphrase?' is a menu option (title case); used on the passphrase screen to show users how to generate a new key after forgetting the passphrase that protects the old one. */
 "menu_ForgotPassphrase" = "Zabudli ste prístupové heslo?";
 /* 'Help' is a menu option (title case); used to show a help dialog for the current screen. */
-"menu_Help" = "Nápoveda";
+"menu_Help" = "Pomoc";
 /* 'Introduction' is a menu option (title case); used to show the secure introduction composition screen via the main home screen. */
 "menu_Introduction" = "Úvod";
 /* 'Language' is a menu (title case); used as the settings menu option to change language */
@@ -599,17 +609,17 @@
 /* 'License' is a menu option (title case); used to show a dialog of the End User License Agreement. */
 "menu_License" = "Licencie";
 /* 'Add Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
-"menu_link_contact_add" = "Pridať kontakt Link";
+"menu_link_contact_add" = "Pridať kontakt odkaz";
 /* 'Change Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
-"menu_link_contact_change" = "Zmena kontaktných Link";
+"menu_link_contact_change" = "Zmena Kontakt Link";
 /* 'Logout' is a menu option (title case); used to remove the cached passphrase and force the user to login again. */
 "menu_Logout" = "Odhlásenie";
 /* 'Manage Passphrases' is a menu option (title case); used on the settings screen to allow users to remove newer keys if created by users without orignial user authorization. */
-"menu_ManagePassphrases" = "Správa frázy";
+"menu_ManagePassphrases" = "Spravovanie frázu";
 /* 'Message Font Size' is a menu (title case); used as the settings menu option to change message font size */
 "menu_message_font_size" = "Správa Veľkosť písma";
 /* 'Copy Text' is a menu option (title case); used to copy the message text into the clipboard via the message list context menu. */
-"menu_messageCopyText" = "Kopírovať text";
+"menu_messageCopyText" = "Copy Text";
 /* 'Forward' is a menu option (title case); used to create a new message with the same text message/attachment via the message list context menu. */
 "menu_messageForward" = "Vpred";
 /* 'Privacy Policy' is a menu option (title case); used to show a dialog of the Privacy Policy. */
@@ -621,36 +631,36 @@
 /* 'Sound' is a menu option (title case); used as Settings item for entering ringtone selection screen */
 "menu_ringtone" = "Zvuk";
 /* 'Add Contact Invitation' is a menu option (title case); used to send an email or text message containing an installation link for SafeSlinger. */
-"menu_SelectShareApp" = "Pridať kontakt Pozvánka";
+"menu_SelectShareApp" = "Pridať kontakt pozvánku";
 /* 'Send Feedback' is a menu option (title case); used to send an email with support data for feedback. */
-"menu_sendFeedback" = "Odoslať názor";
+"menu_sendFeedback" = "Odoslať spätnú väzbu";
 /* 'Send Update' is a menu option (title case); used to send a credential update via the recipient list context menu. */
 "menu_SendUpdate" = "Odoslať aktualizáciu";
 /* 'Settings' is a menu option (title case); used to show the settings screen. */
 "menu_Settings" = "Nastavenie";
 /* 'Show Tutorial' is a menu option (title case); used to toggle the key exchange walkthrough when exchanging keys via the Settings screen. */
-"menu_ShowTutorial" = "Zobraziť Tutorial";
+"menu_ShowTutorial" = "Show Tutorial";
 /* 'Compose' is a menu option (title case); used at the title of the message composition tab for the home tab view. */
-"menu_TagComposeMessage" = "Zostavte";
+"menu_TagComposeMessage" = "Skladať";
 /* 'Sling Keys' is a menu option (title case); used as the title of the key exchange tab for the home tab view. */
 "menu_TagExchange" = "Sling Keys";
 /* 'Messages' is a menu option (title case); used as the title of the message list tab for the home tab view. */
 "menu_TagListMessages" = "Správy";
 /* 'Use Another' is a menu option (title case); used to redo the Setup process again to find another contact to use as the users' main identity via the Personal Contact dialog. */
-"menu_UseAnother" = "Použite iný";
+"menu_UseAnother" = "Použiť Ďalší";
 /* 'Use Contact %s' is a menu option (title case); used to select the found contact as the users' main identity via the Personal Contact dialog. */
-"menu_UseContactPerson" = "Použite Kontakt %@";
+"menu_UseContactPerson" = "Použiť Kontakt %@";
 /* 'Use Name Only' is a menu option (title case); used to select no contact as the users' main identity via the Personal Contact dialog. */
 "menu_UseNoContact" = "Používajte len podľa mena";
 /* 'Use Profile %s' is a menu option (title case); used to select the main profile contact as the users' main identity via the Personal Contact dialog. */
 "menu_UseProfilePerson" = "Použitie profilu %@";
 /* 'Vibrate' is a menu option (title case); used as Settings item for boolean option to vibrate during message notification */
-"menu_vibrate" = "Vibrácie";
+"menu_vibrate" = "Vibrovať";
 
 /* 'waiting for verification from all members...' is a progress message (lower case, ellipsis); used to show progress while verifying data from all members hash equal to the initial commitment they sent. */
-"prog_CollectingOthersCommitVerify" = "čaká na overenie všetkých členov...";
+"prog_CollectingOthersCommitVerify" = "čakanie na overenie všetkých členov...";
 /* 'waiting for all users to join...' is a progress message (lower case, ellipsis); used to show progress while waiting to collect all initial commitments from members who entered the same lowest number grouping ID. */
-"prog_CollectingOthersItems" = "čaká na všetkých užívateľov sa pripojiť...";
+"prog_CollectingOthersItems" = "čakanie na všetkým užívateľom pripojiť sa...";
 /* 'constructing group key...' is a progress message (lower case, ellipsis); used to show progress while generating the asymmetric shared group key tree and distributing the appropriate public tree nodes. */
 "prog_ConstructingGroupKey" = "konštrukciu Group Key...";
 /* 'decrypting...' is a progress message (lower case, ellipsis); used to show progress during message decryption (and currently signature verification as well). */
@@ -658,108 +668,116 @@
 /* 'encrypting...' is a progress message (lower case, ellipsis); used to show progress during message encryption (and currently signing as well). */
 "prog_encrypting" = "šifrovanie...";
 /* 'message sent, awaiting response...' is a progress message (lower case, ellipsis); used to show progress after the message has been uploaded, but the server has not confirmed the generation of a push message yet. */
-"prog_FileSent" = "správa odoslaná, program čaká na odpoveď...";
+"prog_FileSent" = "správa odoslaná, čaká odpoveď...";
 /* 'finding key...' is a progress message (lower case, ellipsis); used to show progress while looking up a matching key in the key database. */
 "prog_findingKey" = "nájsť kľúč...";
 /* 'generating key, this can take a while...' is a progress message (lower case, ellipsis); used to show progress during encryption key and signature key public/private key pair generation. */
 "prog_GeneratingKey" = "generovanie kľúča, môže to chvíľu trvať...";
 /* 'generating signature...' is a progress message (lower case, ellipsis); used to show progress during message signature generation. */
-"prog_generatingSignature" = "vytvorenie podpisu...";
+"prog_generatingSignature" = "generovanie podpisu...";
 /* 'loading content...' is a progress message (lower case, ellipsis); used to show progress during file preview loading. */
 "prog_loadingContent" = "obsah sa načítava...";
+/* 'pending...' is a progress message (lower case, ellipsis); used to show progress during queued message while waiting to act */
+"prog_pending" = "čaká na...";
 /* 'receiving encrypted file...' is a progress message (lower case, ellipsis); used to show progress while receiving the requested file. */
 "prog_ReceivingFile" = "príjem zašifrovaný súbor...";
 /* 'requesting encrypted file...' is a progress message (lower case, ellipsis); used to show progress while waiting for the server to return the requested file. */
-"prog_RequestingFile" = "žiada zašifrovaný súbor...";
+"prog_RequestingFile" = "žiadajúci zašifrovaný súbor...";
 /* 'requesting encrypted message...' is a progress message (lower case, ellipsis); used to show progress while waiting for the server to return the requested message. */
 "prog_RequestingMessage" = "požaduje šifrované správy...";
 /* 'requesting push registration...' is a progress message (lower case, ellipsis); used to show progress while waiting for Google or APNS to return a registration id for this phone to receive SafeSlinger-only push messages. */
-"prog_RequestingPushReg" = "žiadosti o registráciu Push...";
+"prog_RequestingPushReg" = "podávanie žiadostí o zápis tlačiť...";
 /* 'requesting membership...' is a progress message (lower case, ellipsis); used to show progress while waiting for the exchange server to return a grouping ID number. */
 "prog_RequestingUserId" = "žiadajúce o členstvo...";
 /* 'updating address book...' is a progress message (lower case, ellipsis); used to show progress while newly exchanged contact data is added to the users' address book. */
-"prog_SavingContactsToAddressBook" = "aktualizovať adresár...";
+"prog_SavingContactsToAddressBook" = "aktualizácii adresára...";
 /* 'updating key database...' is a progress message (lower case, ellipsis); used to show progress while newly exchanged keys are added to the local database. */
-"prog_SavingContactsToKeyDatabase" = "aktualizovať databázu kľúčov...";
+"prog_SavingContactsToKeyDatabase" = "aktualizácia databázu kľúčov...";
 /* 'searching for backup...' is a progress message (lower case, ellipsis); used to show progress during a search for backed up settings. */
-"prog_SearchingForBackup" = "vyhľadávanie zálohy...";
+"prog_SearchingForBackup" = "vyhľadávanie pre zálohovanie...";
 /* 'sending encrypted %s...' is a progress message (lower case, ellipsis); used to show progress while a message is being sent. %s = the file name if an attachment exists. */
-"prog_SendingFile" = "odosielanie šifrovanej %@...";
+"prog_SendingFile" = "posielanie šifrovaných %@...";
 /* 'verifying integrity...' is a progress message (lower case, ellipsis); used to show progress during message integrity verification. */
 "prog_verifyingIntegrity" = "overenie integrity...";
 /* 'verifying signature...' is a progress message (lower case, ellipsis); used to show progress during message signature verification. */
 "prog_verifyingSignature" = "overenie podpisu...";
 
 /* 'Advanced' is a preferences title (title case); used to sub-divide the Advanced section of the settings screen. */
-"section_advanced" = "Rozšírené";
+"section_advanced" = "Pokročilý";
 /* 'Backup' is a preferences title (title case); used to sub-divide the Backup section of the settings screen. */
 "section_backup" = "Zálohovanie";
 /* 'General' is a preferences title (title case); used to sub-divide the General section of the settings screen. */
-"section_general" = "Všeobecné";
+"section_general" = "Všeobecný";
 /* 'Notifications' is a preferences title (title case); used to sub-divide the Notifications section of the settings screen. */
-"section_notification" = "Upozornenie";
+"section_notification" = "Oznámenia";
 /* 'Storage' is a preferences title (title case); used to sub-divide the Storage section of the settings screen. */
 "section_storage" = "Skladovanie";
 
 /* 'Backup restored.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm backup keys and settings have bee restored on re-install. */
-"state_BackupRestored" = "Obnovená záloha.";
+"state_BackupRestored" = "Obnovená Backup.";
 /* 'Deleted file %s.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that a file has been deleted. %s = the file name of the deleted file. */
 "state_FileDeleted" = "Zmazaný súbor %@.";
 /* 'Message sent.' is an informational message (sentence case, period); TODO: This should be deprecated in favor 1 message push to messages tab (single thread) and >1 messages push to messages tab (all threads) with a toast of state_MessagesSent. */
 "state_FileSent" = "Správa bola odoslaná.";
 /* 'Invitation added.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the addition of a contact invitation. */
-"state_InvitationAdded" = "Pozvánka dodal.";
+"state_InvitationAdded" = "Pozvánka pridaný.";
 /* 'Message saved as draft.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that an un-sent message has been saved. */
 "state_MessageSavedAsDraft" = "Správa uložená ako koncept.";
 /* '%d messages deleted.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the number of messages deleted. %d = the number of messages successfully deleted. */
-"state_MessagesDeleted" = "%d správ odstránená.";
+"state_MessagesDeleted" = "%d správ odstránené.";
+/* '%d messages sent.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that N messages has been sent used on all threads views. */
+"state_MessagesSent" = "%d správy odosielané.";
 /* 'Passphrase updated.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the change of password. */
-"state_PassphraseUpdated" = "Prístupové heslo aktualizovaný.";
+"state_PassphraseUpdated" = "Prístupové heslo aktualizovaná.";
 /* '%d recipients deleted.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the number of recipients deleted. %d the number of recipient's keys successfully deleted. */
-"state_RecipientsDeleted" = "%d príjemcov zmazaný.";
+"state_RecipientsDeleted" = "%d príjemcami zmazaný.";
 /* '%s contacts imported.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the number of contacts imported after exchange. %s the number of contacts imported, may be expressed as a ratio, such as 4/5 in case of a partial import. */
-"state_SomeContactsImported" = "%@ kontakty importovať.";
+"state_SomeContactsImported" = "%@ kontakty importované.";
 /* 'Text copied to clipboard.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the message text has been copied to the device native clipboard. */
-"state_TextCopiedToClipboard" = "Text skopírovaný do schránky.";
+"state_TextCopiedToClipboard" = "Text bol skopírovaný do schránky.";
 
 /* 'SafeSlinger is designed to easily share identity data, in person or over the phone, authenticated, private, and intact. Each person you share with creates a secure end-to-end channel to send messages.' is an application description (sentence case); used at the beginning of the about box and app store listing to describe the application. Beginning of long form: 4000 character max. */
-"text_About" = "SafeSlinger je navrhnutý tak, aby ľahko zdieľať dáta identity, osobne alebo po telefóne, overený, súkromné​​, a neporušený. Každý človek zdieľať s vytvára zabezpečený kanál end-to-end pre odosielanie správ.";
+"text_About" = "SafeSlinger je navrhnutý tak, aby ľahko zdieľať dáta identity, osobne alebo po telefóne, overené, súkromné, a neporušený. Každá osoba, ktorej zdieľate sa vytvára zabezpečený kanál end-to-end odosielať správy.";
 /* 'Easily exchange contact information with others' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
 "text_About1" = "Ľahko vymieňať kontaktné informácie s ostatnými";
 /* 'Securely sling texts, photos, anything!' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
-"text_About2" = "Bezpečne praku texty, fotografie, čokoľvek!";
+"text_About2" = "Bezpečne popruh texty, fotografie, čokoľvek!";
 /* 'Strong cryptography protects your information' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
 "text_About3" = "Silné šifrovanie chráni vaše informácie";
 /* 'SafeSlinger: Speak 3 words and forever chat in peace.' is an application description (sentence case); used in the about box and app store listing to describe the application features. Short form: 80 character max, should be exciting. */
-"text_About_Short" = "SafeSlinger: Speak 3 slová a navždy chatu v kľude.";
+"text_About_Short" = "SafeSlinger: Speak 3 slová a navždy porozprávať v kľude.";
 /* 'email: %s' is an application description (sentence case); used in the app store listing, %s = SafeSlinger support email address. */
 "text_AboutEmail" = "email: %@";
 /* 'Features:' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
 "text_AboutFeat" = "Vlastnosti:";
 /* 'web: %s' is an application description (sentence case); used in the app store listing, %s = SafeSlinger project web page address. */
 "text_AboutWeb" = "web: %@";
+/* 'Developed by:' is an application description (sentence case); used at the end of the about dialog to list the developers of SafeSlinger. */
+"text_DevelopedBy" = "Spracoval:";
 /* 'Exchange' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordExchange" = "Výmena";
 /* 'Identity' is an application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordIdentity" = "Identity";
+"text_KeywordIdentity" = "Identita";
 /* 'Key' is an application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordKey" = "Key";
+"text_KeywordKey" = "Kľúč";
 /* 'Messaging' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordMessaging" = "Správy";
 /* 'Privacy' is an application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordPrivacy" = "Ochrana osobných údajov";
+"text_KeywordPrivacy" = "Súkromie";
 /* 'Security' is an application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordSecurity" = "Bezpečnosť";
+"text_KeywordSecurity" = "Zabezpečenie";
 /* 'Languages provided by:' is an application description (sentence case); used at the end of the about dialog to list the translators of SafeSlinger. */
-"text_LanguagesProvidedBy" = "Jazyky poskytované:";
+"text_LanguagesProvidedBy" = "Jazykov, ak by:";
+/* 'translate: %s' is an application description (sentence case); used in the app store listing, %s = SafeSlinger project localization repo. */
+"text_LocalizationRepo" = "preložiť: %@";
 /* 'Related Terms:' is an application description (sentence case); used in the app store listing to list related search terms to help users looking for secure key exchange and messaging. */
 "text_RelatedSearchTerms" = "Príbuzné termíny:";
 /* 'Requirements:' is an application description (sentence case); used in the about box and app store listing to enumerate requirements. */
 "text_Requirements" = "Požiadavky:";
 /* 'Must be installed on a minimum of 2 devices.' is an application description (sentence case); used in the about box and app store listing to enumerate requirements. */
-"text_Requirements1" = "Musí byť nainštalovaný na minimálne dve zariadenia.";
+"text_Requirements1" = "Musí byť inštalovaný na minimálne 2 zariadenia.";
 /* 'An Internet connection must be active.' is an application description (sentence case); used in the about box and app store listing to enumerate requirements. */
-"text_Requirements2" = "Pripojenie k Internetu musí byť aktívny.";
+"text_Requirements2" = "Pripojenie k internetu, musí byť aktívny.";
 /* 'open source: %s' is an application description (sentence case); used in the app store listing to show the location of the open source code repository. %s = source code URL. */
 "text_SourceCodeRepo" = "open source: %@";
 /* 'Stability fixes.' is an application description (sentence case); used to list what changes have been made to updated versions. */
@@ -768,27 +786,27 @@
 /* 'About' is a title (title case); used as the */
 "title_About" = "O";
 /* 'Camera' is a menu option (title case); used in the Select File Option menu to take a picture with the camera on iOS. */
-"title_camera" = "Fotoaparát";
+"title_camera" = "Kamera";
 /* 'Choose Directory' is a title (title case); used at the top of the menu when choosing a directory to load or save a file attachment. */
-"title_ChooseDirectory" = "Zvoľte adresár";
+"title_ChooseDirectory" = "Vyberte adresár";
 /* 'Choose Your Attachment' is a title (title case); used at the top of the menu options when choosing among sources to pick an attachment. */
-"title_ChooseFileLoad" = "Vyberte si prílohu";
+"title_ChooseFileLoad" = "Vyberte si svoj prílohu";
 /* 'Comments/Questions' is a title (title case); used as the Subject field of an email message for the user to send feedback to developers. Also used as the menu option to start the email. */
-"title_comments" = "Komentáre/otázky";
+"title_comments" = "Komentáre/Otázky";
 /* 'Error' is a title (title case); used at the top of the error dialog. */
 "title_Error" = "Chyba";
 /* 'Sling Keys Assistant' is a title (title case); used at the top of the dialog, which provides a walkthrough of the key exchange protocol. */
 "title_ExchangeWalkthrough" = "Sling Keys Assistant";
 /* 'Attachment Options' is a title (title case); used at the top of the menu when choosing whether to remove the current attachment or select a new one. */
-"title_FileOptions" = "Možnosti príloh";
+"title_FileOptions" = "Možnosti pripojenia";
 /* 'Setup' is a title (title case); used at the top of the setup screen. */
 "title_find" = "Nastavenie";
 /* 'Select a font size' is a title (title case); used as the settings title when changing font size */
-"title_font_size" = "Vyberte si veľkosť písma";
+"title_font_size" = "Vyberte veľkosť písma";
 /* 'Begin Exchange' is a title (title case); used at the top of the begin exchange screen to start the exchange protocol. */
 "title_home" = "Začnite Exchange";
 /* 'Home' is a title (title case); used at the top of the home screen on iOS. */
-"title_HomePanel" = "Domov";
+"title_HomePanel" = "Domáce";
 /* 'Message' is a title (title case); used at the top of the dialog when viewing message details. */
 "title_MessageDetail" = "Správa";
 /* 'Messages' is a title (title case); used at the top of the message list screen. */
@@ -796,13 +814,13 @@
 /* 'Personal Contact' is a title (title case); used at the top of a menu when choosing to alter the users' contact: Edit, Create New, or Use Another. */
 "title_MyIdentity" = "Osobný kontakt";
 /* 'SafeSlinger Message Available' is a title (title case); used as the title of an incoming message in the notification window. */
-"title_NotifyFileAvailable" = "SafeSlinger správy k dispozícii";
+"title_NotifyFileAvailable" = "SafeSlinger Message dispozícii";
 /* '%d SafeSlinger Messages Available' is a title (title case); used as the title of multiple incoming messages in the notification window. iOS-only. */
-"title_NotifyMulFileAvailable" = "%d SafeSlinger Správy dispozícii";
+"title_NotifyMulFileAvailable" = "%d SafeSlinger správy k dispozícii";
 /* 'Passphrase' is a title (title case); used at the top of the passphrase screen where user will login. */
 "title_passphrase" = "Prístupové heslo";
 /* 'Photo Album' is a menu option (title case); used in the Select File Option menu to select a picture from the photo album on iOS. */
-"title_photoalbum" = "Fotoalbum";
+"title_photoalbum" = "Photo Album";
 /* 'Photo Library' is a menu option (title case); used in the Select File Option menu to create a picture from the photo library on iOS. */
 "title_photolibary" = "Photo Library";
 /* 'Recipients' is a title (title case); used at the top of the recipient list screen. */
@@ -818,15 +836,15 @@
 /* 'Secure Introduction' is a title (title case); used at the top of the secure introduction composition screen. */
 "title_SecureIntroduction" = "Secure Úvod";
 /* 'Secure Introduction Invitation!' is a title (title case); used at the top of the confirmation dialog when receiving a secure introduction. */
-"title_SecureIntroductionInvite" = "Secure Úvod Pozvánka!";
+"title_SecureIntroductionInvite" = "Secure Úvod pozvánku!";
 /* 'Sending Options:' is a title (title case); used to denote the dialog for user to pickup sender source options. */
-"title_SelectSource" = "Odoslanie možnosti:";
+"title_SelectSource" = "Odoslanie Možnosti:";
 /* 'Send' is a title (title case); used at the top of compose message screen. */
 "title_SendFile" = "Odoslať";
 /* 'Sharing Folder' is a menu option (title case); used in the Select File Option menu to select a file from the sharing folder on iOS. */
 "title_sharingfolder" = "Zdieľanie priečinkov";
 /* 'How many users in the exchange?' is a title (title case); used at the top of the group size selection screen. */
-"title_size" = "Koľko užívateľov na výmenu?";
+"title_size" = "Koľko užívateľov pri výmene?";
 /* 'Sound Recorder' is a menu option (title case); used in the Select File Option menu to create a voice recording on iOS. */
 "title_soundrecoder" = "Záznam zvuku";
 /* 'SafeSlinger Invitation' is a title (title case); used as the Subject field of an email or text message sent by the Share Application menu option. */
@@ -836,6 +854,6 @@
 /* 'Grouping' is a title (title case); used at the top of the entry screen for the lowest common number. */
 "title_userid" = "Zoskupenie";
 /* 'Verify' is a title (title case); used at the top of the word phrase verification screen. */
-"title_verify" = "Skontrolujte, či";
+"title_verify" = "Overiť";
 /* 'Warning' is a title (title case); used at the top of the warning dialog. */
-"title_Warn" = "Upozornenie";
+"title_Warn" = "Varovanie";

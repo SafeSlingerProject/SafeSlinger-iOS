@@ -23,23 +23,23 @@
 */
 
 /* 'Add a Sling Keys contact invitation via...' is an action title (sentence case, ellipsis); this title is used during Add Contact Invitation in a dialog of message choices, which can send an installation URL for SafeSlinger along with instructions. */
-"action_NewUserRequest" = "ຕື່ມການເຊື້ອເຊີນຕິດຕໍ່ຫຼັກ Sling ຜ່ານ...";
+"action_NewUserRequest" = "ຕື່ມການເຊື້ອເຊີນຕິດຕໍ່ Keys Sling ຜ່ານ...";
 
 /* 'SafeSlinger' is an application name (title case); used for home screen icons, at the top of many screens, and many other places in the application. */
 "app_name" = "SafeSlinger";
 
 /* 'Backup is disabled. Do you want to adjust backup settings and keep this reminder?' is a question message (sentence case, question mark); used to warn when the backup is off to confirm we should keep reminding the user. Used with Forget and Remind buttons. */
-"ask_BackupDisabledRemindLater" = "Backup ເປັນຄົນພິການ. ທ່ານຕ້ອງການທີ່ຈະປັບປຸງການາຮອງແລະຮັກສາການເຕືອນນີ້?";
+"ask_BackupDisabledRemindLater" = "Backup ແມ່ນຄົນພິການ. ທ່ານຕ້ອງການປັບການຕັ້ງຄ່າສໍາຮອງຂໍ້ມູນແລະຮັກສາການແຈ້ງເຕືອນນີ້?";
 /* '%s has a more recent device or key, are you sure you want to use this older one?' is a question message (sentence case, question mark); is a confirmation question that occurs when the user selected a recipient with more recent information in the database. */
-"ask_ConfirmUseOlderDeviceOrKey" = "%@ ມີອຸປະກອນທີ່ຜ່ານມາຫຼາຍທີ່ສໍາຄັນຫຼື, ທ່ານແນ່ໃຈວ່າທ່ານຕ້ອງການທີ່ຈະນໍາໃຊ້ນີ້ອາຍຸຫນຶ່ງ?";
+"ask_ConfirmUseOlderDeviceOrKey" = "%@ ມີອຸປະກອນທີ່ຜ່ານມາຫຼາຍທີ່ສໍາຄັນຫຼື, ທ່ານແນ່ໃຈວ່າທ່ານຕ້ອງການທີ່ຈະນໍາໃຊ້ອາຍຸຫນຶ່ງ?";
 /* 'File name %s already exists. Overwrite?' is a question message (sentence case, question mark); is a question that occurs when the user attempts to save a file with the same name as an existing file in the same location. %s = the file name of the attachment. */
-"ask_FileExistsOverwrite" = "%@ ຊື່ File ແລ້ວ. Overwrite?";
+"ask_FileExistsOverwrite" = "%@ ຊື່ໄຟຢູ່ແລ້ວ. ແທນທີ່?";
 /* 'Without a Google Account you will only be able to send, NOT receive messages. Do you want to add a Google account?' is a question message (sentence case, question mark); used to warn when a Google account has not been setup, if the user intends to receive messages. Android-only. */
-"ask_GoogleAccountToReceiveMsgs" = "ໂດຍບໍ່ມີການກູໂກບັນຊີຂອງທ່ານພຽງແຕ່ຈະສາມາດສົ່ງ, ບໍ່ໄດ້ຮັບຂໍ້ຄວາມ. ທ່ານຕ້ອງການທີ່ຈະເພີ່ມເປັນບັນຊີຂອງກູໂກ?";
+"ask_GoogleAccountToReceiveMsgs" = "ໂດຍບໍ່ມີການກູໂກບັນຊີຂອງທ່ານພຽງແຕ່ຈະສາມາດສົ່ງ, ບໍ່ໄດ້ຮັບຂໍ້ຄວາມ. ທ່ານຕ້ອງການເພີ່ມບັນຊີກູໂກ?";
 /* 'Quit? Are you sure?' is a question message (sentence case, question mark); is a confirmation question that occurs when the user chooses to end the exchange protocol prematurely. */
-"ask_QuitConfirmation" = "ເຊົາ? ທ່ານມີຄວາມແນ່ໃຈວ່າ?";
+"ask_QuitConfirmation" = "ອອກຈາກ? ທ່ານແນ່ໃຈບໍ່?";
 /* 'We'd like your help improving SafeSlinger. Would you like to automatically send any errors to us?' is a question message (sentence case, question mark); is a question that occurs when the user encounters an unhandled exception and are asked if they want to upload this error log and any future error logs. */
-"ask_SendErrorData" = "ພວກເຮົາຢາກຊ່ວຍເຫຼືອຂອງທ່ານປັບປຸງ SafeSlinger. ທ່ານຢາກຈະສົ່ງອັດຕະໂນມັດຄວາມຜິດພາດໃດໆໃຫ້ພວກເຮົາ?";
+"ask_SendErrorData" = "ພວກເຮົາຕ້ອງການຄວາມຊ່ວຍເຫຼືອຂອງທ່ານການປັບປຸງ SafeSlinger. ທ່ານຕ້ອງການທີ່ຈະອັດຕະໂນມັດສົ່ງຄວາມຜິດພາດໃດໆໃຫ້ພວກເຮົາ?";
 
 /* 'Accept' is a button (title case); the Accept button is paired with the Refuse button to indicate user acceptance of a secure introduction. */
 "btn_Accept" = "ຍອມຮັບ";
@@ -54,11 +54,13 @@
 /* 'Create New Key' is a button (title case); the Create New Key button is paired with the Cancel button, and is used to affirm the creation of a new key and passphrase. */
 "btn_CreateNewKey" = "ສ້າງໃຫມ່ Key";
 /* 'Delete Keys' is a button (title case); the Create New Key button is paired with the Cancel button, and is used to affirm the deletion of more recent keys. */
-"btn_DeleteKeys" = "ລຶບຫຼັກ";
+"btn_DeleteKeys" = "ລົບຫຼັກ";
 /* 'Discard' is a button (title case); the Discard button is used to indicate the user wishes to exit the current screen without saving data, such as a voice memo. For non-Android use only, since Android uses the Back hardware button instead. */
-"btn_discard" = "ການຖິ້ມໄພ່";
+"btn_discard" = "ຍົກເລີກ";
 /* 'Done' is a button (title case); the Done button is used to allow the user to complete a current multi-step process. */
-"btn_Done" = "ເຮັດ";
+"btn_Done" = "Done";
+/* 'Edit' is a button (title case); the Edit button is used to show a screen where the user can edit a contact. */
+"btn_Edit" = "ດັດແກ້";
 /* 'Exit' is a button (title case); the Exit button is used to close the application. For non-Android use only, since Android uses the Back hardware button instead. */
 "btn_Exit" = "ການທ່ອງທ່ຽວ";
 /* 'Import' is a button (title case); the Import button is used to import a set of contacts on after an unsuccessful exchange protocol has finished. */
@@ -68,9 +70,9 @@
 /* 'Next' is a button (title case); the Next button is used to remind the user that there is another step to complete. */
 "btn_Match" = "Next";
 /* 'No' is a button (title case); the No button is paired with the Yes button, and is used to indicate a negative answer to a Yes/No question. */
-"btn_No" = "ບໍ່ມີ";
+"btn_No" = "No";
 /* 'No Match' is a button (title case); the No Match button is used if the user cannot find the same batting screen on another user's device during the exchange critical care. */
-"btn_NoMatch" = "ຄໍາວ່າບໍ່ມີ";
+"btn_NoMatch" = "ຄໍາວ່າ No";
 /* 'Not Now' is a button (title case); the Not Now button is used as a negative button to decline an offered service or permission. */
 "btn_NotNow" = "ບໍ່ໃນປັດຈຸບັນ";
 /* 'Forget' is a button (title case); the Forget button is paired with the Remind button and is used to indicate the user wishes to dismiss the current reminder of a potential error state, such as having backup or notification settings turned off, and not be reminded again. */
@@ -78,17 +80,17 @@
 /* 'OK' is a button (title case); the OK button is affirmation button used to indicate the user accepts the data entered on the current screen. */
 "btn_OK" = "OK";
 /* 'Refuse' is a button (title case); the Refuse button is paired with the Accept button to indicate user refusal of a secure introduction. */
-"btn_Refuse" = "ປະຕິເສດບໍ່";
+"btn_Refuse" = "ປະຕິເສດ";
 /* 'Remind' is a button (title case); the Remind button is paired with the Forget button and is used to indicate the user wishes to dismiss the current reminder of a potential error state, such as having backup or notification settings turned off, and does want to be reminded again later. */
 "btn_Remind" = "ເຕືອນ";
 /* 'Save' is a button (title case); the Save button is used to indicate the data in question should be saved and persisted. */
-"btn_Save" = "Save";
+"btn_Save" = "ບັນທຶກ";
 /* 'Add Attachment' is a button (title case); the Add Attachment button is used on the Compose screen to allow the user to select the source of an attachment to the current message. */
-"btn_SelectFile" = "ຕື່ມການຄັດຕິດ";
+"btn_SelectFile" = "ຕື່ມການ Attachment";
 /* 'Send' is a button (title case); the Send button will secure the current text message and attachment, if any, and send the message to the selected recipient. */
 "btn_SendFile" = "ສົ່ງ";
 /* 'Yes' is a button (title case); the Yes button is paired with the No button, and is used to indicate an affirmative answer to a Yes/No question. */
-"btn_Yes" = "ແມ່ນແລ້ວ";
+"btn_Yes" = "Yes";
 
 /* '10 minutes' is a choice (sentence case); used to set the password timeout to 10 minutes. */
 "choice_10mins" = "10 ນາທີ";
@@ -111,9 +113,9 @@
 /* '8 hours' is a choice (sentence case); used to set the password timeout to 8 hours. */
 "choice_8hours" = "8 ຊົ່ວໂມງ";
 /* 'Default Storage' is a choice (sentence case); used to set the attachment root path to the default source. Android-only. */
-"choice_auto_storage" = "ການເກັບຮັກສາໄວ້ໃນຕອນຕົ້ນ";
+"choice_auto_storage" = "ການເກັບຮັກສາມາດຕະຖານ";
 /* 'Default' is a choice (sentence case); used in any menu to denote the default choice. */
-"choice_default" = "ໃນຕອນຕົ້ນ";
+"choice_default" = "ມາດຕະຖານ";
 /* 'External Storage' is a choice (sentence case); used to set the attachment root path to an external source. Android-only. */
 "choice_external_storage" = "ການເກັບຮັກສາຈາກພາຍນອກ";
 /* 'Large' is a choice (sentence case); used in the settings to choose a large font size. */
@@ -127,229 +129,229 @@
 /* 'Internal Storage' is a choice (sentence case); used to set the attachment root path to an internal source. Android-only. */
 "choice_internal_storage" = "ການເກັບຮັກສາພາຍໃນປະເທດ";
 /* 'No Limit' is a choice (sentence case); used to remove the timeout for the password. */
-"choice_nolimit" = "ມີຂໍ້ຈໍາກັດ";
+"choice_nolimit" = "ບໍ່ຈໍາກັດ";
 /* '%d users' is a choice (sentence case); used to describe the number of users currently attempting to exchange keys. %d = number of users in the exchange. */
 "choice_NumUsers" = "%d ຜູ້ຊົມໃຊ້";
 /* 'Save Directory' is a choice (sentence case); used when the user chooses to change the directory of the attachment before saving. */
-"choice_SaveDirectory" = "Save Directory";
+"choice_SaveDirectory" = "ບັນທຶກ Directory";
 /* 'Save file' is a choice (sentence case); used when the user chooses to change the filename of the attachment before saving. */
-"choice_SaveFile" = "ຊ່ວຍປະຢັດໄຟລ໌";
+"choice_SaveFile" = "ຊ່ວຍປະຢັດໄຟ";
 /* 'Up' is a choice (sentence case); used in the File Manager dialog to navigate up to a parent directory. */
 "choice_Up" = "Up";
 
 /* 'Some members are using an older version; all members must upgrade to the newest version.' is an error message (sentence case, period); used to warn when some members of the key exchange protocol are using less than the minimum version. Used for backward-compatibility in some cases. */
-"error_AllMembersMustUpgrade" = "ສະມາຊິກບາງຄົນໄດ້ຖືກນໍາໃຊ້ເປັນສະບັບປີຂຶ້ນໄປ; ສະມາຊິກທຸກຄົນຕ້ອງໄດ້ຍົກລະດັບເພື່ອສະບັບໃຫມ່ໄດ້.";
+"error_AllMembersMustUpgrade" = "ສະມາຊິກບາງຄົນໄດ້ຖືກນໍາໃຊ້ເປັນສະບັບຂຶ້ນໄປ; ສະມາຊິກທຸກຄົນຕ້ອງໄດ້ຍົກລະດັບເພື່ອສະບັບໃຫມ່ໄດ້.";
 /* 'All members must upgrade, some are using older key formats.' is an error message (sentence case, period); used to warn when the key format is incorrect after an exchange and perhaps used an old format. */
-"error_AllMembersMustUpgradeBadKeyFormat" = "ສະມາຊິກທຸກຄົນຕ້ອງໄດ້ຍົກລະດັບ, ບາງຄົນແມ່ນການນໍາໃຊ້ຮູບແບບທີ່ສໍາຄັນຂຶ້ນໄປ.";
+"error_AllMembersMustUpgradeBadKeyFormat" = "ສະມາຊິກທຸກຄົນຈະຕ້ອງຍົກລະດັບ, ຈໍານວນຫນຶ່ງແມ່ນການນໍາໃຊ້ຮູບແບບທີ່ສໍາຄັນຂຶ້ນໄປ.";
 /* 'All members must upgrade, some are using older push registration formats.' is an error message (sentence case, period); used to warn when the push registration format is incorrect or corrupted. */
-"error_AllMembersMustUpgradeBadPushToken" = "ສະມາຊິກທຸກຄົນຕ້ອງໄດ້ຍົກລະດັບ, ບາງຄົນສູງອາຍຸການນໍາໃຊ້ຮູບແບບການຈົດທະບຽນການຊຸກຍູ້.";
+"error_AllMembersMustUpgradeBadPushToken" = "ສະມາຊິກທຸກຄົນຈະຕ້ອງຍົກລະດັບ, ບາງຄົນສູງອາຍຸການນໍາໃຊ້ຮູບແບບການຈົດທະບຽນການຊຸກຍູ້.";
 /* 'Audio player decoding error.' is an error message (sentence case, period); used to warn when attempting to play an audio message fails to decode properly. iOS-only. */
-"error_AudioPlayerDecodeError" = "ສຽງຜິດພາດ decoding ຜູ້ນ.";
+"error_AudioPlayerDecodeError" = "ສຽງຜິດພາດການຖອດລະຫັດຜູ້ນ.";
 /* 'Cannot play the recording.' is an error message (sentence case, period); used to warn when the voice recording received cannot be played. iOS-only. */
 "error_AudioPlayerError" = "ບໍ່ສາມາດຫຼິ້ນການບັນທຶກການ.";
 /* 'Audio recorder encoding error.' is an error message (sentence case, period); used to warn when attempting to record an audio message fails to encode properly. iOS-only. */
-"error_AudioRecorderEncodeError" = "ສຽງຄວາມຜິດພາດລະບົບພາສາການບັນທຶກ.";
+"error_AudioRecorderEncodeError" = "ສຽງຜິດພາດການເຂົ້າລະຫັດບັນທຶກ.";
 /* 'Microphone permission is required to record a secure voice message. Tap the %s button for SafeSlinger Microphone permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Microphone permission. iOS-only. */
-"error_AudioRecorderPermissionError" = "ການອະນຸຍາດ Microphone ແມ່ນຕ້ອງການເພື່ອບັນທຶກຂໍ້ຄວາມສຽງຄວາມຫມັ້ນຄົງ. ປາດປຸ່ມ %@ ສໍາລັບການລາຍລະອຽດອະນຸຍາດ SafeSlinger Microphone.";
+"error_AudioRecorderPermissionError" = "ການອະນຸຍາດ Microphone ແມ່ນຕ້ອງການການບັນທຶກຂໍ້ຄວາມສຽງມີຄວາມປອດໄພ. ແຕະປຸ່ມ %@ ສໍາລັບລາຍລະອຽດອະນຸຍາດ SafeSlinger Microphone.";
 /* 'No backup to restore.' is an error message (sentence case, period); used to warn at application setup, when there is no pre-existing backup to restore and warn the user that any previous keys have not been restored. */
-"error_BackupNotFound" = "Backup ທີ່ບໍ່ມີການຟື້ນຟູ.";
+"error_BackupNotFound" = "ສໍາຮອງຂໍ້ມູນທີ່ບໍ່ມີການຟື້ນຟູ.";
 /* 'Device does not support backup restore.' is an error message (sentence case, period); used to warn when the device hardware does not support restoration from backup. */
-"error_BackupNotSupportedDevice" = "ອຸປະກອນທີ່ບໍ່ໄດ້ສະຫນັບສະຫນູນການຟື້ນຟູ backup.";
+"error_BackupNotSupportedDevice" = "ອຸປະກອນບໍ່ໄດ້ສະຫນັບສະຫນູນສໍາຮອງຂໍ້ມູນການຟື້ນຟູ.";
 /* 'Due to a bug in Android 4.1, you will have to uninstall and reinstall SafeSlinger.' is an error message (sentence case, period); used to warn when unable to load native libraries due to a Google Play copy-protection bug, which can corrupt installations for users upgrading to Android 4.1. Android-only. */
-"error_BadCopyProtectUpgrade" = "ເນື່ອງຈາກ bug ໃນ Android 4.1, ທ່ານຈະມີການຖອນການຕິດຕັ້ງແລະ reinstall SafeSlinger.";
+"error_BadCopyProtectUpgrade" = "ເນື່ອງຈາກ bug ໃນ Android 4.1, ທ່ານຈະມີການຖອນການຕິດຕັ້ງແລະຕິດຕັ້ງ SafeSlinger.";
 /* 'A Google account is required. Please open the account manager and add a Google account.' is an error message (sentence case, period); used to warn during push registration: There is no Google account on the phone. The application should ask the user to open the account manager and add a Google account. Fix on the device side. Android-only. */
-"error_C2DMRegAccountMissing" = "A ບັນຊີຂອງກູໂກແມ່ນທີ່ຕ້ອງການ. ກະລຸນາເປີດຈັດການບັນຊີແລະການເພີ່ມບັນຊີຂອງກູໂກ.";
+"error_C2DMRegAccountMissing" = "A ບັນຊີກູໂກແມ່ນທີ່ຕ້ອງການ. ກະລຸນາເປີດການບັນຊີແລະເພີ່ມບັນຊີກູໂກ.";
 /* 'Registration not authenticated, please retry manually later.' is an error message (sentence case, period); used to warn during push registration: Bad password. The application should ask the user to enter his/her password, and let user retry manually later. Fix on the device side. Android-only. */
-"error_C2DMRegAuthenticationFailed" = "ການຈົດທະບຽນບໍ່ໄດ້ authenticated, ກະລຸນາກົວເຕຄູ່ມືຕໍ່ມາ.";
+"error_C2DMRegAuthenticationFailed" = "ການລົງທະບຽນບໍ່ໄດ້ຮັບຮອງຄວາມຖືກ, ກະລຸນາລອງໃຫມ່ດ້ວຍຕົນເອງຕໍ່ມາ.";
 /* 'Registration is not available for this version, please check for an updated version.' is an error message (sentence case, period); used to warn during push registration: The sender account is not recognized. Android-only. */
-"error_C2DMRegInvalidSender" = "ການຈົດທະບຽນແມ່ນບໍ່ມີສໍາລັບການສະບັບນີ້, ກະລຸນາກວດເບິ່ງສໍາລັບສະບັບປັບປຸງ.";
+"error_C2DMRegInvalidSender" = "ການລົງທະບຽນບໍ່ສາມາດໃຊ້ສໍາລັບການສະບັບນີ້, ກະລຸນາກວດສອບການສໍາລັບການສະບັບປັບປຸງ.";
 /* 'Incorrect device registration with Google. This device does not currently support push messaging.' is an error message (sentence case, period); used to warn during push registration: Incorrect phone registration with Google. This phone doesn't currently support C2DM. Android-only. */
-"error_C2DMRegPhoneRegistrationError" = "ການຈົດທະບຽນການອຸປະກອນທີ່ບໍ່ຖືກຕ້ອງກັບກູໂກ. ອຸປະກອນນີ້ບໍ່ໄດ້ໃນປະຈຸບັນສະຫນັບສະຫນູນຂໍ້ຄວາມການຊຸກຍູ້.";
+"error_C2DMRegPhoneRegistrationError" = "ການຈົດທະບຽນທີ່ບໍ່ຖືກຕ້ອງອຸປະກອນທີ່ມີກູໂກ. ອຸປະກອນນີ້ບໍ່ໄດ້ປະຈຸບັນສະຫນັບສະຫນູນການສົ່ງຂໍ້ຄວາມຊຸກຍູ້.";
 /* 'Push registration service not available, scheduling retry in %d seconds.' is an error message (sentence case, period); used to warn during push registration: The device can't read the response, or there was a 500/503 from the server that can be retried later. The application should use exponential back off and retry. %d = the current number of seconds until the next push registration attempt. Android-only. */
-"error_C2DMRegServiceNotAvailable" = "ການບໍລິການຈົດທະບຽນການຊຸກຍູ້ບໍ່ມີກໍານົດເວລາຢູ່ໃນອິນໂດເນເຊຍ %d ວິນາທີ.";
+"error_C2DMRegServiceNotAvailable" = "ການບໍລິການຈົດທະບຽນການຊຸກຍູ້ບໍ່ມີກໍານົດເວລາລອງໃນ %d ວິນາທີ.";
 /* 'Too many applications are registered for Push. Please uninstall some other applications and retry.' is an error message (sentence case, period); used to warn during push registration: The user has too many applications registered. The application should tell the user to uninstall some other applications, let user retry manually. Fix on the device side. Android-only. */
-"error_C2DMRegTooManyRegistrations" = "ຄໍາຮ້ອງສະຫມັກຈໍານວນຫຼາຍເກີນໄປແມ່ນໄດ້ລົງທະບຽນສໍາລັບການຊຸກຍູ້. ກະລຸນາຖອນການຕິດຕັ້ງຄໍາຮ້ອງສະຫມັກອື່ນໆບາງແລະອິນໂດເນເຊຍ.";
+"error_C2DMRegTooManyRegistrations" = "ຄໍາຮ້ອງສະຫມັກຈໍານວນຫຼາຍເກີນໄປ, ການຈົດທະບຽນສໍາລັບການຊຸກຍູ້. ກະລຸນາຖອນການຕິດຕັ້ງຄໍາຮ້ອງສະຫມັກອື່ນໆແລະລອງ.";
 /* 'Cannot send an empty attachment.' is an error message (sentence case, period); used to warn when use attempts to attach an empty file to the message. */
-"error_CannotSendEmptyFile" = "ບໍ່ສາມາດສົ່ງຕິດເປົ່າຫວ່າງ.";
+"error_CannotSendEmptyFile" = "ບໍ່ສາມາດສົ່ງການຕິດເປົ່າຫວ່າງ.";
 /* 'Cannot send attachments greater than %d bytes in size.' is an error message (sentence case, period); used to warn when the message and attachment (if any) exceed the current quota limits for the App Engine service we use. %d the maximum limit in bytes of the entire message plus attachments that the App Engine service will allow us to upload. */
-"error_CannotSendFilesOver" = "ບໍ່ສາມາດສົ່ງໄຟລ໌ແນບຫຼາຍກ່ວາ %d ໄບຕ໌ໃນຂະຫນາດ.";
+"error_CannotSendFilesOver" = "ບໍ່ສາມາດສົ່ງໄຟລ໌ແນບຫຼາຍກ່ວາ %d bytes ໃນຂະຫນາດ.";
 /* 'Cannot send a null attachment.' is an error message (sentence case, period); used to warn when use attempts to attach an empty file to the message. */
-"error_CannotSendNullFile" = "ບໍ່ສາມາດສົ່ງໄດ້ຕິດ return NULL ກັບ.";
+"error_CannotSendNullFile" = "ບໍ່ສາມາດສົ່ງ attachment null.";
 /* 'Contact creation failed.' is an error message (sentence case, period); used to warn when failing to insert new contact data. */
 "error_contactCreationFailure" = "ການສ້າງການພົວພັນສົບຜົນສໍາເລັດ.";
 /* 'Contact insert failed.' is an error message (sentence case, period); used to warn when failing to insert new contact data. */
-"error_ContactInsertFailed" = "Insert ການພົວພັນສົບຜົນສໍາເລັດ.";
+"error_ContactInsertFailed" = "Insert ຕິດຕໍ່ສົບຜົນສໍາເລັດ.";
 /* 'This contact is missing a name, please edit.' is an error message (sentence case, period); used to warn when the matching contact found on the Setup screen does not have a name. */
-"error_ContactNameMissing" = "ການພົວພັນນີ້ແມ່ນໄດ້ຖືກຫາຍຊື່, ກະລຸນາດັດແກ້.";
+"error_ContactNameMissing" = "ການຕິດຕໍ່ນີ້ແມ່ນບໍ່ມີຊື່, ກະລຸນາແກ້ໄຂ.";
 /* 'This contact is missing a name, please reselect.' is an error message (sentence case, period); used to warn when the matching contact found on the Setup screen does not have a name. */
-"error_ContactNameMissing2" = "ການພົວພັນນີ້ແມ່ນໄດ້ຖືກຫາຍຊື່, ກະລຸນາ reselect.";
+"error_ContactNameMissing2" = "ການຕິດຕໍ່ນີ້ແມ່ນບໍ່ມີຊື່, ກະລຸນາ reselect.";
 /* 'Contact update failed.' is an error message (sentence case, period); used to warn when failing to merge contact data after an exchange. */
-"error_ContactUpdateFailed" = "ການພົວພັນສົບຜົນສໍາເລັດການປັບປຸງ.";
+"error_ContactUpdateFailed" = "ຕິດຕໍ່ການປັບປຸງສົບຜົນສໍາເລັດ.";
 /* 'Internet not available, check your settings.' is an error message (sentence case, period); used to warn when the user attempts to communicate with a server and the device cannot detect a path to the Internet. */
-"error_CorrectYourInternetConnection" = "ອິນເຕີເນັດບໍ່ມີ, ໃຫ້ກວດເບິ່ງການປັບຄ່າຂອງທ່ານ.";
+"error_CorrectYourInternetConnection" = "ອິນເຕີເນັດບໍ່ມີ, ໃຫ້ກວດເບິ່ງການຕັ້ງຄ່າຂອງທ່ານ.";
 /* 'Could not extract private key.' is an error message (sentence case, period); used to warn when the user is not able to extract the private key from the encrypted private key stored on the device. */
 "error_couldNotExtractPrivateKey" = "ບໍ່ສາມາດສະກັດທີ່ສໍາຄັນເອກະຊົນ.";
 /* 'Exchange timeout exceeded. Begin the exchange again.' is an error message (sentence case, period); used to warn when users have waited too long, 10 minutes, before completing the exchange protocol. */
-"error_ExchangeProtocolTimeoutExceeded" = "Timeout ຊັບເກີນ. ເລີ່ມຕົ້ນການແລກປ່ຽນເງິນຕາອີກເທື່ອຫນຶ່ງ.";
+"error_ExchangeProtocolTimeoutExceeded" = "ຫມົດເວລາການແລກປ່ຽນກັນ. ເລີ່ມຕົ້ນການແລກປ່ຽນການອີກເທື່ອຫນຶ່ງ.";
 /* '%s is not supported on %s at this time.' is an error message (sentence case, period); used to warn when a specific capability is not supported by a specific platform. */
-"error_FeatureIsNotSupport" = "%@ ບໍ່ໄດ້ສະຫນັບສະຫນູນກ່ຽວກັບການ %@ ໃນເວລານີ້.";
+"error_FeatureIsNotSupport" = "%@ ບໍ່ໄດ້ສະຫນັບສະຫນຸນກ່ຽວກັບການ %@ ຢູ່ໃນເວລານີ້.";
 /* 'Unable to save %s.' is an error message (sentence case, period); used to warn when there was disk error attempting to save an attachment to the users' device. %s = the name of the file that failed to save. */
 "error_FileSave" = "ບໍ່ສາມາດເພື່ອຊ່ວຍປະຢັດ %@.";
 /* 'File storage is not available.' is an error message (sentence case, period); used to warn when attempting to read/write to attachment storage becomes unavailable. */
-"error_FileStorageUnavailable" = "ການເກັບຮັກສາເອກະສານແມ່ນບໍ່ມີ.";
+"error_FileStorageUnavailable" = "ການເກັບຮັກສາໄຟບໍ່ມີ.";
 /* 'Server HTTP Error: %d' is an error message (sentence case, period); used to warn when the key exchange or messaging servers encountered an error and need to notify the user. %d = the HTTP status line code is case of an error, like 404 (file not found). 500 is common for uncaught Python run-time errors. */
 "error_HttpCode" = "Error HTTP Server: %d";
 /* 'Incorrect data found in exchange. Begin the exchange again.' is an error message (sentence case, period); used to warn when some item received from another group member during the key exchange did not hash correctly to the previously committed value. */
-"error_InvalidCommitVerify" = "ຂໍ້ມູນທີ່ບໍ່ຖືກຕ້ອງທີ່ພົບເຫັນໃນການແລກປ່ຽນ. ເລີ່ມຕົ້ນການແລກປ່ຽນເງິນຕາອີກເທື່ອຫນຶ່ງ.";
+"error_InvalidCommitVerify" = "ຂໍ້ມູນທີ່ບໍ່ຖືກຕ້ອງພົບເຫັນຢູ່ໃນການແລກປ່ຽນ. ເລີ່ມຕົ້ນການແລກປ່ຽນການອີກເທື່ອຫນຶ່ງ.";
 /* 'Please enter a positive integer.' is an error message (sentence case, period); used to warn when the user attempted to type in a group ID on the Grouping screen that was zero, negative, or empty. */
-"error_InvalidCommonUserId" = "ກະລຸນາໃສ່ເລກເຕັມໃນທາງບວກ.";
+"error_InvalidCommonUserId" = "ກະລຸນາໃສ່ຈໍານວນເຕັມບວກ.";
 /* 'A valid contact name is required.' is an error message (sentence case, period); used to warn when the user completes Setup without typing a name, or the name includes 3rd-person words we cannot allow, such as: 'Me', 'Contact', 'Foo',… */
-"error_InvalidContactName" = "ການຕິດຕໍ່ຊື່ A ຖືກຕ້ອງແມ່ນຕ້ອງການ.";
+"error_InvalidContactName" = "ຊື່ການຕິດຕໍ່ທີ່ໃຊ້ແມ່ນຕ້ອງການ.";
 /* 'Bad incoming message format.' is an error message (sentence case, period); used to warn when the incoming message was not formatted properly. */
-"error_InvalidIncomingMessage" = "ບໍ່ດີຮູບແບບຂໍ້ຄວາມມາ.";
+"error_InvalidIncomingMessage" = "Bad ຮູບແບບຂໍ້ຄວາມມາ.";
 /* 'Bad message format.' is an error message (sentence case, period); used to warn when the outgoing message was not formatted properly. */
 "error_InvalidMsg" = "ຮູບແບບຂໍ້ຄວາມທີ່ບໍ່ດີ.";
 /* 'Invalid recipient.' is an error message (sentence case, period); used to warn when the user has not selected 1 recipient to send a message on the Compose Message screen, also when the user has not selected 2 recipients to send introductions to on the Secure Introduction screen. */
-"error_InvalidRecipient" = "ຜູ້ຮັບບໍ່ຖືກຕ້ອງ.";
+"error_InvalidRecipient" = "ຜູ້ຮັບທີ່ບໍ່ຖືກຕ້ອງ.";
 /* 'You have reported a difference in phrases. Begin the exchange again.' is an error message (sentence case, period); used to warn when the user presses the 'No Match' button that they are aborting the protocol for the group and sending a non-match signature to others. */
-"error_LocalGroupCommitDiffer" = "ທ່ານໄດ້ລາຍງານແຕກຕ່າງກັນໃນປະໂຫຍກໄດ້. ເລີ່ມຕົ້ນການແລກປ່ຽນເງິນຕາອີກເທື່ອຫນຶ່ງ.";
+"error_LocalGroupCommitDiffer" = "ທ່ານໄດ້ລາຍງານຄວາມແຕກຕ່າງກັນໃນປະໂຫຍກໄດ້. ເລີ່ມຕົ້ນການແລກປ່ຽນການອີກເທື່ອຫນຶ່ງ.";
 /* 'The peer key format is invalid.' is an error message (sentence case, period); used to warn when the public key we used for this recipient does not exist or is improperly formatted. */
 "error_MessageInvalidPeerKeyFormat" = "ຮູບແບບເພື່ອນສອນເພື່ອນດ້ານທີ່ສໍາຄັນແມ່ນບໍ່ຖືກຕ້ອງ.";
 /* 'Signature verification failed.' is an error message (sentence case, period); used to warn when key used to generate an incoming message signature is not in the key database. */
 "error_MessageSignatureVerificationFails" = "ການຢັ້ງຢືນລາຍເຊັນສົບຜົນສໍາເລັດ.";
 /* 'Passphrases require at least %d characters.' is an error message (sentence case, period); used to warn when a user has setup a passphrase, which does not fit the minimum required length. %d = current requirement is at least 8 characters. */
-"error_minPassphraseRequire" = "Passphrases ຮຽກຮ້ອງໃຫ້ມີຢ່າງຫນ້ອຍ %d ລັກສະນະ.";
+"error_minPassphraseRequire" = "ລະຫັດຜ່ານຕ້ອງຢູ່ໃນຢ່າງຫນ້ອຍ %d ລັກສະນະ.";
 /* 'A minimum of %d members are required to exchange data.' is an error message (sentence case, period); used to warn when attempting to leave the Group Size screen without choosing a group size. %d = the minimum number of users to complete the exchange protocol, 2 usually. */
-"error_MinUsersRequired" = "ຕໍາ່ສຸດທີ່ຂອງ %d ສະມາຊິກທີ່ຖືກຕ້ອງທີ່ຈະແລກປ່ຽນຂໍ້ມູນ.";
+"error_MinUsersRequired" = "ຕໍາ່ສຸດທີ່ຂອງ %d ສະມາຊິກໄດ້ຖືກຈໍາເປັນໃນການແລກປ່ຽນຂໍ້ມູນ.";
 /* 'SafeSlinger did not detect NDK support on this device, which is required.' is an error message (sentence case, period); used to warn when device has no Native Development Kit support installed. Android-only. */
-"error_MissingNdk" = "SafeSlinger ບໍ່ໄດ້ສະຫນັບສະຫນູນການກວດສອບ NDK ກ່ຽວກັບອຸປະກອນນີ້, ເຊິ່ງແມ່ນຕ້ອງການ.";
+"error_MissingNdk" = "SafeSlinger ບໍ່ໄດ້ການກວດສອບສະຫນັບສະຫນູນ NDK ເທິງອຸປະກອນການນີ້, ຊຶ່ງເປັນທີ່ຕ້ອງການ.";
 /* 'Unexpected data found in exchange. Begin the exchange again.' is an error message (sentence case, period); used to warn when a user has entered a group size number that is too low during the exchange protocol or possibly a Man-in-The-Middle (MiTM) attack where a malicious outsider attempts to join the group. */
-"error_MoreDataThanUsers" = "ຂໍ້ມູນທີ່ບໍ່ໄດ້ຄາດຫວັງໄດ້ພົບເຫັນໃນການແລກປ່ຽນ. ເລີ່ມຕົ້ນການແລກປ່ຽນເງິນຕາອີກເທື່ອຫນຶ່ງ.";
+"error_MoreDataThanUsers" = "ຂໍ້ມູນທີ່ບໍ່ຄາດຄິດໃນການແລກປ່ຽນ. ເລີ່ມຕົ້ນການແລກປ່ຽນການອີກເທື່ອຫນຶ່ງ.";
 /* 'You are attempting to send multiple items. At this time, SafeSlinger only supports sending one item at a time.' is an error message (sentence case, period); used to warn when the user attempts to select multiple attachments to send when we only allow one attachment for now. */
-"error_MultipleSendNotSupported" = "ທ່ານກໍາລັງພະຍາຍາມເພື່ອສົ່ງລາຍການລາຍການທີ່ຫຼາກຫຼາຍ. ໃນເວລານີ້, SafeSlinger ພຽງແຕ່ສະຫນັບສະຫນູນການສົ່ງລາຍການຫນຶ່ງຢູ່ທີ່ໃຊ້ເວລາໄດ້.";
+"error_MultipleSendNotSupported" = "ເຈົ້າຍັງບໍ່ໄດ້ພະຍາຍາມເພື່ອສົ່ງລາຍການລາຍການທີ່ຫຼາກຫຼາຍ. ໃນເວລານີ້, SafeSlinger ພຽງແຕ່ສະຫນັບສະຫນູນການສົ່ງລາຍການຫນຶ່ງທີ່ໃຊ້ເວລາໄດ້.";
 /* 'The exchange is missing required data.' is an error message (sentence case, period); used to warn when exchange is missing some parameter or data to complete. */
-"error_NoDataToExchange" = "ແລກປ່ຽນເງິນຕາທີ່ຂາດຫາຍໄປຂໍ້ມູນທີ່ກໍານົດໄວ້.";
+"error_NoDataToExchange" = "ການແລກປ່ຽນແມ່ນຫາຍຂໍ້ມູນທີ່ກໍານົດໄວ້.";
 /* 'Email account is not setup!' is an error message (sentence case, period); used to warn that a user did not have an email account when he/she tries to send out comments to administrator account. iOS-only. */
-"error_NoEmailAccount" = "ບັນຊີ Email ບໍ່ແມ່ນ setup!";
+"error_NoEmailAccount" = "ບັນຊີອີເມວບໍ່ມີການຕິດຕັ້ງ!";
 /* 'No passphrase entered.' is an error message (sentence case, period); used to warn when a user generates or changes a passphrase and they have entered a blank password, which is not acceptable. */
-"error_noPassPhrase" = "Passphrase ບໍ່ເຂົ້າໄປ.";
+"error_noPassPhrase" = "ລະຫັດຜ່ານທີ່ບໍ່ມີເຂົ້າໄປ.";
 /* 'You must select one of the phrases before proceeding.' is an error message (sentence case, period); used to warn when the user attempts to proceed past the word phrase Verify screen during the exchange protocol and they have not selected, which of the three phrases match with the other users'. */
-"error_NoWordListSelected" = "ທ່ານຕ້ອງໄດ້ເລືອກເອົາຫນຶ່ງໃນປະໂຫຍກທີ່ກ່ອນທີ່ຈະດໍາເນີນ.";
+"error_NoWordListSelected" = "ທ່ານຕ້ອງເລືອກເອົາຫນຶ່ງໃນປະໂຫຍກທີ່ກ່ອນທີ່ຈະດໍາເນີນການ.";
 /* 'Someone reported a difference in phrases. Begin the exchange again.' is an error message (sentence case, period); used to warn when at least one other member of the group during the exchange protocol pressed the 'No Match' button. */
-"error_OtherGroupCommitDiffer" = "ມີບາງຄົນໄດ້ລາຍງານແຕກຕ່າງກັນໃນປະໂຫຍກໄດ້. ເລີ່ມຕົ້ນການແລກປ່ຽນເງິນຕາອີກເທື່ອຫນຶ່ງ.";
+"error_OtherGroupCommitDiffer" = "ຄົນລາຍງານຄວາມແຕກຕ່າງກັນໃນປະໂຫຍກໄດ້. ເລີ່ມຕົ້ນການແລກປ່ຽນການອີກເທື່ອຫນຶ່ງ.";
 /* 'Memory is too low to complete this operation.' is an error message (sentence case, period); used to warn when a request for memory is made that cannot be satisfied using the available platform resources. Such a request may be made by both the running application or by an internal function of the VM. */
-"error_OutOfMemoryError" = "ຄວາມຊົງຈໍາແມ່ນຕ່ໍາເກີນໄປທີ່ຈະເຮັດສໍາເລັດການດໍາເນີນງານນີ້.";
+"error_OutOfMemoryError" = "ຄວາມຈໍາເປັນຕ່ໍາເກີນໄປທີ່ຈະໃຫ້ສໍາເລັດໃນການດໍາເນີນງານນີ້.";
 /* 'Passphrases do not match.' is an error message (sentence case, period); used to warn when the user creates or changes their passphrase and the confirmation second entry did not match the first. */
-"error_passPhrasesDoNotMatch" = "Passphrases ບໍ່ມີຄໍາວ່າ.";
+"error_passPhrasesDoNotMatch" = "ລະຫັດຜ່ານບໍ່ກົງກັນ.";
 /* 'You have exceeded the message quota for that recipient. Please retry later.' is an error message (sentence case, period): used to warn when sending messages to device and the message quota for all applications on the device is full. */
-"error_PushMsgDeviceQuotaExceeded" = "ທ່ານໄດ້ເກີນໂຄຕ້າຂໍ້ຄວາມສໍາລັບຜູ້ທີ່. ກົວເຕມາ.";
+"error_PushMsgDeviceQuotaExceeded" = "ທ່ານໄດ້ເກີນໂຄຕ້າຂໍ້ຄວາມສໍາລັບຜູ້ຮັບທີ່. ກະລຸນາລອງມາ.";
 /* 'That recipient has a missing or bad push registration. You should stop sending messages to this device.' is an error message (sentence case, period); used to warn when sending messages to device and the recipient registration was never registered with the push service. */
 "error_PushMsgInvalidRegistration" = "ຜູ້ທີ່ມີການຈົດທະບຽນການຊຸກຍູ້ເປັນທີ່ຂາດຫາຍໄປຫຼືບໍ່ດີ. ທ່ານຄວນຈະຢຸດເຊົາການສົ່ງຂໍ້ຄວາມກັບອຸປະກອນນີ້.";
 /* 'Message expired.' is an error message (sentence case, period); used to warn when getting messages, the message id cannot be found and it has likely been scrubbed from the server. */
-"error_PushMsgMessageNotFound" = "ຂໍ້ຫມົດລົງ.";
+"error_PushMsgMessageNotFound" = "Message ຫມົດອາຍຸແລ້ວ.";
 /* 'The message is too big. Reduce the size of the message.' is an error message (sentence case, period); used to warn when sending messages to device and the initial push exceeds 1024 bytes. Unlikely, since the initial push only contains the message hash identifier, which is 32 bytes plus a bit more of meta data. */
-"error_PushMsgMessageTooBig" = "ຂໍ້ຄວາມແມ່ນເກີນໄປໃຫຍ່. ການຫຼຸດຜ່ອນຂະຫນາດຂອງຂໍ້ຄວາມທີ່ໄດ້.";
+"error_PushMsgMessageTooBig" = "ຂໍ້ຄວາມທີ່ມີຂະຫນາດໃຫຍ່ເກີນໄປ. ຫຼຸດຜ່ອນການຂະຫນາດຂອງຂໍ້ຄວາມ.";
 /* 'That recipient's push registration is no longer valid. The recipient may have uninstalled SafeSlinger or turned off notifications. You should stop sending messages to this device.' is an error message (sentence case, period); used to warn when sending messages to device and the recipient is no longer registered. */
-"error_PushMsgNotRegistered" = "ການຈົດທະບຽນການຊຸກຍູ້ຜູ້ຮັບຂອງນັ້ນແມ່ນບໍ່ມີຕໍ່ໄປອີກແລ້ວ. ຜູ້ຮັບດັ່ງກ່າວອາດຈະ uninstalled SafeSlinger ຫຼືປິດການແຈ້ງການ. ທ່ານຄວນຈະຢຸດເຊົາການສົ່ງຂໍ້ຄວາມກັບອຸປະກອນນີ້.";
+"error_PushMsgNotRegistered" = "ການຈົດທະບຽນການຊຸກຍູ້ຜູ້ທີ່ບໍ່ມີຕໍ່ໄປອີກແລ້ວຖືກຕ້ອງ. ຜູ້ຮັບອາດຈະມີການຖອນການຕິດຕັ້ງ SafeSlinger ຫຼືປິດການແຈ້ງເຕືອນ. ທ່ານຄວນຈະຢຸດເຊົາການສົ່ງຂໍ້ຄວາມກັບອຸປະກອນນີ້.";
 /* 'There was an error communicating with the push notification service.' is an error message (sentence case, period); used to warn when sending messages to device and the push service replies incorrect HTTP status code. */
-"error_PushMsgNotSucceed" = "ມີຄວາມຜິດພາດຕໍ່ສື່ສານກັບການບໍລິການການແຈ້ງການຊຸກຍູ້ການນີ້.";
+"error_PushMsgNotSucceed" = "ມີຄວາມຜິດພາດຕໍ່ສື່ສານກັບການບໍລິການການແຈ້ງການຊຸກຍູ້ການໄດ້.";
 /* 'You have exceeded the message quota for this device. Please retry later.' is an error message (sentence case, period); used to warn when sending messages to device and the message quota for SafeSlinger on the device is full. */
-"error_PushMsgQuotaExceeded" = "ທ່ານໄດ້ເກີນໂຄຕ້າຂໍ້ຄວາມສໍາລັບອຸປະກອນນີ້. ກົວເຕມາ.";
+"error_PushMsgQuotaExceeded" = "ທ່ານໄດ້ເກີນໂຄຕ້າຂໍ້ຄວາມສໍາລັບອຸປະກອນນີ້. ກະລຸນາລອງມາ.";
 /* 'Notification service is not available this time. Please try to send the message later.' is an error message (sentence case, period); used to warn when sending messages to device and the push service has no response for push messages. */
-"error_PushMsgServiceFail" = "ການບໍລິການການແຈ້ງການບໍ່ມີທີ່ໃຊ້ເວລານີ້. ກະລຸນາພະຍາຍາມສົ່ງຂໍ້ຄວາມໄດ້ຕໍ່ມາ.";
+"error_PushMsgServiceFail" = "ການບໍລິການການແຈ້ງການບໍ່ສາມາດໃຊ້ເວລານີ້. ກະລຸນາພະຍາຍາມເພື່ອສົ່ງຂໍ້ຄວາມຕໍ່ມາ.";
 /* 'Cannot prepare the audio recorder.' is an error message (sentence case, period); used to warn when the audio recorder is unavailable from the system to record an audio message. iOS-only. */
 "error_RecoderError" = "ບໍ່ສາມາດກະກຽມການບັນທຶກສຽງ.";
 /* 'To start, Sling Keys with another user at the same time.' is an error message (sentence case, period); used to remind in a notification message that the user should exchange keys with at least one other user to make the app useful to them. */
-"error_ReminderToSlingKeysToUseApp" = "ເພື່ອເລີ່ມຕົ້ນການ, ຫຼັກ Sling ກັບຜູ້ອື່ນໃນທີ່ໃຊ້ເວລາດຽວກັນ.";
+"error_ReminderToSlingKeysToUseApp" = "ເພື່ອເລີ່ມຕົ້ນການ, ຫຼັກ Sling ກັບຜູ້ໃຊ້ຄົນອື່ນໆໃນເວລາດຽວກັນ.";
 /* 'You need an attachment or a text message to send.' is an error message (sentence case, period); used to warn when the user has not attached a file or typed any text message to send to the recipient after using the 'Send' button. */
-"error_selectDataToSend" = "ທ່ານຈໍາເປັນຕ້ອງຕິດຫຼືຂໍ້ຄວາມຂໍ້ຄວາມທີ່ຈະສົ່ງ.";
+"error_selectDataToSend" = "ທ່ານຈໍາເປັນຕ້ອງແນບຫຼືຂໍ້ຄວາມທີ່ຈະສົ່ງ.";
 /* 'Server Message: %s' is an error message (sentence case, period); used to warn when the server has an error message to send back to the client. %s = an English (non-localized) error message sent by our App Engine server code. */
-"error_ServerAppMessage" = "ສານຂອງເຄື່ອງແມ່ຂ່າຍ: %@";
+"error_ServerAppMessage" = "Message Server: %@";
 /* 'No response from server.' is an error message (sentence case, period); used to warn when the server timeout occurs, usually after 30 seconds and did not respond to the client. */
-"error_ServerNotResponding" = "ຄໍາຕອບທີ່ບໍ່ມີຈາກເຄື່ອງແມ່ຂ່າຍ.";
+"error_ServerNotResponding" = "ການຕອບສະຫນອງທີ່ບໍ່ມີຈາກເຄື່ອງແມ່ຂ່າຍ.";
 /* 'Cannot remove the shared file.' is an error message (sentence case, period); used to warn when the shared file cannot be deleted. iOS-only. */
-"error_ShareFileDelError" = "ບໍ່ສາມາດເອົາໄຟລ໌ແບ່ງປັນກັນໄດ້.";
+"error_ShareFileDelError" = "ບໍ່ສາມາດເອົາ file ທີ່ໃຊ້ຮ່ວມກັນ.";
 /* 'Timeout waiting for some group members to add data.' is an error message (sentence case, period); used to warn during the key exchange protocol when at least one of the members of the group has not submitted their data to the server or client itself is not able to retrieve the data within the timeout window, currently 2 minutes. */
-"error_TimeoutWaitingForAllMembers" = "Timeout ລໍຖ້າສໍາລັບສະມາຊິກກຸ່ມຈໍານວນຫນຶ່ງທີ່ຈະເພີ່ມຂໍ້ມູນ.";
+"error_TimeoutWaitingForAllMembers" = "ຫມົດເວລາລໍຖ້າສໍາລັບສະມາຊິກກຸ່ມຈໍານວນຫນຶ່ງເພື່ອເພີ່ມຂໍ້ມູນ.";
 /* 'Unable to match public key to private key in crypto provider.' is an error message (sentence case, period); used to warn when the public encryption key used in the message received is not currently the same private key used, the user should probably Sling Keys to update again. */
-"error_UnableFindPubKey" = "ບໍ່ສາມາດທີ່ຈະມີຄໍາວ່າທີ່ສໍາຄັນສາທາລະນະທີ່ສໍາຄັນຂອງເອກະຊົນໃນການໃຫ້ບໍລິການ crypto.";
+"error_UnableFindPubKey" = "ບໍ່ສາມາດມີຄໍາວ່າທີ່ສໍາຄັນສາທາລະນະທີ່ສໍາຄັນເອກະຊົນໃນຜູ້ໃຫ້ບໍລິ crypto.";
 /* 'Unable to save to the message database.' is an error message (sentence case, period); used to warn when there is database error inserting a new message. */
-"error_UnableToSaveMessageInDB" = "ບໍ່ສາມາດທີ່ຈະຊ່ວຍປະຢັດກັບຖານຂໍ້ມູນຂອງຂໍ້ຄວາມໄດ້.";
+"error_UnableToSaveMessageInDB" = "ບໍ່ສາມາດທີ່ຈະຊ່ວຍປະຢັດກັບຖານຂໍ້ມູນຂໍ້ຄວາມໄດ້.";
 /* 'Unable to save to the recipient database.' is an error message (sentence case, period); used to warn when there is database error inserting a new recipient key/registration . */
-"error_UnableToSaveRecipientInDB" = "ບໍ່ສາມາດທີ່ຈະຊ່ວຍປະຢັດກັບຖານຂໍ້ມູນຂອງຜູ້ຮັບ.";
+"error_UnableToSaveRecipientInDB" = "ບໍ່ສາມາດທີ່ຈະຊ່ວຍປະຢັດກັບຖານຂໍ້ມູນຜູ້ຮັບ.";
 /* 'Unable to update the message database.' is an error message (sentence case, period); used to warn when there is database error updating a message. */
-"error_UnableToUpdateMessageInDB" = "ບໍ່ສາມາດທີ່ຈະປັບປຸງຖານຂໍ້ມູນຂ່າວສານໄດ້.";
+"error_UnableToUpdateMessageInDB" = "ບໍ່ສາມາດທີ່ຈະປັບປຸງຖານຂໍ້ມູນຂໍ້ຄວາມໄດ້.";
 /* 'Unable to update the recipient database.' is an error message (sentence case, period); used to warn when there is database error updating a recipient key/registration . */
-"error_UnableToUpdateRecipientInDB" = "ບໍ່ສາມາດທີ່ຈະປັບປຸງຖານຂໍ້ມູນຂອງຜູ້ຮັບ.";
+"error_UnableToUpdateRecipientInDB" = "ບໍ່ສາມາດທີ່ຈະປັບປຸງຖານຂໍ້ມູນຜູ້ຮັບ.";
 /* 'SafeSlinger error, please restart.' is an error message (sentence case, period); used to warn when an unhandled exception or application fault has occurred. */
 "error_UncaughtExceptionOccured" = "ຄວາມຜິດພາດ SafeSlinger, ກະລຸນາ restart.";
 /* 'Contact data was formatted incorrectly.' is an error message (sentence case, period); used to warn when the vCard format used to exchange contact fields during key exchange are improperly formatted. */
-"error_VcardParseFailure" = "ຂໍ້ມູນການຕິດຕໍ່ໄດ້ຮູບແບບ incorrectly.";
+"error_VcardParseFailure" = "ຂໍ້ມູນຕິດຕໍ່ໄດ້ທີ່ຈັດຮູບແບບບໍ່ຖືກຕ້ອງ.";
 /* 'User canceled server request.' is an error message (sentence case, period); used to warn when the user exited the key exchange protocol or messaging transmission before it was finished. */
-"error_WebCancelledByUser" = "ຜູ້ໃຊ້ຍົກເລີກຄໍາຮ້ອງຂໍຂອງເຄື່ອງແມ່ຂ່າຍ.";
+"error_WebCancelledByUser" = "User ຍົກເລີກຄໍາຮ້ອງຂໍຂອງເຄື່ອງແມ່ຂ່າຍ.";
 
 /* 'Use this screen to set your name to exchange with others, and a passphrase to protect your data. Tap the Done button when finished.' is a help message (sentence case, period); used via Help button on the Setup screen to describe in more detail what the Setup screen does. */
-"help_find" = "ການນໍາໃຊ້ຫນ້າຈໍນີ້ຈະກໍານົດຊື່ຂອງທ່ານທີ່ຈະແລກປ່ຽນກັບຄົນອື່ນ, ແລະ passphrase ໃນການປົກປ້ອງຂໍ້ມູນຂອງທ່ານ. ປາດປຸ່ມເຮັດໄດ້ໃນເວລາສໍາເລັດການ.";
+"help_find" = "ການນໍາໃຊ້ຫນ້າຈໍນີ້ການໃສ່ຊື່ຂອງທ່ານທີ່ຈະແລກປ່ຽນກັບຜູ້ອື່ນ, ແລະລະຫັດຜ່ານໃນການປົກປ້ອງຂໍ້ມູນຂອງທ່ານ. ປຸ່ມເຮັດໄດ້ໃນເວລາທີ່ສໍາເລັດການ.";
 /* 'To exchange identity data, ensure all users are nearby or on the phone. The Begin Exchange button will exchange only the checked contact data.' is a help message (sentence case, period); used via Help button on the Begin Exchange screen and also the key exchange walkthrough tutorial to describe in more detail what the Begin Exchange screen does. */
-"help_home" = "ການແລກປ່ຽນຂໍ້ມູນຕົວຕົນ, ຮັບປະກັນການຊົມໃຊ້ທັງຫມົດມີຄວາມໃກ້ຄຽງຫຼືຢູ່ໃນໂທລະສັບໄດ້. ປຸ່ມເລີ່ມ Exchange ຈະແລກປ່ຽນພຽງແຕ່ຂໍ້ມູນການຕິດຕໍ່ການກວດກາ.";
+"help_home" = "ການແລກປ່ຽນຂໍ້ມູນປະຈໍາຕົວ, ຮັບປະກັນຜູ້ໃຊ້ທັງຫມົດທີ່ມີຢູ່ໃກ້ໆຫຼືໂທລະສັບ. ປຸ່ມເລີ່ມຕົ້ນການແລກປ່ຽນຈະແລກປ່ຽນພຽງແຕ່ຂໍ້ມູນການຕິດຕໍ່ການກວດກາ.";
 /* 'You may also change personal data about your identity on this screen by tapping on the button with your name. This will display a menu allowing you to Edit your contact, Create New contact, or Use Another contact.' is a help message (sentence case, period); Additional help text, which is appended to the Help button text on the Compose and Begin Exchange screens. */
-"help_identity_menu" = "ນອກນັ້ນທ່ານຍັງອາດຈະມີການປ່ຽນແປງຂໍ້ມູນສ່ວນຕົວກ່ຽວກັບຕົວຕົນຂອງທ່ານກ່ຽວກັບຫນ້າຈໍນີ້ໂດຍການປາດຢາງໃສ່ປຸ່ມທີ່ມີຊື່ຂອງທ່ານ. ນີ້ຈະສະແດງເມນູໃຫ້ທ່ານດັດແກ້ການຕິດຕໍ່ຂອງທ່ານ, ສ້າງການພົວພັນໃຫມ່, ຫຼືນໍາໃຊ້ການພົວພັນອີກປະການຫນຶ່ງ.";
+"help_identity_menu" = "ນອກນັ້ນທ່ານຍັງອາດຈະມີການປ່ຽນແປງຂໍ້ມູນສ່ວນຕົວກ່ຽວກັບຕົວຕົນຂອງທ່ານກ່ຽວກັບຫນ້າຈໍນີ້ໂດຍການປາດຢາງໃສ່ປຸ່ມທີ່ມີຊື່ຂອງທ່ານ. ນີ້ຈະສະແດງເມນູໃຫ້ທ່ານໃນການແກ້ໄຂການຕິດຕໍ່ຂອງທ່ານ, ສ້າງການພົວພັນໃຫມ່, ຫລືການນໍາໃຊ້ການຕິດຕໍ່ອີກປະການຫນຶ່ງ.";
 /* 'This screen displays all past messages, and attachments that are still available for download.' is a help message (sentence case, period); used via Help button on the Messages list screen to describe in more detail what the Messages list screen does. */
-"help_Messages" = "ຫນ້າຈໍນີ້ຈະສະແດງຂໍ້ຄວາມທັງຫມົດທີ່ຜ່ານມາ, ແລະຄັດຕິດນັ້ນແມ່ນຍັງມີການສໍາລັບການດາວໂຫຼດ.";
+"help_Messages" = "ຫນ້າຈໍນີ້ຈະສະແດງຂໍ້ຄວາມທັງຫມົດທີ່ຜ່ານມາ, ແລະສິ່ງທີ່ແນບທີ່ຍັງມີສໍາລັບການດາວໂຫຼດ.";
 /* 'Use this screen to login to the application with your passphrase. If you have forgotten your passphrase, you may generate a new key protected by a new passphrase by tapping the Forgot Passphrase? button. Tap the user name to switch between multiple keys.' is a help message (sentence case, period); used via Help button on the Passphrase screen to describe in more detail what the Passphrase screen does. */
-"help_passphrase" = "ການນໍາໃຊ້ຫນ້າຈໍທີ່ນີ້ເພື່ອເຂົ້າສູ່ລະບົບຄໍາຮ້ອງສະຫມັກທີ່ມີ passphrase ຂອງທ່ານ. ຖ້າຫາກວ່າທ່ານໄດ້ລືມ passphrase ຂອງທ່ານ, ທ່ານອາດຈະຜະລິດເປັນທີ່ສໍາຄັນໃຫມ່ປ້ອງກັນໂດຍການເປັນ passphrase ໃຫມ່ໂດຍການປາດຢາງໄດ້ລືມ Passphrase? ປຸ່ມ. ປາດຊື່ຜູ້ໃຊ້ໃນການສະຫຼັບລະຫວ່າງລູກຫຼາຍ.";
+"help_passphrase" = "ການນໍາໃຊ້ຫນ້າຈໍນີ້ເຂົ້າສູ່ລະບົບຄໍາຮ້ອງສະຫມັກທີ່ມີລະຫັດຜ່ານຂອງທ່ານໄດ້. ຖ້າຫາກວ່າທ່ານໄດ້ລືມລະຫັດຜ່ານຂອງທ່ານ, ທ່ານອາດຈະສ້າງເປັນທີ່ສໍາຄັນໃຫມ່ປ້ອງກັນໂດຍລະຫັດຜ່ານໃຫມ່ໂດຍການປາດຢາງທີ່ລືມ Passphrase? ປຸ່ມ. ແຕະໃຊ້ຊື່ຜູ້ໃຊ້ໃນການສະຫຼັບລະຫວ່າງຕົວທີ່ໃຊ້ໃນຫຼາຍປະການ.";
 /* 'Use this screen to change your passphrase by entering your last passphrase for confirmation and the new passphrase.' is a help message (sentence case, period); used via Help button on the Change Passphrase screen to describe in more detail what the Change Passphrase screen does. */
-"help_passphrase_change" = "ການນໍາໃຊ້ຫນ້າຈໍນີ້ຈະມີການປ່ຽນແປງ passphrase ຂອງທ່ານໂດຍການເຂົ້າມາ passphrase ສຸດທ້າຍຂອງທ່ານສໍາລັບການຢັ້ງຢືນແລະ passphrase ໃຫມ່.";
+"help_passphrase_change" = "ການນໍາໃຊ້ຫນ້າຈໍນີ້ມີການປ່ຽນແປງລະຫັດຜ່ານຂອງທ່ານໂດຍການເຂົ້າມາ passphrase ສຸດທ້າຍຂອງທ່ານສໍາລັບການຢັ້ງຢືນແລະລະຫັດຜ່ານໃຫມ່.";
 /* 'Contacts with SafeSlinger keys are displayed here, select one to send your message to.' is a help message (sentence case, period); used via Help button on the Recipients list screen to describe in more detail what the Recipients list screen does. */
-"help_PickRecip" = "ຕິດຕໍ່ພົວພັນກັບທີ່ລູກ SafeSlinger ແມ່ນການສະແດງຢູ່ທີ່ນີ້, ເລືອກເອົາຫນຶ່ງໃນການທີ່ຈະສົ່ງຂໍ້ຄວາມທີ່ທ່ານໄປ.";
+"help_PickRecip" = "ຕິດຕໍ່ພົວພັນກັບທີ່ລູກ SafeSlinger ແມ່ນການສະແດງຢູ່ທີ່ນີ້, ຄັດເລືອກເອົາຫນຶ່ງໃນການສົ່ງຂໍ້ຄວາມຂອງທ່ານໄປ.";
 /* 'When finished, the protocol will reveal a list of the identity data exchanged. Select the contacts you wish to save and press Import.' is a help message (sentence case, period); used via Help button on the End Exchange screen and also the key exchange walkthrough tutorial to describe in more detail what the End Exchange screen does. */
-"help_save" = "ໃນເວລາສໍາເລັດການ, ອະນຸສັນຍາຈະເປີດເຜີຍໃຫ້ເຫັນບັນຊີລາຍການຂອງຂໍ້ມູນຕົວຕົນຂອງແລກປ່ຽນໄດ້. ເລືອກຕິດຕໍ່ພົວພັນທີ່ທ່ານຕ້ອງການເພື່ອຊ່ວຍປະຢັດແລະກົດນໍາເຂົ້າ.";
+"help_save" = "ໃນເວລາທີ່ສໍາເລັດ, ອະນຸສັນຍາຈະເປີດເຜີຍບັນຊີລາຍຊື່ຂອງຂໍ້ມູນຕົວຕົນຂອງແລກປ່ຽນໄດ້. ເລືອກຕິດຕໍ່ພົວພັນທີ່ທ່ານຕ້ອງການເພື່ອຊ່ວຍປະຢັດແລະກົດນໍາເຂົ້າ.";
 /* 'This screen allows you to select two people you have slung keys with before to securely send their keys to each other. Simply press Introduce when ready.' is a help message (sentence case, period); used via Help button on the Secure Introduction screen to describe in more detail what the Secure Introduction screen does. */
-"help_SecureIntroduction" = "ຫນ້າຈໍນີ້ອະນຸຍາດໃຫ້ທ່ານເພື່ອຄັດເລືອກເອົາປະຊາຊົນສອງທ່ານໄດ້ slung ລູກກ່ອນເພື່ອຄວາມປອດໄພໄດ້ສົ່ງລູກຂອງເຂົາເຈົ້າກັບການອື່ນໆໃນແຕ່ລະ. ພຽງແຕ່ກົດແນະນໍາໃນເວລາທີ່ພ້ອມທີ່ຈະ.";
+"help_SecureIntroduction" = "ຫນ້າຈໍນີ້ອະນຸຍາດໃຫ້ທ່ານທີ່ຈະເລືອກເອົາປະຊາຊົນສອງທ່ານໄດ້ slung ແຈທີ່ມີກ່ອນທີ່ຈະກັບຢ່າງປອດໄພສົ່ງລູກຂອງເຂົາເຈົ້າກັບການອື່ນໆໃນແຕ່ລະ. ພຽງແຕ່ກົດແນະນໍາໃນເວລາທີ່ພ້ອມທີ່ຈະ.";
 /* 'This screen allows you to select some data and a recipient to send to. Simply press Send when ready.' is a help message (sentence case, period); used via Help button on the Compose Message screen to describe in more detail what the Compose Message screen does. */
-"help_Send" = "ຫນ້າຈໍນີ້ອະນຸຍາດໃຫ້ທ່ານເພື່ອຄັດເລືອກເອົາບາງຂໍ້ມູນແລະຜູ້ຮັບການສົ່ງກັບ. ພຽງແຕ່ໃຫ້ກົດສົ່ງໃນເວລາທີ່ພ້ອມທີ່ຈະ.";
+"help_Send" = "ຫນ້າຈໍນີ້ອະນຸຍາດໃຫ້ທ່ານເພື່ອຄັດເລືອກເອົາບາງຂໍ້ມູນແລະຜູ້ຮັບຈະສົ່ງໄປໄດ້. ພຽງແຕ່ກົດສົ່ງໃນເວລາທີ່ພ້ອມທີ່ຈະ.";
 /* 'This screen allows you to change the default settings for the application.' is a help message (sentence case, period); used via Help button on the Settings screen to describe in more detail what the Settings screen does. */
-"help_settings" = "ອະນຸຍາດໃຫ້ຫນ້າຈໍທີ່ນີ້ທ່ານມີການປ່ຽນແປງການປັບຄ່າໄວ້ໃນຕອນຕົ້ນສໍາລັບຄໍາຮ້ອງສະຫມັກ.";
+"help_settings" = "ອະນຸຍາດໃຫ້ຫນ້າຈໍນີ້ທ່ານສາມາດມີການປ່ຽນແປງການຕັ້ງຄ່າໄວ້ໃນຕອນຕົ້ນສໍາລັບຄໍາຮ້ອງສະຫມັກ.";
 /* 'Select the number of people who are attempting to exchange data together and press OK.' is a help message (sentence case, period); used via Help button on the Group Size screen and also the key exchange walkthrough tutorial to describe in more detail what the Group Size screen does. */
-"help_size" = "ເລືອກຈໍານວນຂອງປະຊາຊົນຜູ້ທີ່ຖືກພະຍາຍາມທີ່ຈະແລກປ່ຽນຂໍ້ມູນຮ່ວມກັນແລະການກົດ OK.";
+"help_size" = "ເລືອກຈໍານວນຂອງປະຊາຊົນຜູ້ທີ່ຖືກພະຍາຍາມເພື່ອແລກປ່ຽນຂໍ້ມູນຮ່ວມກັນແລະການກົດ OK.";
 /* 'This number on this screen is used to create a unique group of users. Review the numbers on all users' screens, then all users should enter the same lowest number and press OK.' is a help message (sentence case, period); used via Help button on the Grouping screen and also the key exchange walkthrough tutorial to describe in more detail what the Grouping screen does. */
-"help_userid" = "ຈໍານວນໃນຫນ້າຈໍນີ້ນີ້ແມ່ນໄດ້ຖືກນໍາໃຊ້ເພື່ອສ້າງເປັນກຸ່ມເປັນເອກະລັກຂອງຜູ້ຊົມໃຊ້. ການທົບທວນຄືນຈໍານວນຂອງຫນ້າຈໍຜູ້ໃຊ້ທັງຫມົດ, ຫຼັງຈາກນັ້ນຜູ້ຊົມໃຊ້ທັງຫມົດຄວນເຂົ້າຈໍານວນແລະໃຫ້ກົດ OK ຕໍ່າສຸດດຽວກັນ.";
+"help_userid" = "ຈໍານວນໃນຫນ້າຈໍນີ້ນີ້ຖືກນໍາໃຊ້ເພື່ອສ້າງເປັນກຸ່ມເອກະລັກຂອງຜູ້ຊົມໃຊ້. ການທົບທວນຄືນຈໍານວນໃນຫນ້າຈໍຜູ້ໃຊ້ທັງຫມົດ, ຫຼັງຈາກນັ້ນຜູ້ໃຊ້ທັງຫມົດຄວນເຂົ້າຈໍານວນແລະກົດ OK ຕ່ໍາສຸດດຽວກັນ.";
 /* 'Now, you must match one of these 3-word phrases with all users. Every user must select the same common phrase, and press Next.' is a help message (sentence case, period); used via Help button on the Verify screen and also the key exchange walkthrough tutorial to describe in more detail what the Verify screen does. */
-"help_verify" = "ໃນປັດຈຸບັນ, ທ່ານຕ້ອງມີຄໍາວ່າຫນຶ່ງຂອງການເຫຼົ່ານີ້ປະໂຫຍກທີ່ 3 ຄໍາກັບຜູ້ຊົມໃຊ້ທັງຫມົດ. ສະມາຊິກທຸກຕ້ອງໄດ້ເລືອກເອົາປະໂຫຍກທີ່ທົ່ວໄປຄືກັນ, ແລະກົດຕໍ່ໄປ.";
+"help_verify" = "ໃນປັດຈຸບັນ, ທ່ານຕ້ອງມີຄໍາວ່າຫນຶ່ງຂອງເຫຼົ່ານີ້ປະໂຫຍກທີ່ 3 ຄໍາສັບທີ່ມີຜູ້ຊົມໃຊ້ທັງຫມົດ. ຜູ້ໃຊ້ທຸກຄົນຕ້ອງໄດ້ເລືອກເອົາປະໂຫຍກທົ່ວໄປຄືກັນ, ແລະກົດຕໍ່ໄປ.";
 
 /* 'Camera permission is required to attach snapshots to secure messages. Tap the %s button for SafeSlinger Camera permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Camera permission. iOS-only. */
-"iOS_cameraError" = "ການອະນຸຍາດກ້ອງຖ່າຍຮູບໄດ້ຖືກກໍານົດໃຫ້ຕິດພາບຖ່າຍເພື່ອຮັບປະກັນຂໍ້ຄວາມ. ປາດປຸ່ມ %@ ສໍາລັບ SafeSlinger ລາຍລະອຽດອະນຸຍາດກ້ອງຖ່າຍຮູບ.";
+"iOS_cameraError" = "ການອະນຸຍາດກ້ອງຖ່າຍຮູບທີ່ຈໍາເປັນຕ້ອງຄັດຕິດພາບຖ່າຍເພື່ອຮັບປະກັນຂໍ້ຄວາມ. ແຕະປຸ່ມ %@ ສໍາລັບ SafeSlinger ລາຍລະອຽດອະນຸຍາດກ້ອງຖ່າຍຮູບ.";
 /* 'Contacts permission is required for securely sharing contact cards. Tap the %s button for SafeSlinger Contacts permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Contacts permission. iOS-only. */
-"iOS_contactError" = "ຕິດຕໍ່ພົວພັນການອະນຸຍາດຖືກຕ້ອງການສໍາລັບການແລກປ່ຽນຢ່າງປອດໄພບັດການຕິດຕໍ່. ປາດປຸ່ມ %@ ສໍາລັບ SafeSlinger ລາຍລະອຽດຕິດຕໍ່ພົວພັນການອະນຸຍາດ.";
+"iOS_contactError" = "ຕິດຕໍ່ພົວພັນການອະນຸຍາດເປັນສິ່ງຈໍາເປັນສໍາລັບການແລກປ່ຽນຢ່າງປອດໄພບັດການຕິດຕໍ່. ແຕະປຸ່ມ %@ ສໍາລັບ SafeSlinger ລາຍລະອຽດການຕິດຕໍ່ການອະນຸຍາດ.";
 /* 'Push registration is missing.' is an error message (sentence case, period); used to warn the user the push registration is missing. iOS-only. */
-"iOS_errorpushtoken" = "ການຈົດທະບຽນການຊຸກຍູ້ແມ່ນລໍ.";
+"iOS_errorpushtoken" = "ການຈົດທະບຽນການຊຸກຍູ້ທີ່ຂາດຫາຍໄປ.";
 /* 'Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the %s button for SafeSlinger Notification permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Notifications permission. iOS-only. */
-"iOS_notificationError1" = "ການອະນຸຍາດສໍາລັບການແຈ້ງການແຈ້ງເຕືອນຫຼືປ້າຍໂຄສະນາ, ແລະຈໍານວນ badge, ຕ້ອງການສໍາລັບຂໍ້ຄວາມປອດໄພ. ປາດປຸ່ມ %@ ສໍາລັບ SafeSlinger ລາຍລະອຽດອະນຸຍາດແຈ້ງ.";
+"iOS_notificationError1" = "ການອະນຸຍາດສໍາລັບການແຈ້ງການແຈ້ງເຕືອນຫຼືປ້າຍໂຄສະນາ, ແລະຈໍານວນ badge, ຕ້ອງການສໍາລັບການສົ່ງຂໍ້ຄວາມປອດໄພ. ແຕະປຸ່ມ %@ ສໍາລັບ SafeSlinger ລາຍລະອຽດອະນຸຍາດແຈ້ງ.";
 /* 'SafeSlinger is not optimized for iOS 5.x devices. SafeSlinger requires iOS 6 or higher.' is an informational message (sentence case, period); message for dialog popups when a user still uses an old iOS device. iOS-only. */
 "iOS_oldOSWarn" = "SafeSlinger ບໍ່ເຫມາະສໍາລັບອຸປະກອນ iOS 5.x. SafeSlinger ຮຽກຮ້ອງໃຫ້ iOS 6 ຫຼືສູງກວ່າ.";
 /* 'Photo Library permission is required to attach pictures to secure messages. Tap the %s button for SafeSlinger Photo Library permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Photo Library permission. iOS-only. */
-"iOS_photolibraryError" = "ຫໍສະຫມຸດຮູບພາບການອະນຸຍາດແມ່ນຕ້ອງການເພື່ອຄັດຕິດຮູບເພື່ອຮັບປະກັນຂໍ້ຄວາມ. ປາດປຸ່ມ %@ ສໍາລັບການລາຍລະອຽດອະນຸຍາດ SafeSlinger ຫມຸດຮູບພາບ.";
+"iOS_photolibraryError" = "ຫໍສະຫມຸດຮູບພາບອະນຸຍາດທີ່ຈໍາເປັນຕ້ອງຄັດຕິດຮູບພາບເພື່ອຮັບປະກັນຂໍ້ຄວາມ. ແຕະປຸ່ມ %@ ສໍາລັບລາຍລະອຽດອະນຸຍາດ SafeSlinger ຫ້ອງສະຫມຸດຮູບພາບ.";
 /* 'You can select your contact card to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Contacts when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Contacts permission. iOS-only. */
-"iOS_RequestPermissionContacts" = "ທ່ານສາມາດເລືອກເອົາບັດການຕິດຕໍ່ຂອງທ່ານເພື່ອສົ່ງຫມູ່ເພື່ອນຂອງທ່ານແລະ SafeSlinger ຈະ encrypt ມັນສໍາລັບທ່ານ. ເພື່ອໃຫ້ສາມາດຄຸນນະສົມບັດນີ້, ທ່ານຕ້ອງອະນຸຍາດໃຫ້ເຂົ້າເຖິງ SafeSlinger ຕິດຕໍ່ພົວພັນຂອງທ່ານໃນເວລາທີ່ຮ້ອງຂໍໃຫ້.";
+"iOS_RequestPermissionContacts" = "ທ່ານສາມາດເລືອກບັດການຕິດຕໍ່ຂອງທ່ານເພື່ອສົ່ງຫມູ່ເພື່ອນຂອງທ່ານແລະ SafeSlinger ຈະເຂົ້າລະຫັດສໍາລັບທ່ານ. ເພື່ອໃຫ້ສາມາດຄຸນນະສົມບັດນີ້, ທ່ານຕ້ອງອະນຸຍາດໃຫ້ເຂົ້າເຖິງ SafeSlinger ການຕິດຕໍ່ພົວຂອງທ່ານໃນເວລາທີ່ຮ້ອງຂໍໃຫ້.";
 /* 'You can record a voice message to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Microphone when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Microphone permission. iOS-only. */
-"iOS_RequestPermissionMicrophone" = "ທ່ານສາມາດບັນທຶກຂໍ້ຄວາມສຽງທີ່ສົ່ງຫມູ່ເພື່ອນຂອງທ່ານແລະ SafeSlinger ຈະ encrypt ມັນສໍາລັບທ່ານ. ເພື່ອໃຫ້ສາມາດຄຸນນະສົມບັດນີ້, ທ່ານຕ້ອງອະນຸຍາດໃຫ້ເຂົ້າເຖິງ SafeSlinger ກັບ Microphone ຂອງທ່ານໃນເວລາທີ່ຮ້ອງຂໍໃຫ້.";
+"iOS_RequestPermissionMicrophone" = "ທ່ານສາມາດບັນທຶກຂໍ້ຄວາມສຽງເພື່ອສົ່ງຫມູ່ເພື່ອນຂອງທ່ານແລະ SafeSlinger ຈະເຂົ້າລະຫັດສໍາລັບທ່ານ. ເພື່ອໃຫ້ສາມາດຄຸນນະສົມບັດນີ້, ທ່ານຕ້ອງອະນຸຍາດໃຫ້ເຂົ້າເຖິງ SafeSlinger ກັບໄມໂຄໂຟນຂອງທ່ານໃນເວລາທີ່ຮ້ອງຂໍໃຫ້.";
 /* 'SafeSlinger is an encrypted messaging application and cannot function without allowing incoming messages from Notifications. To enable incoming messages, you must allow SafeSlinger to send you Notifications when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Notifications permission. iOS-only. */
-"iOS_RequestPermissionNotifications" = "SafeSlinger ແມ່ນຄໍາຮ້ອງສະຫມັກເປັນຂໍ້ຄວາມ encrypted ແລະບໍ່ສາມາດເຮັດວຽກໂດຍບໍ່ມີການໃຫ້ຂໍ້ຄວາມທີ່ມາຈາກການແຈ້ງເຕືອນ. ເພື່ອໃຫ້ສາມາດຂໍ້ຄວາມລາຍຮັບ, ທ່ານຕ້ອງອະນຸຍາດໃຫ້ SafeSlinger ທີ່ຈະສົ່ງການແຈ້ງເຕືອນໃນເວລາທີ່ຮ້ອງຂໍໃຫ້.";
+"iOS_RequestPermissionNotifications" = "SafeSlinger ແມ່ນຄໍາຮ້ອງສະຫມັກການສົ່ງຂໍ້ຄວາມ encrypted ແລະບໍ່ສາມາດເຮັດວຽກໂດຍບໍ່ມີການອະນຸຍາດໃຫ້ຂໍ້ຄວາມເຂົ້າຈາກການແຈ້ງການ. ເພື່ອໃຫ້ສາມາດຂໍ້ຄວາມມາ, ທ່ານຈະຕ້ອງອະນຸຍາດໃຫ້ SafeSlinger ທີ່ຈະສົ່ງການແຈ້ງເຕືອນໃນເວລາທີ່ຮ້ອງຂໍໃຫ້.";
 
 /* '%s ago' is a screen label (match English casing); used on the messages list screen and is used to describe how long ago a message was sent or received. %s = a time measurement, such as '5 minutes' or '2 hours'. */
 "label_ago" = "%@ ກ່ອນຫນ້ານີ້";
 /* 'Last Backup Completed' is a screen label (match English casing); used on the Settings screen to indicate the time and date when the last backup was confirmed. */
-"label_backupCompleteDate" = "າຮອງທີ່ຜ່ານມາສໍາເລັດ";
+"label_backupCompleteDate" = "Backup ສຸດທ້າຍສໍາເລັດ";
 /* 'Last Backup Request' is a screen label (match English casing); used on the Settings screen to indicate when the user last edited data that should be backed up and the application requested a backup from the backup service. */
-"label_backupRequestDate" = "ຂໍ Backup ສຸດທ້າຍ";
+"label_backupRequestDate" = "ຂໍ Backup ຫຼ້າສຸດ";
 /* 'Backup URL' is a screen label (match English casing); used on the Settings screen above the URL used for iCloud backups. iOS-only. */
-"label_backupURL" = "URL backup";
+"label_backupURL" = "URL Backup";
 /* 'Touch to review your %d messages' is a screen label (match English casing); used in the notification drop down window to indicate what will happen when received messages notification is touched. %d = the number of unseen messages received. */
-"label_ClickForNMsgs" = "ການສໍາພັດກັບການທົບທວນຄືນ %d ຂໍ້ຄວາມຂອງທ່ານ";
+"label_ClickForNMsgs" = "ສໍາຜັດທີ່ວິຈານ %d ຂໍ້ຄວາມຂອງທ່ານ";
 /* 'Compare screens on %s devices.' is a screen label (match English casing); used with arrows and phone graphics to remind user to compare mutiple views, not just their own. %s = the number of users. */
-"label_CompareScreensNDevices" = "ສົມທຽບການຄັດເລືອກກ່ຽວກັບການອຸປະກອນ %@.";
+"label_CompareScreensNDevices" = "ປຽບທຽບຫນ້າຈໍອຸປະກອນ %@.";
 /* 'Compose Message' is a screen label (match English casing); used as a text box hint on the Compose Message screen where the user can type a message in the box. */
-"label_ComposeHint" = "Compose ສານ";
+"label_ComposeHint" = "ຂຽນຂໍ້ຄວາມ";
 /* 'Your Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current user name (first and last) to use. Android-only. */
 "label_ContactName" = "ຊື່ຂອງທ່ານ";
 /* '%d days' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole days. */
@@ -357,57 +359,59 @@
 /* 'Device:' is a screen label (match English casing); used to prefix a push registration in the recipients list screen as a device ID. */
 "label_Device" = "ອຸປະກອນ:";
 /* 'Send-only mode' is a screen label (match English casing); used in many UIs to show that receiving push messages is not supported. */
-"label_DeviceInSendOnlyMode" = "ສົ່ງພຽງແຕ່ຮູບແບບການ";
+"label_DeviceInSendOnlyMode" = "ສົ່ງພຽງແຕ່ຮູບແບບ";
 /* 'Your key has changed: Sling Keys again.' is an error message (sentence case, period); used to warn the user that the key in the Recipients list screen has been exchanged once before with a different key from this user. */
 "label_DisabledExchSourceKeyChange" = "ທີ່ສໍາຄັນຂອງທ່ານໄດ້ປ່ຽນແປງ: ຫຼັກ Sling ອີກເທື່ອຫນຶ່ງ.";
 /* 'To begin messaging, Sling Keys with this user at the same time.' is a screen label (match English casing); used to remind users that an invite is only the beginning, and to Sling Keys before communicating. */
-"label_DisabledNextSlingKeysWithThisPerson" = "ເພື່ອເລີ່ມຕົ້ນການສົ່ງຂໍ້ຄວາມ, ຫຼັກ Sling ກັບຜູ້ຊົມໃຊ້ໃນເວລາດຽວກັນ.";
+"label_DisabledNextSlingKeysWithThisPerson" = "ເພື່ອເລີ່ມຕົ້ນການສົ່ງຂໍ້ຄວາມ, Keys Sling ກັບຜູ້ໃຊ້ທີ່ໃຊ້ເວລາດຽວກັນ.";
 /* 'DRAFT' is a screen label (match English casing); used to label a message in the Messages list that has been saved in progress but not yet sent. */
 "label_Draft" = "ຮ່າງ";
 /* 'Key format deprecated: Sling Keys again.' is an error message (sentence case, period); used on the Recipient list screen to warn users that older key formats have been deprecated. Android-only. */
-"label_EnabledKeyFormatDeprecated" = "ຮູບແບບທີ່ສໍາຄັນ deprecated: ຫຼັກ Sling ອີກເທື່ອຫນຶ່ງ.";
+"label_EnabledKeyFormatDeprecated" = "ຮູບແບບ Key ເລີກ: Keys Sling ອີກເທື່ອຫນຶ່ງ.";
 /* 'exchanged' is a screen label (match English casing); used to indicate 0-hop or direct trust from a key exchange in the Recipient list screen. */
 "label_exchanged" = "ການແລກປ່ຽນ";
 /* 'expired' is a screen label (match English casing); used on the Messages list for message attachment that has not been downloaded more than 24 hours after it was originally sent. */
-"label_expired" = "ທາດສະເຕຣອຍ";
+"label_expired" = "ຫມົດອາຍຸ";
 /* 'expires %s' is a screen label (match English casing); used on the message list to show how much time is left to download an attachment. %s = a time measurement, such as 'in 5 minutes' or 'in 2 hours'. Android-only. */
-"label_expires" = "ຫມົດ %@";
+"label_expires" = "ຫມົດອາຍຸ %@";
 /* 'expires in' is a screen label (match English casing); used on the message list to show how much time is left to download an attachment; a time measurement, such as '5 minutes' or '2 hours' will be appended to this string. iOS-only. */
-"label_expiresIn" = "ຫມົດໃນ";
+"label_expiresIn" = "ຫມົດອາຍຸໃນ";
 /* 'File Name' is a screen label (match English casing); used on the Save File As dialog as a hint in the file name text box when changing the file name. */
-"label_FileNameHint" = "ຊື່ໄຟລ໌";
+"label_FileNameHint" = "ຊື່ file";
 /* 'Enter your name and a passphrase to protect your data:' is a screen label (match English casing); used to instruct the user how to proceed on the Setup screen. */
-"label_FindInstruct" = "ກະລຸນາໃສ່ຊື່ແລະ passphrase ໃນການປົກປ້ອງຂໍ້ມູນຂອງທ່ານເປັນຂອງທ່ານ:";
+"label_FindInstruct" = "ກະລຸນາໃສ່ຊື່ແລະລະຫັດຜ່ານປົກປັກຮັກສາຂໍ້ມູນຂອງທ່ານເປັນຂອງທ່ານ:";
 /* 'First Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current first name to use. iOS-only. */
 "label_FirstName" = "ຊື່ຫນ້າທໍາອິດ";
 /* 'Tap your name to add or remove contact data, check items you wish to share, and tap Begin Exchange when others are ready to exchange:' is a screen label (match English casing); used to instruct the user how to proceed on the Begin Exchange screen. */
-"label_Home" = "ປາດຊື່ຂອງທ່ານຈະເພີ່ມຫຼືເອົາຂໍ້ມູນການຕິດຕໍ່, ໃຫ້ກວດເບິ່ງລາຍການທີ່ທ່ານຕ້ອງການທີ່ຈະແບ່ງປັນ, ແລະທໍ່ເລີ່ມຊັບໃນເວລາທີ່ຄົນອື່ນມີຄວາມພ້ອມທີ່ຈະແລກປ່ຽນເງິນຕາ:";
+"label_Home" = "ແຕະຊື່ຂອງທ່ານທີ່ຈະເພີ່ມຫຼືລົບຂໍ້ມູນການຕິດຕໍ່, ໃຫ້ກວດເບິ່ງລາຍການທີ່ທ່ານຕ້ອງການທີ່ຈະແບ່ງປັນ, ແລະປາດເລີ່ມຕົ້ນການແລກປ່ຽນໃນເວລາທີ່ຄົນອື່ນມີຄວາມພ້ອມທີ່ຈະແລກປ່ຽນເງິນຕາ:";
 /* 'Home' is a screen label (match English casing); used to denote a 'home' type of email or phone contact type. iOS-only. */
 "label_hometag" = "ຫນ້າທໍາອິດ";
 /* '%d hours' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole hours. */
 "label_hours" = "%d ຊົ່ວໂມງ";
 /* 'SafeSlinger iCloud is enabled. Tap the Done button when finished.' is a screen label (match English casing); used to indicate the backup will occur while on the Setup screen. iOS-only. */
-"label_iCloudEnable" = "SafeSlinger iCloud ຖືກເປີດໃຫ້ໃຊ້ງານ. ປາດປຸ່ມເຮັດໄດ້ໃນເວລາສໍາເລັດການ.";
+"label_iCloudEnable" = "SafeSlinger iCloud ຖືກເປີດໃຫ້ໃຊ້ງານ. ປຸ່ມເຮັດໄດ້ໃນເວລາທີ່ສໍາເລັດການ.";
 /* 'No messages. You may send a message from the Compose tab.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. */
-"label_InstNoMessages" = "ຂໍ້ຄວາມທີ່ບໍ່ມີ. ທ່ານອາດຈະສົ່ງຂໍ້ຄວາມຈາກແຖບ Compose.";
+"label_InstNoMessages" = "ບໍ່ມີຂໍ້ຄວາມ. ທ່ານອາດຈະສົ່ງຂໍ້ຄວາມຈາກແຖບ Compose.";
 /* 'To add recipients, you must first Sling Keys with one or more other users at the same time. You may also send a Sling Keys contact invitation from the menu.' is a screen label (match English casing); used to instruct the user how to proceed on the Recipient list screen is case of no recipients. */
-"label_InstNoRecipients" = "ການເພີ່ມຜູ້ຮັບ, ທ່ານທໍາອິດຫຼັກ Sling ມີຫນຶ່ງຫຼືຫຼາຍຜູ້ຊົມໃຊ້ອື່ນໆທີ່ຢູ່ໃນທີ່ໃຊ້ເວລາດຽວກັນຕ້ອງ. ນອກນັ້ນທ່ານຍັງອາດຈະສົ່ງການເຊື້ອເຊີນຕິດຕໍ່ຫຼັກ Sling ຈາກເມນູ.";
+"label_InstNoRecipients" = "ການເພີ່ມຜູ້ຮັບ, ທ່ານທໍາອິດທີ່ Keys Sling ມີຫນຶ່ງຫຼືຫຼາຍຜູ້ໃຊ້ອື່ນໆທີ່ຢູ່ໃນທີ່ໃຊ້ເວລາດຽວກັນຕ້ອງ. ນອກນັ້ນທ່ານຍັງອາດຈະສົ່ງການເຊີນຕິດຕໍ່ Keys Sling ຈາກເມນູ.";
+/* 'None of your current recipients match your search query. Please try a different query or invite a new contact.' is a screen label (match English casing); used to inform the user that no recipients match the search query. */
+"label_InstNoRecipientsMatchQuery" = "None ການຂອງຜູ້ທີ່ໄດ້ຮັບຂອງທ່ານໃນປັດຈຸບັນຄໍາວ່າຄົ້ນຫາຂອງທ່ານ. ກະລຸນາພະຍາຍາມເປັນແບບສອບຖາມທີ່ແຕກຕ່າງກັນຫຼືເຊື້ອເຊີນການພົວພັນໃຫມ່.";
 /* 'No shared file. Connect your device with iTunes and drag files to the shared folder.' is a screen label (match English casing); used to instruct the user how to proceed on the Shared Files screen is case of no files to share. iOS-only. */
-"label_InstNoSharedFile" = "ການແບ່ງປັນໄຟລ໌ທີ່ບໍ່ມີ. ເຊື່ອມຕໍ່ອຸປະກອນຂອງທ່ານກັບ iTunes ແລະໄຟລ໌ drag ກັບໂຟນເດີແບ່ງປັນກັນໄດ້.";
+"label_InstNoSharedFile" = "ທີ່ໃຊ້ຮ່ວມກັນບໍ່ມີໄຟລ໌. ການເຊື່ອມຕໍ່ອຸປະກອນຂອງທ່ານກັບ iTunes ແລະໄຟ drag ກັບໂຟນເດີທີ່ໃຊ້ຮ່ວມກັນ.";
 /* 'Pick a recipient to send a message to:' is a screen label (match English casing); used to instruct the user how to proceed on the Pick Recipients list screen. */
-"label_InstRecipients" = "ເອົາຜູ້ທີ່ຈະສົ່ງຂໍ້ຄວາມໄປຫາ:";
+"label_InstRecipients" = "ເອົາຜູ້ຮັບເພື່ອສົ່ງຂໍ້ຄວາມໄປ:";
 /* 'Pick recipients to introduce securely:' is a screen label (match English casing); used to instruct the user how to proceed on the Secure Introduction Recipients list screen. */
-"label_InstSendInvite" = "ເອົາຜູ້ໄດ້ຮັບການແນະນໍາຢ່າງປອດໄພ:";
+"label_InstSendInvite" = "ເອົາຜູ້ທີ່ໄດ້ຮັບການແນະນໍາຢ່າງປອດໄພ:";
 /* 'Pick a file to attach:' is a screen label (match English casing); used as a title for a list of files that could be attached to the message. */
-"label_InstSharedFile" = "ເອົາໄຟລ໌ທີ່ຄັດຕິດ:";
+"label_InstSharedFile" = "ເອົາໄຟລ໌ທີ່ຈະຕິດ:";
 /* 'introduced' is a screen label (match English casing); used to indicate 1-hop trust from a secure introduction in the Recipient list screen. */
 "label_introduced" = "ການນໍາສະເຫນີ";
 /* 'Invited' is a screen label (match English casing); used on the recipient list to denote when a user has sent an invitation to Sling Keys via emailed or text. */
 "label_inviteSent" = "ເຊີນ";
 /* 'Key:' is a screen label (match English casing); used to prefix the key generation date in the Recipients list and on the Compose Message screen. */
-"label_Key" = "ທີ່ສໍາຄັນ:";
+"label_Key" = "Key:";
 /* 'Last Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current last name to use. iOS-only. */
-"label_LastName" = "ຊື່";
+"label_LastName" = "ຊື່ຫຼ້າສຸດ";
 /* 'Me' is a screen label (match English casing); used on the secure introduction invitation dialog to indicate the one-hop trust relationship between the user (Me); the trusted person, and the new person. */
 "label_Me" = "ຂ້າພະເຈົ້າ";
 /* 'I would like to introduce %s to you.' is a screen label (match English casing); used as the text message when sending secure introduction invitations. %s = the name of a person. */
@@ -415,9 +419,11 @@
 /* 'SafeSlinger app: %s' is a screen label (match English casing); used as message text to show a user how to install SafeSlinger. %s = the main installation url for mobile devices */
 "label_messageInviteInstall" = "App SafeSlinger: %@";
 /* 'To setup a secure messaging connection, we can meet or phone each other at the same time, and then Sling Keys just once to verify the connection.' is a screen label (match English casing); used as message text to show a user how to begin secure messaging. */
-"label_messageInviteSetupInst" = "ໄປ setup ການເຊື່ອມຕໍ່ຂໍ້ຄວາມປອດໄພ, ພວກເຮົາສາມາດຕອບສະຫນອງຫຼືໂທລະສັບອື່ນໆໃນແຕ່ລະຢູ່ໃນເວລາດຽວກັນ, ແລະຫຼັງຈາກນັ້ນຫຼັກ Sling ພຽງແຕ່ຄັ້ງດຽວເພື່ອກວດສອບການເຊື່ອມຕໍ່.";
+"label_messageInviteSetupInst" = "ການຕິດຕັ້ງການເຊື່ອມຕໍ່ການສົ່ງຂໍ້ຄວາມປອດໄພ, ພວກເຮົາສາມາດຕອບສະຫນອງຫຼືໂທລະສັບອື່ນໆໃນແຕ່ລະໃນທີ່ໃຊ້ເວລາດຽວກັນ, ແລະຫຼັງຈາກນັ້ນຫຼັກ Sling ພຽງແຕ່ຄັ້ງດຽວເພື່ອກວດພິສູດການເຊື່ອມຕໍ່.";
 /* 'Can we start secure messaging with the open source SafeSlinger iPhone or Android app?' is a screen label (match English casing); used as message text to invite a contact to begin secure messaging. */
-"label_messageInviteStartMsg" = "ພວກເຮົາສາມາດເລີ່ມຕົ້ນການສົ່ງຂໍ້ຄວາມປອດໄພທີ່ມີແຫຼ່ງເປີດ SafeSlinger iPhone ຫຼື app Android?";
+"label_messageInviteStartMsg" = "ພວກເຮົາສາມາດເລີ່ມຕົ້ນການສົ່ງຂໍ້ຄວາມປອດໄພທີ່ມີແຫຼ່ງເປີດ SafeSlinger iPhone ຫຼື Android app?";
+/* '%s, you are verified.' is a screen label (match English casing); used as the text message completing sling keys. %s = the name of a recipient. */
+"label_messageYouAreVerified" = "%@, ທ່ານໄດ້ຢັ້ງຢືນ.";
 /* '%d minutes' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole minutes. */
 "label_minutes" = "%d ນາທີ";
 /* 'Mobile' is a screen label (match English casing); used to denote a 'mobile' type of email or phone contact type. iOS-only. */
@@ -425,71 +431,75 @@
 /* 'Most recent only' is a screen label (match English casing); used as a label for the boolean toggle switching between all or recent-only recipients on recipient list. */
 "label_MostRecentOnly" = "ສ່ວນຫຼາຍບໍ່ດົນມານີ້ພຽງແຕ່";
 /* 'My updated SafeSlinger credentials are attached.' is a screen label (match English casing); used as default message attached to a credential update. */
-"label_MsgSendUpdate" = "ບໍາລຸງ SafeSlinger ຂອງຂ້າພະເຈົ້າການປັບປຸງແມ່ນຕິດ.";
+"label_MsgSendUpdate" = "ຂໍ້ມູນປະຈໍາ SafeSlinger ຂອງຂ້າພະເຈົ້າສະບັບປັບປຸງແມ່ນຕິດ.";
 /* 'None' is a screen label (match English casing); used to indicate the local, non-synchronized contacts account name on the phone when picking a Save Account. */
-"label_None" = "None";
+"label_None" = "ບໍ່ມີ";
 /* 'Non-English' is a screen label (match English casing); used to instruct the user how to switch on Numeric mode while doing comparison. */
 "label_NumericModeHint" = "ບໍ່ແມ່ນພາສາອັງກິດ";
 /* '%d Files to Share:' is a screen label (match English casing); used on the Sharing Folder screen. %d = the number of files to share. iOS-only. */
-"label_numsharedfiles" = "%d ໄຟລ໌ທີ່ຈະແບ່ງປັນ:";
+"label_numsharedfiles" = "%d Files ການແບ່ງປັນ:";
 /* 'Old Threads' is a screen label (match English casing); used for the old thread (iOS only). */
 "label_OldThreads" = "ກະທູ້ເກົ່າ";
 /* 'Other' is a screen label (match English casing); used to denote a 'other' type of email or phone contact type. iOS-only. */
-"label_othertag" = "ອື່ນ";
+"label_othertag" = "ອື່ນ ໆ";
 /* 'Retry' is a screen label (match English casing); used in the Passphrase screen text box as a prefix hint combined with a time measurement when, which is exponentially backed off on invalid passphrase entry, such as 'Retry in 14 seconds'. Used during back off while all user controls have been disabled. */
-"label_PassHintBackoff" = "ອິນໂດເນເຊຍ";
+"label_PassHintBackoff" = "ລອງໃຫມ່";
 /* 'Updated Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint to create a replacement passphrase. */
-"label_PassHintChange" = "Passphrase ການປັບປຸງ";
+"label_PassHintChange" = "Passphrase ສະບັບປັບປຸງ";
 /* 'Create Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint to create a new passphrase. */
 "label_PassHintCreate" = "ສ້າງ Passphrase";
 /* 'Current Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint to confirm the current passphrase. */
-"label_PassHintCurrent" = "Passphrase ໃນປະຈຸບັນ";
+"label_PassHintCurrent" = "Passphrase ປັດຈຸບັນ";
 /* 'Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint enter the passphrase. */
-"label_PassHintEnter" = "Passphrase";
+"label_PassHintEnter" = "ລະຫັດຜ່ານ";
 /* 'Repeat Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint to confirm the passphrase again. */
-"label_PassHintRepeat" = "Passphrase ເຮັດເລື້ມຄືນ";
+"label_PassHintRepeat" = "Passphrase ຊ້ໍາ";
 /* 'Passphrase Cache' is a screen label (match English casing); used on the Settings screen to above the display of the users' passphrase timeout period. */
-"label_passPhraseCacheTtl" = "ຈາກຖານຄວາມຈໍາ Passphrase";
+"label_passPhraseCacheTtl" = "Cache passphrase";
 /* 'Passphrase cached' is a screen label (match English casing); used in the notification window when a passphrase has been cached. Android-only. */
-"label_PassPhraseIsCached" = "ຈາກຖານຄວາມຈໍາ Passphrase";
+"label_PassPhraseIsCached" = "ເກັບໄວ້ passphrase";
 /* 'phone-only' is a screen label (match English casing); used to indicate the local, non-synchronized contacts account type on the phone when picking a Save Account. */
 "label_phoneOnly" = "ໂທລະສັບເທົ່ານັ້ນ";
 /* 'Photo' is a screen label (match English casing); used on the Begin Exchange screen to toggle sending the users' photo during the exchange. */
-"label_Photo" = "ຮູບພາບ";
+"label_Photo" = "Photo";
 /* 'This number is used to create a unique group of users. Compare, and then enter the lowest number among all users.' is a screen label (match English casing); used to instruct the user how to proceed on the Grouping screen. */
-"label_PromptInstruct" = "ຈໍານວນນີ້ແມ່ນໄດ້ຖືກນໍາໃຊ້ເພື່ອສ້າງເປັນກຸ່ມເປັນເອກະລັກຂອງຜູ້ຊົມໃຊ້. ສົມທຽບໄດ້, ແລະຫຼັງຈາກນັ້ນເຂົ້າຈໍານວນທີ່ຕໍ່າສຸດໃນບັນດາຜູ້ຊົມໃຊ້ທັງຫມົດ.";
+"label_PromptInstruct" = "ຈໍານວນນີ້ຖືກນໍາໃຊ້ເພື່ອສ້າງເປັນກຸ່ມເອກະລັກຂອງຜູ້ຊົມໃຊ້. ປຽບທຽບ, ແລະຫຼັງຈາກນັ້ນເຂົ້າຈໍານວນຕ່ໍາສຸດໃນບັນດາຜູ້ຊົມໃຊ້ທັງຫມົດ.";
 /* 'Key ID' is a screen label (match English casing); used on the Settings, Compose Message, and Recipients list screens as a label above the base-64 encoded key IDs for sender and recipients. */
 "label_PublicKeyID" = "ID Key";
 /* 'Push Registration ID' is a screen label (match English casing); used on the Settings screen as a label above the push registration for this user. */
 "label_PushTokenID" = "ID ການຈົດທະບຽນການຊຸກຍູ້";
 /* 'received %d items' is a screen label (match English casing); used to show the progress when collecting group members data during the key exchange protocol. %d = the number of members' data items received during the current phase of the exchange protocol. */
-"label_ReceivedNItems" = "ໄດ້ຮັບ %d ລາຍການ";
+"label_ReceivedNItems" = "ໄດ້ຮັບ %d ລາຍການລາຍການ";
 /* 'Backup Reminder' is a screen label (match English casing); used on the Settings screen to toggle the reminder when pending backups do not execute in timely manner. */
-"label_RemindBackupDelay" = "ເຕືອນ backup";
+"label_RemindBackupDelay" = "ເຕືອນ Backup";
 /* 'Reported inactive %s.' is an error message (sentence case, period); used on the Recipient list screen to warn users that the push registration has been reported not-registered or inactive by the push service. %s = a time measurement of how long it has been reported inactive: '2 days ago' and the like.. */
 "label_ReportedInactive" = "ລາຍງານ %@ inactive.";
 /* 'Last Restore Completed' is a screen label (match English casing); used above a time stamp on the Settings screen to indicate the last time backup settings were restored. */
-"label_restoreCompleteDate" = "ທີ່ຜ່ານມາການຟື້ນຟູສໍາເລັດ";
+"label_restoreCompleteDate" = "Last Restore ສົມບູນ";
 /* 'SafeSlinger backup delayed' is a screen label (match English casing); used as a title of the notification when a backup request has been pending more than 1 hour. */
-"label_SafeSlingerBackupDelayed" = "Backup SafeSlinger ຊັກຊ້າ";
+"label_SafeSlingerBackupDelayed" = "ການສໍາຮອງ SafeSlinger ຊັກຊ້າ";
 /* '(SafeSlinger Direct Exchange)' is a screen label (match English casing); used on the Secure Introduction invitation dialog to denote the sender whom the user has performed a direct exchange with and holds direct trust. */
 "label_safeslingered" = "(SafeSlinger Direct Exchange)";
 /* 'Save Account' is a screen label (match English casing); used above the editable field on the End Exchange screen to showing the address book account to use when saving or updating contacts. */
 "label_SaveAccount" = "ຊ່ວຍປະຢັດບັນຊີ";
 /* 'Check contacts you want to update in your address book, then tap Import to save secure contacts:' is a screen label (match English casing); used to instruct the user how to proceed on the End Exchange screen. */
-"label_SaveInstruct" = "ກວດສອບການຕິດຕໍ່ພົວພັນທີ່ທ່ານຕ້ອງການທີ່ຈະປັບປຸງໃນປື້ມທີ່ຢູ່ຂອງທ່ານ, ຫຼັງຈາກນັ້ນການນໍາເຂົ້າປາດເພື່ອຊ່ວຍປະຢັດການພົວພັນທີ່ປອດໄພ:";
+"label_SaveInstruct" = "ກວດສອບການຕິດຕໍ່ພົວພັນທີ່ທ່ານຕ້ອງການທີ່ຈະປັບປຸງໃນທີ່ຢູ່ຂອງທ່ານ, ຫຼັງຈາກນັ້ນນໍາເຂົ້າປາດເພື່ອຊ່ວຍປະຢັດການຕິດຕໍ່ທີ່ເຊື່ອຖືໄດ້:";
+/* 'Search contacts' is a screen label (match English casing); used on the Recipients screen to provide a hint to search for contacts. */
+"label_search_contacts_hint" = "ຕິດຕໍ່ພົວພັນການຄົ້ນຫາ";
 /* '%d seconds' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole seconds. */
 "label_seconds" = "%d ວິນາທີ";
 /* 'Select Recipient' is a screen label (match English casing); used on the Compose Message screen recipient button before a recipient has been selected. */
-"label_SelectRecip" = "ເລືອກຮັບຜູ້";
+"label_SelectRecip" = "ເລືອກ";
 /* 'Send Error Data' is a screen label (match English casing); used on the Settings screen to toggle the automatic upload of error reports. */
-"label_sendErrorData" = "ສົ່ງຂໍ້ມູນຜິດພາດ";
+"label_sendErrorData" = "ສົ່ງຂໍ້ມູນ Error";
 /* 'From:' is a screen label (match English casing); used on the Compose Message screen to prefix the recipient's name. */
 "label_SendFrom" = "From:";
 /* 'To:' is a screen label (match English casing); used on the Compose Message screen to prefix the sender's name. */
 "label_SendTo" = "ໄປ:";
 /* 'Show this hint next time.' is a screen label (match English casing); used in the key exchange walkthrough dialog to toggle the display of the walkthrough at the next attempted key exchange. */
 "label_ShowHintAtLaunch" = "ສະແດງໃຫ້ເຫັນ hint ນີ້ທີ່ໃຊ້ເວລາຕໍ່ໄປ.";
+/* 'Using speech recognition is disabled because it might cause an information leak' is a screen label (match English casing); used to alert the user about possible information leak on the use of speech recognition when the user tries to use this feature */
+"label_SpeechRecognitionAlert" = "ການນໍາໃຊ້ການຮັບຮູ້ຄໍາເວົ້າເປັນຜູ້ພິການເນື່ອງຈາກວ່າມັນອາດຈະເຮັດໃຫ້ເກີດການຮົ່ວໄຫລຂໍ້ມູນຂ່າວສານ";
 /* 'Step 1' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
 "label_step_1" = "ຂັ້ນຕອນທີ 1";
 /* 'Step 2' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
@@ -499,69 +509,69 @@
 /* 'Step 4' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
 "label_step_4" = "ຂັ້ນຕອນທີ 4";
 /* 'Step 5' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
-"label_step_5" = "ຂັ້ນຕອນທີ 5";
+"label_step_5" = "ຂັ້ນຕອນທີ່ 5";
 /* 'Automatically download message attachments when logged in.' is a screen label (match English casing); used as the settings summary to describe what Auto-retrieve attachments will do. */
 "label_summary_auto_attach_retrieval" = "ອັດຕະໂນມັດດາວນ໌ໂຫລດໄຟລ໌ແນບຂໍ້ຄວາມໃນເວລາທີ່ຢູ່ໃນລະບົບ.";
 /* 'Automatically decrypt messages when logged in.' is a screen label (match English casing); used as the settings summary to describe what Auto-decrypt will do. */
-"label_summary_auto_decrypt" = "ອັດຕະໂນມັດ decrypt ຂໍ້ຄວາມໃນເວລາທີ່ຢູ່ໃນລະບົບ.";
+"label_summary_auto_decrypt" = "ອັດຕະໂນມັດຖອດລະຫັດຂໍ້ຄວາມໃນເວລາທີ່ຢູ່ໃນລະບົບ.";
 /* 'Receive notification when backup is offline.' is a screen label (match English casing); used as the settings summary to describe what Backup Reminder will do. */
-"label_summary_remind_backup_delay" = "ໄດ້ຮັບການແຈ້ງການໃນເວລາທີ່ backup ແມ່ນບໍ່.";
+"label_summary_remind_backup_delay" = "ໄດ້ຮັບການແຈ້ງການໃນເວລາທີ່ສໍາຮອງຂໍ້ມູນແມ່ນບໍ່.";
 /* 'Show a tutorial before attempting to Sling Keys.' is a screen label (match English casing); used as the settings summary to describe what Show Walkthrough will do. */
-"label_summary_show_tutorial" = "ສະແດງໃຫ້ເຫັນ tutorial ກ່ອນທີ່ຈະພະຍາຍາມທີ່ຈະຫຼັກ Sling ໄດ້.";
+"label_summary_show_tutorial" = "ສະແດງໃຫ້ເຫັນ tutorial ກ່ອນທີ່ຈະ Keys Sling ໄດ້.";
 /* 'Tap to decrypt file' is a screen label (match English casing); used to indicate tapping this message in the list will attempt to decrypt the attachment (if needed). */
-"label_TapToDecryptFile" = "ທໍ່ກັບ decrypt ໄຟລ໌";
+"label_TapToDecryptFile" = "ແຕະເພື່ອຖອດລະຫັດໄຟລ໌";
 /* 'Tap to decrypt' is a screen label (match English casing); used to indicate tapping this message in the list will attempt to decrypt it. */
-"label_TapToDecryptMessage" = "ທໍ່ກັບ decrypt";
+"label_TapToDecryptMessage" = "ແຕະເພື່ອຖອດລະຫັດ";
 /* 'Tap to download file' is a screen label (match English casing); used to indicate tapping this message in the list will download the file (and attempt to decrypt it). */
-"label_TapToDownloadFile" = "ທໍ່ທີ່ຈະດາວໂຫຼດໄຟລ໌";
+"label_TapToDownloadFile" = "ແຕະເພື່ອດາວໂຫລດໄຟລ໌";
 /* 'Tap to download message' is a screen label (match English casing); used to indicate tapping this message in the list will download the message (if needed). */
-"label_TapToDownloadMessage" = "ທໍ່ທີ່ຈະດາວນ໌ໂຫລດຂໍ້ຄວາມ";
+"label_TapToDownloadMessage" = "ແຕະເພື່ອດາວນ໌ໂຫລດຂໍ້ຄວາມ";
 /* 'Tap to open file' is a screen label (match English casing); used to indicate tapping this decrypted message in the list will attempt to view the decrypted attachment. */
-"label_TapToOpenFile" = "ທໍ່ທີ່ຈະເປີດໄຟລ໌";
+"label_TapToOpenFile" = "ປາດເປີດ file";
 /* 'Tap to resume message draft' is a screen label (match English casing); used to indicate tapping this message in the list will take the user to the composition screen. */
-"label_TapToResumeDraft" = "ທໍ່ທີ່ຈະສືບຕໍ່ຮ່າງຂໍ້ຄວາມ";
+"label_TapToResumeDraft" = "ແຕະເພື່ອສືບຕໍ່ຮ່າງຂໍ້ຄວາມ";
 /* 'Tap and hold to send credential update.' is a screen label (match English casing); used as a hint on the recipient list to help the user know if a credential update is needed. Android-only. */
-"label_TapToSendCredentialUpdate" = "ທໍ່ແລະຖືເພື່ອສົ່ງການປັບປຸງບໍາລຸງ.";
+"label_TapToSendCredentialUpdate" = "ແຕະແລະຖືເພື່ອສົ່ງຂໍ້ມູນປະຈໍາການປັບປຸງ.";
 /* 'Tap to Sling Keys.' is a screen label (match English casing); used to remind the user that we can advance the user to the Sling Keys screen for convenience. */
-"label_TapToSlingKeys" = "ທໍ່ກັບຫຼັກ Sling.";
+"label_TapToSlingKeys" = "ແຕະເພື່ອ Keys Sling.";
 /* 'Contacts Account' is a screen label (match English casing); used above the editable field on the Settings screen to show the current address book account to use. */
-"label_targetAccountLabel" = "ຕິດຕໍ່ພົວພັນບັນຊີ";
+"label_targetAccountLabel" = "ບັນຊີການຕິດຕໍ່";
 /* 'You may optionally enable SafeSlinger iCloud backup in iOS Settings. Tap the Done button when finished.' is a screen label (match English casing); used on the Setup screen to remind the user that no backups will be restored on new installation. iOS-only. */
-"label_TouchToConfigureBackupSettings" = "ທາງເລືອກທີ່ອາດຈະເຮັດໃຫ້າຮອງ SafeSlinger iCloud ໃນ iOS Settings. ປາດປຸ່ມເຮັດໄດ້ໃນເວລາສໍາເລັດການ.";
+"label_TouchToConfigureBackupSettings" = "ທ່ານເລືອກອາດຈະເຮັດໃຫ້ສໍາຮອງຂໍ້ມູນ SafeSlinger iCloud ໃນ iOS ການຕັ້ງຄ່າ. ປຸ່ມເຮັດໄດ້ໃນເວລາທີ່ສໍາເລັດການ.";
 /* 'Touch to configure backup settings.' is a screen label (match English casing); used in the notification window when the backup request has been pending over 1 hour. Android-only. */
-"label_TouchToConfigureBackupSettingsAndroid" = "ການສໍາພັດກັບ configure ປັບຄ່າ backup.";
+"label_TouchToConfigureBackupSettingsAndroid" = "ຈັບການກໍາຫນົດຄ່າການຕັ້ງຄ່າສໍາຮອງຂໍ້ມູນ.";
 /* 'Touch to configure cache timeout settings.' is a screen label (match English casing); used in the notification window when a passphrase has been cached. Android-only. */
-"label_TouchToConfigureCacheTimeout" = "ການສໍາພັດກັບ configure ປັບຄ່າ timeout ຖານຄວາມຈໍາ.";
+"label_TouchToConfigureCacheTimeout" = "ຈັບການກໍາຫນົດຄ່າການຕັ້ງຄ່າ timeout cache.";
 /* 'Unknown' is a screen label (match English casing); used in menu lists when unexpected type definitions are encountered. */
 "label_undefinedTypeLabel" = "Unknown";
 /* 'Encrypted Sender' is a screen label (match English casing); used as the header for an encrypted message in the message list. */
-"label_UnknownSender" = "ສົ່ງ encrypted";
+"label_UnknownSender" = "ຜູ້ສົ່ງເຂົ້າລະຫັດ";
 /* 'Lowest' is a screen label (match English casing); used as a text box hint on the Grouping screen when entering the lowest ID number. */
-"label_UserIdHint" = "ຕໍ່າສຸດ";
+"label_UserIdHint" = "ຕ່ໍາສຸດ";
 /* 'User Name' is a screen label (match English casing); used as a placeholder before the users' contact has been loaded. */
 "label_UserName" = "ຊື່ຜູ້ໃຊ້";
 /* 'All phones must match one of the 3-word phrases. Compare, and then pick the matching phrase.' is a screen label (match English casing); used to instruct the user how to proceed on the Verify screen. */
-"label_VerifyInstruct" = "ໂທລະສັບມືຖືທີ່ທຸກຄົນຕ້ອງມີຄໍາວ່າຫນຶ່ງໃນປະໂຫຍກທີ່ 3 ຄໍາ. ສົມທຽບໄດ້, ແລະຫຼັງຈາກນັ້ນເອົາຄໍາວ່າປະໂຫຍກໄດ້.";
+"label_VerifyInstruct" = "ໂທລະສັບທັງຫມົດທີ່ຕ້ອງມີຄໍາວ່າຫນຶ່ງໃນປະໂຫຍກທີ່ 3 ຄໍາ. ປຽບທຽບ, ແລະຫຼັງຈາກນັ້ນເອົາຂໍ້ມູນປະໂຫຍກໄດ້.";
 /* 'To protect your data, SafeSlinger does not store your passphrase anywhere for recovery. You may only access recipients and messages created under the same passphrase login. However, you may generate a new key and passphrase, then repeat Sling Keys with your recipients.' is a screen label (match English casing); used to describe the reasons passphrases are not storeed and how to generate a new one. */
-"label_WarnForgotPassphrase" = "ໄປປົກປ້ອງຂໍ້ມູນຂອງທ່ານ, SafeSlinger ບໍ່ໄດ້ເກັບຮັກສາ passphrase ຂອງທ່ານທຸກບ່ອນສໍາລັບການຟື້ນຟູ. ທ່ານອາດຈະມີພຽງແຕ່ການເຂົ້າເຖິງຜູ້ຮັບຂໍ້ຄວາມແລະການສ້າງຕັ້ງຂື້ນພາຍໃຕ້ການເຂົ້າສູ່ລະບົບ passphrase ດຽວກັນ. ຢ່າງໃດກໍຕາມ, ທ່ານອາດຈະຜະລິດເປັນທີ່ສໍາຄັນໃຫມ່ແລະ passphrase, ຫຼັງຈາກນັ້ນເຮັດເລື້ມຄືນ Sling ກັບຜູ້ໄດ້ຮັບຂອງທ່ານ.";
+"label_WarnForgotPassphrase" = "ການປົກປັກຮັກສາຂໍ້ມູນຂອງທ່ານ, SafeSlinger ບໍ່ໄດ້ເກັບຮັກສາລະຫັດຜ່ານຂອງທ່ານທຸກບ່ອນສໍາລັບການຟື້ນຟູ. ທ່ານພຽງແຕ່ສາເຂົ້າເຖິງຜູ້ຮັບແລະຂໍ້ຄວາມນີ້ຖືກສ້າງຂຶ້ນພາຍໃຕ້ການເຂົ້າສູ່ລະບົບລະຫັດຜ່ານດຽວກັນ. ຢ່າງໃດກໍຕາມ, ທ່ານອາດຈະສ້າງທີ່ສໍາຄັນແລະລະຫັດຜ່ານ, ຫຼັງຈາກນັ້ນເຮັດເລື້ມຄືນ Sling ກັບຜູ້ຮັບຂອງທ່ານ.";
 /* 'The following keys will be deleted:' is a screen label (match English casing); used to begin list of keys that will be deleted. */
 "label_WarnManagePassFollowsAreRecent" = "ການໃຊ້ດັ່ງຕໍ່ໄປນີ້ຈະໄດ້ຮັບການລຶບ:";
 /* 'There are no more recent keys than yours.' is a screen label (match English casing); used to show there are no keys to delete. */
-"label_WarnManagePassNoMoreRecent" = "ມີລູກທີ່ຜ່ານມາບໍ່ມີຫຼາຍກ່ວາທ່ານ.";
+"label_WarnManagePassNoMoreRecent" = "ມີທີ່ໃຊ້ໃນບໍ່ດົນມານີ້ບໍ່ມີຫຼາຍກ່ວາທ່ານມີ.";
 /* 'Only keys generated more recently than yours, generated on %s, may be deleted.' is a screen label (match English casing); used to show which keys may be deleted. %s = the key generation date of the current key */
-"label_WarnManagePassOnlyRecentDeleted" = "ມີພຽງແຕ່ຜະລິດທີ່ບໍ່ດົນມານີ້ກ່ວາທ່ານ, ການຜະລິດຕາມ %@, ອາດຈະໄດ້ຮັບການລຶບ.";
+"label_WarnManagePassOnlyRecentDeleted" = "ພຽງແຕ່ໃຊ້ລູກທີ່ສ້າງຫຼາຍບໍ່ດົນມານີ້ກ່ວາທ່ານ, ສ້າງ on %@, ອາດຈະໄດ້ຮັບການລຶບ.";
 /* 'Work' is a screen label (match English casing); used to denote a 'work' type of email or phone contact type. iOS-only. */
-"label_worktag" = "ການເຮັດວຽກ";
+"label_worktag" = "ເຮັດ";
 
 /* 'SafeSlinger Exchange' is an application name (title case); used for dialogs to show the user which that a SafeSlinger Exchange is in progress. */
-"lib_name" = "SafeSlinger ຊັບ";
+"lib_name" = "SafeSlinger Exchange";
 
 /* 'About' is a menu option (title case); used to show the about dialog via the Settings screen. */
 "menu_About" = "ກ່ຽວກັບ";
 /* 'Auto-retrieve attachments' is a menu option (title case); used to enable/disable automatically retrieving message attachments when logged in via the Settings screen. */
-"menu_auto_attach_retrieval" = "ອັດຕະໂນມັດມາແນບ";
+"menu_auto_attach_retrieval" = "Auto ດຶງສິ່ງທີ່ແນບມາ";
 /* 'Auto-decrypt' is a menu option (title case); used to enable/disable automatically decrypting messages when logged in via the Settings screen. */
-"menu_auto_decrypt" = "ອັດຕະໂນມັດ decrypt";
+"menu_auto_decrypt" = "ການຖອດລະຫັດອັດຕະໂນມັດ";
 /* 'Change' is a menu option (title case); used to change the currently selected file attachment via the File Options dialog. */
 "menu_Change" = "ການປ່ຽນແປງ";
 /* 'Change Passphrase' is a menu option (title case); used to confirm the current passphrase and create and new one via the Settings screen. */
@@ -569,23 +579,23 @@
 /* 'Email from Contacts' is a menu option (title case); used when adding a contact invitaion via email. */
 "menu_ContactInviteEmail" = "Email ຈາກການຕິດຕໍ່";
 /* 'Text from Contacts' is a menu option (title case); used when adding a contact invitaion via sms. */
-"menu_ContactInviteSms" = "ຂໍ້ຄວາມຈາກຕິດຕໍ່ພົວພັນ";
+"menu_ContactInviteSms" = "ຂໍ້ຄວາມຈາກຕິດຕໍ່";
 /* 'Create New' is a menu option (title case); used to show a new empty contact in the address book for editing as the users' current identity via the Personal Contact dialog. */
 "menu_CreateNew" = "ສ້າງໃຫມ່";
 /* 'Delete' is a menu option (title case); used to delete the current item from the list context menu. */
-"menu_delete" = "ລຶບ";
+"menu_delete" = "ລົບ";
 /* 'Delete Thread %s' is a menu option (title case); used to delete all messages from this person via the message list context menu. %s = the name of a person. */
-"menu_deleteThread" = "ລຶບ %@ Thread";
+"menu_deleteThread" = "ລົບ %@ ການກະທູ້";
 /* 'View Detail' is a menu option (title case); used to show a dialog of more detail about the item via the message list context menu. */
-"menu_Details" = "ລາຍລະອຽດເບິ່ງ";
+"menu_Details" = "ເບິ່ງລາຍລະອຽດ";
 /* 'Download Directory' is a choice (sentence case); used when the user chooses to change the directory of the attachment before saving. */
-"menu_DownloadDirectory" = "ດາວໂຫຼດ Directory";
+"menu_DownloadDirectory" = "Download Directory";
 /* 'Edit' is a menu option (title case); used to provide a generic edit menu option. */
 "menu_Edit" = "ດັດແກ້";
 /* 'Edit Contact' is a menu option (title case); used to show the users' current contact in the address book for editing via the Personal Contact dialog. */
 "menu_EditContact" = "ດັດແກ້ການຕິດຕໍ່";
 /* 'Edit Name' is a menu option (title case); used to show the Settings dialog to change the preferred name. */
-"menu_EditName" = "ຊື່ດັດແກ້";
+"menu_EditName" = "ຊື່ການແກ້ໄຂ";
 /* 'File Manager' is a menu option (title case); used to show a custom file system navigation menu via the Choose Your File dialog. Android-only. */
 "menu_FileManager" = "ຈັດການໄຟລ໌";
 /* 'Forgot Passphrase?' is a menu option (title case); used on the passphrase screen to show users how to generate a new key after forgetting the passphrase that protects the old one. */
@@ -599,15 +609,15 @@
 /* 'License' is a menu option (title case); used to show a dialog of the End User License Agreement. */
 "menu_License" = "ໃບອະນຸຍາດ";
 /* 'Add Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
-"menu_link_contact_add" = "ຕື່ມການຕິດຕໍ່ເຊື່ອມຕໍ່";
+"menu_link_contact_add" = "ຕື່ມການຕິດຕໍ່ Link";
 /* 'Change Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
-"menu_link_contact_change" = "ການປ່ຽນແປງການເຊື່ອມຕໍ່ຕິດຕໍ່";
+"menu_link_contact_change" = "ການປ່ຽນແປງຕິດຕໍ່ Link";
 /* 'Logout' is a menu option (title case); used to remove the cached passphrase and force the user to login again. */
-"menu_Logout" = "Logout";
+"menu_Logout" = "ອອກຈາກລະບົບ";
 /* 'Manage Passphrases' is a menu option (title case); used on the settings screen to allow users to remove newer keys if created by users without orignial user authorization. */
-"menu_ManagePassphrases" = "ການຄຸ້ມຄອງ Passphrases";
+"menu_ManagePassphrases" = "ການຄຸ້ມຄອງລະຫັດຜ່ານ";
 /* 'Message Font Size' is a menu (title case); used as the settings menu option to change message font size */
-"menu_message_font_size" = "ຂໍ້ Font Size";
+"menu_message_font_size" = "Message Font Size";
 /* 'Copy Text' is a menu option (title case); used to copy the message text into the clipboard via the message list context menu. */
 "menu_messageCopyText" = "ຂໍ້ຄວາມ Copy";
 /* 'Forward' is a menu option (title case); used to create a new message with the same text message/attachment via the message list context menu. */
@@ -615,29 +625,29 @@
 /* 'Privacy Policy' is a menu option (title case); used to show a dialog of the Privacy Policy. */
 "menu_PrivacyPolicy" = "ນະໂຍບາຍຄວາມເປັນສ່ວນຕົວ";
 /* 'Remove' is a menu option (title case); used to remove the currently selected file attachment via the File Options dialog. */
-"menu_Remove" = "ດຶງອອກຈາກ";
+"menu_Remove" = "ລົບ";
 /* 'Restore Default Settings' is a menu option (title case); used as Settings screen menu item for restoring all settings to default */
-"menu_restore_default" = "ການຟື້ນຟູປັບຄ່າ Default";
+"menu_restore_default" = "ການຟື້ນຟູການຕັ້ງຄ່າມາດຕະຖານ";
 /* 'Sound' is a menu option (title case); used as Settings item for entering ringtone selection screen */
 "menu_ringtone" = "ສຽງ";
 /* 'Add Contact Invitation' is a menu option (title case); used to send an email or text message containing an installation link for SafeSlinger. */
 "menu_SelectShareApp" = "ຕື່ມການເຊີນຕິດຕໍ່";
 /* 'Send Feedback' is a menu option (title case); used to send an email with support data for feedback. */
-"menu_sendFeedback" = "ສົ່ງຄໍາຄຶດຄໍາເຫັນ";
+"menu_sendFeedback" = "ສົ່ງຄວາມຄິດເຫັນ";
 /* 'Send Update' is a menu option (title case); used to send a credential update via the recipient list context menu. */
-"menu_SendUpdate" = "ສົ່ງປັບປຸງໃຫ້ທັນ";
+"menu_SendUpdate" = "ສົ່ງການປັບປຸງ";
 /* 'Settings' is a menu option (title case); used to show the settings screen. */
-"menu_Settings" = "Settings";
+"menu_Settings" = "ການຕັ້ງຄ່າ";
 /* 'Show Tutorial' is a menu option (title case); used to toggle the key exchange walkthrough when exchanging keys via the Settings screen. */
-"menu_ShowTutorial" = "ສະແດງໃຫ້ເຫັນ Tutorial";
+"menu_ShowTutorial" = "ສະແດງ Tutorial";
 /* 'Compose' is a menu option (title case); used at the title of the message composition tab for the home tab view. */
-"menu_TagComposeMessage" = "Compose";
+"menu_TagComposeMessage" = "ຂຽນ";
 /* 'Sling Keys' is a menu option (title case); used as the title of the key exchange tab for the home tab view. */
 "menu_TagExchange" = "ຫຼັກ Sling";
 /* 'Messages' is a menu option (title case); used as the title of the message list tab for the home tab view. */
 "menu_TagListMessages" = "ຂໍ້ຄວາມ";
 /* 'Use Another' is a menu option (title case); used to redo the Setup process again to find another contact to use as the users' main identity via the Personal Contact dialog. */
-"menu_UseAnother" = "ອີກປະການຫນຶ່ງການນໍາໃຊ້";
+"menu_UseAnother" = "ການນໍາໃຊ້ອີກປະການຫນຶ່ງ";
 /* 'Use Contact %s' is a menu option (title case); used to select the found contact as the users' main identity via the Personal Contact dialog. */
 "menu_UseContactPerson" = "ການນໍາໃຊ້ຕິດຕໍ່ %@";
 /* 'Use Name Only' is a menu option (title case); used to select no contact as the users' main identity via the Personal Contact dialog. */
@@ -645,53 +655,55 @@
 /* 'Use Profile %s' is a menu option (title case); used to select the main profile contact as the users' main identity via the Personal Contact dialog. */
 "menu_UseProfilePerson" = "ການນໍາໃຊ້ຂໍ້ມູນ %@";
 /* 'Vibrate' is a menu option (title case); used as Settings item for boolean option to vibrate during message notification */
-"menu_vibrate" = "Vibrations";
+"menu_vibrate" = "ສັ່ນ";
 
 /* 'waiting for verification from all members...' is a progress message (lower case, ellipsis); used to show progress while verifying data from all members hash equal to the initial commitment they sent. */
-"prog_CollectingOthersCommitVerify" = "ລໍຖ້າສໍາລັບການຢັ້ງຢືນຈາກສະມາຊິກທຸກຄົນ...";
+"prog_CollectingOthersCommitVerify" = "ລໍຖ້າສໍາລັບການຢັ້ງຢືນຈາກສະມາຊິກທັງຫມົດ...";
 /* 'waiting for all users to join...' is a progress message (lower case, ellipsis); used to show progress while waiting to collect all initial commitments from members who entered the same lowest number grouping ID. */
 "prog_CollectingOthersItems" = "ລໍຖ້າສໍາລັບຜູ້ໃຊ້ທັງຫມົດເພື່ອເຂົ້າຮ່ວມ...";
 /* 'constructing group key...' is a progress message (lower case, ellipsis); used to show progress while generating the asymmetric shared group key tree and distributing the appropriate public tree nodes. */
 "prog_ConstructingGroupKey" = "ການກໍ່ສ້າງທີ່ສໍາຄັນກຸ່ມ...";
 /* 'decrypting...' is a progress message (lower case, ellipsis); used to show progress during message decryption (and currently signature verification as well). */
-"prog_decrypting" = "decrypting...";
+"prog_decrypting" = "ຖອດລະຫັດ...";
 /* 'encrypting...' is a progress message (lower case, ellipsis); used to show progress during message encryption (and currently signing as well). */
-"prog_encrypting" = "encrypting...";
+"prog_encrypting" = "ການເຂົ້າລະຫັດ...";
 /* 'message sent, awaiting response...' is a progress message (lower case, ellipsis); used to show progress after the message has been uploaded, but the server has not confirmed the generation of a push message yet. */
-"prog_FileSent" = "ຂໍ້ຄວາມຖືກສົ່ງໄປ, ລັງລໍຖ້າການຕອບຮັບ...";
+"prog_FileSent" = "ຂໍ້ຄວາມທີ່ສົ່ງ, ລັງລໍຖ້າການຕອບສະຫນອງ...";
 /* 'finding key...' is a progress message (lower case, ellipsis); used to show progress while looking up a matching key in the key database. */
 "prog_findingKey" = "ການຊອກຫາທີ່ສໍາຄັນ...";
 /* 'generating key, this can take a while...' is a progress message (lower case, ellipsis); used to show progress during encryption key and signature key public/private key pair generation. */
-"prog_GeneratingKey" = "ການຜະລິດທີ່ສໍາຄັນ, ນີ້ສາມາດໃຊ້ເວລາໃນຂະນະທີ່...";
+"prog_GeneratingKey" = "ການສ້າງທີ່ສໍາຄັນ, ນີ້ສາມາດໃຊ້ເວລາໃນຂະນະທີ່...";
 /* 'generating signature...' is a progress message (lower case, ellipsis); used to show progress during message signature generation. */
-"prog_generatingSignature" = "ການຜະລິດລາຍເຊັນ...";
+"prog_generatingSignature" = "ການສ້າງລາຍເຊັນ...";
 /* 'loading content...' is a progress message (lower case, ellipsis); used to show progress during file preview loading. */
-"prog_loadingContent" = "ເນື້ອໃນ... ການໂຫຼດ";
+"prog_loadingContent" = "ເນື້ອໃນ loading...";
+/* 'pending...' is a progress message (lower case, ellipsis); used to show progress during queued message while waiting to act */
+"prog_pending" = "ລໍຖ້າ...";
 /* 'receiving encrypted file...' is a progress message (lower case, ellipsis); used to show progress while receiving the requested file. */
-"prog_ReceivingFile" = "ການໄດ້ຮັບໄຟລ໌ encrypted...";
+"prog_ReceivingFile" = "ໄດ້ຮັບການເຂົ້າລະຫັດໄຟລ໌...";
 /* 'requesting encrypted file...' is a progress message (lower case, ellipsis); used to show progress while waiting for the server to return the requested file. */
-"prog_RequestingFile" = "ຂໍໄຟລ໌ encrypted...";
+"prog_RequestingFile" = "ການຮ້ອງຂໍເຂົ້າລະຫັດໄຟລ໌...";
 /* 'requesting encrypted message...' is a progress message (lower case, ellipsis); used to show progress while waiting for the server to return the requested message. */
-"prog_RequestingMessage" = "ຂໍຂໍ້ຄວາມ encrypted...";
+"prog_RequestingMessage" = "ການຮ້ອງຂໍເຂົ້າລະຫັດຂໍ້ຄວາມ...";
 /* 'requesting push registration...' is a progress message (lower case, ellipsis); used to show progress while waiting for Google or APNS to return a registration id for this phone to receive SafeSlinger-only push messages. */
-"prog_RequestingPushReg" = "ຮ້ອງຂໍການຈົດທະບຽນການຊຸກຍູ້...";
+"prog_RequestingPushReg" = "ການຮ້ອງຂໍຈົດທະບຽນການຊຸກຍູ້ການ...";
 /* 'requesting membership...' is a progress message (lower case, ellipsis); used to show progress while waiting for the exchange server to return a grouping ID number. */
-"prog_RequestingUserId" = "ຮ້ອງຂໍໃຫ້ສະມາຊິກ...";
+"prog_RequestingUserId" = "ການຮ້ອງຂໍເປັນສະມາຊິກ...";
 /* 'updating address book...' is a progress message (lower case, ellipsis); used to show progress while newly exchanged contact data is added to the users' address book. */
-"prog_SavingContactsToAddressBook" = "ການປັບປຸງທີ່ຢູ່ book...";
+"prog_SavingContactsToAddressBook" = "ການປັບປຸງປຶ້ມບັນທຶກທີ່...";
 /* 'updating key database...' is a progress message (lower case, ellipsis); used to show progress while newly exchanged keys are added to the local database. */
 "prog_SavingContactsToKeyDatabase" = "ການປັບປຸງຖານຂໍ້ມູນທີ່ສໍາຄັນ...";
 /* 'searching for backup...' is a progress message (lower case, ellipsis); used to show progress during a search for backed up settings. */
-"prog_SearchingForBackup" = "ຊອກຫາສໍາລັບ backup...";
+"prog_SearchingForBackup" = "ຄົ້ນຫາສໍາລັບການສໍາຮອງຂໍ້ມູນ...";
 /* 'sending encrypted %s...' is a progress message (lower case, ellipsis); used to show progress while a message is being sent. %s = the file name if an attachment exists. */
-"prog_SendingFile" = "ການສົ່ງ %@ encrypted...";
+"prog_SendingFile" = "ການສົ່ງ %@ ການເຂົ້າລະຫັດ...";
 /* 'verifying integrity...' is a progress message (lower case, ellipsis); used to show progress during message integrity verification. */
-"prog_verifyingIntegrity" = "ກວດການເຊື່ອມໂຍງ...";
+"prog_verifyingIntegrity" = "ການກວດສອບຄວາມຊື່ສັດ...";
 /* 'verifying signature...' is a progress message (lower case, ellipsis); used to show progress during message signature verification. */
-"prog_verifyingSignature" = "ກວດລາຍເຊັນ...";
+"prog_verifyingSignature" = "ການກວດສອບລາຍເຊັນ...";
 
 /* 'Advanced' is a preferences title (title case); used to sub-divide the Advanced section of the settings screen. */
-"section_advanced" = "ແບບພິເສດ";
+"section_advanced" = "Advanced";
 /* 'Backup' is a preferences title (title case); used to sub-divide the Backup section of the settings screen. */
 "section_backup" = "Backup";
 /* 'General' is a preferences title (title case); used to sub-divide the General section of the settings screen. */
@@ -704,54 +716,60 @@
 /* 'Backup restored.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm backup keys and settings have bee restored on re-install. */
 "state_BackupRestored" = "Backup ການຟື້ນຟູ.";
 /* 'Deleted file %s.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that a file has been deleted. %s = the file name of the deleted file. */
-"state_FileDeleted" = "%@ ລຶບໄຟລ໌.";
+"state_FileDeleted" = "%@ ໄຟລົບ.";
 /* 'Message sent.' is an informational message (sentence case, period); TODO: This should be deprecated in favor 1 message push to messages tab (single thread) and >1 messages push to messages tab (all threads) with a toast of state_MessagesSent. */
-"state_FileSent" = "ຂໍ້ຄວາມຖືກສົ່ງໄປ.";
+"state_FileSent" = "ຂໍ້ຄວາມຖືກສົ່ງ.";
 /* 'Invitation added.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the addition of a contact invitation. */
-"state_InvitationAdded" = "ການເຊື້ອເຊີນເພີ່ມ.";
+"state_InvitationAdded" = "ການເຊື້ອເຊີນເຂົ້າມາ.";
 /* 'Message saved as draft.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that an un-sent message has been saved. */
-"state_MessageSavedAsDraft" = "ຂໍ້ບັນທືກເປັນຮ່າງ.";
+"state_MessageSavedAsDraft" = "ຂໍ້ຄວາມທີ່ບັນທືກເປັນຮ່າງ.";
 /* '%d messages deleted.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the number of messages deleted. %d = the number of messages successfully deleted. */
-"state_MessagesDeleted" = "%d ຂໍ້ຄວາມລຶບຖິ້ມ.";
+"state_MessagesDeleted" = "%d ຂໍ້ຄວາມລຶບ.";
+/* '%d messages sent.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that N messages has been sent used on all threads views. */
+"state_MessagesSent" = "%d ຂໍ້ຄວາມທີ່ສົ່ງ.";
 /* 'Passphrase updated.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the change of password. */
-"state_PassphraseUpdated" = "Passphrase ການປັບປຸງ.";
+"state_PassphraseUpdated" = "ລະຫັດຜ່ານການປັບປຸງ.";
 /* '%d recipients deleted.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the number of recipients deleted. %d the number of recipient's keys successfully deleted. */
-"state_RecipientsDeleted" = "%d ຜູ້ໄດ້ຮັບການລຶບ.";
+"state_RecipientsDeleted" = "%d ຜູ້ຮັບການລຶບ.";
 /* '%s contacts imported.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the number of contacts imported after exchange. %s the number of contacts imported, may be expressed as a ratio, such as 4/5 in case of a partial import. */
-"state_SomeContactsImported" = "ຕິດຕໍ່ພົວພັນການນໍາເຂົ້າ %@.";
+"state_SomeContactsImported" = "ຕິດຕໍ່ພົວພັນ %@ ນໍາເຂົ້າ.";
 /* 'Text copied to clipboard.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the message text has been copied to the device native clipboard. */
-"state_TextCopiedToClipboard" = "ຂໍ້ຄວາມຄັດລອກໄປທີ່ clipboard.";
+"state_TextCopiedToClipboard" = "ຂໍ້ຄວາມທີ່ຄັດລອກໄປທີ່ clipboard.";
 
 /* 'SafeSlinger is designed to easily share identity data, in person or over the phone, authenticated, private, and intact. Each person you share with creates a secure end-to-end channel to send messages.' is an application description (sentence case); used at the beginning of the about box and app store listing to describe the application. Beginning of long form: 4000 character max. */
-"text_About" = "SafeSlinger ຖືກອອກແບບເພື່ອໄດ້ຢ່າງງ່າຍດາຍແລກປ່ຽນຂໍ້ມູນຕົວຕົນ, ໃນການບຸກຄົນຫຼືຜ່ານທາງໂທລະສັບ, authenticated, ເອກະຊົນ, ແລະ intact. ແຕ່ລະຄົນທີ່ທ່ານແບ່ງປັນກັບການສ້າງເປັນຊ່ອງທາງໃນຕອນທ້າຍເພື່ອທ້າຍທີ່ປອດໄພທີ່ຈະສົ່ງຂໍ້ຄວາມ.";
+"text_About" = "SafeSlinger ຖືກອອກແບບເພື່ອໄດ້ຢ່າງງ່າຍດາຍແບ່ງປັນຂໍ້ມູນເອກະລັກ, ໃນການບຸກຄົນຫຼືຜ່ານທາງໂທລະສັບ, ກວດສອບຄວາມຖືກ, ເອກະຊົນ, ແລະ intact. ແຕ່ລະຄົນທີ່ທ່ານແບ່ງປັນກັບການສ້າງເປັນຊ່ອງທາງໃນຕອນທ້າຍເພື່ອທ້າຍປອດໄພໃນການສົ່ງຂໍ້ຄວາມ.";
 /* 'Easily exchange contact information with others' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
 "text_About1" = "ໄດ້ຢ່າງງ່າຍດາຍແລກປ່ຽນຂໍ້ມູນຂ່າວສານການພົວພັນກັບຄົນອື່ນ";
 /* 'Securely sling texts, photos, anything!' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
-"text_About2" = "ຄວາມປອດໄພ sling ບົດເລື່ອງ, ຮູບພາບຫຍັງ!";
+"text_About2" = "ຢ່າງປອດໄພ sling ບົດເລື່ອງຕ່າງໆ, ຮູບພາບແມ່ນຫຍັງ?";
 /* 'Strong cryptography protects your information' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
-"text_About3" = "Cryptography ທີ່ເຂັ້ມແຂງປົກປ້ອງຂໍ້ມູນຂອງທ່ານ";
+"text_About3" = "Cryptography ເຂັ້ມແຂງການປົກປ້ອງຂໍ້ມູນຂອງທ່ານ";
 /* 'SafeSlinger: Speak 3 words and forever chat in peace.' is an application description (sentence case); used in the about box and app store listing to describe the application features. Short form: 80 character max, should be exciting. */
-"text_About_Short" = "SafeSlinger: ເວົ້າ 3 ຄໍາແລະຕະຫຼອດໄປສົນໃນສັນຕິພາບ.";
+"text_About_Short" = "SafeSlinger: ເວົ້າ 3 ຄໍາແລະຕະຫຼອດໄປສົນທະນາໃນສັນຕິພາບ.";
 /* 'email: %s' is an application description (sentence case); used in the app store listing, %s = SafeSlinger support email address. */
 "text_AboutEmail" = "email: %@";
 /* 'Features:' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
-"text_AboutFeat" = "ຄຸນນະສົມບັດ:";
+"text_AboutFeat" = "ຄຸນສົມບັດ:";
 /* 'web: %s' is an application description (sentence case); used in the app store listing, %s = SafeSlinger project web page address. */
 "text_AboutWeb" = "ເວັບໄຊຕ໌: %@";
+/* 'Developed by:' is an application description (sentence case); used at the end of the about dialog to list the developers of SafeSlinger. */
+"text_DevelopedBy" = "ການພັດທະນາໂດຍ:";
 /* 'Exchange' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordExchange" = "ການແລກປ່ຽນ";
 /* 'Identity' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordIdentity" = "Identity";
 /* 'Key' is an application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordKey" = "ທີ່ສໍາຄັນ";
+"text_KeywordKey" = "Key";
 /* 'Messaging' is an application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordMessaging" = "Messaging";
+"text_KeywordMessaging" = "ການສົ່ງຂໍ້ຄວາມ";
 /* 'Privacy' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordPrivacy" = "ຄວາມເປັນສ່ວນຕົວ";
 /* 'Security' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordSecurity" = "ຄວາມປອດໄພ";
 /* 'Languages provided by:' is an application description (sentence case); used at the end of the about dialog to list the translators of SafeSlinger. */
 "text_LanguagesProvidedBy" = "ພາສາສະຫນອງໃຫ້ໂດຍ:";
+/* 'translate: %s' is an application description (sentence case); used in the app store listing, %s = SafeSlinger project localization repo. */
+"text_LocalizationRepo" = "ແປ: %@";
 /* 'Related Terms:' is an application description (sentence case); used in the app store listing to list related search terms to help users looking for secure key exchange and messaging. */
 "text_RelatedSearchTerms" = "ເງື່ອນໄຂທີ່ກ່ຽວຂ້ອງ:";
 /* 'Requirements:' is an application description (sentence case); used in the about box and app store listing to enumerate requirements. */
@@ -761,9 +779,9 @@
 /* 'An Internet connection must be active.' is an application description (sentence case); used in the about box and app store listing to enumerate requirements. */
 "text_Requirements2" = "ການເຊື່ອມຕໍ່ອິນເຕີເນັດຈະຕ້ອງມີການເຄື່ອນໄຫວ.";
 /* 'open source: %s' is an application description (sentence case); used in the app store listing to show the location of the open source code repository. %s = source code URL. */
-"text_SourceCodeRepo" = "ແຫຼ່ງເປີດ: %@";
+"text_SourceCodeRepo" = "ມາເປີດ: %@";
 /* 'Stability fixes.' is an application description (sentence case); used to list what changes have been made to updated versions. */
-"text_WhatsNew" = "ແກ້ໄຂສະຖຽນລະພາບ.";
+"text_WhatsNew" = "ການແກ້ໄຂສະຖຽນລະພາບ.";
 
 /* 'About' is a title (title case); used as the */
 "title_About" = "ກ່ຽວກັບ";
@@ -772,19 +790,19 @@
 /* 'Choose Directory' is a title (title case); used at the top of the menu when choosing a directory to load or save a file attachment. */
 "title_ChooseDirectory" = "ເລືອກ Directory";
 /* 'Choose Your Attachment' is a title (title case); used at the top of the menu options when choosing among sources to pick an attachment. */
-"title_ChooseFileLoad" = "ເລືອກຕິດຂອງທ່ານ";
+"title_ChooseFileLoad" = "ເລືອກ Attachment ຂອງທ່ານ";
 /* 'Comments/Questions' is a title (title case); used as the Subject field of an email message for the user to send feedback to developers. Also used as the menu option to start the email. */
 "title_comments" = "ຄໍາເຫັນ/ຄໍາຖາມ";
 /* 'Error' is a title (title case); used at the top of the error dialog. */
-"title_Error" = "ຄວາມຜິດພາດ";
+"title_Error" = "Error";
 /* 'Sling Keys Assistant' is a title (title case); used at the top of the dialog, which provides a walkthrough of the key exchange protocol. */
-"title_ExchangeWalkthrough" = "Sling ຫຼັກຊ່ວຍ";
+"title_ExchangeWalkthrough" = "Sling Keys Assistant";
 /* 'Attachment Options' is a title (title case); used at the top of the menu when choosing whether to remove the current attachment or select a new one. */
-"title_FileOptions" = "ຕົວເລືອກຕ່າງໆໃນການຕິດ";
+"title_FileOptions" = "Options Attachment";
 /* 'Setup' is a title (title case); used at the top of the setup screen. */
-"title_find" = "Setup";
+"title_find" = "ການຕິດຕັ້ງ";
 /* 'Select a font size' is a title (title case); used as the settings title when changing font size */
-"title_font_size" = "ເລືອກຂະຫນາດຕົວອັກສອນໄດ້";
+"title_font_size" = "ເລືອກຂະຫນາດຕົວອັກສອນ";
 /* 'Begin Exchange' is a title (title case); used at the top of the begin exchange screen to start the exchange protocol. */
 "title_home" = "ເລີ່ມຕົ້ນການແລກປ່ຽນ";
 /* 'Home' is a title (title case); used at the top of the home screen on iOS. */
@@ -794,15 +812,15 @@
 /* 'Messages' is a title (title case); used at the top of the message list screen. */
 "title_Messages" = "ຂໍ້ຄວາມ";
 /* 'Personal Contact' is a title (title case); used at the top of a menu when choosing to alter the users' contact: Edit, Create New, or Use Another. */
-"title_MyIdentity" = "ຕິດຕໍ່ສ່ວນຕົວ";
+"title_MyIdentity" = "ຕິດຕໍ່ບຸກຄົນ";
 /* 'SafeSlinger Message Available' is a title (title case); used as the title of an incoming message in the notification window. */
-"title_NotifyFileAvailable" = "SafeSlinger ສານທີ່ມີຢູ່";
+"title_NotifyFileAvailable" = "SafeSlinger ຂໍ້ຄວາມທີ່ມີຢູ່";
 /* '%d SafeSlinger Messages Available' is a title (title case); used as the title of multiple incoming messages in the notification window. iOS-only. */
-"title_NotifyMulFileAvailable" = "%d ຂໍ້ SafeSlinger ມີ";
+"title_NotifyMulFileAvailable" = "%d ຂໍ້ SafeSlinger ທີ່ມີຢູ່";
 /* 'Passphrase' is a title (title case); used at the top of the passphrase screen where user will login. */
-"title_passphrase" = "Passphrase";
+"title_passphrase" = "ລະຫັດຜ່ານ";
 /* 'Photo Album' is a menu option (title case); used in the Select File Option menu to select a picture from the photo album on iOS. */
-"title_photoalbum" = "ເວັບບອດ";
+"title_photoalbum" = "Photo Album";
 /* 'Photo Library' is a menu option (title case); used in the Select File Option menu to create a picture from the photo library on iOS. */
 "title_photolibary" = "ຫໍສະຫມຸດຮູບພາບ";
 /* 'Recipients' is a title (title case); used at the top of the recipient list screen. */
@@ -810,17 +828,17 @@
 /* 'Question' is a title (title case); used at the top question yes/no dialog. */
 "title_Question" = "ຄໍາຖາມ";
 /* 'Recipient Detail' is a title (title case); used at the top of the dialog when viewing recipient/key details. */
-"title_RecipientDetail" = "ລາຍລະອຽດຜູ້ຮັບ";
+"title_RecipientDetail" = "ຂໍ້ມູນຜູ້ຮັບ";
 /* 'End Exchange' is a title (title case); used at the top of the import contacts screen at the end of the exchange protocol. */
-"title_save" = "Exchange ສຸດທ້າຍ";
+"title_save" = "ການແລກປ່ຽນສຸດທ້າຍ";
 /* 'Save File As' is a title (title case); used at the top of the File Manager when saving a file on Android. */
-"title_SaveFileAs" = "ຊ່ວຍປະຢັດເອກະສານໃນຖານະເປັນ";
+"title_SaveFileAs" = "ບັນທຶກໄຟເປັນ";
 /* 'Secure Introduction' is a title (title case); used at the top of the secure introduction composition screen. */
 "title_SecureIntroduction" = "ການນໍາສະເຫນີທີ່ປອດໄພ";
 /* 'Secure Introduction Invitation!' is a title (title case); used at the top of the confirmation dialog when receiving a secure introduction. */
-"title_SecureIntroductionInvite" = "ຮັບປະກັນການເຊື້ອເຊີນການນໍາສະເຫນີ!";
+"title_SecureIntroductionInvite" = "ຮັບປະກັນການນໍາສະເຫນີເຊີນ!";
 /* 'Sending Options:' is a title (title case); used to denote the dialog for user to pickup sender source options. */
-"title_SelectSource" = "ການສົ່ງທາງເລືອກ:";
+"title_SelectSource" = "ການສົ່ງ Options:";
 /* 'Send' is a title (title case); used at the top of compose message screen. */
 "title_SendFile" = "ສົ່ງ";
 /* 'Sharing Folder' is a menu option (title case); used in the Select File Option menu to select a file from the sharing folder on iOS. */
@@ -828,7 +846,7 @@
 /* 'How many users in the exchange?' is a title (title case); used at the top of the group size selection screen. */
 "title_size" = "ວິທີການຈໍານວນຫຼາຍຜູ້ຊົມໃຊ້ໃນການແລກປ່ຽນແນວໃດ?";
 /* 'Sound Recorder' is a menu option (title case); used in the Select File Option menu to create a voice recording on iOS. */
-"title_soundrecoder" = "ບັນທຶກສຽງ";
+"title_soundrecoder" = "ການບັນທຶກສຽງ";
 /* 'SafeSlinger Invitation' is a title (title case); used as the Subject field of an email or text message sent by the Share Application menu option. */
 "title_TextInviteMsg" = "ເຊີນ SafeSlinger";
 /* 'Threads' is a title (title case); used at the top of the thread list screen. */
@@ -836,6 +854,6 @@
 /* 'Grouping' is a title (title case); used at the top of the entry screen for the lowest common number. */
 "title_userid" = "ກຸ່ມ";
 /* 'Verify' is a title (title case); used at the top of the word phrase verification screen. */
-"title_verify" = "ຢືນຢັນ";
+"title_verify" = "ກວດສອບ";
 /* 'Warning' is a title (title case); used at the top of the warning dialog. */
 "title_Warn" = "ການເຕືອນໄພ";
