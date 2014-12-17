@@ -23,66 +23,68 @@
 */
 
 /* 'Add a Sling Keys contact invitation via...' is an action title (sentence case, ellipsis); this title is used during Add Contact Invitation in a dialog of message choices, which can send an installation URL for SafeSlinger along with instructions. */
-"action_NewUserRequest" = "Tāpiri i te whakapā i te aniraa te kotaha Kī mā...";
+"action_NewUserRequest" = "Tāpiri i te hoapā fakaafe kotaha Keys mā...";
 
 /* 'SafeSlinger' is an application name (title case); used for home screen icons, at the top of many screens, and many other places in the application. */
 "app_name" = "SafeSlinger";
 
 /* 'Backup is disabled. Do you want to adjust backup settings and keep this reminder?' is a question message (sentence case, question mark); used to warn when the backup is off to confirm we should keep reminding the user. Used with Forget and Remind buttons. */
-"ask_BackupDisabledRemindLater" = "Ko te monokia Pūrua. E hiahia ana koe ki te whakarite tautuhinga te tārua me te pupuri i tēnei whakamaumahara?";
+"ask_BackupDisabledRemindLater" = "Ko te monokia te tārua. E hiahia ana koe ki te whakarite i ngā tautuhinga tārua, me te kia mau ki tenei whakamaumahara?";
 /* '%s has a more recent device or key, are you sure you want to use this older one?' is a question message (sentence case, question mark); is a confirmation question that occurs when the user selected a recipient with more recent information in the database. */
-"ask_ConfirmUseOlderDeviceOrKey" = "%@ He pūrere atu tata kī ranei, ko koutou tino hiahia ana koe ki te whakamahi i tenei tuakana kotahi?";
+"ask_ConfirmUseOlderDeviceOrKey" = "%@ he pūrere atu tata kī ranei, ko koe tino hiahia ana koe ki te whakamahi i tēnei paari kotahi?";
 /* 'File name %s already exists. Overwrite?' is a question message (sentence case, question mark); is a question that occurs when the user attempts to save a file with the same name as an existing file in the same location. %s = the file name of the attachment. */
-"ask_FileExistsOverwrite" = "Kei te tīariari kē te ingoa kōnae %@. Tuhirua?";
+"ask_FileExistsOverwrite" = "Kei te tīariari kē te ingoa Kōnae %@. Tuhirua?";
 /* 'Without a Google Account you will only be able to send, NOT receive messages. Do you want to add a Google account?' is a question message (sentence case, question mark); used to warn when a Google account has not been setup, if the user intends to receive messages. Android-only. */
-"ask_GoogleAccountToReceiveMsgs" = "Te kahore a Pūkete Google anake ka taea e ki te tuku, NOT riro ia karere ki a koutou. E hiahia ana koe ki te tāpiri i tētahi pūkete Google?";
+"ask_GoogleAccountToReceiveMsgs" = "Te kore te Pūkete Google anake ka taea ki te tonoa, NOT whiwhi karere ki a koutou. E hiahia ana koe ki te tāpiri i te pūkete Google?";
 /* 'Quit? Are you sure?' is a question message (sentence case, question mark); is a confirmation question that occurs when the user chooses to end the exchange protocol prematurely. */
-"ask_QuitConfirmation" = "Waiho? Kei te tino?";
+"ask_QuitConfirmation" = "Quit? Kei te tino koe?";
 /* 'We'd like your help improving SafeSlinger. Would you like to automatically send any errors to us?' is a question message (sentence case, question mark); is a question that occurs when the user encounters an unhandled exception and are asked if they want to upload this error log and any future error logs. */
-"ask_SendErrorData" = "Te hinaaro nei tatou i to koutou awhina whakapai ake SafeSlinger. E hiahia ana koe ki te tuku aunoa tetahi hē ki a tatou?";
+"ask_SendErrorData" = "Hiahia ana matou to koutou tauturu te whakapai ake SafeSlinger. E hiahia ana koe ki te tuku aunoa tetahi hapa ki a matou?";
 
 /* 'Accept' is a button (title case); the Accept button is paired with the Refuse button to indicate user acceptance of a secure introduction. */
 "btn_Accept" = "Manakohia";
 /* 'Begin Exchange' is a button (title case); the Begin Exchange button is used to begin the SafeSlinger exchange protocol. */
-"btn_BeginExchangeProximity" = "Tīmataria te Exchange";
+"btn_BeginExchangeProximity" = "Kamata Exchange";
 /* 'Cancel' is a button (title case); the Cancel button is used to indicate the user wishes to exit the current screen without saving data. For non-Android use only, since Android uses the Back hardware button instead. */
 "btn_Cancel" = "Whakakore";
 /* 'Close' is a button (title case); the Close button is used to allow the user to dismiss a dialog. */
 "btn_Close" = "Katia";
 /* 'Continue' is a button (title case); the Continue button is used to remind the user that there is another step to complete. */
-"btn_Continue" = "Tonu";
+"btn_Continue" = "Haere tonu";
 /* 'Create New Key' is a button (title case); the Create New Key button is paired with the Cancel button, and is used to affirm the creation of a new key and passphrase. */
 "btn_CreateNewKey" = "Waihanga Key New";
 /* 'Delete Keys' is a button (title case); the Create New Key button is paired with the Cancel button, and is used to affirm the deletion of more recent keys. */
 "btn_DeleteKeys" = "Mukua Kī";
 /* 'Discard' is a button (title case); the Discard button is used to indicate the user wishes to exit the current screen without saving data, such as a voice memo. For non-Android use only, since Android uses the Back hardware button instead. */
-"btn_discard" = "Me tūraki te";
+"btn_discard" = "Tūraki";
 /* 'Done' is a button (title case); the Done button is used to allow the user to complete a current multi-step process. */
-"btn_Done" = "Mea ai";
+"btn_Done" = "Mahia";
+/* 'Edit' is a button (title case); the Edit button is used to show a screen where the user can edit a contact. */
+"btn_Edit" = "Whakatika";
 /* 'Exit' is a button (title case); the Exit button is used to close the application. For non-Android use only, since Android uses the Back hardware button instead. */
 "btn_Exit" = "Waiho";
 /* 'Import' is a button (title case); the Import button is used to import a set of contacts on after an unsuccessful exchange protocol has finished. */
 "btn_Import" = "Kawemai";
 /* 'Introduce' is a button (title case); the Introduce button is used to send a secure introduction to the two users selected on the Secure Introduction screen. */
-"btn_Introduce" = "Faaite";
+"btn_Introduce" = "Fakafe'iloaki";
 /* 'Next' is a button (title case); the Next button is used to remind the user that there is another step to complete. */
 "btn_Match" = "Next";
 /* 'No' is a button (title case); the No button is paired with the Yes button, and is used to indicate a negative answer to a Yes/No question. */
 "btn_No" = "No";
 /* 'No Match' is a button (title case); the No Match button is used if the user cannot find the same batting screen on another user's device during the exchange critical care. */
-"btn_NoMatch" = "No Whakaōrite";
+"btn_NoMatch" = "No Match";
 /* 'Not Now' is a button (title case); the Not Now button is used as a negative button to decline an offered service or permission. */
-"btn_NotNow" = "E kore Na";
+"btn_NotNow" = "Kāore i Na";
 /* 'Forget' is a button (title case); the Forget button is paired with the Remind button and is used to indicate the user wishes to dismiss the current reminder of a potential error state, such as having backup or notification settings turned off, and not be reminded again. */
 "btn_NotRemind" = "Wareware";
 /* 'OK' is a button (title case); the OK button is affirmation button used to indicate the user accepts the data entered on the current screen. */
 "btn_OK" = "OK";
 /* 'Refuse' is a button (title case); the Refuse button is paired with the Accept button to indicate user refusal of a secure introduction. */
-"btn_Refuse" = "Te kore";
+"btn_Refuse" = "Paru";
 /* 'Remind' is a button (title case); the Remind button is paired with the Forget button and is used to indicate the user wishes to dismiss the current reminder of a potential error state, such as having backup or notification settings turned off, and does want to be reminded again later. */
-"btn_Remind" = "A faahaamana'oi te";
+"btn_Remind" = "Fakamanatu ki";
 /* 'Save' is a button (title case); the Save button is used to indicate the data in question should be saved and persisted. */
-"btn_Save" = "Save";
+"btn_Save" = "Tiaki";
 /* 'Add Attachment' is a button (title case); the Add Attachment button is used on the Compose screen to allow the user to select the source of an attachment to the current message. */
 "btn_SelectFile" = "Tāpiri Āpitihanga";
 /* 'Send' is a button (title case); the Send button will secure the current text message and attachment, if any, and send the message to the selected recipient. */
@@ -131,78 +133,78 @@
 /* '%d users' is a choice (sentence case); used to describe the number of users currently attempting to exchange keys. %d = number of users in the exchange. */
 "choice_NumUsers" = "%d kaiwhakamahi";
 /* 'Save Directory' is a choice (sentence case); used when the user chooses to change the directory of the attachment before saving. */
-"choice_SaveDirectory" = "Whakaorangia Whaiaronga";
+"choice_SaveDirectory" = "Tiaki Whaiaronga";
 /* 'Save file' is a choice (sentence case); used when the user chooses to change the filename of the attachment before saving. */
 "choice_SaveFile" = "Whakaorangia kōnae";
 /* 'Up' is a choice (sentence case); used in the File Manager dialog to navigate up to a parent directory. */
 "choice_Up" = "Up";
 
 /* 'Some members are using an older version; all members must upgrade to the newest version.' is an error message (sentence case, period); used to warn when some members of the key exchange protocol are using less than the minimum version. Used for backward-compatibility in some cases. */
-"error_AllMembersMustUpgrade" = "Te tahi mau melo e te whakamahi i te momo putanga tawhito; Me whakahōu te i te mau melo katoa ki te putanga hōu.";
+"error_AllMembersMustUpgrade" = "Ētahi o ngā mema kei te whakamahi i te putanga tawhito; Me whakahōu te i te mau melo katoa ki te putanga hōu.";
 /* 'All members must upgrade, some are using older key formats.' is an error message (sentence case, period); used to warn when the key format is incorrect after an exchange and perhaps used an old format. */
-"error_AllMembersMustUpgradeBadKeyFormat" = "Me whakahōu te mau melo o te katoa, etahi kei te whakamahi ngā matua pakeke.";
+"error_AllMembersMustUpgradeBadKeyFormat" = "Me whakahōu te mau melo o te katoa, etahi kei te whakamahi i ngā hōputu matua pakeke.";
 /* 'All members must upgrade, some are using older push registration formats.' is an error message (sentence case, period); used to warn when the push registration format is incorrect or corrupted. */
-"error_AllMembersMustUpgradeBadPushToken" = "Me whakahōu te mau melo o te katoa, etahi kei te whakamahi pakeke ngā whakatakotoranga rēhita pana.";
+"error_AllMembersMustUpgradeBadPushToken" = "Me whakahōu te mau melo o te katoa, etahi kei te whakamahi i pakeke hōputu rēhita pana.";
 /* 'Audio player decoding error.' is an error message (sentence case, period); used to warn when attempting to play an audio message fails to decode properly. iOS-only. */
-"error_AudioPlayerDecodeError" = "Hapa kaitākaro wetewaehere Ororongo.";
+"error_AudioPlayerDecodeError" = "Hapa kaitākaro wetemuna Audio.";
 /* 'Cannot play the recording.' is an error message (sentence case, period); used to warn when the voice recording received cannot be played. iOS-only. */
 "error_AudioPlayerError" = "Kāore e taea te tākaro i te tuhi.";
 /* 'Audio recorder encoding error.' is an error message (sentence case, period); used to warn when attempting to record an audio message fails to encode properly. iOS-only. */
-"error_AudioRecorderEncodeError" = "Hapa kaiwhakamahara waehere Ororongo.";
+"error_AudioRecorderEncodeError" = "Hapa kaiwhakamahara whakawaehere Audio.";
 /* 'Microphone permission is required to record a secure voice message. Tap the %s button for SafeSlinger Microphone permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Microphone permission. iOS-only. */
-"error_AudioRecorderPermissionError" = "Hiahiatia whakaaetanga hopuoro kua ki te tuhi i tētahi karere reo haumaru. Paoa i te pātene %@ mō ngā kōrero whakaaetanga SafeSlinger Uruoro.";
+"error_AudioRecorderPermissionError" = "Hiahiatia whakaaetanga hopuoro ki te tuhi i tētahi karere reo haumaru. Tap te pātene %@ mō ngā kōrero whakaaetanga SafeSlinger Uruoro.";
 /* 'No backup to restore.' is an error message (sentence case, period); used to warn at application setup, when there is no pre-existing backup to restore and warn the user that any previous keys have not been restored. */
-"error_BackupNotFound" = "No te tārua ki te whakahokia mai.";
+"error_BackupNotFound" = "No tārua ki te whakahokia mai.";
 /* 'Device does not support backup restore.' is an error message (sentence case, period); used to warn when the device hardware does not support restoration from backup. */
-"error_BackupNotSupportedDevice" = "E kore e tautoko i te Pūrere tārua, whakaora.";
+"error_BackupNotSupportedDevice" = "E kore e tautoko i te Pūrere tārua whakahokia mai.";
 /* 'Due to a bug in Android 4.1, you will have to uninstall and reinstall SafeSlinger.' is an error message (sentence case, period); used to warn when unable to load native libraries due to a Google Play copy-protection bug, which can corrupt installations for users upgrading to Android 4.1. Android-only. */
 "error_BadCopyProtectUpgrade" = "Nā ki te bug i Android 4.1, ka whai koe ki te tango me te tāuta SafeSlinger.";
 /* 'A Google account is required. Please open the account manager and add a Google account.' is an error message (sentence case, period); used to warn during push registration: There is no Google account on the phone. The application should ask the user to open the account manager and add a Google account. Fix on the device side. Android-only. */
-"error_C2DMRegAccountMissing" = "Hiahiatia he pūkete Google te. Tēnā whakatuwhera i te kaiwhakahaere pūkete, me te tāpiri i tētahi pūkete Google.";
+"error_C2DMRegAccountMissing" = "Hiahiatia tētahi pūkete Google te. Koa whakatuwhera i te kaiwhakahaere pūkete, me te tāpiri i te pūkete Google.";
 /* 'Registration not authenticated, please retry manually later.' is an error message (sentence case, period); used to warn during push registration: Bad password. The application should ask the user to enter his/her password, and let user retry manually later. Fix on the device side. Android-only. */
-"error_C2DMRegAuthenticationFailed" = "Rehitatanga kahore whakamotuhēhē, tēnā ngana anō ā-ringa i muri mai.";
+"error_C2DMRegAuthenticationFailed" = "Rehita kore whakamotuhēhē, tēnā ngana anō ā muri.";
 /* 'Registration is not available for this version, please check for an updated version.' is an error message (sentence case, period); used to warn during push registration: The sender account is not recognized. Android-only. */
-"error_C2DMRegInvalidSender" = "E kore te mea e wātea ana mō tēnei putanga Rehita, tēnā tirohia hoki te putanga whakahoutia.";
+"error_C2DMRegInvalidSender" = "E kore te mea e wātea ana hoki tenei putanga Rehita, tēnā tirohia hoki te putanga whakahoutia.";
 /* 'Incorrect device registration with Google. This device does not currently support push messaging.' is an error message (sentence case, period); used to warn during push registration: Incorrect phone registration with Google. This phone doesn't currently support C2DM. Android-only. */
-"error_C2DMRegPhoneRegistrationError" = "Rēhitatanga pūrere hē ki a Google. E kore e tautoko i tēnei wā tēnei pūrere pana karere.";
+"error_C2DMRegPhoneRegistrationError" = "Rēhitatanga pūrere hē ki a Google. E kore e tautoko i tēnei wā i tēnei pūrere pana karere.";
 /* 'Push registration service not available, scheduling retry in %d seconds.' is an error message (sentence case, period); used to warn during push registration: The device can't read the response, or there was a 500/503 from the server that can be retried later. The application should use exponential back off and retry. %d = the current number of seconds until the next push registration attempt. Android-only. */
-"error_C2DMRegServiceNotAvailable" = "Ratonga rēhita Pēhi e kore e wātea ana, te tabularaa ngana anō i te %d hēkona.";
+"error_C2DMRegServiceNotAvailable" = "Ratonga rēhita pana e kore e wātea, te tabularaa ngana anō i te %d hēkona.";
 /* 'Too many applications are registered for Push. Please uninstall some other applications and retry.' is an error message (sentence case, period); used to warn during push registration: The user has too many applications registered. The application should tell the user to uninstall some other applications, let user retry manually. Fix on the device side. Android-only. */
-"error_C2DMRegTooManyRegistrations" = "Kua rēhitatia maha rawa tono mō te Pēhi. Koa wetetāuta etahi atu taupānga, me te ngana anō.";
+"error_C2DMRegTooManyRegistrations" = "E rēhita maha rawa tono mō te Pana. Koa te tango i te tahi atu taupānga, me te ngana anō.";
 /* 'Cannot send an empty attachment.' is an error message (sentence case, period); used to warn when use attempts to attach an empty file to the message. */
-"error_CannotSendEmptyFile" = "Kāore e taea te tukua e tētahi āpitihanga kau.";
+"error_CannotSendEmptyFile" = "Kāore e taea te unga i te āpitihanga kau.";
 /* 'Cannot send attachments greater than %d bytes in size.' is an error message (sentence case, period); used to warn when the message and attachment (if any) exceed the current quota limits for the App Engine service we use. %d the maximum limit in bytes of the entire message plus attachments that the App Engine service will allow us to upload. */
-"error_CannotSendFilesOver" = "Kāore e taea te tuku āpitihanga nui atu i %d bytes i roto i te rahi.";
+"error_CannotSendFilesOver" = "E kore e taea te tuku āpitihanga nui atu %d bytes i roto i te rahi.";
 /* 'Cannot send a null attachment.' is an error message (sentence case, period); used to warn when use attempts to attach an empty file to the message. */
-"error_CannotSendNullFile" = "Kāore e taea te tukua e te āpitihanga korenga.";
+"error_CannotSendNullFile" = "E kore e taea te tuku i te āpitihanga korenga.";
 /* 'Contact creation failed.' is an error message (sentence case, period); used to warn when failing to insert new contact data. */
-"error_contactCreationFailure" = "I rahua te hanganga Whakapā.";
+"error_contactCreationFailure" = "I rahua te mea hanga Whakapā.";
 /* 'Contact insert failed.' is an error message (sentence case, period); used to warn when failing to insert new contact data. */
 "error_ContactInsertFailed" = "I rahua te whakauru Whakapā.";
 /* 'This contact is missing a name, please edit.' is an error message (sentence case, period); used to warn when the matching contact found on the Setup screen does not have a name. */
-"error_ContactNameMissing" = "Kei te ngaro i te ingoa, whakatika tēnā tenei whakapā.";
+"error_ContactNameMissing" = "Kei te ngaro i te ingoa, whakatika tēnā tenei hoapā.";
 /* 'This contact is missing a name, please reselect.' is an error message (sentence case, period); used to warn when the matching contact found on the Setup screen does not have a name. */
-"error_ContactNameMissing2" = "Kei te ngaro tēnei whakapā he ingoa, tīpako anō tēnā.";
+"error_ContactNameMissing2" = "Kei te ngaro tēnei hoapā he ingoa, tīpako anō tēnā.";
 /* 'Contact update failed.' is an error message (sentence case, period); used to warn when failing to merge contact data after an exchange. */
 "error_ContactUpdateFailed" = "I rahua te whakahou Whakapā.";
 /* 'Internet not available, check your settings.' is an error message (sentence case, period); used to warn when the user attempts to communicate with a server and the device cannot detect a path to the Internet. */
-"error_CorrectYourInternetConnection" = "Internet e kore e wātea ana, tirohia ō tautuhinga.";
+"error_CorrectYourInternetConnection" = "Internet e kore e wātea, tirohia ō tautuhinga.";
 /* 'Could not extract private key.' is an error message (sentence case, period); used to warn when the user is not able to extract the private key from the encrypted private key stored on the device. */
-"error_couldNotExtractPrivateKey" = "Kāore i taea tango kī tūmataiti.";
+"error_couldNotExtractPrivateKey" = "Kāore i taea te tango kī tūmataiti.";
 /* 'Exchange timeout exceeded. Begin the exchange again.' is an error message (sentence case, period); used to warn when users have waited too long, 10 minutes, before completing the exchange protocol. */
-"error_ExchangeProtocolTimeoutExceeded" = "Nui Exchange wāhiki. A haamata ano te utu.";
+"error_ExchangeProtocolTimeoutExceeded" = "Nui Exchange wāhiki. Kamata ano te utu.";
 /* '%s is not supported on %s at this time.' is an error message (sentence case, period); used to warn when a specific capability is not supported by a specific platform. */
-"error_FeatureIsNotSupport" = "E kore e te %@ tautokona ana i runga i %@ i tenei wa.";
+"error_FeatureIsNotSupport" = "E kore te %@ tautokona i runga i %@ i tenei wa.";
 /* 'Unable to save %s.' is an error message (sentence case, period); used to warn when there was disk error attempting to save an attachment to the users' device. %s = the name of the file that failed to save. */
-"error_FileSave" = "Kāore e taea te ki te whakaora %@.";
+"error_FileSave" = "Kāore e taea te whakaora %@.";
 /* 'File storage is not available.' is an error message (sentence case, period); used to warn when attempting to read/write to attachment storage becomes unavailable. */
 "error_FileStorageUnavailable" = "E kore te mea e wātea ana rokiroki Kōnae.";
 /* 'Server HTTP Error: %d' is an error message (sentence case, period); used to warn when the key exchange or messaging servers encountered an error and need to notify the user. %d = the HTTP status line code is case of an error, like 404 (file not found). 500 is common for uncaught Python run-time errors. */
 "error_HttpCode" = "Hapa HTTP Tūmau: %d";
 /* 'Incorrect data found in exchange. Begin the exchange again.' is an error message (sentence case, period); used to warn when some item received from another group member during the key exchange did not hash correctly to the previously committed value. */
-"error_InvalidCommitVerify" = "Kitea raraunga hē i roto i te utu. A haamata ano te utu.";
+"error_InvalidCommitVerify" = "Kitea raraunga hē i roto i te utu. Kamata ano te utu.";
 /* 'Please enter a positive integer.' is an error message (sentence case, period); used to warn when the user attempted to type in a group ID on the Grouping screen that was zero, negative, or empty. */
-"error_InvalidCommonUserId" = "Tomo koa he tōpū pai.";
+"error_InvalidCommonUserId" = "Tomo koa te tau tōpū pai.";
 /* 'A valid contact name is required.' is an error message (sentence case, period); used to warn when the user completes Setup without typing a name, or the name includes 3rd-person words we cannot allow, such as: 'Me', 'Contact', 'Foo',… */
 "error_InvalidContactName" = "He ingoa whakapā tika hiahiatia te.";
 /* 'Bad incoming message format.' is an error message (sentence case, period); used to warn when the incoming message was not formatted properly. */
@@ -210,9 +212,9 @@
 /* 'Bad message format.' is an error message (sentence case, period); used to warn when the outgoing message was not formatted properly. */
 "error_InvalidMsg" = "Hōputu karere kino.";
 /* 'Invalid recipient.' is an error message (sentence case, period); used to warn when the user has not selected 1 recipient to send a message on the Compose Message screen, also when the user has not selected 2 recipients to send introductions to on the Secure Introduction screen. */
-"error_InvalidRecipient" = "Kaiwhiwhi muhu te.";
+"error_InvalidRecipient" = "Kaiwhiwhi muhu.";
 /* 'You have reported a difference in phrases. Begin the exchange again.' is an error message (sentence case, period); used to warn when the user presses the 'No Match' button that they are aborting the protocol for the group and sending a non-match signature to others. */
-"error_LocalGroupCommitDiffer" = "Kua korerotia e koe he rerekētanga i roto i te kīanga. A haamata ano te utu.";
+"error_LocalGroupCommitDiffer" = "Kua korerotia e koe he taa-i roto i ngā kīanga. Kamata ano te utu.";
 /* 'The peer key format is invalid.' is an error message (sentence case, period); used to warn when the public key we used for this recipient does not exist or is improperly formatted. */
 "error_MessageInvalidPeerKeyFormat" = "He muhu te hōputu kī hoa.";
 /* 'Signature verification failed.' is an error message (sentence case, period); used to warn when key used to generate an incoming message signature is not in the key database. */
@@ -220,126 +222,126 @@
 /* 'Passphrases require at least %d characters.' is an error message (sentence case, period); used to warn when a user has setup a passphrase, which does not fit the minimum required length. %d = current requirement is at least 8 characters. */
 "error_minPassphraseRequire" = "Passphrases rapu utu i te iti rawa %d pūāhua.";
 /* 'A minimum of %d members are required to exchange data.' is an error message (sentence case, period); used to warn when attempting to leave the Group Size screen without choosing a group size. %d = the minimum number of users to complete the exchange protocol, 2 usually. */
-"error_MinUsersRequired" = "E hiahiatia ana te iti o te mau melo %d ki te taui raraunga.";
+"error_MinUsersRequired" = "E hiahiatia ana te iti o te %d i te mau melo no te taui i raraunga.";
 /* 'SafeSlinger did not detect NDK support on this device, which is required.' is an error message (sentence case, period); used to warn when device has no Native Development Kit support installed. Android-only. */
-"error_MissingNdk" = "Kihai i SafeSlinger kitea tautoko NDK i runga i tenei whakaaro, e hiahiatia ana e te.";
+"error_MissingNdk" = "Kihai i SafeSlinger kitea tautoko NDK i runga i tenei pūrere, e hiahiatia ana e te.";
 /* 'Unexpected data found in exchange. Begin the exchange again.' is an error message (sentence case, period); used to warn when a user has entered a group size number that is too low during the exchange protocol or possibly a Man-in-The-Middle (MiTM) attack where a malicious outsider attempts to join the group. */
-"error_MoreDataThanUsers" = "Kitea raraunga puta noa i roto i te utu. A haamata ano te utu.";
+"error_MoreDataThanUsers" = "Kitea raraunga ohorere i roto i te utu. Kamata ano te utu.";
 /* 'You are attempting to send multiple items. At this time, SafeSlinger only supports sending one item at a time.' is an error message (sentence case, period); used to warn when the user attempts to select multiple attachments to send when we only allow one attachment for now. */
-"error_MultipleSendNotSupported" = "E ngana ana koe ki te tuku i ngā tūemi maha. I tenei wa, anake te tautoko SafeSlinger te tuku i tetahi take i te wa.";
+"error_MultipleSendNotSupported" = "E ngana ana koe ki te tuku i ngā tūemi maha. I tenei wa, anake te tautoko SafeSlinger te tuku i tetahi take i te wā.";
 /* 'The exchange is missing required data.' is an error message (sentence case, period); used to warn when exchange is missing some parameter or data to complete. */
 "error_NoDataToExchange" = "Kei te ngaro te utu raraunga e hiahiatia ana.";
 /* 'Email account is not setup!' is an error message (sentence case, period); used to warn that a user did not have an email account when he/she tries to send out comments to administrator account. iOS-only. */
-"error_NoEmailAccount" = "E kore he te tatūnga pūkete Īmēra!";
+"error_NoEmailAccount" = "E kore ko te tatūnga pūkete Īmēra!";
 /* 'No passphrase entered.' is an error message (sentence case, period); used to warn when a user generates or changes a passphrase and they have entered a blank password, which is not acceptable. */
 "error_noPassPhrase" = "Tomo No kīangahipa.";
 /* 'You must select one of the phrases before proceeding.' is an error message (sentence case, period); used to warn when the user attempts to proceed past the word phrase Verify screen during the exchange protocol and they have not selected, which of the three phrases match with the other users'. */
-"error_NoWordListSelected" = "Me tīpako e koe tetahi o nga kīanga i mua i puta.";
+"error_NoWordListSelected" = "Me tīpako e koe tetahi o nga kīanga i mua i haere.";
 /* 'Someone reported a difference in phrases. Begin the exchange again.' is an error message (sentence case, period); used to warn when at least one other member of the group during the exchange protocol pressed the 'No Match' button. */
-"error_OtherGroupCommitDiffer" = "Tetahi korerotia te rerekētanga i roto i te kīanga. A haamata ano te utu.";
+"error_OtherGroupCommitDiffer" = "Tetahi korerotia te taa-i roto i ngā kīanga. Kamata ano te utu.";
 /* 'Memory is too low to complete this operation.' is an error message (sentence case, period); used to warn when a request for memory is made that cannot be satisfied using the available platform resources. Such a request may be made by both the running application or by an internal function of the VM. */
-"error_OutOfMemoryError" = "He iti rawa Memory ki te whakaoti i tēnei mahi.";
+"error_OutOfMemoryError" = "Ko te iti rawa Memory ki te whakaoti i tēnei mahi.";
 /* 'Passphrases do not match.' is an error message (sentence case, period); used to warn when the user creates or changes their passphrase and the confirmation second entry did not match the first. */
 "error_passPhrasesDoNotMatch" = "E kore e ōrite Passphrases.";
 /* 'You have exceeded the message quota for that recipient. Please retry later.' is an error message (sentence case, period): used to warn when sending messages to device and the message quota for all applications on the device is full. */
-"error_PushMsgDeviceQuotaExceeded" = "Kua nui koe i te motunga karere mo taua kaiwhiwhi. Ngana anō koa i muri.";
+"error_PushMsgDeviceQuotaExceeded" = "Kua nui koe te motunga karere mo taua kaiwhiwhi. Koa ngana anō ā muri.";
 /* 'That recipient has a missing or bad push registration. You should stop sending messages to this device.' is an error message (sentence case, period); used to warn when sending messages to device and the recipient registration was never registered with the push service. */
-"error_PushMsgInvalidRegistration" = "E kaiwhiwhi he rēhita pana ngaro, ahakoa kino. Kia mutu e koe te tuku karere ki tenei pūrere.";
+"error_PushMsgInvalidRegistration" = "Taua kaiwhiwhi he rēhita pana ngaro ranei, he kino. Kia mutu koe te tuku karere ki tenei pūrere.";
 /* 'Message expired.' is an error message (sentence case, period); used to warn when getting messages, the message id cannot be found and it has likely been scrubbed from the server. */
-"error_PushMsgMessageNotFound" = "Hemo te kupu.";
+"error_PushMsgMessageNotFound" = "Hemo Karere.";
 /* 'The message is too big. Reduce the size of the message.' is an error message (sentence case, period); used to warn when sending messages to device and the initial push exceeds 1024 bytes. Unlikely, since the initial push only contains the message hash identifier, which is 32 bytes plus a bit more of meta data. */
-"error_PushMsgMessageTooBig" = "Ko nui rawa te karere. Whakaititia te rahi o te karere.";
+"error_PushMsgMessageTooBig" = "Ko nui rawa te karere. Whakaitia te rahi o te karere.";
 /* 'That recipient's push registration is no longer valid. The recipient may have uninstalled SafeSlinger or turned off notifications. You should stop sending messages to this device.' is an error message (sentence case, period); used to warn when sending messages to device and the recipient is no longer registered. */
-"error_PushMsgNotRegistered" = "Rēhitatanga pana o taua kaiwhiwhi he kore e whaimana. Ko te kaiwhiwhi kia kua wetetāuta SafeSlinger rānei, tahuri atu whakamōhiotanga. Kia mutu e koe te tuku karere ki tenei pūrere.";
+"error_PushMsgNotRegistered" = "Rēhitatanga pana o taua kaiwhiwhi he kore whaimana. Ko te kaiwhiwhi kia kua wetetāuta SafeSlinger ranei tahuri atu whakamōhiotanga. Kia mutu koe te tuku karere ki tenei pūrere.";
 /* 'There was an error communicating with the push notification service.' is an error message (sentence case, period); used to warn when sending messages to device and the push service replies incorrect HTTP status code. */
-"error_PushMsgNotSucceed" = "I hapa te kōrero ki te ratonga pana whakamōhio.";
+"error_PushMsgNotSucceed" = "He he hapa kōrero ki te mahi pana whakamōhiotanga.";
 /* 'You have exceeded the message quota for this device. Please retry later.' is an error message (sentence case, period); used to warn when sending messages to device and the message quota for SafeSlinger on the device is full. */
-"error_PushMsgQuotaExceeded" = "Kua nui koe i te motunga karere mo tenei pūrere. Ngana anō koa i muri.";
+"error_PushMsgQuotaExceeded" = "Kua nui koe te motunga karere mo tenei pūrere. Koa ngana anō ā muri.";
 /* 'Notification service is not available this time. Please try to send the message later.' is an error message (sentence case, period); used to warn when sending messages to device and the push service has no response for push messages. */
-"error_PushMsgServiceFail" = "E kore te mea e wātea ana mahi whakamōhiotanga tenei wa. Koa ngana ki te tuku i te karere i muri mai.";
+"error_PushMsgServiceFail" = "E kore te mea e wātea ana mahi whakamōhiotanga tenei wa. Koa ngana ki te tuku i te karere i muri.";
 /* 'Cannot prepare the audio recorder.' is an error message (sentence case, period); used to warn when the audio recorder is unavailable from the system to record an audio message. iOS-only. */
 "error_RecoderError" = "Kāore e taea te faaineine i te kaiwhakamahara ororongo.";
 /* 'To start, Sling Keys with another user at the same time.' is an error message (sentence case, period); used to remind in a notification message that the user should exchange keys with at least one other user to make the app useful to them. */
 "error_ReminderToSlingKeysToUseApp" = "Hei tīmata, kotaha Kī ki tetahi kaiwhakamahi i te wa ano.";
 /* 'You need an attachment or a text message to send.' is an error message (sentence case, period); used to warn when the user has not attached a file or typed any text message to send to the recipient after using the 'Send' button. */
-"error_selectDataToSend" = "Me koe i te āpitihanga he karere kuputuhi ki te tuku ranei.";
+"error_selectDataToSend" = "Me koe āpitihanga he karere kuputuhi ki te unga ranei.";
 /* 'Server Message: %s' is an error message (sentence case, period); used to warn when the server has an error message to send back to the client. %s = an English (non-localized) error message sent by our App Engine server code. */
-"error_ServerAppMessage" = "Message Tūmau: %@";
+"error_ServerAppMessage" = "Karere Tūmau: %@";
 /* 'No response from server.' is an error message (sentence case, period); used to warn when the server timeout occurs, usually after 30 seconds and did not respond to the client. */
 "error_ServerNotResponding" = "No whakautu i te tūmau.";
 /* 'Cannot remove the shared file.' is an error message (sentence case, period); used to warn when the shared file cannot be deleted. iOS-only. */
-"error_ShareFileDelError" = "Kāore e taea te tango i te kōnae ngā.";
+"error_ShareFileDelError" = "Kāore e taea te tango i te kōnae tiri.";
 /* 'Timeout waiting for some group members to add data.' is an error message (sentence case, period); used to warn during the key exchange protocol when at least one of the members of the group has not submitted their data to the server or client itself is not able to retrieve the data within the timeout window, currently 2 minutes. */
-"error_TimeoutWaitingForAllMembers" = "Wāhiki e tatari ana ki te tahi mau melo o te rōpū tāpiri i raraunga.";
+"error_TimeoutWaitingForAllMembers" = "Wāhiki tatari hoki ki te tahi mau melo o te rōpū tāpiri raraunga.";
 /* 'Unable to match public key to private key in crypto provider.' is an error message (sentence case, period); used to warn when the public encryption key used in the message received is not currently the same private key used, the user should probably Sling Keys to update again. */
-"error_UnableFindPubKey" = "Kāore e taea te ki te ōrite te kī tūmatanui ki te kī tūmataiti i roto i te crypto kaiwhakarato.";
+"error_UnableFindPubKey" = "Kāore e taea te ōrite kī tūmatanui ki te kī tūmataiti i roto i te Crypto kaiwhakarato.";
 /* 'Unable to save to the message database.' is an error message (sentence case, period); used to warn when there is database error inserting a new message. */
-"error_UnableToSaveMessageInDB" = "Kāore e taea te ki te whakaora ki te pātengi raraunga karere.";
+"error_UnableToSaveMessageInDB" = "Kāore e taea te whakaora ki te pātengi raraunga karere.";
 /* 'Unable to save to the recipient database.' is an error message (sentence case, period); used to warn when there is database error inserting a new recipient key/registration . */
-"error_UnableToSaveRecipientInDB" = "Kāore e taea te ki te whakaora ki te pātengi raraunga kaiwhiwhi.";
+"error_UnableToSaveRecipientInDB" = "Kāore e taea te whakaora ki te pātengi raraunga kaiwhiwhi.";
 /* 'Unable to update the message database.' is an error message (sentence case, period); used to warn when there is database error updating a message. */
-"error_UnableToUpdateMessageInDB" = "Kāore e taea te ki te whakahou i te pātengi raraunga karere.";
+"error_UnableToUpdateMessageInDB" = "Kāore e taea te whakahōu i te pātengi raraunga karere.";
 /* 'Unable to update the recipient database.' is an error message (sentence case, period); used to warn when there is database error updating a recipient key/registration . */
-"error_UnableToUpdateRecipientInDB" = "Kāore e taea te ki te whakahou i te pātengi raraunga kaiwhiwhi.";
+"error_UnableToUpdateRecipientInDB" = "Kāore e taea te whakahōu i te pātengi raraunga kaiwhiwhi.";
 /* 'SafeSlinger error, please restart.' is an error message (sentence case, period); used to warn when an unhandled exception or application fault has occurred. */
 "error_UncaughtExceptionOccured" = "Hapa SafeSlinger, tēnā tīmata anō.";
 /* 'Contact data was formatted incorrectly.' is an error message (sentence case, period); used to warn when the vCard format used to exchange contact fields during key exchange are improperly formatted. */
-"error_VcardParseFailure" = "Raraunga Whakapā i te hōputu hē.";
+"error_VcardParseFailure" = "Raraunga Whakapā i whakahōputu hē te.";
 /* 'User canceled server request.' is an error message (sentence case, period); used to warn when the user exited the key exchange protocol or messaging transmission before it was finished. */
 "error_WebCancelledByUser" = "Whakakorea e te kaiwhakamahi tono tūmau.";
 
 /* 'Use this screen to set your name to exchange with others, and a passphrase to protect your data. Tap the Done button when finished.' is a help message (sentence case, period); used via Help button on the Setup screen to describe in more detail what the Setup screen does. */
-"help_find" = "Whakamahia tēnei mata ki te whakatakoto ia koutou ingoa ki te whakawhiti ki ētahi atu, me te kīangahipa ki te tiaki i ō raraunga. Paoa i te pātene meatia, ka mutu.";
+"help_find" = "Whakamahia tēnei mata ki te whakatakotoria tou ingoa ki te whakawhiti ki ētahi atu, me te kīangahipa ki te tiaki i to koutou raraunga. Tap te pātene meatia, ka mutu.";
 /* 'To exchange identity data, ensure all users are nearby or on the phone. The Begin Exchange button will exchange only the checked contact data.' is a help message (sentence case, period); used via Help button on the Begin Exchange screen and also the key exchange walkthrough tutorial to describe in more detail what the Begin Exchange screen does. */
-"help_home" = "Hei taui raraunga tuakiri, te whakarite kei tata ranei ki runga ki te waea ngā kaiwhakamahi katoa. Ka taui te pātene haamata Exchange anake nga raraunga whakapā takina.";
+"help_home" = "Hei whakawhiti raraunga tuakiri, te whakarite kei tata ranei i runga i te waea kaiwhakamahi katoa. Ka whakawhiti te pātene Kamata Exchange anake nga raraunga whakapā i takina.";
 /* 'You may also change personal data about your identity on this screen by tapping on the button with your name. This will display a menu allowing you to Edit your contact, Create New contact, or Use Another contact.' is a help message (sentence case, period); Additional help text, which is appended to the Help button text on the Compose and Begin Exchange screens. */
-"help_identity_menu" = "Kia hoki koe te huri i ngā raraunga whaiaro e pā ana ki tō tuakiri i runga i tenei mata mā te mirimiri i runga i te pātene ki tou ingoa. Tenei ka whakaatu i te tahua tuku ki a koutou Whakatikaina tou whakapā, Waihanga whakapā New, ranei Whakamahia tētahi atu whakapā.";
+"help_identity_menu" = "Kia hoki e koe te huri i ngā raraunga whaiaro e pā ana ki to koutou tuakiri i runga i tenei mata na roto i te mirimiri i runga i te pātene, me tou ingoa. Tenei ka whakaatu i te tahua tuku ki a koutou Whakatikaina tou whakapā, Waihanga whakapā New, ranei Whakamahia tētahi atu whakapā.";
 /* 'This screen displays all past messages, and attachments that are still available for download.' is a help message (sentence case, period); used via Help button on the Messages list screen to describe in more detail what the Messages list screen does. */
-"help_Messages" = "Whakaatu ana tēnei mata karere mua katoa, me te tāpiritanga e wātea ana mō te download he tonu.";
+"help_Messages" = "Ka whakaatu tēnei mata karere mua katoa, me tāpiritanga e wātea ana mō te download e tonu.";
 /* 'Use this screen to login to the application with your passphrase. If you have forgotten your passphrase, you may generate a new key protected by a new passphrase by tapping the Forgot Passphrase? button. Tap the user name to switch between multiple keys.' is a help message (sentence case, period); used via Help button on the Passphrase screen to describe in more detail what the Passphrase screen does. */
-"help_passphrase" = "Whakamahia tēnei mata ki te takiuru ki te tono ki to koutou kīangahipa. Ki te mea kua wareware ki a koe tou kīangahipa, kia whakaputa e koe te kī hou tiakina e te kīangahipa hou mā te mirimiri i te Kīangahipa wareware? pātene. Paoa i te ingoa kaiwhakamahi ki te whakawhiti i waenganui i te mau taviri maha.";
+"help_passphrase" = "Whakamahia tēnei mata ki te takiuru ki te tono ki to koutou kīangahipa. Ki te mea kua wareware ki a koe tou kīangahipa, kia whakaputa e koe te kī hou tiakina e te kīangahipa hou mā te mirimiri i te kīangahipa Wareware? pātene. Tap i te ingoa kaiwhakamahi ki te whakawhiti i waenganui i te mau taviri maha.";
 /* 'Use this screen to change your passphrase by entering your last passphrase for confirmation and the new passphrase.' is a help message (sentence case, period); used via Help button on the Change Passphrase screen to describe in more detail what the Change Passphrase screen does. */
 "help_passphrase_change" = "Whakamahia tēnei mata ki te huri i tō kīangahipa mā te tomo koutou kīangahipa whakamutunga mō te haamauraa, me te kīangahipa hou.";
 /* 'Contacts with SafeSlinger keys are displayed here, select one to send your message to.' is a help message (sentence case, period); used via Help button on the Recipients list screen to describe in more detail what the Recipients list screen does. */
-"help_PickRecip" = "Kua whakaaturia Hoapā ki te mau taviri SafeSlinger konei, tetahi tīpako ki te tuku koutou karere ki.";
+"help_PickRecip" = "E whakaaturia Hoapā ki te mau taviri SafeSlinger konei, tetahi tīpako ki te tonoa koutou karere ki.";
 /* 'When finished, the protocol will reveal a list of the identity data exchanged. Select the contacts you wish to save and press Import.' is a help message (sentence case, period); used via Help button on the End Exchange screen and also the key exchange walkthrough tutorial to describe in more detail what the End Exchange screen does. */
-"help_save" = "A ka mutu, ka te kawa whakakitea he rārangi o nga raraunga tuakiri i whitia ai. Tīpakohia te hoapā e hiahia ana koe ki te whakaora me te pēhi i Kawemai.";
+"help_save" = "A ka mutu, ka te kawa whakakitea te rārangi o nga raraunga tuakiri whakawhiti. Tīpakohia te hoapā e hiahia ana koe ki te whakaora me te pēhi Kawemai.";
 /* 'This screen allows you to select two people you have slung keys with before to securely send their keys to each other. Simply press Introduce when ready.' is a help message (sentence case, period); used via Help button on the Secure Introduction screen to describe in more detail what the Secure Introduction screen does. */
-"help_SecureIntroduction" = "Mā te mata ki a koutou tīpako rua iwi i piua atu e koe mau taviri ki te aroaro o ki te humarie tukua atu ratou mau taviri ki ia atu. Noa e pipiri ana faaite ka rite.";
+"help_SecureIntroduction" = "Mā te mata ki a koutou te tīpako rua te iwi i piua atu koe mau taviri ki te aroaro o ki te humarie unga ratou mau taviri ki tahi i te tahi. Noa pēhi Whakamōhiotia ka rite.";
 /* 'This screen allows you to select some data and a recipient to send to. Simply press Send when ready.' is a help message (sentence case, period); used via Help button on the Compose Message screen to describe in more detail what the Compose Message screen does. */
-"help_Send" = "Mā te mata ki a koutou te tīpako i ētahi raraunga, me te kaiwhiwhi ki te tuku ki te. Noa e pipiri ana Tukua ka rite.";
+"help_Send" = "Mā te mata ki a koutou te tīpako i te tahi mau raraunga, me te kaiwhiwhi ki te unga ki. Noa pēhi Tukua ka rite.";
 /* 'This screen allows you to change the default settings for the application.' is a help message (sentence case, period); used via Help button on the Settings screen to describe in more detail what the Settings screen does. */
-"help_settings" = "Mā te mata ki a koutou te huri i te tautuhinga taunoa mo te tono.";
+"help_settings" = "Mā te mata ki a koutou te huri i te tautuhinga taunoa mō te tono.";
 /* 'Select the number of people who are attempting to exchange data together and press OK.' is a help message (sentence case, period); used via Help button on the Group Size screen and also the key exchange walkthrough tutorial to describe in more detail what the Group Size screen does. */
-"help_size" = "Tīpakohia te tokomaha o te iwi nei e ngana ana ki te whakawhiti tahi raraunga, me te pēhi i te OK.";
+"help_size" = "Tīpakohia te tokomaha o te iwi i te hunga e ngana ana ki te whakawhiti tahi raraunga, me te pēhi i te OK.";
 /* 'This number on this screen is used to create a unique group of users. Review the numbers on all users' screens, then all users should enter the same lowest number and press OK.' is a help message (sentence case, period); used via Help button on the Grouping screen and also the key exchange walkthrough tutorial to describe in more detail what the Grouping screen does. */
-"help_userid" = "Tenei maha i runga i tenei mata whakamahia ki te hanga i te rōpū ahurei o ngā kaiwhakamahi. Faahou i te tau i runga i mata kaiwhakamahi katoa ', ko reira e tae ngā kaiwhakamahi katoa te taua i raro maha, me te pēhi i te OK.";
+"help_userid" = "Tēnei tau i runga i tenei mata whakamahia ki te hanga i te rōpū ahurei o ngā kaiwhakamahi. Faahou i te tau i runga i mata kaiwhakamahi katoa ', ka kia tomo kaiwhakamahi katoa te taua i raro maha, me te pēhi i te OK.";
 /* 'Now, you must match one of these 3-word phrases with all users. Every user must select the same common phrase, and press Next.' is a help message (sentence case, period); used via Help button on the Verify screen and also the key exchange walkthrough tutorial to describe in more detail what the Verify screen does. */
-"help_verify" = "Na, me ōrite koutou tetahi o enei kīanga 3-kupu ki te kaiwhakamahi katoa. Me tīpako nga kaiwhakamahi i te parau noa taua, ka pēhi i te Panuku.";
+"help_verify" = "Na, me ōrite koutou tetahi o enei kupu'i lea 3-kupu ki te kaiwhakamahi katoa. Me tīpako i nga kaiwhakamahi i te parau noa taua, ka pēhi Next.";
 
 /* 'Camera permission is required to attach snapshots to secure messages. Tap the %s button for SafeSlinger Camera permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Camera permission. iOS-only. */
-"iOS_cameraError" = "Hiahiatia whakaaetanga Camera ki te tāpiri pikitia ki te haumaru i ngā karere. Paoa i te pātene %@ mo SafeSlinger kōrero whakaaetanga Camera.";
+"iOS_cameraError" = "Hiahiatia whakaaetanga Camera ki te tāpiri pikitia ki te mau i ngā karere. Tap te pātene %@ mo SafeSlinger kōrero whakaaetanga Camera.";
 /* 'Contacts permission is required for securely sharing contact cards. Tap the %s button for SafeSlinger Contacts permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Contacts permission. iOS-only. */
-"iOS_contactError" = "Hiahiatia whakaaetanga Hoapā mo humarie te faaiteraa i kāri whakapā. Paoa i te pātene %@ mo SafeSlinger kōrero whakaaetanga Hoapā.";
+"iOS_contactError" = "Hiahiatia whakaaetanga Hoapā mo humarie te faaiteraa i kāri whakapā. Tap te pātene %@ mo SafeSlinger kōrero whakaaetanga Hoapā.";
 /* 'Push registration is missing.' is an error message (sentence case, period); used to warn the user the push registration is missing. iOS-only. */
-"iOS_errorpushtoken" = "Kei te ngaro rēhita pana.";
+"iOS_errorpushtoken" = "Kei te ngaro te rēhitatanga o pana.";
 /* 'Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the %s button for SafeSlinger Notification permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Notifications permission. iOS-only. */
-"iOS_notificationError1" = "Whakaaetanga whakamōhiotanga hoki rānei matohi rānei, kara, ka tau tohu, e hiahiatia ana mo te karere haumaru. Paoa i te pātene %@ mo SafeSlinger kōrero whakaaetanga whakamōhiotanga.";
+"iOS_notificationError1" = "Whakaaetanga whakamōhiotanga mō rānei matohi ranei kara, me tau tohu, e hiahiatia ana mo te karere haumaru. Tap te pātene %@ mo SafeSlinger kōrero whakaaetanga Whakamōhiotanga.";
 /* 'SafeSlinger is not optimized for iOS 5.x devices. SafeSlinger requires iOS 6 or higher.' is an informational message (sentence case, period); message for dialog popups when a user still uses an old iOS device. iOS-only. */
-"iOS_oldOSWarn" = "E kore e te SafeSlinger arotautia mō ngā pūrere 5.x iOS. Titau SafeSlinger iOS 6 teitei ranei.";
+"iOS_oldOSWarn" = "E kore te SafeSlinger papaitia kia pūrere 5.x iOS. Titau SafeSlinger iOS 6 teitei ranei.";
 /* 'Photo Library permission is required to attach pictures to secure messages. Tap the %s button for SafeSlinger Photo Library permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Photo Library permission. iOS-only. */
-"iOS_photolibraryError" = "Hiahiatia whakaaetanga Photo Library ki te tāpiri pikitia ki te haumaru i ngā karere. Paoa i te pātene %@ mō ngā kōrero whakaaetanga SafeSlinger Photo Library.";
+"iOS_photolibraryError" = "Hiahiatia whakaaetanga Photo Library ki te tāpiri pikitia ki te mau i ngā karere. Tap te pātene %@ mō ngā kōrero whakaaetanga SafeSlinger Photo Library.";
 /* 'You can select your contact card to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Contacts when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Contacts permission. iOS-only. */
-"iOS_RequestPermissionContacts" = "Ka taea e koe te tīpako i to outou kāri whakapā ki te tuku o koutou hoa, a ka whakamuna SafeSlinger reira mo a koutou. Hei whakahohe i tēnei āhuatanga, me tukua e koe SafeSlinger te uru ki o koutou Hoapā ka ui.";
+"iOS_RequestPermissionContacts" = "Ka taea e koe te tīpako i to outou kāri whakapā ki te unga o koutou hoa, a ka e whakamuna SafeSlinger reira hoki koutou. Hei whakahohe i tēnei āhuatanga, me tukua e koe SafeSlinger te uru ki o koutou Hoapā ka ui.";
 /* 'You can record a voice message to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Microphone when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Microphone permission. iOS-only. */
-"iOS_RequestPermissionMicrophone" = "Taea e koe te tuhi i te karere reo ki te tuku o koutou hoa, a ka whakamuna SafeSlinger reira mo a koutou. Hei whakahohe i tēnei āhuatanga, me tukua e koe SafeSlinger te uru ki tou Uruoro ka ui.";
+"iOS_RequestPermissionMicrophone" = "Ka taea e koe te tuhi i te karere reo ki te unga o koutou hoa, a ka e whakamuna SafeSlinger reira hoki koutou. Hei whakahohe i tēnei āhuatanga, me tukua e koe SafeSlinger te uru ki tou Uruoro ka ui.";
 /* 'SafeSlinger is an encrypted messaging application and cannot function without allowing incoming messages from Notifications. To enable incoming messages, you must allow SafeSlinger to send you Notifications when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Notifications permission. iOS-only. */
-"iOS_RequestPermissionNotifications" = "He tono karere kua whakamunatia SafeSlinger e kore e taea te mahi i waho tuku karere hou i Tuhinga ko a. Hei whakahohe i ngā karere taumai, me tukua e koe SafeSlinger ki te tonoa koe e Tuhinga ka ui.";
+"iOS_RequestPermissionNotifications" = "He tono karere whakamunatia SafeSlinger kore e taea e mahi i waho tuku karere hou i Tuhinga ko a. Hei whakahohe i ngā karere hou, me tukua e koe SafeSlinger ki te tonoa koe Tuhinga ka ui.";
 
 /* '%s ago' is a screen label (match English casing); used on the messages list screen and is used to describe how long ago a message was sent or received. %s = a time measurement, such as '5 minutes' or '2 hours'. */
-"label_ago" = "%@ i ma'iri a'e nei";
+"label_ago" = "%@ i mua";
 /* 'Last Backup Completed' is a screen label (match English casing); used on the Settings screen to indicate the time and date when the last backup was confirmed. */
-"label_backupCompleteDate" = "Kua oti Pūrua Last";
+"label_backupCompleteDate" = "Kua oti te pūrua Last";
 /* 'Last Backup Request' is a screen label (match English casing); used on the Settings screen to indicate when the user last edited data that should be backed up and the application requested a backup from the backup service. */
 "label_backupRequestDate" = "Tono Pūrua Last";
 /* 'Backup URL' is a screen label (match English casing); used on the Settings screen above the URL used for iCloud backups. iOS-only. */
@@ -347,9 +349,9 @@
 /* 'Touch to review your %d messages' is a screen label (match English casing); used in the notification drop down window to indicate what will happen when received messages notification is touched. %d = the number of unseen messages received. */
 "label_ClickForNMsgs" = "Pa ki ki te arotake i a koutou karere %d";
 /* 'Compare screens on %s devices.' is a screen label (match English casing); used with arrows and phone graphics to remind user to compare mutiple views, not just their own. %s = the number of users. */
-"label_CompareScreensNDevices" = "Whakatauritea ngā mata i runga i ngā pūrere %@.";
+"label_CompareScreensNDevices" = "Whakatauritea mata i runga i ngā pūrere %@.";
 /* 'Compose Message' is a screen label (match English casing); used as a text box hint on the Compose Message screen where the user can type a message in the box. */
-"label_ComposeHint" = "Titoa te Karere";
+"label_ComposeHint" = "Titoa Karere";
 /* 'Your Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current user name (first and last) to use. Android-only. */
 "label_ContactName" = "Tou Ingoa";
 /* '%d days' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole days. */
@@ -359,15 +361,15 @@
 /* 'Send-only mode' is a screen label (match English casing); used in many UIs to show that receiving push messages is not supported. */
 "label_DeviceInSendOnlyMode" = "Tukua-anake aratau";
 /* 'Your key has changed: Sling Keys again.' is an error message (sentence case, period); used to warn the user that the key in the Recipients list screen has been exchanged once before with a different key from this user. */
-"label_DisabledExchSourceKeyChange" = "Ke tō kī kua: te kotaha Keys ano.";
+"label_DisabledExchSourceKeyChange" = "Ke tō kī kua: kotaha Keys ano.";
 /* 'To begin messaging, Sling Keys with this user at the same time.' is a screen label (match English casing); used to remind users that an invite is only the beginning, and to Sling Keys before communicating. */
-"label_DisabledNextSlingKeysWithThisPerson" = "Hei timata karere, kotaha Kī ki tenei kaiwhakamahi i te wa ano.";
+"label_DisabledNextSlingKeysWithThisPerson" = "Ki te timata karere, kotaha Kī ki tenei kaiwhakamahi i te wa ano.";
 /* 'DRAFT' is a screen label (match English casing); used to label a message in the Messages list that has been saved in progress but not yet sent. */
-"label_Draft" = "TAUIRA";
+"label_Draft" = "TUKUNGA";
 /* 'Key format deprecated: Sling Keys again.' is an error message (sentence case, period); used on the Recipient list screen to warn users that older key formats have been deprecated. Android-only. */
-"label_EnabledKeyFormatDeprecated" = "Hōputu matua tauwhāitihia: te kotaha Keys ano.";
+"label_EnabledKeyFormatDeprecated" = "Hōputu matua tauwhāitihia: kotaha Keys ano.";
 /* 'exchanged' is a screen label (match English casing); used to indicate 0-hop or direct trust from a key exchange in the Recipient list screen. */
-"label_exchanged" = "kua whakawhiti";
+"label_exchanged" = "whakawhiti";
 /* 'expired' is a screen label (match English casing); used on the Messages list for message attachment that has not been downloaded more than 24 hours after it was originally sent. */
 "label_expired" = "pau";
 /* 'expires %s' is a screen label (match English casing); used on the message list to show how much time is left to download an attachment. %s = a time measurement, such as 'in 5 minutes' or 'in 2 hours'. Android-only. */
@@ -375,49 +377,53 @@
 /* 'expires in' is a screen label (match English casing); used on the message list to show how much time is left to download an attachment; a time measurement, such as '5 minutes' or '2 hours' will be appended to this string. iOS-only. */
 "label_expiresIn" = "pau i roto i te";
 /* 'File Name' is a screen label (match English casing); used on the Save File As dialog as a hint in the file name text box when changing the file name. */
-"label_FileNameHint" = "Ingoa Kōnae";
+"label_FileNameHint" = "Ingoa kōnae";
 /* 'Enter your name and a passphrase to protect your data:' is a screen label (match English casing); used to instruct the user how to proceed on the Setup screen. */
 "label_FindInstruct" = "E tomo tou ingoa, me te kīangahipa ki te tiaki i to koutou raraunga:";
 /* 'First Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current first name to use. iOS-only. */
 "label_FirstName" = "Ingoa Tuatahi";
 /* 'Tap your name to add or remove contact data, check items you wish to share, and tap Begin Exchange when others are ready to exchange:' is a screen label (match English casing); used to instruct the user how to proceed on the Begin Exchange screen. */
-"label_Home" = "Paoa tou ingoa, ki te tāpiri i tango raraunga whakapā ranei, tirohia tūemi e hiahia ana koe ki te faaite i, me te tap haamata Exchange ina rite etahi atu ki te utu:";
+"label_Home" = "Tap tou ingoa ki te tāpiri te tango raraunga whakapā ranei, tirohia ngā tūemi e hiahia ana koe ki te faaite i, me te tap Kamata Exchange ka e rite etahi atu ki te utu:";
 /* 'Home' is a screen label (match English casing); used to denote a 'home' type of email or phone contact type. iOS-only. */
 "label_hometag" = "Home";
 /* '%d hours' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole hours. */
 "label_hours" = "%d haora";
 /* 'SafeSlinger iCloud is enabled. Tap the Done button when finished.' is a screen label (match English casing); used to indicate the backup will occur while on the Setup screen. iOS-only. */
-"label_iCloudEnable" = "Whakahohea te SafeSlinger iCloud te. Paoa i te pātene meatia, ka mutu.";
+"label_iCloudEnable" = "Whakahohea SafeSlinger iCloud te. Tap te pātene meatia, ka mutu.";
 /* 'No messages. You may send a message from the Compose tab.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. */
-"label_InstNoMessages" = "No karere. Kia unga atu koe he karere i te ripa Tito.";
+"label_InstNoMessages" = "No karere. Kia unga e koe he karere i te ripa Tito.";
 /* 'To add recipients, you must first Sling Keys with one or more other users at the same time. You may also send a Sling Keys contact invitation from the menu.' is a screen label (match English casing); used to instruct the user how to proceed on the Recipient list screen is case of no recipients. */
-"label_InstNoRecipients" = "Hei tāpiri kaiwhiwhi, te tuatahi te kotaha Kī ki tētahi, ētahi rānei kaiwhakamahi atu i te wa ano e koe me. Kia hoki e koe te tukua atu he kotaha Kī whakapā te aniraa i te tahua.";
+"label_InstNoRecipients" = "Hei tāpiri kaiwhiwhi, te tuatahi te kotaha Kī ki tetahi atu ranei kaiwhakamahi atu i te wa ano e koe, me. Kia hoki e koe te tukua atu he kotaha Keys whakapā aniraa i te tahua.";
+/* 'None of your current recipients match your search query. Please try a different query or invite a new contact.' is a screen label (match English casing); used to inform the user that no recipients match the search query. */
+"label_InstNoRecipientsMatchQuery" = "Tetahi o koutou kaiwhiwhi o nāianei ōrite tou uiui rapu. Koa tamata i te rapu rerekē ani manihini i te hoapā hou ranei.";
 /* 'No shared file. Connect your device with iTunes and drag files to the shared folder.' is a screen label (match English casing); used to instruct the user how to proceed on the Shared Files screen is case of no files to share. iOS-only. */
-"label_InstNoSharedFile" = "No ngā kōnae. Tūhono tō pūrere ki te iTunes, me ngā kōnae tō ki te kōpaki ngā.";
+"label_InstNoSharedFile" = "No ngā kōnae. Tūhono tō pūrere ki iTunes, me ngā kōnae tō ki te kōpaki tiri.";
 /* 'Pick a recipient to send a message to:' is a screen label (match English casing); used to instruct the user how to proceed on the Pick Recipients list screen. */
-"label_InstRecipients" = "Tangohia te kaiwhiwhi ki te tukua atu he karere ki a:";
+"label_InstRecipients" = "Tangohia te kaiwhiwhi ki te tonoa te karere ki:";
 /* 'Pick recipients to introduce securely:' is a screen label (match English casing); used to instruct the user how to proceed on the Secure Introduction Recipients list screen. */
-"label_InstSendInvite" = "Tangohia ngā kaiwhiwhi ki te humarie whakauru:";
+"label_InstSendInvite" = "Tiki kaiwhiwhi ki te humarie whakamōhio:";
 /* 'Pick a file to attach:' is a screen label (match English casing); used as a title for a list of files that could be attached to the message. */
 "label_InstSharedFile" = "Tangohia te kōnae ki te tāpiri:";
 /* 'introduced' is a screen label (match English casing); used to indicate 1-hop trust from a secure introduction in the Recipient list screen. */
 "label_introduced" = "whakaurua";
 /* 'Invited' is a screen label (match English casing); used on the recipient list to denote when a user has sent an invitation to Sling Keys via emailed or text. */
-"label_inviteSent" = "I Tonoa";
+"label_inviteSent" = "Karangatia";
 /* 'Key:' is a screen label (match English casing); used to prefix the key generation date in the Recipients list and on the Compose Message screen. */
-"label_Key" = "Matua:";
+"label_Key" = "Kī:";
 /* 'Last Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current last name to use. iOS-only. */
 "label_LastName" = "Ingoa Last";
 /* 'Me' is a screen label (match English casing); used on the secure introduction invitation dialog to indicate the one-hop trust relationship between the user (Me); the trusted person, and the new person. */
 "label_Me" = "Ahau";
 /* 'I would like to introduce %s to you.' is a screen label (match English casing); used as the text message when sending secure introduction invitations. %s = the name of a person. */
-"label_messageIntroduceNameToYou" = "E hiahia ana ahau ki te whakauru i %@ ki a koutou.";
+"label_messageIntroduceNameToYou" = "E hiahia ana ahau ki te whakamōhio %@ ki a koutou.";
 /* 'SafeSlinger app: %s' is a screen label (match English casing); used as message text to show a user how to install SafeSlinger. %s = the main installation url for mobile devices */
 "label_messageInviteInstall" = "SafeSlinger taupānga: %@";
 /* 'To setup a secure messaging connection, we can meet or phone each other at the same time, and then Sling Keys just once to verify the connection.' is a screen label (match English casing); used as message text to show a user how to begin secure messaging. */
-"label_messageInviteSetupInst" = "Ki te tatū he hononga karere haumaru, e nehenehe tatou e te whakatau ranei waea ia atu i te wa ano, a ka kotaha Kī tika kotahi ki te manatoko i te hononga.";
+"label_messageInviteSetupInst" = "Ki te tatūnga he hononga karere haumaru, e nehenehe tatou e te whakatau ranei waea ia te tahi i te wa ano, a ka kotaha Kī tika kotahi ki te manatoko i te hononga.";
 /* 'Can we start secure messaging with the open source SafeSlinger iPhone or Android app?' is a screen label (match English casing); used as message text to invite a contact to begin secure messaging. */
-"label_messageInviteStartMsg" = "Taea e matou te tīmata karere haumaru ki te puna tuwhera SafeSlinger iPhone taupānga Android ranei?";
+"label_messageInviteStartMsg" = "Ka taea e tatou te tīmata karere haumaru ki te puna tuwhera SafeSlinger iPhone taupānga Android ranei?";
+/* '%s, you are verified.' is a screen label (match English casing); used as the text message completing sling keys. %s = the name of a recipient. */
+"label_messageYouAreVerified" = "%@, e manatoko koe.";
 /* '%d minutes' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole minutes. */
 "label_minutes" = "%d meneti";
 /* 'Mobile' is a screen label (match English casing); used to denote a 'mobile' type of email or phone contact type. iOS-only. */
@@ -425,29 +431,29 @@
 /* 'Most recent only' is a screen label (match English casing); used as a label for the boolean toggle switching between all or recent-only recipients on recipient list. */
 "label_MostRecentOnly" = "Anake te nuinga o tata";
 /* 'My updated SafeSlinger credentials are attached.' is a screen label (match English casing); used as default message attached to a credential update. */
-"label_MsgSendUpdate" = "Kua piri toku ngā taipitopito SafeSlinger whakahou.";
+"label_MsgSendUpdate" = "E piri toku taipitopito SafeSlinger whakahou.";
 /* 'None' is a screen label (match English casing); used to indicate the local, non-synchronized contacts account name on the phone when picking a Save Account. */
 "label_None" = "Tetahi";
 /* 'Non-English' is a screen label (match English casing); used to instruct the user how to switch on Numeric mode while doing comparison. */
-"label_NumericModeHint" = "Kore-English";
+"label_NumericModeHint" = "Non-English";
 /* '%d Files to Share:' is a screen label (match English casing); used on the Sharing Folder screen. %d = the number of files to share. iOS-only. */
-"label_numsharedfiles" = "%d ki Kōnae Vahevahe:";
+"label_numsharedfiles" = "%d ki te Kōnae Vahevahe:";
 /* 'Old Threads' is a screen label (match English casing); used for the old thread (iOS only). */
 "label_OldThreads" = "Miro Old";
 /* 'Other' is a screen label (match English casing); used to denote a 'other' type of email or phone contact type. iOS-only. */
 "label_othertag" = "Ētahi atu";
 /* 'Retry' is a screen label (match English casing); used in the Passphrase screen text box as a prefix hint combined with a time measurement when, which is exponentially backed off on invalid passphrase entry, such as 'Retry in 14 seconds'. Used during back off while all user controls have been disabled. */
-"label_PassHintBackoff" = "Ngana anō";
+"label_PassHintBackoff" = "Ngana";
 /* 'Updated Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint to create a replacement passphrase. */
-"label_PassHintChange" = "Kīangahipa kua whakahōutia";
+"label_PassHintChange" = "Kīangahipa whakahōutia";
 /* 'Create Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint to create a new passphrase. */
-"label_PassHintCreate" = "Waihanga Kīangahipa";
+"label_PassHintCreate" = "Waihanga kīangahipa";
 /* 'Current Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint to confirm the current passphrase. */
-"label_PassHintCurrent" = "Kīangahipa o nāianei";
+"label_PassHintCurrent" = "Kīangahipa nāianei";
 /* 'Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint enter the passphrase. */
 "label_PassHintEnter" = "Kīangahipa";
 /* 'Repeat Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint to confirm the passphrase again. */
-"label_PassHintRepeat" = "Tukurua Kīangahipa";
+"label_PassHintRepeat" = "Tukurua kīangahipa";
 /* 'Passphrase Cache' is a screen label (match English casing); used on the Settings screen to above the display of the users' passphrase timeout period. */
 "label_passPhraseCacheTtl" = "Keteroki kīangahipa";
 /* 'Passphrase cached' is a screen label (match English casing); used in the notification window when a passphrase has been cached. Android-only. */
@@ -457,11 +463,11 @@
 /* 'Photo' is a screen label (match English casing); used on the Begin Exchange screen to toggle sending the users' photo during the exchange. */
 "label_Photo" = "Whakaahua";
 /* 'This number is used to create a unique group of users. Compare, and then enter the lowest number among all users.' is a screen label (match English casing); used to instruct the user how to proceed on the Grouping screen. */
-"label_PromptInstruct" = "Whakamahia ana tēnei te tau ki te hanga i te rōpū ahurei o ngā kaiwhakamahi. Whakatauritea, a ka tomo i te tokomaha i raro i roto i ngā kaiwhakamahi katoa.";
+"label_PromptInstruct" = "Whakamahia ana tēnei tau ki te hanga i te rōpū ahurei o ngā kaiwhakamahi. Whakatauritea, a ka tomo i te tau i raro i roto i ngā kaiwhakamahi katoa.";
 /* 'Key ID' is a screen label (match English casing); used on the Settings, Compose Message, and Recipients list screens as a label above the base-64 encoded key IDs for sender and recipients. */
 "label_PublicKeyID" = "ID matua";
 /* 'Push Registration ID' is a screen label (match English casing); used on the Settings screen as a label above the push registration for this user. */
-"label_PushTokenID" = "ID Rehitatanga Pēhi";
+"label_PushTokenID" = "ID Rēhitatanga pana";
 /* 'received %d items' is a screen label (match English casing); used to show the progress when collecting group members data during the key exchange protocol. %d = the number of members' data items received during the current phase of the exchange protocol. */
 "label_ReceivedNItems" = "riro %d ngā tūemi";
 /* 'Backup Reminder' is a screen label (match English casing); used on the Settings screen to toggle the reminder when pending backups do not execute in timely manner. */
@@ -471,25 +477,29 @@
 /* 'Last Restore Completed' is a screen label (match English casing); used above a time stamp on the Settings screen to indicate the last time backup settings were restored. */
 "label_restoreCompleteDate" = "Whakaora Last oti";
 /* 'SafeSlinger backup delayed' is a screen label (match English casing); used as a title of the notification when a backup request has been pending more than 1 hour. */
-"label_SafeSlingerBackupDelayed" = "SafeSlinger tārua i whakaroa";
+"label_SafeSlingerBackupDelayed" = "SafeSlinger pūrua whakaroa";
 /* '(SafeSlinger Direct Exchange)' is a screen label (match English casing); used on the Secure Introduction invitation dialog to denote the sender whom the user has performed a direct exchange with and holds direct trust. */
 "label_safeslingered" = "(SafeSlinger Direct Exchange)";
 /* 'Save Account' is a screen label (match English casing); used above the editable field on the End Exchange screen to showing the address book account to use when saving or updating contacts. */
 "label_SaveAccount" = "Whakaorangia Pūkete";
 /* 'Check contacts you want to update in your address book, then tap Import to save secure contacts:' is a screen label (match English casing); used to instruct the user how to proceed on the End Exchange screen. */
-"label_SaveInstruct" = "Tirohia i ngā hoapā e hiahia ana koe ki te whakahou i roto i to koutou pukapuka wāhitau, ka haape'ape'a ia Kawemai ki te whakaora hoapā haumaru:";
+"label_SaveInstruct" = "Tirohia hoapā e hiahia ana koe ki te whakahou i roto i to koutou pukapuka wāhitau, ka pato Kawemai ki te whakaora hoapā haumaru:";
+/* 'Search contacts' is a screen label (match English casing); used on the Recipients screen to provide a hint to search for contacts. */
+"label_search_contacts_hint" = "Rapu hoapā";
 /* '%d seconds' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole seconds. */
 "label_seconds" = "%d hēkona";
 /* 'Select Recipient' is a screen label (match English casing); used on the Compose Message screen recipient button before a recipient has been selected. */
-"label_SelectRecip" = "Tīpako i te Kaiwhiwhi";
+"label_SelectRecip" = "Tīpako Kaiwhiwhi";
 /* 'Send Error Data' is a screen label (match English casing); used on the Settings screen to toggle the automatic upload of error reports. */
 "label_sendErrorData" = "Tukua Raraunga Hapa";
 /* 'From:' is a screen label (match English casing); used on the Compose Message screen to prefix the recipient's name. */
-"label_SendFrom" = "Mai:";
+"label_SendFrom" = "Mai i:";
 /* 'To:' is a screen label (match English casing); used on the Compose Message screen to prefix the sender's name. */
 "label_SendTo" = "Ki:";
 /* 'Show this hint next time.' is a screen label (match English casing); used in the key exchange walkthrough dialog to toggle the display of the walkthrough at the next attempted key exchange. */
-"label_ShowHintAtLaunch" = "Whakaaturia tenei tīwhiri te wā i muri mai.";
+"label_ShowHintAtLaunch" = "Whakaaturia tenei tohu te wā i muri mai.";
+/* 'Using speech recognition is disabled because it might cause an information leak' is a screen label (match English casing); used to alert the user about possible information leak on the use of speech recognition when the user tries to use this feature */
+"label_SpeechRecognitionAlert" = "Mā te āhukahuka kupu he monokia te mea kia meinga he turuturu mōhiohio";
 /* 'Step 1' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
 "label_step_1" = "Hipanga 1";
 /* 'Step 2' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
@@ -501,57 +511,57 @@
 /* 'Step 5' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
 "label_step_5" = "Hipanga 5";
 /* 'Automatically download message attachments when logged in.' is a screen label (match English casing); used as the settings summary to describe what Auto-retrieve attachments will do. */
-"label_summary_auto_attach_retrieval" = "Tikiake aunoatia ngā āpitihanga karere, ka takiuru.";
+"label_summary_auto_attach_retrieval" = "Te tikiake aunoatia āpitihanga karere, ka takiuru i roto i.";
 /* 'Automatically decrypt messages when logged in.' is a screen label (match English casing); used as the settings summary to describe what Auto-decrypt will do. */
-"label_summary_auto_decrypt" = "Wetemuna aunoatia ngā karere, ka takiuru.";
+"label_summary_auto_decrypt" = "Wetemuna aunoatia ngā karere i te takiuru i roto i.";
 /* 'Receive notification when backup is offline.' is a screen label (match English casing); used as the settings summary to describe what Backup Reminder will do. */
-"label_summary_remind_backup_delay" = "Whiwhi pānuitanga inā tuimotu tārua i.";
+"label_summary_remind_backup_delay" = "Whiwhi whakamōhiotanga i te tuimotu pūrua.";
 /* 'Show a tutorial before attempting to Sling Keys.' is a screen label (match English casing); used as the settings summary to describe what Show Walkthrough will do. */
-"label_summary_show_tutorial" = "Whakaaturia te akoranga i mua i te ngana ki te kotaha Keys.";
+"label_summary_show_tutorial" = "A faaite i te akoranga i mua i te nganatanga ki te kotaha Keys.";
 /* 'Tap to decrypt file' is a screen label (match English casing); used to indicate tapping this message in the list will attempt to decrypt the attachment (if needed). */
-"label_TapToDecryptFile" = "Paoa ki te wetemuna kōnae";
+"label_TapToDecryptFile" = "Tap ki te wetemuna kōnae";
 /* 'Tap to decrypt' is a screen label (match English casing); used to indicate tapping this message in the list will attempt to decrypt it. */
-"label_TapToDecryptMessage" = "Paoa ki te wetemuna";
+"label_TapToDecryptMessage" = "Tap ki te wetemuna";
 /* 'Tap to download file' is a screen label (match English casing); used to indicate tapping this message in the list will download the file (and attempt to decrypt it). */
-"label_TapToDownloadFile" = "Paoa ki te tikiake i te kōnae";
+"label_TapToDownloadFile" = "Tap ki te tikiake i te kōnae";
 /* 'Tap to download message' is a screen label (match English casing); used to indicate tapping this message in the list will download the message (if needed). */
-"label_TapToDownloadMessage" = "Paoa ki te tikiake i te karere";
+"label_TapToDownloadMessage" = "Tap ki te tikiake i te karere";
 /* 'Tap to open file' is a screen label (match English casing); used to indicate tapping this decrypted message in the list will attempt to view the decrypted attachment. */
-"label_TapToOpenFile" = "Paoa ki te whakatuwhera i te kōnae";
+"label_TapToOpenFile" = "Tap ki te whakatuwhera kōnae";
 /* 'Tap to resume message draft' is a screen label (match English casing); used to indicate tapping this message in the list will take the user to the composition screen. */
-"label_TapToResumeDraft" = "Paoa ki te haere anō tauira karere";
+"label_TapToResumeDraft" = "Tap ki te anō tauira karere";
 /* 'Tap and hold to send credential update.' is a screen label (match English casing); used as a hint on the recipient list to help the user know if a credential update is needed. Android-only. */
-"label_TapToSendCredentialUpdate" = "Paoa me te mau ki te tuku whakahou taipitopito.";
+"label_TapToSendCredentialUpdate" = "Tap a mau ki te unga whakahou taipitopito.";
 /* 'Tap to Sling Keys.' is a screen label (match English casing); used to remind the user that we can advance the user to the Sling Keys screen for convenience. */
-"label_TapToSlingKeys" = "Pato ki te kotaha Keys.";
+"label_TapToSlingKeys" = "Tap ki te kotaha Keys.";
 /* 'Contacts Account' is a screen label (match English casing); used above the editable field on the Settings screen to show the current address book account to use. */
 "label_targetAccountLabel" = "Pūkete Hoapā";
 /* 'You may optionally enable SafeSlinger iCloud backup in iOS Settings. Tap the Done button when finished.' is a screen label (match English casing); used on the Setup screen to remind the user that no backups will be restored on new installation. iOS-only. */
-"label_TouchToConfigureBackupSettings" = "Kōwhiri koe kia taea ai SafeSlinger iCloud tārua i roto i Tautuhinga iOS. Paoa i te pātene meatia, ka mutu.";
+"label_TouchToConfigureBackupSettings" = "Kōwhiri koe kia taea ai SafeSlinger iCloud tārua i roto i Tautuhinga iOS. Tap te pātene meatia, ka mutu.";
 /* 'Touch to configure backup settings.' is a screen label (match English casing); used in the notification window when the backup request has been pending over 1 hour. Android-only. */
-"label_TouchToConfigureBackupSettingsAndroid" = "Pa ki ki te whirihora tautuhinga te tārua.";
+"label_TouchToConfigureBackupSettingsAndroid" = "Pa ki ki te whirihora i ngā tautuhinga tārua.";
 /* 'Touch to configure cache timeout settings.' is a screen label (match English casing); used in the notification window when a passphrase has been cached. Android-only. */
-"label_TouchToConfigureCacheTimeout" = "Pa ki ki te whirihora tautuhinga wāhiki keteroki.";
+"label_TouchToConfigureCacheTimeout" = "Pa ki ki te whirihora ngā tautuhinga wāhiki keteroki.";
 /* 'Unknown' is a screen label (match English casing); used in menu lists when unexpected type definitions are encountered. */
 "label_undefinedTypeLabel" = "Unknown";
 /* 'Encrypted Sender' is a screen label (match English casing); used as the header for an encrypted message in the message list. */
 "label_UnknownSender" = "Kaituku whakamunatia";
 /* 'Lowest' is a screen label (match English casing); used as a text box hint on the Grouping screen when entering the lowest ID number. */
-"label_UserIdHint" = "Iti";
+"label_UserIdHint" = "Iti Rawa";
 /* 'User Name' is a screen label (match English casing); used as a placeholder before the users' contact has been loaded. */
 "label_UserName" = "Ingoa Kaiwhakamahi";
 /* 'All phones must match one of the 3-word phrases. Compare, and then pick the matching phrase.' is a screen label (match English casing); used to instruct the user how to proceed on the Verify screen. */
 "label_VerifyInstruct" = "Me ōrite waea katoa tetahi o 3-kupu kīanga i te. Whakatauritea, a ka tiki i te parau ōrite.";
 /* 'To protect your data, SafeSlinger does not store your passphrase anywhere for recovery. You may only access recipients and messages created under the same passphrase login. However, you may generate a new key and passphrase, then repeat Sling Keys with your recipients.' is a screen label (match English casing); used to describe the reasons passphrases are not storeed and how to generate a new one. */
-"label_WarnForgotPassphrase" = "Hei tiaki i a koutou raraunga, e kore e rokiroki SafeSlinger koutou kīangahipa hea mo te ora. Kia uru atu anake koe kaiwhiwhi, me ngā karere hanga i raro i te takiuru kīangahipa taua. Heoi, kia whakaputa e koe he kī hou, me te kīangahipa, ka tapiti faahou te kotaha Kī ki o koutou kaiwhiwhi.";
+"label_WarnForgotPassphrase" = "Hei tiaki i tō raraunga, e kore e rokiroki SafeSlinger koutou kīangahipa hea hoki te ora. Kia uru anake koe kaiwhiwhi, me ngā karere hanga i raro i te takiuru kīangahipa taua. Heoi, kia whakaputa e koe te kī hou, me te kīangahipa, ka toe fakaongo kotaha Keys ki o koutou kaiwhiwhi.";
 /* 'The following keys will be deleted:' is a screen label (match English casing); used to begin list of keys that will be deleted. */
 "label_WarnManagePassFollowsAreRecent" = "Ka mukua te mau taviri e whai ake nei:";
 /* 'There are no more recent keys than yours.' is a screen label (match English casing); used to show there are no keys to delete. */
-"label_WarnManagePassNoMoreRecent" = "Kāore he ake mau taviri tata atu koutou.";
+"label_WarnManagePassNoMoreRecent" = "E kore ake mau taviri tata atu koutou.";
 /* 'Only keys generated more recently than yours, generated on %s, may be deleted.' is a screen label (match English casing); used to show which keys may be deleted. %s = the key generation date of the current key */
-"label_WarnManagePassOnlyRecentDeleted" = "Mau taviri anake hanga atu i maoro atu i koutou, i hanga ki runga ki %@, kia mukua ai.";
+"label_WarnManagePassOnlyRecentDeleted" = "Mau taviri anake hanga atu tata atu koutou, hanga ki runga ki %@, kia mukua ai.";
 /* 'Work' is a screen label (match English casing); used to denote a 'work' type of email or phone contact type. iOS-only. */
-"label_worktag" = "Mahi";
+"label_worktag" = "Work";
 
 /* 'SafeSlinger Exchange' is an application name (title case); used for dialogs to show the user which that a SafeSlinger Exchange is in progress. */
 "lib_name" = "SafeSlinger Exchange";
@@ -559,37 +569,37 @@
 /* 'About' is a menu option (title case); used to show the about dialog via the Settings screen. */
 "menu_About" = "Mō";
 /* 'Auto-retrieve attachments' is a menu option (title case); used to enable/disable automatically retrieving message attachments when logged in via the Settings screen. */
-"menu_auto_attach_retrieval" = "Tiki-aunoa ngā āpitihanga";
+"menu_auto_attach_retrieval" = "Tiki-aunoa āpitihanga";
 /* 'Auto-decrypt' is a menu option (title case); used to enable/disable automatically decrypting messages when logged in via the Settings screen. */
 "menu_auto_decrypt" = "Wetemuna-aunoa";
 /* 'Change' is a menu option (title case); used to change the currently selected file attachment via the File Options dialog. */
 "menu_Change" = "Huri";
 /* 'Change Passphrase' is a menu option (title case); used to confirm the current passphrase and create and new one via the Settings screen. */
-"menu_ChangePassphrase" = "Huri Kīangahipa";
+"menu_ChangePassphrase" = "Huri kīangahipa";
 /* 'Email from Contacts' is a menu option (title case); used when adding a contact invitaion via email. */
-"menu_ContactInviteEmail" = "Email i te Hoapā";
+"menu_ContactInviteEmail" = "Email i Hoapā";
 /* 'Text from Contacts' is a menu option (title case); used when adding a contact invitaion via sms. */
-"menu_ContactInviteSms" = "Kuputuhi i te Hoapā";
+"menu_ContactInviteSms" = "Kupu i te Hoapā";
 /* 'Create New' is a menu option (title case); used to show a new empty contact in the address book for editing as the users' current identity via the Personal Contact dialog. */
 "menu_CreateNew" = "Waihanga New";
 /* 'Delete' is a menu option (title case); used to delete the current item from the list context menu. */
-"menu_delete" = "Muku";
+"menu_delete" = "Mukua";
 /* 'Delete Thread %s' is a menu option (title case); used to delete all messages from this person via the message list context menu. %s = the name of a person. */
-"menu_deleteThread" = "Mukua te Miro %@";
+"menu_deleteThread" = "Mukua Miro %@";
 /* 'View Detail' is a menu option (title case); used to show a dialog of more detail about the item via the message list context menu. */
 "menu_Details" = "Tirohia Taipitopito";
 /* 'Download Directory' is a choice (sentence case); used when the user chooses to change the directory of the attachment before saving. */
-"menu_DownloadDirectory" = "Whaiaronga Download";
+"menu_DownloadDirectory" = "Whaiaronga download";
 /* 'Edit' is a menu option (title case); used to provide a generic edit menu option. */
 "menu_Edit" = "Whakatika";
 /* 'Edit Contact' is a menu option (title case); used to show the users' current contact in the address book for editing via the Personal Contact dialog. */
-"menu_EditContact" = "Whakatika Whakapā mai";
+"menu_EditContact" = "Whakatika Whakapā";
 /* 'Edit Name' is a menu option (title case); used to show the Settings dialog to change the preferred name. */
 "menu_EditName" = "Whakatika Ingoa";
 /* 'File Manager' is a menu option (title case); used to show a custom file system navigation menu via the Choose Your File dialog. Android-only. */
-"menu_FileManager" = "Kaiwhakahaere Kōnae";
+"menu_FileManager" = "Kaiwhakahaere kōnae";
 /* 'Forgot Passphrase?' is a menu option (title case); used on the passphrase screen to show users how to generate a new key after forgetting the passphrase that protects the old one. */
-"menu_ForgotPassphrase" = "Wareware Kīangahipa?";
+"menu_ForgotPassphrase" = "Wareware i kīangahipa?";
 /* 'Help' is a menu option (title case); used to show a help dialog for the current screen. */
 "menu_Help" = "Āwhina";
 /* 'Introduction' is a menu option (title case); used to show the secure introduction composition screen via the main home screen. */
@@ -599,29 +609,29 @@
 /* 'License' is a menu option (title case); used to show a dialog of the End User License Agreement. */
 "menu_License" = "Raihana";
 /* 'Add Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
-"menu_link_contact_add" = "Tāpiri Hononga Whakapā mai";
+"menu_link_contact_add" = "Tāpiri Hononga Whakapā";
 /* 'Change Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
-"menu_link_contact_change" = "Huri Link Whakapā mai";
+"menu_link_contact_change" = "Huri Link Whakapā";
 /* 'Logout' is a menu option (title case); used to remove the cached passphrase and force the user to login again. */
 "menu_Logout" = "Takiputa";
 /* 'Manage Passphrases' is a menu option (title case); used on the settings screen to allow users to remove newer keys if created by users without orignial user authorization. */
 "menu_ManagePassphrases" = "Whakahaere Passphrases";
 /* 'Message Font Size' is a menu (title case); used as the settings menu option to change message font size */
-"menu_message_font_size" = "Rahi Momotuhi te kupu";
+"menu_message_font_size" = "Rahi Momotuhi Karere";
 /* 'Copy Text' is a menu option (title case); used to copy the message text into the clipboard via the message list context menu. */
 "menu_messageCopyText" = "Tārua Kuputuhi";
 /* 'Forward' is a menu option (title case); used to create a new message with the same text message/attachment via the message list context menu. */
 "menu_messageForward" = "Whakamua";
 /* 'Privacy Policy' is a menu option (title case); used to show a dialog of the Privacy Policy. */
-"menu_PrivacyPolicy" = "Kaupapa Tūmataiti";
+"menu_PrivacyPolicy" = "Kaupapahere tūmataiti";
 /* 'Remove' is a menu option (title case); used to remove the currently selected file attachment via the File Options dialog. */
-"menu_Remove" = "Tangohia te";
+"menu_Remove" = "Tangohia";
 /* 'Restore Default Settings' is a menu option (title case); used as Settings screen menu item for restoring all settings to default */
-"menu_restore_default" = "Whakahokia Tautuhinga taunoa";
+"menu_restore_default" = "Whakaora Tautuhinga Taunoa";
 /* 'Sound' is a menu option (title case); used as Settings item for entering ringtone selection screen */
-"menu_ringtone" = "Oro";
+"menu_ringtone" = "Tangi";
 /* 'Add Contact Invitation' is a menu option (title case); used to send an email or text message containing an installation link for SafeSlinger. */
-"menu_SelectShareApp" = "Tāpiri Hoapā titauraa";
+"menu_SelectShareApp" = "Tāpiri Hoapā Pōwhiri";
 /* 'Send Feedback' is a menu option (title case); used to send an email with support data for feedback. */
 "menu_sendFeedback" = "Tukua Urupare";
 /* 'Send Update' is a menu option (title case); used to send a credential update via the recipient list context menu. */
@@ -633,62 +643,64 @@
 /* 'Compose' is a menu option (title case); used at the title of the message composition tab for the home tab view. */
 "menu_TagComposeMessage" = "Titoa";
 /* 'Sling Keys' is a menu option (title case); used as the title of the key exchange tab for the home tab view. */
-"menu_TagExchange" = "Kotaha Kī";
+"menu_TagExchange" = "Kotaha Keys";
 /* 'Messages' is a menu option (title case); used as the title of the message list tab for the home tab view. */
-"menu_TagListMessages" = "Messages";
+"menu_TagListMessages" = "Karere";
 /* 'Use Another' is a menu option (title case); used to redo the Setup process again to find another contact to use as the users' main identity via the Personal Contact dialog. */
 "menu_UseAnother" = "Whakamahia tētahi atu";
 /* 'Use Contact %s' is a menu option (title case); used to select the found contact as the users' main identity via the Personal Contact dialog. */
 "menu_UseContactPerson" = "Whakamahia Whakapā %@";
 /* 'Use Name Only' is a menu option (title case); used to select no contact as the users' main identity via the Personal Contact dialog. */
-"menu_UseNoContact" = "Whakamahia te Ingoa anake";
+"menu_UseNoContact" = "Whakamahia Ingoa anake";
 /* 'Use Profile %s' is a menu option (title case); used to select the main profile contact as the users' main identity via the Personal Contact dialog. */
 "menu_UseProfilePerson" = "Whakamahia %@ Profile";
 /* 'Vibrate' is a menu option (title case); used as Settings item for boolean option to vibrate during message notification */
-"menu_vibrate" = "Tōiriiri";
+"menu_vibrate" = "Wiri";
 
 /* 'waiting for verification from all members...' is a progress message (lower case, ellipsis); used to show progress while verifying data from all members hash equal to the initial commitment they sent. */
-"prog_CollectingOthersCommitVerify" = "tatari hei manatoko i roto i te mau melo katoa...";
+"prog_CollectingOthersCommitVerify" = "tatari hei manatoko i te mau melo i te katoa...";
 /* 'waiting for all users to join...' is a progress message (lower case, ellipsis); used to show progress while waiting to collect all initial commitments from members who entered the same lowest number grouping ID. */
 "prog_CollectingOthersItems" = "e tatari ana ki te kaiwhakamahi katoa te whakauru mai...";
 /* 'constructing group key...' is a progress message (lower case, ellipsis); used to show progress while generating the asymmetric shared group key tree and distributing the appropriate public tree nodes. */
 "prog_ConstructingGroupKey" = "hanga matua rōpū...";
 /* 'decrypting...' is a progress message (lower case, ellipsis); used to show progress during message decryption (and currently signature verification as well). */
-"prog_decrypting" = "wetemunatanga i...";
+"prog_decrypting" = "wetemunatanga...";
 /* 'encrypting...' is a progress message (lower case, ellipsis); used to show progress during message encryption (and currently signing as well). */
 "prog_encrypting" = "whakamuna...";
 /* 'message sent, awaiting response...' is a progress message (lower case, ellipsis); used to show progress after the message has been uploaded, but the server has not confirmed the generation of a push message yet. */
-"prog_FileSent" = "ka tono karere, e tatari whakautu...";
+"prog_FileSent" = "ka tono karere, e tatari ana whakautu...";
 /* 'finding key...' is a progress message (lower case, ellipsis); used to show progress while looking up a matching key in the key database. */
 "prog_findingKey" = "te kimi matua...";
 /* 'generating key, this can take a while...' is a progress message (lower case, ellipsis); used to show progress during encryption key and signature key public/private key pair generation. */
-"prog_GeneratingKey" = "whänui matua, ka taea e te tango i te i te wā i tēnei...";
+"prog_GeneratingKey" = "whakaputa matua, ka taea e te tango i te i tenei...";
 /* 'generating signature...' is a progress message (lower case, ellipsis); used to show progress during message signature generation. */
-"prog_generatingSignature" = "whänui waitohu...";
+"prog_generatingSignature" = "whakaputa waitohu...";
 /* 'loading content...' is a progress message (lower case, ellipsis); used to show progress during file preview loading. */
 "prog_loadingContent" = "utanga ihirangi...";
+/* 'pending...' is a progress message (lower case, ellipsis); used to show progress during queued message while waiting to act */
+"prog_pending" = "tārewa...";
 /* 'receiving encrypted file...' is a progress message (lower case, ellipsis); used to show progress while receiving the requested file. */
 "prog_ReceivingFile" = "te fariiraa i te kōnae whakamuna...";
 /* 'requesting encrypted file...' is a progress message (lower case, ellipsis); used to show progress while waiting for the server to return the requested file. */
 "prog_RequestingFile" = "tono kōnae whakamuna...";
 /* 'requesting encrypted message...' is a progress message (lower case, ellipsis); used to show progress while waiting for the server to return the requested message. */
-"prog_RequestingMessage" = "tono karere whakamunatia...";
+"prog_RequestingMessage" = "tono karere whakamuna...";
 /* 'requesting push registration...' is a progress message (lower case, ellipsis); used to show progress while waiting for Google or APNS to return a registration id for this phone to receive SafeSlinger-only push messages. */
 "prog_RequestingPushReg" = "tono rēhitatanga pana...";
 /* 'requesting membership...' is a progress message (lower case, ellipsis); used to show progress while waiting for the exchange server to return a grouping ID number. */
-"prog_RequestingUserId" = "tono te mematanga...";
+"prog_RequestingUserId" = "tono mema...";
 /* 'updating address book...' is a progress message (lower case, ellipsis); used to show progress while newly exchanged contact data is added to the users' address book. */
-"prog_SavingContactsToAddressBook" = "whakahōu ana pukapuka wāhitau...";
+"prog_SavingContactsToAddressBook" = "e whakahōu pukapuka wāhitau...";
 /* 'updating key database...' is a progress message (lower case, ellipsis); used to show progress while newly exchanged keys are added to the local database. */
-"prog_SavingContactsToKeyDatabase" = "whakahōu ana pātengi raraunga matua...";
+"prog_SavingContactsToKeyDatabase" = "e whakahōu pātengi raraunga matua...";
 /* 'searching for backup...' is a progress message (lower case, ellipsis); used to show progress during a search for backed up settings. */
-"prog_SearchingForBackup" = "rapu te tārua...";
+"prog_SearchingForBackup" = "rapu hoki tārua...";
 /* 'sending encrypted %s...' is a progress message (lower case, ellipsis); used to show progress while a message is being sent. %s = the file name if an attachment exists. */
 "prog_SendingFile" = "te tuku %@ whakamuna...";
 /* 'verifying integrity...' is a progress message (lower case, ellipsis); used to show progress during message integrity verification. */
-"prog_verifyingIntegrity" = "manatoko tapatahi...";
+"prog_verifyingIntegrity" = "tautoko i tapatahi...";
 /* 'verifying signature...' is a progress message (lower case, ellipsis); used to show progress during message signature verification. */
-"prog_verifyingSignature" = "whakamanatoko waitohu...";
+"prog_verifyingSignature" = "tautoko i waitohu...";
 
 /* 'Advanced' is a preferences title (title case); used to sub-divide the Advanced section of the settings screen. */
 "section_advanced" = "Arā";
@@ -704,46 +716,50 @@
 /* 'Backup restored.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm backup keys and settings have bee restored on re-install. */
 "state_BackupRestored" = "Faaho'ihia mai Pūrua.";
 /* 'Deleted file %s.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that a file has been deleted. %s = the file name of the deleted file. */
-"state_FileDeleted" = "%@ kōnae i Mukua.";
-/* 'Message sent.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that a message has been sent. */
-"state_FileSent" = "Ka tonoa te kupu.";
+"state_FileDeleted" = "%@ kōnae Mukua.";
+/* 'Message sent.' is an informational message (sentence case, period); TODO: This should be deprecated in favor 1 message push to messages tab (single thread) and >1 messages push to messages tab (all threads) with a toast of state_MessagesSent. */
+"state_FileSent" = "Ka unga Karere.";
 /* 'Invitation added.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the addition of a contact invitation. */
-"state_InvitationAdded" = "Tapiritia titauraa.";
+"state_InvitationAdded" = "Tānaki atu Fakaafé.";
 /* 'Message saved as draft.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that an un-sent message has been saved. */
-"state_MessageSavedAsDraft" = "Ora te kupu, ano he tauira.";
+"state_MessageSavedAsDraft" = "Ora te kupu rite tauira.";
 /* '%d messages deleted.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the number of messages deleted. %d = the number of messages successfully deleted. */
 "state_MessagesDeleted" = "Mukua %d karere.";
+/* '%d messages sent.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that N messages has been sent used on all threads views. */
+"state_MessagesSent" = "Ka tonoa %d karere.";
 /* 'Passphrase updated.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the change of password. */
-"state_PassphraseUpdated" = "Whakahou kīangahipa.";
+"state_PassphraseUpdated" = "Whakahōungia kīangahipa.";
 /* '%d recipients deleted.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the number of recipients deleted. %d the number of recipient's keys successfully deleted. */
 "state_RecipientsDeleted" = "Mukua %d kaiwhiwhi.";
 /* '%s contacts imported.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the number of contacts imported after exchange. %s the number of contacts imported, may be expressed as a ratio, such as 4/5 in case of a partial import. */
-"state_SomeContactsImported" = "I ngā hoapā %@ kawemai.";
+"state_SomeContactsImported" = "Hoapā %@ kawemai.";
 /* 'Text copied to clipboard.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the message text has been copied to the device native clipboard. */
-"state_TextCopiedToClipboard" = "Tārua kuputuhi ki te papatopenga.";
+"state_TextCopiedToClipboard" = "Tārua Kuputuhi ki te papatopenga.";
 
 /* 'SafeSlinger is designed to easily share identity data, in person or over the phone, authenticated, private, and intact. Each person you share with creates a secure end-to-end channel to send messages.' is an application description (sentence case); used at the beginning of the about box and app store listing to describe the application. Beginning of long form: 4000 character max. */
-"text_About" = "Hoahoatia SafeSlinger ki te faaite ngāwari tuakiri raraunga, tangata i roto i runga i te waea ranei, whakamotuhēhē, tūmataiti, me te tonu. Ia tangata faaite i ia koutou ki te hanga i tētahi hongere haumaru pito-ki-mutu ki te tuku karere.";
+"text_About" = "Hangaia SafeSlinger ki te faaite i ngāwari tuakiri raraunga, tangata i roto i runga i te waea ranei, whakamotuhēhē, tūmataiti, me te tonu. Ia tangata faaite i koe ki te hanga i tētahi hongere haumaru mutunga-ki-mutu ki te unga karere.";
 /* 'Easily exchange contact information with others' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
-"text_About1" = "Ngāwari taui pārongo whakapā ki ētahi atu";
+"text_About1" = "Ngāwari whakawhiti pārongo whakapā ki ētahi atu";
 /* 'Securely sling texts, photos, anything!' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
-"text_About2" = "Humarie piua tuhinga, whakaahua, tetahi!";
+"text_About2" = "Humarie piua tuhinga, whakaahua, tetahi mea!";
 /* 'Strong cryptography protects your information' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
-"text_About3" = "Kaha tuhiwhakamuna tiaki i ō mōhiohio";
+"text_About3" = "He kaha Tuhimunatanga tiaki koutou mōhiohio";
 /* 'SafeSlinger: Speak 3 words and forever chat in peace.' is an application description (sentence case); used in the about box and app store listing to describe the application features. Short form: 80 character max, should be exciting. */
 "text_About_Short" = "SafeSlinger: Korero 3 kupu, me te kōrero ake ake i runga i te rangimarie.";
 /* 'email: %s' is an application description (sentence case); used in the app store listing, %s = SafeSlinger support email address. */
-"text_AboutEmail" = "email: %@";
+"text_AboutEmail" = "īmēra: %@";
 /* 'Features:' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
 "text_AboutFeat" = "Āhuatanga:";
 /* 'web: %s' is an application description (sentence case); used in the app store listing, %s = SafeSlinger project web page address. */
 "text_AboutWeb" = "tukutuku: %@";
+/* 'Developed by:' is an application description (sentence case); used at the end of the about dialog to list the developers of SafeSlinger. */
+"text_DevelopedBy" = "Whakawhanakehia e:";
 /* 'Exchange' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordExchange" = "Exchange";
 /* 'Identity' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordIdentity" = "Tuakiri";
 /* 'Key' is an application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordKey" = "Matua";
+"text_KeywordKey" = "Key";
 /* 'Messaging' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordMessaging" = "Kareretanga";
 /* 'Privacy' is an application description (sentence case); one of many keywords to use when searching related terms. */
@@ -752,23 +768,25 @@
 "text_KeywordSecurity" = "Haumarutanga";
 /* 'Languages provided by:' is an application description (sentence case); used at the end of the about dialog to list the translators of SafeSlinger. */
 "text_LanguagesProvidedBy" = "Reo e whakaratohia ana e:";
+/* 'translate: %s' is an application description (sentence case); used in the app store listing, %s = SafeSlinger project localization repo. */
+"text_LocalizationRepo" = "te iriti i: %@";
 /* 'Related Terms:' is an application description (sentence case); used in the app store listing to list related search terms to help users looking for secure key exchange and messaging. */
-"text_RelatedSearchTerms" = "Ngā Pātahi:";
+"text_RelatedSearchTerms" = "Ngā ture e hāngai ana:";
 /* 'Requirements:' is an application description (sentence case); used in the about box and app store listing to enumerate requirements. */
-"text_Requirements" = "Ngā:";
+"text_Requirements" = "Whakaritenga:";
 /* 'Must be installed on a minimum of 2 devices.' is an application description (sentence case); used in the about box and app store listing to enumerate requirements. */
-"text_Requirements1" = "Me tāuta i runga i te iti o 2 whakaaro.";
+"text_Requirements1" = "Me tāuta i runga i te iti o te 2 ngā pūrere.";
 /* 'An Internet connection must be active.' is an application description (sentence case); used in the about box and app store listing to enumerate requirements. */
-"text_Requirements2" = "Me kaha te hononga Ipurangi.";
+"text_Requirements2" = "Me kia hohe He hononga Ipurangi.";
 /* 'open source: %s' is an application description (sentence case); used in the app store listing to show the location of the open source code repository. %s = source code URL. */
 "text_SourceCodeRepo" = "tuwhera puna: %@";
 /* 'Stability fixes.' is an application description (sentence case); used to list what changes have been made to updated versions. */
-"text_WhatsNew" = "Iro, u.";
+"text_WhatsNew" = "Whakatikanga pūmautanga.";
 
 /* 'About' is a title (title case); used as the */
 "title_About" = "Mō";
 /* 'Camera' is a menu option (title case); used in the Select File Option menu to take a picture with the camera on iOS. */
-"title_camera" = "Camera";
+"title_camera" = "Kāmera";
 /* 'Choose Directory' is a title (title case); used at the top of the menu when choosing a directory to load or save a file attachment. */
 "title_ChooseDirectory" = "Kōwhirihia te Whaiaronga";
 /* 'Choose Your Attachment' is a title (title case); used at the top of the menu options when choosing among sources to pick an attachment. */
@@ -778,64 +796,64 @@
 /* 'Error' is a title (title case); used at the top of the error dialog. */
 "title_Error" = "Hapa";
 /* 'Sling Keys Assistant' is a title (title case); used at the top of the dialog, which provides a walkthrough of the key exchange protocol. */
-"title_ExchangeWalkthrough" = "Kotaha Assistant Kī";
+"title_ExchangeWalkthrough" = "Kotaha Assistant Keys";
 /* 'Attachment Options' is a title (title case); used at the top of the menu when choosing whether to remove the current attachment or select a new one. */
-"title_FileOptions" = "Ngā Kōwhiringa Āpitihanga";
+"title_FileOptions" = "Kōwhiringa Āpitihanga";
 /* 'Setup' is a title (title case); used at the top of the setup screen. */
 "title_find" = "Tatūnga";
 /* 'Select a font size' is a title (title case); used as the settings title when changing font size */
 "title_font_size" = "Tīpakohia te rahi momotuhi";
 /* 'Begin Exchange' is a title (title case); used at the top of the begin exchange screen to start the exchange protocol. */
-"title_home" = "Tīmataria te Exchange";
+"title_home" = "Kamata Exchange";
 /* 'Home' is a title (title case); used at the top of the home screen on iOS. */
 "title_HomePanel" = "Home";
 /* 'Message' is a title (title case); used at the top of the dialog when viewing message details. */
-"title_MessageDetail" = "Message";
+"title_MessageDetail" = "Karere";
 /* 'Messages' is a title (title case); used at the top of the message list screen. */
-"title_Messages" = "Messages";
+"title_Messages" = "Karere";
 /* 'Personal Contact' is a title (title case); used at the top of a menu when choosing to alter the users' contact: Edit, Create New, or Use Another. */
 "title_MyIdentity" = "Whakapā Whaiaro";
 /* 'SafeSlinger Message Available' is a title (title case); used as the title of an incoming message in the notification window. */
-"title_NotifyFileAvailable" = "Message SafeSlinger wātea";
+"title_NotifyFileAvailable" = "Karere SafeSlinger wātea";
 /* '%d SafeSlinger Messages Available' is a title (title case); used as the title of multiple incoming messages in the notification window. iOS-only. */
-"title_NotifyMulFileAvailable" = "%d Messages SafeSlinger wātea";
+"title_NotifyMulFileAvailable" = "%d Karere SafeSlinger wātea";
 /* 'Passphrase' is a title (title case); used at the top of the passphrase screen where user will login. */
 "title_passphrase" = "Kīangahipa";
 /* 'Photo Album' is a menu option (title case); used in the Select File Option menu to select a picture from the photo album on iOS. */
-"title_photoalbum" = "Pukaemi Whakaahua";
+"title_photoalbum" = "Photo Album";
 /* 'Photo Library' is a menu option (title case); used in the Select File Option menu to create a picture from the photo library on iOS. */
 "title_photolibary" = "Photo Library";
 /* 'Recipients' is a title (title case); used at the top of the recipient list screen. */
 "title_PickRecipient" = "Kaiwhiwhi";
 /* 'Question' is a title (title case); used at the top question yes/no dialog. */
-"title_Question" = "Pātai";
+"title_Question" = "Question";
 /* 'Recipient Detail' is a title (title case); used at the top of the dialog when viewing recipient/key details. */
 "title_RecipientDetail" = "Kaiwhiwhi Taipitopito";
 /* 'End Exchange' is a title (title case); used at the top of the import contacts screen at the end of the exchange protocol. */
-"title_save" = "End Exchange";
+"title_save" = "Whakamutunga Exchange";
 /* 'Save File As' is a title (title case); used at the top of the File Manager when saving a file on Android. */
-"title_SaveFileAs" = "Whakaorangia Kōnae rite";
+"title_SaveFileAs" = "Whakaorangia Kōnae I";
 /* 'Secure Introduction' is a title (title case); used at the top of the secure introduction composition screen. */
-"title_SecureIntroduction" = "Kupu Whakataki Haumaru";
+"title_SecureIntroduction" = "Kupu Whakataki haumaru";
 /* 'Secure Introduction Invitation!' is a title (title case); used at the top of the confirmation dialog when receiving a secure introduction. */
-"title_SecureIntroductionInvite" = "Haumaru Kupu Whakataki titauraa!";
+"title_SecureIntroductionInvite" = "Haumaru Whakataki titauraa!";
 /* 'Sending Options:' is a title (title case); used to denote the dialog for user to pickup sender source options. */
-"title_SelectSource" = "Kōwhiringa tuku:";
+"title_SelectSource" = "Kōwhiringa te tuku:";
 /* 'Send' is a title (title case); used at the top of compose message screen. */
 "title_SendFile" = "Tukua";
 /* 'Sharing Folder' is a menu option (title case); used in the Select File Option menu to select a file from the sharing folder on iOS. */
-"title_sharingfolder" = "Te toha i Kōpaki";
+"title_sharingfolder" = "Te faaiteraa i Kōpaki";
 /* 'How many users in the exchange?' is a title (title case); used at the top of the group size selection screen. */
-"title_size" = "E hia ngā kaiwhakamahi i roto i te utu?";
+"title_size" = "Hia kaiwhakamahi i roto i te utu?";
 /* 'Sound Recorder' is a menu option (title case); used in the Select File Option menu to create a voice recording on iOS. */
 "title_soundrecoder" = "Kaihopu Oro";
 /* 'SafeSlinger Invitation' is a title (title case); used as the Subject field of an email or text message sent by the Share Application menu option. */
-"title_TextInviteMsg" = "SafeSlinger titauraa";
+"title_TextInviteMsg" = "SafeSlinger Pōwhiri";
 /* 'Threads' is a title (title case); used at the top of the thread list screen. */
-"title_Threads" = "Ngā Miro";
+"title_Threads" = "Miro";
 /* 'Grouping' is a title (title case); used at the top of the entry screen for the lowest common number. */
 "title_userid" = "Whakarōpū";
 /* 'Verify' is a title (title case); used at the top of the word phrase verification screen. */
-"title_verify" = "Manatokohia";
+"title_verify" = "Manatokona";
 /* 'Warning' is a title (title case); used at the top of the warning dialog. */
 "title_Warn" = "Whakatūpato";

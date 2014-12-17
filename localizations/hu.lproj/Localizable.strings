@@ -23,70 +23,72 @@
 */
 
 /* 'Add a Sling Keys contact invitation via...' is an action title (sentence case, ellipsis); this title is used during Add Contact Invitation in a dialog of message choices, which can send an installation URL for SafeSlinger along with instructions. */
-"action_NewUserRequest" = "Hozzáadása Sling Keys kapcsolat meghívás keresztül...";
+"action_NewUserRequest" = "Add a Sling Keys contact meghívás útján...";
 
 /* 'SafeSlinger' is an application name (title case); used for home screen icons, at the top of many screens, and many other places in the application. */
 "app_name" = "SafeSlinger";
 
 /* 'Backup is disabled. Do you want to adjust backup settings and keep this reminder?' is a question message (sentence case, question mark); used to warn when the backup is off to confirm we should keep reminding the user. Used with Forget and Remind buttons. */
-"ask_BackupDisabledRemindLater" = "Backup le van tiltva. Szeretné beállítani mentés beállításait, és tartsa ezt az emlékeztetőt?";
+"ask_BackupDisabledRemindLater" = "Hát van tiltva. Szeretné beállítani biztonsági beállításokat, és tartsa ezt az emlékeztetőt?";
 /* '%s has a more recent device or key, are you sure you want to use this older one?' is a question message (sentence case, question mark); is a confirmation question that occurs when the user selected a recipient with more recent information in the database. */
-"ask_ConfirmUseOlderDeviceOrKey" = "%@ egy újabb eszköz vagy a kulcs, vagy akarod használni ezt a régebbi?";
+"ask_ConfirmUseOlderDeviceOrKey" = "%@ van egy újabb eszköz vagy kulcsot, biztosan szeretné használni ezt a régebbit?";
 /* 'File name %s already exists. Overwrite?' is a question message (sentence case, question mark); is a question that occurs when the user attempts to save a file with the same name as an existing file in the same location. %s = the file name of the attachment. */
 "ask_FileExistsOverwrite" = "Fájlnév %@ már létezik. Felülírja?";
 /* 'Without a Google Account you will only be able to send, NOT receive messages. Do you want to add a Google account?' is a question message (sentence case, question mark); used to warn when a Google account has not been setup, if the user intends to receive messages. Android-only. */
-"ask_GoogleAccountToReceiveMsgs" = "Google Fiók nélkül csak akkor lesz képes küldeni, nem tud üzeneteket fogadni. Szeretné, hogy adjunk egy Google fiókot?";
+"ask_GoogleAccountToReceiveMsgs" = "Google-fiók nélkül csak akkor leszünk képesek küldeni, nem tud üzeneteket fogadni. Szeretné, hogy adjunk egy Google fiókot?";
 /* 'Quit? Are you sure?' is a question message (sentence case, question mark); is a confirmation question that occurs when the user chooses to end the exchange protocol prematurely. */
-"ask_QuitConfirmation" = "Ki? Biztos vagy benne?";
+"ask_QuitConfirmation" = "Lépni? Biztos vagy benne?";
 /* 'We'd like your help improving SafeSlinger. Would you like to automatically send any errors to us?' is a question message (sentence case, question mark); is a question that occurs when the user encounters an unhandled exception and are asked if they want to upload this error log and any future error logs. */
-"ask_SendErrorData" = "Azt szeretné, hogy javítják az SafeSlinger. Szeretnél automatikusan küld hibák minket?";
+"ask_SendErrorData" = "Szeretnénk a segítségét javítása SafeSlinger. Szeretné automatikusan elküldi a hibákat nekünk?";
 
 /* 'Accept' is a button (title case); the Accept button is paired with the Refuse button to indicate user acceptance of a secure introduction. */
-"btn_Accept" = "Elfogadás";
+"btn_Accept" = "Elfogad";
 /* 'Begin Exchange' is a button (title case); the Begin Exchange button is used to begin the SafeSlinger exchange protocol. */
-"btn_BeginExchangeProximity" = "Kezdje az Exchange";
+"btn_BeginExchangeProximity" = "Kezdje Csere";
 /* 'Cancel' is a button (title case); the Cancel button is used to indicate the user wishes to exit the current screen without saving data. For non-Android use only, since Android uses the Back hardware button instead. */
 "btn_Cancel" = "Mégsem";
 /* 'Close' is a button (title case); the Close button is used to allow the user to dismiss a dialog. */
-"btn_Close" = "Bezárás";
+"btn_Close" = "Közel";
 /* 'Continue' is a button (title case); the Continue button is used to remind the user that there is another step to complete. */
-"btn_Continue" = "Folytatás";
+"btn_Continue" = "Folytatódik";
 /* 'Create New Key' is a button (title case); the Create New Key button is paired with the Cancel button, and is used to affirm the creation of a new key and passphrase. */
-"btn_CreateNewKey" = "Új létrehozása Kulcs";
+"btn_CreateNewKey" = "Create New Key";
 /* 'Delete Keys' is a button (title case); the Create New Key button is paired with the Cancel button, and is used to affirm the deletion of more recent keys. */
-"btn_DeleteKeys" = "Delete billentyűkombináció";
+"btn_DeleteKeys" = "Törlés Keys";
 /* 'Discard' is a button (title case); the Discard button is used to indicate the user wishes to exit the current screen without saving data, such as a voice memo. For non-Android use only, since Android uses the Back hardware button instead. */
 "btn_discard" = "Dobja";
 /* 'Done' is a button (title case); the Done button is used to allow the user to complete a current multi-step process. */
-"btn_Done" = "Kész";
+"btn_Done" = "Csinált";
+/* 'Edit' is a button (title case); the Edit button is used to show a screen where the user can edit a contact. */
+"btn_Edit" = "Szerkesztés";
 /* 'Exit' is a button (title case); the Exit button is used to close the application. For non-Android use only, since Android uses the Back hardware button instead. */
-"btn_Exit" = "Exit";
+"btn_Exit" = "Kijárat";
 /* 'Import' is a button (title case); the Import button is used to import a set of contacts on after an unsuccessful exchange protocol has finished. */
 "btn_Import" = "Import";
 /* 'Introduce' is a button (title case); the Introduce button is used to send a secure introduction to the two users selected on the Secure Introduction screen. */
-"btn_Introduce" = "Mutassa be";
+"btn_Introduce" = "Bevezet";
 /* 'Next' is a button (title case); the Next button is used to remind the user that there is another step to complete. */
 "btn_Match" = "Következő";
 /* 'No' is a button (title case); the No button is paired with the Yes button, and is used to indicate a negative answer to a Yes/No question. */
-"btn_No" = "Nem";
+"btn_No" = "Nincs";
 /* 'No Match' is a button (title case); the No Match button is used if the user cannot find the same batting screen on another user's device during the exchange critical care. */
 "btn_NoMatch" = "No Match";
 /* 'Not Now' is a button (title case); the Not Now button is used as a negative button to decline an offered service or permission. */
 "btn_NotNow" = "Nem most";
 /* 'Forget' is a button (title case); the Forget button is paired with the Remind button and is used to indicate the user wishes to dismiss the current reminder of a potential error state, such as having backup or notification settings turned off, and not be reminded again. */
-"btn_NotRemind" = "Felejtsd el";
+"btn_NotRemind" = "Elfelejt";
 /* 'OK' is a button (title case); the OK button is affirmation button used to indicate the user accepts the data entered on the current screen. */
-"btn_OK" = "OK";
+"btn_OK" = "rendben";
 /* 'Refuse' is a button (title case); the Refuse button is paired with the Accept button to indicate user refusal of a secure introduction. */
 "btn_Refuse" = "Hulladék";
 /* 'Remind' is a button (title case); the Remind button is paired with the Forget button and is used to indicate the user wishes to dismiss the current reminder of a potential error state, such as having backup or notification settings turned off, and does want to be reminded again later. */
-"btn_Remind" = "Emlékeztesd";
+"btn_Remind" = "Emlékeztet";
 /* 'Save' is a button (title case); the Save button is used to indicate the data in question should be saved and persisted. */
 "btn_Save" = "Save";
 /* 'Add Attachment' is a button (title case); the Add Attachment button is used on the Compose screen to allow the user to select the source of an attachment to the current message. */
-"btn_SelectFile" = "Melléklet hozzáadása";
+"btn_SelectFile" = "Add Attachment";
 /* 'Send' is a button (title case); the Send button will secure the current text message and attachment, if any, and send the message to the selected recipient. */
-"btn_SendFile" = "Küldjön";
+"btn_SendFile" = "Küld";
 /* 'Yes' is a button (title case); the Yes button is paired with the No button, and is used to indicate an affirmative answer to a Yes/No question. */
 "btn_Yes" = "Igen";
 
@@ -103,23 +105,23 @@
 /* '3 minutes' is a choice (sentence case); used to set the password timeout to 3 minutes. */
 "choice_3mins" = "3 perc";
 /* '40 minutes' is a choice (sentence case); used to set the password timeout to 40 minutes. */
-"choice_40mins" = "40 perc alatt";
+"choice_40mins" = "40 perc";
 /* '4 hours' is a choice (sentence case); used to set the password timeout to 4 hours. */
 "choice_4hours" = "4 óra";
 /* '5 minutes' is a choice (sentence case); used to set the password timeout to 5 minutes. */
-"choice_5mins" = "5 perc alatt";
+"choice_5mins" = "5 perc";
 /* '8 hours' is a choice (sentence case); used to set the password timeout to 8 hours. */
 "choice_8hours" = "8 óra";
 /* 'Default Storage' is a choice (sentence case); used to set the attachment root path to the default source. Android-only. */
-"choice_auto_storage" = "Alapértelmezett Storage";
+"choice_auto_storage" = "Default Storage";
 /* 'Default' is a choice (sentence case); used in any menu to denote the default choice. */
 "choice_default" = "Alapértelmezett";
 /* 'External Storage' is a choice (sentence case); used to set the attachment root path to an external source. Android-only. */
-"choice_external_storage" = "Külső tároló";
+"choice_external_storage" = "Külső tárolás";
 /* 'Large' is a choice (sentence case); used in the settings to choose a large font size. */
 "choice_font_large" = "Nagy";
 /* 'Medium' is a choice (sentence case); used in the settings to choose a medium font size. */
-"choice_font_medium" = "Medium";
+"choice_font_medium" = "Közepes";
 /* 'Very Small' is a choice (sentence case); used in the settings to choose a tiny font size. */
 "choice_font_micro" = "Nagyon kicsi";
 /* 'Small' is a choice (sentence case); used in the settings to choose a small font size. */
@@ -129,92 +131,92 @@
 /* 'No Limit' is a choice (sentence case); used to remove the timeout for the password. */
 "choice_nolimit" = "No Limit";
 /* '%d users' is a choice (sentence case); used to describe the number of users currently attempting to exchange keys. %d = number of users in the exchange. */
-"choice_NumUsers" = "%d felhasználó";
+"choice_NumUsers" = "%d felhasználók";
 /* 'Save Directory' is a choice (sentence case); used when the user chooses to change the directory of the attachment before saving. */
 "choice_SaveDirectory" = "Save Directory";
 /* 'Save file' is a choice (sentence case); used when the user chooses to change the filename of the attachment before saving. */
-"choice_SaveFile" = "Fájl mentése";
+"choice_SaveFile" = "A fájl mentése";
 /* 'Up' is a choice (sentence case); used in the File Manager dialog to navigate up to a parent directory. */
-"choice_Up" = "Up";
+"choice_Up" = "Fel";
 
 /* 'Some members are using an older version; all members must upgrade to the newest version.' is an error message (sentence case, period); used to warn when some members of the key exchange protocol are using less than the minimum version. Used for backward-compatibility in some cases. */
-"error_AllMembersMustUpgrade" = "Egyes tagok egy régebbi verzió; minden tagja köteles frissíteni a legújabb verzióra.";
+"error_AllMembersMustUpgrade" = "Egyes tagok egy régebbi verzió; minden tagja kell frissíteni a legújabb verzióra.";
 /* 'All members must upgrade, some are using older key formats.' is an error message (sentence case, period); used to warn when the key format is incorrect after an exchange and perhaps used an old format. */
-"error_AllMembersMustUpgradeBadKeyFormat" = "Minden tag köteles frissíteni, néhány régebbi kulcs formátumban.";
+"error_AllMembersMustUpgradeBadKeyFormat" = "Minden tag köteles frissíteni, néhány régebbi jelentősebb formátumban.";
 /* 'All members must upgrade, some are using older push registration formats.' is an error message (sentence case, period); used to warn when the push registration format is incorrect or corrupted. */
-"error_AllMembersMustUpgradeBadPushToken" = "Minden tag köteles frissíteni, néhány régebbi nyomja bejegyzés formátumokat.";
+"error_AllMembersMustUpgradeBadPushToken" = "Minden tag köteles frissíteni, néhány régebbi nyomja regisztráció formátumokat.";
 /* 'Audio player decoding error.' is an error message (sentence case, period); used to warn when attempting to play an audio message fails to decode properly. iOS-only. */
-"error_AudioPlayerDecodeError" = "Audio lejátszó dekódolás hiba.";
+"error_AudioPlayerDecodeError" = "Audio player dekódolási hibát.";
 /* 'Cannot play the recording.' is an error message (sentence case, period); used to warn when the voice recording received cannot be played. iOS-only. */
-"error_AudioPlayerError" = "Nem lehet lejátszani a felvételt.";
+"error_AudioPlayerError" = "Nem tudja lejátszani a felvételt.";
 /* 'Audio recorder encoding error.' is an error message (sentence case, period); used to warn when attempting to record an audio message fails to encode properly. iOS-only. */
-"error_AudioRecorderEncodeError" = "Hangrögzítő kódolási hiba.";
+"error_AudioRecorderEncodeError" = "Hangfelvevő kódolás hiba.";
 /* 'Microphone permission is required to record a secure voice message. Tap the %s button for SafeSlinger Microphone permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Microphone permission. iOS-only. */
-"error_AudioRecorderPermissionError" = "Mikrofon engedély köteles rögzíteni a biztonságos hangüzenetet. Érintse meg a %@ gombot SafeSlinger Mikrofon engedély részleteket.";
+"error_AudioRecorderPermissionError" = "Mikrofon engedély szükséges rögzíteni a biztonságos hangüzenetet. Érintse meg a %@ gombot SafeSlinger Mikrofon engedélyével részleteket.";
 /* 'No backup to restore.' is an error message (sentence case, period); used to warn at application setup, when there is no pre-existing backup to restore and warn the user that any previous keys have not been restored. */
 "error_BackupNotFound" = "No hát visszaállítani.";
 /* 'Device does not support backup restore.' is an error message (sentence case, period); used to warn when the device hardware does not support restoration from backup. */
-"error_BackupNotSupportedDevice" = "A készülék nem támogatja a biztonsági mentés visszaállítása.";
+"error_BackupNotSupportedDevice" = "Az eszköz nem támogatja biztonsági mentés visszaállítása.";
 /* 'Due to a bug in Android 4.1, you will have to uninstall and reinstall SafeSlinger.' is an error message (sentence case, period); used to warn when unable to load native libraries due to a Google Play copy-protection bug, which can corrupt installations for users upgrading to Android 4.1. Android-only. */
-"error_BadCopyProtectUpgrade" = "Egy hiba miatt az Android 4.1, akkor kell eltávolítani és újratelepíteni SafeSlinger.";
+"error_BadCopyProtectUpgrade" = "Egy hiba miatt az Android 4.1, akkor meg kell eltávolítani és újratelepíteni SafeSlinger.";
 /* 'A Google account is required. Please open the account manager and add a Google account.' is an error message (sentence case, period); used to warn during push registration: There is no Google account on the phone. The application should ask the user to open the account manager and add a Google account. Fix on the device side. Android-only. */
 "error_C2DMRegAccountMissing" = "A Google-fiók szükséges. Kérjük, nyissa meg a számlavezető és adjunk hozzá egy Google fiókot.";
 /* 'Registration not authenticated, please retry manually later.' is an error message (sentence case, period); used to warn during push registration: Bad password. The application should ask the user to enter his/her password, and let user retry manually later. Fix on the device side. Android-only. */
 "error_C2DMRegAuthenticationFailed" = "Regisztráció nem hitelesített, kérjük, próbálja újra később manuálisan.";
 /* 'Registration is not available for this version, please check for an updated version.' is an error message (sentence case, period); used to warn during push registration: The sender account is not recognized. Android-only. */
-"error_C2DMRegInvalidSender" = "Bejegyzés nem érhető el ez a verzió, ellenőrizze a frissített verzió.";
+"error_C2DMRegInvalidSender" = "A regisztráció nem elérhető ez a verzió, ellenőrizze a frissített változata.";
 /* 'Incorrect device registration with Google. This device does not currently support push messaging.' is an error message (sentence case, period); used to warn during push registration: Incorrect phone registration with Google. This phone doesn't currently support C2DM. Android-only. */
-"error_C2DMRegPhoneRegistrationError" = "Hibás készülék regisztrációja Google. Ez a készülék jelenleg nem támogatja nyomja üzenetküldés.";
+"error_C2DMRegPhoneRegistrationError" = "Helytelen eszköz regisztrációs Google. Ez a készülék jelenleg nem támogatja a Push üzenetek.";
 /* 'Push registration service not available, scheduling retry in %d seconds.' is an error message (sentence case, period); used to warn during push registration: The device can't read the response, or there was a 500/503 from the server that can be retried later. The application should use exponential back off and retry. %d = the current number of seconds until the next push registration attempt. Android-only. */
-"error_C2DMRegServiceNotAvailable" = "Push regisztrációs szolgáltatás nem elérhető, ütemezés újra a %d másodperc.";
+"error_C2DMRegServiceNotAvailable" = "Push regisztrációs szolgáltatás nem áll rendelkezésre, ütemezés újra a %d másodperc.";
 /* 'Too many applications are registered for Push. Please uninstall some other applications and retry.' is an error message (sentence case, period); used to warn during push registration: The user has too many applications registered. The application should tell the user to uninstall some other applications, let user retry manually. Fix on the device side. Android-only. */
-"error_C2DMRegTooManyRegistrations" = "Túl sok alkalmazás regisztrált Push. Kérjük, távolítsa el más alkalmazást, és próbálja újra.";
+"error_C2DMRegTooManyRegistrations" = "Túl sok alkalmazás regisztrált Push. Kérjük, távolítson el néhány más alkalmazások, és próbálja újra.";
 /* 'Cannot send an empty attachment.' is an error message (sentence case, period); used to warn when use attempts to attach an empty file to the message. */
-"error_CannotSendEmptyFile" = "Nem tud küldjön egy üres mellékletet.";
+"error_CannotSendEmptyFile" = "Nem lehet elküldeni egy üres mellékletet.";
 /* 'Cannot send attachments greater than %d bytes in size.' is an error message (sentence case, period); used to warn when the message and attachment (if any) exceed the current quota limits for the App Engine service we use. %d the maximum limit in bytes of the entire message plus attachments that the App Engine service will allow us to upload. */
-"error_CannotSendFilesOver" = "Nem küldhet csatolmányokat nagyobb, mint %d bájt méretű.";
+"error_CannotSendFilesOver" = "Nem tud küldeni csatolmányokat nagyobb, mint %d byte.";
 /* 'Cannot send a null attachment.' is an error message (sentence case, period); used to warn when use attempts to attach an empty file to the message. */
-"error_CannotSendNullFile" = "Nem tud küldeni egy null mellékletet.";
+"error_CannotSendNullFile" = "Nem lehet elküldeni a null mellékletet.";
 /* 'Contact creation failed.' is an error message (sentence case, period); used to warn when failing to insert new contact data. */
 "error_contactCreationFailure" = "Kapcsolat létrehozása sikertelen.";
 /* 'Contact insert failed.' is an error message (sentence case, period); used to warn when failing to insert new contact data. */
-"error_ContactInsertFailed" = "Érintkezőbetét sikertelen.";
+"error_ContactInsertFailed" = "Érintkezőbetéttel nem sikerült.";
 /* 'This contact is missing a name, please edit.' is an error message (sentence case, period); used to warn when the matching contact found on the Setup screen does not have a name. */
-"error_ContactNameMissing" = "Ez a kapcsolat hiányzik a név, kérjük, módosítsa.";
+"error_ContactNameMissing" = "Ez a kapcsolat hiányzik a nevét, kérem szerkeszteni.";
 /* 'This contact is missing a name, please reselect.' is an error message (sentence case, period); used to warn when the matching contact found on the Setup screen does not have a name. */
 "error_ContactNameMissing2" = "Ez a kapcsolat hiányzik egy nevet, válassza ki újra.";
 /* 'Contact update failed.' is an error message (sentence case, period); used to warn when failing to merge contact data after an exchange. */
 "error_ContactUpdateFailed" = "Kapcsolat frissítés nem sikerült.";
 /* 'Internet not available, check your settings.' is an error message (sentence case, period); used to warn when the user attempts to communicate with a server and the device cannot detect a path to the Internet. */
-"error_CorrectYourInternetConnection" = "Internet nem áll rendelkezésre, ellenőrizze a beállításokat.";
+"error_CorrectYourInternetConnection" = "Internet nincs, ellenőrizze a beállításokat.";
 /* 'Could not extract private key.' is an error message (sentence case, period); used to warn when the user is not able to extract the private key from the encrypted private key stored on the device. */
-"error_couldNotExtractPrivateKey" = "Nem sikerült lekérdezni privát kulcsot.";
+"error_couldNotExtractPrivateKey" = "Nem sikerült kinyerni privát kulcsot.";
 /* 'Exchange timeout exceeded. Begin the exchange again.' is an error message (sentence case, period); used to warn when users have waited too long, 10 minutes, before completing the exchange protocol. */
-"error_ExchangeProtocolTimeoutExceeded" = "Csere timeout meghaladta. Kezdje a csere újra.";
+"error_ExchangeProtocolTimeoutExceeded" = "Az Exchange timeout meghaladta. Kezdje a csere újra.";
 /* '%s is not supported on %s at this time.' is an error message (sentence case, period); used to warn when a specific capability is not supported by a specific platform. */
 "error_FeatureIsNotSupport" = "%@ nem támogatott %@ ebben az időben.";
 /* 'Unable to save %s.' is an error message (sentence case, period); used to warn when there was disk error attempting to save an attachment to the users' device. %s = the name of the file that failed to save. */
 "error_FileSave" = "Nem lehet menteni %@.";
 /* 'File storage is not available.' is an error message (sentence case, period); used to warn when attempting to read/write to attachment storage becomes unavailable. */
-"error_FileStorageUnavailable" = "Fájlok tárolása nem elérhető.";
+"error_FileStorageUnavailable" = "Fájlok tárolása nem áll rendelkezésre.";
 /* 'Server HTTP Error: %d' is an error message (sentence case, period); used to warn when the key exchange or messaging servers encountered an error and need to notify the user. %d = the HTTP status line code is case of an error, like 404 (file not found). 500 is common for uncaught Python run-time errors. */
-"error_HttpCode" = "Szerver HTTP hiba: %d";
+"error_HttpCode" = "Server HTTP Error: %d";
 /* 'Incorrect data found in exchange. Begin the exchange again.' is an error message (sentence case, period); used to warn when some item received from another group member during the key exchange did not hash correctly to the previously committed value. */
-"error_InvalidCommitVerify" = "Hibás adatok találhatók cserébe. Kezdje a csere újra.";
+"error_InvalidCommitVerify" = "Helytelen talált adatok cseréjét. Kezdje a csere újra.";
 /* 'Please enter a positive integer.' is an error message (sentence case, period); used to warn when the user attempted to type in a group ID on the Grouping screen that was zero, negative, or empty. */
-"error_InvalidCommonUserId" = "Kérjük, adjon meg egy pozitív egész szám.";
+"error_InvalidCommonUserId" = "Adjon meg egy pozitív egész szám.";
 /* 'A valid contact name is required.' is an error message (sentence case, period); used to warn when the user completes Setup without typing a name, or the name includes 3rd-person words we cannot allow, such as: 'Me', 'Contact', 'Foo',… */
 "error_InvalidContactName" = "Érvényes nevet szükséges.";
 /* 'Bad incoming message format.' is an error message (sentence case, period); used to warn when the incoming message was not formatted properly. */
-"error_InvalidIncomingMessage" = "Bad bejövő üzenet formátumban.";
+"error_InvalidIncomingMessage" = "Bad bejövő üzenetet formátumban.";
 /* 'Bad message format.' is an error message (sentence case, period); used to warn when the outgoing message was not formatted properly. */
 "error_InvalidMsg" = "Rossz üzenet formátumban.";
 /* 'Invalid recipient.' is an error message (sentence case, period); used to warn when the user has not selected 1 recipient to send a message on the Compose Message screen, also when the user has not selected 2 recipients to send introductions to on the Secure Introduction screen. */
 "error_InvalidRecipient" = "Érvénytelen címzett.";
 /* 'You have reported a difference in phrases. Begin the exchange again.' is an error message (sentence case, period); used to warn when the user presses the 'No Match' button that they are aborting the protocol for the group and sending a non-match signature to others. */
-"error_LocalGroupCommitDiffer" = "Ön jelentettek különbséget kifejezéseket. Kezdje a csere újra.";
+"error_LocalGroupCommitDiffer" = "Ön arról számoltak be, a különbség a mondatok. Kezdje a csere újra.";
 /* 'The peer key format is invalid.' is an error message (sentence case, period); used to warn when the public key we used for this recipient does not exist or is improperly formatted. */
-"error_MessageInvalidPeerKeyFormat" = "A szakértői kulcs formátuma érvénytelen.";
+"error_MessageInvalidPeerKeyFormat" = "A peer-kulcs formátuma érvénytelen.";
 /* 'Signature verification failed.' is an error message (sentence case, period); used to warn when key used to generate an incoming message signature is not in the key database. */
 "error_MessageSignatureVerificationFails" = "Aláírás ellenőrzése sikertelen.";
 /* 'Passphrases require at least %d characters.' is an error message (sentence case, period); used to warn when a user has setup a passphrase, which does not fit the minimum required length. %d = current requirement is at least 8 characters. */
@@ -222,119 +224,119 @@
 /* 'A minimum of %d members are required to exchange data.' is an error message (sentence case, period); used to warn when attempting to leave the Group Size screen without choosing a group size. %d = the minimum number of users to complete the exchange protocol, 2 usually. */
 "error_MinUsersRequired" = "Legalább %d tagjai kötelesek egymással kommunikálni.";
 /* 'SafeSlinger did not detect NDK support on this device, which is required.' is an error message (sentence case, period); used to warn when device has no Native Development Kit support installed. Android-only. */
-"error_MissingNdk" = "SafeSlinger nem érzékeli NDK támogatás ezen az eszközön, ami szükséges.";
+"error_MissingNdk" = "SafeSlinger nem érzékeli NDK támogatást ezen az eszközön, ami szükséges.";
 /* 'Unexpected data found in exchange. Begin the exchange again.' is an error message (sentence case, period); used to warn when a user has entered a group size number that is too low during the exchange protocol or possibly a Man-in-The-Middle (MiTM) attack where a malicious outsider attempts to join the group. */
-"error_MoreDataThanUsers" = "Váratlan talált adatok cserébe. Kezdje a csere újra.";
+"error_MoreDataThanUsers" = "Váratlan talált adatok cseréjét. Kezdje a csere újra.";
 /* 'You are attempting to send multiple items. At this time, SafeSlinger only supports sending one item at a time.' is an error message (sentence case, period); used to warn when the user attempts to select multiple attachments to send when we only allow one attachment for now. */
-"error_MultipleSendNotSupported" = "Ön próbált küldeni több elem. Ebben az időben, SafeSlinger csak támogat küld egy tétel egy időben.";
+"error_MultipleSendNotSupported" = "Akkor próbálta küldeni több elem. Ekkor SafeSlinger csak akkor támogatja elküldésével egy tétel egy időben.";
 /* 'The exchange is missing required data.' is an error message (sentence case, period); used to warn when exchange is missing some parameter or data to complete. */
-"error_NoDataToExchange" = "A csere hiányzik a szükséges adatokat.";
+"error_NoDataToExchange" = "A csere Hiányzik a szükséges adatokat.";
 /* 'Email account is not setup!' is an error message (sentence case, period); used to warn that a user did not have an email account when he/she tries to send out comments to administrator account. iOS-only. */
-"error_NoEmailAccount" = "E-mail fiók nem beállítás!";
+"error_NoEmailAccount" = "E-mail fiók nem beállítási!";
 /* 'No passphrase entered.' is an error message (sentence case, period); used to warn when a user generates or changes a passphrase and they have entered a blank password, which is not acceptable. */
-"error_noPassPhrase" = "Nincs jelszó megadva.";
+"error_noPassPhrase" = "No jelszót megadni.";
 /* 'You must select one of the phrases before proceeding.' is an error message (sentence case, period); used to warn when the user attempts to proceed past the word phrase Verify screen during the exchange protocol and they have not selected, which of the three phrases match with the other users'. */
-"error_NoWordListSelected" = "Ki kell választani az egyik kifejezések előtt.";
+"error_NoWordListSelected" = "Ki kell választania az egyik mondatok előtt.";
 /* 'Someone reported a difference in phrases. Begin the exchange again.' is an error message (sentence case, period); used to warn when at least one other member of the group during the exchange protocol pressed the 'No Match' button. */
-"error_OtherGroupCommitDiffer" = "Valaki számolt különbség kifejezéseket. Kezdje a csere újra.";
+"error_OtherGroupCommitDiffer" = "Valaki jelentett a különbség a mondatok. Kezdje a csere újra.";
 /* 'Memory is too low to complete this operation.' is an error message (sentence case, period); used to warn when a request for memory is made that cannot be satisfied using the available platform resources. Such a request may be made by both the running application or by an internal function of the VM. */
-"error_OutOfMemoryError" = "Memória túl alacsony ahhoz, hogy a művelet befejezéséhez.";
+"error_OutOfMemoryError" = "Memória túl alacsony befejezni ezt a műveletet.";
 /* 'Passphrases do not match.' is an error message (sentence case, period); used to warn when the user creates or changes their passphrase and the confirmation second entry did not match the first. */
-"error_passPhrasesDoNotMatch" = "Jelszavak nem egyeznek.";
+"error_passPhrasesDoNotMatch" = "A jelmondatok nem egyeznek.";
 /* 'You have exceeded the message quota for that recipient. Please retry later.' is an error message (sentence case, period): used to warn when sending messages to device and the message quota for all applications on the device is full. */
-"error_PushMsgDeviceQuotaExceeded" = "Túllépte az üzenet kvótát a címzettnek. Kérjük, próbálja később.";
+"error_PushMsgDeviceQuotaExceeded" = "Túllépte az üzenetet kvótát címzettnek. Kérjük, próbálkozzon később.";
 /* 'That recipient has a missing or bad push registration. You should stop sending messages to this device.' is an error message (sentence case, period); used to warn when sending messages to device and the recipient registration was never registered with the push service. */
-"error_PushMsgInvalidRegistration" = "Hogy a kedvezményezett egy hiányzó vagy rossz nyomja regisztráció. Abba kell hagynia üzeneteket erre a készülékre.";
+"error_PushMsgInvalidRegistration" = "Említett címzett a hiányzó vagy rossz nyomja regisztráció. Abba kell hagynia üzeneteket küld a készüléknek.";
 /* 'Message expired.' is an error message (sentence case, period); used to warn when getting messages, the message id cannot be found and it has likely been scrubbed from the server. */
-"error_PushMsgMessageNotFound" = "Üzenet lejárt.";
+"error_PushMsgMessageNotFound" = "Az üzenet érvényessége lejárt.";
 /* 'The message is too big. Reduce the size of the message.' is an error message (sentence case, period); used to warn when sending messages to device and the initial push exceeds 1024 bytes. Unlikely, since the initial push only contains the message hash identifier, which is 32 bytes plus a bit more of meta data. */
-"error_PushMsgMessageTooBig" = "Az üzenet túl nagy. Csökkentse az üzenet mérete.";
+"error_PushMsgMessageTooBig" = "Az üzenet túl nagy. Méretének csökkentéséhez az üzenetet.";
 /* 'That recipient's push registration is no longer valid. The recipient may have uninstalled SafeSlinger or turned off notifications. You should stop sending messages to this device.' is an error message (sentence case, period); used to warn when sending messages to device and the recipient is no longer registered. */
-"error_PushMsgNotRegistered" = "Hogy a címzett push bejegyzés már nem érvényes. A címzett eltávolította SafeSlinger vagy ki van kapcsolva értesítéseket. Abba kell hagynia üzeneteket erre a készülékre.";
+"error_PushMsgNotRegistered" = "Hogy a szolgáltatás igénybevevője push regisztráció már nem érvényes. A címzett eltávolította SafeSlinger vagy ki van kapcsolva értesítéseket. Abba kell hagynia üzeneteket küld a készüléknek.";
 /* 'There was an error communicating with the push notification service.' is an error message (sentence case, period); used to warn when sending messages to device and the push service replies incorrect HTTP status code. */
 "error_PushMsgNotSucceed" = "Hiba kommunikál a push értesítési szolgáltatást.";
 /* 'You have exceeded the message quota for this device. Please retry later.' is an error message (sentence case, period); used to warn when sending messages to device and the message quota for SafeSlinger on the device is full. */
-"error_PushMsgQuotaExceeded" = "Túllépte az üzenet kvóta ehhez az eszközhöz. Kérjük, próbálja később.";
+"error_PushMsgQuotaExceeded" = "Túllépte az üzenetet kvótát ehhez az eszközhöz. Kérjük, próbálkozzon később.";
 /* 'Notification service is not available this time. Please try to send the message later.' is an error message (sentence case, period); used to warn when sending messages to device and the push service has no response for push messages. */
-"error_PushMsgServiceFail" = "Értesítési szolgáltatás nem érhető el ebben az időben. Kérjük, próbálja meg elküldeni az üzenetet később.";
+"error_PushMsgServiceFail" = "Notification szolgáltatás nem elérhető ebben az időben. Kérjük, próbálja meg elküldeni az üzenetet később.";
 /* 'Cannot prepare the audio recorder.' is an error message (sentence case, period); used to warn when the audio recorder is unavailable from the system to record an audio message. iOS-only. */
-"error_RecoderError" = "Nem lehet felkészülni a hangrögzítő.";
+"error_RecoderError" = "Nem tudnak felkészülni a hangrögzítő.";
 /* 'To start, Sling Keys with another user at the same time.' is an error message (sentence case, period); used to remind in a notification message that the user should exchange keys with at least one other user to make the app useful to them. */
-"error_ReminderToSlingKeysToUseApp" = "Indításához, Sling gombok egy másik felhasználó ugyanabban az időben.";
+"error_ReminderToSlingKeysToUseApp" = "Indításához, Sling Keys egy másik felhasználó egy időben.";
 /* 'You need an attachment or a text message to send.' is an error message (sentence case, period); used to warn when the user has not attached a file or typed any text message to send to the recipient after using the 'Send' button. */
-"error_selectDataToSend" = "Szüksége van egy mellékletet, vagy szöveges üzenetet küld.";
+"error_selectDataToSend" = "Szükséged van egy mellékletet, vagy egy szöveges üzenetet küldeni.";
 /* 'Server Message: %s' is an error message (sentence case, period); used to warn when the server has an error message to send back to the client. %s = an English (non-localized) error message sent by our App Engine server code. */
 "error_ServerAppMessage" = "Server Message: %@";
 /* 'No response from server.' is an error message (sentence case, period); used to warn when the server timeout occurs, usually after 30 seconds and did not respond to the client. */
-"error_ServerNotResponding" = "Nincs válasz a szervertől.";
+"error_ServerNotResponding" = "Nem válaszol a szerver.";
 /* 'Cannot remove the shared file.' is an error message (sentence case, period); used to warn when the shared file cannot be deleted. iOS-only. */
 "error_ShareFileDelError" = "Nem lehet eltávolítani a megosztott fájlt.";
 /* 'Timeout waiting for some group members to add data.' is an error message (sentence case, period); used to warn during the key exchange protocol when at least one of the members of the group has not submitted their data to the server or client itself is not able to retrieve the data within the timeout window, currently 2 minutes. */
 "error_TimeoutWaitingForAllMembers" = "Timeout vár néhány csoport tagjai az adatok bevitelében.";
 /* 'Unable to match public key to private key in crypto provider.' is an error message (sentence case, period); used to warn when the public encryption key used in the message received is not currently the same private key used, the user should probably Sling Keys to update again. */
-"error_UnableFindPubKey" = "Képtelenek nyilvános kulcsot privát kulcs titkosítási szolgáltatót.";
+"error_UnableFindPubKey" = "Nem sikerült egyeztetni nyilvános kulcsot a személyes kulcs titkosítási szolgáltatót.";
 /* 'Unable to save to the message database.' is an error message (sentence case, period); used to warn when there is database error inserting a new message. */
-"error_UnableToSaveMessageInDB" = "Nem lehet menteni az üzenetet adatbázisba.";
+"error_UnableToSaveMessageInDB" = "Nem lehet menteni az üzenetre adatbázisban.";
 /* 'Unable to save to the recipient database.' is an error message (sentence case, period); used to warn when there is database error inserting a new recipient key/registration . */
-"error_UnableToSaveRecipientInDB" = "Nem lehet menteni a fogadó adatbázisba.";
+"error_UnableToSaveRecipientInDB" = "Nem lehet menteni a címzett adatbázisban.";
 /* 'Unable to update the message database.' is an error message (sentence case, period); used to warn when there is database error updating a message. */
-"error_UnableToUpdateMessageInDB" = "Nem lehet frissíteni az üzenet adatbázist.";
+"error_UnableToUpdateMessageInDB" = "Nem lehet frissíteni az üzenet adatbázisban.";
 /* 'Unable to update the recipient database.' is an error message (sentence case, period); used to warn when there is database error updating a recipient key/registration . */
-"error_UnableToUpdateRecipientInDB" = "Nem lehet frissíteni a címzett adatbázist.";
+"error_UnableToUpdateRecipientInDB" = "Nem lehet frissíteni a címzett adatbázisban.";
 /* 'SafeSlinger error, please restart.' is an error message (sentence case, period); used to warn when an unhandled exception or application fault has occurred. */
 "error_UncaughtExceptionOccured" = "SafeSlinger hiba, indítsa újra.";
 /* 'Contact data was formatted incorrectly.' is an error message (sentence case, period); used to warn when the vCard format used to exchange contact fields during key exchange are improperly formatted. */
 "error_VcardParseFailure" = "Kapcsolat adatok formázása helytelen.";
 /* 'User canceled server request.' is an error message (sentence case, period); used to warn when the user exited the key exchange protocol or messaging transmission before it was finished. */
-"error_WebCancelledByUser" = "A felhasználó megszakította server kérést.";
+"error_WebCancelledByUser" = "A felhasználó törli szerverkérés.";
 
 /* 'Use this screen to set your name to exchange with others, and a passphrase to protect your data. Tap the Done button when finished.' is a help message (sentence case, period); used via Help button on the Setup screen to describe in more detail what the Setup screen does. */
-"help_find" = "Ezen a képernyőn állíthatja be nevét cserélni másokkal, és a jelszót, hogy az adatok védelmét. Érintse meg a Kész gombot, ha végzett.";
+"help_find" = "A képernyőn állítsa be a nevét cserélni másokkal, és egy jelmondatot az adatok védelme érdekében. Érintse meg a Kész gombot, ha végzett.";
 /* 'To exchange identity data, ensure all users are nearby or on the phone. The Begin Exchange button will exchange only the checked contact data.' is a help message (sentence case, period); used via Help button on the Begin Exchange screen and also the key exchange walkthrough tutorial to describe in more detail what the Begin Exchange screen does. */
-"help_home" = "Cseréje azonosító adatok, hogy minden felhasználó a közelben, vagy a telefon. A Begin Tőzsde gomb cserélnek csak az ellenőrzött elérhetőségeit.";
+"help_home" = "Cserélni azonosító adatok, hogy minden felhasználó van a közelben, vagy telefonon. A Kezdje Tőzsde gomb cserélnek akkor csak a megjelölt kapcsolattartó adatait.";
 /* 'You may also change personal data about your identity on this screen by tapping on the button with your name. This will display a menu allowing you to Edit your contact, Create New contact, or Use Another contact.' is a help message (sentence case, period); Additional help text, which is appended to the Help button text on the Compose and Begin Exchange screens. */
-"help_identity_menu" = "Ön is módosíthatja a személyes adatait a személyazonosságát a képernyőn megérinti a gombot a nevét. Ekkor megjelenik egy menü, amely lehetővé teszi, hogy módosítsuk a kapcsolat, új kapcsolat, vagy használjon másik kapcsolatot.";
+"help_identity_menu" = "Ön is megváltoztathatja személyes adatait a személyazonosságát a képernyőn megérinti a gombot, saját név alatt. Ez megjelenik egy menü, amely lehetővé teszi, hogy módosítsuk a kapcsolatot, új kapcsolattartókat, vagy használjon másik partnert.";
 /* 'This screen displays all past messages, and attachments that are still available for download.' is a help message (sentence case, period); used via Help button on the Messages list screen to describe in more detail what the Messages list screen does. */
-"help_Messages" = "Ez a képernyő minden múltbeli üzeneteket és mellékleteket, amelyek még mindig letölthető.";
+"help_Messages" = "Ez a képernyő minden múltbeli üzeneteket és csatolmányokat, hogy továbbra is letölthető.";
 /* 'Use this screen to login to the application with your passphrase. If you have forgotten your passphrase, you may generate a new key protected by a new passphrase by tapping the Forgot Passphrase? button. Tap the user name to switch between multiple keys.' is a help message (sentence case, period); used via Help button on the Passphrase screen to describe in more detail what the Passphrase screen does. */
-"help_passphrase" = "Használja ezt a képernyőt kell jelentkezned hogy az alkalmazás a jelszót. Ha elfelejtette a jelszót, akkor létrehoz egy új kulcs védi az új jelszót, ha megérinti az Elfelejtett Jelszó? gombra. Érintse meg a felhasználói nevet közötti váltáshoz több kulcsot.";
+"help_passphrase" = "Ezen a képen jelentkezned hogy az alkalmazás az összetett jelszót. Ha elfelejtette ezt, akkor új kulcsot generál védett új jelmondatot megérinti a Elfelejtetted jelszavunkat? gombot. Érintse meg a felhasználói nevet közötti váltáshoz több kulcsot.";
 /* 'Use this screen to change your passphrase by entering your last passphrase for confirmation and the new passphrase.' is a help message (sentence case, period); used via Help button on the Change Passphrase screen to describe in more detail what the Change Passphrase screen does. */
-"help_passphrase_change" = "Használja ezt a képernyőt, hogy változtassa meg jelszót beírja az utolsó jelszó megerősítését és az új jelszót.";
+"help_passphrase_change" = "Ezen a képen változtatni a jelszót beírja az utolsó jelszó megerősítése és az új jelszót.";
 /* 'Contacts with SafeSlinger keys are displayed here, select one to send your message to.' is a help message (sentence case, period); used via Help button on the Recipients list screen to describe in more detail what the Recipients list screen does. */
-"help_PickRecip" = "Kapcsolatok SafeSlinger gombok jelennek meg itt, akkor válasszunk ki egy elküldeni az üzenetet.";
+"help_PickRecip" = "Kapcsolattartás SafeSlinger gombok jelennek meg itt, válassza az egyik küldeni az üzenetet.";
 /* 'When finished, the protocol will reveal a list of the identity data exchanged. Select the contacts you wish to save and press Import.' is a help message (sentence case, period); used via Help button on the End Exchange screen and also the key exchange walkthrough tutorial to describe in more detail what the End Exchange screen does. */
-"help_save" = "Amikor kész, a protokoll felfedi egy lista a személyazonosság adatcsere. Válassza ki a kapcsolatokat szeretné menteni, és nyomja meg Import.";
+"help_save" = "Amikor kész, a protokoll felfedi egy listát arról, hogy mely adatokat cseréltek. Válassza ki a kapcsolatokat a menteni kívánt, majd nyomja meg Import.";
 /* 'This screen allows you to select two people you have slung keys with before to securely send their keys to each other. Simply press Introduce when ready.' is a help message (sentence case, period); used via Help button on the Secure Introduction screen to describe in more detail what the Secure Introduction screen does. */
-"help_SecureIntroduction" = "Ez a képernyő lehetővé teszi, hogy válassza ki a két ember már akasztott kulcsok előtt biztonságosan küldjék kulcsokat egymásnak. Egyszerűen nyomja bevezetése, ha kész.";
+"help_SecureIntroduction" = "Ez a képernyő lehetővé teszi, hogy válassza ki a két ember már akasztott a kulcsokat, mielőtt biztonságosan küldeni a kulcsokat egymáshoz. Egyszerűen nyomja Tegyünk ha kész.";
 /* 'This screen allows you to select some data and a recipient to send to. Simply press Send when ready.' is a help message (sentence case, period); used via Help button on the Compose Message screen to describe in more detail what the Compose Message screen does. */
-"help_Send" = "Ez a képernyő lehetővé teszi, hogy válasszon ki néhány adatot, és a címzett küldeni. Egyszerűen nyomja meg a küldés, ha kész.";
+"help_Send" = "Ez a képernyő lehetővé teszi, hogy válasszon ki néhány adatot, és a címzett küldje a. Egyszerűen nyomja küldése, ha kész.";
 /* 'This screen allows you to change the default settings for the application.' is a help message (sentence case, period); used via Help button on the Settings screen to describe in more detail what the Settings screen does. */
-"help_settings" = "Ez a képernyő lehetővé teszi, hogy változtassa meg az alapértelmezett beállításokat az alkalmazás.";
+"help_settings" = "Ez a képernyő lehetővé teszi, hogy változtassa meg az alapértelmezett beállításokat az alkalmazás számára.";
 /* 'Select the number of people who are attempting to exchange data together and press OK.' is a help message (sentence case, period); used via Help button on the Group Size screen and also the key exchange walkthrough tutorial to describe in more detail what the Group Size screen does. */
-"help_size" = "Válassza ki az embereknek a száma, akik megpróbálják, hogy adatokat cseréljenek együtt, és nyomjuk meg az OK gombot.";
+"help_size" = "Válassza ki az embereknek a száma, akik megpróbálják adatcserét együtt, és nyomjuk meg az OK gombot.";
 /* 'This number on this screen is used to create a unique group of users. Review the numbers on all users' screens, then all users should enter the same lowest number and press OK.' is a help message (sentence case, period); used via Help button on the Grouping screen and also the key exchange walkthrough tutorial to describe in more detail what the Grouping screen does. */
-"help_userid" = "Ez a szám a képernyőn használt hozzon létre egy egyedi felhasználói csoportnak. Tekintse át a számokat az összes felhasználó képernyőn, akkor minden felhasználó adja meg ugyanazt a legkisebb számot, és nyomjuk meg az OK gombot.";
+"help_userid" = "Ez a szám a képernyőn létrehozásához használt egyedi felhasználói csoportnak. Nézze át a számokat az összes felhasználó képernyők, akkor minden felhasználó adja meg ugyanazt a legkevesebb, majd nyomja meg az OK gombot.";
 /* 'Now, you must match one of these 3-word phrases with all users. Every user must select the same common phrase, and press Next.' is a help message (sentence case, period); used via Help button on the Verify screen and also the key exchange walkthrough tutorial to describe in more detail what the Verify screen does. */
-"help_verify" = "Most meg kell egyeznie egy ilyen 3 szavas mondatok minden felhasználó számára. Minden felhasználónak ki kell választani az azonos általános kifejezés, és kattintson a Tovább gombra.";
+"help_verify" = "Most meg kell egyeznie a fenti 3 szavas mondatok minden felhasználó számára. Minden felhasználónak ki kell választani az azonos mondás, és kattintson a Tovább gombra.";
 
 /* 'Camera permission is required to attach snapshots to secure messages. Tap the %s button for SafeSlinger Camera permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Camera permission. iOS-only. */
-"iOS_cameraError" = "Kamera engedély köteles csatolni pillanatképek biztosítása üzeneteket. Érintse meg a %@ gombot SafeSlinger Camera engedély részleteket.";
+"iOS_cameraError" = "Kamera engedély szükséges csatolni pillanatképek, hogy biztosítsa az üzenetek. Érintse meg a %@ gombot SafeSlinger Camera engedélyével részleteket.";
 /* 'Contacts permission is required for securely sharing contact cards. Tap the %s button for SafeSlinger Contacts permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Contacts permission. iOS-only. */
-"iOS_contactError" = "Kapcsolatok engedélye szükséges biztonságos megosztására névjegyzéki. Érintse meg a %@ gombot SafeSlinger Kapcsolatok engedély részleteket.";
+"iOS_contactError" = "Kapcsolatok engedélye szükséges biztonságosan megosztása névjegyet is. Érintse meg a %@ gombot SafeSlinger Kapcsolatok engedélyével részleteket.";
 /* 'Push registration is missing.' is an error message (sentence case, period); used to warn the user the push registration is missing. iOS-only. */
-"iOS_errorpushtoken" = "Push bejegyzés hiányzik.";
+"iOS_errorpushtoken" = "Push regisztrációs hiányzik.";
 /* 'Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the %s button for SafeSlinger Notification permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Notifications permission. iOS-only. */
-"iOS_notificationError1" = "Értesítés engedély vagy riasztások vagy bannereket, és parkot, szükséges biztonságos üzenetküldést. Érintse meg a %@ gombot SafeSlinger Notification engedély részleteket.";
+"iOS_notificationError1" = "Notification engedélyt vagy riasztások vagy bannereket, és a jelvény számát, szükséges biztonságos üzenetküldést. Érintse meg a %@ gombot SafeSlinger Notification engedélyével részleteket.";
 /* 'SafeSlinger is not optimized for iOS 5.x devices. SafeSlinger requires iOS 6 or higher.' is an informational message (sentence case, period); message for dialog popups when a user still uses an old iOS device. iOS-only. */
 "iOS_oldOSWarn" = "SafeSlinger nincs optimalizálva iOS 5.x eszközök. SafeSlinger igényel iOS 6 vagy újabb.";
 /* 'Photo Library permission is required to attach pictures to secure messages. Tap the %s button for SafeSlinger Photo Library permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Photo Library permission. iOS-only. */
-"iOS_photolibraryError" = "Photo Library engedély köteles csatolni képeket, hogy biztosítsa az üzenetek. Érintse meg a %@ gombot SafeSlinger Photo Library engedély részletek.";
+"iOS_photolibraryError" = "Photo Library engedély szükséges csatolni képeket, hogy biztosítsa az üzeneteket. Érintse meg a %@ gombot SafeSlinger Photo Library engedélyével részleteket.";
 /* 'You can select your contact card to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Contacts when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Contacts permission. iOS-only. */
-"iOS_RequestPermissionContacts" = "Kiválaszthatja a névjegykártyát, hogy küldje el a barátok és SafeSlinger titkosítja az Ön számára. Ahhoz, hogy ezt a funkciót, engedélyeznie kell SafeSlinger elérhetők a kapcsolatok, amikor felkérték.";
+"iOS_RequestPermissionContacts" = "Megadhatja, hogy a névjegykártya küldeni a barátok és SafeSlinger titkosítja az Ön számára. Annak érdekében, hogy ezt a funkciót, akkor lehetővé kell tennie SafeSlinger elérhetők a kapcsolatok, ha kérdeznek.";
 /* 'You can record a voice message to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Microphone when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Microphone permission. iOS-only. */
-"iOS_RequestPermissionMicrophone" = "Felvehet hangüzenetet küld barátainak és SafeSlinger titkosítja az Ön számára. Ahhoz, hogy ezt a funkciót, engedélyeznie kell SafeSlinger hozzáférést a mikrofonba, amikor kérdezte.";
+"iOS_RequestPermissionMicrophone" = "Akkor hangüzenet rögzítésére küldeni a barátok és SafeSlinger titkosítja az Ön számára. Annak érdekében, hogy ezt a funkciót, akkor lehetővé kell tennie SafeSlinger a mikrofon használatát, ha kérdeznek.";
 /* 'SafeSlinger is an encrypted messaging application and cannot function without allowing incoming messages from Notifications. To enable incoming messages, you must allow SafeSlinger to send you Notifications when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Notifications permission. iOS-only. */
-"iOS_RequestPermissionNotifications" = "SafeSlinger egy titkosított üzenetküldő alkalmazás, és nem működhet anélkül, hogy a bejövő üzenetek értesítések. Annak érdekében, hogy a bejövő üzeneteket, akkor lehetővé kell tennie SafeSlinger hogy üzenetet küldjön, amikor felkérték.";
+"iOS_RequestPermissionNotifications" = "SafeSlinger egy titkosított üzenetküldő alkalmazás, és nem működhet anélkül, hogy a bejövő üzeneteket értesítések. Annak érdekében, hogy a beérkező üzeneteket, akkor lehetővé kell tennie SafeSlinger, hogy értesítést, ha kérdeznek.";
 
 /* '%s ago' is a screen label (match English casing); used on the messages list screen and is used to describe how long ago a message was sent or received. %s = a time measurement, such as '5 minutes' or '2 hours'. */
 "label_ago" = "%@ ezelőtt";
@@ -345,7 +347,7 @@
 /* 'Backup URL' is a screen label (match English casing); used on the Settings screen above the URL used for iCloud backups. iOS-only. */
 "label_backupURL" = "Backup URL";
 /* 'Touch to review your %d messages' is a screen label (match English casing); used in the notification drop down window to indicate what will happen when received messages notification is touched. %d = the number of unseen messages received. */
-"label_ClickForNMsgs" = "Érintse hogy vizsgálja felül a %d üzenet";
+"label_ClickForNMsgs" = "Érintse meg, hogy vizsgálja felül a %d üzenet";
 /* 'Compare screens on %s devices.' is a screen label (match English casing); used with arrows and phone graphics to remind user to compare mutiple views, not just their own. %s = the number of users. */
 "label_CompareScreensNDevices" = "Hasonlítsa össze a képernyők %@ eszközök.";
 /* 'Compose Message' is a screen label (match English casing); used as a text box hint on the Compose Message screen where the user can type a message in the box. */
@@ -357,15 +359,15 @@
 /* 'Device:' is a screen label (match English casing); used to prefix a push registration in the recipients list screen as a device ID. */
 "label_Device" = "Eszköz:";
 /* 'Send-only mode' is a screen label (match English casing); used in many UIs to show that receiving push messages is not supported. */
-"label_DeviceInSendOnlyMode" = "Send-only módban";
+"label_DeviceInSendOnlyMode" = "Küldd el-only módban";
 /* 'Your key has changed: Sling Keys again.' is an error message (sentence case, period); used to warn the user that the key in the Recipients list screen has been exchanged once before with a different key from this user. */
 "label_DisabledExchSourceKeyChange" = "Az Ön kulcsa megváltozott: Sling Keys újra.";
 /* 'To begin messaging, Sling Keys with this user at the same time.' is a screen label (match English casing); used to remind users that an invite is only the beginning, and to Sling Keys before communicating. */
-"label_DisabledNextSlingKeysWithThisPerson" = "Először üzenetküldés, Sling gombok a felhasználótól ugyanabban az időben.";
+"label_DisabledNextSlingKeysWithThisPerson" = "Először üzenetküldés, Sling Keys ezzel felhasználó egyszerre.";
 /* 'DRAFT' is a screen label (match English casing); used to label a message in the Messages list that has been saved in progress but not yet sent. */
-"label_Draft" = "TERVEZET";
+"label_Draft" = "AZ";
 /* 'Key format deprecated: Sling Keys again.' is an error message (sentence case, period); used on the Recipient list screen to warn users that older key formats have been deprecated. Android-only. */
-"label_EnabledKeyFormatDeprecated" = "Key formátum elavult: Sling Keys újra.";
+"label_EnabledKeyFormatDeprecated" = "A kulcs formátuma elavult: Sling Keys újra.";
 /* 'exchanged' is a screen label (match English casing); used to indicate 0-hop or direct trust from a key exchange in the Recipient list screen. */
 "label_exchanged" = "cserélt";
 /* 'expired' is a screen label (match English casing); used on the Messages list for message attachment that has not been downloaded more than 24 hours after it was originally sent. */
@@ -373,35 +375,37 @@
 /* 'expires %s' is a screen label (match English casing); used on the message list to show how much time is left to download an attachment. %s = a time measurement, such as 'in 5 minutes' or 'in 2 hours'. Android-only. */
 "label_expires" = "lejár %@";
 /* 'expires in' is a screen label (match English casing); used on the message list to show how much time is left to download an attachment; a time measurement, such as '5 minutes' or '2 hours' will be appended to this string. iOS-only. */
-"label_expiresIn" = "lejár";
+"label_expiresIn" = "ben jár le";
 /* 'File Name' is a screen label (match English casing); used on the Save File As dialog as a hint in the file name text box when changing the file name. */
 "label_FileNameHint" = "File Name";
 /* 'Enter your name and a passphrase to protect your data:' is a screen label (match English casing); used to instruct the user how to proceed on the Setup screen. */
-"label_FindInstruct" = "Adja meg a nevét és a jelszót, hogy az adatok védelme:";
+"label_FindInstruct" = "Adja meg a nevét, és egy jelmondatot az adatok védelme érdekében:";
 /* 'First Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current first name to use. iOS-only. */
-"label_FirstName" = "Az első név";
+"label_FirstName" = "First Name";
 /* 'Tap your name to add or remove contact data, check items you wish to share, and tap Begin Exchange when others are ready to exchange:' is a screen label (match English casing); used to instruct the user how to proceed on the Begin Exchange screen. */
-"label_Home" = "Érintse meg saját nevét a hozzáadni vagy eltávolítani elérhetőségét, ellenőrizze az elemek kívánt osztani, majd érintse meg a Begin az Exchange, amikor mások készek csere:";
+"label_Home" = "Érintse meg saját nevét betenni vagy kivenni a kontakt adatok, ellenőrizze az elemek kívánt megosztani, és érintse Begin Tőzsde, amikor mások készek arra, csere:";
 /* 'Home' is a screen label (match English casing); used to denote a 'home' type of email or phone contact type. iOS-only. */
-"label_hometag" = "Főoldal";
+"label_hometag" = "Otthon";
 /* '%d hours' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole hours. */
 "label_hours" = "%d óra";
 /* 'SafeSlinger iCloud is enabled. Tap the Done button when finished.' is a screen label (match English casing); used to indicate the backup will occur while on the Setup screen. iOS-only. */
 "label_iCloudEnable" = "SafeSlinger iCloud engedélyezve van. Érintse meg a Kész gombot, ha végzett.";
 /* 'No messages. You may send a message from the Compose tab.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. */
-"label_InstNoMessages" = "Nincs üzenet. Küldhet üzenetet az írása lapra.";
+"label_InstNoMessages" = "Nincs üzenet. Küldhet egy üzenetet a lap írása.";
 /* 'To add recipients, you must first Sling Keys with one or more other users at the same time. You may also send a Sling Keys contact invitation from the menu.' is a screen label (match English casing); used to instruct the user how to proceed on the Recipient list screen is case of no recipients. */
-"label_InstNoRecipients" = "A címzettek megadásához először meg kell Sling Keys egy vagy több másik felhasználó egyszerre. Ön is küldhet Sling Keys kapcsolat meghívására a menüből.";
+"label_InstNoRecipients" = "Címzettek, akkor először a Sling Keys egy vagy több más felhasználók egyidejűleg. Ön is küldhet Sling Keys contact meghívást a menüből.";
+/* 'None of your current recipients match your search query. Please try a different query or invite a new contact.' is a screen label (match English casing); used to inform the user that no recipients match the search query. */
+"label_InstNoRecipientsMatchQuery" = "Egyik az aktuális címzettek felel meg a keresési lekérdezést. Kérjük, próbálkozz egy másik lekérdezéssel, vagy kérj meg egy új kapcsolatot.";
 /* 'No shared file. Connect your device with iTunes and drag files to the shared folder.' is a screen label (match English casing); used to instruct the user how to proceed on the Shared Files screen is case of no files to share. iOS-only. */
-"label_InstNoSharedFile" = "Nincs megosztott fájlok. Csatlakoztassa a készüléket az iTunes, és húzza a fájlokat a megosztott mappa.";
+"label_InstNoSharedFile" = "Nem megosztott fájlt. A készülék csatlakoztatása iTunes és húzza a fájlokat a megosztott mappa.";
 /* 'Pick a recipient to send a message to:' is a screen label (match English casing); used to instruct the user how to proceed on the Pick Recipients list screen. */
-"label_InstRecipients" = "Válassz egy címzett, hogy küldjön egy üzenetet:";
+"label_InstRecipients" = "Válassz egy címzettet, hogy küldjön egy üzenetet:";
 /* 'Pick recipients to introduce securely:' is a screen label (match English casing); used to instruct the user how to proceed on the Secure Introduction Recipients list screen. */
 "label_InstSendInvite" = "Pick címzettek bevezetni biztonságosan:";
 /* 'Pick a file to attach:' is a screen label (match English casing); used as a title for a list of files that could be attached to the message. */
-"label_InstSharedFile" = "Válassz a csatolni kívánt fájlt:";
+"label_InstSharedFile" = "Válassz egy fájlt csatolni:";
 /* 'introduced' is a screen label (match English casing); used to indicate 1-hop trust from a secure introduction in the Recipient list screen. */
-"label_introduced" = "be";
+"label_introduced" = "bevezetett";
 /* 'Invited' is a screen label (match English casing); used on the recipient list to denote when a user has sent an invitation to Sling Keys via emailed or text. */
 "label_inviteSent" = "Meghívott";
 /* 'Key:' is a screen label (match English casing); used to prefix the key generation date in the Recipients list and on the Compose Message screen. */
@@ -409,25 +413,27 @@
 /* 'Last Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current last name to use. iOS-only. */
 "label_LastName" = "Vezetéknév";
 /* 'Me' is a screen label (match English casing); used on the secure introduction invitation dialog to indicate the one-hop trust relationship between the user (Me); the trusted person, and the new person. */
-"label_Me" = "Me";
+"label_Me" = "Nekem";
 /* 'I would like to introduce %s to you.' is a screen label (match English casing); used as the text message when sending secure introduction invitations. %s = the name of a person. */
 "label_messageIntroduceNameToYou" = "Szeretném bemutatni %@ Önnek.";
 /* 'SafeSlinger app: %s' is a screen label (match English casing); used as message text to show a user how to install SafeSlinger. %s = the main installation url for mobile devices */
 "label_messageInviteInstall" = "SafeSlinger app: %@";
 /* 'To setup a secure messaging connection, we can meet or phone each other at the same time, and then Sling Keys just once to verify the connection.' is a screen label (match English casing); used as message text to show a user how to begin secure messaging. */
-"label_messageInviteSetupInst" = "Hogy beállít egy biztonságos üzenetküldést kapcsolat, találkozhatunk, vagy telefonon egymással egy időben, majd a Sling Keys csak egyszer, hogy ellenőrizze a kapcsolatot.";
+"label_messageInviteSetupInst" = "Hogy telepítsék a biztonságos üzenetküldés kapcsolatot, találkozhatunk, vagy telefonon egymással egy időben, majd Sling Keys csak egyszer ellenőrizze a kapcsolatot.";
 /* 'Can we start secure messaging with the open source SafeSlinger iPhone or Android app?' is a screen label (match English casing); used as message text to invite a contact to begin secure messaging. */
-"label_messageInviteStartMsg" = "Kezdhetnénk biztonságos üzenetküldést a nyílt forráskódú SafeSlinger iPhone vagy Android app?";
+"label_messageInviteStartMsg" = "Tudunk majd biztonságos üzenetküldést a nyílt forráskódú SafeSlinger iPhone vagy Android app?";
+/* '%s, you are verified.' is a screen label (match English casing); used as the text message completing sling keys. %s = the name of a recipient. */
+"label_messageYouAreVerified" = "%@, akkor ellenőrzik.";
 /* '%d minutes' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole minutes. */
 "label_minutes" = "%d perc";
 /* 'Mobile' is a screen label (match English casing); used to denote a 'mobile' type of email or phone contact type. iOS-only. */
-"label_mobiletag" = "Mobile";
+"label_mobiletag" = "Mozgó";
 /* 'Most recent only' is a screen label (match English casing); used as a label for the boolean toggle switching between all or recent-only recipients on recipient list. */
 "label_MostRecentOnly" = "Legfrissebb csak";
 /* 'My updated SafeSlinger credentials are attached.' is a screen label (match English casing); used as default message attached to a credential update. */
-"label_MsgSendUpdate" = "Az aktualizált SafeSlinger hitelesítő kapcsolódnak.";
+"label_MsgSendUpdate" = "Saját frissített SafeSlinger hitelesítő kapcsolódnak.";
 /* 'None' is a screen label (match English casing); used to indicate the local, non-synchronized contacts account name on the phone when picking a Save Account. */
-"label_None" = "Nincs";
+"label_None" = "Egyik sem";
 /* 'Non-English' is a screen label (match English casing); used to instruct the user how to switch on Numeric mode while doing comparison. */
 "label_NumericModeHint" = "Nem angol nyelvű";
 /* '%d Files to Share:' is a screen label (match English casing); used on the Sharing Folder screen. %d = the number of files to share. iOS-only. */
@@ -435,61 +441,65 @@
 /* 'Old Threads' is a screen label (match English casing); used for the old thread (iOS only). */
 "label_OldThreads" = "Régi téma";
 /* 'Other' is a screen label (match English casing); used to denote a 'other' type of email or phone contact type. iOS-only. */
-"label_othertag" = "Egyéb";
+"label_othertag" = "Más";
 /* 'Retry' is a screen label (match English casing); used in the Passphrase screen text box as a prefix hint combined with a time measurement when, which is exponentially backed off on invalid passphrase entry, such as 'Retry in 14 seconds'. Used during back off while all user controls have been disabled. */
 "label_PassHintBackoff" = "Próbálja újra";
 /* 'Updated Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint to create a replacement passphrase. */
 "label_PassHintChange" = "Frissítve Jelszó";
 /* 'Create Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint to create a new passphrase. */
-"label_PassHintCreate" = "Létrehozása Jelszó";
+"label_PassHintCreate" = "Hozzon létre Jelszó";
 /* 'Current Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint to confirm the current passphrase. */
 "label_PassHintCurrent" = "Jelenlegi Jelszó";
 /* 'Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint enter the passphrase. */
-"label_PassHintEnter" = "Jelmondat";
+"label_PassHintEnter" = "Jelmondatot";
 /* 'Repeat Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint to confirm the passphrase again. */
 "label_PassHintRepeat" = "Ismételje meg a Jelszó";
 /* 'Passphrase Cache' is a screen label (match English casing); used on the Settings screen to above the display of the users' passphrase timeout period. */
-"label_passPhraseCacheTtl" = "Jelmondat gyorsítótár";
+"label_passPhraseCacheTtl" = "Jelmondatot gyorsítótár";
 /* 'Passphrase cached' is a screen label (match English casing); used in the notification window when a passphrase has been cached. Android-only. */
-"label_PassPhraseIsCached" = "Jelmondat gyorsítótárazott";
+"label_PassPhraseIsCached" = "Jelmondatot gyorsítótárazásos";
 /* 'phone-only' is a screen label (match English casing); used to indicate the local, non-synchronized contacts account type on the phone when picking a Save Account. */
 "label_phoneOnly" = "telefon csak";
 /* 'Photo' is a screen label (match English casing); used on the Begin Exchange screen to toggle sending the users' photo during the exchange. */
 "label_Photo" = "Fénykép";
 /* 'This number is used to create a unique group of users. Compare, and then enter the lowest number among all users.' is a screen label (match English casing); used to instruct the user how to proceed on the Grouping screen. */
-"label_PromptInstruct" = "Ez a szám, hogy hozzon létre egy egyedi felhasználói csoportnak. Hasonlítsa össze, majd adja meg a legalacsonyabb az összes felhasználó számára.";
+"label_PromptInstruct" = "Ez a szám, hogy hozzon létre egy egyedi felhasználói csoportnak. Összehasonlítása, majd adja meg a legkevesebb felhasználók között.";
 /* 'Key ID' is a screen label (match English casing); used on the Settings, Compose Message, and Recipients list screens as a label above the base-64 encoded key IDs for sender and recipients. */
 "label_PublicKeyID" = "Key ID";
 /* 'Push Registration ID' is a screen label (match English casing); used on the Settings screen as a label above the push registration for this user. */
-"label_PushTokenID" = "Nyomja regisztrációs azonosító";
+"label_PushTokenID" = "Push regisztrációs azonosítója";
 /* 'received %d items' is a screen label (match English casing); used to show the progress when collecting group members data during the key exchange protocol. %d = the number of members' data items received during the current phase of the exchange protocol. */
-"label_ReceivedNItems" = "kapott %d elem";
+"label_ReceivedNItems" = "beérkezett %d példány";
 /* 'Backup Reminder' is a screen label (match English casing); used on the Settings screen to toggle the reminder when pending backups do not execute in timely manner. */
 "label_RemindBackupDelay" = "Backup Emlékeztető";
 /* 'Reported inactive %s.' is an error message (sentence case, period); used on the Recipient list screen to warn users that the push registration has been reported not-registered or inactive by the push service. %s = a time measurement of how long it has been reported inactive: '2 days ago' and the like.. */
 "label_ReportedInactive" = "Jelentett inaktív %@.";
 /* 'Last Restore Completed' is a screen label (match English casing); used above a time stamp on the Settings screen to indicate the last time backup settings were restored. */
-"label_restoreCompleteDate" = "Utolsó visszaállítás Befejezett";
+"label_restoreCompleteDate" = "Utolsó Restore Befejezett";
 /* 'SafeSlinger backup delayed' is a screen label (match English casing); used as a title of the notification when a backup request has been pending more than 1 hour. */
 "label_SafeSlingerBackupDelayed" = "SafeSlinger mentés késleltetett";
 /* '(SafeSlinger Direct Exchange)' is a screen label (match English casing); used on the Secure Introduction invitation dialog to denote the sender whom the user has performed a direct exchange with and holds direct trust. */
 "label_safeslingered" = "(SafeSlinger Közvetlen csere)";
 /* 'Save Account' is a screen label (match English casing); used above the editable field on the End Exchange screen to showing the address book account to use when saving or updating contacts. */
-"label_SaveAccount" = "Számla mentése";
+"label_SaveAccount" = "Mentsd Account";
 /* 'Check contacts you want to update in your address book, then tap Import to save secure contacts:' is a screen label (match English casing); used to instruct the user how to proceed on the End Exchange screen. */
-"label_SaveInstruct" = "Ellenőrizze a kapcsolatokat szeretné frissíteni a címjegyzékben, majd érintse meg az Importálás menteni biztonságos kapcsolat:";
+"label_SaveInstruct" = "Ellenőrizze kapcsolatokat szeretné frissíteni a címjegyzékben, majd érintse meg az Import menteni biztonságos kapcsolat:";
+/* 'Search contacts' is a screen label (match English casing); used on the Recipients screen to provide a hint to search for contacts. */
+"label_search_contacts_hint" = "Kapcsolatok keresése";
 /* '%d seconds' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole seconds. */
 "label_seconds" = "%d másodperc";
 /* 'Select Recipient' is a screen label (match English casing); used on the Compose Message screen recipient button before a recipient has been selected. */
-"label_SelectRecip" = "Válassza ki a Címzett";
+"label_SelectRecip" = "Válassza ki a címzett";
 /* 'Send Error Data' is a screen label (match English casing); used on the Settings screen to toggle the automatic upload of error reports. */
-"label_sendErrorData" = "Send Error adat";
+"label_sendErrorData" = "Küldd el a hibás adatok";
 /* 'From:' is a screen label (match English casing); used on the Compose Message screen to prefix the recipient's name. */
-"label_SendFrom" = "Feladó:";
+"label_SendFrom" = "Re:";
 /* 'To:' is a screen label (match English casing); used on the Compose Message screen to prefix the sender's name. */
-"label_SendTo" = "To:";
+"label_SendTo" = "Hogy:";
 /* 'Show this hint next time.' is a screen label (match English casing); used in the key exchange walkthrough dialog to toggle the display of the walkthrough at the next attempted key exchange. */
-"label_ShowHintAtLaunch" = "Mutatni ezt a tippet legközelebb.";
+"label_ShowHintAtLaunch" = "Mutasd ezt hint legközelebb.";
+/* 'Using speech recognition is disabled because it might cause an information leak' is a screen label (match English casing); used to alert the user about possible information leak on the use of speech recognition when the user tries to use this feature */
+"label_SpeechRecognitionAlert" = "Beszédfelismerő van tiltva, mert ez okozhat egy információs szivárgás";
 /* 'Step 1' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
 "label_step_1" = "1. lépés";
 /* 'Step 2' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
@@ -501,37 +511,37 @@
 /* 'Step 5' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
 "label_step_5" = "5. lépés";
 /* 'Automatically download message attachments when logged in.' is a screen label (match English casing); used as the settings summary to describe what Auto-retrieve attachments will do. */
-"label_summary_auto_attach_retrieval" = "Automatikus letöltése üzenet mellékleteket, ha bejelentkezett.";
+"label_summary_auto_attach_retrieval" = "Automatikusan letölti üzenet mellékleteket, ha bejelentkezve.";
 /* 'Automatically decrypt messages when logged in.' is a screen label (match English casing); used as the settings summary to describe what Auto-decrypt will do. */
-"label_summary_auto_decrypt" = "Automatikusan dekódolja az üzeneteket, amikor bejelentkezett.";
+"label_summary_auto_decrypt" = "Automatikusan dekódolni az üzeneteket, ha bejelentkezve.";
 /* 'Receive notification when backup is offline.' is a screen label (match English casing); used as the settings summary to describe what Backup Reminder will do. */
 "label_summary_remind_backup_delay" = "Értesítés kérése, ha mentés nem elérhető.";
 /* 'Show a tutorial before attempting to Sling Keys.' is a screen label (match English casing); used as the settings summary to describe what Show Walkthrough will do. */
-"label_summary_show_tutorial" = "Mutasd a bemutató, mielőtt Sling Keys.";
+"label_summary_show_tutorial" = "Mutasd a tutorial, mielőtt Sling Keys.";
 /* 'Tap to decrypt file' is a screen label (match English casing); used to indicate tapping this message in the list will attempt to decrypt the attachment (if needed). */
-"label_TapToDecryptFile" = "Érintse meg a Fájl dekódolása";
+"label_TapToDecryptFile" = "Érintse meg, hogy hírbe fájl";
 /* 'Tap to decrypt' is a screen label (match English casing); used to indicate tapping this message in the list will attempt to decrypt it. */
-"label_TapToDecryptMessage" = "Érintse meg a visszafejteni";
+"label_TapToDecryptMessage" = "Érintse meg, hogy hírbe";
 /* 'Tap to download file' is a screen label (match English casing); used to indicate tapping this message in the list will download the file (and attempt to decrypt it). */
 "label_TapToDownloadFile" = "Érintse meg a fájl letöltéséhez:";
 /* 'Tap to download message' is a screen label (match English casing); used to indicate tapping this message in the list will download the message (if needed). */
-"label_TapToDownloadMessage" = "Érintse meg a letölthető üzenet";
+"label_TapToDownloadMessage" = "Érintse meg letölteni üzenet";
 /* 'Tap to open file' is a screen label (match English casing); used to indicate tapping this decrypted message in the list will attempt to view the decrypted attachment. */
 "label_TapToOpenFile" = "Megnyitásához érintse meg a fájl";
 /* 'Tap to resume message draft' is a screen label (match English casing); used to indicate tapping this message in the list will take the user to the composition screen. */
-"label_TapToResumeDraft" = "Folytatásához érintse meg a-üzenet";
+"label_TapToResumeDraft" = "Folytatásához érintse meg az üzenetet tervezete";
 /* 'Tap and hold to send credential update.' is a screen label (match English casing); used as a hint on the recipient list to help the user know if a credential update is needed. Android-only. */
-"label_TapToSendCredentialUpdate" = "Érintse meg és tartsa küldeni megbízólevél frissítést.";
+"label_TapToSendCredentialUpdate" = "Tartsa nyomva, hogy küldjön megbízólevél frissítést.";
 /* 'Tap to Sling Keys.' is a screen label (match English casing); used to remind the user that we can advance the user to the Sling Keys screen for convenience. */
-"label_TapToSlingKeys" = "Érintse meg a Sling Keys.";
+"label_TapToSlingKeys" = "Érintésre Sling Keys.";
 /* 'Contacts Account' is a screen label (match English casing); used above the editable field on the Settings screen to show the current address book account to use. */
-"label_targetAccountLabel" = "Kapcsolatok fiók";
+"label_targetAccountLabel" = "Kapcsolatok Account";
 /* 'You may optionally enable SafeSlinger iCloud backup in iOS Settings. Tap the Done button when finished.' is a screen label (match English casing); used on the Setup screen to remind the user that no backups will be restored on new installation. iOS-only. */
-"label_TouchToConfigureBackupSettings" = "Lehet, opcionálisan lehetővé SafeSlinger iCloud biztonsági mentés iOS beállítások. Érintse meg a Kész gombot, ha végzett.";
+"label_TouchToConfigureBackupSettings" = "Lehetősége lehetővé SafeSlinger iCloud biztonsági mentés iOS Settings. Érintse meg a Kész gombot, ha végzett.";
 /* 'Touch to configure backup settings.' is a screen label (match English casing); used in the notification window when the backup request has been pending over 1 hour. Android-only. */
-"label_TouchToConfigureBackupSettingsAndroid" = "Megérintve konfigurálhatja mentés beállításait.";
+"label_TouchToConfigureBackupSettingsAndroid" = "Érintse meg beállítani a biztonsági mentési beállítások.";
 /* 'Touch to configure cache timeout settings.' is a screen label (match English casing); used in the notification window when a passphrase has been cached. Android-only. */
-"label_TouchToConfigureCacheTimeout" = "Megérintve konfigurálhatja cache időhatár beállításait.";
+"label_TouchToConfigureCacheTimeout" = "Érintse beállítani cache időhatár beállításait.";
 /* 'Unknown' is a screen label (match English casing); used in menu lists when unexpected type definitions are encountered. */
 "label_undefinedTypeLabel" = "Ismeretlen";
 /* 'Encrypted Sender' is a screen label (match English casing); used as the header for an encrypted message in the message list. */
@@ -539,89 +549,89 @@
 /* 'Lowest' is a screen label (match English casing); used as a text box hint on the Grouping screen when entering the lowest ID number. */
 "label_UserIdHint" = "Legalacsonyabb";
 /* 'User Name' is a screen label (match English casing); used as a placeholder before the users' contact has been loaded. */
-"label_UserName" = "Felhasználói név";
+"label_UserName" = "Felhasználónév";
 /* 'All phones must match one of the 3-word phrases. Compare, and then pick the matching phrase.' is a screen label (match English casing); used to instruct the user how to proceed on the Verify screen. */
-"label_VerifyInstruct" = "Minden telefon kell egyeznie az egyik 3 szavas mondatokat. Hasonlítsa össze, majd vedd a megfelelő kifejezés.";
+"label_VerifyInstruct" = "Minden telefon kell egyeznie az egyik 3 szavas mondatok. Összehasonlítása, majd vedd a megfelelő kifejezést.";
 /* 'To protect your data, SafeSlinger does not store your passphrase anywhere for recovery. You may only access recipients and messages created under the same passphrase login. However, you may generate a new key and passphrase, then repeat Sling Keys with your recipients.' is a screen label (match English casing); used to describe the reasons passphrases are not storeed and how to generate a new one. */
-"label_WarnForgotPassphrase" = "Az adatok védelme, SafeSlinger nem tárolja a jelszót bárhol a behajtásra. Lehet, hogy csak a hozzáférést címzettek és üzenetek alapján létrehozott azonos jelszót bejelentkezést. Előfordulhat azonban, hogy létrehoz egy új kulcsot és jelszót, majd ismételje meg Sling gombok a címzettek.";
+"label_WarnForgotPassphrase" = "Az adatok védelme, SafeSlinger nem tárolja jelszót bárhol a behajtásra. Lehet, csak a hozzáférést címzettek és üzenetek alapján létrehozott ugyanazt a jelszót login. Előfordulhat azonban, hogy új kulcsot generál és jelszót, majd ismételje Sling gombok a címzettek.";
 /* 'The following keys will be deleted:' is a screen label (match English casing); used to begin list of keys that will be deleted. */
-"label_WarnManagePassFollowsAreRecent" = "A következő kulcsok törlésre kerülnek:";
+"label_WarnManagePassFollowsAreRecent" = "A következő gombok törlésre kerül:";
 /* 'There are no more recent keys than yours.' is a screen label (match English casing); used to show there are no keys to delete. */
-"label_WarnManagePassNoMoreRecent" = "Nincs újabb kulcsokat, mint a tiéd.";
+"label_WarnManagePassNoMoreRecent" = "Nincs újabb gombok, mint a tiéd.";
 /* 'Only keys generated more recently than yours, generated on %s, may be deleted.' is a screen label (match English casing); used to show which keys may be deleted. %s = the key generation date of the current key */
-"label_WarnManagePassOnlyRecentDeleted" = "Csak előállított kulcsok frissebb, mint a tiéd, keletkező %@ lehet törölni.";
+"label_WarnManagePassOnlyRecentDeleted" = "Csak előállított kulcsok frissebb, mint a tiéd, keletkezett %@, törölhető.";
 /* 'Work' is a screen label (match English casing); used to denote a 'work' type of email or phone contact type. iOS-only. */
 "label_worktag" = "Munka";
 
 /* 'SafeSlinger Exchange' is an application name (title case); used for dialogs to show the user which that a SafeSlinger Exchange is in progress. */
-"lib_name" = "SafeSlinger cseréje";
+"lib_name" = "SafeSlinger Csere";
 
 /* 'About' is a menu option (title case); used to show the about dialog via the Settings screen. */
-"menu_About" = "A";
+"menu_About" = "Körülbelül";
 /* 'Auto-retrieve attachments' is a menu option (title case); used to enable/disable automatically retrieving message attachments when logged in via the Settings screen. */
 "menu_auto_attach_retrieval" = "Automatikus letöltés mellékletek";
 /* 'Auto-decrypt' is a menu option (title case); used to enable/disable automatically decrypting messages when logged in via the Settings screen. */
-"menu_auto_decrypt" = "Auto-dekódolása";
+"menu_auto_decrypt" = "Auto-hírbe";
 /* 'Change' is a menu option (title case); used to change the currently selected file attachment via the File Options dialog. */
 "menu_Change" = "Változás";
 /* 'Change Passphrase' is a menu option (title case); used to confirm the current passphrase and create and new one via the Settings screen. */
 "menu_ChangePassphrase" = "Change Jelszó";
 /* 'Email from Contacts' is a menu option (title case); used when adding a contact invitaion via email. */
-"menu_ContactInviteEmail" = "E-mail a Kapcsolatok";
+"menu_ContactInviteEmail" = "E-mail-re Kapcsolatok";
 /* 'Text from Contacts' is a menu option (title case); used when adding a contact invitaion via sms. */
-"menu_ContactInviteSms" = "Szöveget Kapcsolatok";
+"menu_ContactInviteSms" = "Szöveg Kapcsolatok";
 /* 'Create New' is a menu option (title case); used to show a new empty contact in the address book for editing as the users' current identity via the Personal Contact dialog. */
 "menu_CreateNew" = "Új létrehozása";
 /* 'Delete' is a menu option (title case); used to delete the current item from the list context menu. */
-"menu_delete" = "Törlése";
+"menu_delete" = "Töröl";
 /* 'Delete Thread %s' is a menu option (title case); used to delete all messages from this person via the message list context menu. %s = the name of a person. */
 "menu_deleteThread" = "Törlés Téma %@";
 /* 'View Detail' is a menu option (title case); used to show a dialog of more detail about the item via the message list context menu. */
 "menu_Details" = "Részletek";
 /* 'Download Directory' is a choice (sentence case); used when the user chooses to change the directory of the attachment before saving. */
-"menu_DownloadDirectory" = "Download Directory";
+"menu_DownloadDirectory" = "Letöltés Directory";
 /* 'Edit' is a menu option (title case); used to provide a generic edit menu option. */
 "menu_Edit" = "Szerkesztés";
 /* 'Edit Contact' is a menu option (title case); used to show the users' current contact in the address book for editing via the Personal Contact dialog. */
-"menu_EditContact" = "Kapcsolat szerkesztése";
+"menu_EditContact" = "Edit Contact";
 /* 'Edit Name' is a menu option (title case); used to show the Settings dialog to change the preferred name. */
 "menu_EditName" = "Név szerkesztése";
 /* 'File Manager' is a menu option (title case); used to show a custom file system navigation menu via the Choose Your File dialog. Android-only. */
 "menu_FileManager" = "File Manager";
 /* 'Forgot Passphrase?' is a menu option (title case); used on the passphrase screen to show users how to generate a new key after forgetting the passphrase that protects the old one. */
-"menu_ForgotPassphrase" = "Elfelejtett Jelszó?";
+"menu_ForgotPassphrase" = "Elfelejtette jelszavunkat?";
 /* 'Help' is a menu option (title case); used to show a help dialog for the current screen. */
 "menu_Help" = "Segítség";
 /* 'Introduction' is a menu option (title case); used to show the secure introduction composition screen via the main home screen. */
-"menu_Introduction" = "Bemutatkozás";
+"menu_Introduction" = "Bevezetés";
 /* 'Language' is a menu (title case); used as the settings menu option to change language */
 "menu_language" = "Nyelv";
 /* 'License' is a menu option (title case); used to show a dialog of the End User License Agreement. */
-"menu_License" = "Licenc";
+"menu_License" = "Engedély";
 /* 'Add Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
-"menu_link_contact_add" = "Add Contact link";
+"menu_link_contact_add" = "Add Kapcsolat Kapcsolat";
 /* 'Change Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
-"menu_link_contact_change" = "Változás Kapcsolat Kapcsolat";
+"menu_link_contact_change" = "Change Kapcsolat Kapcsolat";
 /* 'Logout' is a menu option (title case); used to remove the cached passphrase and force the user to login again. */
-"menu_Logout" = "Logout";
+"menu_Logout" = "Kilépés";
 /* 'Manage Passphrases' is a menu option (title case); used on the settings screen to allow users to remove newer keys if created by users without orignial user authorization. */
-"menu_ManagePassphrases" = "Kezelése jelmondatok";
+"menu_ManagePassphrases" = "Kezelje jelmondatok";
 /* 'Message Font Size' is a menu (title case); used as the settings menu option to change message font size */
-"menu_message_font_size" = "Message Betűméret";
+"menu_message_font_size" = "Message betűméret";
 /* 'Copy Text' is a menu option (title case); used to copy the message text into the clipboard via the message list context menu. */
-"menu_messageCopyText" = "Szöveg másolása";
+"menu_messageCopyText" = "Copy Text";
 /* 'Forward' is a menu option (title case); used to create a new message with the same text message/attachment via the message list context menu. */
 "menu_messageForward" = "Előre";
 /* 'Privacy Policy' is a menu option (title case); used to show a dialog of the Privacy Policy. */
-"menu_PrivacyPolicy" = "Adatvédelmi irányelvek";
+"menu_PrivacyPolicy" = "Adatvédelem";
 /* 'Remove' is a menu option (title case); used to remove the currently selected file attachment via the File Options dialog. */
-"menu_Remove" = "Vegye ki";
+"menu_Remove" = "Eltávolít";
 /* 'Restore Default Settings' is a menu option (title case); used as Settings screen menu item for restoring all settings to default */
 "menu_restore_default" = "Az alapértelmezett beállítások visszaállítása";
 /* 'Sound' is a menu option (title case); used as Settings item for entering ringtone selection screen */
 "menu_ringtone" = "Hang";
 /* 'Add Contact Invitation' is a menu option (title case); used to send an email or text message containing an installation link for SafeSlinger. */
-"menu_SelectShareApp" = "Partner hozzáadása Meghívó";
+"menu_SelectShareApp" = "Add Kapcsolat Meghívó";
 /* 'Send Feedback' is a menu option (title case); used to send an email with support data for feedback. */
 "menu_sendFeedback" = "Visszajelzés küldése";
 /* 'Send Update' is a menu option (title case); used to send a credential update via the recipient list context menu. */
@@ -629,9 +639,9 @@
 /* 'Settings' is a menu option (title case); used to show the settings screen. */
 "menu_Settings" = "Beállítások";
 /* 'Show Tutorial' is a menu option (title case); used to toggle the key exchange walkthrough when exchanging keys via the Settings screen. */
-"menu_ShowTutorial" = "Előadás bemutatója";
+"menu_ShowTutorial" = "Útmutató megjelenítése";
 /* 'Compose' is a menu option (title case); used at the title of the message composition tab for the home tab view. */
-"menu_TagComposeMessage" = "Levélírás";
+"menu_TagComposeMessage" = "Összeállít";
 /* 'Sling Keys' is a menu option (title case); used as the title of the key exchange tab for the home tab view. */
 "menu_TagExchange" = "Sling Keys";
 /* 'Messages' is a menu option (title case); used as the title of the message list tab for the home tab view. */
@@ -639,59 +649,61 @@
 /* 'Use Another' is a menu option (title case); used to redo the Setup process again to find another contact to use as the users' main identity via the Personal Contact dialog. */
 "menu_UseAnother" = "Használjon másik";
 /* 'Use Contact %s' is a menu option (title case); used to select the found contact as the users' main identity via the Personal Contact dialog. */
-"menu_UseContactPerson" = "Használja Kapcsolat %@";
+"menu_UseContactPerson" = "Kapcsolat %@";
 /* 'Use Name Only' is a menu option (title case); used to select no contact as the users' main identity via the Personal Contact dialog. */
-"menu_UseNoContact" = "Use Name Only";
+"menu_UseNoContact" = "Használata csak a nevében";
 /* 'Use Profile %s' is a menu option (title case); used to select the main profile contact as the users' main identity via the Personal Contact dialog. */
-"menu_UseProfilePerson" = "Használja Profile %@";
+"menu_UseProfilePerson" = "Használja Profil %@";
 /* 'Vibrate' is a menu option (title case); used as Settings item for boolean option to vibrate during message notification */
-"menu_vibrate" = "Rezgés";
+"menu_vibrate" = "Rezeg";
 
 /* 'waiting for verification from all members...' is a progress message (lower case, ellipsis); used to show progress while verifying data from all members hash equal to the initial commitment they sent. */
 "prog_CollectingOthersCommitVerify" = "vár ellenőrzés minden tagja...";
 /* 'waiting for all users to join...' is a progress message (lower case, ellipsis); used to show progress while waiting to collect all initial commitments from members who entered the same lowest number grouping ID. */
 "prog_CollectingOthersItems" = "vár minden felhasználó számára, hogy csatlakozzon...";
 /* 'constructing group key...' is a progress message (lower case, ellipsis); used to show progress while generating the asymmetric shared group key tree and distributing the appropriate public tree nodes. */
-"prog_ConstructingGroupKey" = "építése csoport legfontosabb...";
+"prog_ConstructingGroupKey" = "építésének csoport gombot...";
 /* 'decrypting...' is a progress message (lower case, ellipsis); used to show progress during message decryption (and currently signature verification as well). */
-"prog_decrypting" = "dekódoláshoz...";
+"prog_decrypting" = "visszafejtése...";
 /* 'encrypting...' is a progress message (lower case, ellipsis); used to show progress during message encryption (and currently signing as well). */
 "prog_encrypting" = "titkosítása...";
 /* 'message sent, awaiting response...' is a progress message (lower case, ellipsis); used to show progress after the message has been uploaded, but the server has not confirmed the generation of a push message yet. */
-"prog_FileSent" = "küldött üzenet, várom a választ...";
+"prog_FileSent" = "üzenetet küldött, várom a választ...";
 /* 'finding key...' is a progress message (lower case, ellipsis); used to show progress while looking up a matching key in the key database. */
-"prog_findingKey" = "megtalálása kulcsfontosságú...";
+"prog_findingKey" = "kulcs megtalálása...";
 /* 'generating key, this can take a while...' is a progress message (lower case, ellipsis); used to show progress during encryption key and signature key public/private key pair generation. */
-"prog_GeneratingKey" = "generáló kulcs, ez eltarthat egy ideig...";
+"prog_GeneratingKey" = "generáló kulcsot, ez eltarthat egy ideig...";
 /* 'generating signature...' is a progress message (lower case, ellipsis); used to show progress during message signature generation. */
 "prog_generatingSignature" = "generáló aláírás...";
 /* 'loading content...' is a progress message (lower case, ellipsis); used to show progress during file preview loading. */
 "prog_loadingContent" = "betöltése...";
+/* 'pending...' is a progress message (lower case, ellipsis); used to show progress during queued message while waiting to act */
+"prog_pending" = "függőben lévő...";
 /* 'receiving encrypted file...' is a progress message (lower case, ellipsis); used to show progress while receiving the requested file. */
-"prog_ReceivingFile" = "fogadó titkosított fájl...";
+"prog_ReceivingFile" = "fogadó titkosított fájlt...";
 /* 'requesting encrypted file...' is a progress message (lower case, ellipsis); used to show progress while waiting for the server to return the requested file. */
-"prog_RequestingFile" = "kérő titkosított fájl...";
+"prog_RequestingFile" = "kérő titkosított file...";
 /* 'requesting encrypted message...' is a progress message (lower case, ellipsis); used to show progress while waiting for the server to return the requested message. */
-"prog_RequestingMessage" = "kérő titkosított üzenet...";
+"prog_RequestingMessage" = "kérő titkosított üzenetet...";
 /* 'requesting push registration...' is a progress message (lower case, ellipsis); used to show progress while waiting for Google or APNS to return a registration id for this phone to receive SafeSlinger-only push messages. */
-"prog_RequestingPushReg" = "kérő tolja bejegyzés...";
+"prog_RequestingPushReg" = "kérő nyomja regisztrációs...";
 /* 'requesting membership...' is a progress message (lower case, ellipsis); used to show progress while waiting for the exchange server to return a grouping ID number. */
 "prog_RequestingUserId" = "kérő tagság...";
 /* 'updating address book...' is a progress message (lower case, ellipsis); used to show progress while newly exchanged contact data is added to the users' address book. */
-"prog_SavingContactsToAddressBook" = "címjegyzék frissítését...";
+"prog_SavingContactsToAddressBook" = "frissítése címjegyzék...";
 /* 'updating key database...' is a progress message (lower case, ellipsis); used to show progress while newly exchanged keys are added to the local database. */
 "prog_SavingContactsToKeyDatabase" = "frissítése kulcs adatbázis...";
 /* 'searching for backup...' is a progress message (lower case, ellipsis); used to show progress during a search for backed up settings. */
-"prog_SearchingForBackup" = "keres mentés...";
+"prog_SearchingForBackup" = "keres hát...";
 /* 'sending encrypted %s...' is a progress message (lower case, ellipsis); used to show progress while a message is being sent. %s = the file name if an attachment exists. */
-"prog_SendingFile" = "küld titkosított %@...";
+"prog_SendingFile" = "küldését titkosított %@...";
 /* 'verifying integrity...' is a progress message (lower case, ellipsis); used to show progress during message integrity verification. */
-"prog_verifyingIntegrity" = "ellenőrzése integritás...";
+"prog_verifyingIntegrity" = "ellenőrzése integritását...";
 /* 'verifying signature...' is a progress message (lower case, ellipsis); used to show progress during message signature verification. */
-"prog_verifyingSignature" = "ellenőrzése aláírás...";
+"prog_verifyingSignature" = "aláírás ellenőrzésekor...";
 
 /* 'Advanced' is a preferences title (title case); used to sub-divide the Advanced section of the settings screen. */
-"section_advanced" = "Speciális";
+"section_advanced" = "Előrehaladott";
 /* 'Backup' is a preferences title (title case); used to sub-divide the Backup section of the settings screen. */
 "section_backup" = "Backup";
 /* 'General' is a preferences title (title case); used to sub-divide the General section of the settings screen. */
@@ -702,93 +714,99 @@
 "section_storage" = "Tárolás";
 
 /* 'Backup restored.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm backup keys and settings have bee restored on re-install. */
-"state_BackupRestored" = "Backup vissza.";
+"state_BackupRestored" = "Backup helyreállt.";
 /* 'Deleted file %s.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that a file has been deleted. %s = the file name of the deleted file. */
 "state_FileDeleted" = "Törölt fájl %@.";
-/* 'Message sent.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that a message has been sent. */
-"state_FileSent" = "Üzenetet küldött.";
+/* 'Message sent.' is an informational message (sentence case, period); TODO: This should be deprecated in favor 1 message push to messages tab (single thread) and >1 messages push to messages tab (all threads) with a toast of state_MessagesSent. */
+"state_FileSent" = "Üzenet elküldve.";
 /* 'Invitation added.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the addition of a contact invitation. */
 "state_InvitationAdded" = "Meghívó hozzá.";
 /* 'Message saved as draft.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that an un-sent message has been saved. */
-"state_MessageSavedAsDraft" = "Üzenet mentett tervezet.";
+"state_MessageSavedAsDraft" = "Üzenet mentésre tervezetét.";
 /* '%d messages deleted.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the number of messages deleted. %d = the number of messages successfully deleted. */
-"state_MessagesDeleted" = "%d törölt üzeneteket.";
+"state_MessagesDeleted" = "%d törölt üzenetek.";
+/* '%d messages sent.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that N messages has been sent used on all threads views. */
+"state_MessagesSent" = "%d küldött üzenetek.";
 /* 'Passphrase updated.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the change of password. */
-"state_PassphraseUpdated" = "Jelmondat frissítve.";
+"state_PassphraseUpdated" = "Jelmondatot frissítve.";
 /* '%d recipients deleted.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the number of recipients deleted. %d the number of recipient's keys successfully deleted. */
-"state_RecipientsDeleted" = "%d címzettek törölve.";
+"state_RecipientsDeleted" = "%d címzettek hagyni.";
 /* '%s contacts imported.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the number of contacts imported after exchange. %s the number of contacts imported, may be expressed as a ratio, such as 4/5 in case of a partial import. */
-"state_SomeContactsImported" = "%@ kapcsolatokat importált.";
+"state_SomeContactsImported" = "%@ kapcsolatokat importálni.";
 /* 'Text copied to clipboard.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the message text has been copied to the device native clipboard. */
-"state_TextCopiedToClipboard" = "Szöveget másolt a vágólapra.";
+"state_TextCopiedToClipboard" = "Szöveg másolt a vágólapra.";
 
 /* 'SafeSlinger is designed to easily share identity data, in person or over the phone, authenticated, private, and intact. Each person you share with creates a secure end-to-end channel to send messages.' is an application description (sentence case); used at the beginning of the about box and app store listing to describe the application. Beginning of long form: 4000 character max. */
-"text_About" = "SafeSlinger úgy tervezték, hogy könnyen megoszthatja az azonosítási adatokat, személyesen vagy telefonon, hitelesített, magán, és ép. Minden személy megosztani létrehoz egy biztonságos end-to-end csatorna üzeneteket küldeni.";
+"text_About" = "SafeSlinger úgy tervezték, hogy könnyedén megoszthatja a személyazonossági adatok, személyesen vagy telefonon keresztül, hitelesített, saját, és ép. Minden ember oszt meg olyan biztonságos end-to-end csatorna üzeneteket küldeni.";
 /* 'Easily exchange contact information with others' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
 "text_About1" = "Könnyen információcseréhez másokkal";
 /* 'Securely sling texts, photos, anything!' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
-"text_About2" = "Biztonságosan parittya szövegek, fotók, semmit!";
+"text_About2" = "Biztonságosan parittyával szövegek, fotók, semmit!";
 /* 'Strong cryptography protects your information' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
-"text_About3" = "Erős kriptográfia védi az adatok";
+"text_About3" = "Az erős titkosítás védi információk";
 /* 'SafeSlinger: Speak 3 words and forever chat in peace.' is an application description (sentence case); used in the about box and app store listing to describe the application features. Short form: 80 character max, should be exciting. */
-"text_About_Short" = "SafeSlinger: Beszélj 3 szó, és örökre a chat békében.";
+"text_About_Short" = "SafeSlinger: Beszélj 3 szó, és örökre beszélgetni békében.";
 /* 'email: %s' is an application description (sentence case); used in the app store listing, %s = SafeSlinger support email address. */
-"text_AboutEmail" = "email: %@";
+"text_AboutEmail" = "e-mail: %@";
 /* 'Features:' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
 "text_AboutFeat" = "Jellemzők:";
 /* 'web: %s' is an application description (sentence case); used in the app store listing, %s = SafeSlinger project web page address. */
 "text_AboutWeb" = "web: %@";
+/* 'Developed by:' is an application description (sentence case); used at the end of the about dialog to list the developers of SafeSlinger. */
+"text_DevelopedBy" = "Készítette:";
 /* 'Exchange' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordExchange" = "Csere";
 /* 'Identity' is an application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordIdentity" = "Identity";
+"text_KeywordIdentity" = "Identitás";
 /* 'Key' is an application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordKey" = "Key";
+"text_KeywordKey" = "Kulcs";
 /* 'Messaging' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordMessaging" = "Üzenetek";
 /* 'Privacy' is an application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordPrivacy" = "Privacy";
+"text_KeywordPrivacy" = "Magánélet";
 /* 'Security' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordSecurity" = "Biztonság";
 /* 'Languages provided by:' is an application description (sentence case); used at the end of the about dialog to list the translators of SafeSlinger. */
-"text_LanguagesProvidedBy" = "Nyelvek által:";
+"text_LanguagesProvidedBy" = "Nyelvek biztosította:";
+/* 'translate: %s' is an application description (sentence case); used in the app store listing, %s = SafeSlinger project localization repo. */
+"text_LocalizationRepo" = "lefordítani: %@";
 /* 'Related Terms:' is an application description (sentence case); used in the app store listing to list related search terms to help users looking for secure key exchange and messaging. */
 "text_RelatedSearchTerms" = "Kapcsolódó kifejezések:";
 /* 'Requirements:' is an application description (sentence case); used in the about box and app store listing to enumerate requirements. */
 "text_Requirements" = "Követelmények:";
 /* 'Must be installed on a minimum of 2 devices.' is an application description (sentence case); used in the about box and app store listing to enumerate requirements. */
-"text_Requirements1" = "Kell telepíteni minimum 2 eszköz.";
+"text_Requirements1" = "Telepíteni kell egy minimum 2 eszközt.";
 /* 'An Internet connection must be active.' is an application description (sentence case); used in the about box and app store listing to enumerate requirements. */
-"text_Requirements2" = "Internetkapcsolat aktívnak kell lennie.";
+"text_Requirements2" = "Internet kapcsolat aktívnak kell lennie.";
 /* 'open source: %s' is an application description (sentence case); used in the app store listing to show the location of the open source code repository. %s = source code URL. */
 "text_SourceCodeRepo" = "Open Source: %@";
 /* 'Stability fixes.' is an application description (sentence case); used to list what changes have been made to updated versions. */
-"text_WhatsNew" = "Stabilitás javítások.";
+"text_WhatsNew" = "Stabilitási javítások.";
 
 /* 'About' is a title (title case); used as the */
-"title_About" = "A";
+"title_About" = "Körülbelül";
 /* 'Camera' is a menu option (title case); used in the Select File Option menu to take a picture with the camera on iOS. */
-"title_camera" = "Camera";
+"title_camera" = "Kamera";
 /* 'Choose Directory' is a title (title case); used at the top of the menu when choosing a directory to load or save a file attachment. */
-"title_ChooseDirectory" = "Válassza ki a könyvtár";
+"title_ChooseDirectory" = "Válasszon Directory";
 /* 'Choose Your Attachment' is a title (title case); used at the top of the menu options when choosing among sources to pick an attachment. */
-"title_ChooseFileLoad" = "Válassza ki Attachment";
+"title_ChooseFileLoad" = "Válassz Attachment";
 /* 'Comments/Questions' is a title (title case); used as the Subject field of an email message for the user to send feedback to developers. Also used as the menu option to start the email. */
-"title_comments" = "Megjegyzések/kérdések";
+"title_comments" = "Comments/Kérdések";
 /* 'Error' is a title (title case); used at the top of the error dialog. */
 "title_Error" = "Hiba";
 /* 'Sling Keys Assistant' is a title (title case); used at the top of the dialog, which provides a walkthrough of the key exchange protocol. */
 "title_ExchangeWalkthrough" = "Sling Keys Assistant";
 /* 'Attachment Options' is a title (title case); used at the top of the menu when choosing whether to remove the current attachment or select a new one. */
-"title_FileOptions" = "Rögzítési lehetőség";
+"title_FileOptions" = "Attachment Options";
 /* 'Setup' is a title (title case); used at the top of the setup screen. */
-"title_find" = "Beállítás";
+"title_find" = "Felépítés";
 /* 'Select a font size' is a title (title case); used as the settings title when changing font size */
 "title_font_size" = "Válassza ki a betűméretet";
 /* 'Begin Exchange' is a title (title case); used at the top of the begin exchange screen to start the exchange protocol. */
-"title_home" = "Kezdje az Exchange";
+"title_home" = "Kezdje Csere";
 /* 'Home' is a title (title case); used at the top of the home screen on iOS. */
-"title_HomePanel" = "Főoldal";
+"title_HomePanel" = "Otthon";
 /* 'Message' is a title (title case); used at the top of the dialog when viewing message details. */
 "title_MessageDetail" = "Üzenet";
 /* 'Messages' is a title (title case); used at the top of the message list screen. */
@@ -800,7 +818,7 @@
 /* '%d SafeSlinger Messages Available' is a title (title case); used as the title of multiple incoming messages in the notification window. iOS-only. */
 "title_NotifyMulFileAvailable" = "%d SafeSlinger üzenetek Elérhető";
 /* 'Passphrase' is a title (title case); used at the top of the passphrase screen where user will login. */
-"title_passphrase" = "Jelmondat";
+"title_passphrase" = "Jelmondatot";
 /* 'Photo Album' is a menu option (title case); used in the Select File Option menu to select a picture from the photo album on iOS. */
 "title_photoalbum" = "Photo Album";
 /* 'Photo Library' is a menu option (title case); used in the Select File Option menu to create a picture from the photo library on iOS. */
@@ -810,7 +828,7 @@
 /* 'Question' is a title (title case); used at the top question yes/no dialog. */
 "title_Question" = "Kérdés";
 /* 'Recipient Detail' is a title (title case); used at the top of the dialog when viewing recipient/key details. */
-"title_RecipientDetail" = "Címzett Detail";
+"title_RecipientDetail" = "A címzett részlete";
 /* 'End Exchange' is a title (title case); used at the top of the import contacts screen at the end of the exchange protocol. */
 "title_save" = "Vége az Exchange";
 /* 'Save File As' is a title (title case); used at the top of the File Manager when saving a file on Android. */
@@ -818,17 +836,17 @@
 /* 'Secure Introduction' is a title (title case); used at the top of the secure introduction composition screen. */
 "title_SecureIntroduction" = "Biztonságos Bevezetés";
 /* 'Secure Introduction Invitation!' is a title (title case); used at the top of the confirmation dialog when receiving a secure introduction. */
-"title_SecureIntroductionInvite" = "Biztonságos Bemutatkozás Meghívó!";
+"title_SecureIntroductionInvite" = "Biztonságos Bevezetés Meghívó!";
 /* 'Sending Options:' is a title (title case); used to denote the dialog for user to pickup sender source options. */
-"title_SelectSource" = "Küldési opciók:";
+"title_SelectSource" = "Küldő Options:";
 /* 'Send' is a title (title case); used at the top of compose message screen. */
-"title_SendFile" = "Küldjön";
+"title_SendFile" = "Küld";
 /* 'Sharing Folder' is a menu option (title case); used in the Select File Option menu to select a file from the sharing folder on iOS. */
 "title_sharingfolder" = "Megosztása Folder";
 /* 'How many users in the exchange?' is a title (title case); used at the top of the group size selection screen. */
 "title_size" = "Hány felhasználó a csere?";
 /* 'Sound Recorder' is a menu option (title case); used in the Select File Option menu to create a voice recording on iOS. */
-"title_soundrecoder" = "Sound Recorder";
+"title_soundrecoder" = "Hangrögzítő";
 /* 'SafeSlinger Invitation' is a title (title case); used as the Subject field of an email or text message sent by the Share Application menu option. */
 "title_TextInviteMsg" = "SafeSlinger Meghívó";
 /* 'Threads' is a title (title case); used at the top of the thread list screen. */
@@ -836,6 +854,6 @@
 /* 'Grouping' is a title (title case); used at the top of the entry screen for the lowest common number. */
 "title_userid" = "Csoportosítás";
 /* 'Verify' is a title (title case); used at the top of the word phrase verification screen. */
-"title_verify" = "Győződjön meg arról";
+"title_verify" = "Ellenőrizze";
 /* 'Warning' is a title (title case); used at the top of the warning dialog. */
 "title_Warn" = "Figyelmeztetés";
