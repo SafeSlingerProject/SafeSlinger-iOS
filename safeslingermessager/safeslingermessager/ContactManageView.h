@@ -36,9 +36,7 @@
 @interface ContactManageView : UITableViewController <ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, ABNewPersonViewControllerDelegate, MFMailComposeViewControllerDelegate> {
     int default_menu_index;
 	
-	NSMutableArray *contact_index;
-	NSMutableArray *contact_photos;
-	NSMutableDictionary *user_actions;
+	NSMutableArray *user_actions;
 }
 
 @property (nonatomic, retain) AppDelegate *appDelegate;

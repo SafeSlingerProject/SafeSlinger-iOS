@@ -327,10 +327,10 @@ typedef enum {
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        ContactEntry *sc = _filteredContacts[indexPath.row];
-        [_appDelegate.DbInstance RemoveRecipient: sc.keyId];
+        ContactEntry *contact = _filteredContacts[indexPath.row];
+        [_appDelegate.DbInstance RemoveRecipient:contact.keyId];
         [_filteredContacts removeObjectAtIndex:indexPath.row];
-		[_contacts removeObject:sc];
+		[_contacts removeObject:contact];
         
         // show hint to user
         [[[[iToast makeText: [NSString stringWithFormat:NSLocalizedString(@"state_RecipientsDeleted", @"%d recipients deleted."), 1]] setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
@@ -340,6 +340,7 @@ typedef enum {
         [_appDelegate.BackupSys PerformBackup];
 		
 		[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
+		[_delegate contactDeleted:contact];
 		
 		if (_contacts.count == 0) {
 			[self reloadTable];

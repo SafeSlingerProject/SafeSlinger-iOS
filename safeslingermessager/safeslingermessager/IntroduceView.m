@@ -44,8 +44,7 @@
 @synthesize pickU1, pickU2, pickUser;
 @synthesize ProgressLabel, ProgressIndicator;
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     [HintLabel setText:NSLocalizedString(@"label_InstSendInvite", @"Pick recipients to introduce securely:")];
@@ -56,8 +55,7 @@
     [User2Photo setImage: [UIImage imageNamed: @"blank_contact.png"]];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     self.parentViewController.navigationItem.title = NSLocalizedString(@"title_SecureIntroduction", @"Secure Introduction");
     
     // ? button
@@ -73,8 +71,7 @@
     [self CleanSelectContact: User2Tag];
 }
 
-- (void)DisplayHow
-{
+- (void)DisplayHow {
     UIActionSheet *actionSheet = [[UIActionSheet alloc]
                                   initWithTitle: nil
                                   delegate: self
@@ -88,8 +85,7 @@
     actionSheet = nil;
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
     switch (buttonIndex) {
         case Help:
             // show help
@@ -103,8 +99,7 @@
     }
 }
 
-- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
-{
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
     switch (result)
     {
         case MFMailComposeResultCancelled:
@@ -123,14 +118,7 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (BOOL)EvaluateContact: (ContactEntry*)SelectContact
-{
+- (BOOL)EvaluateContact: (ContactEntry*)SelectContact {
     BOOL _SafeSelect = YES;
     
     if(SelectContact==nil) return !_SafeSelect;
@@ -153,8 +141,7 @@
     return _SafeSelect;
 }
 
-- (void)SetupContact: (ContactEntry*)SelectContact
-{
+- (void)SetupContact:(ContactEntry*)SelectContact {
     switch (pickUser) {
         case User1Tag:
             pickU1 = SelectContact;
@@ -398,8 +385,7 @@
     [self CleanSelectContact: User2Tag];
 }
 
-- (IBAction)SelectContact:(id)sender
-{
+- (IBAction)SelectContact:(id)sender {
     pickUser = [sender tag];
     switch ([sender tag]) {
         case User1Tag:
@@ -415,8 +401,7 @@
     }
 }
 
-- (void)CleanSelectContact: (int)index
-{
+- (void)CleanSelectContact: (int)index {
     switch (index) {
         case User1Tag:
             messageForU2 = nil;
@@ -435,8 +420,7 @@
     }
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([[segue identifier]isEqualToString:@"SelectContact"]) {
         ContactSelectView *dest = (ContactSelectView *)segue.destinationViewController;
         dest.delegate = self;
@@ -449,6 +433,14 @@
 - (void)contactSelected:(ContactEntry *)contact {
 	if([self EvaluateContact:contact]) {
 		[self SetupContact:contact];
+	}
+}
+
+- (void)contactDeleted:(ContactEntry *)contact {
+	if([pickU1.pushToken isEqualToString:contact.pushToken]) {
+		[self CleanSelectContact:User1Tag];
+	} else if([pickU2.pushToken isEqualToString:contact.pushToken]) {
+		[self CleanSelectContact:User2Tag];
 	}
 }
 

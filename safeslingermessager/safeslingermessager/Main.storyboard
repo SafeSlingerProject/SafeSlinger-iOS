@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="MZK-Wx-VW0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="MZK-Wx-VW0">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -425,7 +425,6 @@ Key: 15/Oct/2014</string>
                                 <constraints>
                                     <constraint firstItem="H5q-Al-CsH" firstAttribute="centerX" secondItem="XSP-ND-vdW" secondAttribute="centerX" id="03I-Ay-nLf"/>
                                     <constraint firstItem="MRN-fw-nCN" firstAttribute="leading" secondItem="4bK-tY-ZVB" secondAttribute="leading" constant="18" id="1Id-7p-pk9"/>
-                                    <constraint firstItem="vTi-lB-C41" firstAttribute="centerX" secondItem="H5q-Al-CsH" secondAttribute="centerX" id="3Tb-Zh-JeC"/>
                                     <constraint firstItem="H5q-Al-CsH" firstAttribute="top" secondItem="XSP-ND-vdW" secondAttribute="bottom" constant="8" symbolic="YES" id="4SA-UY-HIN"/>
                                     <constraint firstItem="fPb-2A-0Pl" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vTi-lB-C41" secondAttribute="bottom" constant="5" id="5gQ-3B-Swl"/>
                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="V1J-GI-26o" secondAttribute="bottom" constant="10" id="Ftp-JK-kOq"/>
@@ -851,7 +850,7 @@ Key: 15/Oct/2014</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qqq-9a-7tv">
-                                <rect key="frame" x="18" y="391" width="285" height="44"/>
+                                <rect key="frame" x="18" y="391" width="284" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Peu-K6-R95"/>
@@ -874,7 +873,7 @@ Key: 15/Oct/2014</string>
                             <constraint firstItem="qqq-9a-7tv" firstAttribute="top" secondItem="7Zh-Kc-07v" secondAttribute="bottom" constant="8" id="Ap8-ZA-Ucv"/>
                             <constraint firstItem="1YH-89-j4B" firstAttribute="leading" secondItem="BYG-QE-8od" secondAttribute="leading" constant="10" id="BAe-uj-zj3"/>
                             <constraint firstItem="vcM-fT-RrC" firstAttribute="bottom" secondItem="GA6-Ia-ToL" secondAttribute="bottom" id="DSX-7L-gps"/>
-                            <constraint firstAttribute="trailing" secondItem="qqq-9a-7tv" secondAttribute="trailing" constant="17" id="HnK-Tc-1FD"/>
+                            <constraint firstAttribute="trailing" secondItem="qqq-9a-7tv" secondAttribute="trailing" constant="18" id="HnK-Tc-1FD"/>
                             <constraint firstItem="1YH-89-j4B" firstAttribute="top" secondItem="vcM-fT-RrC" secondAttribute="bottom" constant="15" id="ICQ-ez-DS4"/>
                             <constraint firstItem="vcM-fT-RrC" firstAttribute="top" secondItem="SrJ-ZO-Soo" secondAttribute="top" id="KZd-ym-iig"/>
                             <constraint firstAttribute="trailing" secondItem="7Zh-Kc-07v" secondAttribute="trailing" id="MGa-rV-bSL"/>
@@ -1084,7 +1083,7 @@ Key: 15/Oct/2014</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NTs-KD-9EO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-346" y="169"/>
+            <point key="canvasLocation" x="-346" y="190"/>
         </scene>
         <!--Introduction-->
         <scene sceneID="s7G-Wl-fv4">
@@ -2263,9 +2262,9 @@ Key: 15/Oct/2014</string>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="UZ2-1F-SnD"/>
-        <segue reference="LD0-eN-P9b"/>
-        <segue reference="Oq5-5I-4N6"/>
+        <segue reference="fmt-VR-Qc6"/>
+        <segue reference="Xbv-WE-X4U"/>
         <segue reference="eTE-lm-5os"/>
-        <segue reference="4Sf-VJ-fnH"/>
+        <segue reference="Oq5-5I-4N6"/>
     </inferredMetricsTieBreakers>
 </document>

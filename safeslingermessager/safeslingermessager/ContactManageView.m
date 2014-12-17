@@ -31,6 +31,50 @@
 #import "FunctionView.h"
 #import <safeslingerexchange/iToast.h>
 
+@interface ContactInfo : NSObject 
+
+@property NSString *label;
+@property UIImage *picture;
+@property int recordId;
+
+@end
+
+@implementation ContactInfo
+
+@end
+
+
+typedef enum {
+	UseNameOnly = -1,
+	AddNew = -2,
+	ReSelect = -3,
+	EditOld = -4,
+} ContactActionId;
+
+
+@interface Action : NSObject
+
+@property NSString *label;
+@property ContactActionId actionId;
+
+- (instancetype)initWithLabel:(NSString *)label actionId:(int)actionId;
+
+@end
+
+@implementation Action
+
+- (instancetype)initWithLabel:(NSString *)label actionId:(int)actionId {
+	self = [super init];
+	if(self) {
+		self.label = label;
+		self.actionId = actionId;
+	}
+	return self;
+}
+
+@end
+
+
 @interface ContactManageView ()
 
 @end
@@ -43,39 +87,30 @@
     _appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     // All cache time entries
-    user_actions = [NSMutableDictionary dictionary];
-    contact_index = [NSMutableArray array];
-    contact_photos = [NSMutableArray array];
+    user_actions = [NSMutableArray array];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [user_actions removeAllObjects];
-    [contact_index removeAllObjects];
-    [contact_photos removeAllObjects];
-	
-    // has contact already
-	[user_actions addEntriesFromDictionary:@{@(UseNameOnly): NSLocalizedString(@"menu_UseNoContact", nil),
-												  @(AddNew): NSLocalizedString(@"menu_CreateNew", nil),
-												  @(ReSelect): NSLocalizedString(@"menu_UseAnother", nil)}];
-    
 	
 	NSString *nameInDatabase;
 	
 	if(_editingContact) {
 		self.navigationItem.title = NSLocalizedString(@"title_RecipientDetail", nil);
 		if(_editingContact.recordId > 0) {
-			[user_actions setObject:NSLocalizedString(@"menu_Edit", nil) forKey:@(EditOld)];
+			[user_actions addObject:[[Action alloc] initWithLabel:NSLocalizedString(@"menu_Edit", nil) actionId:EditOld]];
 		}
 		
 		nameInDatabase = [NSString compositeName:_editingContact.firstName withLastName:_editingContact.lastName];
 	} else {
 		self.navigationItem.title = NSLocalizedString(@"title_MyIdentity", nil);
 		if(_appDelegate.IdentityNum > 0) {
-			[user_actions setObject:NSLocalizedString(@"menu_Edit", nil) forKey:@(EditOld)];
+			[user_actions addObject:[[Action alloc] initWithLabel:NSLocalizedString(@"menu_Edit", nil) actionId:EditOld]];
 		}
 		
 		nameInDatabase = [_appDelegate.DbInstance GetProfileName];
 	}
+	
 	
     ABAddressBookRef aBook = NULL;
     CFErrorRef error = NULL;
@@ -98,20 +133,21 @@
 			
             // firstname and lastname matches
             if([compositename isEqualToString:nameInDatabase]) {
-                [user_actions setObject: [NSString stringWithFormat:NSLocalizedString(@"menu_UseContactPerson", nil),compositename]
-                                      forKey:@(index)];
-                [contact_index addObject:@(ABRecordGetRecordID(aRecord))];
+				ContactInfo *contactInfo = [ContactInfo new];
+				contactInfo.recordId = ABRecordGetRecordID(aRecord);
+				contactInfo.label = [NSString stringWithFormat:NSLocalizedString(@"menu_UseContactPerson", nil),compositename];
                 
                 // Parse Photo
                 if(ABPersonHasImageData(aRecord)) {
                     CFDataRef photo = ABPersonCopyImageDataWithFormat(aRecord, kABPersonImageFormatThumbnail);
                     UIImage *image = [UIImage imageWithData: (__bridge NSData *)photo];
-                    [contact_photos addObject:image];
+					contactInfo.picture = image;
                     CFRelease(photo);
                 } else {
-                    [contact_photos addObject:[UIImage imageNamed: @"blank_contact.png"]];
+					contactInfo.picture = [UIImage imageNamed: @"blank_contact.png"];
                 }
-                
+				
+				[user_actions addObject:contactInfo];
                 index++;
             }
         }
@@ -119,6 +155,10 @@
     
     if(allPeople)CFRelease(allPeople);
     if(aBook)CFRelease(aBook);
+	
+	[user_actions addObjectsFromArray:@[[[Action alloc] initWithLabel:NSLocalizedString(@"menu_UseAnother", nil) actionId:ReSelect],
+										[[Action alloc] initWithLabel:NSLocalizedString(@"menu_UseNoContact", nil) actionId:UseNameOnly],
+										[[Action alloc] initWithLabel:NSLocalizedString(@"menu_CreateNew", nil) actionId:AddNew]]];
 }
 
 - (IBAction)DisplayHow:(id)sender {
@@ -163,14 +203,18 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"ContactOptCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell...
-    cell.textLabel.text = [[user_actions allValues]objectAtIndex:indexPath.row];
-    cell.detailTextLabel.text = nil;
-    NSInteger key = [[[user_actions allKeys]objectAtIndex:indexPath.row]integerValue];
-    if(key >= 0) {
-        [cell.imageView setImage:contact_photos[key]];
-    }
+	cell.detailTextLabel.text = nil;
+	
+	if([user_actions[indexPath.row] isKindOfClass:[Action class]]) {
+		Action *action = user_actions[indexPath.row];
+		cell.textLabel.text = action.label;
+		cell.imageView.image = nil;
+	} else {
+		ContactInfo *contactInfo = user_actions[indexPath.row];
+		cell.textLabel.text = contactInfo.label;
+		cell.imageView.image = contactInfo.picture;
+	}
+	
     return cell;
 }
 
@@ -178,28 +222,29 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSInteger key = [[[user_actions allKeys]objectAtIndex:indexPath.row]integerValue];
-    
-    switch (key) {
-        case UseNameOnly:
-			[self updateContact:nil];
-            [self.navigationController popViewControllerAnimated:YES];
-            break;
-        case EditOld:
-            [self editOldContact];
-            break;
-        case AddNew:
-            [self addNewContact];
-            break;
-        case ReSelect:
-            [self selectAnotherContact];
-            break;
-        default:
-            // other contacts with the same name
-			[self updateContact:[self getPersonFromAddressBook:(int)[contact_index[key] integerValue]]];
-            [self.navigationController popViewControllerAnimated:YES];
-            break;
-    }
+	
+	if([user_actions[indexPath.row] isKindOfClass:[Action class]]) {
+		Action *action = user_actions[indexPath.row];
+		switch (action.actionId) {
+			case UseNameOnly:
+				[self updateContact:nil];
+				[self.navigationController popViewControllerAnimated:YES];
+				break;
+			case EditOld:
+				[self editOldContact];
+				break;
+			case AddNew:
+				[self addNewContact];
+				break;
+			case ReSelect:
+				[self selectAnotherContact];
+				break;
+		}
+	} else {
+		ContactInfo *contactInfo = user_actions[indexPath.row];
+		[self updateContact:[self getPersonFromAddressBook:contactInfo.recordId]];
+		[self.navigationController popViewControllerAnimated:YES];
+	}
 }
 
 - (void)editOldContact {

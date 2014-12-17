@@ -213,7 +213,7 @@
 	
 	int currentVersion = (int)[[NSUserDefaults standardUserDefaults] integerForKey:kAPPVERSION];
 	oldVersion = (1 << 24) | (8 << 16) | 1; // version 1.8.0.1
-	if (currentVersion <= oldVersion) {
+	if (currentVersion != 0 && currentVersion <= oldVersion) {
 		[DbInstance patchForContactsFromAddressBook];
 	}
 }

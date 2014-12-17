@@ -720,17 +720,18 @@
     self.parentViewController.navigationItem.leftBarButtonItem = _logoutButton;
 }
 
-#pragma mark - ContactManageViewDelegate methods
-
-- (void)contactManagerViewDidFinishEditingContact:(ContactEntry *)contact {
-	[self updateSelf];
-}
-
 #pragma mark - ContactSelectViewDelegate methods
 
 - (void)contactSelected:(ContactEntry *)contact {
 	_selectedReceiver = contact;
 	[self updateReceiver];
+}
+
+- (void)contactDeleted:(ContactEntry *)contact {
+	if([_selectedReceiver.pushToken isEqualToString:contact.pushToken]) {
+		_selectedReceiver = nil;
+		[self updateReceiver];
+	}
 }
 
 @end

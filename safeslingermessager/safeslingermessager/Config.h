@@ -132,10 +132,3 @@ typedef enum ContactCategory {
     Address,
     IMPP
 }ContactCategory;
-
-typedef enum ContactOperation {
-    UseNameOnly = -1,
-	AddNew = -2,
-	ReSelect = -3,
-    EditOld = -4,
-}ContactOperation;
