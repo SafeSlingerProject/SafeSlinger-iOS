@@ -28,8 +28,7 @@
 @class AppDelegate;
 @class MsgListEntry;
 
-@interface MessageView : UITableViewController
-{
+@interface MessageView : UITableViewController {
     AppDelegate *delegate;
 }
 
@@ -37,7 +36,6 @@
 @property (nonatomic, strong) NSMutableArray *MessageList;
 @property (nonatomic, strong) UIImage *b_img;
 
--(IBAction)unwindToThreadView:(UIStoryboardSegue *)unwindSegue;
-- (void)UpdateThread;
+- (IBAction)unwindToThreadView:(UIStoryboardSegue *)unwindSegue;
 
 @end

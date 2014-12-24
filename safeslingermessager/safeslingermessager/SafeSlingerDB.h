@@ -155,7 +155,7 @@ typedef enum DirectionType {
 - (BOOL)addNewRecipient:(ContactEntry *)contact;
 
 // for Message Thread
-- (void)GetThreads:(NSMutableDictionary *)threadlist;
+- (NSMutableDictionary *)getThreads;
 - (NSArray *)LoadThreadMessage:(NSString *)KEYID;
 - (int)ThreadMessageCount:(NSString *)KEYID;
 - (BOOL)DeleteThread:(NSString *)KEYID;

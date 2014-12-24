@@ -136,14 +136,15 @@
 }
 
 - (void)registerPushToken {
-    [UAirship setLogLevel:UALogLevelTrace];
     UAConfig *config = [UAConfig defaultConfig];
     // Call takeOff (which creates the UAirship singleton)
     [UAirship takeOff:config];
-    // Print out the application configuration for debugging (optional)
-    [UAPush shared].userNotificationTypes = (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert);
-    [UAirship setLogLevel:UALogLevelError];
-    [[UAPush shared]setAutobadgeEnabled:YES];
+	
+    [UAPush shared].userNotificationTypes = (UIUserNotificationTypeBadge |
+											 UIUserNotificationTypeAlert |
+											 UIUserNotificationTypeSound);
+	UAirship.logLevel = UALogLevelError;
+    [UAPush shared].autobadgeEnabled = YES;
     [UAPush shared].userPushNotificationsEnabled = YES;
     [UAPush shared].registrationDelegate = self;
 }

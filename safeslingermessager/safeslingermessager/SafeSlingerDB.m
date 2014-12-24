@@ -1136,28 +1136,22 @@
 	}
 }
 
-- (void) GetThreads: (NSMutableDictionary*)threadlist
-{
-    if(db==nil&&threadlist==nil)
-    {
-        [ErrorLogger ERRORDEBUG:@"ERROR: DB Object is null or input is null."];
+- (NSMutableDictionary *)getThreads {
+	NSMutableDictionary *threadlist = [NSMutableDictionary new];
+	
+    if(db == nil) {
+        [ErrorLogger ERRORDEBUG:@"ERROR: DB Object is null."];
     }
 	
     @try {
-		
-        [threadlist removeAllObjects];
-        const char *sql = NULL;
+		const char *sql = "SELECT receipt, cTime, count(msgid) FROM msgtable GROUP BY receipt order by cTime desc";
         sqlite3_stmt *sqlStatement;
 		
-        // New Thread Only
-        sql = "SELECT receipt, cTime, count(msgid) FROM msgtable GROUP BY receipt order by cTime desc";
-		
-        if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK)
-        {
+        if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
             [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
         }
 		
-        while (sqlite3_step(sqlStatement)==SQLITE_ROW) {
+        while(sqlite3_step(sqlStatement) == SQLITE_ROW) {
             MsgListEntry *listEnt = [[MsgListEntry alloc]init];
             listEnt.keyid = [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 0)];
             listEnt.lastSeen = [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 1)];
@@ -1173,7 +1167,7 @@
         [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"An exception occured: %@", [exception reason]]];
     }
     @finally {
-        
+		return threadlist;
     }
 }
 
