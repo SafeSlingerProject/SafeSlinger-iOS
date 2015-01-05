@@ -28,7 +28,6 @@
 #import "Utility.h"
 #import "SSEngine.h"
 #import "UniversalDB.h"
-#import <AudioToolbox/AudioToolbox.h>
 #import <UAPush.h>
 
 @implementation MessageReceiver
@@ -340,7 +339,7 @@
 			if(_notificationDelegate) {
 				[_notificationDelegate messageReceived];
 			} else {
-				AudioServicesPlaySystemSound(1003);
+				[UtilityFunc playSoundAlert];
 			}
 			
 			[[NSNotificationCenter defaultCenter] postNotificationName:NSNotificationMessageReceived object:nil userInfo:nil];

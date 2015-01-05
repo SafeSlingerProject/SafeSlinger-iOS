@@ -71,6 +71,7 @@
 #define kBackupReqDate @"BackupReqDate"
 #define kBackupURL @"BackupURL"
 #define kAPPVERSION @"APP_VERSION"
+#define kLastNotificationTimestamp @"LastNotificationTimestamp"
 
 #define kRequireMicrophonePrivacy @"RequireMicrophonePrivacy"
 #define kRequirePushNotification @"RequirePushNotification"

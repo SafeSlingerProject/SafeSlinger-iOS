@@ -28,6 +28,7 @@
 #import "FunctionView.h"
 #import "AppDelegate.h"
 #import <AddressBook/AddressBook.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 @implementation UtilityFunc
 
@@ -212,6 +213,31 @@
     
     });
     if(aBook)CFRelease(aBook);
+}
+
++ (void)playVibrationAlert {
+	if([self shouldPlayAlert]) {
+		AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+		[[NSUserDefaults standardUserDefaults] setDouble:[[NSDate date] timeIntervalSince1970] forKey:kLastNotificationTimestamp];
+	}
+}
+
++ (void)playSoundAlert {
+	if([self shouldPlayAlert]) {
+		// Play system sound
+		AudioServicesPlaySystemSound(1003);
+
+		// OR play custom sound:
+//		NSString *soundPath = [[NSBundle mainBundle] pathForResource:@"sound" ofType:@"aif"];
+//		SystemSoundID soundID;
+//		AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath:soundPath], &soundID);
+//		AudioServicesPlaySystemSound(soundID);
+	}
+}
+
++ (BOOL)shouldPlayAlert {
+	double lastNotificationTime = [[NSUserDefaults standardUserDefaults] doubleForKey:kLastNotificationTimestamp];
+	return [[NSDate date] timeIntervalSince1970] - lastNotificationTime < 1;
 }
 
 @end

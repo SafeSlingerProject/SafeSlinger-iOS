@@ -32,7 +32,6 @@
 #import "VCardParser.h"
 #import "InvitationView.h"
 #import "MessageView.h"
-#import <AudioToolbox/AudioToolbox.h>
 
 @interface MessageDetailView ()
 
@@ -963,9 +962,9 @@
 	
 	if(messages.count > count) {
 		// new message was in this conversation
-		AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+		[UtilityFunc playVibrationAlert];
 	} else {
-		AudioServicesPlaySystemSound(1003);
+		[UtilityFunc playSoundAlert];
 	}
 }
 
