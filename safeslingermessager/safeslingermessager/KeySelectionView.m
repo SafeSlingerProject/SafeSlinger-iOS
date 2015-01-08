@@ -36,15 +36,6 @@
 
 @synthesize keyitem, keylist, parent;
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -59,12 +50,6 @@
     [keylist setArray: [[NSUserDefaults standardUserDefaults] stringArrayForKey: kDB_KEY]];
     [keyitem removeAllObjects];
     [keyitem setArray: [[NSUserDefaults standardUserDefaults] stringArrayForKey: kDB_LIST]];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
@@ -91,11 +76,12 @@
     // Configure the cell...
     NSInteger index = [[NSUserDefaults standardUserDefaults] integerForKey: kDEFAULT_DB_KEY];
     
-    if(indexPath.row == index)
+	if(indexPath.row == index) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    else
+	} else {
         cell.accessoryType = UITableViewCellAccessoryNone;
-    
+	}
+	
     NSArray *keyinfo = [[keyitem objectAtIndex:indexPath.row] componentsSeparatedByString:@"\n"];
     cell.textLabel.text = [keyinfo objectAtIndex:0];
     cell.detailTextLabel.text = [keyinfo objectAtIndex:1];

@@ -1,7 +1,7 @@
 {
 	inProduction = NO;
-	developmentAppKey = "Dev AppKey here.";
-	developmentAppSecret = "Dev AppSecret here.";
-	productionAppKey = "Pro AppKey here.";
-	productionAppSecret = "Pro AppSecret here.";
+	developmentAppKey = "Secret Here.";
+	developmentAppSecret = "Secret Here.";
+	productionAppKey = "Secret Here.";
+	productionAppSecret = "Secret Here.";
 }

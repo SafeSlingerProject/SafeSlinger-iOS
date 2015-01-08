@@ -30,6 +30,7 @@
 #import "SSEngine.h"
 #import "ErrorLogger.h"
 #import "MessageDetailView.h"
+#import "MessageReceiver.h"
 
 #import <UAirship.h>
 #import <UAPush.h>
@@ -43,86 +44,80 @@
 @synthesize MessageList, delegate;
 @synthesize b_img;
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     MessageList = [[NSMutableArray alloc]init];
     b_img = [UIImage imageNamed: @"blank_contact_small.png"];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(messageReceived:)
+												 name:NSNotificationMessageReceived
+											   object:nil];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	
     [self UpdateThread];
+	
     UIBarButtonItem *addBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action: @selector(createNewThread:)];
     [self.parentViewController.navigationItem setRightBarButtonItem:addBtn];
+	
+	self.parentViewController.navigationItem.title = [NSString stringWithFormat:@"%lu %@",(unsigned long)[MessageList count], NSLocalizedString(@"title_Threads" ,@"Threads")];
 }
 
-- (void)UpdateThread
-{
+- (void)UpdateThread {
     // Messages from universal database
-    NSMutableDictionary *list = [NSMutableDictionary dictionary];
-    
-    [delegate.DbInstance GetThreads: list];
-    int badgenum = [delegate.UDbInstance UpdateThreadEntries: list];
-    if(badgenum>0)
+    NSMutableDictionary *list = [delegate.DbInstance getThreads];
+	
+    int badgenum = [delegate.UDbInstance UpdateThreadEntries:list];
+	if(badgenum > 0) {
         [self.tabBarItem setBadgeValue:[NSString stringWithFormat:@"%d", badgenum]];
-    else
+	} else {
         [self.tabBarItem setBadgeValue:nil];
-    
+	}
+	
     // Messages from individual database
-    [MessageList setArray: [list allValues]];
+    [MessageList setArray:[list allValues]];
     
     [self.tableView reloadData];
 }
 
--(IBAction)unwindToThreadView:(UIStoryboardSegue *)unwindSegue
-{
+-(IBAction)unwindToThreadView:(UIStoryboardSegue *)unwindSegue {
     [self viewWillAppear:YES];
 }
 
-- (void)createNewThread: (id)sender
-{
+- (void)createNewThread:(id)sender {
     [self.tabBarController setSelectedIndex:1];
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [MessageList removeAllObjects];
-    MessageList = nil;
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self
+													name:NSNotificationMessageReceived
+												  object:nil];
+	
     [super viewDidUnload];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - Table view data source
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    return 1;
-}
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    self.parentViewController.navigationItem.title = [NSString stringWithFormat:@"%lu %@",(unsigned long)[MessageList count], NSLocalizedString(@"title_Threads" ,@"Threads")];
     return [MessageList count];
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    if([MessageList count]==0)
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+	if([MessageList count] == 0) {
         return NSLocalizedString(@"label_InstNoMessages", @"No messages. You may send a message from tapping the 'Compose Message' Button in Home Menu.");
-    else
-        return @"";
+	}
+ 
+	return @"";
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"ThreadCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -134,16 +129,15 @@
     // username
     NSString* display = MsgListEntry.keyid;
     NSString* username = nil;
-    if([MsgListEntry.keyid isEqualToString:@"UNDEFINED"])
+	if([MsgListEntry.keyid isEqualToString:@"UNDEFINED"]) {
         display = NSLocalizedString(@"label_undefinedTypeLabel", @"Unknown");
-    else {
+	} else {
         username = [delegate.DbInstance QueryStringInTokenTableByKeyID: MsgListEntry.keyid Field:@"pid"];
-        if(username)
-        {
+        if(username) {
             NSArray* namearray = [[username substringFromIndex:[username rangeOfString:@":"].location+1]componentsSeparatedByString:@";"];
-            display = [NSString composite_name:[namearray objectAtIndex:1] withLastName:[namearray objectAtIndex:0]];
+            display = [NSString compositeName:[namearray objectAtIndex:1] withLastName:[namearray objectAtIndex:0]];
             [cell.imageView setAlpha: 1.0f];
-        }else{
+        } else {
             // disable
             [cell.imageView setAlpha: 0.3f];
         }
@@ -175,30 +169,22 @@
 }
 
 // Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete)
-	{
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
         MsgListEntry* MsgListEntry = [MessageList objectAtIndex:indexPath.row];
-        if([MsgListEntry.keyid isEqual:@"UNDEFINED"])
-        {
-            if([delegate.UDbInstance DeleteThread: @"UNDEFINED"])
-            {
+        if([MsgListEntry.keyid isEqual:@"UNDEFINED"]) {
+            if([delegate.UDbInstance DeleteThread: @"UNDEFINED"]) {
                 [MessageList removeObjectAtIndex:indexPath.row];
                 [[[[iToast makeText: [NSString stringWithFormat:NSLocalizedString(@"state_MessagesDeleted", @"%d messages deleted."), MsgListEntry.messagecount]]setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-                
-            }else{
+            } else {
                 [[[[iToast makeText: NSLocalizedString(@"error_UnableToUpdateMessageInDB", @"Unable to update the message database.")]setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
             }
-        }
-        else
-        {
-            if([delegate.DbInstance DeleteThread: MsgListEntry.keyid] && [delegate.UDbInstance DeleteThread: MsgListEntry.keyid])
-            {
+        } else {
+            if([delegate.DbInstance DeleteThread: MsgListEntry.keyid] && [delegate.UDbInstance DeleteThread: MsgListEntry.keyid]) {
                 [MessageList removeObjectAtIndex:indexPath.row];
                 [[[[iToast makeText: [NSString stringWithFormat:NSLocalizedString(@"state_MessagesDeleted", @"%d messages deleted."), MsgListEntry.messagecount]]setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
                 
-            }else{
+            } else {
                 [[[[iToast makeText: NSLocalizedString(@"error_UnableToUpdateMessageInDB", @"Unable to update the message database.")]setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
             }
         }
@@ -207,21 +193,22 @@
     }
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+#pragma mark - NSNotificationCenter methods
+
+- (void)messageReceived:(NSNotification *)notification {
+	[self UpdateThread];
+}
 
 #pragma mark - Navigation
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if([[segue identifier]isEqualToString:@"MessageDetail"])
-    {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([[segue identifier]isEqualToString:@"MessageDetail"]) {
         // assign entry...
         MessageDetailView *detail = (MessageDetailView*)[segue destinationViewController];
-        detail.parentView = self;
         detail.assignedEntry = [MessageList objectAtIndex:[self.tableView indexPathForSelectedRow].row];
     }
 }

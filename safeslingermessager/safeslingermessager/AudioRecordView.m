@@ -37,15 +37,6 @@
 
 @synthesize PlayBtn, RecordBtn, SaveBtn, StopBtn, polling_timer, parent, DiscardBtn, TimeLabel, audio_recorder;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -340,12 +331,6 @@
     sec_label = (sec<10) ? [NSString stringWithFormat:@"0%d", sec]: [NSString stringWithFormat:@"%d", sec];
     min_label = (min<10) ? [NSString stringWithFormat:@"0%d", min]: [NSString stringWithFormat:@"%d", min];
     TimeLabel.text = [NSString stringWithFormat:@"%@:%@", min_label, sec_label];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

@@ -45,17 +45,7 @@
 @synthesize EndExchangeAlready, GatherList;
 @synthesize proto;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
@@ -85,11 +75,15 @@
     
     // safeslinger exchange protocol
     proto = [[safeslingerexchange alloc]init];
-    GatherList = [NSMutableArray array];
+	GatherList = [NSMutableArray array];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(contactEdited:)
+												 name:NSNotificationContactEdited
+											   object:nil];
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     // Change Title and Help Button
@@ -105,17 +99,20 @@
     DescriptionLabel.adjustsFontSizeToFitWidth = YES;
     [ExchangeBtn setTitle: NSLocalizedString(@"btn_BeginExchangeProximity", @"Begin Exchange") forState:UIControlStateNormal];
     
-    if([[NSUserDefaults standardUserDefaults]integerForKey: kShowExchangeHint]==TurnOn)
-    {
+    if([[NSUserDefaults standardUserDefaults]integerForKey: kShowExchangeHint] == TurnOn) {
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             [self performSegueWithIdentifier:@"ShowExchangeHelp" sender:self];
         });
     }
-    [self ProcessProfile];
+	
+    [self processProfile];
 }
 
--(void) ProcessProfile
-{
+- (void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)processProfile {
 	DEBUGMSG(@"processContactWithID: %d", delegate.IdentityNum);
 	
     // clean up
@@ -142,8 +139,7 @@
             break;
         default:
             [ContactChangeBtn setTitle: delegate.IdentityName forState: UIControlStateNormal];
-            if(![self ParseContact:delegate.IdentityNum])
-            {
+            if(![self ParseContact:delegate.IdentityNum]) {
                 // if permission is disabled
                 [ContactImage setImage: [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"blank_contact" ofType:@"png"]]];
             }
@@ -152,8 +148,7 @@
     }
     
     // Update display, for key and token information
-    if([[SSEngine getPackPubKeys]length]>0)
-    {
+    if([[SSEngine getPackPubKeys]length] > 0) {
         [contact_labels addObject: @"SafeSlinger-PubKey"];
         [contact_values addObject: @""];
         [contact_selections addObject:[NSNumber numberWithBool:YES]];
@@ -174,8 +169,7 @@
     [self.ContactInfoTable reloadData];
 }
 
--(IBAction) EditContact
-{
+-(IBAction) EditContact {
     ABAuthorizationStatus status = ABAddressBookGetAuthorizationStatus();
     if(status == kABAuthorizationStatusNotDetermined) {
         UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
@@ -186,8 +180,7 @@
         message.tag = AskPerm;
         [message show];
         message = nil;
-    }
-    else if(status == kABAuthorizationStatusDenied || status == kABAuthorizationStatusRestricted) {
+    } else if(status == kABAuthorizationStatusDenied || status == kABAuthorizationStatusRestricted) {
         NSString* buttontitle = nil;
         NSString* description = nil;
         if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
@@ -206,25 +199,19 @@
         message.tag = HelpContact;
         [message show];
         message = nil;
-    }
-    else if(status == kABAuthorizationStatusAuthorized) {
-        if(delegate.IdentityNum!=NonExist)
-        {
+    } else if(status == kABAuthorizationStatusAuthorized) {
+        if(delegate.IdentityNum != NonExist) {
             [self performSegueWithIdentifier:@"EditContact" sender:self];
         }
     }
     
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(buttonIndex!=alertView.cancelButtonIndex)
-    {
-        if(alertView.tag==AskPerm)
-        {
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if(buttonIndex!=alertView.cancelButtonIndex) {
+        if(alertView.tag==AskPerm) {
             [UtilityFunc TriggerContactPermission];
-        }else if(alertView.tag==HelpContact)
-        {
+        } else if(alertView.tag==HelpContact) {
             if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kContactHelpURL]];
             } else {
@@ -232,8 +219,7 @@
                 NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
                 [[UIApplication sharedApplication] openURL:url];
             }
-        }else if(alertView.tag==HelpNotification)
-        {
+        } else if(alertView.tag==HelpNotification) {
             if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kPushNotificationHelpURL]];
             } else {
@@ -245,8 +231,7 @@
     }
 }
 
--(IBAction) BeginExchange
-{
+- (IBAction)BeginExchange {
     NSString* buttontitle = nil;
     NSString* description = nil;
     
@@ -286,14 +271,12 @@
     }
     
     NSString* vCard;
-    if(delegate.IdentityNum==NonLink)
-    {
+    if(delegate.IdentityNum==NonLink) {
         // profile only
         NSString* fname = [delegate.DbInstance GetStringConfig:@"Profile_FN"];
         NSString* lname = [delegate.DbInstance GetStringConfig:@"Profile_LN"];
         vCard = [VCardParser vCardWithNameOnly: fname LastName: lname];
-    }else if(delegate.IdentityNum>0)
-    {
+    } else if(delegate.IdentityNum>0) {
         // vCard extracted from address book is ready to exchange
         CFErrorRef error = NULL;
         ABAddressBookRef aBook = NULL;
@@ -312,11 +295,9 @@
     [proto BeginExchange: [vCard dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
-- (BOOL) ParseContact: (int)contactID
-{
+- (BOOL)ParseContact:(int)contactID {
     // load contact
-    if(ABAddressBookGetAuthorizationStatus()!=kABAuthorizationStatusAuthorized)
-    {
+    if(ABAddressBookGetAuthorizationStatus()!=kABAuthorizationStatusAuthorized) {
         return NO;
     }
     
@@ -329,8 +310,7 @@
     });
     
 	ABRecordRef aRecord = ABAddressBookGetPersonWithRecordID(book, contactID);
-	if (!aRecord)
-	{
+	if (!aRecord) {
         // error handle
 		delegate.IdentityNum = NonExist;
         [ContactChangeBtn setTitle:NSLocalizedString(@"label_undefinedTypeLabel", @"Unknown") forState:UIControlStateNormal];
@@ -342,8 +322,7 @@
 	}
     
     // Parse Photo
-    if(ABPersonHasImageData(aRecord))
-    {
+    if(ABPersonHasImageData(aRecord)) {
         CFDataRef photo = ABPersonCopyImageDataWithFormat(aRecord, kABPersonImageFormatThumbnail);
         UIImage *image = [UIImage imageWithData: (__bridge NSData *)photo];
         [ContactImage setImage:image];
@@ -357,28 +336,25 @@
         [contact_category addObject:[NSNumber numberWithInt:Photo]];
         
         CFRelease(photo);
-    }
-	else{
+    } else {
         [ContactImage setImage: [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"blank_contact" ofType:@"png"]]];
     }
     
     // Parse Emails
 	ABMutableMultiValueRef email = ABRecordCopyValue(aRecord, kABPersonEmailProperty);
-	for (CFIndex i = 0; i < ABMultiValueGetCount(email); i++)
-    {
+	for (CFIndex i = 0; i < ABMultiValueGetCount(email); i++) {
         CFStringRef emailAddress = ABMultiValueCopyValueAtIndex(email, i);
         CFStringRef eLabel = ABMultiValueCopyLabelAtIndex(email, i);
         NSString *emailLabel = [label_dictionary objectForKey:(__bridge NSString*)eLabel];
         
-        if([(__bridge NSString*)emailAddress IsValidEmail])
-        {
-            if(emailLabel)
-            {
+        if([(__bridge NSString*)emailAddress IsValidEmail]) {
+            if(emailLabel) {
                 [contact_labels addObject: (NSString*)emailLabel];
-            }else if(eLabel!=NULL)
+			} else if(eLabel!=NULL) {
                 [contact_labels addObject: (__bridge NSString*)eLabel];
-            else
+			} else {
                 [contact_labels addObject: @"Other"];
+			}
             [contact_values addObject: (__bridge NSString *)emailAddress];
             [contact_selections addObject:[NSNumber numberWithBool:YES]];
             [contact_category addObject:[NSNumber numberWithInt:Email]];
@@ -390,18 +366,17 @@
     
     // Parse URLs
     ABMutableMultiValueRef webpage = ABRecordCopyValue(aRecord, kABPersonURLProperty);
-    for (CFIndex i = 0; i < ABMultiValueGetCount(webpage); i++)
-    {
+    for (CFIndex i = 0; i < ABMultiValueGetCount(webpage); i++) {
         CFStringRef url = ABMultiValueCopyValueAtIndex(webpage, i);
         CFStringRef uLabel = ABMultiValueCopyLabelAtIndex(webpage, i);
         NSString *urlLabel = [label_dictionary objectForKey:(__bridge NSString*)uLabel];
-        if(urlLabel)
-        {
+        if(urlLabel) {
             [contact_labels addObject: urlLabel];
-        }else if(uLabel)
+		} else if(uLabel) {
             [contact_labels addObject: (__bridge NSString*)uLabel];
-        else
+		} else {
             [contact_labels addObject: @"Other"];
+		}
         [contact_values addObject: (__bridge NSString *)url];
         [contact_selections addObject:[NSNumber numberWithBool:YES]];
         [contact_category addObject:[NSNumber numberWithInt:Url]];
@@ -412,21 +387,18 @@
     
     // Parse PhoneNumber
 	ABMutableMultiValueRef phone = ABRecordCopyValue(aRecord, kABPersonPhoneProperty);
-    for (CFIndex i = 0; i < ABMultiValueGetCount(phone); i++)
-    {
+    for (CFIndex i = 0; i < ABMultiValueGetCount(phone); i++) {
         CFStringRef phoneNumber = ABMultiValueCopyValueAtIndex(phone, i);
         CFStringRef pLabel = ABMultiValueCopyLabelAtIndex(phone, i);
         NSString *phoneLabel = [label_dictionary objectForKey:(__bridge NSString*)pLabel];
-        if([(__bridge NSString*)phoneNumber IsValidPhoneNumber])
-        {
-            if(phoneLabel)
-            {
+        if([(__bridge NSString*)phoneNumber IsValidPhoneNumber]) {
+            if(phoneLabel) {
                 [contact_labels addObject: phoneLabel];
-            }else if(pLabel)
+			} else if(pLabel) {
                 [contact_labels addObject: (__bridge NSString*)pLabel];
-            else
+			} else {
                 [contact_labels addObject: @"Other"];
-            
+			}
             [contact_values addObject: (__bridge NSString *)phoneNumber];
             [contact_selections addObject:[NSNumber numberWithBool:YES]];
             [contact_category addObject:[NSNumber numberWithInt:PhoneNum]];
@@ -438,8 +410,7 @@
     
     // Parse adress
 	ABMutableMultiValueRef address = ABRecordCopyValue(aRecord, kABPersonAddressProperty);
-	for (CFIndex i = 0; i < ABMultiValueGetCount(address); i++)
-    {
+	for (CFIndex i = 0; i < ABMultiValueGetCount(address); i++) {
         CFStringRef aLabel = ABMultiValueCopyLabelAtIndex(address, i);
         NSString *addressLabel = [label_dictionary objectForKey:(__bridge NSString*)aLabel];
         
@@ -492,8 +463,7 @@
     return YES;
 }
 
-- (void)DisplayHow
-{
+- (void)DisplayHow {
     UIActionSheet *actionSheet = [[UIActionSheet alloc]
                                   initWithTitle: nil
                                   delegate: self
@@ -507,11 +477,9 @@
     actionSheet = nil;
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
     switch (buttonIndex) {
-        case Help:
-        {
+        case Help: {
             // show help
             [self performSegueWithIdentifier:@"ShowHelp" sender:self];
         }
@@ -524,10 +492,8 @@
     }
 }
 
-- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
-{
-    switch (result)
-    {
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    switch (result) {
         case MFMailComposeResultCancelled:
         case MFMailComposeResultSaved:
         case MFMailComposeResultSent:
@@ -544,21 +510,21 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - NSNotification methods
+
+- (void)contactEdited:(NSNotification *)notification {
+	if(!notification.userInfo[NSNotificationContactEditedObject]) {
+		[self processProfile];
+	}
 }
 
 #pragma mark UITableViewDelegate
--(void) tableView: (UITableView *)tableView didSelectRowAtIndexPath: (NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[tableView deselectRowAtIndexPath: [tableView indexPathForSelectedRow] animated: YES];
 	NSInteger row = [indexPath row];
 	UITableViewCell *cell = [tableView cellForRowAtIndexPath: indexPath];
     
-    if(cell.tag == 0)
-    {
+    if(cell.tag == 0) {
         switch (cell.accessoryType) {
             case UITableViewCellAccessoryNone:
                 cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -575,13 +541,12 @@
 }
 
 #pragma mark UITableViewDataSource
--(NSInteger) tableView: (UITableView *)tableView numberOfRowsInSection: (NSInteger)section
-{
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	return [contact_labels count];
 }
 
--(UITableViewCell *) tableView: (UITableView *)tableView cellForRowAtIndexPath: (NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"ContactFieldIdentifier";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -595,8 +560,7 @@
     
     NSNumber* cateclass = [contact_category objectAtIndex:row];
     cell.tag = 0;
-    switch(cateclass.intValue)
-    {
+    switch(cateclass.intValue) {
         case Photo:
             [cell.imageView setImage:[UIImage imageNamed:@"photo.png"]];
             cell.textLabel.text = @"Photo";
@@ -621,8 +585,7 @@
             break;
     }
     
-    switch(cateclass.intValue)
-    {
+    switch(cateclass.intValue) {
         case Photo:
             cell.textLabel.text = @"Photo";
             break;
@@ -641,20 +604,16 @@
 }
 
 #pragma SafeSlingerDelegate Methods
-- (void)EndExchange:(int)status_code ErrorString:(NSString*)error_str ExchangeSet: (NSArray*)exchange_set
-{
-    switch(status_code)
-    {
-        case RESULT_EXCHANGE_OK:
+
+- (void)EndExchange:(int)status_code ErrorString:(NSString *)error_str ExchangeSet:(NSArray *)exchange_set {
+    switch(status_code) {
+		case RESULT_EXCHANGE_OK: {
             // parse the exchanged data
-        {
             [GatherList removeAllObjects];
-            for(NSData* item in exchange_set)
-            {
+            for(NSData* item in exchange_set) {
                 NSString *card = [[NSString alloc] initWithData:item encoding:NSUTF8StringEncoding];
                 ABRecordRef aRecord = [VCardParser vCardToContact: card];
-                if (aRecord)
-                {
+                if (aRecord) {
                     [GatherList addObject:(__bridge id)(aRecord)];
                 }
             }
@@ -662,16 +621,13 @@
         }
             break;
             
-        case RESULT_EXCHANGE_CANCELED:
+		case RESULT_EXCHANGE_CANCELED: {
         // handle canceled result
-        {
             DEBUGMSG(@"Exchange Error: %@", error_str);
             FunctionView *mainview = nil;
             NSArray *stack = [self.navigationController viewControllers];
-            for(UIViewController *view in stack)
-            {
-                if([view isMemberOfClass:[FunctionView class]])
-                {
+            for(UIViewController *view in stack) {
+                if([view isMemberOfClass:[FunctionView class]]) {
                     mainview = (FunctionView*)view;
                     break;
                 }
@@ -687,16 +643,11 @@
 
 #pragma mark - Navigation
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier]isEqualToString:@"EndExchange"]) {
         // Get destination view
         EndExchangeView *saveView = [segue destinationViewController];
         saveView.contactList = GatherList;
-    }else if([segue.identifier isEqualToString:@"EditContact"])
-    {
-        ContactManageView* dest = (ContactManageView*)segue.destinationViewController;
-        dest.parent = self;
     }
 }
 

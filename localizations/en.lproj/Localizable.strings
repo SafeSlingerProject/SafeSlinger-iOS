@@ -30,7 +30,7 @@
 /* application name (title case); used for home screen icons, at the top of many screens, and many other places in the application. */
 "app_name" = "SafeSlinger";
 /* application description (sentence case); the names of the individuals who translated and/or reviewed localizations. */
-"app_TranslatorName" = "Adrian Perrig\nAkira Yamada\nAlbert Stroucken\nElli Fragkaki\nEmmanuel Owusu\nIrina Fudrow\nJens Höfflinger\nMichael Stroucken\nNicolas Christin\nSteve Matsumoto\nYeon Yim\nYue-Hsun Lin\n";
+"app_TranslatorName" = "Adrian Perrig\nAkira Yamada\nAlbert Stroucken\nElli Fragkaki\nEmmanuel Owusu\nIrina Fudrow\nJens Höfflinger\nMatthias Beckerle\nMichael Stroucken\nNicolas Christin\nSteve Matsumoto\nYeon Yim\nYue-Hsun Lin\n";
 
 /* question message (sentence case, question mark); used to warn when the backup is off to confirm we should keep reminding the user. Used with Forget and Remind buttons. */
 "ask_BackupDisabledRemindLater" = "Backup is disabled. Do you want to adjust backup settings and keep this reminder?";
@@ -65,6 +65,8 @@
 "btn_discard" = "Discard";
 /* button (title case); the Done button is used to allow the user to complete a current multi-step process. */
 "btn_Done" = "Done";
+/* button (title case); the Edit button is used to show a screen where the user can edit a contact. */
+"btn_Edit" = "Edit";
 /* button (title case); the Exit button is used to close the application. For non-Android use only, since Android uses the Back hardware button instead. */
 "btn_Exit" = "Exit";
 /* button (title case); the Import button is used to import a set of contacts on after an unsuccessful exchange protocol has finished. */
@@ -459,6 +461,8 @@
 "label_InstNoMessages" = "No messages. You may send a message from the Compose tab.";
 /* screen label (match English casing); used to instruct the user how to proceed on the Recipient list screen is case of no recipients. */
 "label_InstNoRecipients" = "To add recipients, you must first Sling Keys with one or more other users at the same time. You may also send a Sling Keys contact invitation from the menu.";
+/* screen label (match English casing); used to inform the user that no recipients match the search query. */
+"label_InstNoRecipientsMatchQuery" = "None of your current recipients match your search query. Please try a different query or invite a new contact.";
 /* screen label (match English casing); used to instruct the user how to proceed on the Shared Files screen is case of no files to share. iOS-only. */
 "label_InstNoSharedFile" = "No shared file. Connect your device with iTunes and drag files to the shared folder.";
 /* screen label (match English casing); used to instruct the user how to proceed on the Pick Recipients list screen. */
@@ -495,6 +499,8 @@
 "label_messageInviteSetupInst" = "To setup a secure messaging connection, we can meet or phone each other at the same time, and then Sling Keys just once to verify the connection.";
 /* screen label (match English casing); used as message text to invite a contact to begin secure messaging. */
 "label_messageInviteStartMsg" = "Can we start secure messaging with the open source SafeSlinger iPhone or Android app?";
+/* screen label (match English casing); used as the text message completing sling keys. %s = the name of a recipient. */
+"label_messageYouAreVerified" = "%@, you are verified.";
 /* screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole minutes. */
 "label_minutes" = "%d minutes";
 /* screen label (match English casing); used to denote a 'mobile' type of email or phone contact type. iOS-only. */
@@ -555,6 +561,8 @@
 "label_SaveAccount" = "Save Account";
 /* screen label (match English casing); used to instruct the user how to proceed on the End Exchange screen. */
 "label_SaveInstruct" = "Check contacts you want to update in your address book, then tap Import to save secure contacts:";
+/* screen label (match English casing); used on the Recipients screen to provide a hint to search for contacts. */
+"label_search_contacts_hint" = "Search contacts";
 /* screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole seconds. */
 "label_seconds" = "%d seconds";
 /* screen label (match English casing); used on the Compose Message screen recipient button before a recipient has been selected. */
@@ -567,6 +575,8 @@
 "label_SendTo" = "To:";
 /* screen label (match English casing); used in the key exchange walkthrough dialog to toggle the display of the walkthrough at the next attempted key exchange. */
 "label_ShowHintAtLaunch" = "Show this hint next time.";
+/* screen label (match English casing); used to alert the user about possible information leak on the use of speech recognition when the user tries to use this feature */
+"label_SpeechRecognitionAlert" = "Using speech recognition is disabled because it might cause an information leak";
 /* screen label (match English casing); used in the key exchange walkthrough dialog. */
 "label_step_1" = "Step 1";
 /* screen label (match English casing); used in the key exchange walkthrough dialog. */
@@ -750,6 +760,8 @@
 "prog_generatingSignature" = "generating signature...";
 /* progress message (lower case, ellipsis); used to show progress during file preview loading. */
 "prog_loadingContent" = "loading content...";
+/* progress message (lower case, ellipsis); used to show progress during queued message while waiting to act */
+"prog_pending" = "pending...";
 /* progress message (lower case, ellipsis); used to show progress while receiving the requested file. */
 "prog_ReceivingFile" = "receiving encrypted file...";
 /* progress message (lower case, ellipsis); used to show progress while waiting for the server to return the requested file. */
@@ -788,7 +800,7 @@
 "state_BackupRestored" = "Backup restored.";
 /* informational message (sentence case, period); used in an auto-dismissed message to confirm that a file has been deleted. %s = the file name of the deleted file. */
 "state_FileDeleted" = "Deleted file %@.";
-/* informational message (sentence case, period); used in an auto-dismissed message to confirm that a message has been sent. */
+/* informational message (sentence case, period); TODO: This should be deprecated in favor 1 message push to messages tab (single thread) and >1 messages push to messages tab (all threads) with a toast of state_MessagesSent. */
 "state_FileSent" = "Message sent.";
 /* informational message (sentence case, period); used in an auto-dismissed message to confirm the addition of a contact invitation. */
 "state_InvitationAdded" = "Invitation added.";
@@ -796,6 +808,8 @@
 "state_MessageSavedAsDraft" = "Message saved as draft.";
 /* informational message (sentence case, period); used in an auto-dismissed message to confirm the number of messages deleted. %d = the number of messages successfully deleted. */
 "state_MessagesDeleted" = "%d messages deleted.";
+/* informational message (sentence case, period); used in an auto-dismissed message to confirm that N messages has been sent used on all threads views. */
+"state_MessagesSent" = "%d messages sent.";
 /* informational message (sentence case, period); used in an auto-dismissed message to confirm the change of password. */
 "state_PassphraseUpdated" = "Passphrase updated.";
 /* informational message (sentence case, period); used in an auto-dismissed message to confirm the number of recipients deleted. %d the number of recipient's keys successfully deleted. */

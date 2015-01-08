@@ -26,12 +26,13 @@
 #import <QuickLook/QuickLook.h>
 #import <AddressBook/AddressBook.h>
 #import <dispatch/dispatch.h>
+#import "MessageReceiver.h"
 
 @class MsgListEntry;
 @class AppDelegate;
 @class MessageView;
 
-@interface MessageDetailView : UITableViewController <QLPreviewControllerDataSource, QLPreviewControllerDelegate, UIGestureRecognizerDelegate, UITextFieldDelegate>
+@interface MessageDetailView : UITableViewController <QLPreviewControllerDataSource, QLPreviewControllerDelegate, UIGestureRecognizerDelegate, UITextFieldDelegate, MessageReceiverNotificationDelegate>
 {
     // For Grand Central Dispatch
     dispatch_queue_t BackGroundQueue;
@@ -39,7 +40,6 @@
 }
 
 @property (nonatomic, retain) AppDelegate *delegate;
-@property (nonatomic, assign) MessageView *parentView;
 @property (nonatomic, strong) NSMutableArray *messages;
 @property (nonatomic, strong) NSURL *preview_cache_page;
 @property (nonatomic, strong) QLPreviewController *previewer;
@@ -56,8 +56,7 @@
 @property (nonatomic, strong) UIBarButtonItem *BackBtn;
 @property (nonatomic) ABRecordRef tRecord;
 
--(IBAction)unwindToMessageView:(UIStoryboardSegue *)unwindSegue;
--(IBAction)sendshortmsg:(id)sender;
+- (IBAction)sendshortmsg:(id)sender;
 - (void)ReloadTable;
 
 @end

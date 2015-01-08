@@ -28,6 +28,7 @@
 #import "FunctionView.h"
 #import "AppDelegate.h"
 #import <AddressBook/AddressBook.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 @implementation UtilityFunc
 
@@ -82,7 +83,7 @@
 +(BOOL) AddContactEntry: (ABAddressBookRef)aBook TargetRecord:(ABRecordRef)aRecord
 {
     CFErrorRef error = NULL;
-    BOOL InsertSucess = false;
+    BOOL success = false;
     ABRecordRef defaultR = ABAddressBookCopyDefaultSource(aBook);
     CFTypeRef sourceType = ABRecordCopyValue(defaultR, kABSourceTypeProperty);
     int STI = [(__bridge NSNumber *)sourceType intValue];
@@ -90,8 +91,8 @@
     CFRelease(defaultR);
     
     if (STI==kABSourceTypeLocal) {
-        InsertSucess = ABAddressBookAddRecord(aBook, aRecord, &error);
-    }else{
+        success = ABAddressBookAddRecord(aBook, aRecord, &error);
+    } else {
         // copy out all fields in the old namecard
         CFStringRef f = ABRecordCopyValue(aRecord, kABPersonFirstNameProperty);
         CFStringRef l = ABRecordCopyValue(aRecord, kABPersonLastNameProperty);
@@ -123,7 +124,7 @@
                 if(allPhones&&ABMultiValueGetCount(allPhones)>0)ABRecordSetValue(acopy, kABPersonPhoneProperty, allPhones, &error);
                 if(allAddresses&&ABMultiValueGetCount(allAddresses)>0)ABRecordSetValue(acopy, kABPersonAddressProperty, allAddresses, &error);
                 if(allEmails&&ABMultiValueGetCount(allEmails)>0)ABRecordSetValue(acopy, kABPersonEmailProperty, allEmails, &error);
-                InsertSucess = ABAddressBookAddRecord(aBook, acopy, &error);
+                success = ABAddressBookAddRecord(aBook, acopy, &error);
             }
         }
         CFRelease(sources);
@@ -139,11 +140,11 @@
         if(allPhones)CFRelease(allPhones);
     }
     
-    if(!InsertSucess){
+    if(!success){
         [ErrorLogger ERRORDEBUG: @"ERROR: Unable to Add the new record."];
     }
     
-    return InsertSucess;
+    return success;
 }
 
 +(void) RemoveDuplicates:(ABAddressBookRef)aBook AdressList:(CFArrayRef)allPeople CompareArray:(NSMutableDictionary*)compared
@@ -212,6 +213,31 @@
     
     });
     if(aBook)CFRelease(aBook);
+}
+
++ (void)playVibrationAlert {
+	if([self shouldPlayAlert]) {
+		AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+		[[NSUserDefaults standardUserDefaults] setDouble:[[NSDate date] timeIntervalSince1970] forKey:kLastNotificationTimestamp];
+	}
+}
+
++ (void)playSoundAlert {
+	if([self shouldPlayAlert]) {
+		// Play system sound
+		AudioServicesPlaySystemSound(1003);
+
+		// OR play custom sound:
+//		NSString *soundPath = [[NSBundle mainBundle] pathForResource:@"sound" ofType:@"aif"];
+//		SystemSoundID soundID;
+//		AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath:soundPath], &soundID);
+//		AudioServicesPlaySystemSound(soundID);
+	}
+}
+
++ (BOOL)shouldPlayAlert {
+	double lastNotificationTime = [[NSUserDefaults standardUserDefaults] doubleForKey:kLastNotificationTimestamp];
+	return [[NSDate date] timeIntervalSince1970] - lastNotificationTime < 1;
 }
 
 @end
@@ -365,32 +391,24 @@
 
 @implementation NSString (NameHandler)
 
-+(NSString*) humanreadable:(NSString*)databasename
-{
++ (NSString *)humanreadable:(NSString *)databasename {
     NSArray* namearray = [[databasename substringFromIndex:[databasename rangeOfString:@":"].location+1]componentsSeparatedByString:@";"];
-    return [NSString composite_name:[namearray objectAtIndex:1] withLastName:[namearray objectAtIndex:0]];
+    return [NSString compositeName:[namearray objectAtIndex:1] withLastName:[namearray objectAtIndex:0]];
 }
 
-+(NSString*) composite_name:(NSString*)fname withLastName:(NSString*)lname
-{
-    if(fname==nil&&lname==nil)
-    {
++ (NSString *)compositeName:(NSString *)fname withLastName:(NSString *)lname {
+    if(fname==nil&&lname==nil) {
         return nil;
-    }else if(fname!=nil&&lname==nil)
-    {
+    } else if(fname!=nil&&lname==nil) {
         return [NSString stringWithFormat:@"%@", fname];
-    }else if(fname==nil&&lname!=nil)
-    {
+    } else if(fname==nil&&lname!=nil) {
         return [NSString stringWithFormat:@"%@", lname];
-    }
-    else
-    {
+    } else {
         return [NSString stringWithFormat:@"%@ %@", fname, lname];
     }
 }
 
-+(NSString*) vcardnstring:(NSString*)fname withLastName:(NSString*)lname
-{
++ (NSString *)vcardnstring:(NSString *)fname withLastName:(NSString *)lname {
     if(lname==nil) return [NSString stringWithFormat:@"N:;%@", fname];
     else if (fname==nil) return [NSString stringWithFormat:@"N:%@;", lname];
     else return [NSString stringWithFormat:@"N:%@;%@", lname, fname];

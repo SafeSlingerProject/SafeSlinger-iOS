@@ -27,9 +27,10 @@
 @interface ContactCellView : UITableViewCell
 
 @property (nonatomic, strong) IBOutlet UILabel *NameLabel;
-@property (nonatomic, strong) IBOutlet UILabel *KeyIDLabel;
 @property (nonatomic, strong) IBOutlet UIImageView *UserPhoto;
 @property (nonatomic, strong) IBOutlet UILabel *KeygenLabel;
 @property (nonatomic, strong) IBOutlet UILabel *ExchangeLabel;
 @property (nonatomic, retain) IBOutlet UILabel *DeviceLabel;
+@property (strong, nonatomic) IBOutlet UIButton *contactInfoButton;
+
 @end

@@ -71,6 +71,7 @@
 #define kBackupReqDate @"BackupReqDate"
 #define kBackupURL @"BackupURL"
 #define kAPPVERSION @"APP_VERSION"
+#define kLastNotificationTimestamp @"LastNotificationTimestamp"
 
 #define kRequireMicrophonePrivacy @"RequireMicrophonePrivacy"
 #define kRequirePushNotification @"RequirePushNotification"
@@ -81,6 +82,8 @@
 #define kMicrophoneHelpURL @"https://www.cylab.cmu.edu/safeslinger/help/h4.html"
 #define kPhotoHelpURL @"https://www.cylab.cmu.edu/safeslinger/help/h5.html"
 #define kCameraHelpURL @"https://www.cylab.cmu.edu/safeslinger/help/h6.html"
+
+#define kHelpURL @"www.cylab.cmu.edu/safeslinger"
 
 #define kPrivacyURL @"http://www.cylab.cmu.edu/safeslinger/privacy.html"
 #define kLicenseURL @"http://www.cylab.cmu.edu/safeslinger/eula.html"
@@ -130,10 +133,3 @@ typedef enum ContactCategory {
     Address,
     IMPP
 }ContactCategory;
-
-typedef enum ContactOperation {
-    UseNameOnly = -1,
-	AddNew = -2,
-	ReSelect = -3,
-    EditOld = -4,
-}ContactOperation;

@@ -656,8 +656,8 @@
             // user id
             NSString *uid = [NSString stringWithFormat: @"%d", ntohl(*(int *)ptr)];
             ptr += 4;
-            int len = ntohl(*(int *)ptr);
-            DEBUGMSG(@"len = %d", len);
+			
+            DEBUGMSG(@"len = %d", ntohl(*(int *)ptr));
             ptr += 4;
             
             //first hash Nmh, change to sha3

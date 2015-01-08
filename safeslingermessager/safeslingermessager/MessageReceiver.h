@@ -24,21 +24,29 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum MessageStatus
-{
+#define NSNotificationMessageReceived @"MessageReceivedNotification"
+
+typedef enum MessageStatus {
     Expired = -3,
     NetworkFail = -2,
     NonceError = -1,
     InitFetch = 0,
     AlreadyExist = 1,
     Downloaded = 2
-}MessageStatus;
+} MessageStatus;
+
+
+@protocol MessageReceiverNotificationDelegate
+
+- (void)messageReceived;
+
+@end
+
 
 @class SafeSlingerDB;
 @class UniversalDB;
 
-@interface MessageReceiver : NSObject
-{
+@interface MessageReceiver : NSObject {
     int *MsgFinish;
     SafeSlingerDB *DbInstance;
     UniversalDB *UDbInstance;
@@ -51,9 +59,10 @@ typedef enum MessageStatus
 @property (nonatomic, strong) NSMutableDictionary *MsgNonces;
 @property (nonatomic, readwrite) int NumNewMsg, VersionNum, MsgCount;
 
+@property (nonatomic, weak) id notificationDelegate;
 
-- (id) init: (SafeSlingerDB*)GivenDB UniveralTable:(UniversalDB*)UniDB Version:(int)Version;
-- (void) FetchMessageNonces: (int)NumOfMostRecents;
-- (void) FetchSingleMessage: (NSString*)encodeNonce;
+- (id)init:(SafeSlingerDB *)GivenDB UniveralTable:(UniversalDB *)UniDB Version:(int)Version;
+- (void)FetchMessageNonces:(int)NumOfMostRecents;
+- (void)FetchSingleMessage:(NSString*)encodeNonce;
 
 @end

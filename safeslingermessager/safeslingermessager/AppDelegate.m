@@ -46,8 +46,7 @@
 @synthesize IdentityName, IdentityNum, RootPath, IdentityImage;
 @synthesize BackupSys, SelectContact, MessageInBox, bgTask;
 
--(NSString*) getVersionNumber
-{
+- (NSString *)getVersionNumber {
 #ifdef BETA
     return [NSString stringWithFormat:@"%@-beta", [[[NSBundle mainBundle] infoDictionary]objectForKey: @"CFBundleShortVersionString"]];
 #else
@@ -55,22 +54,26 @@
 #endif
 }
 
--(int) getVersionNumberByInt
-{
+- (int)getVersionNumberByInt {
     NSArray *versionArray = [[[[NSBundle mainBundle] infoDictionary]objectForKey: @"CFBundleVersion"] componentsSeparatedByString:@"."];
     
     int version = 0;
-    for(int i=0;i<[versionArray count];i++)
-    {
+    for(int i=0;i<[versionArray count];i++) {
         NSString* tmp = [versionArray objectAtIndex:i];
         version = version | ([tmp intValue] << (8*(3-i)));
     }
     return version;
 }
 
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+	// Preloads keyboard so there's no lag on initial keyboard appearance.
+	UITextField *lagFreeField = [[UITextField alloc] init];
+	[self.window addSubview:lagFreeField];
+	[lagFreeField becomeFirstResponder];
+	[lagFreeField resignFirstResponder];
+	[lagFreeField removeFromSuperview];
+	
+	
     [Crashlytics startWithAPIKey:@"a9f2629c171299fa2ff44a07abafb7652f4e1d5c"];
     [[Crashlytics sharedInstance]setDebugMode:YES];
     
@@ -82,40 +85,28 @@
     DbInstance = [[SafeSlingerDB alloc]init];
     
     NSInteger DB_KEY_INDEX = [[NSUserDefaults standardUserDefaults] integerForKey: kDEFAULT_DB_KEY];
-    if(DB_KEY_INDEX>0){
-        [DbInstance LoadDBFromStorage: [NSString stringWithFormat:@"%@-%ld", DATABASE_NAME, (long)DB_KEY_INDEX]];
-    }else{
-        [DbInstance LoadDBFromStorage: nil];
+    if(DB_KEY_INDEX > 0) {
+        [DbInstance LoadDBFromStorage:[NSString stringWithFormat:@"%@-%ld", DATABASE_NAME, (long)DB_KEY_INDEX]];
+    } else {
+        [DbInstance LoadDBFromStorage:nil];
     }
     
-    UDbInstance = [[UniversalDB alloc]init];
+    UDbInstance = [[UniversalDB alloc] init];
     [UDbInstance LoadDBFromStorage];
-    
-    int oldver = (1 << 24) | (7 << 16);
-    if([DbInstance GetProfileName]&&[self getVersionNumberByInt]<oldver)
-    {
-        // version 1.6.x, apply 1.7 changes...
-        [self ApplyChangeForV17];
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kRequirePushNotification];
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kRequireMicrophonePrivacy];
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kRequirePushNotification];
-    }
+	
+	[self updateDatabase];
     
     [[NSUserDefaults standardUserDefaults] setInteger:[self getVersionNumberByInt] forKey: kAPPVERSION];
     
     BOOL PushIsRegistered = NO;
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1)
-    {
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
         if ([[UIApplication sharedApplication] enabledRemoteNotificationTypes] != UIRemoteNotificationTypeNone)
             PushIsRegistered = YES;
-    }
-    else
-    {
+    } else {
         PushIsRegistered = [[UIApplication sharedApplication]isRegisteredForRemoteNotifications];
     }
     
-    if(PushIsRegistered)
-    {
+    if(PushIsRegistered) {
         [UAirship setLogLevel:UALogLevelTrace];
         UAConfig *config = [UAConfig defaultConfig];
         // Call takeOff (which creates the UAirship singleton)
@@ -136,39 +127,35 @@
     return YES;
 }
 
-- (void)registrationSucceededForChannelID:(NSString *)channelID deviceToken:(NSString *)deviceToken
-{
+- (void)registrationSucceededForChannelID:(NSString *)channelID deviceToken:(NSString *)deviceToken {
     // DEBUGMSG(@"channelID = %@, deviceToken = %@", channelID, deviceToken);
 }
 
-- (void)registrationFailed
-{
+- (void)registrationFailed {
     DEBUGMSG(@"registrationFailed");
 }
 
-- (void)registerPushToken
-{
-    [UAirship setLogLevel:UALogLevelTrace];
+- (void)registerPushToken {
     UAConfig *config = [UAConfig defaultConfig];
     // Call takeOff (which creates the UAirship singleton)
     [UAirship takeOff:config];
-    // Print out the application configuration for debugging (optional)
-    [UAPush shared].userNotificationTypes = (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert);
-    [UAirship setLogLevel:UALogLevelError];
-    [[UAPush shared]setAutobadgeEnabled:YES];
+	
+    [UAPush shared].userNotificationTypes = (UIUserNotificationTypeBadge |
+											 UIUserNotificationTypeAlert |
+											 UIUserNotificationTypeSound);
+	UAirship.logLevel = UALogLevelError;
+    [UAPush shared].autobadgeEnabled = YES;
     [UAPush shared].userPushNotificationsEnabled = YES;
     [UAPush shared].registrationDelegate = self;
 }
 
-- (void) removeContactLink
-{
-    int ContactID = NonLink;
-    NSData *contact = [NSData dataWithBytes:&ContactID length:sizeof(ContactID)];
+- (void)removeContactLink {
+    IdentityNum = NonLink;
+    NSData *contact = [NSData dataWithBytes:&IdentityNum length:sizeof(IdentityNum)];
     [DbInstance InsertOrUpdateConfig:contact withTag:@"IdentityNum"];
 }
 
--(void) saveConactDataWithoutChaningName: (int)ContactID
-{
+- (void)saveConactDataWithoutChaningName:(int)ContactID {
     if(ContactID == NonExist) return;
     self.IdentityNum = ContactID;
     NSData *contact = [NSData dataWithBytes:&ContactID length:sizeof(ContactID)];
@@ -179,56 +166,68 @@
     [BackupSys PerformBackup];
 }
 
--(void) saveConactData: (int)ContactID Firstname:(NSString*)FN Lastname:(NSString*)LN
-{
+- (void)saveConactData:(int)ContactID Firstname:(NSString *)FN Lastname:(NSString *)LN {
 	if(ContactID == NonExist) return;
  
     NSString* oldValue = [DbInstance GetProfileName];
-    if(FN)
-    {
+    if(FN) {
         [DbInstance InsertOrUpdateConfig:[FN dataUsingEncoding:NSUTF8StringEncoding] withTag:@"Profile_FN"];
-    }else{
+    } else {
         [DbInstance RemoveConfigTag:@"Profile_FN"];
     }
     
-    if(LN)
-    {
+    if(LN) {
         [DbInstance InsertOrUpdateConfig:[LN dataUsingEncoding:NSUTF8StringEncoding] withTag:@"Profile_LN"];
-    }else{
+    } else {
         [DbInstance RemoveConfigTag:@"Profile_LN"];
     }
     
     NSString* newValue = [DbInstance GetProfileName];
-    if(![oldValue isEqualToString:newValue])
-    {
+    if(![oldValue isEqualToString:newValue]) {
         //change information for kDB_LIST
         NSArray *infoarr = [[NSUserDefaults standardUserDefaults] stringArrayForKey: kDB_LIST];
         NSInteger index = [[NSUserDefaults standardUserDefaults] integerForKey: kDEFAULT_DB_KEY];
         
         NSMutableArray *arr = [NSMutableArray arrayWithArray:infoarr];
         
-        NSString *keyinfo = [NSString stringWithFormat:@"%@\n%@ %@", [NSString composite_name:FN withLastName:LN], NSLocalizedString(@"label_Key", @"Key:"), [NSString ChangeGMT2Local:[SSEngine getSelfGenKeyDate] GMTFormat:DATABASE_TIMESTR LocalFormat: @"yyyy-MM-dd HH:mm:ss"]];
+        NSString *keyinfo = [NSString stringWithFormat:@"%@\n%@ %@", [NSString compositeName:FN withLastName:LN], NSLocalizedString(@"label_Key", @"Key:"), [NSString ChangeGMT2Local:[SSEngine getSelfGenKeyDate] GMTFormat:DATABASE_TIMESTR LocalFormat: @"yyyy-MM-dd HH:mm:ss"]];
         
         [arr setObject:keyinfo atIndexedSubscript:index];
         [[NSUserDefaults standardUserDefaults] setObject:arr forKey: kDB_LIST];
     }
     
-    self.IdentityName = [NSString composite_name:FN withLastName:LN];
+    self.IdentityName = [NSString compositeName:FN withLastName:LN];
 	[self saveConactDataWithoutChaningName:ContactID];
 }
 
--(void)ApplyChangeForV17
-{
+#pragma mark - Database updates
+
+- (void)updateDatabase {
+	int oldVersion = (1 << 24) | (7 << 16); // version 1.7
+	if ([DbInstance GetProfileName] && [self getVersionNumberByInt] < oldVersion) {
+		// version 1.6.x, apply 1.7 changes...
+		[self ApplyChangeForV17];
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey: kRequirePushNotification];
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey: kRequireMicrophonePrivacy];
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey: kRequirePushNotification];
+	}
+	
+	int currentVersion = (int)[[NSUserDefaults standardUserDefaults] integerForKey:kAPPVERSION];
+	oldVersion = (1 << 24) | (8 << 16) | 1; // version 1.8.0.1
+	if (currentVersion != 0 && currentVersion <= oldVersion) {
+		[DbInstance patchForContactsFromAddressBook];
+	}
+}
+
+- (void)ApplyChangeForV17 {
     if([DbInstance PatchForTokenStoreTable])
         DEBUGMSG(@"Patch done...");
     
     // save contact index to database
-    if([DbInstance GetProfileName]&&([DbInstance GetConfig:@"IdentityNum"]==nil))
-    {
+    if([DbInstance GetProfileName] && ([DbInstance GetConfig:@"IdentityNum"]==nil)) {
         int contact_id = NonLink;
         NSString *contactsFile = [NSString stringWithFormat: @"%@/contact", RootPath];
-        if ([[NSFileManager defaultManager] fileExistsAtPath: contactsFile])
-        {
+        if ([[NSFileManager defaultManager] fileExistsAtPath: contactsFile]) {
             NSData *data = [[NSFileManager defaultManager] contentsAtPath: contactsFile];
             const char *bytes = [data bytes];
             bytes += 8;
@@ -240,69 +239,56 @@
     }
     
     // backup keys into database
-    if(![DbInstance GetConfig:@"KEYID"])
-    {
+    if(![DbInstance GetConfig:@"KEYID"]) {
         NSString *floc = [NSString stringWithFormat: @"%@/gendate.dat", RootPath];
-        if ([[NSFileManager defaultManager] fileExistsAtPath: floc])
-        {
+        if ([[NSFileManager defaultManager] fileExistsAtPath: floc]) {
             NSData *data = [[NSFileManager defaultManager] contentsAtPath: floc];
             [DbInstance InsertOrUpdateConfig:data withTag:@"KEYID"];
         }
     }
     
-    if(![DbInstance GetConfig:@"KEYGENDATE"])
-    {
+    if(![DbInstance GetConfig:@"KEYGENDATE"]) {
         NSString *floc = [NSString stringWithFormat: @"%@/gendate.txt", RootPath];
-        if ([[NSFileManager defaultManager] fileExistsAtPath: floc])
-        {
+        if ([[NSFileManager defaultManager] fileExistsAtPath: floc]) {
             NSData *data = [[NSFileManager defaultManager] contentsAtPath: floc];
             [DbInstance InsertOrUpdateConfig:data withTag:@"KEYGENDATE"];
         }
     }
     
-    if(![DbInstance GetConfig:@"ENCPUB"])
-    {
+    if(![DbInstance GetConfig:@"ENCPUB"]) {
         NSString *floc = [NSString stringWithFormat: @"%@/pubkey.pem", RootPath];
-        if ([[NSFileManager defaultManager] fileExistsAtPath: floc])
-        {
+        if ([[NSFileManager defaultManager] fileExistsAtPath: floc]) {
             NSData *data = [[NSFileManager defaultManager] contentsAtPath: floc];
             [DbInstance InsertOrUpdateConfig:data withTag:@"ENCPUB"];
         }
     }
     
-    if(![DbInstance GetConfig:@"SIGNPUB"])
-    {
+    if(![DbInstance GetConfig:@"SIGNPUB"]) {
         NSString *floc = [NSString stringWithFormat: @"%@/spubkey.pem", RootPath];
-        if ([[NSFileManager defaultManager] fileExistsAtPath: floc])
-        {
+        if ([[NSFileManager defaultManager] fileExistsAtPath: floc]) {
             NSData *data = [[NSFileManager defaultManager] contentsAtPath: floc];
             [DbInstance InsertOrUpdateConfig:data withTag:@"SIGNPUB"];
         }
     }
     
-    if(![DbInstance GetConfig:@"ENCPRI"])
-    {
+    if(![DbInstance GetConfig:@"ENCPRI"]) {
         NSString *floc = [NSString stringWithFormat: @"%@/prikey.pem", RootPath];
-        if ([[NSFileManager defaultManager] fileExistsAtPath: floc])
-        {
+        if ([[NSFileManager defaultManager] fileExistsAtPath: floc]) {
             NSData *data = [[NSFileManager defaultManager] contentsAtPath: floc];
             [DbInstance InsertOrUpdateConfig:data withTag:@"ENCPRI"];
         }
     }
     
-    if(![DbInstance GetConfig:@"SIGNPRI"])
-    {
+    if(![DbInstance GetConfig:@"SIGNPRI"]) {
         NSString *floc = [NSString stringWithFormat: @"%@/sprikey.pem", RootPath];
-        if ([[NSFileManager defaultManager] fileExistsAtPath: floc])
-        {
+        if ([[NSFileManager defaultManager] fileExistsAtPath: floc]) {
             NSData *data = [[NSFileManager defaultManager] contentsAtPath: floc];
             [DbInstance InsertOrUpdateConfig:data withTag:@"SIGNPRI"];
         }
     }
     
     // Register Default
-    if([DbInstance GetProfileName]&&![[NSUserDefaults standardUserDefaults] stringArrayForKey: kDB_KEY])
-    {
+    if([DbInstance GetProfileName] && ![[NSUserDefaults standardUserDefaults] stringArrayForKey:kDB_KEY]) {
         // Add default setting
         NSArray *arr = [NSArray arrayWithObjects: DATABASE_NAME, nil];
         [[NSUserDefaults standardUserDefaults] setObject:arr forKey: kDB_KEY];
@@ -315,16 +301,14 @@
     DEBUGMSG(@"Error log: %@", [ErrorLogger GetLogs]);
 }
 
--(BOOL)checkIdentity
-{
+- (BOOL)checkIdentity {
     BOOL ret = YES;
     
     // Identity checking, check if conact is linked
     NSData* contact_data = [DbInstance GetConfig:@"IdentityNum"];
-    if(contact_data)
-    {
+    if(contact_data) {
         [contact_data getBytes:&IdentityNum];
-    }else{
+    } else {
         IdentityNum = NonExist;
     }
     
@@ -337,8 +321,7 @@
             break;
         default:
             IdentityName = [DbInstance GetProfileName];
-            if (ABAddressBookGetAuthorizationStatus()==kABAuthorizationStatusAuthorized)
-            {
+            if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
                 // get self photo first, cached.
                 CFErrorRef error = NULL;
                 ABAddressBookRef aBook = ABAddressBookCreateWithOptions(NULL, &error);
@@ -349,14 +332,13 @@
         
                 ABRecordRef aRecord = ABAddressBookGetPersonWithRecordID(aBook, IdentityNum);
                 // set self photo
-                if(ABPersonHasImageData(aRecord))
-                {
+                if(ABPersonHasImageData(aRecord)) {
                     CFDataRef imgData = ABPersonCopyImageDataWithFormat(aRecord, kABPersonImageFormatThumbnail);
                     IdentityImage = UIImageJPEGRepresentation([[UIImage imageWithData:(__bridge NSData *)imgData]scaleToSize:CGSizeMake(45.0f, 45.0f)], 0.9);
                     CFRelease(imgData);
                 }
                 if(aBook)CFRelease(aBook);
-            }else{
+            } else {
                 // contact privacy might be shut off
                 IdentityNum = NonLink;
                 [self saveConactDataWithoutChaningName:IdentityNum];
@@ -368,12 +350,10 @@
     return ret;
 }
 
-
 #pragma mark Handle Push Notifications
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
-{
-    if([self checkIdentity])
-    {
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    if([self checkIdentity]) {
         if ([UIApplication sharedApplication].applicationIconBadgeNumber>0) {
             NSString* nonce = [[[userInfo objectForKey:@"aps"]objectForKey:@"nonce"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
             [MessageInBox FetchSingleMessage:nonce];
@@ -381,10 +361,8 @@
     }
 }
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))handler
-{
-    if([self checkIdentity])
-    {
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))handler {
+    if([self checkIdentity]) {
         if ([UIApplication sharedApplication].applicationIconBadgeNumber>0) {
             NSString* nonce = [[[userInfo objectForKey:@"aps"]objectForKey:@"nonce"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
             [MessageInBox FetchSingleMessage:nonce];
@@ -392,8 +370,7 @@
     }
 }
 
-- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-{
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     UALOG(@"APN device token: %@", deviceToken);
     // Updates the device token and registers the token with UA
     [[UAPush shared] appRegisteredForRemoteNotificationsWithDeviceToken:deviceToken];
@@ -403,11 +380,9 @@
     [[UAPush shared]addTag:[NSString stringWithFormat:@"AppVer = %@", [self getVersionNumber]]];
     [[UAPush shared]updateRegistration];
     
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1)
-    {
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
         //Do something when notifications are disabled altogther
-        if( [app enabledRemoteNotificationTypes] != (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert) )
-        {
+        if([app enabledRemoteNotificationTypes] != (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert)) {
             UALOG(@"iOS Registered a device token, but nothing is enabled!");
             //only alert if this is the first registration, or if push has just been
             //re-enabled
@@ -416,12 +391,9 @@
             }
             //Do something when some notification types are disabled
         }
-    }
-    else
-    {
+    } else {
         //Do something when notifications are disabled altogther
-        if (![[UIApplication sharedApplication] isRegisteredForRemoteNotifications] || [UIApplication sharedApplication].currentUserNotificationSettings.types != (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert))
-        {
+        if (![[UIApplication sharedApplication] isRegisteredForRemoteNotifications] || [UIApplication sharedApplication].currentUserNotificationSettings.types != (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert)) {
             UALOG(@"iOS Registered a device token, but nothing is enabled!");
             //only alert if this is the first registration, or if push has just been
             //re-enabled
@@ -433,35 +405,15 @@
     }
 }
 
-- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err
-{
+- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
     [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"Failed To Register For Remote Notifications With Error: %@", err]];
 }
-							
-- (void)applicationWillResignActive:(UIApplication *)application
-{
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-}
 
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
+- (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     DEBUGMSG(@"BadgeNumber = %ld", (long)[UIApplication sharedApplication].applicationIconBadgeNumber);
     
-    if([self checkIdentity])
-    {
+    if([self checkIdentity]) {
         // update push notification status
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidTimeout:) name:KSDIdlingWindowTimeoutNotification object:nil];
         
@@ -483,21 +435,17 @@
     }
 }
 
--(void)applicationDidTimeout: (NSNotification *)notification
-{
-    if([self.window.rootViewController isMemberOfClass:[UINavigationController class]])
-    {
+-(void)applicationDidTimeout: (NSNotification *)notification {
+    if([self.window.rootViewController isMemberOfClass:[UINavigationController class]]) {
         UINavigationController* nag = (UINavigationController*)self.window.rootViewController;
-        if([nag.visibleViewController isMemberOfClass:[FunctionView class]])
-        {
+        if([nag.visibleViewController isMemberOfClass:[FunctionView class]]) {
             // FunctionView* view = (FunctionView*)nag.visibleViewController;
             [nag popViewControllerAnimated:YES];
         }
     }
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application
-{
+- (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     [DbInstance CloseDB];
     DbInstance = nil;

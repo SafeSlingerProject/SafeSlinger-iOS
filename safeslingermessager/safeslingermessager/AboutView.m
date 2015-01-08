@@ -24,6 +24,7 @@
 
 #import "AboutView.h"
 #import "AppDelegate.h"
+#import "Config.h"
 
 @interface AboutView ()
 
@@ -60,7 +61,7 @@
     NSString* msgAb2 = NSLocalizedString(@"text_About2", @"Securely sling texts, photos, anything!");
     NSString* msgAb3 = NSLocalizedString(@"text_About3", @"Strong cryptography protects your information");
     NSString* msgEmail = [NSString stringWithFormat: NSLocalizedString(@"text_AboutEmail", @"email: %@"), @"safeslingerapp@gmail.com"];
-    NSString* msgWeb = [NSString stringWithFormat: NSLocalizedString(@"text_AboutWeb", @"web: %@"), @"www.cylab.cmu.edu/safeslinger"];
+    NSString* msgWeb = [NSString stringWithFormat: NSLocalizedString(@"text_AboutWeb", @"web: %@"), kHelpURL];
     NSString* msgSrc = [NSString stringWithFormat: NSLocalizedString(@"text_SourceCodeRepo", @"open source: %@"), @"github.com/safeslingerproject"];
     NSString* msgLoc = [NSString stringWithFormat: NSLocalizedString(@"text_LocalizationRepo", @"translate: %@"), @"transifex.com/projects/p/safeslinger"];
     NSString* msgReq = NSLocalizedString(@"text_Requirements", @"Requirements:");
@@ -72,6 +73,7 @@
     NSString* msgTran = NSLocalizedString(@"app_TranslatorName", @"Adrian Perrig\nAkira Yamada\nAlbert Stroucken\nElli Fragkaki\nEmmanuel Owusu\nIrina Fudrow\nJens Höfflinger\nMichael Stroucken\nNicolas Christin\nSteve Matsumoto\nYeon Yim\nYue-Hsun Lin\n");
     
     [InfoLabel setText: [NSString stringWithFormat:@"%@\n\n%@\n\n%@\n- %@\n- %@\n- %@\n\n%@\n1. %@\n2. %@\n\n%@\n%@\n%@\n%@\n\n%@\n%@\n%@\n%@", msgHead, msgAbout, msgAbFeat, msgAb1, msgAb2, msgAb3, msgReq, msgReq1, msgReq2, msgEmail, msgWeb, msgSrc, msgLoc, msgLang, msgTran, msgProg, msgDevs]];
+
     [InfoLabel sizeToFit];
 }
 

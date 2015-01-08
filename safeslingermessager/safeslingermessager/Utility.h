@@ -34,13 +34,15 @@
 + (void) RemoveDuplicates: (ABAddressBookRef)aBook AdressList:(CFArrayRef)allPeople CompareArray:(NSMutableDictionary*)compared;
 + (NSComparisonResult)CompareDate: (NSString*)basedate Target:(NSString*)targetdate;
 + (void) TriggerContactPermission;
++ (void)playSoundAlert;
++ (void)playVibrationAlert;
 
 @end
 
 @interface NSString (NameHandler)
-+(NSString*) composite_name:(NSString*)fname withLastName:(NSString*)lname;
-+(NSString*) vcardnstring:(NSString*)fname withLastName:(NSString*)lname;
-+(NSString*) humanreadable:(NSString*)databasename;
++ (NSString *)compositeName:(NSString *)fname withLastName:(NSString *)lname;
++ (NSString *)vcardnstring:(NSString *)fname withLastName:(NSString *)lname;
++ (NSString *)humanreadable:(NSString *)databasename;
 @end
 
 @interface NSString (Utility)

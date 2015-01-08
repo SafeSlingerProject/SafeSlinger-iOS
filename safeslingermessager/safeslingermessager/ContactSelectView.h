@@ -24,38 +24,44 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
+#import <AddressBook/AddressBook.h>
+#import <AddressBookUI/AddressBookUI.h>
+#import "ContactEntry.h"
+#import "ContactManageView.h"
 
 @class AppDelegate;
-@class ContactEntry;
 
-@interface ContactEntry : NSObject
+@protocol ContactSelectViewDelegate <NSObject>
 
-@property (nonatomic, strong) NSString *fname, *lname, *keyid, *pushtoken, *keygenDate, *exchangeDate;
-@property (nonatomic, strong) NSData *photo;
-@property (nonatomic, readwrite) int devType, contact_id, ex_type;
-
--(NSString*)PrintContact;
+- (void)contactSelected:(ContactEntry *)contact;
+- (void)contactDeleted:(ContactEntry *)contact;
 
 @end
 
 
-@interface ContactSelectView : UITableViewController <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate>
-{
-    // used for show peers, each entry is a SSContactEntry object
-    AppDelegate *delegate;
-    UIAlertView *UserInfo;
-    UIViewController *parent;
+typedef enum {
+	ContactSelectionModeCompose,
+	ContactSelectionModeIntroduce
+} ContactSelectionMode;
+
+
+@interface ContactSelectView : UITableViewController <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate, UIActionSheetDelegate, ABPeoplePickerNavigationControllerDelegate, MFMessageComposeViewControllerDelegate, UIAlertViewDelegate, UISearchBarDelegate> {
+	
 }
 
+@property (nonatomic, retain) AppDelegate *appDelegate;
 
-@property (nonatomic, retain) AppDelegate *delegate;
-@property (nonatomic, retain) UIViewController *parent;
-@property (nonatomic, strong) NSMutableArray *safeslingers;
-@property (nonatomic, strong) UISwitch *showRecent;
-@property (nonatomic, strong) UILabel *Hint, *SwitchHint;
-@property (nonatomic, strong) UIAlertView *UserInfo;
-@property (nonatomic, strong) ContactEntry *selectedUser;
+@property (weak, nonatomic) IBOutlet UIView *tableHeaderView;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UILabel *hintLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *hintLabelHeightConstraint;
+@property (weak, nonatomic) IBOutlet UISwitch *showRecentSwitch;
+@property (weak, nonatomic) IBOutlet UILabel *showRecentLabel;
+@property (weak, nonatomic) IBOutlet UIButton *addContactButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *infoButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 
-- (IBAction) DisplayHow: (id)sender;
+@property (weak, nonatomic) id<ContactSelectViewDelegate> delegate;
+@property ContactSelectionMode contactSelectionMode;
 
 @end

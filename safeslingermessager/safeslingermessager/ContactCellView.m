@@ -26,6 +26,4 @@
 
 @implementation ContactCellView
 
-@synthesize NameLabel, UserPhoto, ExchangeLabel, KeygenLabel, KeyIDLabel, DeviceLabel;
-
 @end

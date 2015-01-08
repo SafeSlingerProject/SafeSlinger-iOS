@@ -88,10 +88,9 @@
     switch (alertView.tag) {
         case PushNotificationConfirm:
         {
-            if(buttonIndex==alertView.cancelButtonIndex)
-            {
+            if(buttonIndex==alertView.cancelButtonIndex) {
                 exit(EXIT_SUCCESS);
-            }else{
+            } else {
                 [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kRequirePushNotification];
                 [delegate registerPushToken];
             }
@@ -99,8 +98,7 @@
             break;
         case HelpAndFeedBack:
         {
-            if(buttonIndex!=alertView.cancelButtonIndex)
-            {
+            if(buttonIndex!=alertView.cancelButtonIndex) {
                 // feedback
                 [UtilityFunc SendOpts:self];
             }
@@ -135,11 +133,10 @@
 {
     [self SetComponentsLocked:NO];
     // delegate to handle backup recovery...
-    if(result)
-    {
+    if(result) {
         [delegate checkIdentity];
         [self performSegueWithIdentifier:@"FinishSetup" sender:self];
-    }else{
+    } else {
         [[[[iToast makeText: NSLocalizedString(@"error_BackupNotFound", @"No backup to restore.")]setGravity:iToastGravityCenter] setDuration:iToastDurationLong] show];
         backinfo.text = NSLocalizedString(@"label_iCloudEnable", @"SafeSlinger iCloud is enabled. Tap the 'Done' button when finished.");
         [self TriggerNotificationRequire];
@@ -148,8 +145,7 @@
 
 - (void)TriggerNotificationRequire
 {
-    if(![[NSUserDefaults standardUserDefaults] boolForKey: kRequirePushNotification])
-    {
+    if(![[NSUserDefaults standardUserDefaults] boolForKey: kRequirePushNotification]) {
         UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
                                                           message: NSLocalizedString(@"iOS_RequestPermissionNotifications", @"SafeSlinger is an encrypted messaging application and cannot function without allowing incoming messages from Notifications. To enable incoming messages, you must allow SafeSlinger to send you Notifications when asked.")
                                                          delegate: self
@@ -163,13 +159,12 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    if(!newkeycreated)
-    {
+    if(!newkeycreated) {
         // first setup, try to fecth backup
         
         [delegate.BackupSys RecheckCapability];
         
-        if(delegate.BackupSys.CloudEnabled){
+        if(delegate.BackupSys.CloudEnabled) {
             delegate.BackupSys.Responder = self;
             // genkey first, locked all components
             [self SetComponentsLocked: YES];
@@ -179,7 +174,7 @@
                 [self updateprogress];
                 [delegate.BackupSys PerformRecovery];
             });
-        }else{
+        } else {
             [self.navigationItem setHidesBackButton:YES];
             [self TriggerNotificationRequire];
         }
@@ -215,8 +210,7 @@
     
     // get height of the keyboard
     CGFloat offset = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height+_textfieldOffset-_originalFrame.size.height+60.0f;
-    if( offset > 0)
-    {
+    if(offset > 0) {
         // covered by keyboard, left the view and scroll it
         [Scrollview setContentOffset:CGPointMake(0.0, offset) animated:YES];
     }
@@ -272,11 +266,10 @@
     
     DoneBtn.enabled = Fnamefield.enabled = Lnamefield.enabled = PassField.enabled = RepassField.enabled = !lock;
     keygenProgress.hidden = keygenIndicator.hidden = !lock;
-    if(lock)
-    {
+    if(lock) {
         [keygenIndicator startAnimating];
         [keygenProgress setProgress:0.0f];
-    }else{
+    } else {
         [keygenIndicator stopAnimating];
         [keygenProgress setProgress:1.0f];
     }
@@ -310,23 +303,19 @@
     NSString* repeatpasstext = RepassField.text;
     
     // error check
-    if([Fnamefield.text length]==0&&[Lnamefield.text length]==0)
-    {
+    if([Fnamefield.text length]==0 && [Lnamefield.text length]==0) {
         [[[[iToast makeText: NSLocalizedString(@"error_ContactNameMissing", @"This contact is missing a name, please edit.")] setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
         
-    }else if((passtext.length<MIN_PINCODE_LENGTH)||(repeatpasstext.length<MIN_PINCODE_LENGTH))
-    {
+    } else if((passtext.length<MIN_PINCODE_LENGTH) || (repeatpasstext.length<MIN_PINCODE_LENGTH)) {
         NSString *warn = [NSString stringWithFormat:NSLocalizedString(@"error_minPassphraseRequire", @"Passphrases require at least %d characters."), MIN_PINCODE_LENGTH];
         [[[[iToast makeText: warn]setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
         PassField.text = RepassField.text = nil;
-    }
-    else if(![passtext isEqualToString:repeatpasstext])
-    {
+    } else if(![passtext isEqualToString:repeatpasstext]) {
         [[[[iToast makeText: NSLocalizedString(@"error_passPhrasesDoNotMatch", @"Pass phrases do not match.")]
            setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
         PassField.text = RepassField.text = nil;
         
-    }else {
+    } else {
         
         [[[[iToast makeText: NSLocalizedString(@"state_PassphraseUpdated", @"Passphrase updated.")]
            setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
@@ -334,8 +323,7 @@
         if(newkeycreated) [self BackupDatabase];
         
         // check key file existing
-        if(![SSEngine checkCredentialExist])
-        {
+        if(![SSEngine checkCredentialExist]) {
             // genkey first, locked all components
             [self SetComponentsLocked: YES];
             [self.backinfo setText:NSLocalizedString(@"prog_GeneratingKey", @"generating key, this can take a while...")];
@@ -348,7 +336,7 @@
                 [self updateprogress];
             });
             
-        }else{
+        } else {
             // goto genkeydone
             [self buildProfile];
         }
@@ -386,19 +374,18 @@
     // save profile
     [self EncryptPrivateKeys:PassField.text];
     
-    if(!newkeycreated)
-    {
+    if(!newkeycreated) {
         NSArray *arr = [NSArray arrayWithObjects: DATABASE_NAME, nil];
         [[NSUserDefaults standardUserDefaults] setObject:arr forKey: kDB_KEY];
-        NSString *keyinfo = [NSString stringWithFormat:@"%@\n%@ %@", [NSString composite_name:Fnamefield.text withLastName:Lnamefield.text], NSLocalizedString(@"label_Key", @"Key:"), [NSString ChangeGMT2Local:[SSEngine getSelfGenKeyDate] GMTFormat:DATABASE_TIMESTR LocalFormat: @"yyyy-MM-dd HH:mm:ss"]];
+        NSString *keyinfo = [NSString stringWithFormat:@"%@\n%@ %@", [NSString compositeName:Fnamefield.text withLastName:Lnamefield.text], NSLocalizedString(@"label_Key", @"Key:"), [NSString ChangeGMT2Local:[SSEngine getSelfGenKeyDate] GMTFormat:DATABASE_TIMESTR LocalFormat: @"yyyy-MM-dd HH:mm:ss"]];
         arr = [NSArray arrayWithObjects: keyinfo, nil];
         [[NSUserDefaults standardUserDefaults] setObject:arr forKey: kDB_LIST];
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: kDEFAULT_DB_KEY];
         
-    }else{
+    } else {
         NSArray *infoarr = [[NSUserDefaults standardUserDefaults] stringArrayForKey: kDB_LIST];
         NSMutableArray *arr = [NSMutableArray arrayWithArray:infoarr];
-        NSString *keyinfo = [NSString stringWithFormat:@"%@\n%@ %@", [NSString composite_name:Fnamefield.text withLastName:Lnamefield.text], NSLocalizedString(@"label_Key", @"Key:"), [NSString ChangeGMT2Local:[SSEngine getSelfGenKeyDate] GMTFormat:DATABASE_TIMESTR LocalFormat: @"yyyy-MM-dd HH:mm:ss"]];
+        NSString *keyinfo = [NSString stringWithFormat:@"%@\n%@ %@", [NSString compositeName:Fnamefield.text withLastName:Lnamefield.text], NSLocalizedString(@"label_Key", @"Key:"), [NSString ChangeGMT2Local:[SSEngine getSelfGenKeyDate] GMTFormat:DATABASE_TIMESTR LocalFormat: @"yyyy-MM-dd HH:mm:ss"]];
         [arr addObject: keyinfo];
         [[NSUserDefaults standardUserDefaults] setObject:arr forKey: kDB_LIST];
         // Set key index to the newest profile
@@ -410,7 +397,8 @@
     [self performSegueWithIdentifier:@"FinishSetup" sender:self];
 }
 
-#pragma UITextFieldDelegate Methods
+#pragma mark UITextFieldDelegate Methods
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     _textfieldOffset = textField.frame.size.height + textField.frame.origin.y;
@@ -418,44 +406,26 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if([textField isEqual:Fnamefield])
-    {
+    if([textField isEqual:Fnamefield]) {
         [Lnamefield becomeFirstResponder];
-    }else if([textField isEqual:Lnamefield])
-    {
+    } else if([textField isEqual:Lnamefield]) {
         [PassField becomeFirstResponder];
-    }else if([textField isEqual:PassField])
-    {
+    } else if([textField isEqual:PassField]) {
         [RepassField becomeFirstResponder];
-    }else if([textField isEqual:RepassField])
-    {
+    } else if([textField isEqual:RepassField]) {
         [self profileCreation];
     }
 }
+
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
     return YES;
 }
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
     return NO;
 }
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
