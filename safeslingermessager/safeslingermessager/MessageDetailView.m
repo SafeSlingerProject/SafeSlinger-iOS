@@ -82,9 +82,15 @@
                                                  style:UIBarButtonItemStyleDone
                                                 target:self
                                                 action:@selector(DismissKeyboard)];
-    
-    [InstanceMessage setPlaceholder:NSLocalizedString(@"label_ComposeHint", @"Compose Message")];
-    [InstanceBtn setTitle: NSLocalizedString(@"title_SendFile", @"Send") forState: UIControlStateNormal];
+	
+	// hides textfield if this contact is not active
+	if(assignedEntry.active) {
+		[InstanceMessage setPlaceholder:NSLocalizedString(@"label_ComposeHint", @"Compose Message")];
+		[InstanceBtn setTitle: NSLocalizedString(@"title_SendFile", @"Send") forState: UIControlStateNormal];
+	} else {
+		[self.tableView.tableFooterView removeFromSuperview];
+		self.tableView.tableFooterView = nil;
+	}
 }
 
 - (void)DismissKeyboard {

@@ -93,6 +93,7 @@ typedef enum DirectionType {
 @property (nonatomic, strong) NSString *lastSeen;
 @property (nonatomic, readwrite) int messagecount;
 @property (nonatomic, readwrite) int ciphercount;
+@property (nonatomic, readwrite) BOOL active;
 
 @end
 

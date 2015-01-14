@@ -199,10 +199,8 @@
     }
 }
 
-- (int) UpdateThreadEntries: (NSMutableDictionary*) threadlist
-{
-    if(db==nil&&threadlist==nil)
-    {
+- (int)UpdateThreadEntries:(NSMutableDictionary *)threadlist {
+    if(db==nil && threadlist==nil) {
         [ErrorLogger ERRORDEBUG:@"ERROR: DB Object is null or input is null."];
         return -1;
     }
@@ -213,19 +211,16 @@
         sqlite3_stmt *sqlStatement;
         
         sql = "SELECT keyid, cTime, count(msgid) FROM ciphertable GROUP BY keyid order by cTime desc;";
-        if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK)
-        {
+        if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
             [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
         }
         
-        while (sqlite3_step(sqlStatement)==SQLITE_ROW) {
-            
+        while (sqlite3_step(sqlStatement) == SQLITE_ROW) {
             NSString* keyid = [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 0)];
             DEBUGMSG(@"keyid = %@", keyid);
             
             MsgListEntry *listEnt = [threadlist objectForKey: keyid];
-            if(listEnt)
-            {
+            if(listEnt) {
                 // update information
                 DEBUGMSG(@"modify entry thread.");
                 NSString *date1 = [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 1)];
@@ -246,7 +241,7 @@
                 listEnt.ciphercount = sqlite3_column_int(sqlStatement, 2);
                 NumMessage += listEnt.ciphercount;
                 listEnt.messagecount += listEnt.ciphercount;
-            }else{
+            } else {
                 // create entry
                 DEBUGMSG(@"create new entry thread.");
                 listEnt = [[MsgListEntry alloc]init];
@@ -258,7 +253,7 @@
             }
         }
         
-        if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
+        if(sqlite3_finalize(sqlStatement) != SQLITE_OK) {
             [ErrorLogger ERRORDEBUG: @"ERROR: Problem with finalize statement"];
             NumMessage = -1;
         }

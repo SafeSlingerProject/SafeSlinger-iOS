@@ -665,45 +665,33 @@
     }
 }
 
-- (NSArray*)LoadRecentRecipients:(BOOL)ExchangeOnly {
+- (NSArray *)LoadRecentRecipients:(BOOL)ExchangeOnly {
     if(db == nil) {
         [ErrorLogger ERRORDEBUG:@"ERROR: DB Object is null or input is null."];
         return nil;
     }
 	
-    NSMutableArray *tmpArray = nil;
+    NSMutableArray *result = [NSMutableArray new];
     @try {
-        
-        tmpArray = [NSMutableArray arrayWithCapacity:0];
         const char *sql = NULL;
+		
+		// Entries with the same value of <Name><Device Type> or <Push Token><Device Type>
+		// are considered the represent the same contact, and only the most recent one is shown
 		if(ExchangeOnly) {
-            sql = "SELECT * FROM tokenstore where ex_type = 0 ORDER BY pid COLLATE NOCASE DESC, bdate DESC";
+            sql = "SELECT *, max(bdate) FROM (SELECT *, max(bdate) FROM tokenstore WHERE ex_type = 0 GROUP BY pid, dev) GROUP BY ptoken, dev ORDER BY pid COLLATE NOCASE DESC";
 		} else {
-            sql = "SELECT * FROM tokenstore ORDER BY pid COLLATE NOCASE DESC, bdate DESC";
+            sql = "SELECT *, max(bdate) FROM (SELECT *, max(bdate) FROM tokenstore GROUP BY pid, dev) GROUP BY ptoken, dev ORDER BY pid COLLATE NOCASE DESC";
 		}
 		
         sqlite3_stmt *sqlStatement = nil;
         if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
             [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
         }
-        
-        NSMutableSet *unqiueSet = [[NSMutableSet alloc]initWithCapacity:0];
-        
+		
         while (sqlite3_step(sqlStatement)==SQLITE_ROW) {
-            
-            // try different device as different entries
-            NSString* output = [NSString stringWithFormat:@"%@:%d", [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 0)], sqlite3_column_int(sqlStatement, 3)];
-            
-            if([unqiueSet containsObject:output]) {
-                continue;
-            }
-            
-            // add to set
-            [unqiueSet addObject:output];
-			
-			[tmpArray addObject:[self loadContactEntryFromStatement:sqlStatement]];
+			[result addObject:[self loadContactEntryFromStatement:sqlStatement]];
         }
-        
+		
         if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
             [ErrorLogger ERRORDEBUG: @"ERROR: Problem with finalize statement"];
         }
@@ -712,7 +700,7 @@
         [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"An exception occured: %@", [exception reason]]];
     }
     @finally {
-        return tmpArray;
+        return result;
     }
 }
 
@@ -1144,7 +1132,7 @@
     }
 	
     @try {
-		const char *sql = "SELECT receipt, cTime, count(msgid) FROM msgtable GROUP BY receipt order by cTime desc";
+		const char *sql = "SELECT receipt, cTime, count(msgid), (CASE WHEN receipt IN (SELECT CAST(keyid AS TEXT) FROM (SELECT *, max(bdate) FROM (SELECT *, max(bdate) FROM tokenstore GROUP BY pid, dev) GROUP BY ptoken, dev ORDER BY pid COLLATE NOCASE DESC)) THEN 1 ELSE 0 END) as active FROM msgtable GROUP BY receipt order by cTime desc;";
         sqlite3_stmt *sqlStatement;
 		
         if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
@@ -1156,6 +1144,7 @@
             listEnt.keyid = [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 0)];
             listEnt.lastSeen = [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 1)];
             listEnt.messagecount = sqlite3_column_int(sqlStatement, 2);
+			listEnt.active = sqlite3_column_int(sqlStatement, 3) == 1;
             [threadlist setObject:listEnt forKey:listEnt.keyid];
         }
         
