@@ -82,9 +82,15 @@
                                                  style:UIBarButtonItemStyleDone
                                                 target:self
                                                 action:@selector(DismissKeyboard)];
-    
-    [InstanceMessage setPlaceholder:NSLocalizedString(@"label_ComposeHint", @"Compose Message")];
-    [InstanceBtn setTitle: NSLocalizedString(@"title_SendFile", @"Send") forState: UIControlStateNormal];
+	
+	// hides textfield if this contact is not active
+	if(assignedEntry.active) {
+		[InstanceMessage setPlaceholder:NSLocalizedString(@"label_ComposeHint", @"Compose Message")];
+		[InstanceBtn setTitle: NSLocalizedString(@"title_SendFile", @"Send") forState: UIControlStateNormal];
+	} else {
+		[self.tableView.tableFooterView removeFromSuperview];
+		self.tableView.tableFooterView = nil;
+	}
 }
 
 - (void)DismissKeyboard {
@@ -119,7 +125,6 @@
     [messages removeAllObjects];
     [messages setArray:[delegate.DbInstance LoadThreadMessage: assignedEntry.keyid]];
     [messages addObjectsFromArray: [delegate.UDbInstance LoadThreadMessage: assignedEntry.keyid]];
-    [self.tableView reloadData];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardDidShow:)
@@ -136,14 +141,12 @@
 												 name:@"UITextInputCurrentInputModeDidChangeNotification"
 											   object:nil];
 	
-    NSIndexPath * ndxPath= [NSIndexPath indexPathForRow:[messages count]-1 inSection:0];
-    @try {
-        [self.tableView scrollToRowAtIndexPath:ndxPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-    }
-    @catch (NSException *exception) {
-    }
-    @finally {
-    }
+	[self.tableView reloadData];
+	
+	if(self.tableView.contentSize.height > self.tableView.frame.size.height) {
+		CGPoint offset = CGPointMake(0, self.tableView.contentSize.height - self.tableView.frame.size.height);
+		[self.tableView setContentOffset:offset animated:NO];
+	}
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

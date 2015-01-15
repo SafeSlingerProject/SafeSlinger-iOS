@@ -152,6 +152,19 @@
     
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier: NSCalendarIdentifierGregorian];
     NSDateComponents *components = nil;
+	
+	// semitransparent cell if contact is not active
+	if(MsgListEntry.active) {
+		cell.backgroundColor = [UIColor colorWithWhite:1 alpha:1];
+		cell.imageView.alpha = 1;
+		cell.textLabel.alpha = 1;
+		cell.detailTextLabel.alpha = 1;
+	} else {
+		cell.backgroundColor = [UIColor colorWithWhite:1 alpha:.7];
+		cell.imageView.alpha = 0.7;
+		cell.textLabel.alpha = 0.7;
+		cell.detailTextLabel.alpha = 0.7;
+	}
     
     NSDate *lastSeen;
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
