@@ -30,8 +30,6 @@
 #import "FunctionView.h"
 #import "ContactManageView.h"
 #import "EndExchangeView.h"
-#import <UAirship.h>
-#import <UAPush.h>
 
 @interface SlingkeyView ()
 
@@ -156,7 +154,7 @@
     }
     
     // check with mike here
-    if([UAirship shared].deviceToken)
+    if([[NSUserDefaults standardUserDefaults] stringForKey: kPUSH_TOKEN])
     {
         [contact_labels addObject: @"SafeSlinger-Push"];
         [contact_values addObject: @""];

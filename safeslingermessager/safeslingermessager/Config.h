@@ -25,7 +25,7 @@
 // for beta testing
 #ifdef BETA
 #define HTTPURL_PREFIX @"https://01060000t-dot-"
-#define HTTPURL_HOST_MSG @"starsling-server.appspot.com"
+#define HTTPURL_HOST_MSG @"starsling-server-iostest.appspot.com"
 #define HTTPURL_HOST_EXCHANGE @"keyslinger-server.appspot.com"
 #else
 // default server, for app store
@@ -72,6 +72,7 @@
 #define kBackupURL @"BackupURL"
 #define kAPPVERSION @"APP_VERSION"
 #define kLastNotificationTimestamp @"LastNotificationTimestamp"
+#define kPUSH_TOKEN @"PUSH_TOKEN"
 
 #define kRequireMicrophonePrivacy @"RequireMicrophonePrivacy"
 #define kRequirePushNotification @"RequirePushNotification"

@@ -28,7 +28,6 @@
 #import "Utility.h"
 #import "SSEngine.h"
 #import "UniversalDB.h"
-#import <UAPush.h>
 
 @implementation MessageReceiver
 
@@ -75,12 +74,12 @@
         //E1: Version (4bytes)
         int version = htonl(VersionNum);
         [pktdata appendBytes: &version length: 4];
-        NSString* token = [[UAPush shared]deviceToken];
+        NSString* hex_token = [[NSUserDefaults standardUserDefaults] stringForKey: kPUSH_TOKEN];
         //E2: Token_len (4bytes)
-        int len = htonl([token length]);
+        int len = htonl([hex_token length]);
         [pktdata appendBytes: &len length: 4];
         //E3: Token
-        [pktdata appendBytes:[token cStringUsingEncoding: NSUTF8StringEncoding] length: [token lengthOfBytesUsingEncoding:NSUTF8StringEncoding]];
+        [pktdata appendBytes:[hex_token cStringUsingEncoding: NSUTF8StringEncoding] length: [hex_token lengthOfBytesUsingEncoding:NSUTF8StringEncoding]];
         //E4: count of query
         len = htonl(NumOfMostRecents);
         [pktdata appendBytes: &len length: 4];
@@ -163,7 +162,7 @@
                                  //[delegate.activityView DisableProgress];
                                  [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
                                  [ThreadLock unlock];
-                                 [[UAPush shared] setBadgeNumber:0];
+                                 [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
                              });
                          }
                      } else {
@@ -345,7 +344,7 @@
 			[[NSNotificationCenter defaultCenter] postNotificationName:NSNotificationMessageReceived object:nil userInfo:nil];
         }
         
-        [[UAPush shared] setBadgeNumber:0];
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
         
         NumNewMsg = MsgCount = 0;
     }

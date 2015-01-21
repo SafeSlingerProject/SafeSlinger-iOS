@@ -36,9 +36,6 @@
 
 #import <AddressBook/AddressBook.h>
 #import <Crashlytics/Crashlytics.h>
-#import <UAirship.h>
-#import <UAAnalytics.h>
-#import <UAConfig.h>
 
 @implementation AppDelegate
 
@@ -66,6 +63,7 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
 	// Preloads keyboard so there's no lag on initial keyboard appearance.
 	UITextField *lagFreeField = [[UITextField alloc] init];
 	[self.window addSubview:lagFreeField];
@@ -98,6 +96,7 @@
     
     [[NSUserDefaults standardUserDefaults] setInteger:[self getVersionNumberByInt] forKey: kAPPVERSION];
     
+    /*
     BOOL PushIsRegistered = NO;
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
         if ([[UIApplication sharedApplication] enabledRemoteNotificationTypes] != UIRemoteNotificationTypeNone)
@@ -117,6 +116,7 @@
         [UAPush shared].userPushNotificationsEnabled = YES;
         [UAPush shared].registrationDelegate = self;
     }
+    */
     
     // message receiver
     MessageInBox = [[MessageReceiver alloc]init:DbInstance UniveralTable:UDbInstance Version:[self getVersionNumberByInt]];
@@ -127,26 +127,17 @@
     return YES;
 }
 
-- (void)registrationSucceededForChannelID:(NSString *)channelID deviceToken:(NSString *)deviceToken {
-    // DEBUGMSG(@"channelID = %@, deviceToken = %@", channelID, deviceToken);
-}
-
-- (void)registrationFailed {
-    DEBUGMSG(@"registrationFailed");
-}
-
-- (void)registerPushToken {
-    UAConfig *config = [UAConfig defaultConfig];
-    // Call takeOff (which creates the UAirship singleton)
-    [UAirship takeOff:config];
-	
-    [UAPush shared].userNotificationTypes = (UIUserNotificationTypeBadge |
-											 UIUserNotificationTypeAlert |
-											 UIUserNotificationTypeSound);
-	UAirship.logLevel = UALogLevelError;
-    [UAPush shared].autobadgeEnabled = YES;
-    [UAPush shared].userPushNotificationsEnabled = YES;
-    [UAPush shared].registrationDelegate = self;
+- (void)registerPushToken
+{
+    // database entry does not exist, try to do registraiton again..
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+        [[UIApplication sharedApplication]registerForRemoteNotificationTypes: (UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeAlert)];
+    } else {
+        // iOS8
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeAlert)
+                                                                                 categories:nil];
+        [[UIApplication sharedApplication]registerUserNotificationSettings: settings];
+    }
 }
 
 - (void)removeContactLink {
@@ -356,7 +347,7 @@
     if([self checkIdentity]) {
         if ([UIApplication sharedApplication].applicationIconBadgeNumber>0) {
             NSString* nonce = [[[userInfo objectForKey:@"aps"]objectForKey:@"nonce"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            [MessageInBox FetchSingleMessage:nonce];
+            if(nonce) [MessageInBox FetchSingleMessage:nonce];
         }
     }
 }
@@ -365,47 +356,48 @@
     if([self checkIdentity]) {
         if ([UIApplication sharedApplication].applicationIconBadgeNumber>0) {
             NSString* nonce = [[[userInfo objectForKey:@"aps"]objectForKey:@"nonce"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            [MessageInBox FetchSingleMessage:nonce];
+            if(nonce) [MessageInBox FetchSingleMessage:nonce];
         }
     }
 }
 
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    UALOG(@"APN device token: %@", deviceToken);
-    // Updates the device token and registers the token with UA
-    [[UAPush shared] appRegisteredForRemoteNotificationsWithDeviceToken:deviceToken];
-    // Sets the alias. It will be sent to the server on registration.
-    [UAPush shared].alias = [UIDevice currentDevice].name;
-    // Add AppVer tag
-    [[UAPush shared]addTag:[NSString stringWithFormat:@"AppVer = %@", [self getVersionNumber]]];
-    [[UAPush shared]updateRegistration];
-    
+    // TODO: will replace device token resgitration by our own
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-        //Do something when notifications are disabled altogther
-        if([app enabledRemoteNotificationTypes] != (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert)) {
-            UALOG(@"iOS Registered a device token, but nothing is enabled!");
-            //only alert if this is the first registration, or if push has just been
+        if([app enabledRemoteNotificationTypes] == (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert)) {
             //re-enabled
-            if ([UAirship shared].deviceToken != nil) { //already been set this session
-                [ErrorLogger ERRORDEBUG: NSLocalizedString(@"iOS_notificationError1", @"Unable to turn on notifications. Use the \"Settings\" app to enable notifications.")];
-            }
+            NSString *hex_device_token = [[[deviceToken description]
+                                           stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]]
+                                          stringByReplacingOccurrencesOfString:@" "
+                                          withString:@""];
+            DEBUGMSG(@"APNS registered token = %@", hex_device_token);
+            if(hex_device_token) [[NSUserDefaults standardUserDefaults] setObject:hex_device_token forKey:kPUSH_TOKEN];
+        }else{
             //Do something when some notification types are disabled
+            [ErrorLogger ERRORDEBUG: NSLocalizedString(@"iOS_notificationError1", @"Unable to turn on notifications. Use the \"Settings\" app to enable notifications.")];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:kPUSH_TOKEN];
         }
     } else {
         //Do something when notifications are disabled altogther
-        if (![[UIApplication sharedApplication] isRegisteredForRemoteNotifications] || [UIApplication sharedApplication].currentUserNotificationSettings.types != (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert)) {
-            UALOG(@"iOS Registered a device token, but nothing is enabled!");
-            //only alert if this is the first registration, or if push has just been
+        if ([[UIApplication sharedApplication] isRegisteredForRemoteNotifications] && [UIApplication sharedApplication].currentUserNotificationSettings.types != (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert)) {
             //re-enabled
-            if ([UAirship shared].deviceToken != nil) { //already been set this session
-                [ErrorLogger ERRORDEBUG: NSLocalizedString(@"iOS_notificationError1", @"Unable to turn on notifications. Use the \"Settings\" app to enable notifications.")];
-            }
+            NSString *hex_device_token = [[[deviceToken description]
+                                           stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]]
+                                          stringByReplacingOccurrencesOfString:@" "
+                                          withString:@""];
+            DEBUGMSG(@"APNS registered token = %@", hex_device_token);
+            if(hex_device_token) [[NSUserDefaults standardUserDefaults] setObject:hex_device_token forKey:kPUSH_TOKEN];
+        }else{
             //Do something when some notification types are disabled
+            [ErrorLogger ERRORDEBUG: NSLocalizedString(@"iOS_notificationError1", @"Unable to turn on notifications. Use the \"Settings\" app to enable notifications.")];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:kPUSH_TOKEN];
         }
     }
+    
 }
 
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
+    
     [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"Failed To Register For Remote Notifications With Error: %@", err]];
 }
 
@@ -426,12 +418,8 @@
         [BackupSys RecheckCapability];
         [BackupSys PerformBackup];
         
-        // update push notificaiton registration
-        DEBUGMSG(@"updateRegistration..");
-        [[UAPush shared]updateRegistration];
-        
-        DEBUGMSG(@"token = %@", [UAPush shared].deviceToken);
-        DEBUGMSG(@"currentEnabledNotificationTypes = %lu", [UAPush shared].currentEnabledNotificationTypes);
+        // update push notificaiton registration if necessary
+        [self registerPushToken];
     }
 }
 
