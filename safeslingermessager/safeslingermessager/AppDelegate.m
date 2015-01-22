@@ -346,8 +346,14 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     if([self checkIdentity]) {
         if ([UIApplication sharedApplication].applicationIconBadgeNumber>0) {
+            DEBUGMSG(@"userInfo = %@", userInfo);
             NSString* nonce = [[[userInfo objectForKey:@"aps"]objectForKey:@"nonce"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            if(nonce) [MessageInBox FetchSingleMessage:nonce];
+            if(nonce) {
+                DEBUGMSG(@"nonce = %@", nonce);
+                [MessageInBox FetchSingleMessage:nonce];
+            }
+            NSString* broadcast_message = [[[userInfo objectForKey:@"aps"]objectForKey:@"broadcast"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            DEBUGMSG(@"broadcast_message = %@", broadcast_message);
         }
     }
 }
@@ -355,8 +361,14 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))handler {
     if([self checkIdentity]) {
         if ([UIApplication sharedApplication].applicationIconBadgeNumber>0) {
+            DEBUGMSG(@"userInfo = %@", userInfo);
             NSString* nonce = [[[userInfo objectForKey:@"aps"]objectForKey:@"nonce"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            if(nonce) [MessageInBox FetchSingleMessage:nonce];
+            if(nonce) {
+                DEBUGMSG(@"nonce = %@", nonce);
+                [MessageInBox FetchSingleMessage:nonce];
+            }
+            NSString* broadcast_message = [[[userInfo objectForKey:@"aps"]objectForKey:@"broadcast"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            DEBUGMSG(@"broadcast_message = %@", broadcast_message);
         }
     }
 }
