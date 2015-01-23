@@ -96,28 +96,6 @@
     
     [[NSUserDefaults standardUserDefaults] setInteger:[self getVersionNumberByInt] forKey: kAPPVERSION];
     
-    /*
-    BOOL PushIsRegistered = NO;
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-        if ([[UIApplication sharedApplication] enabledRemoteNotificationTypes] != UIRemoteNotificationTypeNone)
-            PushIsRegistered = YES;
-    } else {
-        PushIsRegistered = [[UIApplication sharedApplication]isRegisteredForRemoteNotifications];
-    }
-    
-    if(PushIsRegistered) {
-        [UAirship setLogLevel:UALogLevelTrace];
-        UAConfig *config = [UAConfig defaultConfig];
-        // Call takeOff (which creates the UAirship singleton)
-        [UAirship takeOff: config];
-        [UAirship setLogLevel:UALogLevelError];
-        [[UAPush shared]setAutobadgeEnabled:YES];
-        [UAPush shared].userNotificationTypes = (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert);
-        [UAPush shared].userPushNotificationsEnabled = YES;
-        [UAPush shared].registrationDelegate = self;
-    }
-    */
-    
     // message receiver
     MessageInBox = [[MessageReceiver alloc]init:DbInstance UniveralTable:UDbInstance Version:[self getVersionNumberByInt]];
     
@@ -137,6 +115,7 @@
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeAlert)
                                                                                  categories:nil];
         [[UIApplication sharedApplication]registerUserNotificationSettings: settings];
+        [[UIApplication sharedApplication]registerForRemoteNotifications];
     }
 }
 
@@ -344,12 +323,15 @@
 #pragma mark Handle Push Notifications
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [UIApplication sharedApplication].applicationIconBadgeNumber += 1;
+    DEBUGMSG(@"didReceiveRemoteNotification");
     if([self checkIdentity]) {
         if ([UIApplication sharedApplication].applicationIconBadgeNumber>0) {
             DEBUGMSG(@"userInfo = %@", userInfo);
             NSString* nonce = [[[userInfo objectForKey:@"aps"]objectForKey:@"nonce"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
             if(nonce) {
                 DEBUGMSG(@"nonce = %@", nonce);
+                
                 [MessageInBox FetchSingleMessage:nonce];
             }
             NSString* broadcast_message = [[[userInfo objectForKey:@"aps"]objectForKey:@"broadcast"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -359,12 +341,16 @@
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))handler {
+    [UIApplication sharedApplication].applicationIconBadgeNumber += 1;
+    DEBUGMSG(@"didReceiveRemoteNotification: fetchCompletionHandler");
+    
     if([self checkIdentity]) {
         if ([UIApplication sharedApplication].applicationIconBadgeNumber>0) {
             DEBUGMSG(@"userInfo = %@", userInfo);
             NSString* nonce = [[[userInfo objectForKey:@"aps"]objectForKey:@"nonce"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
             if(nonce) {
                 DEBUGMSG(@"nonce = %@", nonce);
+                [UIApplication sharedApplication].applicationIconBadgeNumber += 1;
                 [MessageInBox FetchSingleMessage:nonce];
             }
             NSString* broadcast_message = [[[userInfo objectForKey:@"aps"]objectForKey:@"broadcast"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -373,7 +359,13 @@
     }
 }
 
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings{
+    
+    DEBUGMSG(@"didRegisterUserNotificationSettings");
+}
+
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    DEBUGMSG(@"didRegisterForRemoteNotificationsWithDeviceToken");
     // TODO: will replace device token resgitration by our own
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
         if([app enabledRemoteNotificationTypes] == (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert)) {
@@ -391,7 +383,7 @@
         }
     } else {
         //Do something when notifications are disabled altogther
-        if ([[UIApplication sharedApplication] isRegisteredForRemoteNotifications] && [UIApplication sharedApplication].currentUserNotificationSettings.types != (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert)) {
+        if ([[UIApplication sharedApplication] isRegisteredForRemoteNotifications] && [UIApplication sharedApplication].currentUserNotificationSettings.types == (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert)) {
             //re-enabled
             NSString *hex_device_token = [[[deviceToken description]
                                            stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]]
@@ -409,7 +401,7 @@
 }
 
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
-    
+    DEBUGMSG(@"didFailToRegisterForRemoteNotificationsWithError: %@", [err debugDescription]);
     [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"Failed To Register For Remote Notifications With Error: %@", err]];
 }
 
