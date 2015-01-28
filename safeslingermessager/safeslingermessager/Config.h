@@ -26,12 +26,12 @@
 #ifdef BETA
 #define HTTPURL_PREFIX @"https://01060000t-dot-"
 #define HTTPURL_HOST_MSG @"starsling-server-iostest.appspot.com"
-#define HTTPURL_HOST_EXCHANGE @"keyslinger-server.appspot.com"
+#define HTTPURL_HOST_EXCHANGE @"safeslinger-exchange.appspot.com"
 #else
 // default server, for app store
 #define HTTPURL_PREFIX @"https://"
-#define HTTPURL_HOST_MSG @"starsling-server.appspot.com"
-#define HTTPURL_HOST_EXCHANGE @"keyslinger-server.appspot.com"
+#define HTTPURL_HOST_MSG @"safeslinger-messenger.appspot.com"
+#define HTTPURL_HOST_EXCHANGE @"safeslinger-exchange.appspot.com"
 #endif
 
 // for backup capability
@@ -48,6 +48,8 @@
 #define GETNONCESBYTOKEN @"getMessageNoncesByToken"
 #define GETFILE @"getFile"
 #define QUERYTOKEN @"checkStatus"
+#define POSTREGISTRATION @"postRegistration"
+
 #define FILEID_LEN 32
 #define PLATFORM_ANDROID_SMS 0
 #define PLATFORM_ANDROID_C2DM 1
@@ -117,8 +119,9 @@ typedef enum OptionType {
 
 typedef enum DevType {
     DISABLED = 0,
-	Android = 1,
-	iOS = 2
+	Android_C2DM = 1,
+	iOS = 2,
+    Android_GCM = 3
 }DevType;
 
 typedef enum ProfileStatus {

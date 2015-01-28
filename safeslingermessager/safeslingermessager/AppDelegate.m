@@ -323,15 +323,12 @@
 #pragma mark Handle Push Notifications
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    [UIApplication sharedApplication].applicationIconBadgeNumber += 1;
     DEBUGMSG(@"didReceiveRemoteNotification");
     if([self checkIdentity]) {
         if ([UIApplication sharedApplication].applicationIconBadgeNumber>0) {
-            DEBUGMSG(@"userInfo = %@", userInfo);
             NSString* nonce = [[[userInfo objectForKey:@"aps"]objectForKey:@"nonce"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
             if(nonce) {
                 DEBUGMSG(@"nonce = %@", nonce);
-                
                 [MessageInBox FetchSingleMessage:nonce];
             }
             NSString* broadcast_message = [[[userInfo objectForKey:@"aps"]objectForKey:@"broadcast"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -341,7 +338,6 @@
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))handler {
-    [UIApplication sharedApplication].applicationIconBadgeNumber += 1;
     DEBUGMSG(@"didReceiveRemoteNotification: fetchCompletionHandler");
     
     if([self checkIdentity]) {
@@ -359,8 +355,8 @@
     }
 }
 
-- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings{
-    
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
     DEBUGMSG(@"didRegisterUserNotificationSettings");
 }
 

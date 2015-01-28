@@ -138,6 +138,12 @@
     }
 }
 
++(NSString*)getSelfSubmissionToken
+{
+    // compute on the fly
+    return [Base64 encode:[sha3 Keccak256Digest:[self getPrivateKey:SIGN_PRI]]];
+}
+
 +(NSString*)getSelfGenKeyDate
 {
     AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];

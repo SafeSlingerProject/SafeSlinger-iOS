@@ -28,6 +28,7 @@
 #import "Utility.h"
 #import "SSEngine.h"
 #import "UniversalDB.h"
+#import "RegistrationHandler.h"
 
 @implementation MessageReceiver
 
@@ -156,7 +157,7 @@
                              // Download messages in a for loop
                              [self DownloadMessages];
                          } else {
-                             // noncecnt ==0
+                             // noncecnt == 0
                              [ErrorLogger ERRORDEBUG: @"No available messages."];
                              dispatch_async(dispatch_get_main_queue(), ^(void) {
                                  //[delegate.activityView DisableProgress];
@@ -345,6 +346,12 @@
         }
         
         [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+        // update badge number on the server
+        //RegistrationHandler *handler = [[RegistrationHandler alloc]init];
+        //NSString* hex_token = [[NSUserDefaults standardUserDefaults] stringForKey: kPUSH_TOKEN];
+        
+        //if(hex_token)
+        //    [handler updateBadgeNumber:hex_token KeyHex:[SSEngine getSelfKeyID] ClientVer: BadgeNum:0];
         
         NumNewMsg = MsgCount = 0;
     }

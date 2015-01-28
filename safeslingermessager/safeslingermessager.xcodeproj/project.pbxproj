@@ -58,6 +58,7 @@
 		18D6C25519463EF7000909F4 /* logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18D6C25319463EF7000909F4 /* logo.jpg */; };
 		18D6C25A1946418C000909F4 /* MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D6C2591946418C000909F4 /* MainController.m */; };
 		18D6C25E19464CEE000909F4 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D6C21F1946267B000909F4 /* AddressBook.framework */; };
+		18DE29741A75BEB0008CC41E /* RegistrationHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DE29731A75BEB0008CC41E /* RegistrationHandler.m */; };
 		18DE70FE194BA38400C43F84 /* ContactSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DE70FD194BA38400C43F84 /* ContactSelectView.m */; };
 		18DE7102194BA54C00C43F84 /* ContactCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DE7101194BA54C00C43F84 /* ContactCellView.m */; };
 		18F908401982EFC0004B540B /* help2.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 18F9083E1982EFC0004B540B /* help2.PNG */; };
@@ -186,6 +187,8 @@
 		18D6C25319463EF7000909F4 /* logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = logo.jpg; path = images/logo.jpg; sourceTree = "<group>"; };
 		18D6C2581946418C000909F4 /* MainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainController.h; sourceTree = "<group>"; };
 		18D6C2591946418C000909F4 /* MainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainController.m; sourceTree = "<group>"; };
+		18DE29721A75BEB0008CC41E /* RegistrationHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistrationHandler.h; sourceTree = "<group>"; };
+		18DE29731A75BEB0008CC41E /* RegistrationHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistrationHandler.m; sourceTree = "<group>"; };
 		18DE70FB194BA0F100C43F84 /* SafeSlinger.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SafeSlinger.entitlements; sourceTree = "<group>"; };
 		18DE70FC194BA38400C43F84 /* ContactSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactSelectView.h; sourceTree = "<group>"; };
 		18DE70FD194BA38400C43F84 /* ContactSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactSelectView.m; sourceTree = "<group>"; };
@@ -535,6 +538,8 @@
 				18D6C20319461268000909F4 /* BackupCloud.m */,
 				18D6C1F41946107D000909F4 /* SSEngine.h */,
 				18D6C1F31946107D000909F4 /* SSEngine.m */,
+				18DE29721A75BEB0008CC41E /* RegistrationHandler.h */,
+				18DE29731A75BEB0008CC41E /* RegistrationHandler.m */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -803,6 +808,7 @@
 				18D6C20B1946139F000909F4 /* SafeSlingerDB.m in Sources */,
 				186057771945174B002DD149 /* IntroduceView.m in Sources */,
 				18FBD723194A2243006CA09C /* FunctionView.m in Sources */,
+				18DE29741A75BEB0008CC41E /* RegistrationHandler.m in Sources */,
 				1860574519451001002DD149 /* main.m in Sources */,
 				18D6C21519461E71000909F4 /* VCardParser.m in Sources */,
 				180D25BF195A6A64002C34DC /* UniversalDB.m in Sources */,
@@ -958,13 +964,9 @@
 					"$(BUILT_PRODUCTS_DIR)",
 					"${SRCROOT}/../openssl-ios/include",
 					"${SRCROOT}/../sha3-ios-binary/include",
-					"$(SRCROOT)/../Airship_lib/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/../Airship_lib",
-					"$(SRCROOT)/../openssl-ios/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../openssl-ios/lib";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
@@ -1004,13 +1006,9 @@
 					"$(BUILT_PRODUCTS_DIR)",
 					"${SRCROOT}/../openssl-ios/include",
 					"${SRCROOT}/../sha3-ios-binary/include",
-					"$(SRCROOT)/../Airship_lib/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/../Airship_lib",
-					"$(SRCROOT)/../openssl-ios/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../openssl-ios/lib";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
@@ -1025,7 +1023,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = safeslingermessager/SafeSlinger.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEPLOYMENT_LOCATION = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

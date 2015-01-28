@@ -104,7 +104,6 @@
 - (IBAction)Login:(id)sender {
     if([self CheckPassphase: PassField.text]) {
         error_t = 0;
-        // [delegate GainAccess];
         [self performSegueWithIdentifier: @"SwitchToMain" sender:self];
         
     } else {

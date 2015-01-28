@@ -57,6 +57,7 @@ typedef enum KeyType {
 +(NSData*)getPrivateKey: (int)keytype;
 +(NSData*)getPubKey: (int)keytype;
 +(NSString*)getSelfKeyID;
++(NSString*)getSelfSubmissionToken;
 +(NSString*)getSelfGenKeyDate;
 +(NSData*)getPackPubKeys;
 
