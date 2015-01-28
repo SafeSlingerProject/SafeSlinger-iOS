@@ -64,6 +64,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    
 	// Preloads keyboard so there's no lag on initial keyboard appearance.
 	UITextField *lagFreeField = [[UITextField alloc] init];
 	[self.window addSubview:lagFreeField];
@@ -325,13 +327,17 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     DEBUGMSG(@"didReceiveRemoteNotification");
     if([self checkIdentity]) {
-        if ([UIApplication sharedApplication].applicationIconBadgeNumber>0) {
-            NSString* nonce = [[[userInfo objectForKey:@"aps"]objectForKey:@"nonce"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            if(nonce) {
-                DEBUGMSG(@"nonce = %@", nonce);
-                [MessageInBox FetchSingleMessage:nonce];
-            }
-            NSString* broadcast_message = [[[userInfo objectForKey:@"aps"]objectForKey:@"broadcast"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        NSDictionary* aps = [userInfo objectForKey:@"aps"];
+        if([[aps allKeys]containsObject:@"nonce"])
+        {
+            // secure message
+            NSString* nonce = [[aps objectForKey:@"nonce"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            DEBUGMSG(@"fetch single messages...");
+            [MessageInBox FetchSingleMessage:nonce];
+        }else if([[aps allKeys]containsObject:@"broadcast"])
+        {
+            // broadcast message
+            NSString* broadcast_message = [[aps objectForKey:@"broadcast"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
             DEBUGMSG(@"broadcast_message = %@", broadcast_message);
         }
     }
@@ -341,15 +347,17 @@
     DEBUGMSG(@"didReceiveRemoteNotification: fetchCompletionHandler");
     
     if([self checkIdentity]) {
-        if ([UIApplication sharedApplication].applicationIconBadgeNumber>0) {
-            DEBUGMSG(@"userInfo = %@", userInfo);
-            NSString* nonce = [[[userInfo objectForKey:@"aps"]objectForKey:@"nonce"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            if(nonce) {
-                DEBUGMSG(@"nonce = %@", nonce);
-                [UIApplication sharedApplication].applicationIconBadgeNumber += 1;
-                [MessageInBox FetchSingleMessage:nonce];
-            }
-            NSString* broadcast_message = [[[userInfo objectForKey:@"aps"]objectForKey:@"broadcast"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        NSDictionary* aps = [userInfo objectForKey:@"aps"];
+        if([[aps allKeys]containsObject:@"nonce"])
+        {
+            // secure message
+            NSString* nonce = [[aps objectForKey:@"nonce"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            DEBUGMSG(@"fetch single messages...");
+            [MessageInBox FetchSingleMessage:nonce];
+        }else if([[aps allKeys]containsObject:@"broadcast"])
+        {
+            // broadcast message
+            NSString* broadcast_message = [[aps objectForKey:@"broadcast"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
             DEBUGMSG(@"broadcast_message = %@", broadcast_message);
         }
     }
@@ -403,14 +411,12 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    DEBUGMSG(@"BadgeNumber = %ld", (long)[UIApplication sharedApplication].applicationIconBadgeNumber);
-    
     if([self checkIdentity]) {
         // update push notification status
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidTimeout:) name:KSDIdlingWindowTimeoutNotification object:nil];
         
         if ([UIApplication sharedApplication].applicationIconBadgeNumber>0) {
-            DEBUGMSG(@"Fetch %ld messages...", (long)[UIApplication sharedApplication].applicationIconBadgeNumber);
+            DEBUGMSG(@"fetch %ld messages...", (long)[UIApplication sharedApplication].applicationIconBadgeNumber);
             [MessageInBox FetchMessageNonces: (int)[UIApplication sharedApplication].applicationIconBadgeNumber];
         }
         

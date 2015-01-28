@@ -65,6 +65,7 @@
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         if(error) {
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Internet Connection failed. Error - %@ %@",
                                       [error localizedDescription],
                                       [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]]];
@@ -91,13 +92,14 @@
                     DEBUGMSG(@"Registration Response: %s", msgchar+8);
                     // Registraiton Succeed.
                     dispatch_async(dispatch_get_main_queue(), ^(void) {
-                        
+                        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
                     });
                 } else if(ntohl(*(int *)msgchar) == 0) {
                     // Error Message
                     NSString* error_msg = [NSString TranlsateErrorMessage:[NSString stringWithUTF8String: msgchar+4]];
                     [ErrorLogger ERRORDEBUG:error_msg];
                     dispatch_async(dispatch_get_main_queue(), ^(void) {
+                        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
                         [ErrorLogger ERRORDEBUG:error_msg];
                     });
                 }

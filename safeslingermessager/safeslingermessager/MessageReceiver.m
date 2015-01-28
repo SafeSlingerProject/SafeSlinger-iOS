@@ -65,6 +65,7 @@
 }
 
 - (void)FetchMessageNonces:(int)NumOfMostRecents {
+    
     if([ThreadLock tryLock]) {
         
         NumNewMsg = 0;
@@ -345,14 +346,10 @@
 			[[NSNotificationCenter defaultCenter] postNotificationName:NSNotificationMessageReceived object:nil userInfo:nil];
         }
         
-        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
-        // update badge number on the server
-        //RegistrationHandler *handler = [[RegistrationHandler alloc]init];
-        //NSString* hex_token = [[NSUserDefaults standardUserDefaults] stringForKey: kPUSH_TOKEN];
-        
-        //if(hex_token)
-        //    [handler updateBadgeNumber:hex_token KeyHex:[SSEngine getSelfKeyID] ClientVer: BadgeNum:0];
-        
+        long badge_num = [[UIApplication sharedApplication]applicationIconBadgeNumber];
+        badge_num = badge_num - _NumSafeMsg - _NumExpiredMsg;
+        DEBUGMSG(@"new badge_num = %ld", badge_num);
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:badge_num];
         NumNewMsg = MsgCount = 0;
     }
 }

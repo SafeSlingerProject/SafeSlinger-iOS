@@ -43,7 +43,7 @@
 #define PENALTY_TIME 10
 
 // For Secure Message and Introduction
-#define POSTMSG @"postFile1"
+#define POSTMSG @"postMessage"
 #define GETMSG @"getMessage"
 #define GETNONCESBYTOKEN @"getMessageNoncesByToken"
 #define GETFILE @"getFile"
