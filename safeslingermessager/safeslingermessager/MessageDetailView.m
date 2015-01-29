@@ -959,8 +959,8 @@
 }
 
 #pragma mark - MessageReceiverNotificationDelegate methods
-
 - (void)messageReceived {
+    
 	NSUInteger count = messages.count;
 	[self ReloadTable];
 	

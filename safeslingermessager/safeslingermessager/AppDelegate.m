@@ -111,11 +111,10 @@
 {
     // database entry does not exist, try to do registraiton again..
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-        [[UIApplication sharedApplication]registerForRemoteNotificationTypes: (UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeAlert)];
+        [[UIApplication sharedApplication]registerForRemoteNotificationTypes: (UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound)];
     } else {
         // iOS8
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeAlert)
-                                                                                 categories:nil];
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound) categories:nil];
         [[UIApplication sharedApplication]registerUserNotificationSettings: settings];
         [[UIApplication sharedApplication]registerForRemoteNotifications];
     }
@@ -323,64 +322,36 @@
 }
 
 #pragma mark Handle Push Notifications
-
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-
-    DEBUGMSG(@"didReceiveRemoteNotification");
-    if([self checkIdentity]) {
-        
-        long badge = [UIApplication sharedApplication].applicationIconBadgeNumber;
-        if (badge == 1)
-        {
-            NSDictionary* aps = [userInfo objectForKey:@"aps"];
-            if([[aps allKeys]containsObject:@"nonce"])
-            {
-                // secure message
-                NSString* nonce = [[aps objectForKey:@"nonce"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                DEBUGMSG(@"fetch single messages...");
-                [MessageInBox FetchSingleMessage:nonce];
-            }else if([[aps allKeys]containsObject:@"broadcast"])
-            {
-                // broadcast message
-                NSString* broadcast_message = [[aps objectForKey:@"broadcast"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                DEBUGMSG(@"broadcast_message = %@", broadcast_message);
-            }
-        }else if (badge > 1){
-            DEBUGMSG(@"fetch %ld messages...", (long)[UIApplication sharedApplication].applicationIconBadgeNumber);
-            [MessageInBox FetchMessageNonces: (int)[UIApplication sharedApplication].applicationIconBadgeNumber];
-        }
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    
+    DEBUGMSG(@"call didReceiveRemoteNotification...");
+    DEBUGMSG(@"userInfo = %@", userInfo);
+    NSString* badge = [[userInfo objectForKey:@"aps"]objectForKey:@"badge"];
+    DEBUGMSG(@"received badge = %@", badge);
+    
+    if(badge&&[self checkIdentity])
+    {
+        DEBUGMSG(@"fetch %d messages...", [badge intValue]);
+        [MessageInBox FetchMessageNonces: [badge intValue]];
     }
 }
 
-- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler
+// for background
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler
 {
-    DEBUGMSG(@"didReceiveRemoteNotification: performFetchWithCompletionHandler");
-}
-
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))handler {
+    DEBUGMSG(@"call didReceiveRemoteNotification...");
+    DEBUGMSG(@"userInfo = %@", userInfo);
+    NSString* badge = [[userInfo objectForKey:@"aps"]objectForKey:@"badge"];
+    DEBUGMSG(@"received badge = %@", badge);
     
-    DEBUGMSG(@"didReceiveRemoteNotification: fetchCompletionHandler");
-    if([self checkIdentity]) {
-        long badge = [UIApplication sharedApplication].applicationIconBadgeNumber;
-        if (badge == 1)
-        {
-            NSDictionary* aps = [userInfo objectForKey:@"aps"];
-            if([[aps allKeys]containsObject:@"nonce"])
-            {
-                // secure message
-                NSString* nonce = [[aps objectForKey:@"nonce"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                DEBUGMSG(@"fetch single messages...");
-                [MessageInBox FetchSingleMessage:nonce];
-            }else if([[aps allKeys]containsObject:@"broadcast"])
-            {
-                // broadcast message
-                NSString* broadcast_message = [[aps objectForKey:@"broadcast"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                DEBUGMSG(@"broadcast_message = %@", broadcast_message);
-            }
-        }else if (badge > 1){
-            DEBUGMSG(@"fetch %ld messages...", (long)[UIApplication sharedApplication].applicationIconBadgeNumber);
-            [MessageInBox FetchMessageNonces: (int)[UIApplication sharedApplication].applicationIconBadgeNumber];
-        }
+    if(badge&&[self checkIdentity])
+    {
+        DEBUGMSG(@"fetch %d messages...", [badge intValue]);
+        [MessageInBox FetchMessageNonces: [badge intValue]];
+        completionHandler(UIBackgroundFetchResultNewData);
+    }else{
+        completionHandler(UIBackgroundFetchResultNoData);
     }
 }
 
@@ -391,9 +362,11 @@
 
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     DEBUGMSG(@"didRegisterForRemoteNotificationsWithDeviceToken");
+    
     // TODO: will replace device token resgitration by our own
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-        if([app enabledRemoteNotificationTypes] == (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert)) {
+        int flag = [app enabledRemoteNotificationTypes] & (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert);
+        if(flag == (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert)) {
             //re-enabled
             NSString *hex_device_token = [[[deviceToken description]
                                            stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]]
@@ -408,7 +381,9 @@
         }
     } else {
         //Do something when notifications are disabled altogther
-        if ([[UIApplication sharedApplication] isRegisteredForRemoteNotifications] && [UIApplication sharedApplication].currentUserNotificationSettings.types == (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert)) {
+        int flag = [UIApplication sharedApplication].currentUserNotificationSettings.types & (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert);
+        
+        if ([[UIApplication sharedApplication] isRegisteredForRemoteNotifications] && flag == (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert)) {
             //re-enabled
             NSString *hex_device_token = [[[deviceToken description]
                                            stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]]
@@ -436,9 +411,14 @@
         // update push notification status
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidTimeout:) name:KSDIdlingWindowTimeoutNotification object:nil];
         
-        if ([UIApplication sharedApplication].applicationIconBadgeNumber>0) {
-            DEBUGMSG(@"fetch %ld messages...", (long)[UIApplication sharedApplication].applicationIconBadgeNumber);
-            [MessageInBox FetchMessageNonces: (int)[UIApplication sharedApplication].applicationIconBadgeNumber];
+        DEBUGMSG(@"check to see if MessageInBox is budy..");
+        long badge = [UIApplication sharedApplication].applicationIconBadgeNumber;
+        
+        if(![MessageInBox IsBusy]&&badge>0)
+        {
+            [MessageInBox FetchMessageNonces: (int)badge];
+        }else{
+            DEBUGMSG(@"thread is busy or badge is zero.");
         }
         
         // Try to backup

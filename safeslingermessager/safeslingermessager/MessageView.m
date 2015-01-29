@@ -77,7 +77,6 @@
 	
     // Messages from individual database
     [MessageList setArray:[list allValues]];
-    
     [self.tableView reloadData];
 }
 

@@ -44,23 +44,14 @@
     return self;
 }
 
-- (void)FetchSingleMessage:(NSString *)encodeNonce {
-    if([ThreadLock tryLock]) {
-        NumNewMsg = 0;
-        MsgCount = 1;
-        
-        // Add single nonce
-        _MsgNonces = [NSMutableDictionary dictionary];
-        [_MsgNonces setObject:[NSNumber numberWithInt:0] forKey:encodeNonce];
-        
-		if(MsgFinish) {
-			free(MsgFinish);
-		}
-        MsgFinish = malloc(sizeof(int) * 1);
-        
-        MsgFinish[0] = InitFetch;
-        // Download messages
-        [self DownloadMessages];
+- (BOOL)IsBusy
+{
+    if([ThreadLock tryLock])
+    {
+        [ThreadLock unlock];
+        return NO;
+    }else{
+        return YES;
     }
 }
 
@@ -306,11 +297,7 @@
 	}
 	
     if(all_processed) {
-        //[delegate.activityView DisableProgress];
         [ThreadLock unlock];
-        
-        DEBUGMSG(@"IconBadgeNumber = %ld", (long)[[UIApplication sharedApplication]applicationIconBadgeNumber]);
-        
         int _NumExpiredMsg = 0, _NumBadMsg = 0, _NumSafeMsg = 0;
         
         for(int i = 0; i < MsgCount; i++) {
@@ -338,18 +325,29 @@
         } else if(_NumExpiredMsg==MsgCount) {
             [self PrintToastMessage: NSLocalizedString(@"error_InvalidIncomingMessage", @"Bad incoming message format.")];
         } else if(_NumSafeMsg>0) {
+            
 			if(_notificationDelegate) {
 				[_notificationDelegate messageReceived];
 			} else {
+                // move toast message back..
+                NSString *msg = nil;
+                if(_NumSafeMsg==1)
+                    msg = NSLocalizedString(@"title_NotifyFileAvailable", @"SafeSlinger Message Available");
+                else
+                    msg = [NSString stringWithFormat: NSLocalizedString(@"title_NotifyMulFileAvailable", @"%d SafeSlinger Messages Available"),_NumSafeMsg];
+                [[[[iToast makeText: msg]
+                  setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
 				[UtilityFunc playSoundAlert];
 			}
 			
 			[[NSNotificationCenter defaultCenter] postNotificationName:NSNotificationMessageReceived object:nil userInfo:nil];
         }
         
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         long badge_num = [[UIApplication sharedApplication]applicationIconBadgeNumber];
         badge_num = badge_num - _NumSafeMsg - _NumExpiredMsg;
         DEBUGMSG(@"new badge_num = %ld", badge_num);
+        if (badge_num<0) badge_num = 0;
         [[UIApplication sharedApplication] setApplicationIconBadgeNumber:badge_num];
         NumNewMsg = MsgCount = 0;
     }

@@ -235,7 +235,8 @@
     
     // check notification permission
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-        if ([[UIApplication sharedApplication] enabledRemoteNotificationTypes] != (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert))
+        int flag =[[UIApplication sharedApplication] enabledRemoteNotificationTypes] & (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert);
+        if (flag != (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert))
         {
             buttontitle = NSLocalizedString(@"menu_Help", @"Help");
             description = [NSString stringWithFormat: NSLocalizedString(@"iOS_notificationError1", @"Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the %@ button for SafeSlinger Notification permission details."), buttontitle];
@@ -251,7 +252,9 @@
             return;
         }
     } else {
-        if (![[UIApplication sharedApplication] isRegisteredForRemoteNotifications] || [UIApplication sharedApplication].currentUserNotificationSettings.types != (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert))
+        int flag =[UIApplication sharedApplication].currentUserNotificationSettings.types & (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert);
+        
+        if (![[UIApplication sharedApplication] isRegisteredForRemoteNotifications] || flag != (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert))
         {
             buttontitle = NSLocalizedString(@"menu_Settings", @"menu_Settings");
             description = [NSString stringWithFormat: NSLocalizedString(@"iOS_notificationError1", @"Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the %@ button for SafeSlinger Notification permission details."), buttontitle];
