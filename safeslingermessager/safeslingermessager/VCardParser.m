@@ -29,10 +29,6 @@
 #import "ErrorLogger.h"
 #import "ContactSelectView.h"
 
-#import <UAirship.h>
-#import <UAPush.h>
-#import <UAAnalytics.h>
-
 
 @implementation VCardParser
 
@@ -51,15 +47,15 @@
     [vCard appendString: @"\n"];
 #pragma mark PubliKey
     [vCard appendFormat: @"IMPP;SafeSlinger-PubKey:%@\n", [Base64 encode:[SSEngine getPackPubKeys]]];
-    NSString* uairship = [UAirship shared].deviceToken;
+    NSString* hex_token = [[NSUserDefaults standardUserDefaults] stringForKey: kPUSH_TOKEN];
     NSMutableData *encodeToken = [NSMutableData dataWithLength:0];
-    if(uairship)
+    if(hex_token)
     {
         int devtype = htonl(iOS);
-        int len = htonl([uairship length]);
+        int len = htonl([hex_token length]);
         [encodeToken appendData:[NSData dataWithBytes: &devtype length: 4]];
         [encodeToken appendData:[NSData dataWithBytes: &len length: 4]];
-        [encodeToken appendData:[uairship dataUsingEncoding:NSASCIIStringEncoding]];
+        [encodeToken appendData:[hex_token dataUsingEncoding:NSASCIIStringEncoding]];
     }else{
         // no token available
         int devtype = htonl(DISABLED);
@@ -211,15 +207,15 @@
     
 #pragma mark PubliKey
     [vCard appendFormat: @"IMPP;SafeSlinger-PubKey:%@\n", [Base64 encode:[SSEngine getPackPubKeys]]];
-    NSString* uairship = [UAirship shared].deviceToken;
+    NSString* hex_token = [[NSUserDefaults standardUserDefaults] stringForKey: kPUSH_TOKEN];
     NSMutableData *encodeToken = [NSMutableData dataWithLength:0];
-    if(uairship)
+    if(hex_token)
     {
         int devtype = htonl(iOS);
-        int len = htonl([uairship length]);
+        int len = htonl([hex_token length]);
         [encodeToken appendData:[NSData dataWithBytes: &devtype length: 4]];
         [encodeToken appendData:[NSData dataWithBytes: &len length: 4]];
-        [encodeToken appendData:[uairship dataUsingEncoding:NSASCIIStringEncoding]];
+        [encodeToken appendData:[hex_token dataUsingEncoding:NSASCIIStringEncoding]];
     }else{
         // no token available
         int devtype = htonl(DISABLED);

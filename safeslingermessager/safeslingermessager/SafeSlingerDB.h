@@ -165,8 +165,6 @@ typedef enum DirectionType {
 - (BOOL)InsertMessage: (MsgEntry*)MSG;
 - (BOOL)DeleteMessage: (NSData*)msgid;
 - (BOOL)CheckMessage: (NSData*)msgid;
-- (BOOL)UpdateMessage: (NSData*)msgid NewMSG:(NSString*)decrypted_message Time:(NSString*)GMTTime User:(NSString*)Name Token:(NSString*)TID Photo:(NSString*)UserPhoto;
-- (BOOL)UpdateMessagesWithToken: (NSString*)oldKeyID ReplaceUsername:(NSString*)username ReplaceToken:(NSString*)token;
 
 
 // Query function for msg Table

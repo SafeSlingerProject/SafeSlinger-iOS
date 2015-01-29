@@ -28,9 +28,6 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 
-#import <UAirship.h>
-#import <UAPush.h>
-
 @interface MainController ()
 
 @end

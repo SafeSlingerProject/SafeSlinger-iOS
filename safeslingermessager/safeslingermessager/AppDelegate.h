@@ -23,7 +23,6 @@
  */
 
 #import <UIKit/UIKit.h>
-#import <UAPush.h>
 
 @class SafeSlingerDB;
 @class BackupCloudUtility;
@@ -31,7 +30,7 @@
 @class MessageReceiver;
 @class UniversalDB;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, UARegistrationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
 {
     // Management Path
     NSString *RootPath;

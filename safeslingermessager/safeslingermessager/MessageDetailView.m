@@ -524,7 +524,7 @@
             }
             
             // Display Time
-            [msgText appendString:[NSString GetTimeLabelString: msg.cTime]];
+            [msgText appendString:[NSString GetTimeLabelString: msg.rTime]];
             cell.detailTextLabel.text = msgText;
             
             // set as empty string
@@ -873,6 +873,7 @@
     if(len>0){
         // handle text
         gmt = [[NSString alloc] initWithBytes:p+offset length:len encoding:NSASCIIStringEncoding];
+        DEBUGMSG(@"gmt: %@", gmt);
         offset = offset+len;
     }
     
@@ -958,8 +959,8 @@
 }
 
 #pragma mark - MessageReceiverNotificationDelegate methods
-
 - (void)messageReceived {
+    
 	NSUInteger count = messages.count;
 	[self ReloadTable];
 	

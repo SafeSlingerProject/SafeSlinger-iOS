@@ -24,6 +24,9 @@
 
 #import "FunctionView.h"
 #import "VCardParser.h"
+#import "RegistrationHandler.h"
+#import "SSEngine.h"
+#import "AppDelegate.h"
 
 @interface FunctionView ()
 
@@ -46,7 +49,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(tappedRightButton:)];
     [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
     [self.view addGestureRecognizer:swipeLeft];
@@ -83,6 +85,22 @@
                                                 otherButtonTitles:NSLocalizedString(@"btn_NotRemind", @"Forget"), nil];
         [message show];
         message = nil;
+    }
+    // Update registration if necessary
+    [self registerDeviceInfo];
+}
+
+- (void)registerDeviceInfo
+{
+    RegistrationHandler *handler = [[RegistrationHandler alloc]init];
+    NSString* hex_token = [[NSUserDefaults standardUserDefaults] stringForKey: kPUSH_TOKEN];
+    int ver = [(AppDelegate*)[[UIApplication sharedApplication]delegate]getVersionNumberByInt];
+    NSString* hex_subtoken = [SSEngine getSelfSubmissionToken];
+    NSString* hex_keyid = [SSEngine getSelfKeyID];
+    
+    if(hex_token && hex_subtoken && hex_keyid)
+    {
+        [handler registerToken: hex_subtoken DeviceHex: hex_token KeyHex: hex_keyid ClientVer: ver];
     }
 }
 

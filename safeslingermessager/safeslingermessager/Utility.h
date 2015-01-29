@@ -30,10 +30,10 @@
 
 + (void)SendOpts: (UIViewController<MFMailComposeViewControllerDelegate>*)VC;
 + (void)PopToMainPanel: (UINavigationController*)navigationController;
-+ (BOOL) AddContactEntry: (ABAddressBookRef)aBook TargetRecord:(ABRecordRef)aRecord;
-+ (void) RemoveDuplicates: (ABAddressBookRef)aBook AdressList:(CFArrayRef)allPeople CompareArray:(NSMutableDictionary*)compared;
++ (BOOL)AddContactEntry: (ABAddressBookRef)aBook TargetRecord:(ABRecordRef)aRecord;
++ (void)RemoveDuplicates: (ABAddressBookRef)aBook AdressList:(CFArrayRef)allPeople CompareArray:(NSMutableDictionary*)compared;
 + (NSComparisonResult)CompareDate: (NSString*)basedate Target:(NSString*)targetdate;
-+ (void) TriggerContactPermission;
++ (void)TriggerContactPermission;
 + (void)playSoundAlert;
 + (void)playVibrationAlert;
 

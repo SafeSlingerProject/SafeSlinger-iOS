@@ -63,6 +63,6 @@ typedef enum MessageStatus {
 
 - (id)init:(SafeSlingerDB *)GivenDB UniveralTable:(UniversalDB *)UniDB Version:(int)Version;
 - (void)FetchMessageNonces:(int)NumOfMostRecents;
-- (void)FetchSingleMessage:(NSString*)encodeNonce;
+- (BOOL)IsBusy;
 
 @end

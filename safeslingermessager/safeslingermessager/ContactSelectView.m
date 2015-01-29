@@ -287,7 +287,8 @@ typedef enum {
 	}
 	
     switch (entry.devType) {
-        case Android:
+        case Android_C2DM:
+        case Android_GCM:
             cell.DeviceLabel.text = NSLocalizedString(@"label_AndroidOS", @"Android");
             break;
         case iOS:

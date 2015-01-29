@@ -32,9 +32,6 @@
 #import "MessageDetailView.h"
 #import "MessageReceiver.h"
 
-#import <UAirship.h>
-#import <UAPush.h>
-
 @interface MessageView ()
 
 @end
@@ -80,7 +77,6 @@
 	
     // Messages from individual database
     [MessageList setArray:[list allValues]];
-    
     [self.tableView reloadData];
 }
 
