@@ -97,10 +97,9 @@
     int ver = [(AppDelegate*)[[UIApplication sharedApplication]delegate]getVersionNumberByInt];
     NSString* hex_subtoken = [SSEngine getSelfSubmissionToken];
     NSString* hex_keyid = [SSEngine getSelfKeyID];
-    DEBUGMSG(@"%@ %@ %@", hex_token, hex_subtoken, hex_keyid);
+    
     if(hex_token && hex_subtoken && hex_keyid)
     {
-        DEBUGMSG(@"do registration.");
         [handler registerToken: hex_subtoken DeviceHex: hex_token KeyHex: hex_keyid ClientVer: ver];
     }
 }

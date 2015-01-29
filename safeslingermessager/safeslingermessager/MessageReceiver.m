@@ -190,6 +190,7 @@
         if([decodenonce length]==NONCELEN) {
             if(![UDbInstance CheckMessage:decodenonce]) {
                 // Get message
+                DEBUGMSG(@"nonce = %@", nonce);
                 [UDbInstance CreateNewEntry:decodenonce];
                 [self RetrieveCipher: decodenonce EncodeNonce:nonce];
             } else {

@@ -325,40 +325,61 @@
 #pragma mark Handle Push Notifications
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+
     DEBUGMSG(@"didReceiveRemoteNotification");
     if([self checkIdentity]) {
-        NSDictionary* aps = [userInfo objectForKey:@"aps"];
-        if([[aps allKeys]containsObject:@"nonce"])
+        
+        long badge = [UIApplication sharedApplication].applicationIconBadgeNumber;
+        if (badge == 1)
         {
-            // secure message
-            NSString* nonce = [[aps objectForKey:@"nonce"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            DEBUGMSG(@"fetch single messages...");
-            [MessageInBox FetchSingleMessage:nonce];
-        }else if([[aps allKeys]containsObject:@"broadcast"])
-        {
-            // broadcast message
-            NSString* broadcast_message = [[aps objectForKey:@"broadcast"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            DEBUGMSG(@"broadcast_message = %@", broadcast_message);
+            NSDictionary* aps = [userInfo objectForKey:@"aps"];
+            if([[aps allKeys]containsObject:@"nonce"])
+            {
+                // secure message
+                NSString* nonce = [[aps objectForKey:@"nonce"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                DEBUGMSG(@"fetch single messages...");
+                [MessageInBox FetchSingleMessage:nonce];
+            }else if([[aps allKeys]containsObject:@"broadcast"])
+            {
+                // broadcast message
+                NSString* broadcast_message = [[aps objectForKey:@"broadcast"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                DEBUGMSG(@"broadcast_message = %@", broadcast_message);
+            }
+        }else if (badge > 1){
+            DEBUGMSG(@"fetch %ld messages...", (long)[UIApplication sharedApplication].applicationIconBadgeNumber);
+            [MessageInBox FetchMessageNonces: (int)[UIApplication sharedApplication].applicationIconBadgeNumber];
         }
     }
 }
 
+- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler
+{
+    DEBUGMSG(@"didReceiveRemoteNotification: performFetchWithCompletionHandler");
+}
+
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))handler {
-    DEBUGMSG(@"didReceiveRemoteNotification: fetchCompletionHandler");
     
+    DEBUGMSG(@"didReceiveRemoteNotification: fetchCompletionHandler");
     if([self checkIdentity]) {
-        NSDictionary* aps = [userInfo objectForKey:@"aps"];
-        if([[aps allKeys]containsObject:@"nonce"])
+        long badge = [UIApplication sharedApplication].applicationIconBadgeNumber;
+        if (badge == 1)
         {
-            // secure message
-            NSString* nonce = [[aps objectForKey:@"nonce"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            DEBUGMSG(@"fetch single messages...");
-            [MessageInBox FetchSingleMessage:nonce];
-        }else if([[aps allKeys]containsObject:@"broadcast"])
-        {
-            // broadcast message
-            NSString* broadcast_message = [[aps objectForKey:@"broadcast"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            DEBUGMSG(@"broadcast_message = %@", broadcast_message);
+            NSDictionary* aps = [userInfo objectForKey:@"aps"];
+            if([[aps allKeys]containsObject:@"nonce"])
+            {
+                // secure message
+                NSString* nonce = [[aps objectForKey:@"nonce"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                DEBUGMSG(@"fetch single messages...");
+                [MessageInBox FetchSingleMessage:nonce];
+            }else if([[aps allKeys]containsObject:@"broadcast"])
+            {
+                // broadcast message
+                NSString* broadcast_message = [[aps objectForKey:@"broadcast"]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                DEBUGMSG(@"broadcast_message = %@", broadcast_message);
+            }
+        }else if (badge > 1){
+            DEBUGMSG(@"fetch %ld messages...", (long)[UIApplication sharedApplication].applicationIconBadgeNumber);
+            [MessageInBox FetchMessageNonces: (int)[UIApplication sharedApplication].applicationIconBadgeNumber];
         }
     }
 }
