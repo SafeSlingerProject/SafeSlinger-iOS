@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  * 
- * Copyright (c) 2010-2014 Carnegie Mellon University
+ * Copyright (c) 2010-2015 Carnegie Mellon University
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@
 // for beta testing
 #ifdef BETA
 #define HTTPURL_PREFIX @"https://01060000t-dot-"
-#define HTTPURL_HOST_MSG @"starsling-server-iostest.appspot.com"
+#define HTTPURL_HOST_MSG @"safeslinger-messenger.appspot.com"
 #define HTTPURL_HOST_EXCHANGE @"safeslinger-exchange.appspot.com"
 #else
 // default server, for app store
