@@ -321,6 +321,8 @@
     PreferredLanguage = [[NSLocale preferredLanguages] objectAtIndex:0];
     [CompareLabel setText:[NSString stringWithFormat: NSLocalizedStringFromBundle(delegate.res, @"label_CompareScreensNDevices", @"Compare screens on %@ devices.."), [NSString stringWithFormat:@"%d", delegate.protocol.users]]];
     [self generateWordList: [delegate.protocol generateHashForPhrases]];
+    
+    if(delegate.first_use) [self DisplayHow];
 }
     
 #pragma mark UIPickerViewDelegate

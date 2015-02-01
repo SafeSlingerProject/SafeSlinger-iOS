@@ -60,6 +60,8 @@ enum ReturnStatus
     NSBundle *res;
     // Navigation Controller Delegate
     UIViewController<SafeSlingerDelegate> *mController;
+    // Flag to indicate whether it is in the first use
+    BOOL first_use;
 }
 
 @property (nonatomic, retain) UIViewController<SafeSlingerDelegate> *mController;
@@ -72,9 +74,10 @@ enum ReturnStatus
 @property (nonatomic, retain) NSData *exchangeInput;
 @property (nonatomic, retain) NSTimer *pro_expire;
 @property (nonatomic) Reachability *internetReachability;
+@property (nonatomic, readwrite) BOOL first_use;
 
 // Public interfaces
--(BOOL)SetupExchange: (UIViewController<SafeSlingerDelegate>*)mainController ServerHost: (NSString*) host VersionNumber:(NSString*)vNum;
+-(BOOL)SetupExchange: (UIViewController<SafeSlingerDelegate>*)mainController ServerHost: (NSString*) host VersionNumber:(NSString*)vNum FirstUse:(BOOL)isFirstuse;
 -(void)BeginExchange: (NSData*)input;
 -(void)RequestUniqueID: (int)NumOfUsers;
 -(void)BeginGrouping: (NSString*)UserID;

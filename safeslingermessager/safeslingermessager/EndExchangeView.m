@@ -56,6 +56,8 @@
 	for (int i = 0; i < [contactList count]; i++)
 		selections[i] = YES;
 	[selectionTable reloadData];
+    if(![[NSUserDefaults standardUserDefaults] boolForKey:kFIRST_USE])
+        [self DisplayHow:self];
 }
 
 - (IBAction)DisplayHow:(id)sender {
@@ -68,6 +70,10 @@
 }
 
 - (IBAction)Import:(id)sender {
+    
+    // after import done, not first user anymore
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFIRST_USE];
+    
     NSMutableDictionary *mapping = [NSMutableDictionary dictionary];
     int importedcount = 0;
 	

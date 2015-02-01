@@ -66,6 +66,7 @@
 #define kPasshpraseCacheTime @"PasshpraseCacheTime"
 #define kShowExchangeHint @"ShowExchangeHint"
 #define kDEFAULT_DB_KEY @"DEFAULT_DB_KEY"
+#define kFIRST_USE @"FIRST_USE"
 #define kDB_KEY @"DB_KEY"
 #define kDB_LIST @"DB_LIST"
 #define kRestoreDate @"RestoreDate"

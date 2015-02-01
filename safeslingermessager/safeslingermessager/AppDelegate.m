@@ -73,7 +73,7 @@
 	[lagFreeField resignFirstResponder];
 	[lagFreeField removeFromSuperview];
 	
-	
+
     [Crashlytics startWithAPIKey:@"a9f2629c171299fa2ff44a07abafb7652f4e1d5c"];
     [[Crashlytics sharedInstance]setDebugMode:YES];
     

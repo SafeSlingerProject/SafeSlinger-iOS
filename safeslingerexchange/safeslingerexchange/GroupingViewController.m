@@ -120,6 +120,7 @@
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+    if(delegate.first_use) [self DisplayHow];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
