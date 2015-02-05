@@ -27,7 +27,6 @@
 #import "Utility.h"
 #import "BackupCloud.h"
 #import "ContactCellView.h"
-#import "MessageReceiver.h"
 #import "SSEngine.h"
 #import "IdleHandler.h"
 #import "UniversalDB.h"
@@ -120,7 +119,9 @@
     
     // message receiver
     MessageInBox = [[MessageReceiver alloc]init:DbInstance UniveralTable:UDbInstance Version:[self getVersionNumberByInt]];
-    
+	// message sender
+	_messageSender = [MessageSender new];
+	
     // backup system
     BackupSys = [[BackupCloudUtility alloc]init];
     

@@ -24,11 +24,12 @@
 
 #import <UIKit/UIKit.h>
 #import <AddressBook/AddressBook.h>
+#import "MessageSender.h"
 
 @class AppDelegate;
 @class MsgListEntry;
 
-@interface MessageView : UITableViewController {
+@interface MessageView : UITableViewController <MessageSenderDelegate> {
     AppDelegate *delegate;
 }
 
@@ -37,5 +38,6 @@
 @property (nonatomic, strong) UIImage *b_img;
 
 - (IBAction)unwindToThreadView:(UIStoryboardSegue *)unwindSegue;
+- (void)shouldPushViewController:(UIViewController *)viewController;
 
 @end

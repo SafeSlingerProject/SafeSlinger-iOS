@@ -37,14 +37,8 @@
 
 @implementation MainController
 
-- (void)viewDidLoad
-{
-	[super viewDidLoad];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    AppDelegate* app = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+- (void)viewWillAppear:(BOOL)animated {
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     if([app checkIdentity]) {
         [self performSegueWithIdentifier: @"Login" sender:self];
     } else {

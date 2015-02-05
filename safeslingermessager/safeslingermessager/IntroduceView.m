@@ -192,8 +192,8 @@
     NSMutableData* pktdata1 = [[NSMutableData alloc]initWithCapacity:0];
     NSMutableData* pktdata2 = [[NSMutableData alloc]initWithCapacity:0];
     
-    _nonce1 = [SSEngine BuildCipher: pickU1.keyId Message:messageForU1 Attach: @"introduction.vcf" RawFile:VCardForU1 MIMETYPE:@"SafeSlinger/SecureIntroduce" Cipher:pktdata1];
-    _nonce2 = [SSEngine BuildCipher: pickU2.keyId Message:messageForU2 Attach: @"introduction.vcf" RawFile:VCardForU2 MIMETYPE:@"SafeSlinger/SecureIntroduce" Cipher:pktdata2];
+    _nonce1 = [SSEngine BuildCipher: pickU1.keyId Message:[messageForU1 dataUsingEncoding:NSUTF8StringEncoding] Attach: @"introduction.vcf" RawFile:VCardForU1 MIMETYPE:@"SafeSlinger/SecureIntroduce" Cipher:pktdata1];
+    _nonce2 = [SSEngine BuildCipher: pickU2.keyId Message:[messageForU2 dataUsingEncoding:NSUTF8StringEncoding] Attach: @"introduction.vcf" RawFile:VCardForU2 MIMETYPE:@"SafeSlinger/SecureIntroduce" Cipher:pktdata2];
     
     // Send out U1 data
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@/%@", HTTPURL_PREFIX, HTTPURL_HOST_MSG, POSTMSG]];

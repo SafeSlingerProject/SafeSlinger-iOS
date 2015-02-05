@@ -28,6 +28,9 @@
 #import "AppDelegate.h"
 #import "SafeSlingerDB.h"
 #import "BackupCloud.h"
+#import "FunctionView.h"
+#import "MessageDetailView.h"
+#import "MessageView.h"
 
 @interface EndExchangeView ()
 
@@ -69,8 +72,6 @@
 
 - (IBAction)Import:(id)sender {
     NSMutableDictionary *mapping = [NSMutableDictionary dictionary];
-    int importedcount = 0;
-	
 	
 	if(ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
 		// contact permission is enabled, update address book.
@@ -106,6 +107,8 @@
 		if(allPeople)CFRelease(allPeople);
 		if(aBook)CFRelease(aBook);
 	}
+	
+	NSMutableArray *importedContacts = [NSMutableArray new];
 	
     // update keys and tokens
     for (int i = 0; i < [contactList count]; i++) {
@@ -183,8 +186,9 @@
                    setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
                 continue;
             }
-            
-            importedcount++;
+			
+			[importedContacts addObject:contact];
+			
             // add to temp structure for address book update
 			if (selections[i]) {
                 [mapping setObject:[NSString vcardnstring:contact.firstName withLastName:contact.lastName] forKey:comparedtoken];
@@ -199,18 +203,97 @@
     
     free(selections);
     
-    DEBUGMSG(@"imported count = %d", importedcount);
+    DEBUGMSG(@"imported count = %ld", (unsigned long) importedContacts.count);
     
-    [[[[iToast makeText: [NSString stringWithFormat: NSLocalizedString(@"state_SomeContactsImported", @"%@ contacts imported."), [NSString stringWithFormat:@"%d", importedcount]]]
+    [[[[iToast makeText: [NSString stringWithFormat: NSLocalizedString(@"state_SomeContactsImported", @"%@ contacts imported."), [NSString stringWithFormat:@"%ld", (unsigned long)importedContacts.count]]]
        setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
     
-    if(importedcount>0) {
+    if(importedContacts.count > 0) {
         // Try to backup
         [delegate.BackupSys RecheckCapability];
         [delegate.BackupSys PerformBackup];
-    }
-    
-    [UtilityFunc PopToMainPanel:self.navigationController];
+		
+		if(importedContacts.count == 1) {
+			// if imported only one contact, send a confirmation message and navigate to the screen that shows the conversation between these contacts
+			NSMutableData *pktdata = [NSMutableData new];
+			ContactEntry *contact = importedContacts[0];
+			NSString *message = [NSString stringWithFormat:NSLocalizedString(@"label_messageYouAreVerified", nil), [NSString compositeName:contact.firstName withLastName:contact.lastName]];
+			NSData *messageId = [SSEngine BuildCipher:contact.keyId Message:[message dataUsingEncoding:NSUTF8StringEncoding] Attach:nil RawFile:nil MIMETYPE:nil Cipher:pktdata];
+			
+			MsgEntry *newMessage = [[MsgEntry alloc]
+									InitOutgoingMsg:messageId
+									Recipient:contact
+									Message:message
+									FileName:nil
+									FileType:nil
+									FileData:nil];
+			newMessage.outgoingStatus = MessageOutgoingStatusSending;
+			
+			[delegate.messageSender sendMessage:newMessage packetData:pktdata];
+			
+			FunctionView *functionView = nil;
+			
+			for(UIViewController *view in self.navigationController.viewControllers) {
+				if([view isMemberOfClass:[FunctionView class]]) {
+					functionView = (FunctionView *)view;
+					
+					MessageView *messageView = functionView.viewControllers[MESSAGES_VIEW_CONTROLLER_INDEX];
+					
+					MsgListEntry *listEntry = [MsgListEntry new];
+					listEntry.keyid = contact.keyId;
+					listEntry.messagecount = 1;
+					listEntry.active = 1;
+					listEntry.ciphercount = 0;
+					
+					MessageDetailView *viewController = (MessageDetailView *)[self.storyboard instantiateViewControllerWithIdentifier:@"MessageDetailViewController"];
+					viewController.assignedEntry = listEntry;
+					delegate.messageSender.delegate = viewController;
+					
+					[messageView shouldPushViewController:viewController];
+					
+					[self.navigationController popToViewController:functionView animated:YES];
+					functionView.selectedViewController = messageView;
+					
+					break;
+				}
+			}
+		} else {
+			for(ContactEntry *contact in importedContacts) {
+				NSMutableData *pktdata = [NSMutableData new];
+				NSString *message = [NSString stringWithFormat:NSLocalizedString(@"label_messageYouAreVerified", nil), [NSString compositeName:contact.firstName withLastName:contact.lastName]];
+				NSData *messageId = [SSEngine BuildCipher:contact.keyId Message:[message dataUsingEncoding:NSUTF8StringEncoding] Attach:nil RawFile:nil MIMETYPE:nil Cipher:pktdata];
+				
+				MsgEntry *newMessage = [[MsgEntry alloc]
+										InitOutgoingMsg:messageId
+										Recipient:contact
+										Message:message
+										FileName:nil
+										FileType:nil
+										FileData:nil];
+				newMessage.outgoingStatus = MessageOutgoingStatusSending;
+				
+				[delegate.messageSender sendMessage:newMessage packetData:pktdata];
+			}
+			
+			FunctionView *functionView = nil;
+			
+			for(UIViewController *view in self.navigationController.viewControllers) {
+				if([view isMemberOfClass:[FunctionView class]]) {
+					functionView = (FunctionView *)view;
+					
+					MessageView *messageView = functionView.viewControllers[MESSAGES_VIEW_CONTROLLER_INDEX];
+					delegate.messageSender.delegate = messageView;
+																			
+					[self.navigationController popToViewController:functionView animated:YES];
+					functionView.selectedViewController = messageView;
+					
+					break;
+				}
+			}
+		}
+	} else {
+		[UtilityFunc PopToMainPanel:self.navigationController];
+	}
 }
 
 - (IBAction)Cancel:(id)sender {

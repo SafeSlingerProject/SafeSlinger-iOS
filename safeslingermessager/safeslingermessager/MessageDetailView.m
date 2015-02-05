@@ -35,11 +35,15 @@
 
 @interface MessageDetailView ()
 
+@property (strong, nonatomic) ContactEntry *recipient;
+@property (strong, nonatomic) NSMutableDictionary *pendingMessages;
+@property (strong, nonatomic) NSIndexPath *longPressedIndexPath;
+
 @end
 
 @implementation MessageDetailView
 
-@synthesize messages, delegate, b_img, thread_img, assignedEntry, OperationLock, actWindow, InstanceMessage, InstanceBtn, CancelBtn, BackBtn, InstanceBox;
+@synthesize delegate, b_img, thread_img, assignedEntry, OperationLock, InstanceMessage, InstanceBtn, CancelBtn, BackBtn, InstanceBox;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -47,37 +51,28 @@
     delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     BackGroundQueue = dispatch_queue_create("safeslinger.background.queue", NULL);
     b_img = [UIImage imageNamed: @"blank_contact_small.png"];
-    actWindow = [[ActivityWindow alloc] initWithNibName: @"ActivityWindow" bundle:[NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"exchangeui" withExtension:@"bundle"]]];
 	
     OperationLock = [[NSLock alloc]init];
-    
-    messages = [[NSMutableArray alloc]init];
+	
     _previewer = [[QLPreviewController alloc] init];
     [_previewer setDataSource:self];
     [_previewer setDelegate:self];
     [_previewer setCurrentPreviewItemIndex:0];
-    
+	
+	_recipient = [delegate.DbInstance loadContactEntryWithKeyId:assignedEntry.keyid];
+	_pendingMessages = [NSMutableDictionary new];
+	
     //for unknown thread
-    if([assignedEntry.keyid isEqualToString:@"UNDEFINED"]) {
-        DEBUGMSG(@"UNDEFINED thread...");
-        [InstanceBox setHidden:YES];
-    } else if([delegate.DbInstance QueryStringInTokenTableByKeyID: assignedEntry.keyid Field:@"pid"] == nil) {
+    if(_recipient == nil || (_recipient.firstName == nil && _recipient.lastName == nil)) {
         DEBUGMSG(@"UNDEFINED thread...");
         [InstanceBox setHidden:YES];
     } else {
         [InstanceBox setHidden:NO];
     }
-    
-    // load message
-    NSString* faceraw = [delegate.DbInstance QueryStringInTokenTableByKeyID: assignedEntry.keyid Field:@"note"];
-    if([faceraw length]>0) {
-        thread_img = [[UIImage imageWithData:[Base64 decode:faceraw]]scaleToSize:CGSizeMake(45.0f, 45.0f)];
-    } else {
-        thread_img = nil;
-    }
+	
+	thread_img = [_recipient.photo length] > 0 ? [[UIImage imageWithData:_recipient.photo] scaleToSize:CGSizeMake(45.0f, 45.0f)] : nil;
     
     BackBtn = self.navigationItem.backBarButtonItem;
-    
     CancelBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"btn_Cancel", @"Cancel")
                                                  style:UIBarButtonItemStyleDone
                                                 target:self
@@ -91,29 +86,61 @@
 		[self.tableView.tableFooterView removeFromSuperview];
 		self.tableView.tableFooterView = nil;
 	}
+	
+	UILongPressGestureRecognizer *gestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+	gestureRecognizer.delegate = self;
+	[self.tableView addGestureRecognizer:gestureRecognizer];
+}
+
+- (void)updateTitle {
+	NSString* displayName = nil;
+	if(_recipient == nil || (_recipient.firstName == nil && _recipient.lastName == nil)) {
+		displayName = NSLocalizedString(@"label_undefinedTypeLabel", @"Unknown");
+	} else {
+		displayName = [NSString compositeName:_recipient.firstName withLastName:_recipient.lastName];
+	}
+	
+	if(assignedEntry.ciphercount == 0) {
+		self.navigationItem.title = [NSString stringWithFormat:@"%@ %d", displayName, assignedEntry.messagecount];
+	} else {
+		self.navigationItem.title = [NSString stringWithFormat:@"%@ %d (%d)", displayName, assignedEntry.ciphercount+assignedEntry.messagecount, assignedEntry.ciphercount];
+	}
 }
 
 - (void)DismissKeyboard {
     [InstanceMessage resignFirstResponder];
 }
 
-- (void)ReloadTable {
-    [messages removeAllObjects];
-    [messages setArray:[delegate.DbInstance LoadThreadMessage: assignedEntry.keyid]];
-    [messages addObjectsFromArray: [delegate.UDbInstance LoadThreadMessage: assignedEntry.keyid]];
+- (void)scrollToBottom {
+	if(self.tableView.contentSize.height > self.tableView.frame.size.height) {
+		CGPoint offset = CGPointMake(0, self.tableView.contentSize.height - self.tableView.frame.size.height);
+		[self.tableView setContentOffset:offset animated:NO];
+	}
+}
+
+- (void)reloadTable {
+	[self.messages removeAllObjects];
+    [self.messages setArray:[delegate.DbInstance loadMessagesExchangedWithKeyId:assignedEntry.keyid]];
+	
+	NSArray *cipherMessages = [delegate.UDbInstance LoadThreadMessage:assignedEntry.keyid];
+    [self.messages addObjectsFromArray:cipherMessages];
+	assignedEntry.ciphercount = (int)cipherMessages.count;
+	
+	MsgEntry *outgoingMessage = delegate.messageSender.outgoingMessage;
+	if([outgoingMessage.keyid isEqualToString:assignedEntry.keyid]) {
+		[self.messages addObject:outgoingMessage];
+	}
+	
+	assignedEntry.messagecount = (int)self.messages.count;
+	
     [self.tableView reloadData];
-    
-    NSIndexPath * ndxPath= [NSIndexPath indexPathForRow:[messages count]-1 inSection:0];
-    @try {
-        [self.tableView scrollToRowAtIndexPath:ndxPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-    }
-    @catch (NSException *exception) {
-    }
+	
+	[self scrollToBottom];
 }
 
 - (void)viewDidUnload {
     [super viewDidLoad];
-    [messages removeAllObjects];
+    [self.messages removeAllObjects];
     [super viewDidUnload];
 }
 
@@ -121,10 +148,6 @@
     [super viewWillAppear:animated];
 	
 	delegate.MessageInBox.notificationDelegate = self;
-	
-    [messages removeAllObjects];
-    [messages setArray:[delegate.DbInstance LoadThreadMessage: assignedEntry.keyid]];
-    [messages addObjectsFromArray: [delegate.UDbInstance LoadThreadMessage: assignedEntry.keyid]];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardDidShow:)
@@ -141,12 +164,7 @@
 												 name:@"UITextInputCurrentInputModeDidChangeNotification"
 											   object:nil];
 	
-	[self.tableView reloadData];
-	
-	if(self.tableView.contentSize.height > self.tableView.frame.size.height) {
-		CGPoint offset = CGPointMake(0, self.tableView.contentSize.height - self.tableView.frame.size.height);
-		[self.tableView setContentOffset:offset animated:NO];
-	}
+	[self reloadTable];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -165,16 +183,14 @@
 	delegate.MessageInBox.notificationDelegate = nil;
 	
     [super viewWillDisappear:animated];
-    [actWindow.view removeFromSuperview];
 }
 
 - (void)keyboardDidShow:(NSNotification *)notification {
     // adjust view due to keyboard
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+    if(floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
         CGFloat keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
-        CGFloat offset = self.tableView.contentSize.height+InstanceMessage.frame.size.height+keyboardSize-self.view.frame.size.height;
-        if(offset>0)
-        {
+        CGFloat offset = self.tableView.contentSize.height + InstanceBox.frame.size.height + keyboardSize - self.view.frame.size.height;
+        if(offset>0) {
             [self.tableView setContentOffset:CGPointMake(0.0, offset) animated:YES];
         }
     }
@@ -223,193 +239,27 @@
 	}
 }
 
-- (void)sendSecureText:(NSString *)msgbody {
-    if([msgbody length]==0)
-    {
-        // empty message
-        [[[[iToast makeText: NSLocalizedString(@"error_selectDataToSend", @"You need an attachment or a text message to send.")]
-           setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-        return;
-    }
-    
-    
-    NSData* packnonce = nil;
-    NSMutableData* pktdata = nil;
-    
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@/%@", HTTPURL_PREFIX, HTTPURL_HOST_MSG, POSTMSG]];
-    
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        //Background Thread
-        dispatch_async(dispatch_get_main_queue(), ^(void){
-            //Run UI Updates
-            [InstanceBtn setEnabled:NO];
-            [InstanceMessage setEnabled:NO];
-            [actWindow DisplayMessage: NSLocalizedString(@"prog_encrypting", @"encrypting...") Detail:nil];
-            [self.navigationController.view addSubview: actWindow.view];
-        });
-    });
-    
-    pktdata = [[NSMutableData alloc]initWithCapacity:0];
-    
-    [delegate.DbInstance QueryStringInTokenTableByKeyID: assignedEntry.keyid Field:@"pid"];
-    
-    NSString* username = [delegate.DbInstance QueryStringInTokenTableByKeyID: assignedEntry.keyid Field:@"pid"];
-    NSArray* namearray = [[username substringFromIndex:[username rangeOfString:@":"].location+1]componentsSeparatedByString:@";"];
-    username = [NSString compositeName:[namearray objectAtIndex:1] withLastName:[namearray objectAtIndex:0]];
-    
-    packnonce = [SSEngine BuildCipher:assignedEntry.keyid Message:msgbody Attach:nil RawFile:nil MIMETYPE:nil Cipher:pktdata];
-    
-    // Default timeout
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:MESSAGE_TIMEOUT];
-    [request setURL: url];
-	[request setHTTPMethod: @"POST"];
-	[request setHTTPBody: pktdata];
-    
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        //Background Thread
-        dispatch_async(dispatch_get_main_queue(), ^(void){
-            //Run UI Updates
-            [actWindow DisplayMessage: NSLocalizedString(@"prog_FileSent", @"message sent, awaiting response...") Detail:nil];
-            [self.navigationController.view addSubview: actWindow.view];
-        });
-    });
-    
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
-     {
-         if(error)
-         {
-             [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Internet Connection failed. Error - %@ %@",
-                                       [error localizedDescription],
-                                       [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]]];
-             if(error.code==NSURLErrorTimedOut)
-             {
-                 dispatch_async(dispatch_get_main_queue(), ^(void) {
-                     [actWindow.view removeFromSuperview];
-                     [[[[iToast makeText: NSLocalizedString(@"error_ServerNotResponding", @"No response from server.")]
-                        setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-                     [InstanceBtn setEnabled:YES];
-                     [InstanceMessage setEnabled:YES];
-                     InstanceMessage.text = nil;
-                 });
-             }else{
-                 // general errors
-                 dispatch_async(dispatch_get_main_queue(), ^(void) {
-                     [actWindow.view removeFromSuperview];
-                     [[[[iToast makeText: [NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessageCStr", @"Server Message: '%@'"), [error localizedDescription]]]
-                        setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-                     [InstanceBtn setEnabled:YES];
-                     [InstanceMessage setEnabled:YES];
-                     InstanceMessage.text = nil;
-                 });
-             }
-         }else{
-             if ([data length] > 0 )
-             {
-                 // start parsing data
-                 DEBUGMSG(@"Succeeded! Received %lu bytes of data",(unsigned long)[data length]);
-                 const char *msgchar = [data bytes];
-                 DEBUGMSG(@"Return SerV: %02X", ntohl(*(int *)msgchar));
-                 if (ntohl(*(int *)msgchar) > 0)
-                 {
-                     // Send Response
-                     DEBUGMSG(@"Send Message Code: %d", ntohl(*(int *)(msgchar+4)));
-                     DEBUGMSG(@"Send Message Response: %s", msgchar+8);
-                     // Save to Database
-                     dispatch_async(dispatch_get_main_queue(), ^(void) {
-                         [self SaveText:packnonce];
-                     });
-                 }else if(ntohl(*(int *)msgchar) == 0)
-                 {
-                     // Error Message
-                     NSString* error_msg = [NSString TranlsateErrorMessage:[NSString stringWithUTF8String: msgchar+4]];
-                     DEBUGMSG(@"ERROR: error_msg = %@", error_msg);
-                     dispatch_async(dispatch_get_main_queue(), ^(void) {
-                         [actWindow.view removeFromSuperview];
-                         [[[[iToast makeText: error_msg]
-                            setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-                         [InstanceBtn setEnabled:YES];
-                         [InstanceMessage setEnabled:YES];
-                         InstanceMessage.text = nil;
-                     });
-                 }
-             }
-         }
-     }];
-}
-
-- (void)SaveText:(NSData *)msgid {
-    ContactEntry *recipient = [[ContactEntry alloc]init];
-    // assign necessary information
-    recipient.keyId = assignedEntry.keyid;
-    
-    NSString* name = [delegate.DbInstance QueryStringInTokenTableByKeyID:assignedEntry.keyid Field:@"pid"];
-    NSArray* namearray = [[name substringFromIndex:[name rangeOfString:@":"].location+1]componentsSeparatedByString:@";"];
-    if([[namearray objectAtIndex:1]length]>0) recipient.firstName = [namearray objectAtIndex:1];
-    if([[namearray objectAtIndex:0]length]>0) recipient.lastName = [namearray objectAtIndex:0];
-    
-    recipient.pushToken = [delegate.DbInstance QueryStringInTokenTableByKeyID:assignedEntry.keyid Field:@"ptoken"];
-    
-    MsgEntry *NewMsg = [[MsgEntry alloc]
-                        InitOutgoingMsg:msgid
-                        Recipient:recipient
-                        Message:InstanceMessage.text
-                        FileName:nil
-                        FileType:nil
-                        FileData:nil];
-    NSString* ret = nil;
-    
-    if([delegate.DbInstance InsertMessage: NewMsg])
-    {
-        ret = NSLocalizedString(@"state_FileSent", @"Message sent.");
-    }else{
-        ret = NSLocalizedString(@"error_UnableToSaveMessageInDB", @"Unable to save to the message database.");
-    }
-    
-    // reload the view
-    dispatch_async(dispatch_get_main_queue(), ^(void) {
-        [actWindow.view removeFromSuperview];
-        [[[[iToast makeText: ret]
-           setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-        [self ReloadTable];
-        [InstanceBtn setEnabled:YES];
-        [InstanceMessage setEnabled:YES];
-        InstanceMessage.text = nil;
-    });
+- (NSMutableArray *)messages {
+	if(!_messages) {
+		_messages = [NSMutableArray new];
+	}
+	return _messages;
 }
 
 #pragma mark - Table view data source
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 1;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    assignedEntry.messagecount = [delegate.DbInstance ThreadMessageCount: assignedEntry.keyid];
-    assignedEntry.ciphercount = [delegate.UDbInstance ThreadCipherCount: assignedEntry.keyid];
-    
-    NSString* displayName = nil;
-    if([assignedEntry.keyid isEqualToString:@"UNDEFINED"])
-        displayName = NSLocalizedString(@"label_undefinedTypeLabel", @"Unknown");
-    else{
-        NSString* name = [delegate.DbInstance QueryStringInTokenTableByKeyID: assignedEntry.keyid Field:@"pid"];
-        if(name)
-            displayName = [NSString humanreadable: name];
-        else
-            displayName = assignedEntry.keyid;
-    }
-    
-    if(assignedEntry.ciphercount==0)
-        self.navigationItem.title = [NSString stringWithFormat:@"%@ %d", displayName, assignedEntry.messagecount];
-    else
-        self.navigationItem.title = [NSString stringWithFormat:@"%@ %d (%d)", displayName, assignedEntry.ciphercount+assignedEntry.messagecount, assignedEntry.ciphercount];
-    
-    return [messages count];
+    assignedEntry.messagecount = [delegate.DbInstance ThreadMessageCount:assignedEntry.keyid];
+    assignedEntry.ciphercount = [delegate.UDbInstance ThreadCipherCount:assignedEntry.keyid];
+	
+	[self updateTitle];
+	
+    return [self.messages count];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if([messages count]==0)
+    if([self.messages count]==0)
         return NSLocalizedString(@"label_InstNoMessages", @"No messages. You may send a message from tapping the 'Compose Message' Button in Home Menu.");
     else
         return @"";
@@ -417,25 +267,27 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat totalheight = 0.0f;
-    MsgEntry* msg = [messages objectAtIndex:indexPath.row];
-    if(msg.smsg)
-    {
+    MsgEntry* msg = [self.messages objectAtIndex:indexPath.row];
+    if(msg.smsg) {
         totalheight = 60.0f;
-    }else{
+    } else {
         totalheight += 62.0f;
-        if([msg.msgbody length]>0)
-        {
+		
+        if([msg.msgbody length] > 0) {
             totalheight += [[NSString stringWithUTF8String: [msg.msgbody bytes]]
                             sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake(300, CGFLOAT_MAX)].height;
         }
-        if(msg.attach) totalheight += 56.0f;
+		
+		if(msg.attach) {
+			totalheight += 56.0f;
+		}
     }
     return totalheight;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        MsgEntry* entry = [messages objectAtIndex:indexPath.row];
+        MsgEntry* entry = [self.messages objectAtIndex:indexPath.row];
         BOOL result = NO;
         
         switch (entry.smsg) {
@@ -450,7 +302,7 @@
         }
         
         if(result) {
-            [messages removeObjectAtIndex:indexPath.row];
+            [self.messages removeObjectAtIndex:indexPath.row];
             [[[[iToast makeText: [NSString stringWithFormat:NSLocalizedString(@"state_MessagesDeleted", @"%d messages deleted."), 1]]
                setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
             [self.tableView reloadData];
@@ -462,99 +314,94 @@
 }
 
 #pragma mark - Table view delegate
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"MessageCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-    }
-    
-    // multiple line mode
-    cell.detailTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    cell.detailTextLabel.numberOfLines = 0;
-    cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
-    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    cell.textLabel.numberOfLines = 0;
-    cell.textLabel.font = [UIFont systemFontOfSize:14];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     cell.imageView.image = nil;
     cell.accessoryView = nil;
     cell.detailTextLabel.text = nil;
     cell.textLabel.text = nil;
     
-    if([assignedEntry.keyid isEqualToString:@"UNDEFINED"])
-    {
-        MsgEntry* msg = [messages objectAtIndex:indexPath.row];
+    if([assignedEntry.keyid isEqualToString:@"UNDEFINED"]) {
+        MsgEntry* msg = [self.messages objectAtIndex:indexPath.row];
         [cell.imageView setImage:b_img];
         cell.textLabel.textColor = [UIColor redColor];
         cell.textLabel.text = NSLocalizedString(@"error_PushMsgMessageNotFound", @"Message expired.");
         cell.detailTextLabel.text = [NSString GetTimeLabelString: msg.cTime];
+    } else {
+        MsgEntry* msg = [self.messages objectAtIndex:indexPath.row];
         
-    }else{
-        
-        MsgEntry* msg = [messages objectAtIndex:indexPath.row];
-        
-        if(msg.smsg==Encrypted)
-        {
+        if(msg.smsg==Encrypted) {
             // encrypted message
             cell.textLabel.textColor = [UIColor blueColor];
             cell.textLabel.text = NSLocalizedString(@"label_TapToDecryptMessage", @"Tap to decrypt");
-            
-        }else{
-            
-            NSMutableString* msgText = [NSMutableString stringWithCapacity:0];
-            // plaintext message
-            cell.detailTextLabel.textColor = [UIColor grayColor];
-            
+        } else {
+			cell.textLabel.textColor = [UIColor blackColor];
+			
             // new thread, show picture
-            if(msg.dir==ToMsg){
+            if(msg.dir == ToMsg){
                 // To message
                 UIImageView *imageView = nil;
-                if([delegate.IdentityImage length]>0)
+				if([delegate.IdentityImage length] > 0) {
                     imageView = [[UIImageView alloc] initWithImage:[UIImage imageWithData: delegate.IdentityImage]];
-                else
+				} else {
                     imageView = [[UIImageView alloc] initWithImage:b_img];
+				}
                 cell.accessoryView = imageView;
-            }else{
+				
+				switch (msg.outgoingStatus) {
+					case MessageOutgoingStatusSending:
+						cell.detailTextLabel.text = NSLocalizedString(@"prog_FileSent", nil);
+						break;
+						
+					case MessageOutgoingStatusFailed:
+						cell.textLabel.textColor = [UIColor redColor];
+						cell.detailTextLabel.text = NSLocalizedString(@"state_FailedToSendMessage", nil);
+						break;
+						
+					default:
+						cell.detailTextLabel.text = [NSString GetTimeLabelString:msg.cTime];
+						break;
+				}
+            } else {
                 // From message
-                if(thread_img)
+				if(thread_img) {
                     [cell.imageView setImage:thread_img];
-                else
+				} else {
                     [cell.imageView setImage:b_img];
+				}
+				
+				cell.detailTextLabel.text = [NSString GetTimeLabelString:msg.cTime];
             }
-            
-            // Display Time
-            [msgText appendString:[NSString GetTimeLabelString: msg.cTime]];
-            cell.detailTextLabel.text = msgText;
-            
-            // set as empty string
-            [msgText setString:@""];
+			
+			// set as empty string
+			NSMutableString* msgText = [NSMutableString stringWithCapacity:0];
             NSString* textbody = nil;
-            if([msg.msgbody length]>0)
+			if([msg.msgbody length]>0) {
                 textbody = [[NSString alloc] initWithData:msg.msgbody encoding:NSUTF8StringEncoding];
-            if(textbody)
+			}
+			
+			if(textbody) {
                 [msgText appendString:textbody];
-            
-            cell.textLabel.textColor = [UIColor blackColor];
+			}
             
             if(msg.attach){
                 if(msg.sfile) {
-                    
                     FileInfo *fio = [delegate.DbInstance GetFileInfo:msg.msgid];
                     // display file date
                     NSString* tm = [NSString GetFileDateLabelString: msg.cTime];
                     
-                    if(!tm)
-                    {
+					if(!tm) {
                         // negative, expired
                         cell.textLabel.textColor = [UIColor redColor];
                         [msgText appendFormat:@"\n%@", NSLocalizedString(@"label_expired", @"expired")];
-                    }else{
+                    } else {
                         [msgText appendFormat: @"\n%@:\n%@ (%@)", NSLocalizedString(@"label_TapToDownloadFile", @"Tap to download file"), fio.FName, [NSString CalculateMemorySize:fio.FSize]];
                         [msgText appendString:tm];
                     }
-                    
-                }else {
+                } else {
                     [msgText appendFormat: @"\n%@:\n%@", NSLocalizedString(@"label_TapToOpenFile", @"Tap to open file"), msg.fname];
                 }
             }
@@ -571,7 +418,7 @@
         return;
     
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath: indexPath];
-    MsgEntry* entry = [messages objectAtIndex:indexPath.row];
+    MsgEntry* entry = [self.messages objectAtIndex:indexPath.row];
     
     if(entry.smsg == Encrypted)
     {
@@ -628,6 +475,54 @@
             }
         }
     }
+}
+
+- (void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer {
+	CGPoint point = [gestureRecognizer locationInView:self.tableView];
+	_longPressedIndexPath = [self.tableView indexPathForRowAtPoint:point];
+	if(_longPressedIndexPath && gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+		MsgEntry *message = self.messages[_longPressedIndexPath.row];
+		if(message.dir == ToMsg && message.outgoingStatus == MessageOutgoingStatusFailed) {
+			[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"title_MessageOptions", nil)
+										message:nil
+									   delegate:self
+							  cancelButtonTitle:NSLocalizedString(@"btn_Cancel", nil)
+							  otherButtonTitles:NSLocalizedString(@"btn_Retry", nil), NSLocalizedString(@"btn_Delete", nil) , nil] show];
+		}
+	}
+}
+
+#pragma mark - UIAlertViewDelegate methods
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+	if(buttonIndex != alertView.cancelButtonIndex) {
+		MsgEntry *message = self.messages[_longPressedIndexPath.row];
+		
+		// remove message from array and from database
+		[self.messages removeObjectAtIndex:_longPressedIndexPath.row];
+		[delegate.DbInstance DeleteMessage:message.msgid];
+		
+		
+		if(buttonIndex == 1) {
+			// retry
+			
+			[CATransaction begin];
+			[CATransaction setCompletionBlock:^{
+				// animation has finished
+				[self.tableView scrollRectToVisible:InstanceBox.frame animated:YES];
+			}];
+			
+			[self.tableView beginUpdates];
+			[self.tableView deleteRowsAtIndexPaths:@[_longPressedIndexPath] withRowAnimation:UITableViewRowAnimationTop];
+			
+			[self sendTextMessage:[[NSString alloc] initWithData:message.msgbody encoding:NSUTF8StringEncoding] tableViewUpdateStarted:YES];
+		} else {
+			// remove message from tableview
+			[self.tableView beginUpdates];
+			[self.tableView deleteRowsAtIndexPaths:@[_longPressedIndexPath] withRowAnimation:UITableViewRowAnimationTop];
+			[self.tableView endUpdates];
+		}
+	}
 }
 
 - (void)DownloadFile: (NSData*)nonce WithIndex:(NSIndexPath*)index {
@@ -748,7 +643,7 @@
                              dispatch_async(dispatch_get_main_queue(), ^(void) {
                                  cell.tag = 0;
                                  [OperationLock unlock];
-                                 [self ReloadTable];
+                                 [self reloadTable];
                              });
                          }
                      }
@@ -910,7 +805,7 @@
     dispatch_async(dispatch_get_main_queue(), ^(void) {
         [OperationLock unlock];
         [self.tableView cellForRowAtIndexPath:index].tag = 0;
-        [self ReloadTable];
+        [self reloadTable];
     });
 }
 
@@ -923,8 +818,48 @@
 }
 
 - (IBAction)sendshortmsg:(id)sender {
-    [InstanceMessage resignFirstResponder];
-    [self sendSecureText:[InstanceMessage text]];
+	if(InstanceMessage.text == nil || InstanceMessage.text.length == 0) {
+		return;
+	}
+	
+	[self sendTextMessage:InstanceMessage.text tableViewUpdateStarted:NO];
+}
+
+- (void)sendTextMessage:(NSString *)text tableViewUpdateStarted:(BOOL)updateStarted {
+	NSMutableData *pktdata = [[NSMutableData alloc]initWithCapacity:0];
+	NSData *messageId = [SSEngine BuildCipher:_recipient.keyId Message:[text dataUsingEncoding:NSUTF8StringEncoding] Attach:nil RawFile:nil MIMETYPE:nil Cipher:pktdata];
+	
+	MsgEntry *newMessage = [[MsgEntry alloc]
+							InitOutgoingMsg:messageId
+							Recipient:_recipient
+							Message:text
+							FileName:nil
+							FileType:nil
+							FileData:nil];
+	newMessage.outgoingStatus = MessageOutgoingStatusSending;
+	
+	InstanceMessage.text = @"";
+	
+	[self.messages addObject:newMessage];
+	
+	if(!updateStarted) {
+		[CATransaction begin];
+		[CATransaction setCompletionBlock:^{
+			// animation has finished
+			[self.tableView scrollRectToVisible:InstanceBox.frame animated:YES];
+		}];
+		
+		[self.tableView beginUpdates];
+	}
+	
+	[self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.messages.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
+	[self.tableView endUpdates];
+	
+	[CATransaction commit];
+	
+	
+	delegate.messageSender.delegate = self;
+	[delegate.messageSender sendMessage:newMessage packetData:pktdata];
 }
 
 #pragma UITextFieldDelegate Methods
@@ -946,10 +881,9 @@
 }
 
 #pragma mark - Navigation
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([[segue identifier]isEqualToString:@"ShowInvitation"])
-    {
+    if([[segue identifier]isEqualToString:@"ShowInvitation"]) {
         InvitationView *view = (InvitationView*)[segue destinationViewController];
         view.InviterFaceImg = thread_img;
         view.InviterName = [NSString humanreadable: [delegate.DbInstance QueryStringInTokenTableByKeyID: assignedEntry.keyid Field:@"pid"]];
@@ -960,10 +894,10 @@
 #pragma mark - MessageReceiverNotificationDelegate methods
 
 - (void)messageReceived {
-	NSUInteger count = messages.count;
-	[self ReloadTable];
+	NSUInteger count = self.messages.count;
+	[self reloadTable];
 	
-	if(messages.count > count) {
+	if(self.messages.count > count) {
 		// new message was in this conversation
 		[UtilityFunc playVibrationAlert];
 	} else {
@@ -971,5 +905,27 @@
 	}
 }
 
+#pragma mark - MessageSenderDelegate methods
+
+- (void)updatedOutgoingStatusForMessage:(MsgEntry *)message {
+	int i = (int)self.messages.count - 1;
+	BOOL found = NO;
+	
+	while(i >= 0 && !found) {
+		MsgEntry *entry = self.messages[i];
+		if([entry.msgid isEqualToData:message.msgid]) {
+			[self.messages removeObjectAtIndex:i];
+			[self.messages insertObject:message atIndex:i];
+			[self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:i inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+			found = YES;
+		}
+	}
+	
+	if(!found) {
+		[self.messages addObject:message];
+		
+		[self reloadTable];
+	}
+}
 
 @end

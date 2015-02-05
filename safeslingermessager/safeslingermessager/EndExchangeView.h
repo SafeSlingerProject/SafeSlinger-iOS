@@ -26,8 +26,7 @@
 
 @class AppDelegate;
 
-@interface EndExchangeView : UIViewController <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate>
-{
+@interface EndExchangeView : UIViewController <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate> {
 	NSArray *contactList;
 	BOOL *selections;
     AppDelegate *delegate;

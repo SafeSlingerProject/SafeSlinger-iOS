@@ -34,7 +34,7 @@ typedef enum KeyType {
 
 @interface SSEngine : NSObject 
 
-+(NSData*) BuildCipher:(NSString*)keyid Message:(NSString*)Message Attach:(NSString*)FileName RawFile:(NSData*)rawFile MIMETYPE:(NSString*)MimeType Cipher:(NSMutableData*)cipher;
++ (NSData *)BuildCipher:(NSString *)keyid Message:(NSData *)Message Attach:(NSString *)FileName RawFile:(NSData *)rawFile MIMETYPE:(NSString *)MimeType Cipher:(NSMutableData *)cipher;
 
 // Key Generation API
 +(BOOL)checkCredentialExist;

@@ -58,7 +58,7 @@
  table msgtable(17) := {
     msgid blob primary key,             // msgid, 32 bytes
     cTime datetime null,                // timestamp for create/receive this message
-    rTime datetime null,                // timestamp for decrypt this message
+    rTime datetime null,                // time of decryption of received message or send of sent message
     dir   boolean not null,             // indicate msg is from or to
     token text null,                    // sender pushtoken
     sender text null,                   // sender display name 
@@ -87,6 +87,12 @@ typedef enum DirectionType {
     FromMsg
 }DirectionType;
 
+typedef enum {
+	MessageOutgoingStatusSent = 0,
+	MessageOutgoingStatusSending,
+	MessageOutgoingStatusFailed
+} MessageOutgoingStatus;
+
 @interface MsgListEntry : NSObject
 
 @property (nonatomic, strong) NSString *keyid;
@@ -101,19 +107,23 @@ typedef enum DirectionType {
 
 // message indicator
 @property (nonatomic, strong) NSData *msgid;    // primary key, old version is sha1, new version is sha3
-@property (nonatomic, strong) NSString *cTime;  // for Send Time, GMT String
-@property (nonatomic, strong) NSString *rTime;  // for Received Time, GMT String
-@property (nonatomic, readwrite) int dir;       // send (1), receive (0)
+@property (nonatomic, strong) NSString *cTime;  // for creation Time, GMT String
+// for Received/Sent Time, GMT String
+// When this message was received, rTime is the time of decryption
+// When this message was sent, rTime is the time it was sent, or null if failed to send
+@property (nonatomic, strong) NSString *rTime;
+@property (nonatomic, readwrite) DirectionType dir;       // send (1), receive (0)
+@property (nonatomic, readwrite) MessageOutgoingStatus outgoingStatus;	// the status of the message
 // receipent indicator
 @property (nonatomic, strong) NSString *token;  // sender/receiver pushtoken
 @property (nonatomic, strong) NSString *sender; // sender/receiver display name
 @property (nonatomic, strong) NSString *face;   // sender/receiver facephoto
 @property (nonatomic, strong) NSString *keyid;   // sender/receiver keyid
-@property (nonatomic, readwrite) int smsg;      // encrypted(1) or decrypted(0) msg
+@property (nonatomic, readwrite) ProtectType smsg;      // encrypted(1) or decrypted(0) msg
 // attachment indicator
 @property (nonatomic, strong) NSData *msgbody;  // msg body, could be encrypted or unencrypted
 @property (nonatomic, readwrite) int attach;    // has attachment (1) or null (0)
-@property (nonatomic, readwrite) int sfile;     // encrypted(1) or decrypted(0) file,
+@property (nonatomic, readwrite) ProtectType sfile;     // encrypted(1) or decrypted(0) file,
 @property (nonatomic, strong) NSString *fname;  // filename
 @property (nonatomic, strong) NSData *fbody;    // file extension, MIME type
 @property (nonatomic, strong) NSString *fext;   // file raw data
@@ -151,13 +161,14 @@ typedef enum DirectionType {
 // for recipients
 - (NSArray *)LoadRecipients:(BOOL)ExchangeOnly;
 - (NSArray *)LoadRecentRecipients:(BOOL)ExchangeOnly;
+- (ContactEntry *)loadContactEntryWithKeyId:(NSString *)keyId;
 - (BOOL)updateContactDetails:(ContactEntry *)contact;
 - (BOOL)RemoveRecipient:(NSString *)KEYID;
 - (BOOL)addNewRecipient:(ContactEntry *)contact;
 
 // for Message Thread
-- (NSMutableDictionary *)getThreads;
-- (NSArray *)LoadThreadMessage:(NSString *)KEYID;
+- (NSMutableArray *)getConversationThreads;
+- (NSArray *)loadMessagesExchangedWithKeyId:(NSString *)keyId;
 - (int)ThreadMessageCount:(NSString *)KEYID;
 - (BOOL)DeleteThread:(NSString *)KEYID;
 
@@ -165,7 +176,7 @@ typedef enum DirectionType {
 - (BOOL)InsertMessage: (MsgEntry*)MSG;
 - (BOOL)DeleteMessage: (NSData*)msgid;
 - (BOOL)CheckMessage: (NSData*)msgid;
-- (BOOL)UpdateMessage: (NSData*)msgid NewMSG:(NSString*)decrypted_message Time:(NSString*)GMTTime User:(NSString*)Name Token:(NSString*)TID Photo:(NSString*)UserPhoto;
+- (BOOL)updateMessage: (NSData*)msgid NewMSG:(NSString*)decrypted_message Time:(NSString*)GMTTime User:(NSString*)Name Token:(NSString*)TID Photo:(NSString*)UserPhoto;
 - (BOOL)UpdateMessagesWithToken: (NSString*)oldKeyID ReplaceUsername:(NSString*)username ReplaceToken:(NSString*)token;
 
 

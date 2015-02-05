@@ -50,7 +50,7 @@
 - (BOOL) CreateNewEntry: (NSData*)msgnonce;
 - (BOOL) UpdateEntryWithCipher: (NSData*)msgnonce Cipher:(NSData*)newcipher;
 - (BOOL) DeleteThread: (NSString*)keyid;
-- (int) UpdateThreadEntries: (NSMutableDictionary*) threadlist;
+- (int)updateThreadEntries:(NSMutableArray *)threadlist;
 - (NSArray*) GetEntriesForKeyID: (NSString*)keyid WithToken:(NSString*)token WithName:(NSString*)name;
 - (int) ThreadCipherCount: (NSString*)KEYID;
 - (BOOL) CheckMessage: (NSData*)msgid;

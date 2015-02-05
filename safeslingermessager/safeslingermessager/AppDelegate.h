@@ -24,12 +24,14 @@
 
 #import <UIKit/UIKit.h>
 #import <UAPush.h>
+#import "MessageSender.h"
+#import "MessageReceiver.h"
+#import "ContactEntry.h"
 
 @class SafeSlingerDB;
 @class BackupCloudUtility;
-@class ContactEntry;
-@class MessageReceiver;
 @class UniversalDB;
+@class MessageSender;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, UARegistrationDelegate>
 {
@@ -61,6 +63,7 @@
 @property (nonatomic, retain) SafeSlingerDB *DbInstance;
 @property (nonatomic, retain) UniversalDB *UDbInstance;
 @property (nonatomic, retain) MessageReceiver *MessageInBox;
+@property (nonatomic, retain) MessageSender *messageSender;
 @property (nonatomic, retain) ContactEntry *SelectContact;
 @property (nonatomic, retain) BackupCloudUtility *BackupSys;
 @property (nonatomic, retain) NSString *tempralPINCode, *IdentityName, *RootPath;

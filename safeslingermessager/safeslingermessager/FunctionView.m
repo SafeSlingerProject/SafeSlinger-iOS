@@ -33,17 +33,7 @@
 
 @synthesize LogoutBtn;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
@@ -57,24 +47,24 @@
     
     [LogoutBtn setTitle:NSLocalizedString(@"menu_Logout", @"Logout")];
     
-    UITabBarItem *item = [self.viewControllers objectAtIndex: 0];
+    UITabBarItem *item = [self.viewControllers objectAtIndex: MESSAGES_VIEW_CONTROLLER_INDEX];
     [item setTitle: NSLocalizedString(@"menu_TagListMessages", @"Messages")];
-    item = [self.viewControllers objectAtIndex: 1];
+    item = [self.viewControllers objectAtIndex: COMPOSE_VIEW_CONTROLLER_INDEX];
     [item setTitle: NSLocalizedString(@"menu_TagComposeMessage", @"Compose")];
-    item = [self.viewControllers objectAtIndex: 2];
+    item = [self.viewControllers objectAtIndex: SLING_KEYS_VIEW_CONTROLLER_INDEX];
     [item setTitle: NSLocalizedString(@"menu_TagExchange", @"Sling Keys")];
-    item = [self.viewControllers objectAtIndex: 3];
+    item = [self.viewControllers objectAtIndex: INTRODUCTION_VIEW_CONTROLLER_INDEX];
     [item setTitle: NSLocalizedString(@"menu_Introduction", @"Introduction")];
-    item = [self.viewControllers objectAtIndex: 4];
+    item = [self.viewControllers objectAtIndex: SETTINGS_VIEW_CONTROLLER_INDEX];
     [item setTitle: NSLocalizedString(@"menu_Settings", @"Settings")];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	
     // check iCloud capability
     id currentiCloudToken = [[NSFileManager defaultManager] ubiquityIdentityToken];
-    if([[NSUserDefaults standardUserDefaults] integerForKey: kRemindBackup]==TurnOn && !currentiCloudToken)
-    {
+    if([[NSUserDefaults standardUserDefaults] integerForKey: kRemindBackup]==TurnOn && !currentiCloudToken) {
         // notifiy user to enable it
         UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"title_find", @"Setup")
                                                           message:NSLocalizedString(@"ask_BackupDisabledRemindLater", @"Backup is disabled. Do you want to adjust backup settings and keep this reminder?")
@@ -86,41 +76,24 @@
     }
 }
 
-- (IBAction)Logout:(id)sender
-{
+- (IBAction)Logout:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(buttonIndex!=alertView.cancelButtonIndex)
-    {
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if(buttonIndex!=alertView.cancelButtonIndex) {
         [[NSUserDefaults standardUserDefaults] setInteger:TurnOff forKey: kRemindBackup];
     }
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    
-}
-
-- (void)tappedRightButton:(id)sender
-{
+- (void)tappedRightButton:(id)sender {
     NSUInteger selectedIndex = [self selectedIndex];
     [self setSelectedIndex:selectedIndex + 1];
 }
 
-- (void)tappedLeftButton:(id)sender
-{
+- (void)tappedLeftButton:(id)sender {
     NSUInteger selectedIndex = [self selectedIndex];
     [self setSelectedIndex:selectedIndex - 1];
 }
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 @end

@@ -38,7 +38,6 @@
 #import "Config.h"
 
 #import <safeslingerexchange/iToast.h>
-#import <safeslingerexchange/ActivityWindow.h>
 
 @interface ComposeView ()
 
@@ -350,7 +349,7 @@
     CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension,(__bridge CFStringRef)[[_attachFile lastPathComponent] pathExtension] ,NULL);
     NSString* MimeType = (__bridge NSString*)UTTypeCopyPreferredTagWithClass(UTI,kUTTagClassMIMEType);
     
-    packnonce = [SSEngine BuildCipher:_selectedReceiver.keyId Message:_messageTextView.text Attach:[_attachFile lastPathComponent] RawFile:attachFileRawBytes MIMETYPE:MimeType Cipher:pktdata];
+	packnonce = [SSEngine BuildCipher:_selectedReceiver.keyId Message:[_messageTextView.text dataUsingEncoding:NSUTF8StringEncoding] Attach:[_attachFile lastPathComponent] RawFile:attachFileRawBytes MIMETYPE:MimeType Cipher:pktdata];
     
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@/%@", HTTPURL_PREFIX, HTTPURL_HOST_MSG, POSTMSG]];;
     

@@ -79,6 +79,7 @@
 		18FBD720194A0EED006CA09C /* MessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBD71F194A0EED006CA09C /* MessageView.m */; };
 		18FBD723194A2243006CA09C /* FunctionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBD722194A2243006CA09C /* FunctionView.m */; };
 		18FBD727194A4478006CA09C /* EndExchangeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBD726194A4478006CA09C /* EndExchangeView.m */; };
+		414C9E341A72EAD700E03916 /* MessageSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 414C9E331A72EAD700E03916 /* MessageSender.m */; };
 		41AE90721A0ADDAC009E08C4 /* ContactEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 41AE90711A0ADDAC009E08C4 /* ContactEntry.m */; };
 /* End PBXBuildFile section */
 
@@ -295,6 +296,8 @@
 		18FBD722194A2243006CA09C /* FunctionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FunctionView.m; sourceTree = "<group>"; };
 		18FBD725194A4478006CA09C /* EndExchangeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EndExchangeView.h; sourceTree = "<group>"; };
 		18FBD726194A4478006CA09C /* EndExchangeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndExchangeView.m; sourceTree = "<group>"; };
+		414C9E321A72EAD700E03916 /* MessageSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageSender.h; sourceTree = "<group>"; };
+		414C9E331A72EAD700E03916 /* MessageSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageSender.m; sourceTree = "<group>"; };
 		41AE90701A0ADDAC009E08C4 /* ContactEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactEntry.h; sourceTree = "<group>"; };
 		41AE90711A0ADDAC009E08C4 /* ContactEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactEntry.m; sourceTree = "<group>"; };
 		C9CFD8FC1950EA2C0048857E /* af */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = af; path = af.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -367,6 +370,8 @@
 				182E220D1950AC5900F5997A /* MessageReceiver.m */,
 				18FBD71A194A088E006CA09C /* AudioRecordView.h */,
 				18FBD71B194A088E006CA09C /* AudioRecordView.m */,
+				414C9E321A72EAD700E03916 /* MessageSender.h */,
+				414C9E331A72EAD700E03916 /* MessageSender.m */,
 			);
 			name = Messaging;
 			sourceTree = "<group>";
@@ -812,6 +817,7 @@
 				18DE7102194BA54C00C43F84 /* ContactCellView.m in Sources */,
 				1860577A194518D6002DD149 /* ComposeView.m in Sources */,
 				1860577D194518F2002DD149 /* SlingkeyView.m in Sources */,
+				414C9E341A72EAD700E03916 /* MessageSender.m in Sources */,
 				18D6C2081946136E000909F4 /* ErrorLogger.m in Sources */,
 				1846A16D196221C6008C6A00 /* InvitationView.m in Sources */,
 				182E220E1950AC5900F5997A /* MessageReceiver.m in Sources */,

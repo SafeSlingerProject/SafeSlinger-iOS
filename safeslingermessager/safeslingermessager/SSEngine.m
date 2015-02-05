@@ -933,8 +933,7 @@
     return mdcipher;
 }
 
-+(NSData*) BuildCipher:(NSString*)keyid Message:(NSString*)Message Attach:(NSString*)FileName RawFile:(NSData*)rawFile MIMETYPE:(NSString*)MimeType Cipher:(NSMutableData*)cipher
-{
++ (NSData *)BuildCipher:(NSString *)keyid Message:(NSData *)Message Attach:(NSString *)FileName RawFile:(NSData *)rawFile MIMETYPE:(NSString *)MimeType Cipher:(NSMutableData *)cipher {
     NSData* packnonce = nil;
     NSData* encryptMsg = nil;
     NSData* encryptFile = nil;
@@ -952,17 +951,9 @@
     int devtype = [delegate.DbInstance GetDeviceType: keyid];
     
     // encrypt the file first if necessary
-    if(FileName){
+    if(FileName) {
         encryptFile = [SSEngine PackMessage:rawFile PubKey:[delegate.DbInstance GetRawKey: keyid] Prikey:SignKey];
     }
-    
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-        //Background Thread
-        dispatch_async(dispatch_get_main_queue(), ^(void){
-            //Run UI Updates
-            //[delegate.activityView UpdateProgessMsg:NSLocalizedString(@"prog_generatingSignature" ,@"generating signature...")];
-        });
-    });
     
     //Prepare Message Format
     NSMutableData *msgchunk = [[NSMutableData alloc] init];
@@ -981,43 +972,39 @@
     [msgchunk appendData:[dateString dataUsingEncoding:NSASCIIStringEncoding]];
     
     // 4 File size, unencrypted size
-    if(FileName)
-    {
+    if(FileName) {
         len = htonl([rawFile length]);
-    }else {
+    } else {
         len = htonl(0);
     }
     [msgchunk appendBytes: &len length: 4];
     
     // file name and size
-    if(FileName)
-    {
+    if(FileName) {
         len = htonl([FileName lengthOfBytesUsingEncoding:NSASCIIStringEncoding]);
         [msgchunk appendBytes: &len length: 4];
         [msgchunk appendData:[FileName dataUsingEncoding:NSASCIIStringEncoding]];
-    }else {
+    } else {
         len = htonl(0);
         [msgchunk appendBytes: &len length: 4];
     }
     
     // file type size
-    if(FileName)
-    {
+    if(FileName) {
         len = htonl([MimeType lengthOfBytesUsingEncoding:NSUTF8StringEncoding]);
         [msgchunk appendBytes: &len length: 4];
         [msgchunk appendData:[MimeType dataUsingEncoding:NSUTF8StringEncoding]];
-    }else {
+    } else {
         len = htonl(0);
         [msgchunk appendBytes: &len length: 4];
     }
     
     // 9 Text length
-    if([Message length]>0)
-    {
-        len = htonl([Message lengthOfBytesUsingEncoding:NSUTF8StringEncoding]);
+    if([Message length] > 0) {
+        len = htonl(Message.length);
         [msgchunk appendBytes: &len length: 4];
-        [msgchunk appendData:[Message dataUsingEncoding:NSUTF8StringEncoding]];
-    }else {
+        [msgchunk appendData:Message];
+    } else {
         len = htonl(0);
         [msgchunk appendBytes: &len length: 4];
     }
@@ -1033,13 +1020,13 @@
     [msgchunk appendData:[GTMdateString dataUsingEncoding:NSASCIIStringEncoding]];
     
     // 14 hash of file
-    if(FileName){
+    if(FileName) {
         // hash attachment
         NSData* filehash = [sha3 Keccak256Digest:encryptFile];
         len = htonl([filehash length]);
         [msgchunk appendBytes: &len length: 4];
         [msgchunk appendData:filehash];
-    }else{
+    } else {
         // no hash
         len = htonl(0);
         [msgchunk appendBytes: &len length: 4];
@@ -1070,11 +1057,11 @@
     [cipher appendData:encryptMsg];
     
     //E8: File data
-    if(FileName){
+    if(FileName) {
         len = htonl([encryptFile length]);
         [cipher appendBytes: &len length: 4];
         [cipher appendData:encryptFile];
-    }else {
+    } else {
         len = htonl(0);
         [cipher appendBytes: &len length: 4];
     }

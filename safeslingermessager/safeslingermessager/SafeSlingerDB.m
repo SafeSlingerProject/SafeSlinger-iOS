@@ -37,16 +37,15 @@
 @synthesize msgid, cTime, rTime, attach, smsg, sfile, fext, face;
 @synthesize dir, token, sender, msgbody, fname, fbody, keyid;
 
--(MsgEntry*)InitOutgoingMsg: (NSData*)newmsgid Recipient:(ContactEntry*)user Message:(NSString*)message FileName:(NSString*)File FileType:(NSString*)MimeType FileData:(NSData*)FileRaw
-{
+-(MsgEntry*)InitOutgoingMsg: (NSData*)newmsgid Recipient:(ContactEntry*)user Message:(NSString*)message FileName:(NSString*)File FileType:(NSString*)MimeType FileData:(NSData*)FileRaw {
     // msgid
     self.msgid = newmsgid;
     self.dir = ToMsg;
     self.sender = [NSString compositeName:user.firstName withLastName:user.lastName];
     self.token = user.pushToken;
     self.keyid = user.keyId;
-    self.rTime = self.cTime = [NSString GetGMTString:DATABASE_TIMESTR];
-    
+	self.cTime = [NSString GetGMTString:DATABASE_TIMESTR];
+	
     if([message length]>0) self.msgbody = [message dataUsingEncoding:NSUTF8StringEncoding];
     else self.msgbody = nil;
     
@@ -54,8 +53,7 @@
     self.smsg = self.sfile = Decrypted;
     self.face = nil;
     
-    if(File)
-    {
+    if(File) {
         self.fname = File;
         self.fbody = FileRaw;
         self.fext = MimeType;
@@ -81,7 +79,6 @@
 @end
 
 @implementation MsgListEntry
-@synthesize keyid, lastSeen, messagecount, ciphercount;
 @end
 
 @implementation SafeSlingerDB
@@ -704,6 +701,41 @@
     }
 }
 
+- (ContactEntry *)loadContactEntryWithKeyId:(NSString *)keyId {
+	if(db == nil) {
+		[ErrorLogger ERRORDEBUG:@"ERROR: DB Object is null or input is null."];
+		return nil;
+	}
+	
+	ContactEntry *contact;
+	
+	@try {
+		const char *sql = "SELECT * FROM tokenstore WHERE keyid=?";
+		
+		sqlite3_stmt *sqlStatement = nil;
+		if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
+			[ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
+		}
+		
+		// bind keyId
+		sqlite3_bind_blob(sqlStatement, 1, [keyId cStringUsingEncoding:NSUTF8StringEncoding], (int)[keyId lengthOfBytesUsingEncoding:NSUTF8StringEncoding], SQLITE_TRANSIENT);
+		
+		if(sqlite3_step(sqlStatement)==SQLITE_ROW) {
+			contact = [self loadContactEntryFromStatement:sqlStatement];
+		}
+		
+		if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
+			[ErrorLogger ERRORDEBUG: @"ERROR: Problem with finalize statement"];
+		}
+	}
+	@catch (NSException *exception) {
+		[ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"An exception occured: %@", [exception reason]]];
+	}
+	@finally {
+		return contact;
+	}
+}
+
 - (ContactEntry *)loadContactEntryFromStatement:(sqlite3_stmt *)sqlStatement {
 	ContactEntry *contact = [ContactEntry new];
 	
@@ -1096,7 +1128,7 @@
 }
 
 - (BOOL)patchForContactsFromAddressBook {
-	// patch for 1.8
+	// patch for 1.8.1
 	BOOL ret = YES;
 	@try {
 		// for configuration table
@@ -1124,8 +1156,8 @@
 	}
 }
 
-- (NSMutableDictionary *)getThreads {
-	NSMutableDictionary *threadlist = [NSMutableDictionary new];
+- (NSMutableArray *)getConversationThreads {
+	NSMutableArray *threads = [NSMutableArray new];
 	
     if(db == nil) {
         [ErrorLogger ERRORDEBUG:@"ERROR: DB Object is null."];
@@ -1140,12 +1172,12 @@
         }
 		
         while(sqlite3_step(sqlStatement) == SQLITE_ROW) {
-            MsgListEntry *listEnt = [[MsgListEntry alloc]init];
-            listEnt.keyid = [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 0)];
-            listEnt.lastSeen = [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 1)];
-            listEnt.messagecount = sqlite3_column_int(sqlStatement, 2);
-			listEnt.active = sqlite3_column_int(sqlStatement, 3) == 1;
-            [threadlist setObject:listEnt forKey:listEnt.keyid];
+            MsgListEntry *listEntry = [MsgListEntry new];
+            listEntry.keyid = [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 0)];
+            listEntry.lastSeen = [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 1)];
+            listEntry.messagecount = sqlite3_column_int(sqlStatement, 2);
+			listEntry.active = sqlite3_column_int(sqlStatement, 3) == 1;
+            [threads addObject:listEntry];
         }
         
         if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
@@ -1156,7 +1188,7 @@
         [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"An exception occured: %@", [exception reason]]];
     }
     @finally {
-		return threadlist;
+		return threads;
     }
 }
 
@@ -1200,34 +1232,30 @@
     }
 }
 
-- (NSArray*)LoadThreadMessage: (NSString*)KEYID
-{
-    if(db==nil||KEYID==nil)
-    {
+// Loads the messages exchanged with the keyId KEYID
+- (NSArray *)loadMessagesExchangedWithKeyId:(NSString *)keyId {
+    if(db==nil || keyId==nil) {
         [ErrorLogger ERRORDEBUG: @"ERROR: DB Object is null or Input is null."];
         return nil;
     }
     
     NSMutableArray *tmparray = nil;
     @try {
-        
         int rownum = 0;
-        tmparray = [NSMutableArray arrayWithCapacity:0];
+        tmparray = [NSMutableArray new];
         
         const char *sql = "SELECT * FROM msgtable WHERE receipt=? ORDER BY cTime ASC";
         sqlite3_stmt *sqlStatement;
-        if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK)
-        {
+        if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK)  {
             [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
             tmparray = nil;
         }
         
-        sqlite3_bind_text(sqlStatement, 1, [KEYID UTF8String], -1, SQLITE_TRANSIENT);
-        
-        char* output = NULL;
+        sqlite3_bind_text(sqlStatement, 1, [keyId UTF8String], -1, SQLITE_TRANSIENT);
+		
         while (sqlite3_step(sqlStatement)==SQLITE_ROW) {
             
-            MsgEntry *amsg = [[MsgEntry alloc]init];
+            MsgEntry *amsg = [MsgEntry new];
             
             //1:msid
             int rawLen = sqlite3_column_bytes(sqlStatement, 0);
@@ -1236,16 +1264,12 @@
             }
             
             // 2 cTime, might be null
-            if(sqlite3_column_type(sqlStatement, 1)!=SQLITE_NULL)
-            {
-                //2/3 cTime/rTime
+            if(sqlite3_column_type(sqlStatement, 1)!=SQLITE_NULL) {
                 amsg.cTime = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 1)];
             }
             
-            // 3 rTime, not used anymore
-            if(sqlite3_column_type(sqlStatement, 2)!=SQLITE_NULL)
-            {
-                //2/3 cTime/rTime
+            // 3 rTime, might be null
+            if(sqlite3_column_type(sqlStatement, 2)!=SQLITE_NULL) {
                 amsg.rTime = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 2)];
             }
             
@@ -1253,53 +1277,43 @@
             amsg.dir = sqlite3_column_int(sqlStatement, 3);
             
             // 5 token, might be null
-            if(sqlite3_column_type(sqlStatement, 4)!=SQLITE_NULL)
-            {
-                output = (char *)sqlite3_column_text(sqlStatement, 4);
-                amsg.token = [NSString stringWithUTF8String:output];
+            if(sqlite3_column_type(sqlStatement, 4)!=SQLITE_NULL) {
+                amsg.token = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 4)];
             }
             
             // 6 sender, might be null
-            if(sqlite3_column_type(sqlStatement, 5)!=SQLITE_NULL)
-            {
-                output = (char *)sqlite3_column_text(sqlStatement, 5);
-                amsg.sender = [NSString stringWithUTF8String:output];
+            if(sqlite3_column_type(sqlStatement, 5)!=SQLITE_NULL) {
+                amsg.sender = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 5)];
             }
             
             // 7 msgbody
-            if(sqlite3_column_type(sqlStatement, 6)!=SQLITE_NULL)
-            {
-                int rawLen = sqlite3_column_bytes(sqlStatement, 6);
-                if(rawLen>0) {
-                    output = (char*)sqlite3_column_blob(sqlStatement, 6);
-                    amsg.msgbody = [NSData dataWithBytes:output length:rawLen];
-                }
+            if(sqlite3_column_type(sqlStatement, 6)!=SQLITE_NULL) {
+				amsg.msgbody = [NSData dataWithBytes:(char*)sqlite3_column_blob(sqlStatement, 6) length:sqlite3_column_bytes(sqlStatement, 6)];
             }
             
             // 8 attach
             amsg.attach = sqlite3_column_int(sqlStatement, 7);
             
             // 9 fname text
-            if(sqlite3_column_type(sqlStatement, 8)!=SQLITE_NULL)
-            {
-                output = (char *)sqlite3_column_text(sqlStatement, 8);
-                amsg.fname = [NSString stringWithUTF8String:output];
+			if(sqlite3_column_type(sqlStatement, 8)!=SQLITE_NULL) {
+                amsg.fname = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 8)];
             }
             
             // 12 fext
-            if(sqlite3_column_type(sqlStatement, 11)!=SQLITE_NULL)
-            {
-                output = (char *)sqlite3_column_text(sqlStatement, 11);
-                amsg.fext = [NSString stringWithUTF8String:output];
+            if(sqlite3_column_type(sqlStatement, 11)!=SQLITE_NULL) {
+                amsg.fext = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 11)];
             }
             
             // 13 smsg boolean
             amsg.smsg = sqlite3_column_int(sqlStatement, 12);
             // 14 sfile boolean
             amsg.sfile = sqlite3_column_int(sqlStatement, 13);
-            
+			
+			if(amsg.dir == ToMsg && (amsg.rTime == nil || amsg.rTime.length == 0)) {
+				amsg.outgoingStatus = MessageOutgoingStatusFailed;
+			}
+			
             [tmparray addObject:amsg];
-            amsg = nil;
             rownum++;
         }
         
@@ -1383,68 +1397,73 @@
     }
 }
 
-- (BOOL)InsertMessage: (MsgEntry*)MSG
-{
-    if(db==nil||MSG==nil){
+- (BOOL)InsertMessage:(MsgEntry *)MSG {
+    if(db==nil||MSG==nil) {
         [ErrorLogger ERRORDEBUG: @"ERROR: DB Object is null or Input is null."];
         return NO;
     }
     
     BOOL ret = YES;
     @try {
-        
         sqlite3_stmt *sqlStatement;
         const char *sql = "insert into msgtable (msgid, cTime, rTime, dir, token, sender, msgbody, attach, fname, fbody, ft, fext, smsg, sfile, note, receipt, thread_id) Values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,0)";
-        if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK){
+        if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
             [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while creating statement. '%s'", sqlite3_errmsg(db)]];
             ret = NO;
         }
         
         // msgid
         sqlite3_bind_blob(sqlStatement, 1, [MSG.msgid bytes], (int)[MSG.msgid length], SQLITE_TRANSIENT);
-        // 2/3: cTime/rTime, rTime is not used anymore
+        //2: cTime
         sqlite3_bind_text(sqlStatement, 2, [MSG.cTime UTF8String], -1, SQLITE_TRANSIENT);
-        sqlite3_bind_text(sqlStatement, 3, [MSG.rTime UTF8String], -1, SQLITE_TRANSIENT);
+		
+		//3: rTime
+		if(MSG.rTime) {
+			sqlite3_bind_text(sqlStatement, 3, [MSG.rTime UTF8String], -1, SQLITE_TRANSIENT);
+		} else {
+			sqlite3_bind_null(sqlStatement, 3);
+		}
+		
         //4: dir
         sqlite3_bind_int(sqlStatement, 4, MSG.dir);
         
         // 5: token, 6: sender (receiver when receiving messages)
-        if(MSG.token)
+		if(MSG.token) {
             sqlite3_bind_text(sqlStatement, 5, [MSG.token UTF8String], -1, SQLITE_TRANSIENT);
-        else
+		} else {
             sqlite3_bind_null(sqlStatement, 5);
-        
-        if(MSG.sender)
+		}
+		
+		if(MSG.sender) {
             sqlite3_bind_text(sqlStatement, 6, [MSG.sender UTF8String], -1, SQLITE_TRANSIENT);
-        else
+		} else {
             sqlite3_bind_null(sqlStatement, 6);
-        
+		}
+		
         // 7: msgbody
-        if(MSG.msgbody)
+		if(MSG.msgbody) {
             sqlite3_bind_blob(sqlStatement, 7, [MSG.msgbody bytes], (int)[MSG.msgbody length], SQLITE_TRANSIENT);
-        else
+		} else {
             sqlite3_bind_null(sqlStatement, 7);
-        
+		}
+		
         // 8: attach, 9: fname, 10: fbody, 11: ft, 12: fext
-        if(MSG.attach)
-        {
+        if(MSG.attach) {
             sqlite3_bind_int(sqlStatement, 8, 1);
-            if(MSG.dir==ToMsg)
-            {
+            if(MSG.dir==ToMsg) {
                 // fname/fdata
                 sqlite3_bind_text(sqlStatement, 9, [MSG.fname UTF8String], -1, SQLITE_TRANSIENT);
                 sqlite3_bind_blob(sqlStatement, 10, [MSG.fbody bytes], (int)[MSG.fbody length], NULL);
                 sqlite3_bind_null(sqlStatement, 11);
                 sqlite3_bind_text(sqlStatement, 12, [MSG.fext UTF8String], -1, SQLITE_TRANSIENT);
-            }else{
+            } else {
                 // FromMsg
                 sqlite3_bind_text(sqlStatement, 9, [MSG.fname UTF8String], -1, SQLITE_TRANSIENT);
                 sqlite3_bind_blob(sqlStatement, 10, [MSG.fbody bytes], (int)[MSG.fbody length], NULL);
                 sqlite3_bind_text(sqlStatement, 11, [MSG.rTime UTF8String], -1, SQLITE_TRANSIENT);
                 sqlite3_bind_text(sqlStatement, 12, [MSG.fext UTF8String], -1, SQLITE_TRANSIENT);
             }
-            
-        }else {
+        } else {
             // for receive only
             sqlite3_bind_int(sqlStatement, 8, 0);
             // fname and fdata are null
@@ -1459,21 +1478,21 @@
         sqlite3_bind_int(sqlStatement, 14, MSG.sfile);
         
         // note
-        if(MSG.face){
+        if(MSG.face) {
             sqlite3_bind_text(sqlStatement, 15, [MSG.face UTF8String], -1, SQLITE_TRANSIENT);
-        }else {
+        } else {
             sqlite3_bind_null(sqlStatement, 15);
         }
         
         // bind keyid
         sqlite3_bind_text(sqlStatement, 16, [MSG.keyid UTF8String], -1, SQLITE_TRANSIENT);
         
-        if(SQLITE_DONE != sqlite3_step(sqlStatement)){
+        if(SQLITE_DONE != sqlite3_step(sqlStatement)) {
             [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"ERROR: Error while inserting data. '%s'", sqlite3_errmsg(db)]];
             ret = NO;
         }
         
-        if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
+        if(sqlite3_finalize(sqlStatement) != SQLITE_OK) {
             [ErrorLogger ERRORDEBUG: @"ERROR: Problem with finalize statement"];
             ret = NO;
         }
@@ -1527,7 +1546,7 @@
     }
 }
 
-- (BOOL)UpdateMessage: (NSData*)msgid NewMSG:(NSString*)decrypted_message Time:(NSString*)GMTTime User:(NSString*)Name Token:(NSString*)TID Photo:(NSString*)UserPhoto
+- (BOOL)updateMessage: (NSData*)msgid NewMSG:(NSString*)decrypted_message Time:(NSString*)GMTTime User:(NSString*)Name Token:(NSString*)TID Photo:(NSString*)UserPhoto
 {
     if(db==nil){
         [ErrorLogger ERRORDEBUG: @"ERROR: DB Object is null or Input is null."];

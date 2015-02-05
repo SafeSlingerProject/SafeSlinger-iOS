@@ -27,12 +27,13 @@
 #import <AddressBook/AddressBook.h>
 #import <dispatch/dispatch.h>
 #import "MessageReceiver.h"
+#import "MessageSender.h"
 
 @class MsgListEntry;
 @class AppDelegate;
 @class MessageView;
 
-@interface MessageDetailView : UITableViewController <QLPreviewControllerDataSource, QLPreviewControllerDelegate, UIGestureRecognizerDelegate, UITextFieldDelegate, MessageReceiverNotificationDelegate>
+@interface MessageDetailView : UITableViewController <QLPreviewControllerDataSource, QLPreviewControllerDelegate, UIGestureRecognizerDelegate, UITextFieldDelegate, MessageReceiverNotificationDelegate, MessageSenderDelegate, UIAlertViewDelegate>
 {
     // For Grand Central Dispatch
     dispatch_queue_t BackGroundQueue;
@@ -48,15 +49,11 @@
 @property (nonatomic, strong) UIImage *thread_img;
 @property (nonatomic, strong) MsgListEntry *assignedEntry;
 @property (nonatomic, strong) NSLock *OperationLock;
-@property (nonatomic, strong) ActivityWindow *actWindow;
 @property (nonatomic, strong) IBOutlet UITextField *InstanceMessage;
 @property (nonatomic, strong) IBOutlet UIButton *InstanceBtn;
 @property (nonatomic, strong) IBOutlet UIView *InstanceBox;
 @property (nonatomic, strong) UIBarButtonItem *CancelBtn;
 @property (nonatomic, strong) UIBarButtonItem *BackBtn;
 @property (nonatomic) ABRecordRef tRecord;
-
-- (IBAction)sendshortmsg:(id)sender;
-- (void)ReloadTable;
 
 @end

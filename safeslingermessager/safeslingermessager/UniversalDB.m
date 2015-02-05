@@ -199,18 +199,17 @@
     }
 }
 
-- (int)UpdateThreadEntries:(NSMutableDictionary *)threadlist {
-    if(db==nil && threadlist==nil) {
+- (int)updateThreadEntries:(NSMutableArray *)threadlist {
+    if(db == nil || threadlist == nil) {
         [ErrorLogger ERRORDEBUG:@"ERROR: DB Object is null or input is null."];
         return -1;
     }
     
     int NumMessage = 0;
     @try {
-        const char *sql = NULL;
         sqlite3_stmt *sqlStatement;
-        
-        sql = "SELECT keyid, cTime, count(msgid) FROM ciphertable GROUP BY keyid order by cTime desc;";
+		const char *sql = "SELECT keyid, cTime, count(msgid) FROM ciphertable GROUP BY keyid order by cTime desc;";
+		
         if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
             [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
         }
@@ -218,38 +217,41 @@
         while (sqlite3_step(sqlStatement) == SQLITE_ROW) {
             NSString* keyid = [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 0)];
             DEBUGMSG(@"keyid = %@", keyid);
-            
-            MsgListEntry *listEnt = [threadlist objectForKey: keyid];
-            if(listEnt) {
+			
+			MsgListEntry *listEntry;
+			
+			for(int i = 0; i < threadlist.count; i++) {
+				if([keyid isEqualToString:((MsgListEntry *)threadlist[i]).keyid]) {
+					listEntry = threadlist[i];
+					break;
+				}
+			}
+			
+            if(listEntry) {
                 // update information
                 DEBUGMSG(@"modify entry thread.");
                 NSString *date1 = [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 1)];
-                NSString *date2 = listEnt.lastSeen;
                 // compare dates
-                switch ([UtilityFunc CompareDate:date1 Target:date2]) {
-                    case NSOrderedAscending:
-                        listEnt.lastSeen = date2;
-                        break;
-                    case NSOrderedSame:
-                    case NSOrderedDescending:
-                        listEnt.lastSeen = date1;
-                        break;
-                    default:
-                        break;
+                if ([UtilityFunc CompareDate:date1 Target:listEntry.lastSeen] == NSOrderedDescending) {
+					listEntry.lastSeen = date1;
+					
+					[threadlist removeObject:listEntry];
+					[self insertMessageListEntry:listEntry orderedByDateDescendingInArray:threadlist];
                 }
                 
-                listEnt.ciphercount = sqlite3_column_int(sqlStatement, 2);
-                NumMessage += listEnt.ciphercount;
-                listEnt.messagecount += listEnt.ciphercount;
+                listEntry.ciphercount = sqlite3_column_int(sqlStatement, 2);
+                NumMessage += listEntry.ciphercount;
+                listEntry.messagecount += listEntry.ciphercount;
             } else {
                 // create entry
                 DEBUGMSG(@"create new entry thread.");
-                listEnt = [[MsgListEntry alloc]init];
-                listEnt.keyid = keyid;
-                listEnt.lastSeen = [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 1)];
-                listEnt.messagecount = listEnt.ciphercount = sqlite3_column_int(sqlStatement, 2);
-                NumMessage += listEnt.ciphercount;
-                [threadlist setObject:listEnt forKey:keyid];
+                listEntry = [[MsgListEntry alloc]init];
+                listEntry.keyid = keyid;
+                listEntry.lastSeen = [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 1)];
+                listEntry.messagecount = listEntry.ciphercount = sqlite3_column_int(sqlStatement, 2);
+                NumMessage += listEntry.ciphercount;
+				
+				[self insertMessageListEntry:listEntry orderedByDateDescendingInArray:threadlist];
             }
         }
         
@@ -265,6 +267,25 @@
     @finally {
         return NumMessage;
     }
+}
+
+- (void)insertMessageListEntry:(MsgListEntry *)listEntry orderedByDateDescendingInArray:(NSMutableArray *)threadList {
+	int index = 0;
+	BOOL inserted = false;
+	
+	while(index < threadList.count && !inserted) {
+		MsgListEntry *entry = threadList[index];
+		if([UtilityFunc CompareDate:listEntry.lastSeen Target:entry.lastSeen] == NSOrderedDescending) {
+			[threadList insertObject:listEntry atIndex:index];
+			inserted = true;
+		}
+		index++;
+	}
+	
+	if(!inserted) {
+		// if date is smaller than any other thread, insert at the end
+		[threadList addObject:listEntry];
+	}
 }
 
 - (BOOL)UpdateEntryWithCipher: (NSData*)msgnonce Cipher:(NSData*)newcipher

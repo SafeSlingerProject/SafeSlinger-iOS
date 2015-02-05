@@ -37,6 +37,8 @@
 
 @interface MessageView ()
 
+@property (strong, nonatomic) UIViewController *viewControllerToBePushed;
+
 @end
 
 @implementation MessageView
@@ -64,23 +66,27 @@
     UIBarButtonItem *addBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action: @selector(createNewThread:)];
     [self.parentViewController.navigationItem setRightBarButtonItem:addBtn];
 	
-	self.parentViewController.navigationItem.title = [NSString stringWithFormat:@"%lu %@",(unsigned long)[MessageList count], NSLocalizedString(@"title_Threads" ,@"Threads")];
+	if(_viewControllerToBePushed) {
+		[self.navigationController pushViewController:_viewControllerToBePushed animated:YES];
+		_viewControllerToBePushed = nil;
+	}
 }
 
 - (void)UpdateThread {
-    // Messages from universal database
-    NSMutableDictionary *list = [delegate.DbInstance getThreads];
+    // Messages from individual database
+    NSMutableArray *threadsList = [delegate.DbInstance getConversationThreads];
 	
-    int badgenum = [delegate.UDbInstance UpdateThreadEntries:list];
+	// Messages from individual database
+    int badgenum = [delegate.UDbInstance updateThreadEntries:threadsList];
 	if(badgenum > 0) {
         [self.tabBarItem setBadgeValue:[NSString stringWithFormat:@"%d", badgenum]];
 	} else {
         [self.tabBarItem setBadgeValue:nil];
 	}
 	
-    // Messages from individual database
-    [MessageList setArray:[list allValues]];
-    
+	[MessageList setArray:threadsList];
+	self.parentViewController.navigationItem.title = [NSString stringWithFormat:@"%lu %@",(unsigned long)[MessageList count], NSLocalizedString(@"title_Threads" ,@"Threads")];
+	
     [self.tableView reloadData];
 }
 
@@ -224,6 +230,19 @@
         MessageDetailView *detail = (MessageDetailView*)[segue destinationViewController];
         detail.assignedEntry = [MessageList objectAtIndex:[self.tableView indexPathForSelectedRow].row];
     }
+}
+
+- (void)shouldPushViewController:(UIViewController *)viewController {
+	_viewControllerToBePushed = viewController;
+}
+
+
+#pragma mark - MessageSenderDelegate methods
+
+- (void)updatedOutgoingStatusForMessage:(MsgEntry *)message {
+	if(message.outgoingStatus == MessageOutgoingStatusFailed || message.outgoingStatus == MessageOutgoingStatusSent) {
+		[self UpdateThread];
+	}
 }
 
 @end

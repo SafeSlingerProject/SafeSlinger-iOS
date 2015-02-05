@@ -36,12 +36,6 @@
     [self.mainLabel setTextAlignment:NSTextAlignmentCenter];
 }
 
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    // Release any cached data, images, etc that aren't in use.
-}
-
 -(void) DisplayMessage: (NSString*)mainTitle Detail:(NSString*)detailMessage
 {
     self.view.center = CGPointMake([[UIScreen mainScreen] bounds].size.width/2, [[UIScreen mainScreen] bounds].size.height/2);
@@ -49,10 +43,5 @@
 	[mainLabel setText: mainTitle];
 	[descriptionLable setText:detailMessage];
 }
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-}
-
 
 @end
