@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2010-2014 Carnegie Mellon University
+ * Copyright (c) 2010-2015 Carnegie Mellon University
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
 #import "Utility.h"
 #import "SSEngine.h"
 #import "UniversalDB.h"
-#import <UAPush.h>
+#import "RegistrationHandler.h"
 
 @implementation MessageReceiver
 
@@ -44,27 +44,19 @@
     return self;
 }
 
-- (void)FetchSingleMessage:(NSString *)encodeNonce {
-    if([ThreadLock tryLock]) {
-        NumNewMsg = 0;
-        MsgCount = 1;
-        
-        // Add single nonce
-        _MsgNonces = [NSMutableDictionary dictionary];
-        [_MsgNonces setObject:[NSNumber numberWithInt:0] forKey:encodeNonce];
-        
-		if(MsgFinish) {
-			free(MsgFinish);
-		}
-        MsgFinish = malloc(sizeof(int) * 1);
-        
-        MsgFinish[0] = InitFetch;
-        // Download messages
-        [self DownloadMessages];
+- (BOOL)IsBusy
+{
+    if([ThreadLock tryLock])
+    {
+        [ThreadLock unlock];
+        return NO;
+    }else{
+        return YES;
     }
 }
 
 - (void)FetchMessageNonces:(int)NumOfMostRecents {
+    
     if([ThreadLock tryLock]) {
         
         NumNewMsg = 0;
@@ -75,12 +67,12 @@
         //E1: Version (4bytes)
         int version = htonl(VersionNum);
         [pktdata appendBytes: &version length: 4];
-        NSString* token = [[UAPush shared]deviceToken];
+        NSString* hex_token = [[NSUserDefaults standardUserDefaults] stringForKey: kPUSH_TOKEN];
         //E2: Token_len (4bytes)
-        int len = htonl([token length]);
+        int len = htonl([hex_token length]);
         [pktdata appendBytes: &len length: 4];
         //E3: Token
-        [pktdata appendBytes:[token cStringUsingEncoding: NSUTF8StringEncoding] length: [token lengthOfBytesUsingEncoding:NSUTF8StringEncoding]];
+        [pktdata appendBytes:[hex_token cStringUsingEncoding: NSUTF8StringEncoding] length: [hex_token lengthOfBytesUsingEncoding:NSUTF8StringEncoding]];
         //E4: count of query
         len = htonl(NumOfMostRecents);
         [pktdata appendBytes: &len length: 4];
@@ -157,13 +149,13 @@
                              // Download messages in a for loop
                              [self DownloadMessages];
                          } else {
-                             // noncecnt ==0
+                             // noncecnt == 0
                              [ErrorLogger ERRORDEBUG: @"No available messages."];
                              dispatch_async(dispatch_get_main_queue(), ^(void) {
                                  //[delegate.activityView DisableProgress];
                                  [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
                                  [ThreadLock unlock];
-                                 [[UAPush shared] setBadgeNumber:0];
+                                 [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
                              });
                          }
                      } else {
@@ -189,6 +181,7 @@
         if([decodenonce length]==NONCELEN) {
             if(![UDbInstance CheckMessage:decodenonce]) {
                 // Get message
+                DEBUGMSG(@"nonce = %@", nonce);
                 [UDbInstance CreateNewEntry:decodenonce];
                 [self RetrieveCipher: decodenonce EncodeNonce:nonce];
             } else {
@@ -304,11 +297,7 @@
 	}
 	
     if(all_processed) {
-        //[delegate.activityView DisableProgress];
         [ThreadLock unlock];
-        
-        DEBUGMSG(@"IconBadgeNumber = %ld", (long)[[UIApplication sharedApplication]applicationIconBadgeNumber]);
-        
         int _NumExpiredMsg = 0, _NumBadMsg = 0, _NumSafeMsg = 0;
         
         for(int i = 0; i < MsgCount; i++) {
@@ -336,17 +325,30 @@
         } else if(_NumExpiredMsg==MsgCount) {
             [self PrintToastMessage: NSLocalizedString(@"error_InvalidIncomingMessage", @"Bad incoming message format.")];
         } else if(_NumSafeMsg>0) {
+            
 			if(_notificationDelegate) {
 				[_notificationDelegate messageReceived];
 			} else {
+                // move toast message back..
+                NSString *msg = nil;
+                if(_NumSafeMsg==1)
+                    msg = NSLocalizedString(@"title_NotifyFileAvailable", @"SafeSlinger Message Available");
+                else
+                    msg = [NSString stringWithFormat: NSLocalizedString(@"title_NotifyMulFileAvailable", @"%d SafeSlinger Messages Available"),_NumSafeMsg];
+                [[[[iToast makeText: msg]
+                  setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
 				[UtilityFunc playSoundAlert];
 			}
 			
 			[[NSNotificationCenter defaultCenter] postNotificationName:NSNotificationMessageReceived object:nil userInfo:nil];
         }
         
-        [[UAPush shared] setBadgeNumber:0];
-        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        long badge_num = [[UIApplication sharedApplication]applicationIconBadgeNumber];
+        badge_num = badge_num - _NumSafeMsg - _NumExpiredMsg;
+        DEBUGMSG(@"new badge_num = %ld", badge_num);
+        if (badge_num<0) badge_num = 0;
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:badge_num];
         NumNewMsg = MsgCount = 0;
     }
 }

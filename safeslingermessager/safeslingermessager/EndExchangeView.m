@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2010-2014 Carnegie Mellon University
+ * Copyright (c) 2010-2015 Carnegie Mellon University
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -59,6 +59,8 @@
 	for (int i = 0; i < [contactList count]; i++)
 		selections[i] = YES;
 	[selectionTable reloadData];
+    if(![[NSUserDefaults standardUserDefaults] boolForKey:kFIRST_USE])
+        [self DisplayHow:self];
 }
 
 - (IBAction)DisplayHow:(id)sender {
@@ -71,6 +73,10 @@
 }
 
 - (IBAction)Import:(id)sender {
+    
+    // after import done, not first user anymore
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFIRST_USE];
+    
     NSMutableDictionary *mapping = [NSMutableDictionary dictionary];
 	
 	if(ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {

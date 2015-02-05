@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2010-2014 Carnegie Mellon University
+ * Copyright (c) 2010-2015 Carnegie Mellon University
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -30,10 +30,10 @@
 
 + (void)SendOpts: (UIViewController<MFMailComposeViewControllerDelegate>*)VC;
 + (void)PopToMainPanel: (UINavigationController*)navigationController;
-+ (BOOL) AddContactEntry: (ABAddressBookRef)aBook TargetRecord:(ABRecordRef)aRecord;
-+ (void) RemoveDuplicates: (ABAddressBookRef)aBook AdressList:(CFArrayRef)allPeople CompareArray:(NSMutableDictionary*)compared;
++ (BOOL)AddContactEntry: (ABAddressBookRef)aBook TargetRecord:(ABRecordRef)aRecord;
++ (void)RemoveDuplicates: (ABAddressBookRef)aBook AdressList:(CFArrayRef)allPeople CompareArray:(NSMutableDictionary*)compared;
 + (NSComparisonResult)CompareDate: (NSString*)basedate Target:(NSString*)targetdate;
-+ (void) TriggerContactPermission;
++ (void)TriggerContactPermission;
 + (void)playSoundAlert;
 + (void)playVibrationAlert;
 

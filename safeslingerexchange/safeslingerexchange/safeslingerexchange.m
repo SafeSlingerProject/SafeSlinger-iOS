@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2010-2014 Carnegie Mellon University
+ * Copyright (c) 2010-2015 Carnegie Mellon University
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -39,8 +39,9 @@
 @synthesize sizePicker, groupView, compareView, actWindow;
 @synthesize mController, protocol, res;
 @synthesize exchangeInput, pro_expire;
+@synthesize first_use;
 
--(BOOL)SetupExchange: (UIViewController<SafeSlingerDelegate>*)mainController ServerHost: (NSString*) host VersionNumber:(NSString*)vNum
+-(BOOL)SetupExchange: (UIViewController<SafeSlingerDelegate>*)mainController ServerHost: (NSString*) host VersionNumber:(NSString*)vNum FirstUse:(BOOL)isFirstuse
 {
     if(![mainController isKindOfClass:[UIViewController class]])
         return NO;
@@ -67,6 +68,7 @@
         
         protocol = [[SafeSlingerExchange alloc]init:host version:version];
         protocol.delegate = self;
+        self.first_use = isFirstuse;
         res = [NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"exchangeui" withExtension:@"bundle"]];
         
         // UI resource allocation

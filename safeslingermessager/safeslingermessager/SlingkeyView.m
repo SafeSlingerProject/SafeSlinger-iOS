@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2010-2014 Carnegie Mellon University
+ * Copyright (c) 2010-2015 Carnegie Mellon University
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -30,8 +30,6 @@
 #import "FunctionView.h"
 #import "ContactManageView.h"
 #import "EndExchangeView.h"
-#import <UAirship.h>
-#import <UAPush.h>
 
 @interface SlingkeyView ()
 
@@ -156,7 +154,7 @@
     }
     
     // check with mike here
-    if([UAirship shared].deviceToken)
+    if([[NSUserDefaults standardUserDefaults] stringForKey: kPUSH_TOKEN])
     {
         [contact_labels addObject: @"SafeSlinger-Push"];
         [contact_values addObject: @""];
@@ -237,7 +235,8 @@
     
     // check notification permission
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-        if ([[UIApplication sharedApplication] enabledRemoteNotificationTypes] != (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert))
+        int flag =[[UIApplication sharedApplication] enabledRemoteNotificationTypes] & (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert);
+        if (flag != (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert))
         {
             buttontitle = NSLocalizedString(@"menu_Help", @"Help");
             description = [NSString stringWithFormat: NSLocalizedString(@"iOS_notificationError1", @"Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the %@ button for SafeSlinger Notification permission details."), buttontitle];
@@ -253,7 +252,9 @@
             return;
         }
     } else {
-        if (![[UIApplication sharedApplication] isRegisteredForRemoteNotifications] || [UIApplication sharedApplication].currentUserNotificationSettings.types != (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert))
+        int flag =[UIApplication sharedApplication].currentUserNotificationSettings.types & (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert);
+        
+        if (![[UIApplication sharedApplication] isRegisteredForRemoteNotifications] || flag != (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert))
         {
             buttontitle = NSLocalizedString(@"menu_Settings", @"menu_Settings");
             description = [NSString stringWithFormat: NSLocalizedString(@"iOS_notificationError1", @"Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the %@ button for SafeSlinger Notification permission details."), buttontitle];
@@ -291,7 +292,7 @@
         if(aBook)CFRelease(aBook);
     }
     
-    [proto SetupExchange:self ServerHost:[NSString stringWithFormat:@"%@%@", HTTPURL_PREFIX, HTTPURL_HOST_EXCHANGE] VersionNumber:[delegate getVersionNumber]];
+    [proto SetupExchange:self ServerHost:[NSString stringWithFormat:@"%@%@", HTTPURL_PREFIX, HTTPURL_HOST_EXCHANGE] VersionNumber:[delegate getVersionNumber] FirstUse:![[NSUserDefaults standardUserDefaults] boolForKey:kFIRST_USE]];
     [proto BeginExchange: [vCard dataUsingEncoding:NSUTF8StringEncoding]];
 }
 

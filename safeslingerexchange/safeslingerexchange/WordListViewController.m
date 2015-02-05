@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2010-2014 Carnegie Mellon University
+ * Copyright (c) 2010-2015 Carnegie Mellon University
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -321,6 +321,8 @@
     PreferredLanguage = [[NSLocale preferredLanguages] objectAtIndex:0];
     [CompareLabel setText:[NSString stringWithFormat: NSLocalizedStringFromBundle(delegate.res, @"label_CompareScreensNDevices", @"Compare screens on %@ devices.."), [NSString stringWithFormat:@"%d", delegate.protocol.users]]];
     [self generateWordList: [delegate.protocol generateHashForPhrases]];
+    
+    if(delegate.first_use) [self DisplayHow];
 }
     
 #pragma mark UIPickerViewDelegate

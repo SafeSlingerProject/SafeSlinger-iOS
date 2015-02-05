@@ -1,18 +1,18 @@
 /*
  * The MIT License (MIT)
- * 
- * Copyright (c) 2010-2014 Carnegie Mellon University
- * 
+ *
+ * Copyright (c) 2010-2015 Carnegie Mellon University
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -1244,7 +1244,7 @@
         int rownum = 0;
         tmparray = [NSMutableArray new];
         
-        const char *sql = "SELECT * FROM msgtable WHERE receipt=? ORDER BY cTime ASC";
+        const char *sql = "SELECT * FROM msgtable WHERE receipt=? ORDER BY rTime ASC";
         sqlite3_stmt *sqlStatement;
         if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK)  {
             [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
@@ -1493,114 +1493,6 @@
         }
         
         if(sqlite3_finalize(sqlStatement) != SQLITE_OK) {
-            [ErrorLogger ERRORDEBUG: @"ERROR: Problem with finalize statement"];
-            ret = NO;
-        }
-    }
-    @catch (NSException *exception) {
-        [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"An exception occured: %@", [exception reason]]];
-        ret = NO;
-    }
-    @finally {
-        return ret;
-    }
-}
-
-- (BOOL)UpdateMessagesWithToken: (NSString*)oldKeyID ReplaceUsername:(NSString*)username ReplaceToken:(NSString*)token
-{
-    if(db==nil||oldKeyID==nil||username==nil||token==nil){
-        [ErrorLogger ERRORDEBUG: @"ERROR: DB Object is null or Input is null."];
-        return NO;
-    }
-    
-    BOOL ret = YES;
-    @try {
-        sqlite3_stmt *sqlStatement;
-        const char *sql = "UPDATE msgtable SET token=?, sender=? where token = ?";
-        if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK){
-            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while creating statement. '%s'", sqlite3_errmsg(db)]];
-            ret = NO;
-        }
-        
-        // Binding
-        sqlite3_bind_text(sqlStatement, 1, [token UTF8String], -1, SQLITE_TRANSIENT);
-        sqlite3_bind_text(sqlStatement, 2, [username UTF8String], -1, SQLITE_TRANSIENT);
-        sqlite3_bind_text(sqlStatement, 3, [oldKeyID UTF8String], -1, SQLITE_TRANSIENT);
-        
-        if(SQLITE_DONE != sqlite3_step(sqlStatement)){
-            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"Error while updating data. '%s'", sqlite3_errmsg(db)]];
-            ret = NO;
-        }
-        
-        if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
-            [ErrorLogger ERRORDEBUG: @"ERROR: Problem with finalize statement"];
-            ret = NO;
-        }
-    }
-    @catch (NSException *exception) {
-        [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"An exception occured: %@", [exception reason]]];
-        ret = NO;
-    }
-    @finally {
-        return ret;
-    }
-}
-
-- (BOOL)updateMessage: (NSData*)msgid NewMSG:(NSString*)decrypted_message Time:(NSString*)GMTTime User:(NSString*)Name Token:(NSString*)TID Photo:(NSString*)UserPhoto
-{
-    if(db==nil){
-        [ErrorLogger ERRORDEBUG: @"ERROR: DB Object is null or Input is null."];
-        return NO;
-    }
-    
-    BOOL ret = YES;
-    @try {
-        sqlite3_stmt *sqlStatement;
-        const char *sql = "UPDATE msgtable SET msgbody=?, cTime=?, token=?, sender=?, note=?, smsg='N' where msgid=?";
-        if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK){
-            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while creating statement. '%s'", sqlite3_errmsg(db)]];
-            ret = NO;
-        }
-        
-        // bind msgbody
-        if(decrypted_message!=NULL)
-        {
-            sqlite3_bind_blob(sqlStatement, 1, [[decrypted_message dataUsingEncoding:NSUTF8StringEncoding] bytes], (int)[decrypted_message lengthOfBytesUsingEncoding:NSUTF8StringEncoding], SQLITE_TRANSIENT);
-        }
-        else {
-            sqlite3_bind_null(sqlStatement, 1);
-        }
-        
-        // getGMT and transfter to local time
-        sqlite3_bind_text(sqlStatement, 2, [GMTTime UTF8String], -1, SQLITE_TRANSIENT);
-        
-        // for name and token and picture
-        if(TID)
-        {
-            sqlite3_bind_text(sqlStatement, 3, [TID UTF8String], -1, SQLITE_TRANSIENT);
-        }else {
-            sqlite3_bind_null(sqlStatement, 3);
-        }
-        
-        if(Name)
-        {
-            sqlite3_bind_text(sqlStatement, 4, [Name UTF8String], -1, SQLITE_TRANSIENT);
-        }else {
-            sqlite3_bind_null(sqlStatement, 4);
-        }
-        
-        
-        if(UserPhoto!=nil) sqlite3_bind_text(sqlStatement, 5, [UserPhoto UTF8String], -1, SQLITE_TRANSIENT);
-        else sqlite3_bind_null(sqlStatement, 5);
-        // bind msgid
-        sqlite3_bind_blob(sqlStatement, 6, [msgid bytes], (int)[msgid length], SQLITE_TRANSIENT);
-        
-        if(SQLITE_DONE != sqlite3_step(sqlStatement)){
-            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"Error while updating data. '%s'", sqlite3_errmsg(db)]];
-            ret = NO;
-        }
-        
-        if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
             [ErrorLogger ERRORDEBUG: @"ERROR: Problem with finalize statement"];
             ret = NO;
         }

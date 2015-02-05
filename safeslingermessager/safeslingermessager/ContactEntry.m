@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2010-2014 Carnegie Mellon University
+ * Copyright (c) 2010-2015 Carnegie Mellon University
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -50,12 +50,15 @@
 	[detail appendFormat:@"Exchange(Introduce) Date:%@\n", _exchangeDate];
 	
 	switch (_devType) {
-		case Android:
-			[detail appendString:@"DEV: Android\n"];
+		case Android_C2DM:
+			[detail appendString:@"DEV: Android(C2DM)\n"];
 			break;
 		case iOS:
 			[detail appendString:@"DEV: iOS\n"];
 			break;
+        case Android_GCM:
+            [detail appendString:@"DEV: Android(GCM)\n"];
+            break;
 		default:
 			[detail appendFormat:@"DEV: %d", _devType];
 			break;

@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2010-2014 Carnegie Mellon University
+ * Copyright (c) 2010-2015 Carnegie Mellon University
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -215,29 +215,33 @@
     if(aBook)CFRelease(aBook);
 }
 
-+ (void)playVibrationAlert {
-	if([self shouldPlayAlert]) {
-		AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-		[[NSUserDefaults standardUserDefaults] setDouble:[[NSDate date] timeIntervalSince1970] forKey:kLastNotificationTimestamp];
-	}
++ (void)playVibrationAlert
+{
+	AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
 }
 
-+ (void)playSoundAlert {
-	if([self shouldPlayAlert]) {
-		// Play system sound
-		AudioServicesPlaySystemSound(1003);
-
-		// OR play custom sound:
++ (void)playSoundAlert
+{
+    // Play system sound
+    if([self shouldPlayAlert])
+    {
+        AudioServicesPlaySystemSound(1003);
+        [[NSUserDefaults standardUserDefaults] setDouble:[[NSDate date] timeIntervalSince1970] forKey:kLastNotificationTimestamp];
+    }else
+    {
+        [self playVibrationAlert];
+    }
+    // OR play custom sound:
 //		NSString *soundPath = [[NSBundle mainBundle] pathForResource:@"sound" ofType:@"aif"];
 //		SystemSoundID soundID;
 //		AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath:soundPath], &soundID);
 //		AudioServicesPlaySystemSound(soundID);
-	}
 }
 
 + (BOOL)shouldPlayAlert {
 	double lastNotificationTime = [[NSUserDefaults standardUserDefaults] doubleForKey:kLastNotificationTimestamp];
-	return [[NSDate date] timeIntervalSince1970] - lastNotificationTime < 1;
+    DEBUGMSG(@"gap: %f", [[NSDate date] timeIntervalSince1970]-lastNotificationTime);
+	return [[NSDate date] timeIntervalSince1970] - lastNotificationTime > 10;
 }
 
 @end

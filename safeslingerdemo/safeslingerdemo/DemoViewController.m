@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2010-2014 Carnegie Mellon University
+ * Copyright (c) 2010-2015 Carnegie Mellon University
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -123,7 +123,7 @@
 {
     proto = [[safeslingerexchange alloc]init];
     // use default client version
-    if([proto SetupExchange: self ServerHost:hostField.text VersionNumber: nil])
+    if([proto SetupExchange: self ServerHost:hostField.text VersionNumber: nil FirstUse:![[NSUserDefaults standardUserDefaults] boolForKey:@"FIRST_USE"]])
     {
         [proto BeginExchange: [secretData.text dataUsingEncoding:NSUTF8StringEncoding]];
         // save parameters
@@ -161,6 +161,9 @@
 #pragma SafeSlingerDelegate Methods
 - (void)EndExchange:(int)status_code ErrorString:(NSString*)error_str ExchangeSet: (NSArray*)exchange_set
 {
+    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"FIRST_USE"])
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"FIRST_USE"];
+    
     [self.navigationController popToRootViewControllerAnimated:YES];
     switch(status_code)
     {

@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2010-2014 Carnegie Mellon University
+ * Copyright (c) 2010-2015 Carnegie Mellon University
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -30,9 +30,6 @@
 #import "ErrorLogger.h"
 #import "BackupCloud.h"
 #import "TimePicker.h"
-
-#import <UAPush.h>
-#import <UAirship.h>
 
 @interface ConfigView ()
 
@@ -339,7 +336,8 @@
             break;
         case AdvanceSec:
         {
-            switch (indexPath.row) {
+            switch (indexPath.row)
+            {
                 /*
                 case AutoDecrypt:
                     cell.textLabel.text = NSLocalizedString(@"menu_auto_decrypt", @"Auto-decrypt");
@@ -357,13 +355,16 @@
                     cell.detailTextLabel.text = [SSEngine getSelfKeyID];
                     break;
                 case PushToken:
+                {
                     cell.textLabel.text = NSLocalizedString(@"label_PushTokenID", @"Push Registration ID");
-                    if([UAirship shared].deviceToken)
+                    NSString* hex_token = [[NSUserDefaults standardUserDefaults] stringForKey: kPUSH_TOKEN];
+                    if(hex_token)
                     {
-                        cell.detailTextLabel.text = [UAirship shared].deviceToken;
+                        cell.detailTextLabel.text = hex_token;
                     }else{
                         cell.detailTextLabel.text = NSLocalizedString(@"iOS_errorpushtoken", @"Push Token is missing.");
                     }
+                }
                     break;
                 default:
                     break;
