@@ -29,7 +29,7 @@
 
 @implementation RegistrationHandler
 
-- (void)registerToken: (NSString*)hex_submissiontoken DeviceHex: (NSString*)hex_token KeyHex: (NSString*)hex_keyid ClientVer: (int)int_clientver
+- (void)registerToken: (NSString*)hex_submissiontoken DeviceHex: (NSString*)hex_token KeyHex: (NSString*)hex_keyid ClientVer: (int)int_clientver PassphraseCache:(NSString*)passcache
 {
     /* 
      * Build packet for registration
@@ -74,13 +74,14 @@
     
     // append pubkey
     NSData *pubkey = [SSEngine getPubKey:SIGN_PUB];
-    NSInteger pubkey_len = [pubkey length];
+    NSInteger pubkey_len = htonl([pubkey length]);
     [msgchunk appendBytes: &pubkey_len length: 4];
     [msgchunk appendData: pubkey];
     
     // sign and append signature
-    NSData *sig = [SSEngine Sign:msgchunk withPrikey:[SSEngine getPrivateKey:SIGN_PRI]];
-    NSInteger sig_len = [sig length];
+    NSData* SignKey = [SSEngine UnlockPrivateKey:passcache Size:[SSEngine getSelfPrivateKeySize:SIGN_PRI] Type:SIGN_PRI];
+    NSData *sig = [SSEngine Sign:msgchunk withPrikey:SignKey];
+    NSInteger sig_len = htonl([sig length]);
     [msgchunk appendBytes: &sig_len length: 4];
     [msgchunk appendData: sig];
     

@@ -85,12 +85,13 @@
     RegistrationHandler *handler = [[RegistrationHandler alloc]init];
     NSString* hex_token = [[NSUserDefaults standardUserDefaults] stringForKey: kPUSH_TOKEN];
     int ver = [(AppDelegate*)[[UIApplication sharedApplication]delegate]getVersionNumberByInt];
+    NSString* pass_cache = [(AppDelegate*)[[UIApplication sharedApplication]delegate]tempralPINCode];
     NSString* hex_subtoken = [SSEngine getSelfSubmissionToken];
     NSString* hex_keyid = [SSEngine getSelfKeyID];
     
     if(hex_token && hex_subtoken && hex_keyid)
     {
-        [handler registerToken: hex_subtoken DeviceHex: hex_token KeyHex: hex_keyid ClientVer: ver];
+        [handler registerToken: hex_subtoken DeviceHex: hex_token KeyHex: hex_keyid ClientVer: ver PassphraseCache:pass_cache];
     }
 }
 
