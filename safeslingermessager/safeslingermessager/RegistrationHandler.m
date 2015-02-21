@@ -25,6 +25,7 @@
 #import "RegistrationHandler.h"
 #import "ErrorLogger.h"
 #import "Utility.h"
+#import "SSEngine.h"
 
 @implementation RegistrationHandler
 
@@ -32,14 +33,18 @@
 {
     /* 
      * Build packet for registration
-     * client_ver [0:4]
-     * lenkeyid [4:4+4]
-     * keyId [4+4: 4+4+lenkeyid]
-     * lensubtok [4+4+lenkeyid: 4+4+lenkeyid+4]
-     * submissionToken [4+4+lenkeyid+4: 4+4+lenkeyid+4+lensubtok]
-     * lenregid [4+4+lenkeyid+4+lensubtok: 4+4+lenkeyid+4+lensubtok+4]
-     * registrationId [4+4+lenkeyid+4+lensubtok+4: 4+4+lenkeyid+4+lensubtok+4+lenregid]
-     * devtype = [4+4+lenkeyid+4+lensubtok+4+lenregid: 4+4+lenkeyid+4+lensubtok+4+lenregid+4]
+     * client_ver 4 bytes
+     * lenkeyid 4 bytes
+     * keyId
+     * lensubtok 4 bytes
+     * submissionToken
+     * lenregid 4 bytes
+     * registrationId
+     * devtype 4 bytes
+     * lenpubkey 4 bytes
+     * pubkey
+     * lensig 4 bytes
+     * sig
      */
     
     NSMutableData *msgchunk = [[NSMutableData alloc] init];
@@ -66,6 +71,18 @@
     // devtype
     int dev_type = htonl(iOS);
     [msgchunk appendBytes: &dev_type length: 4];
+    
+    // append pubkey
+    NSData *pubkey = [SSEngine getPubKey:SIGN_PUB];
+    NSInteger pubkey_len = [pubkey length];
+    [msgchunk appendBytes: &pubkey_len length: 4];
+    [msgchunk appendData: pubkey];
+    
+    // sign and append signature
+    NSData *sig = [SSEngine Sign:msgchunk withPrikey:[SSEngine getPrivateKey:SIGN_PRI]];
+    NSInteger sig_len = [sig length];
+    [msgchunk appendBytes: &sig_len length: 4];
+    [msgchunk appendData: sig];
     
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@/%@", HTTPURL_PREFIX, HTTPURL_HOST_MSG, POSTREGISTRATION]];;
     
