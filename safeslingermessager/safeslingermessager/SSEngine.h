@@ -43,7 +43,7 @@ typedef enum KeyType {
 +(int)GenRSAKey:(int)bits WithType:(int)keytype;
 
 // block cipher and hmac for message and files
-+(NSData*)GenRandomAESKey;
++(NSData*)GenRandomBytes:(int)len_bytes;
 +(NSData*)AESEncrypt: (NSData*)plain withAESKey: (NSData*)secret;
 +(NSData*)AESDecrypt: (NSData*)cipher withAESKey: (NSData*)secret withPlen: (int)lengthOfPlain;
 

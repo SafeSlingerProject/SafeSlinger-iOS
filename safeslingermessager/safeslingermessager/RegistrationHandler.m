@@ -41,6 +41,8 @@
      * lenregid 4 bytes
      * registrationId
      * devtype 4 bytes
+     * lennonce 4 bytes
+     * nonce
      * lenpubkey 4 bytes
      * pubkey
      * lensig 4 bytes
@@ -72,10 +74,16 @@
     int dev_type = htonl(iOS);
     [msgchunk appendBytes: &dev_type length: 4];
     
+    // append nonce
+    NSData *nonce = [SSEngine GenRandomBytes:32];
+    NSInteger lennonce = htonl([nonce length]);
+    [msgchunk appendBytes: &lennonce length: 4];
+    [msgchunk appendData: nonce];
+    
     // append pubkey
     NSData *pubkey = [SSEngine getPubKey:SIGN_PUB];
-    NSInteger pubkey_len = htonl([pubkey length]);
-    [msgchunk appendBytes: &pubkey_len length: 4];
+    NSInteger lenpubkey = htonl([pubkey length]);
+    [msgchunk appendBytes: &lenpubkey length: 4];
     [msgchunk appendData: pubkey];
     
     // sign and append signature
