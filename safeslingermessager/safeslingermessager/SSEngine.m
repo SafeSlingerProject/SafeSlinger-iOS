@@ -56,7 +56,7 @@
     char* keyid[128];
     memset(keyid, 0, 128);
     unsigned char *bytePtr = (unsigned char *)[packet bytes];
-    memcpy(keyid, bytePtr, 88);
+    memcpy(keyid, bytePtr, LENGTH_KEYID);
     return [NSString stringWithCString: (const char*)keyid encoding:NSASCIIStringEncoding];
 }
 
@@ -1053,7 +1053,7 @@
     //E4: Token_length, UAirship token string
     len = htonl([token length]);
     [cipher appendBytes: &len length: 4];
-    //E5: Token, UAirship token string
+    //E5: Token, push token
     [cipher appendBytes: [token cStringUsingEncoding: NSASCIIStringEncoding] length: [token length]];
     //E6: Message len
     len = htonl([encryptMsg length]);
