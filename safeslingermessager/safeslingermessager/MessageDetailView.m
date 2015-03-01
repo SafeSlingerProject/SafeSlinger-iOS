@@ -80,6 +80,7 @@
 	
 	// hides textfield if this contact is not active
 	if(assignedEntry.active) {
+        InstanceMessage.autocapitalizationType = UITextAutocapitalizationTypeSentences;
 		[InstanceMessage setPlaceholder:NSLocalizedString(@"label_ComposeHint", @"Compose Message")];
 		[InstanceBtn setTitle: NSLocalizedString(@"title_SendFile", @"Send") forState: UIControlStateNormal];
 	} else {

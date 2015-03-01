@@ -495,6 +495,7 @@
                                                           otherButtonTitles: NSLocalizedString(@"btn_OK", @"OK"), nil];
                     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
                     UITextField *textField = [alert textFieldAtIndex:0];
+                    textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
                     
                     if(indexPath.row==UserFirstName)
                         textField.text = [delegate.DbInstance GetStringConfig: @"Profile_FN"];

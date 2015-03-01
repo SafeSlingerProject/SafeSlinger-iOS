@@ -50,6 +50,7 @@
     
     _appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     
+    _messageTextView.autocapitalizationType = UITextAutocapitalizationTypeSentences;
     _messageTextView.layer.borderWidth = 1.0f;
     _messageTextView.layer.borderColor = [[UIColor grayColor] CGColor];
 	
