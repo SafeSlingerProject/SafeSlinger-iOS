@@ -62,6 +62,10 @@
 	
     UIBarButtonItem *addBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action: @selector(createNewThread:)];
     [self.parentViewController.navigationItem setRightBarButtonItem:addBtn];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
 	
 	if(_viewControllerToBePushed) {
 		[self.navigationController pushViewController:_viewControllerToBePushed animated:YES];
