@@ -953,19 +953,18 @@
 }
 
 - (BOOL)RemoveRecipient:(NSString *)KEYID {
-    if(db==nil||KEYID==nil){
+    if(db==nil || KEYID==nil) {
         [ErrorLogger ERRORDEBUG:@"ERROR: DB Object is null or input is null."];
         return NO;
     }
     
     BOOL ret = YES;
     @try {
-        
         sqlite3_stmt *sqlStatement;
         const char *sql = "DELETE FROM tokenstore WHERE keyid=?";
         
         // first , remove toekn from token store
-        if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK){
+        if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
             [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while creating statement. '%s'", sqlite3_errmsg(db)]];
             ret = NO;
         }
@@ -973,12 +972,12 @@
         // bind keyid
         sqlite3_bind_blob(sqlStatement, 1, [KEYID cStringUsingEncoding:NSUTF8StringEncoding], (int)[KEYID lengthOfBytesUsingEncoding:NSUTF8StringEncoding], SQLITE_TRANSIENT);
         
-        if(SQLITE_DONE != sqlite3_step(sqlStatement)){
+        if(SQLITE_DONE != sqlite3_step(sqlStatement)) {
             [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"ERROR: Error while inserting data. '%s'", sqlite3_errmsg(db)]];
             ret = NO;
         }
         
-        if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
+        if(sqlite3_finalize(sqlStatement) != SQLITE_OK) {
             [ErrorLogger ERRORDEBUG: @"ERROR: Problem with finalize statement"];
             ret = NO;
         }
@@ -1004,69 +1003,64 @@
         sqlite3_stmt *sqlStatement;
         const char *sql = "ALTER TABLE tokenstore RENAME TO tokenstore_temp;";
         
-        if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK){
+        if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
             DEBUGMSG(@"Error while preparing statement. '%s'\n", sqlite3_errmsg(db));
             ret = NO;
         }
         
-        if(sqlite3_step(sqlStatement) != SQLITE_OK)
-        {
+        if(sqlite3_step(sqlStatement) != SQLITE_OK) {
             ret = NO;
         }
         
         sql = "CREATE TABLE tokenstore (ptoken text not null, pid text not null, bdate datetime not null, dev int not null, ex_type int not null, note text null, keyid blob primary key, pkey text null,pstamp datetime null,pstatus int default 0);";
         
-        if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK){
+        if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
             DEBUGMSG(@"Error while preparing statement. '%s'\n", sqlite3_errmsg(db));
             ret = NO;
         }
         
-        if(sqlite3_step(sqlStatement) != SQLITE_OK)
-        {
+        if(sqlite3_step(sqlStatement) != SQLITE_OK) {
             ret = NO;
         }
         
         sql = "INSERT INTO tokenstore SELECT * FROM tokenstore_temp;";
         
-        if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK){
+        if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
             DEBUGMSG(@"Error while preparing statement. '%s'\n", sqlite3_errmsg(db));
             ret = NO;
         }
         
-        if(sqlite3_step(sqlStatement) != SQLITE_OK)
-        {
+        if(sqlite3_step(sqlStatement) != SQLITE_OK) {
             ret = NO;
         }
         
         sql = "DROP TABLE tokenstore_temp;";
         
-        if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK){
+        if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
             DEBUGMSG(@"Error while preparing statement. '%s'\n", sqlite3_errmsg(db));
             ret = NO;
         }
         
-        if(sqlite3_step(sqlStatement) != SQLITE_OK)
-        {
+        if(sqlite3_step(sqlStatement) != SQLITE_OK) {
             ret = NO;
         }
         
-        if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
+        if(sqlite3_finalize(sqlStatement) != SQLITE_OK) {
             ret = NO;
         }
         
         sql = "DELETE msgtable WHERE smsg = 'Y';";
         
-        if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK){
+        if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
             DEBUGMSG(@"Error while preparing statement. '%s'\n", sqlite3_errmsg(db));
             ret = NO;
         }
         
-        if(sqlite3_step(sqlStatement) != SQLITE_OK)
-        {
+        if(sqlite3_step(sqlStatement) != SQLITE_OK) {
             ret = NO;
         }
         
-        if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
+        if(sqlite3_finalize(sqlStatement) != SQLITE_OK) {
             ret = NO;
         }
         
@@ -1079,36 +1073,33 @@
             ret = NO;
         }
         
-        while(sqlite3_step(sqlStatement) == SQLITE_ROW)
-        {
+        while(sqlite3_step(sqlStatement) == SQLITE_ROW) {
             NSString* keyid = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 0)];
             NSString* token = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 1)];
             [dict setObject:keyid forKey:token];
         }
         
-        if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
+        if(sqlite3_finalize(sqlStatement) != SQLITE_OK) {
             ret = NO;
         }
         
-        for(NSString* token in [dict allKeys])
-        {
+        for(NSString* token in [dict allKeys]) {
             NSString *keyid = [dict objectForKey:token];
             
             sql = "UPDATE msgtable SET receipt = ? WHERE token = ?;";
-            if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK){
+            if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
                 DEBUGMSG(@"Error while preparing statement. '%s'\n", sqlite3_errmsg(db));
                 ret = NO;
             }
             
             sqlite3_bind_text(sqlStatement, 1, [keyid UTF8String], -1, SQLITE_TRANSIENT);
             sqlite3_bind_text(sqlStatement, 2, [token UTF8String], -1, SQLITE_TRANSIENT);
-            if(sqlite3_step(sqlStatement) != SQLITE_DONE)
-            {
+            if(sqlite3_step(sqlStatement) != SQLITE_DONE) {
                 DEBUGMSG(@"update failed.");
                 ret = NO;
             }
             
-            if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
+            if(sqlite3_finalize(sqlStatement) != SQLITE_OK) {
                 ret = NO;
             }
         }
@@ -1192,11 +1183,8 @@
     }
 }
 
-- (int)ThreadMessageCount: (NSString*)KEYID
-{
-    
-    if(db==nil||KEYID==nil)
-    {
+- (int)ThreadMessageCount:(NSString *)KEYID {
+    if(db==nil || KEYID==nil) {
         [ErrorLogger ERRORDEBUG: @"ERROR: DB Object is null or Input is null."];
         return 0;
     }
@@ -1205,8 +1193,8 @@
     @try {
         const char *sql = "SELECT count(msgid) FROM msgtable WHERE receipt=?";
         sqlite3_stmt *sqlStatement;
-        if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK)
-        {
+		
+        if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
             [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
         }
         

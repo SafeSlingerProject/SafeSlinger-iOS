@@ -44,7 +44,7 @@ typedef enum AttachCategory{
     ShareFolderType=4
 }AttachCategory;
 
-@interface ComposeView : UIViewController <UITextViewDelegate, UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIAlertViewDelegate, ContactSelectViewDelegate> {
+@interface ComposeView : UIViewController <UITextViewDelegate, UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIAlertViewDelegate> {
 
     NSData *attachFileRawBytes;
 }

@@ -35,6 +35,7 @@
 @interface MessageView ()
 
 @property (strong, nonatomic) UIViewController *viewControllerToBePushed;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *createNewMessageButton;
 
 @end
 
@@ -45,8 +46,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
-    MessageList = [[NSMutableArray alloc]init];
+    delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    MessageList = [NSMutableArray new];
     b_img = [UIImage imageNamed: @"blank_contact_small.png"];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
@@ -60,8 +61,7 @@
 	
     [self UpdateThread];
 	
-    UIBarButtonItem *addBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action: @selector(createNewThread:)];
-    [self.parentViewController.navigationItem setRightBarButtonItem:addBtn];
+	self.parentViewController.navigationItem.rightBarButtonItem = _createNewMessageButton;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -95,10 +95,6 @@
     [self viewWillAppear:YES];
 }
 
-- (void)createNewThread:(id)sender {
-    [self.tabBarController setSelectedIndex:1];
-}
-
 - (void)viewDidUnload {
     [MessageList removeAllObjects];
 	
@@ -112,13 +108,12 @@
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
     return [MessageList count];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 	if([MessageList count] == 0) {
-        return NSLocalizedString(@"label_InstNoMessages", @"No messages. You may send a message from tapping the 'Compose Message' Button in Home Menu.");
+        return NSLocalizedString(@"label_InstNoMessages", nil);
 	}
  
 	return @"";
@@ -191,7 +186,7 @@
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        MsgListEntry* MsgListEntry = [MessageList objectAtIndex:indexPath.row];
+        MsgListEntry* MsgListEntry = MessageList[indexPath.row];
         if([MsgListEntry.keyid isEqual:@"UNDEFINED"]) {
             if([delegate.UDbInstance DeleteThread: @"UNDEFINED"]) {
                 [MessageList removeObjectAtIndex:indexPath.row];
@@ -224,19 +219,22 @@
 }
 
 #pragma mark - Navigation
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([[segue identifier]isEqualToString:@"MessageDetail"]) {
+    if([segue.identifier isEqualToString:@"MessageDetail"]) {
         // assign entry...
         MessageDetailView *detail = (MessageDetailView*)[segue destinationViewController];
-        detail.assignedEntry = [MessageList objectAtIndex:[self.tableView indexPathForSelectedRow].row];
-    }
+        detail.assignedEntry = MessageList[[self.tableView indexPathForSelectedRow].row];
+	} else if([segue.identifier isEqualToString:@"SelectContactSegue"]) {
+		ContactSelectView *destination = (ContactSelectView *)segue.destinationViewController;
+		destination.delegate = self;
+		destination.contactSelectionMode = ContactSelectionModeCompose;
+	}
 }
 
 - (void)shouldPushViewController:(UIViewController *)viewController {
 	_viewControllerToBePushed = viewController;
 }
-
 
 #pragma mark - MessageSenderDelegate methods
 
@@ -244,6 +242,20 @@
 	if(message.outgoingStatus == MessageOutgoingStatusFailed || message.outgoingStatus == MessageOutgoingStatusSent) {
 		[self UpdateThread];
 	}
+}
+
+#pragma mark - ContactSelectViewDelegate methods
+
+- (void)contactSelected:(ContactEntry *)contact {
+	MsgListEntry *listEntry = [MsgListEntry new];
+	listEntry.keyid = contact.keyId;
+	listEntry.active = 1;
+	
+	MessageDetailView *viewController = (MessageDetailView *)[self.storyboard instantiateViewControllerWithIdentifier:@"MessageDetailViewController"];
+	viewController.assignedEntry = listEntry;
+	delegate.messageSender.delegate = viewController;
+	
+	[self shouldPushViewController:viewController];
 }
 
 @end

@@ -29,7 +29,7 @@
 @class AppDelegate;
 @class MsgListEntry;
 
-@interface MessageView : UITableViewController <MessageSenderDelegate> {
+@interface MessageView : UITableViewController <MessageSenderDelegate, ContactSelectViewDelegate> {
     AppDelegate *delegate;
 }
 

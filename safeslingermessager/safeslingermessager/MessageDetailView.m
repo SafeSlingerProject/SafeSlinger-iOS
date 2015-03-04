@@ -48,13 +48,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+    delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     BackGroundQueue = dispatch_queue_create("safeslinger.background.queue", NULL);
     b_img = [UIImage imageNamed: @"blank_contact_small.png"];
 	
-    OperationLock = [[NSLock alloc]init];
+    OperationLock = [NSLock new];
 	
-    _previewer = [[QLPreviewController alloc] init];
+    _previewer = [QLPreviewController new];
     [_previewer setDataSource:self];
     [_previewer setDelegate:self];
     [_previewer setCurrentPreviewItemIndex:0];

@@ -703,10 +703,6 @@
     if([segue.identifier isEqualToString:@"AudioRecord"]) {
         AudioRecordView *dest = (AudioRecordView *)segue.destinationViewController;
         dest.parent = self;
-    } else if([segue.identifier isEqualToString:@"ContactSelectForCompose"]) {
-        ContactSelectView *dest = (ContactSelectView *)segue.destinationViewController;
-        dest.delegate = self;
-		dest.contactSelectionMode = ContactSelectionModeCompose;
     }
 }
 
