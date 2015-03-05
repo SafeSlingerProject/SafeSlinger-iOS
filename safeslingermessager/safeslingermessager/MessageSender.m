@@ -26,7 +26,7 @@
 }
 
 - (void)sendMessage:(MsgEntry *)message packetData:(NSData *)packetData {
-	if([message.msgbody length] == 0) {
+	if([message.msgbody length] == 0 && message.fbody.length == 0) {
 		// empty message
 		[[[[iToast makeText: NSLocalizedString(@"error_selectDataToSend", @"You need an attachment or a text message to send.")]
 		   setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
@@ -53,7 +53,9 @@
 	[request setHTTPBody:packetData];
 	
 	NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	[NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 		 if(error) {
 			 [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Internet Connection failed. Error - %@ %@",
 									   [error localizedDescription],

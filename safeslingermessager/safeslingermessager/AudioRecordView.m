@@ -35,7 +35,7 @@
 
 @implementation AudioRecordView
 
-@synthesize PlayBtn, RecordBtn, SaveBtn, StopBtn, polling_timer, parent, DiscardBtn, TimeLabel, audio_recorder;
+@synthesize PlayBtn, RecordBtn, SaveBtn, StopBtn, polling_timer, DiscardBtn, TimeLabel, audio_recorder;
 
 - (void)viewDidLoad
 {
@@ -250,19 +250,17 @@
     // audio_recorder = nil;
 }
 
-- (IBAction) save
-{
+- (IBAction)save {
     [DiscardBtn setHidden:YES];
     [SaveBtn setHidden:YES];
+	[_delegate recordedAudioInURL:self.audio_recorder.url];
     parent.attachFile = self.audio_recorder.url;
-    [parent UpdateAttachment];
+//    [parent UpdateAttachment];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction) record
-{
-    if (!audio_recorder.recording)
-    {
+- (IBAction)record {
+    if(!audio_recorder.recording) {
         [DiscardBtn setHidden:YES];
         [SaveBtn setHidden:YES];
         TimeLabel.text = @"00:00";
@@ -285,16 +283,15 @@
     }
 }
 
-- (IBAction) stop
-{
-    if(polling_timer.isValid)
+- (IBAction)stop {
+	if(polling_timer.isValid) {
         [polling_timer invalidate];
-    
+	}
+	
     RecordBtn.enabled = StopBtn.enabled = NO;
     PlayBtn.enabled = YES;
     
-    if (audio_recorder.recording)
-    {
+    if (audio_recorder.recording) {
         [audio_recorder stop];
         AVAudioSession *audioSession = [AVAudioSession sharedInstance];
         [audioSession setActive:NO error:nil];
@@ -305,29 +302,31 @@
     }
 }
 
-- (void) CalRECTime
-{
+- (void)CalRECTime {
     NSString *sec_label = nil, *min_label = nil;
     int min = 0, sec = 0;
+	
     if (audio_recorder.recording) {
         min = audio_recorder.currentTime/60;
         sec = audio_recorder.currentTime - min*60;
     }
-    sec_label = (sec<10) ? [NSString stringWithFormat:@"0%d", sec]: [NSString stringWithFormat:@"%d", sec];
+	
+	sec_label = (sec<10) ? [NSString stringWithFormat:@"0%d", sec]: [NSString stringWithFormat:@"%d", sec];
     min_label = (min<10) ? [NSString stringWithFormat:@"0%d", min]: [NSString stringWithFormat:@"%d", min];
     TimeLabel.text = [NSString stringWithFormat:@"%@:%@", min_label, sec_label];
 }
 
-- (void) CalPLAYTime
-{
+- (void)CalPLAYTime {
     NSString *sec_label = nil, *min_label = nil;
     int min = 0, sec = 0;
-    if(audio_player.playing) {
+	
+	if(audio_player.playing) {
         min = audio_player.currentTime/60;
         sec = audio_player.currentTime - min*60;
-    }else{
+    } else {
         if(polling_timer.isValid)[polling_timer invalidate];
     }
+	
     sec_label = (sec<10) ? [NSString stringWithFormat:@"0%d", sec]: [NSString stringWithFormat:@"%d", sec];
     min_label = (min<10) ? [NSString stringWithFormat:@"0%d", min]: [NSString stringWithFormat:@"%d", min];
     TimeLabel.text = [NSString stringWithFormat:@"%@:%@", min_label, sec_label];

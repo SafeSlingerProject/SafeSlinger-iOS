@@ -125,8 +125,8 @@ typedef enum {
 @property (nonatomic, readwrite) int attach;    // has attachment (1) or null (0)
 @property (nonatomic, readwrite) ProtectType sfile;     // encrypted(1) or decrypted(0) file,
 @property (nonatomic, strong) NSString *fname;  // filename
-@property (nonatomic, strong) NSData *fbody;    // file extension, MIME type
-@property (nonatomic, strong) NSString *fext;   // file raw data
+@property (nonatomic, strong) NSData *fbody;    // file raw data
+@property (nonatomic, strong) NSString *fext;   // file extension, MIME type
 
 
 -(MsgEntry*)InitOutgoingMsg: (NSData*)newmsgid Recipient:(ContactEntry*)user Message:(NSString*)message FileName:(NSString*)File FileType:(NSString*)MimeType FileData:(NSData*)FileRaw;

@@ -880,6 +880,8 @@
 "title_About" = "About";
 /* menu option (title case); used in the Select File Option menu to take a picture with the camera on iOS. */
 "title_camera" = "Camera";
+/* title (title case); used in the Select File Option menu to clear the current attachment. */
+"title_clear" = "Clear";
 /* title (title case); used at the top of the menu when choosing a directory to load or save a file attachment. */
 "title_ChooseDirectory" = "Choose Directory";
 /* title (title case); used at the top of the menu options when choosing among sources to pick an attachment. */

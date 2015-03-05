@@ -323,7 +323,7 @@ Key: 15/Oct/2014</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="onc-G9-TSq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-511" y="-197"/>
+            <point key="canvasLocation" x="-455" y="-233"/>
         </scene>
         <!--Passphase-->
         <scene sceneID="kNW-OJ-D2Z">
@@ -1333,9 +1333,12 @@ Key: 15/Oct/2014</string>
                                         <constraint firstAttribute="width" constant="32" id="NPI-uV-COR"/>
                                         <constraint firstAttribute="height" constant="32" id="Ta0-O0-0LI"/>
                                     </constraints>
-                                    <state key="normal" image="paperclip">
+                                    <state key="normal" image="attachment_add">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="selectAttachment:" destination="o1C-fE-r9V" eventType="touchUpInside" id="5ke-Bw-49L"/>
+                                    </connections>
                                 </button>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Compose Message" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Yx1-oA-3q4" userLabel="Message Text Field">
                                     <rect key="frame" x="48" y="7" width="210" height="30"/>
@@ -1412,7 +1415,9 @@ Key: 15/Oct/2014</string>
                         <outlet property="InstanceBox" destination="O7b-js-2Pz" id="LNF-lQ-kBv"/>
                         <outlet property="InstanceBtn" destination="y0I-Io-mhP" id="fIv-la-eyA"/>
                         <outlet property="InstanceMessage" destination="Yx1-oA-3q4" id="ORM-Cd-f4L"/>
+                        <outlet property="attachmentButton" destination="kWj-Rp-0bR" id="8xP-hy-ZkI"/>
                         <segue destination="I3B-Od-oYK" kind="push" identifier="ShowInvitation" id="2jF-bd-AcT"/>
+                        <segue destination="QgW-jC-qQD" kind="push" identifier="AudioRecordSegue" id="gwO-du-Lkg"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bjy-yp-Cyv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2274,6 +2279,7 @@ Key: 15/Oct/2014</string>
         </scene>
     </scenes>
     <resources>
+        <image name="attachment_add" width="24" height="24"/>
         <image name="blank_contact" width="256" height="256"/>
         <image name="blank_contact_small" width="45" height="45"/>
         <image name="compose" width="32" height="32"/>
@@ -2286,7 +2292,6 @@ Key: 15/Oct/2014</string>
         <image name="mrecord" width="32" height="32"/>
         <image name="mstop" width="32" height="32"/>
         <image name="namecard" width="58" height="58"/>
-        <image name="paperclip" width="24" height="24"/>
         <image name="slingkey" width="32" height="32"/>
         <image name="starslinger512p" width="512" height="512"/>
     </resources>
@@ -2298,8 +2303,9 @@ Key: 15/Oct/2014</string>
     <inferredMetricsTieBreakers>
         <segue reference="UZ2-1F-SnD"/>
         <segue reference="fmt-VR-Qc6"/>
-        <segue reference="4Sf-VJ-fnH"/>
         <segue reference="eWx-Wq-HcZ"/>
+        <segue reference="4Sf-VJ-fnH"/>
         <segue reference="Oq5-5I-4N6"/>
+        <segue reference="gwO-du-Lkg"/>
     </inferredMetricsTieBreakers>
 </document>

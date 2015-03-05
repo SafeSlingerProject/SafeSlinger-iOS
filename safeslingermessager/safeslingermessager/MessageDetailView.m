@@ -22,6 +22,8 @@
  * THE SOFTWARE.
  */
 
+#import <MobileCoreServices/UTType.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 #import "MessageDetailView.h"
 #import "AppDelegate.h"
 #import "SafeSlingerDB.h"
@@ -33,12 +35,29 @@
 #import "InvitationView.h"
 #import "MessageView.h"
 
+typedef enum {
+	AttachmentStatusEmpty,
+	AttachmentStatusAudio,
+	AttachmentStatusImage
+} AttachmentStatus;
+
+typedef enum {
+	AttachmentTypePhotoLibrary = 0,
+	AttachmentTypePhotosAlbum = 1,
+	AttachmentTypeCamera = 2,
+	AttachmentTypeSoundRecoder = 3,
+	AttachmentTypeClear = 4
+} AttachmentType;
+
 @interface MessageDetailView ()
 
 @property (strong, nonatomic) ContactEntry *recipient;
 @property (strong, nonatomic) NSMutableDictionary *pendingMessages;
 @property (strong, nonatomic) NSIndexPath *longPressedIndexPath;
 
+@property (strong, nonatomic) NSURL *attachedFile;
+@property (strong, nonatomic) NSData *attachedFileRawData;
+@property AttachmentStatus attachmentStatus;
 @end
 
 @implementation MessageDetailView
@@ -47,6 +66,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	_attachmentStatus = AttachmentStatusEmpty;
+	[self updateAttachmentButton];
     
     delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     BackGroundQueue = dispatch_queue_create("safeslinger.background.queue", NULL);
@@ -105,6 +127,22 @@
 		self.navigationItem.title = [NSString stringWithFormat:@"%@ %d", displayName, assignedEntry.messagecount];
 	} else {
 		self.navigationItem.title = [NSString stringWithFormat:@"%@ %d (%d)", displayName, assignedEntry.ciphercount+assignedEntry.messagecount, assignedEntry.ciphercount];
+	}
+}
+
+- (void)updateAttachmentButton {
+	switch (_attachmentStatus) {
+		case AttachmentStatusEmpty:
+			[_attachmentButton setImage:[UIImage imageNamed:@"attachment_add"] forState:UIControlStateNormal];
+			break;
+			
+		case AttachmentStatusAudio:
+			[_attachmentButton setImage:[UIImage imageNamed:@"attachment_audio"] forState:UIControlStateNormal];
+			break;
+			
+		case AttachmentStatusImage:
+			[_attachmentButton setImage:[UIImage imageNamed:@"attachment_image"] forState:UIControlStateNormal];
+			break;
 	}
 }
 
@@ -820,7 +858,7 @@
 }
 
 - (IBAction)sendshortmsg:(id)sender {
-	if(InstanceMessage.text == nil || InstanceMessage.text.length == 0) {
+	if((InstanceMessage.text == nil || InstanceMessage.text.length == 0) && !_attachedFile) {
 		return;
 	}
 	
@@ -828,16 +866,21 @@
 }
 
 - (void)sendTextMessage:(NSString *)text tableViewUpdateStarted:(BOOL)updateStarted {
-	NSMutableData *pktdata = [[NSMutableData alloc]initWithCapacity:0];
-	NSData *messageId = [SSEngine BuildCipher:_recipient.keyId Message:[text dataUsingEncoding:NSUTF8StringEncoding] Attach:nil RawFile:nil MIMETYPE:nil Cipher:pktdata];
+	NSMutableData *pktdata = [NSMutableData new];
+	
+	// get file type in MIME format
+	CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension,(__bridge CFStringRef)[[_attachedFile lastPathComponent] pathExtension], NULL);
+	NSString* mimeType = (__bridge NSString*)UTTypeCopyPreferredTagWithClass(UTI, kUTTagClassMIMEType);
+	
+	NSData *messageId = [SSEngine BuildCipher:_recipient.keyId Message:[text dataUsingEncoding:NSUTF8StringEncoding] Attach:[_attachedFile lastPathComponent]	RawFile:_attachedFileRawData MIMETYPE:mimeType Cipher:pktdata];
 	
 	MsgEntry *newMessage = [[MsgEntry alloc]
 							InitOutgoingMsg:messageId
 							Recipient:_recipient
 							Message:text
-							FileName:nil
-							FileType:nil
-							FileData:nil];
+							FileName:[_attachedFile lastPathComponent]
+							FileType:mimeType
+							FileData:_attachedFileRawData];
 	newMessage.outgoingStatus = MessageOutgoingStatusSending;
 	
 	InstanceMessage.text = @"";
@@ -862,9 +905,81 @@
 	
 	delegate.messageSender.delegate = self;
 	[delegate.messageSender sendMessage:newMessage packetData:pktdata];
+	
+	_attachedFile = nil;
+	_attachedFileRawData = nil;
+	_attachmentStatus = AttachmentStatusEmpty;
+	[self updateAttachmentButton];
+}
+
+- (void)sendAttachment {
+	
+}
+
+- (BOOL)CheckPhotoPermission {
+	BOOL ret = NO;
+	ALAuthorizationStatus authStatus = [ALAssetsLibrary authorizationStatus];
+	if(authStatus == ALAuthorizationStatusNotDetermined) {
+		ret = YES; // wait to trigger it
+	} else if(authStatus == ALAuthorizationStatusRestricted || authStatus == ALAuthorizationStatusDenied) {
+		// show indicator
+		NSString* buttontitle = nil;
+		NSString* description = nil;
+		
+		if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+			buttontitle = NSLocalizedString(@"menu_Help", nil);
+			description = [NSString stringWithFormat: NSLocalizedString(@"iOS_photolibraryError", nil), buttontitle];
+		} else {
+			buttontitle = NSLocalizedString(@"menu_Settings", nil);
+			description = [NSString stringWithFormat: NSLocalizedString(@"iOS_photolibraryError", nil), buttontitle];
+		}
+		
+		UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", nil)
+														  message: description
+														 delegate: self
+												cancelButtonTitle: NSLocalizedString(@"btn_Cancel", nil)
+												otherButtonTitles: buttontitle, nil];
+		message.tag = HelpPhotoLibrary;
+		[message show];
+		message = nil;
+	} else if(authStatus == ALAuthorizationStatusAuthorized){
+		ret = YES;
+	}
+	return ret;
+}
+
+- (BOOL)CheckCameraPermission {
+	AVCaptureDevice *inputDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+	AVCaptureDeviceInput *captureInput = [AVCaptureDeviceInput deviceInputWithDevice:inputDevice error:nil];
+	if (!captureInput) {
+		// show indicator
+		NSString* buttontitle = nil;
+		NSString* description = nil;
+		
+		if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+			buttontitle = NSLocalizedString(@"menu_Help", nil);
+			description = [NSString stringWithFormat: NSLocalizedString(@"iOS_cameraError", nil), buttontitle];
+		} else {
+			buttontitle = NSLocalizedString(@"menu_Settings", nil);
+			description = [NSString stringWithFormat: NSLocalizedString(@"iOS_cameraError", nil), buttontitle];
+		}
+		
+		UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", nil)
+														  message: description
+														 delegate: self
+												cancelButtonTitle: NSLocalizedString(@"btn_Cancel", nil)
+												otherButtonTitles: buttontitle, nil];
+		message.tag = HelpCamera;
+		[message show];
+		message = nil;
+		return NO;
+	} else {
+		return YES;
+	}
 }
 
 #pragma UITextFieldDelegate Methods
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     self.navigationItem.leftBarButtonItem = CancelBtn;
 }
@@ -890,10 +1005,14 @@
         view.InviterFaceImg = thread_img;
         view.InviterName = [NSString humanreadable: [delegate.DbInstance QueryStringInTokenTableByKeyID: assignedEntry.keyid Field:@"pid"]];
         view.InviteeVCard = _tRecord;
-    }
+	} else if([segue.identifier isEqualToString:@"AudioRecordSegue"]) {
+		AudioRecordView *destination = (AudioRecordView *)segue.destinationViewController;
+		destination.delegate = self;
+	}
 }
 
 #pragma mark - MessageReceiverNotificationDelegate methods
+
 - (void)messageReceived {
 	NSUInteger count = self.messages.count;
 	[self reloadTable];
@@ -927,6 +1046,156 @@
 		
 		[self reloadTable];
 	}
+}
+
+#pragma mark - AudioRecordDelegate methods
+
+- (void)recordedAudioInURL:(NSURL *)audioURL {
+	NSData *rawData = [NSData dataWithContentsOfURL:audioURL];
+	
+	if([rawData length] == 0) {
+		[[[[iToast makeText: NSLocalizedString(@"error_CannotSendEmptyFile", @"Cannot send an empty file.")]
+		   setGravity:iToastGravityCenter] setDuration:iToastDurationShort] show];
+	} else if([_attachedFileRawData length] > 9437184) {
+		NSString *msg = [NSString stringWithFormat: NSLocalizedString(@"error_CannotSendFilesOver", @"Cannot send attachments greater than %d bytes in size."), 9437184];
+		[[[[iToast makeText: msg]
+		   setGravity:iToastGravityCenter] setDuration:iToastDurationShort] show];
+	} else {
+		_attachedFile = audioURL;
+		_attachedFileRawData = rawData;
+		_attachmentStatus = AttachmentStatusAudio;
+		[self updateAttachmentButton];
+	}
+}
+
+#pragma mark - IBAction methods
+
+- (IBAction)selectAttachment:(id)sender {
+	UIActionSheet *actionSheet = [[UIActionSheet alloc]
+								  initWithTitle: NSLocalizedString(@"title_ChooseFileLoad", @"Choose Your File")
+								  delegate: self
+								  cancelButtonTitle: nil
+								  destructiveButtonTitle: nil
+								  otherButtonTitles:
+								  NSLocalizedString(@"title_photolibary", @"Photo Library"),
+								  NSLocalizedString(@"title_photoalbum", @"Photo Album"),
+								  NSLocalizedString(@"title_camera", @"Camera"),
+								  NSLocalizedString(@"title_soundrecoder", @"Sound Recorder"),
+								  nil];
+	
+	if(_attachmentStatus != AttachmentStatusEmpty) {
+		[actionSheet setDestructiveButtonIndex:[actionSheet addButtonWithTitle:NSLocalizedString(@"title_clear", nil)]]; 
+	}
+	
+	[actionSheet setCancelButtonIndex:[actionSheet addButtonWithTitle:NSLocalizedString(@"btn_Cancel", @"Cancel")]];
+	[actionSheet showInView:[self.navigationController view]];
+}
+
+#pragma mark - UIActionSheetDelegate methods
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+	if(buttonIndex == actionSheet.cancelButtonIndex) {
+		return;
+	}
+	
+	[self dismissViewControllerAnimated:NO completion:nil];
+	
+	switch (buttonIndex) {
+		case AttachmentTypePhotoLibrary:
+			if([self CheckPhotoPermission]) {
+				UIImagePickerController *imagePicker = [UIImagePickerController new];
+				imagePicker.delegate = self;
+				imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+				imagePicker.allowsEditing = YES;
+				[self presentViewController:imagePicker animated:YES completion:nil];
+			}
+			
+			break;
+			
+		case AttachmentTypePhotosAlbum:
+			if([self CheckPhotoPermission]) {
+				UIImagePickerController *imagePicker = [UIImagePickerController new];
+				imagePicker.delegate = self;
+				imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+				imagePicker.allowsEditing = YES;
+				[self presentViewController:imagePicker animated:YES completion:nil];
+			}
+			
+			break;
+			
+		case AttachmentTypeCamera:
+			if([self CheckCameraPermission]) {
+				UIImagePickerController *imagePicker = [UIImagePickerController new];
+				imagePicker.delegate = self;
+				imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+				imagePicker.showsCameraControls = YES;
+				imagePicker.allowsEditing = YES;
+				[self presentViewController:imagePicker animated:YES completion:nil];
+			}
+			
+			break;
+			
+		case AttachmentTypeSoundRecoder:
+			[self performSegueWithIdentifier:@"AudioRecordSegue" sender:self];
+			break;
+			
+		case AttachmentTypeClear:
+			_attachedFile = nil;
+			_attachedFileRawData = nil;
+			_attachmentStatus = AttachmentStatusEmpty;
+			[self updateAttachmentButton];
+			break;
+			
+	}
+}
+
+#pragma mark - UIImagePickerControllerDelegate methods
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+	[self dismissViewControllerAnimated:YES completion:nil];
+	
+	[info valueForKey:UIImagePickerControllerReferenceURL];
+	NSURL *urlstr = [info valueForKey:UIImagePickerControllerReferenceURL];
+	NSData *imgdata = UIImageJPEGRepresentation([info valueForKey:UIImagePickerControllerOriginalImage], 1.0);
+	
+	if(!imgdata.length) {
+		[[[[iToast makeText: NSLocalizedString(@"error_CannotSendEmptyFile", @"Cannot send an empty file.")]
+		   setGravity:iToastGravityCenter] setDuration:iToastDurationShort] show];
+		return;
+	} else if(imgdata.length > 9437184) {
+		NSString *msg = [NSString stringWithFormat: NSLocalizedString(@"error_CannotSendFilesOver", "Cannot send attachments greater than %d bytes in size."), 9437184];
+		[[[[iToast makeText: msg]
+		   setGravity:iToastGravityCenter] setDuration:iToastDurationShort] show];
+		return;
+	}
+	
+	NSString *filename = nil;
+	
+	if(!urlstr) {
+		DEBUGMSG(@"camera file");
+		NSDateFormatter *format = [[NSDateFormatter alloc] init];
+		[format setDateFormat:@"yyyyMMdd-HHmmss"];
+		NSDate *now = [[NSDate alloc] init];
+		NSString *dateString = [format stringFromDate:now];
+		filename = [NSString stringWithFormat:@"cam-%@.jpg", dateString];
+	} else {
+		// has id
+		NSRange range, idrange;
+		range = [[urlstr absoluteString] rangeOfString:@"id="];
+		idrange.location = range.location+range.length;
+		range = [[urlstr absoluteString] rangeOfString:@"&ext="];
+		idrange.length = range.location - idrange.location;
+		filename = [NSString stringWithFormat:@"%@.%@", [[urlstr absoluteString]substringWithRange:idrange], [[urlstr absoluteString]substringFromIndex:range.location+range.length]];
+	}
+	
+//	NSString *sizeinfo = [NSString stringWithFormat:@"%@ (%@).", filename,
+//						  [NSString stringWithFormat:NSLocalizedString(@"label_kb",@"%.0f kb"), [imgdata length]/1024.0f]
+//						  ];
+	
+	_attachedFile = [NSURL URLWithString:filename];
+	_attachedFileRawData = imgdata;
+	_attachmentStatus = AttachmentStatusImage;
+	[self updateAttachmentButton];
 }
 
 @end

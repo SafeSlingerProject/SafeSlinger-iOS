@@ -28,13 +28,13 @@
 #import <dispatch/dispatch.h>
 #import "MessageReceiver.h"
 #import "MessageSender.h"
+#import "AudioRecordView.h"
 
 @class MsgListEntry;
 @class AppDelegate;
 @class MessageView;
 
-@interface MessageDetailView : UITableViewController <QLPreviewControllerDataSource, QLPreviewControllerDelegate, UIGestureRecognizerDelegate, UITextFieldDelegate, MessageReceiverNotificationDelegate, MessageSenderDelegate, UIAlertViewDelegate>
-{
+@interface MessageDetailView : UITableViewController <QLPreviewControllerDataSource, QLPreviewControllerDelegate, UIGestureRecognizerDelegate, UITextFieldDelegate, MessageReceiverNotificationDelegate, MessageSenderDelegate, AudioRecordDelegate, UIAlertViewDelegate, UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
     // For Grand Central Dispatch
     dispatch_queue_t BackGroundQueue;
     AppDelegate *delegate;
@@ -52,6 +52,7 @@
 @property (nonatomic, strong) IBOutlet UITextField *InstanceMessage;
 @property (nonatomic, strong) IBOutlet UIButton *InstanceBtn;
 @property (nonatomic, strong) IBOutlet UIView *InstanceBox;
+@property (strong, nonatomic) IBOutlet UIButton *attachmentButton;
 @property (nonatomic, strong) UIBarButtonItem *CancelBtn;
 @property (nonatomic, strong) UIBarButtonItem *BackBtn;
 @property (nonatomic) ABRecordRef tRecord;
