@@ -28,7 +28,6 @@
 #import "SafeSlingerDB.h"
 #import "ContactCellView.h"
 #import "IntroduceView.h"
-#import "ComposeView.h"
 #import "IntroduceView.h"
 #import "FunctionView.h"
 #import "BackupCloud.h"

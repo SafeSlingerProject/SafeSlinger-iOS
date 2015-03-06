@@ -6,188 +6,6 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Compose-->
-        <scene sceneID="W3I-pn-N6e">
-            <objects>
-                <viewController title="Compose" id="CZ4-MO-1fc" customClass="ComposeView" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="s9W-kb-ARv"/>
-                        <viewControllerLayoutGuide type="bottom" id="dtj-EO-iXF"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="2VE-Yg-loa">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ZP-hg-sYJ">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
-                                <subviews>
-                                    <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" image="blank_contact" translatesAutoresizingMaskIntoConstraints="NO" id="9Nh-su-J75" userLabel="Sender Photo">
-                                        <rect key="frame" x="20" y="20" width="55" height="52"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="55" id="YVn-Tr-Phn"/>
-                                            <constraint firstAttribute="height" priority="999" constant="52" id="osV-DJ-x42"/>
-                                        </constraints>
-                                    </imageView>
-                                    <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="WRx-0N-e7B" userLabel="From">
-                                        <rect key="frame" x="100" y="20" width="200" height="52"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="200" id="EbF-R5-1IO"/>
-                                            <constraint firstAttribute="height" constant="52" id="Koj-32-SsS"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <state key="normal">
-                                            <string key="title">From: Alice
-Key: 14/Oct/2014</string>
-                                        </state>
-                                        <connections>
-                                            <action selector="selectSender:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="b0G-sh-DhS"/>
-                                        </connections>
-                                    </button>
-                                    <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" image="blank_contact" translatesAutoresizingMaskIntoConstraints="NO" id="v8X-QE-F86" userLabel="Receiver Photo">
-                                        <rect key="frame" x="20" y="82" width="55" height="52"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="52" id="YbG-hC-o2M"/>
-                                            <constraint firstAttribute="width" constant="55" id="vdQ-Q8-qrp"/>
-                                        </constraints>
-                                    </imageView>
-                                    <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="VMZ-uv-zEK" userLabel="To">
-                                        <rect key="frame" x="100" y="82" width="200" height="52"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="52" id="y48-Ap-Tdp"/>
-                                            <constraint firstAttribute="width" constant="200" id="z8d-wS-U26"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <inset key="titleEdgeInsets" minX="0.0" minY="1" maxX="0.0" maxY="1"/>
-                                        <state key="normal">
-                                            <string key="title">To: Bob
-Key: 15/Oct/2014</string>
-                                        </state>
-                                    </button>
-                                    <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ROl-83-wEJ">
-                                        <rect key="frame" x="20" y="142" width="280" height="56"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="56" id="Unx-Ut-pYi"/>
-                                            <constraint firstAttribute="width" constant="280" id="zVF-qO-k5o"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <state key="normal" title="Add Attachment">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="selectAttachment:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="dIS-3F-BWA"/>
-                                        </connections>
-                                    </button>
-                                    <textView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m5Z-hd-La4" userLabel="Message" colorLabel="IBBuiltInLabel-Red">
-                                        <rect key="frame" x="20" y="234" width="280" height="202"/>
-                                        <accessibility key="accessibilityConfiguration" hint="Text Here.">
-                                            <accessibilityTraits key="traits" none="YES"/>
-                                        </accessibility>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="280" id="I7m-Sx-8vc"/>
-                                            <constraint firstAttribute="height" constant="202" id="Z9e-EA-Zxp"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="next"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="CZ4-MO-1fc" id="uSv-Cq-4CP"/>
-                                        </connections>
-                                    </textView>
-                                    <label autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="Mvi-GA-0IR">
-                                        <rect key="frame" x="65" y="205" width="235" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="235" id="1aj-uP-rqN"/>
-                                            <constraint firstAttribute="height" constant="21" id="edP-Rs-tWp"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="gV2-dp-Tsz">
-                                        <rect key="frame" x="20" y="206" width="20" height="20"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="20" id="1cl-Py-tQQ"/>
-                                            <constraint firstAttribute="height" constant="20" id="VEb-PK-mu8"/>
-                                        </constraints>
-                                    </activityIndicatorView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="Mvi-GA-0IR" firstAttribute="trailing" secondItem="ROl-83-wEJ" secondAttribute="trailing" id="28X-2W-M8v"/>
-                                    <constraint firstItem="9Nh-su-J75" firstAttribute="top" secondItem="5ZP-hg-sYJ" secondAttribute="top" constant="20" symbolic="YES" id="3Ph-Tp-Gc6"/>
-                                    <constraint firstItem="WRx-0N-e7B" firstAttribute="top" secondItem="9Nh-su-J75" secondAttribute="top" id="6bJ-M9-fd7"/>
-                                    <constraint firstItem="v8X-QE-F86" firstAttribute="leading" secondItem="ROl-83-wEJ" secondAttribute="leading" id="9GL-TP-e9k"/>
-                                    <constraint firstItem="VMZ-uv-zEK" firstAttribute="bottom" secondItem="v8X-QE-F86" secondAttribute="bottom" id="Dad-kg-kjj"/>
-                                    <constraint firstItem="9Nh-su-J75" firstAttribute="top" relation="greaterThanOrEqual" secondItem="5ZP-hg-sYJ" secondAttribute="top" constant="10" id="GEa-eX-Dqm" userLabel="Vertical Space - (10) - Image View - blank_contact - Scroll View"/>
-                                    <constraint firstItem="gV2-dp-Tsz" firstAttribute="top" secondItem="ROl-83-wEJ" secondAttribute="bottom" constant="8" symbolic="YES" id="GgP-6N-bf6"/>
-                                    <constraint firstItem="Mvi-GA-0IR" firstAttribute="bottom" secondItem="gV2-dp-Tsz" secondAttribute="bottom" id="IMZ-Si-OxO"/>
-                                    <constraint firstItem="VMZ-uv-zEK" firstAttribute="trailing" secondItem="ROl-83-wEJ" secondAttribute="trailing" id="Ihl-bG-rcs"/>
-                                    <constraint firstAttribute="centerX" secondItem="ROl-83-wEJ" secondAttribute="centerX" id="JIi-Eq-0ku"/>
-                                    <constraint firstItem="m5Z-hd-La4" firstAttribute="top" secondItem="Mvi-GA-0IR" secondAttribute="bottom" constant="8" symbolic="YES" id="N7p-cN-N0j"/>
-                                    <constraint firstAttribute="bottom" secondItem="m5Z-hd-La4" secondAttribute="bottom" constant="20" symbolic="YES" id="PI7-V9-4AI"/>
-                                    <constraint firstItem="gV2-dp-Tsz" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ROl-83-wEJ" secondAttribute="bottom" constant="8" id="QJN-FO-ec4"/>
-                                    <constraint firstItem="m5Z-hd-La4" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Mvi-GA-0IR" secondAttribute="bottom" constant="8" id="Vlz-FU-wRN"/>
-                                    <constraint firstItem="gV2-dp-Tsz" firstAttribute="leading" secondItem="ROl-83-wEJ" secondAttribute="leading" id="WRf-vu-7sa"/>
-                                    <constraint firstAttribute="trailing" secondItem="WRx-0N-e7B" secondAttribute="trailing" constant="20" symbolic="YES" id="dzw-yb-m0R"/>
-                                    <constraint firstItem="ROl-83-wEJ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="v8X-QE-F86" secondAttribute="bottom" constant="8" id="h5g-re-D0l"/>
-                                    <constraint firstItem="v8X-QE-F86" firstAttribute="leading" secondItem="9Nh-su-J75" secondAttribute="leading" id="hsl-nB-MmU"/>
-                                    <constraint firstItem="WRx-0N-e7B" firstAttribute="top" relation="greaterThanOrEqual" secondItem="5ZP-hg-sYJ" secondAttribute="top" constant="10" id="ijI-7V-Chj"/>
-                                    <constraint firstItem="ROl-83-wEJ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="VMZ-uv-zEK" secondAttribute="bottom" constant="8" id="j9o-co-cDh"/>
-                                    <constraint firstItem="WRx-0N-e7B" firstAttribute="leading" secondItem="VMZ-uv-zEK" secondAttribute="leading" id="kIf-gk-umX"/>
-                                    <constraint firstAttribute="centerX" secondItem="m5Z-hd-La4" secondAttribute="centerX" id="kSV-CX-czo"/>
-                                    <constraint firstItem="v8X-QE-F86" firstAttribute="top" relation="greaterThanOrEqual" secondItem="9Nh-su-J75" secondAttribute="bottom" constant="10" id="sRb-Dx-h3D"/>
-                                    <constraint firstItem="v8X-QE-F86" firstAttribute="top" secondItem="9Nh-su-J75" secondAttribute="bottom" constant="10" id="t2s-Bp-J1Y"/>
-                                    <constraint firstItem="VMZ-uv-zEK" firstAttribute="top" relation="greaterThanOrEqual" secondItem="WRx-0N-e7B" secondAttribute="bottom" constant="10" id="xly-IE-QCp"/>
-                                    <constraint firstItem="ROl-83-wEJ" firstAttribute="top" secondItem="v8X-QE-F86" secondAttribute="bottom" constant="8" symbolic="YES" id="zwE-Fd-Uro"/>
-                                </constraints>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="dtj-EO-iXF" firstAttribute="top" secondItem="5ZP-hg-sYJ" secondAttribute="bottom" id="Cfe-g5-V9N"/>
-                            <constraint firstItem="5ZP-hg-sYJ" firstAttribute="leading" secondItem="2VE-Yg-loa" secondAttribute="leading" id="akR-Hy-77p"/>
-                            <constraint firstAttribute="trailing" secondItem="5ZP-hg-sYJ" secondAttribute="trailing" id="kjc-jG-uQn"/>
-                            <constraint firstItem="5ZP-hg-sYJ" firstAttribute="top" secondItem="s9W-kb-ARv" secondAttribute="bottom" id="zAb-VQ-9LI"/>
-                        </constraints>
-                    </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
-                    <tabBarItem key="tabBarItem" title="Compose" image="compose" id="mxs-dg-0Vh"/>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="vEv-iZ-rcx">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" style="done" id="zFd-XT-wYp">
-                            <connections>
-                                <action selector="dismissKeyboard" destination="CZ4-MO-1fc" id="thf-6z-WQm"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Send" style="done" id="gTs-5j-TuK">
-                            <connections>
-                                <action selector="sendMessage" destination="CZ4-MO-1fc" id="SLC-LY-LKY"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="addAttachmentButton" destination="ROl-83-wEJ" id="dHY-2d-lBV"/>
-                        <outlet property="cancelButton" destination="zFd-XT-wYp" id="M90-Fw-Duo"/>
-                        <outlet property="messageTextView" destination="m5Z-hd-La4" id="6y7-lG-xwo"/>
-                        <outlet property="progressLabel" destination="Mvi-GA-0IR" id="p9f-2X-bdD"/>
-                        <outlet property="progressView" destination="gV2-dp-Tsz" id="AJ9-9E-Vri"/>
-                        <outlet property="receiverButton" destination="VMZ-uv-zEK" id="fWL-dj-nc5"/>
-                        <outlet property="receiverPhoto" destination="v8X-QE-F86" id="QBI-IX-LR1"/>
-                        <outlet property="scrollView" destination="5ZP-hg-sYJ" id="lQq-8j-WzF"/>
-                        <outlet property="sendButton" destination="gTs-5j-TuK" id="SPw-rB-eQa"/>
-                        <outlet property="senderButton" destination="WRx-0N-e7B" id="Bex-EK-m14"/>
-                        <outlet property="senderPhoto" destination="9Nh-su-J75" id="IYV-pE-rvA"/>
-                        <segue destination="QgW-jC-qQD" kind="push" identifier="AudioRecord" id="7uU-A0-7Lj"/>
-                        <segue destination="B1D-b8-eTN" kind="push" identifier="EditContact" id="Oq5-5I-4N6"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Qh2-T1-AhA" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1795" y="238"/>
-        </scene>
         <!--AudioRecordView-->
         <scene sceneID="4O3-zF-lMh">
             <objects>
@@ -323,7 +141,7 @@ Key: 15/Oct/2014</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="onc-G9-TSq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-455" y="-233"/>
+            <point key="canvasLocation" x="-511" y="-237"/>
         </scene>
         <!--Passphase-->
         <scene sceneID="kNW-OJ-D2Z">
@@ -1080,7 +898,7 @@ Key: 15/Oct/2014</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NTs-KD-9EO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-346" y="190"/>
+            <point key="canvasLocation" x="-598" y="436"/>
         </scene>
         <!--Introduction-->
         <scene sceneID="s7G-Wl-fv4">
@@ -1313,7 +1131,7 @@ Key: 15/Oct/2014</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nai-3v-1tC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1795" y="-525"/>
+            <point key="canvasLocation" x="-1759" y="-309"/>
         </scene>
         <!--MessageDetailView-->
         <scene sceneID="EXO-NJ-J2c">
@@ -1327,21 +1145,19 @@ Key: 15/Oct/2014</string>
                             <rect key="frame" x="0.0" y="125" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kWj-Rp-0bR" userLabel="Attach Button">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kWj-Rp-0bR" userLabel="Attach Button">
                                     <rect key="frame" x="8" y="6" width="32" height="32"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="32" id="NPI-uV-COR"/>
                                         <constraint firstAttribute="height" constant="32" id="Ta0-O0-0LI"/>
                                     </constraints>
-                                    <state key="normal" image="attachment_add">
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
+                                    <state key="normal" image="attachment_add"/>
                                     <connections>
                                         <action selector="selectAttachment:" destination="o1C-fE-r9V" eventType="touchUpInside" id="5ke-Bw-49L"/>
                                     </connections>
                                 </button>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Compose Message" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Yx1-oA-3q4" userLabel="Message Text Field">
-                                    <rect key="frame" x="48" y="7" width="210" height="30"/>
+                                    <rect key="frame" x="48" y="7" width="220" height="30"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                     <connections>
@@ -1349,14 +1165,12 @@ Key: 15/Oct/2014</string>
                                     </connections>
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y0I-Io-mhP" userLabel="Send Button">
-                                    <rect key="frame" x="266" y="7" width="46" height="30"/>
+                                    <rect key="frame" x="276" y="7" width="36" height="32"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="46" id="Lf7-Vu-c2s"/>
-                                        <constraint firstAttribute="height" constant="30" id="Nv7-rl-ahd"/>
+                                        <constraint firstAttribute="width" constant="36" id="Lf7-Vu-c2s"/>
+                                        <constraint firstAttribute="height" constant="32" id="Nv7-rl-ahd"/>
                                     </constraints>
-                                    <state key="normal" title="Send">
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
+                                    <state key="normal" image="send"/>
                                     <connections>
                                         <action selector="sendshortmsg:" destination="o1C-fE-r9V" eventType="touchUpInside" id="xeb-fX-6Zh"/>
                                     </connections>
@@ -1413,16 +1227,16 @@ Key: 15/Oct/2014</string>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="InstanceBox" destination="O7b-js-2Pz" id="LNF-lQ-kBv"/>
-                        <outlet property="InstanceBtn" destination="y0I-Io-mhP" id="fIv-la-eyA"/>
                         <outlet property="InstanceMessage" destination="Yx1-oA-3q4" id="ORM-Cd-f4L"/>
                         <outlet property="attachmentButton" destination="kWj-Rp-0bR" id="8xP-hy-ZkI"/>
+                        <outlet property="sendButton" destination="y0I-Io-mhP" id="hM9-4m-i1w"/>
                         <segue destination="I3B-Od-oYK" kind="push" identifier="ShowInvitation" id="2jF-bd-AcT"/>
                         <segue destination="QgW-jC-qQD" kind="push" identifier="AudioRecordSegue" id="gwO-du-Lkg"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bjy-yp-Cyv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1190" y="-965"/>
+            <point key="canvasLocation" x="-1218" y="-673"/>
         </scene>
         <!--InvitationView-->
         <scene sceneID="vMZ-1I-YJb">
@@ -1584,7 +1398,6 @@ Key: 15/Oct/2014</string>
                     <connections>
                         <outlet property="LogoutBtn" destination="GeJ-bB-Z1f" id="TI0-92-gaC"/>
                         <segue destination="q2R-Ey-DJ5" kind="relationship" relationship="viewControllers" id="aiG-Sf-Hog"/>
-                        <segue destination="CZ4-MO-1fc" kind="relationship" relationship="viewControllers" id="s4g-ib-6P4"/>
                         <segue destination="d1f-cX-BQx" kind="relationship" relationship="viewControllers" id="E4p-lx-69H"/>
                         <segue destination="TIc-1a-0xa" kind="relationship" relationship="viewControllers" id="pDF-An-ZoL"/>
                         <segue destination="m7S-7d-zqb" kind="relationship" relationship="viewControllers" id="wXj-sF-3OY"/>
@@ -2210,7 +2023,7 @@ Key: 15/Oct/2014</string>
                     </connections>
                 </barButtonItem>
             </objects>
-            <point key="canvasLocation" x="-1190" y="-44"/>
+            <point key="canvasLocation" x="-1218" y="228"/>
         </scene>
         <!--ContactManage-->
         <scene sceneID="MAW-2s-3mL">
@@ -2282,7 +2095,6 @@ Key: 15/Oct/2014</string>
         <image name="attachment_add" width="24" height="24"/>
         <image name="blank_contact" width="256" height="256"/>
         <image name="blank_contact_small" width="45" height="45"/>
-        <image name="compose" width="32" height="32"/>
         <image name="config" width="32" height="32"/>
         <image name="introduce_arraw" width="32" height="32"/>
         <image name="introduction" width="32" height="32"/>
@@ -2292,6 +2104,7 @@ Key: 15/Oct/2014</string>
         <image name="mrecord" width="32" height="32"/>
         <image name="mstop" width="32" height="32"/>
         <image name="namecard" width="58" height="58"/>
+        <image name="send" width="32" height="32"/>
         <image name="slingkey" width="32" height="32"/>
         <image name="starslinger512p" width="512" height="512"/>
     </resources>
@@ -2301,11 +2114,9 @@ Key: 15/Oct/2014</string>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="3wJ-vU-Lfr"/>
         <segue reference="UZ2-1F-SnD"/>
         <segue reference="fmt-VR-Qc6"/>
-        <segue reference="eWx-Wq-HcZ"/>
         <segue reference="4Sf-VJ-fnH"/>
-        <segue reference="Oq5-5I-4N6"/>
-        <segue reference="gwO-du-Lkg"/>
     </inferredMetricsTieBreakers>
 </document>

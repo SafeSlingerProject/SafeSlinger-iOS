@@ -62,13 +62,13 @@ typedef enum {
 
 @implementation MessageDetailView
 
-@synthesize delegate, b_img, thread_img, assignedEntry, OperationLock, InstanceMessage, InstanceBtn, CancelBtn, BackBtn, InstanceBox;
+@synthesize delegate, b_img, thread_img, assignedEntry, OperationLock, InstanceMessage, CancelBtn, BackBtn, InstanceBox;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
 	_attachmentStatus = AttachmentStatusEmpty;
-	[self updateAttachmentButton];
+	[self updateAttachmentStatus];
     
     delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     BackGroundQueue = dispatch_queue_create("safeslinger.background.queue", NULL);
@@ -104,7 +104,7 @@ typedef enum {
 	if(assignedEntry.active) {
         InstanceMessage.autocapitalizationType = UITextAutocapitalizationTypeSentences;
 		[InstanceMessage setPlaceholder:NSLocalizedString(@"label_ComposeHint", @"Compose Message")];
-		[InstanceBtn setTitle: NSLocalizedString(@"title_SendFile", @"Send") forState: UIControlStateNormal];
+//		[_sendButton setTitle: NSLocalizedString(@"title_SendFile", @"Send") forState: UIControlStateNormal];
 	} else {
 		[self.tableView.tableFooterView removeFromSuperview];
 		self.tableView.tableFooterView = nil;
@@ -130,18 +130,21 @@ typedef enum {
 	}
 }
 
-- (void)updateAttachmentButton {
+- (void)updateAttachmentStatus {
 	switch (_attachmentStatus) {
 		case AttachmentStatusEmpty:
 			[_attachmentButton setImage:[UIImage imageNamed:@"attachment_add"] forState:UIControlStateNormal];
+			[_sendButton setImage:[UIImage imageNamed:@"send"] forState:UIControlStateNormal];
 			break;
 			
 		case AttachmentStatusAudio:
 			[_attachmentButton setImage:[UIImage imageNamed:@"attachment_audio"] forState:UIControlStateNormal];
+			[_sendButton setImage:[UIImage imageNamed:@"send_attachment"] forState:UIControlStateNormal];
 			break;
 			
 		case AttachmentStatusImage:
 			[_attachmentButton setImage:[UIImage imageNamed:@"attachment_image"] forState:UIControlStateNormal];
+			[_sendButton setImage:[UIImage imageNamed:@"send_attachment"] forState:UIControlStateNormal];
 			break;
 	}
 }
@@ -909,11 +912,7 @@ typedef enum {
 	_attachedFile = nil;
 	_attachedFileRawData = nil;
 	_attachmentStatus = AttachmentStatusEmpty;
-	[self updateAttachmentButton];
-}
-
-- (void)sendAttachment {
-	
+	[self updateAttachmentStatus];
 }
 
 - (BOOL)CheckPhotoPermission {
@@ -1064,7 +1063,7 @@ typedef enum {
 		_attachedFile = audioURL;
 		_attachedFileRawData = rawData;
 		_attachmentStatus = AttachmentStatusAudio;
-		[self updateAttachmentButton];
+		[self updateAttachmentStatus];
 	}
 }
 
@@ -1143,7 +1142,7 @@ typedef enum {
 			_attachedFile = nil;
 			_attachedFileRawData = nil;
 			_attachmentStatus = AttachmentStatusEmpty;
-			[self updateAttachmentButton];
+			[self updateAttachmentStatus];
 			break;
 			
 	}
@@ -1195,7 +1194,7 @@ typedef enum {
 	_attachedFile = [NSURL URLWithString:filename];
 	_attachedFileRawData = imgdata;
 	_attachmentStatus = AttachmentStatusImage;
-	[self updateAttachmentButton];
+	[self updateAttachmentStatus];
 }
 
 @end

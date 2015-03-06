@@ -30,7 +30,6 @@
 		1860574919451001002DD149 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1860574819451001002DD149 /* AppDelegate.m */; };
 		1860575419451001002DD149 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1860575319451001002DD149 /* Images.xcassets */; };
 		186057771945174B002DD149 /* IntroduceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 186057761945174B002DD149 /* IntroduceView.m */; };
-		1860577A194518D6002DD149 /* ComposeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18605779194518D6002DD149 /* ComposeView.m */; };
 		1860577D194518F2002DD149 /* SlingkeyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1860577C194518F2002DD149 /* SlingkeyView.m */; };
 		18605791194534BB002DD149 /* SetupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18605790194534BB002DD149 /* SetupView.m */; };
 		1869D6571948A50400B186D3 /* safeslinger-20120828.db in Resources */ = {isa = PBXBuildFile; fileRef = 1869D6561948A50400B186D3 /* safeslinger-20120828.db */; };
@@ -136,8 +135,6 @@
 		1860575319451001002DD149 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		186057751945174B002DD149 /* IntroduceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroduceView.h; sourceTree = "<group>"; };
 		186057761945174B002DD149 /* IntroduceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroduceView.m; sourceTree = "<group>"; };
-		18605778194518D6002DD149 /* ComposeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeView.h; sourceTree = "<group>"; };
-		18605779194518D6002DD149 /* ComposeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeView.m; sourceTree = "<group>"; };
 		1860577B194518F2002DD149 /* SlingkeyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlingkeyView.h; sourceTree = "<group>"; };
 		1860577C194518F2002DD149 /* SlingkeyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlingkeyView.m; sourceTree = "<group>"; };
 		1860578F194534BB002DD149 /* SetupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetupView.h; sourceTree = "<group>"; };
@@ -342,8 +339,6 @@
 		182E22141950B9B000F5997A /* Messaging */ = {
 			isa = PBXGroup;
 			children = (
-				18605778194518D6002DD149 /* ComposeView.h */,
-				18605779194518D6002DD149 /* ComposeView.m */,
 				18FBD71E194A0EED006CA09C /* MessageView.h */,
 				18FBD71F194A0EED006CA09C /* MessageView.m */,
 				182E220F1950B5E700F5997A /* MessageDetailView.h */,
@@ -796,7 +791,6 @@
 				41AE90721A0ADDAC009E08C4 /* ContactEntry.m in Sources */,
 				1860574919451001002DD149 /* AppDelegate.m in Sources */,
 				18DE7102194BA54C00C43F84 /* ContactCellView.m in Sources */,
-				1860577A194518D6002DD149 /* ComposeView.m in Sources */,
 				1860577D194518F2002DD149 /* SlingkeyView.m in Sources */,
 				414C9E341A72EAD700E03916 /* MessageSender.m in Sources */,
 				18D6C2081946136E000909F4 /* ErrorLogger.m in Sources */,

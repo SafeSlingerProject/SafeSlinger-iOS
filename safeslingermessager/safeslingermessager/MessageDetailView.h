@@ -50,7 +50,7 @@
 @property (nonatomic, strong) MsgListEntry *assignedEntry;
 @property (nonatomic, strong) NSLock *OperationLock;
 @property (nonatomic, strong) IBOutlet UITextField *InstanceMessage;
-@property (nonatomic, strong) IBOutlet UIButton *InstanceBtn;
+@property (nonatomic, strong) IBOutlet UIButton *sendButton;
 @property (nonatomic, strong) IBOutlet UIView *InstanceBox;
 @property (strong, nonatomic) IBOutlet UIButton *attachmentButton;
 @property (nonatomic, strong) UIBarButtonItem *CancelBtn;

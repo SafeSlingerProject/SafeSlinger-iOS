@@ -26,7 +26,6 @@
 #import "AudioRecordView.h"
 #import "AppDelegate.h"
 #import "ErrorLogger.h"
-#import "ComposeView.h"
 #import <safeslingerexchange/iToast.h>
 
 @interface AudioRecordView ()
@@ -254,8 +253,6 @@
     [DiscardBtn setHidden:YES];
     [SaveBtn setHidden:YES];
 	[_delegate recordedAudioInURL:self.audio_recorder.url];
-    parent.attachFile = self.audio_recorder.url;
-//    [parent UpdateAttachment];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

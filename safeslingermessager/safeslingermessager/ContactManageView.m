@@ -26,7 +26,6 @@
 #import "AppDelegate.h"
 #import "SafeSlingerDB.h"
 #import "Utility.h"
-#import "ComposeView.h"
 #import "SlingkeyView.h"
 #import "FunctionView.h"
 #import <safeslingerexchange/iToast.h>
