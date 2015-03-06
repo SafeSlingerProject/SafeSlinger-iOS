@@ -1,7 +1,7 @@
 /*
     The MIT License (MIT)
     
-    Copyright (c) 2010-2014 Carnegie Mellon University
+    Copyright (c) 2010-2015 Carnegie Mellon University
     
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
@@ -422,8 +422,6 @@
 "label_messageInviteSetupInst" = "ஒரு பாதுகாப்பான செய்தி இணைப்பு அமைப்புகள், நாம் இணைப்பை உறுதிப்படுத்த ஒரு முறை பின்னர் ஸ்லிங் விசைகள் சந்திக்க அல்லது தொலைபேசி ஒருவருக்கொருவர் அதே நேரத்தில், மற்றும் முடியும்.";
 /* 'Can we start secure messaging with the open source SafeSlinger iPhone or Android app?' is a screen label (match English casing); used as message text to invite a contact to begin secure messaging. */
 "label_messageInviteStartMsg" = "நாங்கள் திறந்த மூல SafeSlinger iPhone அல்லது Android பயன்பாட்டை பாதுகாப்பான செய்தி தொடங்க முடியுமா?";
-/* '%s, you are verified.' is a screen label (match English casing); used as the text message completing sling keys. %s = the name of a recipient. */
-"label_messageYouAreVerified" = "%@, சரிபார்க்கப்பட்டது.";
 /* '%d minutes' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole minutes. */
 "label_minutes" = "%d நிமிடங்கள்";
 /* 'Mobile' is a screen label (match English casing); used to denote a 'mobile' type of email or phone contact type. iOS-only. */

@@ -1,7 +1,7 @@
 /*
     The MIT License (MIT)
     
-    Copyright (c) 2010-2014 Carnegie Mellon University
+    Copyright (c) 2010-2015 Carnegie Mellon University
     
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
@@ -495,6 +495,8 @@
 "label_mb" = "%.1f MB";
 /* screen label (match English casing); used on the secure introduction invitation dialog to indicate the one-hop trust relationship between the user (Me); the trusted person, and the new person. */
 "label_Me" = "Me";
+/* screen label (match English casing); used as the automated test text message completing sling keys. %1$s = the name of the sender. %2$s = the name of the recipient. */
+"label_messageAutomatedVerify" = "(%@ has confirmed the key for %@.)";
 /* screen label (match English casing); used as the text message when sending secure introduction invitations. %s = the name of a person. */
 "label_messageIntroduceNameToYou" = "I would like to introduce %@ to you.";
 /* screen label (match English casing); used as message text to show a user how to install SafeSlinger. %s = the main installation url for mobile devices */
@@ -503,8 +505,6 @@
 "label_messageInviteSetupInst" = "To setup a secure messaging connection, we can meet or phone each other at the same time, and then Sling Keys just once to verify the connection.";
 /* screen label (match English casing); used as message text to invite a contact to begin secure messaging. */
 "label_messageInviteStartMsg" = "Can we start secure messaging with the open source SafeSlinger iPhone or Android app?";
-/* screen label (match English casing); used as the text message completing sling keys. %s = the name of a recipient. */
-"label_messageYouAreVerified" = "%@, you are verified.";
 /* screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole minutes. */
 "label_minutes" = "%d minutes";
 /* screen label (match English casing); used to denote a 'mobile' type of email or phone contact type. iOS-only. */
@@ -880,12 +880,12 @@
 "title_About" = "About";
 /* menu option (title case); used in the Select File Option menu to take a picture with the camera on iOS. */
 "title_camera" = "Camera";
-/* title (title case); used in the Select File Option menu to clear the current attachment. */
-"title_clear" = "Clear";
 /* title (title case); used at the top of the menu when choosing a directory to load or save a file attachment. */
 "title_ChooseDirectory" = "Choose Directory";
 /* title (title case); used at the top of the menu options when choosing among sources to pick an attachment. */
 "title_ChooseFileLoad" = "Choose Your Attachment";
+/* title (title case); used in the Select File Option menu to clear the current attachment. */
+"title_clear" = "Clear";
 /* title (title case); used as the Subject field of an email message for the user to send feedback to developers. Also used as the menu option to start the email. */
 "title_comments" = "Comments/Questions";
 /* title (title case); used at the top of the error dialog. */
