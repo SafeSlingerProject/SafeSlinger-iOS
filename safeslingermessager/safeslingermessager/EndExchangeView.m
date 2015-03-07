@@ -213,6 +213,8 @@
     
     [[[[iToast makeText: [NSString stringWithFormat: NSLocalizedString(@"state_SomeContactsImported", @"%@ contacts imported."), [NSString stringWithFormat:@"%ld", (unsigned long)importedContacts.count]]]
        setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+	
+	NSString *userName = [delegate.DbInstance GetProfileName];
     
     if(importedContacts.count > 0) {
         // Try to backup
@@ -223,7 +225,7 @@
 			// if imported only one contact, send a confirmation message and navigate to the screen that shows the conversation between these contacts
 			NSMutableData *pktdata = [NSMutableData new];
 			ContactEntry *contact = importedContacts[0];
-			NSString *message = [NSString stringWithFormat:NSLocalizedString(@"label_messageYouAreVerified", nil), [NSString compositeName:contact.firstName withLastName:contact.lastName]];
+			NSString *message = [NSString stringWithFormat:NSLocalizedString(@"label_messageAutomatedVerify", nil), userName, [NSString compositeName:contact.firstName withLastName:contact.lastName]];
 			NSData *messageId = [SSEngine BuildCipher:contact.keyId Message:[message dataUsingEncoding:NSUTF8StringEncoding] Attach:nil RawFile:nil MIMETYPE:nil Cipher:pktdata];
 			
 			MsgEntry *newMessage = [[MsgEntry alloc]
@@ -266,7 +268,7 @@
 		} else {
 			for(ContactEntry *contact in importedContacts) {
 				NSMutableData *pktdata = [NSMutableData new];
-				NSString *message = [NSString stringWithFormat:NSLocalizedString(@"label_messageYouAreVerified", nil), [NSString compositeName:contact.firstName withLastName:contact.lastName]];
+				NSString *message = [NSString stringWithFormat:NSLocalizedString(@"label_messageAutomatedVerify", nil), userName, [NSString compositeName:contact.firstName withLastName:contact.lastName]];
 				NSData *messageId = [SSEngine BuildCipher:contact.keyId Message:[message dataUsingEncoding:NSUTF8StringEncoding] Attach:nil RawFile:nil MIMETYPE:nil Cipher:pktdata];
 				
 				MsgEntry *newMessage = [[MsgEntry alloc]
