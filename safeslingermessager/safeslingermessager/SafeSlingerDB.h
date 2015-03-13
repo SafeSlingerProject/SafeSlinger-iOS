@@ -30,7 +30,6 @@
 #define DATABASE_TITLE @"safeslinger"
 #define DATABASE_TIMESTR @"yyyy-MM-dd'T'HH:mm:ss'Z'"
 
-
 /**
  Database Tables
     
@@ -150,7 +149,6 @@ typedef enum {
 }
 
 - (BOOL)PatchForTokenStoreTable;
-- (BOOL)patchForContactsFromAddressBook;
 
 // basic database operation
 - (BOOL)LoadDBFromStorage:(NSString *)specific_path;

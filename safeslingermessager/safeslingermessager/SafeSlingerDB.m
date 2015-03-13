@@ -27,6 +27,9 @@
 #import "ErrorLogger.h"
 #import "ContactSelectView.h"
 
+// the version of the database for this version of the app
+#define CURRENT_DATABASE_VERSION 1
+
 @implementation FileInfo
 @synthesize FName, FSize, FExt;
 
@@ -89,14 +92,9 @@
 	@try {
         NSFileManager *fileManager = [NSFileManager defaultManager];
         NSError *error;
-        NSString *writableDBPath = nil;
-        
-        if(specific_path) {
-            writableDBPath = [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent: [NSString stringWithFormat:@"%@.db", specific_path]];
-        } else {
-            // default
-            writableDBPath = [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent: [NSString stringWithFormat:@"%@.db", DATABASE_NAME]];
-        }
+		
+		NSString *libraryPath = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)[0];
+		NSString *writableDBPath = [libraryPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.db", specific_path ? specific_path : DATABASE_NAME]];
         
         DEBUGMSG(@"writableDBPath = %@", writableDBPath);
         
@@ -109,17 +107,61 @@
             }
         }
         
-        if(!(sqlite3_open([writableDBPath UTF8String], &db) == SQLITE_OK)) {
-            [ErrorLogger ERRORDEBUG:@"ERROR: Unable to open database."];
-            success = NO;
-        }
-        
+        if(sqlite3_open([writableDBPath UTF8String], &db) == SQLITE_OK) {
+			[self updateDatabase];
+		} else {
+			[ErrorLogger ERRORDEBUG:@"ERROR: Unable to open database."];
+			success = NO;
+		}
+		
     } @catch (NSException *exception) {
         [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: An exception occured, %@", [exception reason]]];
         success = NO;
     } @finally {
         return success;
     }
+}
+
+- (BOOL)updateDatabase {
+	@try {
+		sqlite3_stmt *sqlStatement;
+		
+		const char *sql = "PRAGMA user_version;";
+		
+		if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
+			DEBUGMSG(@"Error while preparing statement. '%s'\n", sqlite3_errmsg(db));
+			return false;
+		}
+		
+		if(sqlite3_step(sqlStatement) == SQLITE_ROW) {
+			int databaseVersion = sqlite3_column_int(sqlStatement, 0);
+			if(databaseVersion < CURRENT_DATABASE_VERSION) {
+				if(databaseVersion == 0) {
+					// patches for database update from version 0 to version 1
+					[self patchForContactsFromAddressBook];
+					[self patchForTokenstorePrimaryKey];
+				}
+			
+				sql = [[NSString stringWithFormat:@"PRAGMA user_version = %d;", CURRENT_DATABASE_VERSION] cStringUsingEncoding:NSUTF8StringEncoding];
+				
+				if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
+					DEBUGMSG(@"Error while preparing statement. '%s'\n", sqlite3_errmsg(db));
+				}
+				
+				if(sqlite3_step(sqlStatement) != SQLITE_DONE) {
+					return false;
+				}
+			}
+		} else {
+			NSLog(@"Error executing statement: '%s'\n", sqlite3_errmsg(db));
+		}
+	}
+	@catch (NSException *exception) {
+		DEBUGMSG(@"ERROR: An exception occured, %@", [exception reason]);
+		return false;
+	}
+	
+	return true;
 }
 
 - (BOOL)TrimTable: (NSString*)table_name
@@ -1012,7 +1054,7 @@
             ret = NO;
         }
         
-        sql = "CREATE TABLE tokenstore (ptoken text not null, pid text not null, bdate datetime not null, dev int not null, ex_type int not null, note text null, keyid blob primary key, pkey text null,pstamp datetime null,pstatus int default 0);";
+        sql = "CREATE TABLE tokenstore (ptoken text not null, pid text not null, bdate datetime not null, dev int not null, ex_type int not null, note text, keyid blob not null, pkey text, pstamp datetime, pstatus int default 0, PRIMARY KEY(ptoken, keyid));";
         
         if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
             DEBUGMSG(@"Error while preparing statement. '%s'\n", sqlite3_errmsg(db));
@@ -1118,13 +1160,22 @@
     }
 }
 
+// Adds a new column 'ABRecordID' to the table 'tokenstore'
+// 'ABRecordID' stores the AddressBook RecordID for the contact in the user's device associated with this key
 - (BOOL)patchForContactsFromAddressBook {
 	// patch for 1.8.1
 	BOOL ret = YES;
 	@try {
 		// for configuration table
 		sqlite3_stmt *sqlStatement;
-		const char *sql = "ALTER TABLE tokenstore ADD COLUMN ABRecordID int;";
+		
+		char *sql = "SELECT ABRecordID FROM tokenstore;";
+		if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) == SQLITE_OK) {
+			// column already exists
+			return YES;
+		}
+		
+		sql = "ALTER TABLE tokenstore ADD COLUMN ABRecordID int;";
 		
 		if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK){
 			DEBUGMSG(@"Error while preparing statement. '%s'\n", sqlite3_errmsg(db));
@@ -1137,6 +1188,118 @@
 		
 		DEBUGMSG(@"Update Done.");
 		
+	}
+	@catch (NSException *exception) {
+		DEBUGMSG(@"ERROR: An exception occured, %@", [exception reason]);
+		ret = NO;
+	}
+	@finally {
+		return ret;
+	}
+}
+
+// Sets the columns 'ptoken' and 'keyid' as primary keys for the table 'tokenstore'
+- (BOOL)patchForTokenstorePrimaryKey {
+	DEBUGMSG(@"database patch to change primary key on tokenstore table");
+	
+	BOOL ret = YES;
+	@try {
+		sqlite3_stmt *sqlStatement;
+		
+		char *sql = "PRAGMA table_info(tokenstore);";
+		
+		if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
+			DEBUGMSG(@"Error while preparing statement. '%s'\n", sqlite3_errmsg(db));
+			ret = NO;
+		}
+		
+		int primaryKeyColumnNumber = -1;
+		
+		for(int i = 0; i < sqlite3_column_count(sqlStatement); i++) {
+			if([[NSString stringWithUTF8String:sqlite3_column_name(sqlStatement, i)] isEqualToString:@"pk"]) {
+				primaryKeyColumnNumber = i;
+				break;
+			}
+		}
+		
+		int primaryKeyColumnsCount = 0;
+		while(sqlite3_step(sqlStatement) == SQLITE_ROW) {
+			if(sqlite3_column_int(sqlStatement, primaryKeyColumnNumber) != 0) {
+				primaryKeyColumnsCount++;
+			}
+		}
+		
+		if(primaryKeyColumnsCount == 2) {
+			// primary key is already ptoken + keyid
+			return YES;
+		}
+		
+		sql = "ALTER TABLE tokenstore RENAME TO tokenstore_temp;";
+		
+		if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
+			DEBUGMSG(@"Error while preparing statement. '%s'\n", sqlite3_errmsg(db));
+			ret = NO;
+		}
+		
+		int result = sqlite3_step(sqlStatement);
+		if(result != SQLITE_DONE) {
+			ret = NO;
+		}
+		
+		sql = "CREATE TABLE `tokenstore` ("
+					"`ptoken`		text NOT NULL,"
+					"`pid`			text NOT NULL,"
+					"`bdate`		datetime NOT NULL,"
+					"`dev`			int NOT NULL,"
+					"`ex_type`		int NOT NULL,"
+					"`note`			text,"
+					"`keyid`		blob NOT NULL,"
+					"`pkey`			text,"
+					"`pstamp`		datetime,"
+					"`pstatus`		int DEFAULT 0,"
+					"`ABRecordID`	int,"
+					"PRIMARY KEY(ptoken, keyid)"
+				");";
+		
+		if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
+			DEBUGMSG(@"Error while preparing statement. '%s'\n", sqlite3_errmsg(db));
+			ret = NO;
+		}
+		
+		result = sqlite3_step(sqlStatement);
+		if(result != SQLITE_DONE) {
+			ret = NO;
+		}
+		
+		sql = "INSERT INTO tokenstore SELECT * FROM tokenstore_temp;";
+		
+		if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
+			DEBUGMSG(@"Error while preparing statement. '%s'\n", sqlite3_errmsg(db));
+			ret = NO;
+		}
+		
+		result = sqlite3_step(sqlStatement);
+		if(result != SQLITE_DONE) {
+			ret = NO;
+		}
+		
+		sql = "DROP TABLE tokenstore_temp;";
+		
+		if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
+			DEBUGMSG(@"Error while preparing statement. '%s'\n", sqlite3_errmsg(db));
+			ret = NO;
+		}
+		
+		result = sqlite3_step(sqlStatement);
+		if(result != SQLITE_DONE) {
+			ret = NO;
+		}
+		
+		if(sqlite3_finalize(sqlStatement) != SQLITE_OK) {
+			ret = NO;
+		}
+		
+		DEBUGMSG(@"Update Done.");
 	}
 	@catch (NSException *exception) {
 		DEBUGMSG(@"ERROR: An exception occured, %@", [exception reason]);
