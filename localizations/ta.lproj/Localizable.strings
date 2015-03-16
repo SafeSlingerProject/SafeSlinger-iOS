@@ -390,8 +390,6 @@
 "label_hours" = "%d மணி நேரம்";
 /* 'SafeSlinger iCloud is enabled. Tap the Done button when finished.' is a screen label (match English casing); used to indicate the backup will occur while on the Setup screen. iOS-only. */
 "label_iCloudEnable" = "SafeSlinger iCloud செயல்படுத்தப்படும். முடிந்ததும் முடிந்தது பொத்தான் தட்டவும்.";
-/* 'No messages. You may send a message from the Compose tab.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. */
-"label_InstNoMessages" = "செய்திகள் இல்லை. நீங்கள் உருவாக்கும் தாவலில் இருந்து ஒரு செய்தியை அனுப்ப வேண்டும்.";
 /* 'To add recipients, you must first Sling Keys with one or more other users at the same time. You may also send a Sling Keys contact invitation from the menu.' is a screen label (match English casing); used to instruct the user how to proceed on the Recipient list screen is case of no recipients. */
 "label_InstNoRecipients" = "பெற்றவர்கள் சேர்க்க, நீங்கள் வேண்டும் முதல் ஸ்லிங் விசைகள் அதே நேரத்தில் ஒன்று அல்லது அதற்கு மேற்பட்ட மற்ற பயனர்கள். நீங்கள் மெனுவிலிருந்து ஒரு ஸ்லிங் விசைகள் தொடர்பு அழைப்பிதழ் அனுப்ப வேண்டும்.";
 /* 'None of your current recipients match your search query. Please try a different query or invite a new contact.' is a screen label (match English casing); used to inform the user that no recipients match the search query. */

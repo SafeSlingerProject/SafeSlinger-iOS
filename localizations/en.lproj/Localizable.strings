@@ -26,11 +26,11 @@
 "action_NewUserRequest" = "Add a Sling Keys contact invitation via...";
 
 /* application description (sentence case); the names of the individuals who helped develop the application. */
-"app_DeveloperName" = "Bruno Nunes\nGurtej Singh Chandok\nJason Lee\nManish Burman\nMichael W Farb (Android Lead)\nVinay Ramkrishnan\nYue-Hsun Lin (iOS Lead)\n";
+"app_DeveloperName" = "Bruno Nunes\nGurtej Singh Chandok\nJason Lee\nMadhur Shrimal (JavaScript Lead)\nManish Burham\nMichael W Farb (Android Lead)\nVinay Ramkrishnan\nYue-Hsun Lin (iOS Lead)\n";
 /* application name (title case); used for home screen icons, at the top of many screens, and many other places in the application. */
 "app_name" = "SafeSlinger";
 /* application description (sentence case); the names of the individuals who translated and/or reviewed localizations. */
-"app_TranslatorName" = "Adrian Perrig\nAkira Yamada\nAlbert Stroucken\nElli Fragkaki\nEmmanuel Owusu\nIrina Fudrow\nJens Höfflinger\nMatthias Beckerle\nMichael Stroucken\nNicolas Christin\nSteve Matsumoto\nYeon Yim\nYue-Hsun Lin\n";
+"app_TranslatorName" = "Adrian Perrig\nAkira Yamada\nAlbert Stroucken\nElli Fragkaki\nEmmanuel Owusu\nIrina Fudrow\nJens Höfflinger\nMatthias Beckerle\nMichael Stroucken\nNicolas Christin\nSteve Matsumoto\nWasilis Mandratzis-Walz\nYeon Yim\nYue-Hsun Lin\n";
 
 /* question message (sentence case, question mark); used to warn when the backup is off to confirm we should keep reminding the user. Used with Forget and Remind buttons. */
 "ask_BackupDisabledRemindLater" = "Backup is disabled. Do you want to adjust backup settings and keep this reminder?";
@@ -220,6 +220,8 @@
 "error_C2DMRegInvalidSender" = "Registration is not available for this version, please check for an updated version.";
 /* error message (sentence case, period); used to warn during push registration: Incorrect phone registration with Google. This phone doesn't currently support C2DM. Android-only. */
 "error_C2DMRegPhoneRegistrationError" = "Incorrect device registration with Google. This device does not currently support push messaging.";
+/* error message (sentence case, period); used to warn during push registration: There is no Google Play Services on the phone. The application should ask the user to install Play Services. Fix on the device side. Android-only. */
+"error_C2DMRegPlayServicesMissing" = "Play Services is required to recieve messages. Please install Google Play Services to continue.";
 /* error message (sentence case, period); used to warn during push registration: The device can't read the response, or there was a 500/503 from the server that can be retried later. The application should use exponential back off and retry. %d = the current number of seconds until the next push registration attempt. Android-only. */
 "error_C2DMRegServiceNotAvailable" = "Push registration service not available, scheduling retry in %d seconds.";
 /* error message (sentence case, period); used to warn during push registration: The user has too many applications registered. The application should tell the user to uninstall some other applications, let user retry manually. Fix on the device side. Android-only. */
@@ -462,7 +464,7 @@
 /* screen label (match English casing); used to indicate the backup will occur while on the Setup screen. iOS-only. */
 "label_iCloudEnable" = "SafeSlinger iCloud is enabled. Tap the Done button when finished.";
 /* screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. */
-"label_InstNoMessages" = "No messages. You may send a message from the Compose tab.";
+"label_InstNoMessages" = "No messages. To send a message, tap on the New Message icon at the top of your screen.";
 /* screen label (match English casing); used to instruct the user how to proceed on the Recipient list screen is case of no recipients. */
 "label_InstNoRecipients" = "To add recipients, you must first Sling Keys with one or more other users at the same time. You may also send a Sling Keys contact invitation from the menu.";
 /* screen label (match English casing); used to inform the user that no recipients match the search query. */
