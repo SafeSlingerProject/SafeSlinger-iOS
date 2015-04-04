@@ -35,6 +35,9 @@
 #import "InvitationView.h"
 #import "MessageView.h"
 
+#define BOTTOM_BAR_HEIGHT_WITHOUT_ATTACHMENT 44
+#define BOTTOM_BAR_HEIGHT_WITH_ATTACHMENT 88
+
 typedef enum {
 	AttachmentStatusEmpty,
 	AttachmentStatusAudio,
@@ -62,7 +65,7 @@ typedef enum {
 
 @implementation MessageDetailView
 
-@synthesize delegate, b_img, thread_img, assignedEntry, OperationLock, InstanceMessage, CancelBtn, BackBtn, InstanceBox;
+@synthesize delegate, b_img, thread_img, assignedEntry, OperationLock, CancelBtn, BackBtn;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -71,8 +74,10 @@ typedef enum {
 	[self updateAttachmentStatus];
     
     delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    BackGroundQueue = dispatch_queue_create("safeslinger.background.queue", NULL);
+    BackGroundQueue = dispatch_queue_create("safeslinger.background.queue", nil);
     b_img = [UIImage imageNamed: @"blank_contact_small.png"];
+	_messageTextField.placeholder = NSLocalizedString(@"label_ComposeHint", nil);
+	_tableView.contentInset = UIEdgeInsetsZero;
 	
     OperationLock = [NSLock new];
 	
@@ -84,12 +89,14 @@ typedef enum {
 	_recipient = [delegate.DbInstance loadContactEntryWithKeyId:assignedEntry.keyid];
 	_pendingMessages = [NSMutableDictionary new];
 	
-    //for unknown thread
-    if(_recipient == nil || (_recipient.firstName == nil && _recipient.lastName == nil)) {
+    //for unknown thread or contact not active
+    if(_recipient == nil || (_recipient.firstName == nil && _recipient.lastName == nil) || !assignedEntry.active) {
         DEBUGMSG(@"UNDEFINED thread...");
-        [InstanceBox setHidden:YES];
-    } else {
-        [InstanceBox setHidden:NO];
+		_bottomBarHeightConstraint.constant = 0;
+		_bottomBarView.hidden = YES;
+	} else {
+		_bottomBarHeightConstraint.constant = BOTTOM_BAR_HEIGHT_WITHOUT_ATTACHMENT;
+		_bottomBarView.hidden = NO;
     }
 	
 	thread_img = [_recipient.photo length] > 0 ? [[UIImage imageWithData:_recipient.photo] scaleToSize:CGSizeMake(45.0f, 45.0f)] : nil;
@@ -99,16 +106,6 @@ typedef enum {
                                                  style:UIBarButtonItemStyleDone
                                                 target:self
                                                 action:@selector(DismissKeyboard)];
-	
-	// hides textfield if this contact is not active
-	if(assignedEntry.active) {
-        InstanceMessage.autocapitalizationType = UITextAutocapitalizationTypeSentences;
-		[InstanceMessage setPlaceholder:NSLocalizedString(@"label_ComposeHint", @"Compose Message")];
-//		[_sendButton setTitle: NSLocalizedString(@"title_SendFile", @"Send") forState: UIControlStateNormal];
-	} else {
-		[self.tableView.tableFooterView removeFromSuperview];
-		self.tableView.tableFooterView = nil;
-	}
 	
 	UILongPressGestureRecognizer *gestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
 	gestureRecognizer.delegate = self;
@@ -135,22 +132,64 @@ typedef enum {
 		case AttachmentStatusEmpty:
 			[_attachmentButton setImage:[UIImage imageNamed:@"attachment_add"] forState:UIControlStateNormal];
 			[_sendButton setImage:[UIImage imageNamed:@"send"] forState:UIControlStateNormal];
+			
+			_attachmentFileThumbnailImageView.image = nil;
+			
+			[self hideAttachmentDetailsView];
 			break;
 			
-		case AttachmentStatusAudio:
+		case AttachmentStatusAudio: {
 			[_attachmentButton setImage:[UIImage imageNamed:@"attachment_audio"] forState:UIControlStateNormal];
 			[_sendButton setImage:[UIImage imageNamed:@"send_attachment"] forState:UIControlStateNormal];
-			break;
 			
-		case AttachmentStatusImage:
+			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+				UIImage *thumbnail = [UIImage imageNamed:@"microphone_icon"];
+				
+				dispatch_async(dispatch_get_main_queue(), ^{
+					_attachmentFileThumbnailImageView.image = thumbnail;
+				});
+			});
+			
+			[self showAttachmentDetailsView];
+			break;
+		}
+			
+		case AttachmentStatusImage: {
 			[_attachmentButton setImage:[UIImage imageNamed:@"attachment_image"] forState:UIControlStateNormal];
 			[_sendButton setImage:[UIImage imageNamed:@"send_attachment"] forState:UIControlStateNormal];
+			
+			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+				UIImage *thumbnail = [UIImage imageWithData:_attachedFileRawData];
+				
+				dispatch_async(dispatch_get_main_queue(), ^{
+					_attachmentFileThumbnailImageView.image = thumbnail;
+				});
+			});
+			
+			[self showAttachmentDetailsView];
 			break;
+		}
 	}
 }
 
+- (void)showAttachmentDetailsView {
+	_attachmentDetailsView.hidden = NO;
+	_bottomBarHeightConstraint.constant = BOTTOM_BAR_HEIGHT_WITH_ATTACHMENT;
+	
+	NSString *fileNameLabel = [NSString stringWithFormat:@"%@ (%.0fKb)", [_attachedFile lastPathComponent], _attachedFileRawData.length/1024.0f];
+	
+	[_attachmentFileNameButton setTitle:fileNameLabel forState:UIControlStateNormal];
+}
+
+- (void)hideAttachmentDetailsView {
+	_attachmentDetailsView.hidden = YES;
+	_bottomBarHeightConstraint.constant = BOTTOM_BAR_HEIGHT_WITHOUT_ATTACHMENT;
+	
+	_attachmentFileNameButton.titleLabel.text = @"";
+}
+
 - (void)DismissKeyboard {
-    [InstanceMessage resignFirstResponder];
+    [_messageTextField resignFirstResponder];
 }
 
 - (void)scrollToBottom {
@@ -190,56 +229,71 @@ typedef enum {
     [super viewWillAppear:animated];
 	
 	delegate.MessageInBox.notificationDelegate = self;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardDidShow:)
-                                                 name:UIKeyboardDidShowNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide:)
-                                                 name:UIKeyboardWillHideNotification
+	[self registerForInputNotifications];
+	
+	[self reloadTable];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+	delegate.MessageInBox.notificationDelegate = nil;
+	[self unregisterForInputNotifications];
+	
+    [super viewWillDisappear:animated];
+}
+
+- (void)registerForInputNotifications {
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(keyboardWillShow:)
+												 name:UIKeyboardWillShowNotification
+											   object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(keyboardWillHide:)
+												 name:UIKeyboardWillHideNotification
 											   object:nil];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(inputModeDidChange:)
 												 name:@"UITextInputCurrentInputModeDidChangeNotification"
 											   object:nil];
-	
-	[self reloadTable];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillShowNotification
-                                                  object:nil];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillHideNotification
+- (void)unregisterForInputNotifications {
+	[[NSNotificationCenter defaultCenter] removeObserver:self
+													name:UIKeyboardWillShowNotification
+												  object:nil];
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self
+													name:UIKeyboardWillHideNotification
 												  object:nil];
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self
 													name:@"UITextInputCurrentInputModeDidChangeNotification"
 												  object:nil];
-	
-	delegate.MessageInBox.notificationDelegate = nil;
-	
-    [super viewWillDisappear:animated];
 }
 
-- (void)keyboardDidShow:(NSNotification *)notification {
-    // adjust view due to keyboard
-    if(floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        CGFloat keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
-        CGFloat offset = self.tableView.contentSize.height + InstanceBox.frame.size.height + keyboardSize - self.view.frame.size.height;
-        if(offset>0) {
-            [self.tableView setContentOffset:CGPointMake(0.0, offset) animated:YES];
-        }
-    }
+- (void)keyboardWillShow:(NSNotification *)notification {
+	// adjust view due to keyboard
+	CGFloat keyboardSize = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
+	NSTimeInterval animationDuration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+	
+	[self.view layoutIfNeeded];
+	_bottomBarBottomSpaceConstraint.constant = keyboardSize;
+	[UIView animateWithDuration:animationDuration
+					 animations:^{
+						 [self.view layoutIfNeeded];
+					 }];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-    
+	NSTimeInterval animationDuration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+	
+	[self.view layoutIfNeeded];
+	_bottomBarBottomSpaceConstraint.constant = 0;
+	[UIView animateWithDuration:animationDuration
+					 animations:^{
+						 [self.view layoutIfNeeded];
+					 }];
 }
 
 - (void)inputModeDidChange:(NSNotification *)notification {
@@ -248,36 +302,19 @@ typedef enum {
 	NSString *modeIdentifier = [inputMode respondsToSelector:@selector(identifier)] ? (NSString *)[inputMode performSelector:@selector(identifier)] : nil;
 	
 	if([modeIdentifier isEqualToString:@"dictation"]) {
-		[UIView setAnimationsEnabled:NO];
-		[[NSNotificationCenter defaultCenter] removeObserver:self
-														name:UIKeyboardDidShowNotification
-													  object:nil];
-		
-		[[NSNotificationCenter defaultCenter] removeObserver:self
-														name:UIKeyboardWillHideNotification
-													  object:nil];
-		
 		// hide the keyboard and show again to cancel dictation
-		[InstanceMessage resignFirstResponder];
-		[InstanceMessage becomeFirstResponder];
-		
+		[UIView setAnimationsEnabled:NO];
+		[self unregisterForInputNotifications];
+		[_messageTextField resignFirstResponder];
+		[_messageTextField becomeFirstResponder];
+		[self registerForInputNotifications];
 		[UIView setAnimationsEnabled:YES];
-		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(keyboardDidShow:)
-													 name:UIKeyboardDidShowNotification
-												   object:nil];
 		
-		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(keyboardWillHide:)
-													 name:UIKeyboardWillHideNotification
-												   object:nil];
-		
-		UIAlertView *denyAlert = [[UIAlertView alloc] initWithTitle:nil
-															message:NSLocalizedString(@"label_SpeechRecognitionAlert", nil)
-														   delegate:nil
-												  cancelButtonTitle:NSLocalizedString(@"btn_OK", nil)
-												  otherButtonTitles:nil];
-		[denyAlert show];
+		[[[UIAlertView alloc] initWithTitle:nil
+									message:NSLocalizedString(@"label_SpeechRecognitionAlert", nil)
+								   delegate:nil
+						  cancelButtonTitle:NSLocalizedString(@"btn_OK", nil)
+						  otherButtonTitles:nil] show];
 	}
 }
 
@@ -547,11 +584,10 @@ typedef enum {
 		
 		if(buttonIndex == 1) {
 			// retry
-			
 			[CATransaction begin];
 			[CATransaction setCompletionBlock:^{
 				// animation has finished
-				[self.tableView scrollRectToVisible:InstanceBox.frame animated:YES];
+				[self scrollToBottom];
 			}];
 			
 			[self.tableView beginUpdates];
@@ -861,11 +897,11 @@ typedef enum {
 }
 
 - (IBAction)sendshortmsg:(id)sender {
-	if((InstanceMessage.text == nil || InstanceMessage.text.length == 0) && !_attachedFile) {
+	if((_messageTextField.text == nil || _messageTextField.text.length == 0) && !_attachedFile) {
 		return;
 	}
 	
-	[self sendTextMessage:InstanceMessage.text tableViewUpdateStarted:NO];
+	[self sendTextMessage:_messageTextField.text tableViewUpdateStarted:NO];
 }
 
 - (void)sendTextMessage:(NSString *)text tableViewUpdateStarted:(BOOL)updateStarted {
@@ -886,7 +922,7 @@ typedef enum {
 							FileData:_attachedFileRawData];
 	newMessage.outgoingStatus = MessageOutgoingStatusSending;
 	
-	InstanceMessage.text = @"";
+	_messageTextField.text = @"";
 	
 	[self.messages addObject:newMessage];
 	
@@ -894,7 +930,7 @@ typedef enum {
 		[CATransaction begin];
 		[CATransaction setCompletionBlock:^{
 			// animation has finished
-			[self.tableView scrollRectToVisible:InstanceBox.frame animated:YES];
+			[self scrollToBottom];
 		}];
 		
 		[self.tableView beginUpdates];
@@ -1186,10 +1222,6 @@ typedef enum {
 		idrange.length = range.location - idrange.location;
 		filename = [NSString stringWithFormat:@"%@.%@", [[urlstr absoluteString]substringWithRange:idrange], [[urlstr absoluteString]substringFromIndex:range.location+range.length]];
 	}
-	
-//	NSString *sizeinfo = [NSString stringWithFormat:@"%@ (%@).", filename,
-//						  [NSString stringWithFormat:NSLocalizedString(@"label_kb",@"%.0f kb"), [imgdata length]/1024.0f]
-//						  ];
 	
 	_attachedFile = [NSURL URLWithString:filename];
 	_attachedFileRawData = imgdata;
