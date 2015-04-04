@@ -171,6 +171,8 @@
 "error_C2DMRegInvalidSender" = "Die Registrierung dieser Version ist nicht verfügbar, überprüfen Sie bitte ob eine aktualisierte Version bereitsteht.";
 /* 'Incorrect device registration with Google. This device does not currently support push messaging.' is an error message (sentence case, period); used to warn during push registration: Incorrect phone registration with Google. This phone doesn't currently support C2DM. Android-only. */
 "error_C2DMRegPhoneRegistrationError" = "Registrierung dieses Gerätes bei Google fehlgeschlagen. Dieses Gerät unterstützt derzeit kein Push-Messaging.";
+/* 'Google Play Services is required to receive messages. Please install Google Play Services to continue.' is an error message (sentence case, period); used to warn during push registration: There is no Google Play Services on the phone. The application should ask the user to install Play Services. Fix on the device side. Android-only. */
+"error_C2DMRegPlayServicesMissing" = "Google Play Services ist erforderlich, um Nachrichten zu empfangen. Bitte installieren Sie Google Play Services, um fortzufahren.";
 /* 'Push registration service not available, scheduling retry in %d seconds.' is an error message (sentence case, period); used to warn during push registration: The device can't read the response, or there was a 500/503 from the server that can be retried later. The application should use exponential back off and retry. %d = the current number of seconds until the next push registration attempt. Android-only. */
 "error_C2DMRegServiceNotAvailable" = "Push Registration Service momentan nicht verfügbar, wird in %d Sekunden erneut versucht.";
 /* 'Too many applications are registered for Push. Please uninstall some other applications and retry.' is an error message (sentence case, period); used to warn during push registration: The user has too many applications registered. The application should tell the user to uninstall some other applications, let user retry manually. Fix on the device side. Android-only. */
@@ -394,6 +396,8 @@
 "label_hours" = "%d Stunden";
 /* 'SafeSlinger iCloud is enabled. Tap the Done button when finished.' is a screen label (match English casing); used to indicate the backup will occur while on the Setup screen. iOS-only. */
 "label_iCloudEnable" = "SafeSlinger iCloud ist aktiviert. Tippen Sie auf die Schaltfläche Fertig, wenn Sie fertig sind.";
+/* 'No messages. To send a message, tap on the New Message icon at the top of your screen.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. */
+"label_InstNoMessages" = "Keine Nachrichten. Um eine Nachricht zu senden, tippen Sie auf das Symbol für neue Nachrichten am oberen Rand des Bildschirms.";
 /* 'To add recipients, you must first Sling Keys with one or more other users at the same time. You may also send a Sling Keys contact invitation from the menu.' is a screen label (match English casing); used to instruct the user how to proceed on the Recipient list screen is case of no recipients. */
 "label_InstNoRecipients" = "Um Empfänger hinzuzufügen, müssen Sie zuerst mit einem oder mehreren anderen Usern gleichzeitig Schlüssel austauschen. Sie können auch eine Sling Keys Kontakt Einladung aus dem Menü heraus verschicken.";
 /* 'None of your current recipients match your search query. Please try a different query or invite a new contact.' is a screen label (match English casing); used to inform the user that no recipients match the search query. */
