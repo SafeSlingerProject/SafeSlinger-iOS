@@ -1,5 +1,5 @@
 language: objective-c
 script:
-  - xcodebuild -project safeslingerdemo/safeslingerdemo.xcodeproj/ -scheme exchangeui -sdk iphonesimulator
-  - xcodebuild -project safeslingerdemo/safeslingerdemo.xcodeproj/ -scheme safeslingerexchange -sdk iphonesimulator
-  - xcodebuild -project safeslingerdemo/safeslingerdemo.xcodeproj/ -scheme safeslingerdemo -sdk iphonesimulator
+  - xcodebuild -project safeslingerdemo/safeslingerdemo.xcodeproj/ -scheme exchangeui -sdk iphonesimulator build
+  - xcodebuild -project safeslingerdemo/safeslingerdemo.xcodeproj/ -scheme safeslingerexchange -sdk iphonesimulator build
+  - xcodebuild -project safeslingerdemo/safeslingerdemo.xcodeproj/ -scheme safeslingerdemo -sdk iphonesimulator build
