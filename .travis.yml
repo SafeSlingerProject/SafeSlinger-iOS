@@ -3,13 +3,7 @@ language: objective-c
 xcode_project: safeslingerdemo/safeslingerdemo.xcodeproj
 xcode_scheme: safeslingerdemo/safeslingerdemo
 script:
-  - xcodebuild -project safeslingerdemo/safeslingerdemo.xcodeproj -scheme exchangeui -sdk iphonesimulator build ONLY_ACTIVE_ARCH=N
-  - xcodebuild -project safeslingerdemo/safeslingerdemo.xcodeproj -scheme safeslingerexchange -sdk iphonesimulator build ONLY_ACTIVE_ARCH=N
-  - xcodebuild -project safeslingerdemo/safeslingerdemo.xcodeproj -scheme safeslingerdemo -sdk iphonesimulator build ONLY_ACTIVE_ARCH=N
-  
-xcode_project: safeslingermessager/safeslingermessager.xcodeproj
-xcode_scheme: safeslingermessager/safeslingermessager
-script:
-  - xcodebuild -project safeslingermessager/safeslingermessager.xcodeproj -scheme exchangeui -sdk iphonesimulator build ONLY_ACTIVE_ARCH=N
-  - xcodebuild -project safeslingermessager/safeslingermessager.xcodeproj -scheme safeslingerexchange -sdk iphonesimulator build ONLY_ACTIVE_ARCH=N
-  - xcodebuild -project safeslingermessager/safeslingermessager.xcodeproj -scheme safeslingermessager -sdk iphonesimulator build ONLY_ACTIVE_ARCH=N
+  - xcodebuild -project safeslingerdemo/safeslingerdemo.xcodeproj -scheme exchangeui -sdk iphonesimulator build
+  - xcodebuild -project safeslingerdemo/safeslingerdemo.xcodeproj -scheme safeslingerexchange -sdk iphonesimulator build
+  - xcodebuild -project safeslingerdemo/safeslingerdemo.xcodeproj -scheme safeslingerdemo -sdk iphonesimulator build
+
