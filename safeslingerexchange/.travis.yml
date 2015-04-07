@@ -1,0 +1,6 @@
+language: objective-c
+xcode_project: safeslingerexchange.xcodeproj
+xcode_scheme: safeslingerexchange
+script:
+  - xcodebuild -project safeslingerexchange.xcodeproj -scheme exchangeui -sdk iphonesimulator build
+  - xcodebuild -project safeslingerexchange.xcodeproj -scheme safeslingerexchange -sdk iphonesimulator build
