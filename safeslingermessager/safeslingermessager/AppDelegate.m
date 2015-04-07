@@ -32,6 +32,8 @@
 #import "UniversalDB.h"
 #import "ErrorLogger.h"
 #import "FunctionView.h"
+#import "MessageReceiver.h"
+#import "MessageSender.h"
 
 #import <AddressBook/AddressBook.h>
 #import <Crashlytics/Crashlytics.h>

@@ -6,4 +6,12 @@ script:
   - xcodebuild -project safeslingerdemo/safeslingerdemo.xcodeproj -scheme exchangeui -sdk iphonesimulator build
   - xcodebuild -project safeslingerdemo/safeslingerdemo.xcodeproj -scheme safeslingerexchange -sdk iphonesimulator build
   - xcodebuild -project safeslingerdemo/safeslingerdemo.xcodeproj -scheme safeslingerdemo -sdk iphonesimulator build
+  
+  
+xcode_project: safeslingermessager/safeslingermessager.xcodeproj
+xcode_scheme: safeslingermessager/safeslingermessager
+script:
+  - xcodebuild -project safeslingermessager/safeslingermessager.xcodeproj -scheme exchangeui -sdk iphonesimulator build
+  - xcodebuild -project safeslingermessager/safeslingermessager.xcodeproj -scheme safeslingerexchange -sdk iphonesimulator build
+  - xcodebuild -project safeslingermessager/safeslingermessager.xcodeproj -scheme safeslingermessager -sdk iphonesimulator build
 
