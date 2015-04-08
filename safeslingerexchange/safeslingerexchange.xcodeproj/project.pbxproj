@@ -381,7 +381,6 @@
 				sk,
 				sr,
 				sv,
-				tl,
 				tr,
 				ur,
 				vi,
