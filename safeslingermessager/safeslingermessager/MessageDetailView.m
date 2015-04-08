@@ -1126,6 +1126,10 @@ typedef enum {
 	[actionSheet showInView:[self.navigationController view]];
 }
 
+- (IBAction)unwindToMessageDetailView:(UIStoryboardSegue *)unwindSegue {
+	
+}
+
 #pragma mark - UIActionSheetDelegate methods
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
