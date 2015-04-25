@@ -1066,6 +1066,7 @@ typedef enum {
 	int i = (int)self.messages.count - 1;
 	BOOL found = NO;
 	
+	// go backwards through the messages
 	while(i >= 0 && !found) {
 		MsgEntry *entry = self.messages[i];
 		if([entry.msgid isEqualToData:message.msgid]) {
@@ -1074,6 +1075,7 @@ typedef enum {
 			[self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:i inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
 			found = YES;
 		}
+		i--;
 	}
 	
 	if(!found) {
