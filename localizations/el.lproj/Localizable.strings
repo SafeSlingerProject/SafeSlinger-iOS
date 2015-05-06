@@ -76,7 +76,7 @@
 /* 'No Match' is a button (title case); the No Match button is used if the user cannot find the same batting screen on another user's device during the exchange critical care. */
 "btn_NoMatch" = "Δε βρέθηκε κοινή φράση";
 /* 'Not Now' is a button (title case); the Not Now button is used as a negative button to decline an offered service or permission. */
-"btn_NotNow" = "Όχι τώρα";
+"btn_NotNow" = "Όχι Τώρα";
 /* 'Forget' is a button (title case); the Forget button is paired with the Remind button and is used to indicate the user wishes to dismiss the current reminder of a potential error state, such as having backup or notification settings turned off, and not be reminded again. */
 "btn_NotRemind" = "Ακύρωση";
 /* 'OK' is a button (title case); the OK button is affirmation button used to indicate the user accepts the data entered on the current screen. */
@@ -144,7 +144,7 @@
 "choice_Up" = "Πάνω";
 
 /* 'Some members are using an older version; all members must upgrade to the newest version.' is an error message (sentence case, period); used to warn when some members of the key exchange protocol are using less than the minimum version. Used for backward-compatibility in some cases. */
-"error_AllMembersMustUpgrade" = "Μερικά μέλη χρησιμοποιώντας μια παλαιότερη έκδοση? όλα τα μέλη πρέπει να αναβαθμίσουν στην τελευταία έκδοση.";
+"error_AllMembersMustUpgrade" = "Ορισμένα μέλη χρησιμοποιείτε μια παλαιότερη έκδοση? όλα τα μέλη πρέπει να αναβαθμίσουν στην τελευταία έκδοση.";
 /* 'All members must upgrade, some are using older key formats.' is an error message (sentence case, period); used to warn when the key format is incorrect after an exchange and perhaps used an old format. */
 "error_AllMembersMustUpgradeBadKeyFormat" = "Όλα τα μέλη πρέπει να αναβαθμίσουν, ορισμένα χρησιμοποιούν παλαιότερες μορφές κλειδιού.";
 /* 'All members must upgrade, some are using older push registration formats.' is an error message (sentence case, period); used to warn when the push registration format is incorrect or corrupted. */
@@ -156,7 +156,7 @@
 /* 'Audio recorder encoding error.' is an error message (sentence case, period); used to warn when attempting to record an audio message fails to encode properly. iOS-only. */
 "error_AudioRecorderEncodeError" = "Σφάλμα κωδικοποίησης της εγγραφής ήχου.";
 /* 'Microphone permission is required to record a secure voice message. Tap the %s button for SafeSlinger Microphone permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Microphone permission. iOS-only. */
-"error_AudioRecorderPermissionError" = "Άδεια μικροφώνου απαιτείται για να καταγράψει ένα ασφαλές φωνητικό μήνυμα. Πατήστε το κουμπί %@ για SafeSlinger Μικρόφωνο λεπτομέρειες άδεια.";
+"error_AudioRecorderPermissionError" = "Άδεια Μικρόφωνο υποχρεούται να καταχωρεί ένα ασφαλές φωνητικό μήνυμα. Πατήστε το κουμπί %@ για SafeSlinger Μικρόφωνο λεπτομέρειες άδεια.";
 /* 'No backup to restore.' is an error message (sentence case, period); used to warn at application setup, when there is no pre-existing backup to restore and warn the user that any previous keys have not been restored. */
 "error_BackupNotFound" = "Δε βρέθηκε αντίγραφο ασφαλείας για επαναφορά.";
 /* 'Device does not support backup restore.' is an error message (sentence case, period); used to warn when the device hardware does not support restoration from backup. */
@@ -166,13 +166,13 @@
 /* 'A Google account is required. Please open the account manager and add a Google account.' is an error message (sentence case, period); used to warn during push registration: There is no Google account on the phone. The application should ask the user to open the account manager and add a Google account. Fix on the device side. Android-only. */
 "error_C2DMRegAccountMissing" = "Ένας λογαριασμός Google είναι απαραίτητος. Παρακαλούμε ανοίξτε το διαχειριστή λογαριασμών και προσθέστε ένα λογαριασμό Google.";
 /* 'Registration not authenticated, please retry manually later.' is an error message (sentence case, period); used to warn during push registration: Bad password. The application should ask the user to enter his/her password, and let user retry manually later. Fix on the device side. Android-only. */
-"error_C2DMRegAuthenticationFailed" = "Η εγγραφή δεν ολοκληρώθηκε, δοκιμάστε ξανά αργότερα.";
+"error_C2DMRegAuthenticationFailed" = "Εγγραφή δεν επικυρώνονται, παρακαλώ δοκιμάστε ξανά με μη αυτόματο τρόπο αργότερα.";
 /* 'Registration is not available for this version, please check for an updated version.' is an error message (sentence case, period); used to warn during push registration: The sender account is not recognized. Android-only. */
 "error_C2DMRegInvalidSender" = "Η εγγραφή δεν είναι διαθέσιμη για αυτήν την έκδοση, παρακαλούμε να ελέγξετε για μια ενημερωμένη έκδοση.";
 /* 'Incorrect device registration with Google. This device does not currently support push messaging.' is an error message (sentence case, period); used to warn during push registration: Incorrect phone registration with Google. This phone doesn't currently support C2DM. Android-only. */
 "error_C2DMRegPhoneRegistrationError" = "Εσφαλμένη εγγραφή της συσκευής με τη Google. Αυτή η συσκευή δεν υποστηρίζει push messaging.";
 /* 'Google Play Services is required to receive messages. Please install Google Play Services to continue.' is an error message (sentence case, period); used to warn during push registration: There is no Google Play Services on the phone. The application should ask the user to install Play Services. Fix on the device side. Android-only. */
-"error_C2DMRegPlayServicesMissing" = "To Google Play Services απαιτείται για να λαμβάνετε μηνύματα. Παρακαλώ εγκαταστήστε το Google Play Services για να συνεχίσετε.";
+"error_C2DMRegPlayServicesMissing" = "Google Play Services απαιτείται για τη λήψη μηνυμάτων. Παρακαλώ εγκαταστήστε Google Play Services για να συνεχίσετε.";
 /* 'Push registration service not available, scheduling retry in %d seconds.' is an error message (sentence case, period); used to warn during push registration: The device can't read the response, or there was a 500/503 from the server that can be retried later. The application should use exponential back off and retry. %d = the current number of seconds until the next push registration attempt. Android-only. */
 "error_C2DMRegServiceNotAvailable" = "H υπηρεσία push registration δεν είναι διαθέσιμη, επανάληψη σε %d δευτερόλεπτα.";
 /* 'Too many applications are registered for Push. Please uninstall some other applications and retry.' is an error message (sentence case, period); used to warn during push registration: The user has too many applications registered. The application should tell the user to uninstall some other applications, let user retry manually. Fix on the device side. Android-only. */
@@ -297,7 +297,7 @@
 "error_WebCancelledByUser" = "Ο χρήστης ακύρωσε το αίτημα διακομιστή.";
 
 /* 'Use this screen to set your name to exchange with others, and a passphrase to protect your data. Tap the Done button when finished.' is a help message (sentence case, period); used via Help button on the Setup screen to describe in more detail what the Setup screen does. */
-"help_find" = "Χρησιμοποιήστε αυτήν την οθόνη για να ρυθμίσετε το όνομά σας για να ανταλλάξουν με άλλους, και ένα συνθηματικό για την προστασία των δεδομένων σας. Πατήστε το κουμπί Τέλος όταν τελειώσετε.";
+"help_find" = "Χρησιμοποιήστε αυτή την οθόνη για να ρυθμίσετε το όνομά σας για να ανταλλάξουν με άλλους, και ένα συνθηματικό για την προστασία των δεδομένων σας. Πατήστε το κουμπί Τέλος όταν τελειώσετε.";
 /* 'To exchange identity data, ensure all users are nearby or on the phone. The Begin Exchange button will exchange only the checked contact data.' is a help message (sentence case, period); used via Help button on the Begin Exchange screen and also the key exchange walkthrough tutorial to describe in more detail what the Begin Exchange screen does. */
 "help_home" = "Για την ανταλλαγή δεδομένων ταυτότητας, βεβαιωθείτε ότι όλοι οι χρήστες είναι κοντά ή στο τηλέφωνο. Το πλήκτρο Αρχίστε Ανταλλαγή θα ανταλλάξει μόνο τα επιλεγμένα στοιχεία επικοινωνίας.";
 /* 'You may also change personal data about your identity on this screen by tapping on the button with your name. This will display a menu allowing you to Edit your contact, Create New contact, or Use Another contact.' is a help message (sentence case, period); Additional help text, which is appended to the Help button text on the Compose and Begin Exchange screens. */
@@ -305,9 +305,9 @@
 /* 'This screen displays all past messages, and attachments that are still available for download.' is a help message (sentence case, period); used via Help button on the Messages list screen to describe in more detail what the Messages list screen does. */
 "help_Messages" = "Αυτή η οθόνη εμφανίζει όλα τα προηγούμενα μηνύματα, και τα αρχεία που είναι ακόμα διαθέσιμα για λήψη.";
 /* 'Use this screen to login to the application with your passphrase. If you have forgotten your passphrase, you may generate a new key protected by a new passphrase by tapping the Forgot Passphrase? button. Tap the user name to switch between multiple keys.' is a help message (sentence case, period); used via Help button on the Passphrase screen to describe in more detail what the Passphrase screen does. */
-"help_passphrase" = "Χρησιμοποιήστε αυτή την οθόνη για να συνδεθείτε στην εφαρμογή με τη φράση πρόσβασής σας. Αν έχετε ξεχάσει το συνθηματικό σας, μπορείτε να δημιουργήσετε ένα νέο κλειδί που προστατεύεται από ένα νέο συνθηματική φράση πατώντας το κουμπί Ξεχάσατε Φράση πρόσβασης; κουμπί. Πατήστε το όνομα χρήστη για να κάνετε εναλλαγή μεταξύ πολλών πλήκτρων.";
+"help_passphrase" = "Χρησιμοποιήστε αυτήν την οθόνη για να συνδεθείτε στην εφαρμογή με τη φράση πρόσβασης. Αν έχετε ξεχάσει την κωδική φράση σας, μπορείτε να δημιουργήσετε ένα νέο κλειδί που προστατεύονται από μια νέα φράση πρόσβασης πατώντας το Ξέχασα Passphrase; κουμπί. Πατήστε το όνομα χρήστη για εναλλαγή μεταξύ πολλών πλήκτρων.";
 /* 'Use this screen to change your passphrase by entering your last passphrase for confirmation and the new passphrase.' is a help message (sentence case, period); used via Help button on the Change Passphrase screen to describe in more detail what the Change Passphrase screen does. */
-"help_passphrase_change" = "Χρησιμοποιήστε αυτή την οθόνη για να αλλάξετε τη φράση σας εισάγοντας τελευταία φράση κλειδί σας για την επιβεβαίωση και την νέα φράση κλειδί.";
+"help_passphrase_change" = "Χρησιμοποιήστε αυτή την οθόνη για να αλλάξετε τη φράση σας εισάγοντας τελευταία φράση κλειδί σας για την επιβεβαίωση και τη νέα φράση πρόσβασης.";
 /* 'Contacts with SafeSlinger keys are displayed here, select one to send your message to.' is a help message (sentence case, period); used via Help button on the Recipients list screen to describe in more detail what the Recipients list screen does. */
 "help_PickRecip" = "Οι επαφές με SafeSlinger εμφανίζονται εδώ, επιλέξτε κάποια για να στείλετε το μήνυμά σας.";
 /* 'When finished, the protocol will reveal a list of the identity data exchanged. Select the contacts you wish to save and press Import.' is a help message (sentence case, period); used via Help button on the End Exchange screen and also the key exchange walkthrough tutorial to describe in more detail what the End Exchange screen does. */
@@ -326,23 +326,23 @@
 "help_verify" = "Τώρα πρέπει να βρείτε την κοινή ομάδα 3 λέξεων μεταξύ όλων των χρηστών. Κάθε χρήστης πρέπει να επιλέξει την ίδια κοινή φράση, και να πατήσει Επόμενο.";
 
 /* 'Camera permission is required to attach snapshots to secure messages. Tap the %s button for SafeSlinger Camera permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Camera permission. iOS-only. */
-"iOS_cameraError" = "Άδεια Κάμερα υποχρεούται να επισυνάψει στιγμιότυπα για να εξασφαλίσει τα μηνύματα. Πατήστε το κουμπί %@ για SafeSlinger λεπτομέρειες άδεια κάμερα.";
+"iOS_cameraError" = "Άδεια Κάμερα υποχρεούται να επισυνάψει στιγμιότυπα για να εξασφαλίσει τα μηνύματα. Πατήστε το κουμπί %@ για SafeSlinger λεπτομέρειες άδεια κάμερας.";
 /* 'Contacts permission is required for securely sharing contact cards. Tap the %s button for SafeSlinger Contacts permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Contacts permission. iOS-only. */
 "iOS_contactError" = "Επαφές απαιτείται άδεια για την ασφαλή ανταλλαγή των καρτών επαφών. Πατήστε το κουμπί %@ για SafeSlinger λεπτομέρειες Επαφές άδεια.";
 /* 'Push registration is missing.' is an error message (sentence case, period); used to warn the user the push registration is missing. iOS-only. */
 "iOS_errorpushtoken" = "Λείπει το Push registration.";
 /* 'Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the %s button for SafeSlinger Notification permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Notifications permission. iOS-only. */
-"iOS_notificationError1" = "Άδεια Γνωστοποίηση είτε για ειδοποιήσεις ή banners, και οι αριθμοί σήμα, που απαιτούνται για την ασφαλή ανταλλαγή μηνυμάτων. Πατήστε το κουμπί %@ για SafeSlinger λεπτομέρειες άδεια κοινοποίησης.";
+"iOS_notificationError1" = "Άδεια κοινοποίηση είτε για ειδοποιήσεις ή πανό, και τους αριθμούς μητρώου που απαιτούνται για την ασφαλή αποστολή μηνύματος. Πατήστε το κουμπί %@ για SafeSlinger λεπτομέρειες άδεια κοινοποίησης.";
 /* 'SafeSlinger is not optimized for iOS 5.x devices. SafeSlinger requires iOS 6 or higher.' is an informational message (sentence case, period); message for dialog popups when a user still uses an old iOS device. iOS-only. */
 "iOS_oldOSWarn" = "Η εφαρμογή SafeSlinger δεν είναι βελτιστοποιημένη για συσκευές iOS 5.x. Το SafeSlinger απαιτεί iOS 6 ή νεότερη έκδοση.";
 /* 'Photo Library permission is required to attach pictures to secure messages. Tap the %s button for SafeSlinger Photo Library permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Photo Library permission. iOS-only. */
 "iOS_photolibraryError" = "Άδεια Photo Library απαιτείται να επισυνάψετε εικόνες για να εξασφαλίσει τα μηνύματα. Πατήστε το κουμπί %@ για SafeSlinger Photo Library λεπτομέρειες άδεια.";
 /* 'You can select your contact card to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Contacts when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Contacts permission. iOS-only. */
-"iOS_RequestPermissionContacts" = "Μπορείτε να επιλέξετε την κάρτα επαφής σας για να στείλετε τους φίλους σας και SafeSlinger θα κρυπτογραφήσει για σας. Για να ενεργοποιήσετε αυτήν τη δυνατότητα, θα πρέπει να επιτρέπουν την πρόσβαση σε SafeSlinger Επαφές σας όταν σας ζητηθεί.";
+"iOS_RequestPermissionContacts" = "Μπορείτε να επιλέξετε την κάρτα επαφής σας για να στείλετε στους φίλους σας και SafeSlinger θα κρυπτογραφήσει για εσάς. Για να ενεργοποιήσετε αυτή τη λειτουργία, θα πρέπει να επιτρέψετε SafeSlinger πρόσβαση στις επαφές σας όταν σας ζητηθεί.";
 /* 'You can record a voice message to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Microphone when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Microphone permission. iOS-only. */
-"iOS_RequestPermissionMicrophone" = "Μπορείτε να ηχογραφήσετε ένα φωνητικό μήνυμα για να στείλετε στους φίλους σας και SafeSlinger θα κρυπτογραφήσει για σας. Για να ενεργοποιήσετε αυτήν τη δυνατότητα, θα πρέπει να επιτρέπουν την πρόσβαση σε SafeSlinger μικρόφωνο σας όταν σας ζητηθεί.";
+"iOS_RequestPermissionMicrophone" = "Μπορείτε να ηχογραφήσετε ένα φωνητικό μήνυμα για να στείλετε στους φίλους σας και SafeSlinger θα κρυπτογραφήσει για εσάς. Για να ενεργοποιήσετε αυτή τη λειτουργία, θα πρέπει να επιτρέψετε SafeSlinger πρόσβαση στο μικρόφωνο, όταν σας ζητηθούν.";
 /* 'SafeSlinger is an encrypted messaging application and cannot function without allowing incoming messages from Notifications. To enable incoming messages, you must allow SafeSlinger to send you Notifications when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Notifications permission. iOS-only. */
-"iOS_RequestPermissionNotifications" = "SafeSlinger είναι μια κρυπτογραφημένη εφαρμογή μηνυμάτων και δεν μπορεί να λειτουργήσει χωρίς να επιτρέπει εισερχόμενα μηνύματα από Ειδοποιήσεις. Για να ενεργοποιήσετε τα εισερχόμενα μηνύματα, θα πρέπει να επιτρέψει SafeSlinger να σας στείλουμε Ειδοποιήσεις όταν σας ζητηθεί.";
+"iOS_RequestPermissionNotifications" = "SafeSlinger είναι μια κρυπτογραφημένη εφαρμογή μηνυμάτων και δεν μπορεί να λειτουργήσει χωρίς να επιτρέπει εισερχόμενα μηνύματα από Ειδοποιήσεις. Για να ενεργοποιήσετε τα εισερχόμενα μηνύματα, θα πρέπει να επιτρέψετε SafeSlinger να σας στείλουμε ειδοποιήσεις όταν σας ζητηθεί.";
 
 /* '%s ago' is a screen label (match English casing); used on the messages list screen and is used to describe how long ago a message was sent or received. %s = a time measurement, such as '5 minutes' or '2 hours'. */
 "label_ago" = "%@ πριν";
@@ -385,7 +385,7 @@
 /* 'File Name' is a screen label (match English casing); used on the Save File As dialog as a hint in the file name text box when changing the file name. */
 "label_FileNameHint" = "Όνομα αρχείου";
 /* 'Enter your name and a passphrase to protect your data:' is a screen label (match English casing); used to instruct the user how to proceed on the Setup screen. */
-"label_FindInstruct" = "Πληκτρολογήστε το όνομά σας και μια φράση κλειδί για την προστασία των δεδομένων σας:";
+"label_FindInstruct" = "Πληκτρολογήστε το όνομά σας και μια φράση πρόσβασης για την προστασία των δεδομένων σας:";
 /* 'First Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current first name to use. iOS-only. */
 "label_FirstName" = "Όνομα";
 /* 'Tap your name to add or remove contact data, check items you wish to share, and tap Begin Exchange when others are ready to exchange:' is a screen label (match English casing); used to instruct the user how to proceed on the Begin Exchange screen. */
@@ -489,7 +489,7 @@
 /* 'Save Account' is a screen label (match English casing); used above the editable field on the End Exchange screen to showing the address book account to use when saving or updating contacts. */
 "label_SaveAccount" = "Αποθήκευση λογαριασμού";
 /* 'Check contacts you want to update in your address book, then tap Import to save secure contacts:' is a screen label (match English casing); used to instruct the user how to proceed on the End Exchange screen. */
-"label_SaveInstruct" = "Ελέγξτε τις επαφές που θέλετε να ενημερώσετε το βιβλίο διευθύνσεών σας, στη συνέχεια, πατήστε «Εισαγωγή» για να αποθηκεύσετε ασφαλείς επαφές:";
+"label_SaveInstruct" = "Ελέγξτε τις επαφές που θέλετε να ενημερώσετε στο βιβλίο διευθύνσεών σας, στη συνέχεια, πιέστε Εισαγωγή για να αποθηκεύσετε ασφαλείς επαφές:";
 /* 'Search contacts' is a screen label (match English casing); used on the Recipients screen to provide a hint to search for contacts. */
 "label_search_contacts_hint" = "Αναζήτηση επαφών";
 /* '%d seconds' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole seconds. */
@@ -505,7 +505,7 @@
 /* 'Show this hint next time.' is a screen label (match English casing); used in the key exchange walkthrough dialog to toggle the display of the walkthrough at the next attempted key exchange. */
 "label_ShowHintAtLaunch" = "Εμφάνισε αυτή την υπόδειξη την επόμενη φορά.";
 /* 'Using speech recognition is disabled because it might cause an information leak' is a screen label (match English casing); used to alert the user about possible information leak on the use of speech recognition when the user tries to use this feature */
-"label_SpeechRecognitionAlert" = "Χρησιμοποιώντας την αναγνώριση ομιλίας είναι απενεργοποιημένη, διότι θα μπορούσε να προκαλέσει διαρροή πληροφοριών";
+"label_SpeechRecognitionAlert" = "Χρησιμοποιώντας αναγνώριση ομιλίας είναι απενεργοποιημένη, γιατί μπορεί να προκαλέσουν διαρροή πληροφοριών";
 /* 'Step 1' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
 "label_step_1" = "Βήμα 1";
 /* 'Step 2' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
@@ -517,13 +517,13 @@
 /* 'Step 5' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
 "label_step_5" = "Βήμα 5";
 /* 'Automatically download message attachments when logged in.' is a screen label (match English casing); used as the settings summary to describe what Auto-retrieve attachments will do. */
-"label_summary_auto_attach_retrieval" = "Αυτόματη λήψη συνημμένων σε μήνυμα όταν εισέλθει";
+"label_summary_auto_attach_retrieval" = "Αυτόματη λήψη συνημμένων σε μήνυμα όταν συνδέεστε.";
 /* 'Automatically decrypt messages when logged in.' is a screen label (match English casing); used as the settings summary to describe what Auto-decrypt will do. */
-"label_summary_auto_decrypt" = "Αυτόματη αποκρυπτογράφηση μηνυμάτων όταν εισέλθει";
+"label_summary_auto_decrypt" = "Αυτόματη αποκρυπτογράφηση μηνυμάτων όταν είστε συνδεδεμένοι.";
 /* 'Receive notification when backup is offline.' is a screen label (match English casing); used as the settings summary to describe what Backup Reminder will do. */
-"label_summary_remind_backup_delay" = "Λήψη ειδοποίησης όταν backup είναι offline.";
+"label_summary_remind_backup_delay" = "Λήψη ειδοποίησης όταν αντιγράφων ασφαλείας δεν είναι συνδεδεμένος.";
 /* 'Show a tutorial before attempting to Sling Keys.' is a screen label (match English casing); used as the settings summary to describe what Show Walkthrough will do. */
-"label_summary_show_tutorial" = "Δείτε ένα φροντιστήριο πριν επιχειρήσετε να Sling Keys.";
+"label_summary_show_tutorial" = "Δείτε ένα φροντιστήριο πριν επιχειρήσετε να Sling Κλειδιά.";
 /* 'Tap to decrypt file' is a screen label (match English casing); used to indicate tapping this message in the list will attempt to decrypt the attachment (if needed). */
 "label_TapToDecryptFile" = "Πιέστε για να αποκρυπτογραφήσετε το αρχείο";
 /* 'Tap to decrypt' is a screen label (match English casing); used to indicate tapping this message in the list will attempt to decrypt it. */
@@ -537,17 +537,17 @@
 /* 'Tap to resume message draft' is a screen label (match English casing); used to indicate tapping this message in the list will take the user to the composition screen. */
 "label_TapToResumeDraft" = "Πιέστε για να συνεχίσετε το πρόχειρο";
 /* 'Tap and hold to send credential update.' is a screen label (match English casing); used as a hint on the recipient list to help the user know if a credential update is needed. Android-only. */
-"label_TapToSendCredentialUpdate" = "Πατήστε και κρατήστε πατημένο για να στείλετε ενημέρωση διαπιστευτηρίων.";
+"label_TapToSendCredentialUpdate" = "Πατήστε και κρατήστε πατημένο για να στείλετε διαπιστευτηρίων ενημέρωση.";
 /* 'Tap to Sling Keys.' is a screen label (match English casing); used to remind the user that we can advance the user to the Sling Keys screen for convenience. */
-"label_TapToSlingKeys" = "Πατήστε για να Sling Keys.";
+"label_TapToSlingKeys" = "Πατήστε για να Sling Κλειδιά.";
 /* 'Contacts Account' is a screen label (match English casing); used above the editable field on the Settings screen to show the current address book account to use. */
 "label_targetAccountLabel" = "Επαφές λογαριασμού";
 /* 'You may optionally enable SafeSlinger iCloud backup in iOS Settings. Tap the Done button when finished.' is a screen label (match English casing); used on the Setup screen to remind the user that no backups will be restored on new installation. iOS-only. */
-"label_TouchToConfigureBackupSettings" = "Μπορείτε προαιρετικά να ενεργοποιήσετε SafeSlinger iCloud αντιγράφων ασφαλείας στο iOS Ρυθμίσεις. Πατήστε το κουμπί Τέλος όταν τελειώσετε.";
+"label_TouchToConfigureBackupSettings" = "Μπορείτε προαιρετικά να ενεργοποιήσετε SafeSlinger iCloud δημιουργίας αντιγράφων ασφαλείας σε ρυθμίσεις iOS. Πατήστε το κουμπί Τέλος όταν τελειώσετε.";
 /* 'Touch to configure backup settings.' is a screen label (match English casing); used in the notification window when the backup request has been pending over 1 hour. Android-only. */
 "label_TouchToConfigureBackupSettingsAndroid" = "Πιέστε για να διαμορφώσετε τις ρυθμίσεις ασφαλείας.";
 /* 'Touch to configure cache timeout settings.' is a screen label (match English casing); used in the notification window when a passphrase has been cached. Android-only. */
-"label_TouchToConfigureCacheTimeout" = "Αγγίξτε για να διαμορφώσετε τις ρυθμίσεις χρονικού ορίου cache.";
+"label_TouchToConfigureCacheTimeout" = "Αγγίξτε για να διαμορφώσετε τις ρυθμίσεις χρονικού ορίου της προσωρινής μνήμης.";
 /* 'Unknown' is a screen label (match English casing); used in menu lists when unexpected type definitions are encountered. */
 "label_undefinedTypeLabel" = "Άγνωστος";
 /* 'Encrypted Sender' is a screen label (match English casing); used as the header for an encrypted message in the message list. */
@@ -555,22 +555,22 @@
 /* 'Lowest' is a screen label (match English casing); used as a text box hint on the Grouping screen when entering the lowest ID number. */
 "label_UserIdHint" = "Μικρότερος";
 /* 'User Name' is a screen label (match English casing); used as a placeholder before the users' contact has been loaded. */
-"label_UserName" = "Όνομα";
+"label_UserName" = "Όνομα χρήστη";
 /* 'All phones must match one of the 3-word phrases. Compare, and then pick the matching phrase.' is a screen label (match English casing); used to instruct the user how to proceed on the Verify screen. */
 "label_VerifyInstruct" = "Όλα τα κινητά τηλέφωνα πρέπει να συφωνήσουν σε μια κοινη ομάδα 3 λέξεων. Συγκρίνετε και επιλέξτε την κοινή ομάδα.";
 /* 'To protect your data, SafeSlinger does not store your passphrase anywhere for recovery. You may only access recipients and messages created under the same passphrase login. However, you may generate a new key and passphrase, then repeat Sling Keys with your recipients.' is a screen label (match English casing); used to describe the reasons passphrases are not storeed and how to generate a new one. */
-"label_WarnForgotPassphrase" = "Για την προστασία των δεδομένων σας, SafeSlinger δεν αποθηκεύει τη φράση πρόσβασης σας οπουδήποτε για την ανάκαμψη. Μπορείτε να αποκτήσετε πρόσβαση μόνο οι παραλήπτες και τα μηνύματα που δημιουργούνται κάτω από την ίδια φράση πρόσβασης σύνδεσης. Ωστόσο, μπορείτε να δημιουργήσετε ένα νέο κλειδί και συνθηματική φράση, στη συνέχεια, επαναλάβετε Sling Πλήκτρα με τους παραλήπτες σας.";
+"label_WarnForgotPassphrase" = "Για την προστασία των δεδομένων σας, SafeSlinger δεν αποθηκεύει τη φράση πρόσβασης οπουδήποτε για ανάκαμψη. Μπορείτε να αποκτήσετε πρόσβαση μόνο παραλήπτες και τα μηνύματα που δημιουργούνται κάτω από την ίδια είσοδο συνθηματική φράση. Ωστόσο, μπορείτε να δημιουργήσετε ένα νέο κλειδί και συνθηματική φράση, στη συνέχεια, επαναλάβετε Sling Πλήκτρα με τους παραλήπτες σας.";
 /* 'The following keys will be deleted:' is a screen label (match English casing); used to begin list of keys that will be deleted. */
 "label_WarnManagePassFollowsAreRecent" = "Τα ακόλουθα πλήκτρα θα διαγραφούν:";
 /* 'There are no more recent keys than yours.' is a screen label (match English casing); used to show there are no keys to delete. */
-"label_WarnManagePassNoMoreRecent" = "Δεν υπάρχουν πιο πρόσφατων κλειδιών από τη δική σας.";
+"label_WarnManagePassNoMoreRecent" = "Δεν υπάρχουν πιο πρόσφατα τα κλειδιά από τη δική σας.";
 /* 'Only keys generated more recently than yours, generated on %s, may be deleted.' is a screen label (match English casing); used to show which keys may be deleted. %s = the key generation date of the current key */
-"label_WarnManagePassOnlyRecentDeleted" = "Μόνο κλειδιά δημιουργούνται πιο πρόσφατα από τη δική σας, που παράγεται στο %@, ενδέχεται να διαγραφούν.";
+"label_WarnManagePassOnlyRecentDeleted" = "Μόνο κλειδιά δημιουργούνται πιο πρόσφατα από τη δική σας, που δημιουργείται σε %@, μπορεί να διαγραφεί.";
 /* 'Work' is a screen label (match English casing); used to denote a 'work' type of email or phone contact type. iOS-only. */
 "label_worktag" = "Εργασία";
 
 /* 'SafeSlinger Exchange' is an application name (title case); used for dialogs to show the user which that a SafeSlinger Exchange is in progress. */
-"lib_name" = "SafeSlinger Exchange";
+"lib_name" = "SafeSlinger Ανταλλαγή";
 
 /* 'About' is a menu option (title case); used to show the about dialog via the Settings screen. */
 "menu_About" = "Πληροφορίες";
@@ -591,11 +591,11 @@
 /* 'Delete' is a menu option (title case); used to delete the current item from the list context menu. */
 "menu_delete" = "Διαγραφή";
 /* 'Delete Thread %s' is a menu option (title case); used to delete all messages from this person via the message list context menu. %s = the name of a person. */
-"menu_deleteThread" = "Διαγραφή θέμα %@";
+"menu_deleteThread" = "Διαγραφή Θέματος %@";
 /* 'View Detail' is a menu option (title case); used to show a dialog of more detail about the item via the message list context menu. */
 "menu_Details" = "Δείτε Λεπτομέρειες";
 /* 'Download Directory' is a choice (sentence case); used when the user chooses to change the directory of the attachment before saving. */
-"menu_DownloadDirectory" = "Download Directory";
+"menu_DownloadDirectory" = "Λήψη καταλόγου";
 /* 'Edit' is a menu option (title case); used to provide a generic edit menu option. */
 "menu_Edit" = "Επεξεργασία";
 /* 'Edit Contact' is a menu option (title case); used to show the users' current contact in the address book for editing via the Personal Contact dialog. */
@@ -613,23 +613,23 @@
 /* 'Language' is a menu (title case); used as the settings menu option to change language */
 "menu_language" = "Γλώσσα";
 /* 'License' is a menu option (title case); used to show a dialog of the End User License Agreement. */
-"menu_License" = "License";
+"menu_License" = "Άδεια";
 /* 'Add Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
-"menu_link_contact_add" = "Προσθήκη επαφής Σύνδεσμος";
+"menu_link_contact_add" = "Προσθέστε Επικοινωνία Σύνδεση";
 /* 'Change Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
-"menu_link_contact_change" = "Αλλαγή Επικοινωνία Σύνδεσμος";
+"menu_link_contact_change" = "Αλλαγή Επικοινωνία Σύνδεση";
 /* 'Logout' is a menu option (title case); used to remove the cached passphrase and force the user to login again. */
 "menu_Logout" = "Αποσύνδεση";
 /* 'Manage Passphrases' is a menu option (title case); used on the settings screen to allow users to remove newer keys if created by users without orignial user authorization. */
-"menu_ManagePassphrases" = "Διαχειριστείτε συνθηματικών";
+"menu_ManagePassphrases" = "Διαχειριστείτε φράσεις πρόσβασης";
 /* 'Message Font Size' is a menu (title case); used as the settings menu option to change message font size */
-"menu_message_font_size" = "Μήνυμα Μέγεθος γραμματοσειράς";
+"menu_message_font_size" = "Μήνυμα μεγέθους γραμματοσειράς";
 /* 'Copy Text' is a menu option (title case); used to copy the message text into the clipboard via the message list context menu. */
 "menu_messageCopyText" = "Αντιγραφή κειμένου";
 /* 'Forward' is a menu option (title case); used to create a new message with the same text message/attachment via the message list context menu. */
 "menu_messageForward" = "Προς τα εμπρός";
 /* 'Privacy Policy' is a menu option (title case); used to show a dialog of the Privacy Policy. */
-"menu_PrivacyPolicy" = "Πολιτική Προστασίας Προσωπικών Δεδομένων";
+"menu_PrivacyPolicy" = "Πολιτική Απορρήτου";
 /* 'Remove' is a menu option (title case); used to remove the currently selected file attachment via the File Options dialog. */
 "menu_Remove" = "Κατάργηση";
 /* 'Restore Default Settings' is a menu option (title case); used as Settings screen menu item for restoring all settings to default */
@@ -641,7 +641,7 @@
 /* 'Send Feedback' is a menu option (title case); used to send an email with support data for feedback. */
 "menu_sendFeedback" = "Αποστολή σχολίων";
 /* 'Send Update' is a menu option (title case); used to send a credential update via the recipient list context menu. */
-"menu_SendUpdate" = "Αποστολή ενημέρωσης";
+"menu_SendUpdate" = "Αποστολή Ενημέρωση";
 /* 'Settings' is a menu option (title case); used to show the settings screen. */
 "menu_Settings" = "Ρυθμίσεις";
 /* 'Show Tutorial' is a menu option (title case); used to toggle the key exchange walkthrough when exchanging keys via the Settings screen. */
@@ -657,11 +657,11 @@
 /* 'Use Contact %s' is a menu option (title case); used to select the found contact as the users' main identity via the Personal Contact dialog. */
 "menu_UseContactPerson" = "Χρησιμοποιήστε Επικοινωνία %@";
 /* 'Use Name Only' is a menu option (title case); used to select no contact as the users' main identity via the Personal Contact dialog. */
-"menu_UseNoContact" = "Χρησιμοποιήστε Name Only";
+"menu_UseNoContact" = "Χρησιμοποιήστε μόνο το όνομα";
 /* 'Use Profile %s' is a menu option (title case); used to select the main profile contact as the users' main identity via the Personal Contact dialog. */
-"menu_UseProfilePerson" = "Χρησιμοποιήστε Προφίλ »%@»";
+"menu_UseProfilePerson" = "Χρησιμοποιήστε Προφίλ %@";
 /* 'Vibrate' is a menu option (title case); used as Settings item for boolean option to vibrate during message notification */
-"menu_vibrate" = "Δονούμαι";
+"menu_vibrate" = "Δόνηση";
 
 /* 'waiting for verification from all members...' is a progress message (lower case, ellipsis); used to show progress while verifying data from all members hash equal to the initial commitment they sent. */
 "prog_CollectingOthersCommitVerify" = "αναμονή για επιβεβαίωση από όλα τα μέλη...";
@@ -711,7 +711,7 @@
 /* 'Advanced' is a preferences title (title case); used to sub-divide the Advanced section of the settings screen. */
 "section_advanced" = "Προχωρημένα";
 /* 'Backup' is a preferences title (title case); used to sub-divide the Backup section of the settings screen. */
-"section_backup" = "Δημιουργία αντιγράφων ασφαλείας";
+"section_backup" = "Εφεδρικός";
 /* 'General' is a preferences title (title case); used to sub-divide the General section of the settings screen. */
 "section_general" = "Γενικές";
 /* 'Notifications' is a preferences title (title case); used to sub-divide the Notifications section of the settings screen. */
@@ -722,7 +722,7 @@
 /* 'Backup restored.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm backup keys and settings have bee restored on re-install. */
 "state_BackupRestored" = "Αντίγραφο ασφαλείας αποκαταστάθηκε.";
 /* 'Failed to send message. Touch and hold for options.' is an informational message (sentence case, period); used in a message instance to indicate that the message has not been sent to the destination. */
-"state_FailedToSendMessage" = "Αποτυχία να στείλετε μήνυμα. Αγγίξτε και κρατήστε το για επιλογές.";
+"state_FailedToSendMessage" = "Αποτυχία για να στείλετε μήνυμα. Αγγίξτε και κρατήστε το για επιλογές.";
 /* 'Deleted file %s.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that a file has been deleted. %s = the file name of the deleted file. */
 "state_FileDeleted" = "Διαγραφή αρχείου %@.";
 /* 'Message sent.' is an informational message (sentence case, period); TODO: This should be deprecated in favor 1 message push to messages tab (single thread) and >1 messages push to messages tab (all threads) with a toast of state_MessagesSent. */
@@ -753,7 +753,7 @@
 /* 'Strong cryptography protects your information' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
 "text_About3" = "Ισχυρή κρυπτογράφηση προστατεύει τις πληροφορίες σας";
 /* 'SafeSlinger: Speak 3 words and forever chat in peace.' is an application description (sentence case); used in the about box and app store listing to describe the application features. Short form: 80 character max, should be exciting. */
-"text_About_Short" = "SafeSlinger: Μίλα 3 λέξεις και πάντα να συνομιλήσετε με ειρήνη.";
+"text_About_Short" = "SafeSlinger: Μιλήστε 3 λέξεις και πάντα να συνομιλήσετε με ειρήνη.";
 /* 'email: %s' is an application description (sentence case); used in the app store listing, %s = SafeSlinger support email address. */
 "text_AboutEmail" = "email: %@";
 /* 'Features:' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
@@ -761,13 +761,13 @@
 /* 'web: %s' is an application description (sentence case); used in the app store listing, %s = SafeSlinger project web page address. */
 "text_AboutWeb" = "web: %@";
 /* 'Developed by:' is an application description (sentence case); used at the end of the about dialog to list the developers of SafeSlinger. */
-"text_DevelopedBy" = "Αναπτύχθηκε από την:";
+"text_DevelopedBy" = "Αναπτύχθηκε από:";
 /* 'Exchange' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordExchange" = "Ανταλλαγή";
 /* 'Identity' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordIdentity" = "Ταυτότητα";
 /* 'Key' is an application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordKey" = "Πλήκτρο";
+"text_KeywordKey" = "Κλειδί";
 /* 'Messaging' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordMessaging" = "Μηνύματα";
 /* 'Privacy' is an application description (sentence case); one of many keywords to use when searching related terms. */
@@ -779,11 +779,11 @@
 /* 'translate: %s' is an application description (sentence case); used in the app store listing, %s = SafeSlinger project localization repo. */
 "text_LocalizationRepo" = "μετάφραση: %@";
 /* 'Related Terms:' is an application description (sentence case); used in the app store listing to list related search terms to help users looking for secure key exchange and messaging. */
-"text_RelatedSearchTerms" = "Σχετικά Όροι:";
+"text_RelatedSearchTerms" = "Σχετικές Όροι:";
 /* 'Requirements:' is an application description (sentence case); used in the about box and app store listing to enumerate requirements. */
 "text_Requirements" = "Απαιτήσεις:";
 /* 'Must be installed on a minimum of 2 devices.' is an application description (sentence case); used in the about box and app store listing to enumerate requirements. */
-"text_Requirements1" = "Πρέπει να είναι εγκατεστημένο σε ένα ελάχιστο των 2 συσκευών.";
+"text_Requirements1" = "Πρέπει να εγκατασταθεί σε τουλάχιστον 2 συσκευές.";
 /* 'An Internet connection must be active.' is an application description (sentence case); used in the about box and app store listing to enumerate requirements. */
 "text_Requirements2" = "Μια σύνδεση με το Διαδίκτυο πρέπει να είναι ενεργή.";
 /* 'open source: %s' is an application description (sentence case); used in the app store listing to show the location of the open source code repository. %s = source code URL. */
@@ -800,7 +800,7 @@
 /* 'Choose Your Attachment' is a title (title case); used at the top of the menu options when choosing among sources to pick an attachment. */
 "title_ChooseFileLoad" = "Επιλέξτε το αρχείο σας";
 /* 'Clear' is a title (title case); used in the Select File Option menu to clear the current attachment. */
-"title_clear" = "Απαλοιφή";
+"title_clear" = "Σαφής";
 /* 'Comments/Questions' is a title (title case); used as the Subject field of an email message for the user to send feedback to developers. Also used as the menu option to start the email. */
 "title_comments" = "Σχόλια/Ερωτήσεις";
 /* 'Error' is a title (title case); used at the top of the error dialog. */
@@ -810,9 +810,9 @@
 /* 'Attachment Options' is a title (title case); used at the top of the menu when choosing whether to remove the current attachment or select a new one. */
 "title_FileOptions" = "Επιλογές αρχείου";
 /* 'Setup' is a title (title case); used at the top of the setup screen. */
-"title_find" = "Ρυθμίσεις";
+"title_find" = "Ρύθμιση";
 /* 'Select a font size' is a title (title case); used as the settings title when changing font size */
-"title_font_size" = "Επιλέξτε ένα μέγεθος γραμματοσειράς";
+"title_font_size" = "Επιλέξτε το μέγεθος της γραμματοσειράς";
 /* 'Begin Exchange' is a title (title case); used at the top of the begin exchange screen to start the exchange protocol. */
 "title_home" = "Ξεκινήστε Ανταλλαγή";
 /* 'Home' is a title (title case); used at the top of the home screen on iOS. */
@@ -824,13 +824,13 @@
 /* 'Messages' is a title (title case); used at the top of the message list screen. */
 "title_Messages" = "Μηνύματα";
 /* 'Personal Contact' is a title (title case); used at the top of a menu when choosing to alter the users' contact: Edit, Create New, or Use Another. */
-"title_MyIdentity" = "Προσωπική Επικοινωνία";
+"title_MyIdentity" = "Προσωπικη Επαφη";
 /* 'SafeSlinger Message Available' is a title (title case); used as the title of an incoming message in the notification window. */
 "title_NotifyFileAvailable" = "SafeSlinger Μήνυμα Διαθέσιμο";
 /* '%d SafeSlinger Messages Available' is a title (title case); used as the title of multiple incoming messages in the notification window. iOS-only. */
-"title_NotifyMulFileAvailable" = "%d SafeSlinger μηνύματα Διαθέσιμο";
+"title_NotifyMulFileAvailable" = "%d SafeSlinger Μηνύματα Διαθέσιμο";
 /* 'Passphrase' is a title (title case); used at the top of the passphrase screen where user will login. */
-"title_passphrase" = "Φράση πρόσβασης";
+"title_passphrase" = "Φράση κλειδί";
 /* 'Photo Album' is a menu option (title case); used in the Select File Option menu to select a picture from the photo album on iOS. */
 "title_photoalbum" = "Άλμπουμ Φωτογραφιών";
 /* 'Photo Library' is a menu option (title case); used in the Select File Option menu to create a picture from the photo library on iOS. */
@@ -850,7 +850,7 @@
 /* 'Secure Introduction Invitation!' is a title (title case); used at the top of the confirmation dialog when receiving a secure introduction. */
 "title_SecureIntroductionInvite" = "Ασφαλής πρόσκληση γνωριμίας!";
 /* 'Sending Options:' is a title (title case); used to denote the dialog for user to pickup sender source options. */
-"title_SelectSource" = "Επιλογές αποστολής:";
+"title_SelectSource" = "Αποστολή Επιλογές:";
 /* 'Send' is a title (title case); used at the top of compose message screen. */
 "title_SendFile" = "Αποστολή";
 /* 'Sharing Folder' is a menu option (title case); used in the Select File Option menu to select a file from the sharing folder on iOS. */
@@ -862,7 +862,7 @@
 /* 'SafeSlinger Invitation' is a title (title case); used as the Subject field of an email or text message sent by the Share Application menu option. */
 "title_TextInviteMsg" = "Πρόσκληση SafeSlinger";
 /* 'Threads' is a title (title case); used at the top of the thread list screen. */
-"title_Threads" = "Θέματα";
+"title_Threads" = "Κλωστές";
 /* 'Grouping' is a title (title case); used at the top of the entry screen for the lowest common number. */
 "title_userid" = "Ομαδοποίηση";
 /* 'Verify' is a title (title case); used at the top of the word phrase verification screen. */
