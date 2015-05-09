@@ -102,17 +102,17 @@
 
 -(void)RecheckCapability
 {
-    NSString *displayStr = nil;
-    id currentiCloudToken = [[NSFileManager defaultManager] ubiquityIdentityToken];
-    
-    if (currentiCloudToken) {
-        CloudEnabled = YES;
-        NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
-        displayStr = [ubiq lastPathComponent];
-        [[NSUserDefaults standardUserDefaults]setObject:displayStr forKey: kBackupURL];
-    } else {
+//    NSString *displayStr = nil;
+//    id currentiCloudToken = [[NSFileManager defaultManager] ubiquityIdentityToken];
+//    
+//    if (currentiCloudToken) {
+//        CloudEnabled = YES;
+//        NSURL *ubiq = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
+//        displayStr = [ubiq lastPathComponent];
+//        [[NSUserDefaults standardUserDefaults]setObject:displayStr forKey: kBackupURL];
+//    } else {
         CloudEnabled = NO;
-    }
+//    }
 }
 
 -(void)PerformBackup

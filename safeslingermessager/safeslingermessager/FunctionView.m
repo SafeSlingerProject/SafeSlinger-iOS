@@ -63,17 +63,17 @@
 	[super viewWillAppear:animated];
 	
     // check iCloud capability
-    id currentiCloudToken = [[NSFileManager defaultManager] ubiquityIdentityToken];
-    if([[NSUserDefaults standardUserDefaults] integerForKey: kRemindBackup]==TurnOn && !currentiCloudToken) {
-        // notifiy user to enable it
-        UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"title_find", @"Setup")
-                                                          message:NSLocalizedString(@"ask_BackupDisabledRemindLater", @"Backup is disabled. Do you want to adjust backup settings and keep this reminder?")
-                                                         delegate:self
-                                                cancelButtonTitle:NSLocalizedString(@"btn_Remind", @"Remind")
-                                                otherButtonTitles:NSLocalizedString(@"btn_NotRemind", @"Forget"), nil];
-        [message show];
-        message = nil;
-    }
+//    id currentiCloudToken = [[NSFileManager defaultManager] ubiquityIdentityToken];
+//    if([[NSUserDefaults standardUserDefaults] integerForKey: kRemindBackup]==TurnOn && !currentiCloudToken) {
+//        // notifiy user to enable it
+//        UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"title_find", @"Setup")
+//                                                          message:NSLocalizedString(@"ask_BackupDisabledRemindLater", @"Backup is disabled. Do you want to adjust backup settings and keep this reminder?")
+//                                                         delegate:self
+//                                                cancelButtonTitle:NSLocalizedString(@"btn_Remind", @"Remind")
+//                                                otherButtonTitles:NSLocalizedString(@"btn_NotRemind", @"Forget"), nil];
+//        [message show];
+//        message = nil;
+//    }
     // Update registration if necessary
     [self registerDeviceInfo];
 }
