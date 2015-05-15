@@ -71,7 +71,7 @@ Add Secure Exchange to your iOS App
 
 ![AddLibrary5](https://www.andrew.cmu.edu/user/tenma/ios_help/github/addlibrary-5.png)
 
-## Delegate Implemetation
+## Delegate Implementation
 Implement the SafeSlinger delegate function on your UI controller, e.g., ViewController.
 
 - Import the SafeSlinger header into your project.
