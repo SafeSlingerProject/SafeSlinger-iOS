@@ -65,8 +65,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
-    
 	// Preloads keyboard so there's no lag on initial keyboard appearance.
 	UITextField *lagFreeField = [[UITextField alloc] init];
 	[self.window addSubview:lagFreeField];
