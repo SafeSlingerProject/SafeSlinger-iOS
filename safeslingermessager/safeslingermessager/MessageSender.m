@@ -36,17 +36,6 @@
 	_outgoingMessage = message;
 	[self updatedStatus:MessageOutgoingStatusSending forMessage:message];
 	
-//	dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-//		//Background Thread
-//		dispatch_async(dispatch_get_main_queue(), ^(void){
-//			//Run UI Updates
-//			[InstanceBtn setEnabled:NO];
-//			[InstanceMessage setEnabled:NO];
-//			[actWindow DisplayMessage: NSLocalizedString(@"prog_encrypting", @"encrypting...") Detail:nil];
-//			[self.navigationController.view addSubview: actWindow.view];
-//		});
-//	});
-	
 	
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:_serverURL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:MESSAGE_TIMEOUT];
 	[request setHTTPMethod: @"POST"];
@@ -64,19 +53,6 @@
 			 message.rTime = nil;
 			 [self updatedStatus:MessageOutgoingStatusFailed forMessage:message];
 			 _outgoingMessage = nil;
-			 
-//			 if(error.code == NSURLErrorTimedOut) {
-//				 dispatch_async(dispatch_get_main_queue(), ^(void) {
-////					 [[[[iToast makeText: NSLocalizedString(@"error_ServerNotResponding", @"No response from server.")]
-////						setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-//				 });
-//			 } else {
-//				 // general errors
-//				 dispatch_async(dispatch_get_main_queue(), ^(void) {
-////					 [[[[iToast makeText: [NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessageCStr", @"Server Message: '%@'"), [error localizedDescription]]]
-////						setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-//				 });
-//			 }
 		 } else {
 			 if([data length] > 0) {
 				 // start parsing data
@@ -91,16 +67,6 @@
 					 message.rTime = [NSString GetGMTString:DATABASE_TIMESTR];
 					 [self updatedStatus:MessageOutgoingStatusSent forMessage:message];
 					 _outgoingMessage = nil;
-									
-//					 // reload the view
-//					 dispatch_async(dispatch_get_main_queue(), ^(void) {
-//						 [[[[iToast makeText: ret]
-//							setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-////						 [self reloadTable];
-////						 [InstanceBtn setEnabled:YES];
-////						 [InstanceMessage setEnabled:YES];
-////						 InstanceMessage.text = nil;
-//					 });
 				 } else if(ntohl(*(int *)msgchar) == 0) {
 					 // Error Message
 					 NSString* error_msg = [NSString TranlsateErrorMessage:[NSString stringWithUTF8String: msgchar+4]];
@@ -109,15 +75,6 @@
 					 message.rTime = nil;
 					 [self updatedStatus:MessageOutgoingStatusFailed forMessage:message];
 					 _outgoingMessage = nil;
-					 
-//					 dispatch_async(dispatch_get_main_queue(), ^(void) {
-////						 [actWindow.view removeFromSuperview];
-//						 [[[[iToast makeText: error_msg]
-//							setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-////						 [InstanceBtn setEnabled:YES];
-////						 [InstanceMessage setEnabled:YES];
-////						 InstanceMessage.text = nil;
-//					 });
 				 }
 			 }
 		 }

@@ -56,8 +56,8 @@ typedef enum BackupSet{
 }BackupSet;
 
 typedef enum AdvanceSet{
-    // AutoDecrypt = 0,
-    PushToken = 0,
+    AutoDecrypt = 0,
+    PushToken,
     KeyID,
     AdvanceSetCnt
 }AdvanceSet;

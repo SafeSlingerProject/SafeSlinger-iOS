@@ -338,10 +338,11 @@ typedef enum {
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if([self.messages count]==0)
+	if([self.messages count] == 0) {
         return NSLocalizedString(@"label_InstNoMessages", @"No messages. You may send a message from tapping the 'Compose Message' Button in Home Menu.");
-    else
+	} else {
         return @"";
+	}
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -496,13 +497,11 @@ typedef enum {
     if([assignedEntry.keyid isEqualToString:@"UNDEFINED"])
         return;
     
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath: indexPath];
-    MsgEntry* entry = [self.messages objectAtIndex:indexPath.row];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    MsgEntry* entry = self.messages[indexPath.row];
     
-    if(entry.smsg == Encrypted)
-    {
-        if([self.tableView cellForRowAtIndexPath:indexPath].tag!=-1&&[OperationLock tryLock])
-        {
+    if(entry.smsg == Encrypted) {
+        if(cell.tag != -1 && [OperationLock tryLock]) {
             cell.detailTextLabel.text = NSLocalizedString(@"prog_decrypting", @"decrypting...");
             dispatch_async(BackGroundQueue, ^(void) {
                 [self DecryptMessage: entry WithIndex: indexPath];

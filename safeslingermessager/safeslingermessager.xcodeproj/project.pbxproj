@@ -71,6 +71,7 @@
 		18FBD727194A4478006CA09C /* EndExchangeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FBD726194A4478006CA09C /* EndExchangeView.m */; };
 		414C9E341A72EAD700E03916 /* MessageSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 414C9E331A72EAD700E03916 /* MessageSender.m */; };
 		41AE90721A0ADDAC009E08C4 /* ContactEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 41AE90711A0ADDAC009E08C4 /* ContactEntry.m */; };
+		41FF4BB81B0E8E1B00EE9C50 /* MessageDecryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 41FF4BB71B0E8E1B00EE9C50 /* MessageDecryptor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -243,6 +244,8 @@
 		414C9E331A72EAD700E03916 /* MessageSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageSender.m; sourceTree = "<group>"; };
 		41AE90701A0ADDAC009E08C4 /* ContactEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactEntry.h; sourceTree = "<group>"; };
 		41AE90711A0ADDAC009E08C4 /* ContactEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactEntry.m; sourceTree = "<group>"; };
+		41FF4BB61B0E8E1B00EE9C50 /* MessageDecryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDecryptor.h; sourceTree = "<group>"; };
+		41FF4BB71B0E8E1B00EE9C50 /* MessageDecryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDecryptor.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -303,6 +306,8 @@
 				18FBD71B194A088E006CA09C /* AudioRecordView.m */,
 				414C9E321A72EAD700E03916 /* MessageSender.h */,
 				414C9E331A72EAD700E03916 /* MessageSender.m */,
+				41FF4BB61B0E8E1B00EE9C50 /* MessageDecryptor.h */,
+				41FF4BB71B0E8E1B00EE9C50 /* MessageDecryptor.m */,
 			);
 			name = Messaging;
 			sourceTree = "<group>";
@@ -720,6 +725,7 @@
 				18DE29741A75BEB0008CC41E /* RegistrationHandler.m in Sources */,
 				1860574519451001002DD149 /* main.m in Sources */,
 				18D6C21519461E71000909F4 /* VCardParser.m in Sources */,
+				41FF4BB81B0E8E1B00EE9C50 /* MessageDecryptor.m in Sources */,
 				180D25BF195A6A64002C34DC /* UniversalDB.m in Sources */,
 				188EF471194F911C0022E6C3 /* AboutView.m in Sources */,
 				18D6C20519461268000909F4 /* BackupCloud.m in Sources */,

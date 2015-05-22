@@ -103,8 +103,7 @@
     }
 }
 
-- (BOOL)CreateNewEntry: (NSData*)msgnonce
-{
+- (BOOL)CreateNewEntry:(MsgEntry *)msg {
     DEBUGMSG(@"CreateNewEntry");
     if(db==nil){
         [ErrorLogger ERRORDEBUG: @"ERROR: DB Object is null or Input is null."];
@@ -124,9 +123,9 @@
         const NSString* unknownFlag = @"UNDEFINED";
         
         // msgid
-        sqlite3_bind_blob(sqlStatement, 1, [msgnonce bytes], (int)[msgnonce length], SQLITE_TRANSIENT);
+        sqlite3_bind_blob(sqlStatement, 1, [msg.msgid bytes], (int)[msg.msgid length], SQLITE_TRANSIENT);
         // time
-        sqlite3_bind_text(sqlStatement, 2, [[NSString GetGMTString:DATABASE_TIMESTR]UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(sqlStatement, 2, [msg.cTime UTF8String], -1, SQLITE_TRANSIENT);
         // unknown for keyid
         sqlite3_bind_text(sqlStatement, 3, [unknownFlag UTF8String], -1, SQLITE_TRANSIENT);
         // empty for cipher

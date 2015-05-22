@@ -47,7 +47,7 @@
 - (BOOL) LoadDBFromStorage;
 - (BOOL) CloseDB;
 
-- (BOOL) CreateNewEntry: (NSData*)msgnonce;
+- (BOOL)CreateNewEntry:(MsgEntry *)msg;
 - (BOOL) UpdateEntryWithCipher: (NSData*)msgnonce Cipher:(NSData*)newcipher;
 - (BOOL) DeleteThread: (NSString*)keyid;
 - (int)updateThreadEntries:(NSMutableArray *)threadlist;

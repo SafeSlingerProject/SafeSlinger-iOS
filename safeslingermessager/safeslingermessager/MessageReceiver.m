@@ -29,6 +29,7 @@
 #import "SSEngine.h"
 #import "UniversalDB.h"
 #import "RegistrationHandler.h"
+#import "MessageDecryptor.h"
 
 @implementation MessageReceiver
 
@@ -44,13 +45,11 @@
     return self;
 }
 
-- (BOOL)IsBusy
-{
-    if([ThreadLock tryLock])
-    {
+- (BOOL)IsBusy {
+    if([ThreadLock tryLock]) {
         [ThreadLock unlock];
         return NO;
-    }else{
+    } else {
         return YES;
     }
 }
@@ -58,7 +57,6 @@
 - (void)FetchMessageNonces:(int)NumOfMostRecents {
     
     if([ThreadLock tryLock]) {
-        
         NumNewMsg = 0;
         MsgCount = NumOfMostRecents;
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
@@ -182,8 +180,15 @@
             if(![UDbInstance CheckMessage:decodenonce]) {
                 // Get message
                 DEBUGMSG(@"nonce = %@", nonce);
-                [UDbInstance CreateNewEntry:decodenonce];
-                [self RetrieveCipher: decodenonce EncodeNonce:nonce];
+				
+				MsgEntry *msg = [MsgEntry new];
+				msg.msgid = decodenonce;
+				msg.cTime = [NSString GetGMTString:DATABASE_TIMESTR];
+				msg.dir = FromMsg;
+				msg.smsg = msg.sfile = Encrypted;
+				
+                [UDbInstance CreateNewEntry:msg];
+                [self RetrieveCipherForMessage:msg withNonceString:nonce];
             } else {
                 [ErrorLogger ERRORDEBUG: @"Message exist."];
                 MsgFinish[[[_MsgNonces objectForKey:nonce]integerValue]] = AlreadyExist;   // already download
@@ -197,7 +202,8 @@
     [self CheckQueriedMessages];
 }
 
-- (void)RetrieveCipher:(NSData *)nonce EncodeNonce:(NSString *)cnonce {
+- (void)RetrieveCipherForMessage:(MsgEntry *)msg withNonceString:(NSString *)nonceString {//(NSData *)nonce EncodeNonce:(NSString *)cnonce {
+	NSData *nonce = msg.msgid;
     NSMutableData *pktdata = [[NSMutableData alloc] init];
     //E1: Version (4bytes)
     int version = htonl(VersionNum);
@@ -215,7 +221,7 @@
 	[request setHTTPMethod: @"POST"];
 	[request setHTTPBody: pktdata];
     
-    NSInteger index = [[_MsgNonces objectForKey:cnonce]integerValue];
+    NSInteger index = [[_MsgNonces objectForKey:nonceString] integerValue];
     
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
@@ -256,10 +262,11 @@
                      } else {
                          MsgFinish[index] = Downloaded;
                          NSData* cipher = [NSData dataWithBytes:(msgchar+12) length:msglen];
-                         NSArray* EncryptPkt = [NSArray arrayWithObjects: nonce, cipher, nil];
-                         dispatch_async(dispatch_get_main_queue(), ^(void) {
-                             [self SaveSecureMessage:EncryptPkt];
-                         });
+						 
+						 msg.msgbody = cipher;
+						 msg.keyid = [SSEngine ExtractKeyID:msg.msgbody];
+						 
+						 [self handleNewCipherMessage:msg];
                      }
                  } else if(ntohl(*(int *)msgchar) == 0) {
                      // Error Message
@@ -353,19 +360,24 @@
     }
 }
 
-- (void)SaveSecureMessage:(NSArray *)EncryptPkt {
-    NSData* nonce = [EncryptPkt objectAtIndex:0];
-    NSData* cipher = [EncryptPkt objectAtIndex:1];
-    
-    if(![[sha3 Keccak256Digest:cipher] isEqualToData:nonce]) {
-        [ErrorLogger ERRORDEBUG:@"ERROR: Received Message Digest Error."];
-        // display error
-        [self PrintToastMessage: NSLocalizedString(@"error_InvalidIncomingMessage", @"Bad incoming message format.")];
-    } else {
-        if(![UDbInstance UpdateEntryWithCipher:nonce Cipher:cipher]) {
-            [self PrintToastMessage: NSLocalizedString(@"error_UnableToSaveMessageInDB", @"Unable to save to the message database.")];
-        }
-    }
+- (void)handleNewCipherMessage:(MsgEntry *)msg {
+	if([[NSUserDefaults standardUserDefaults] integerForKey:kAutoDecryptOpt] == TurnOn
+	   && [MessageDecryptor DecryptCipherMessage:msg]) {
+		 //auto-decrypt enabled and message was decrypted
+		return;
+	} else {
+		//auto-decrypt disabled or unable to decrypt message
+		//save to DB encrypted
+		if(![[sha3 Keccak256Digest:msg.msgbody] isEqualToData:msg.msgid]) {
+			[ErrorLogger ERRORDEBUG:@"ERROR: Received Message Digest Error."];
+			// display error
+			[self PrintToastMessage: NSLocalizedString(@"error_InvalidIncomingMessage", @"Bad incoming message format.")];
+		} else {
+			if(![UDbInstance UpdateEntryWithCipher:msg.msgid Cipher:msg.msgbody]) {
+				[self PrintToastMessage: NSLocalizedString(@"error_UnableToSaveMessageInDB", @"Unable to save to the message database.")];
+			}
+		}
+	}
 }
 
 - (void)PrintToastMessage:(NSString *)error {

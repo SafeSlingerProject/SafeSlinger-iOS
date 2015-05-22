@@ -338,7 +338,6 @@
         {
             switch (indexPath.row)
             {
-                /*
                 case AutoDecrypt:
                     cell.textLabel.text = NSLocalizedString(@"menu_auto_decrypt", @"Auto-decrypt");
                     cell.detailTextLabel.text = NSLocalizedString(@"label_summary_auto_decrypt", @"Automatically decrypt messages when logged in.");
@@ -349,7 +348,7 @@
                         cell.accessoryType = UITableViewCellAccessoryNone;
                     }
                     break;
-                */
+					
                 case KeyID:
                     cell.textLabel.text = NSLocalizedString(@"label_PublicKeyID", @"Key ID");
                     cell.detailTextLabel.text = [SSEngine getSelfKeyID];
@@ -587,7 +586,6 @@
         case AdvanceSec:
         {
             switch (indexPath.row) {
-                /*
                 case AutoDecrypt:
                 {
                     UITableViewCell *cell = [tableView cellForRowAtIndexPath: indexPath];
@@ -609,7 +607,6 @@
                     }
                 }
                     break;
-                */
                 case KeyID:
                 case PushToken:
                 default:
