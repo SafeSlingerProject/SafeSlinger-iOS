@@ -47,14 +47,15 @@
 - (BOOL) LoadDBFromStorage;
 - (BOOL) CloseDB;
 
-- (BOOL)CreateNewEntry:(MsgEntry *)msg;
-- (BOOL) UpdateEntryWithCipher: (NSData*)msgnonce Cipher:(NSData*)newcipher;
+- (BOOL)createNewEntry:(MsgEntry *)msg;
+- (BOOL)updateMessageEntry:(MsgEntry *)msg;
 - (BOOL) DeleteThread: (NSString*)keyid;
 - (int)updateThreadEntries:(NSMutableArray *)threadlist;
 - (NSArray*) GetEntriesForKeyID: (NSString*)keyid WithToken:(NSString*)token WithName:(NSString*)name;
 - (int) ThreadCipherCount: (NSString*)KEYID;
 - (BOOL) CheckMessage: (NSData*)msgid;
 - (NSArray*)LoadThreadMessage: (NSString*)KEYID;
+- (NSArray *)getEncryptedMessages;
 - (BOOL)DeleteMessage: (NSData*)msgid;
 
 @end

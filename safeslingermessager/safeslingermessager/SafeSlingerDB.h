@@ -98,6 +98,7 @@ typedef enum {
 @property (nonatomic, strong) NSString *lastSeen;
 @property (nonatomic, readwrite) int messagecount;
 @property (nonatomic, readwrite) int ciphercount;
+@property (nonatomic, readwrite) int unreadcount;
 @property (nonatomic, readwrite) BOOL active;
 
 @end
@@ -126,6 +127,7 @@ typedef enum {
 @property (nonatomic, strong) NSString *fname;  // filename
 @property (nonatomic, strong) NSData *fbody;    // file raw data
 @property (nonatomic, strong) NSString *fext;   // file extension, MIME type
+@property (nonatomic, readwrite) int unread; // flag that indicates if the message was not read yet
 
 
 -(MsgEntry*)InitOutgoingMsg: (NSData*)newmsgid Recipient:(ContactEntry*)user Message:(NSString*)message FileName:(NSString*)File FileType:(NSString*)MimeType FileData:(NSData*)FileRaw;
@@ -167,6 +169,7 @@ typedef enum {
 // for Message Thread
 - (NSMutableArray *)getConversationThreads;
 - (NSArray *)loadMessagesExchangedWithKeyId:(NSString *)keyId;
+- (BOOL)markAllMessagesAsReadFromKeyId:(NSString *)keyId;
 - (int)ThreadMessageCount:(NSString *)KEYID;
 - (BOOL)DeleteThread:(NSString *)KEYID;
 

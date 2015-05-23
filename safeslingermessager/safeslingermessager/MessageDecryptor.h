@@ -11,6 +11,7 @@
 
 @interface MessageDecryptor : NSObject
 
-+ (BOOL)DecryptCipherMessage:(MsgEntry *)msg;
++ (void)tryToDecryptAll;
++ (BOOL)decryptCipherMessage:(MsgEntry *)msg;
 
 @end

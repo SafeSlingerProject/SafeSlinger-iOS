@@ -404,7 +404,7 @@
         long badge = [UIApplication sharedApplication].applicationIconBadgeNumber;
         
         if(![MessageInBox IsBusy] && badge > 0) {
-            [MessageInBox FetchMessageNonces:(int)badge];
+			[MessageInBox FetchMessageNonces:(int)badge];
         } else {
             DEBUGMSG(@"thread is busy or badge is zero.");
         }

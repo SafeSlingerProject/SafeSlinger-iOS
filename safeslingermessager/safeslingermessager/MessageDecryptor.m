@@ -14,20 +14,26 @@
 
 @implementation MessageDecryptor
 
-+ (BOOL)DecryptCipherMessage:(MsgEntry *)msg {
++ (void)tryToDecryptAll {
+	AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+		NSArray *encryptedMessages = [delegate.UDbInstance getEncryptedMessages];
+		
+		for(MsgEntry *message in encryptedMessages) {
+			[MessageDecryptor decryptCipherMessage:message];
+		}
+	});
+}
+
++ (BOOL)decryptCipherMessage:(MsgEntry *)msg {
 	BOOL hasfile = NO;
 	AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-	
-	NSData* cipher = [NSData dataWithBytes:[msg.msgbody bytes] + LENGTH_KEYID length:[msg.msgbody length] - LENGTH_KEYID];
 	
 	// tap to decrypt
 	NSString* pubkeySet = [delegate.DbInstance QueryStringInTokenTableByKeyID:msg.keyid Field:@"pkey"];
 	
 	if(pubkeySet == nil) {
 		[ErrorLogger ERRORDEBUG: NSLocalizedString(@"error_UnableFindPubKey", @"Unable to match public key to private key in crypto provider.")];
-		dispatch_async(dispatch_get_main_queue(), ^(void) {
-			[[[[iToast makeText: NSLocalizedString(@"error_UnableFindPubKey", @"Unable to match public key to private key in crypto provider.")] setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-		});
 		return NO;
 	}
 	
@@ -40,13 +46,10 @@
 	
 	if(!DecKey) {
 		[ErrorLogger ERRORDEBUG: NSLocalizedString(@"error_couldNotExtractPrivateKey", @"Could not extract private key.")];
-		dispatch_async(dispatch_get_main_queue(), ^(void) {
-			[[[[iToast makeText: NSLocalizedString(@"error_couldNotExtractPrivateKey", @"Could not extract private key.")] setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-		});
 		return NO;
 	}
 	
-	NSData* decipher = [SSEngine UnpackMessage:cipher PubKey:pubkeySet Prikey:DecKey];
+	NSData* decipher = [SSEngine UnpackMessage:msg.msgbody PubKey:pubkeySet Prikey:DecKey];
 	
 	// parsing
 	if(!decipher || decipher.length == 0) {
@@ -134,6 +137,7 @@
 	msg.smsg = Decrypted;
 	msg.msgbody = [text dataUsingEncoding:NSUTF8StringEncoding];
 	msg.rTime = gmt;
+	msg.unread = 1;
 	
 	if(hasfile) {
 		msg.attach = msg.sfile = Encrypted;

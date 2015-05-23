@@ -139,6 +139,7 @@
 				if(databaseVersion == 0) {
 					// patches for database update from version 0 to version 1
 					[self patchForContactsFromAddressBook];
+					[self patchForUnreadMessagesFlag];
 					[self patchForTokenstorePrimaryKey];
 				}
 			
@@ -1160,6 +1161,44 @@
     }
 }
 
+// Adds a new column 'unread' to the table 'msgtable'
+// 'unread' is a flag that indicates if the message was not read yet. It is needed with the auto-decryption, to show the correct number of unread messages
+- (BOOL)patchForUnreadMessagesFlag {
+	// patch for 1.8.1
+	BOOL ret = YES;
+	@try {
+		// for configuration table
+		sqlite3_stmt *sqlStatement;
+		
+		char *sql = "SELECT unread FROM msgtable;";
+		if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) == SQLITE_OK) {
+			// column already exists
+			return YES;
+		}
+		
+		sql = "ALTER TABLE msgtable ADD COLUMN unread int;";
+		
+		if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK){
+			DEBUGMSG(@"Error while preparing statement. '%s'\n", sqlite3_errmsg(db));
+			ret = NO;
+		}
+		
+		if(sqlite3_step(sqlStatement) != SQLITE_OK) {
+			ret = NO;
+		}
+		
+		DEBUGMSG(@"Update Done.");
+		
+	}
+	@catch (NSException *exception) {
+		DEBUGMSG(@"ERROR: An exception occured, %@", [exception reason]);
+		ret = NO;
+	}
+	@finally {
+		return ret;
+	}
+}
+
 // Adds a new column 'ABRecordID' to the table 'tokenstore'
 // 'ABRecordID' stores the AddressBook RecordID for the contact in the user's device associated with this key
 - (BOOL)patchForContactsFromAddressBook {
@@ -1318,7 +1357,7 @@
     }
 	
     @try {
-		const char *sql = "SELECT receipt, cTime, count(msgid), (CASE WHEN receipt IN (SELECT CAST(keyid AS TEXT) FROM (SELECT *, max(bdate) FROM (SELECT *, max(bdate) FROM tokenstore GROUP BY pid, dev) GROUP BY ptoken, dev ORDER BY pid COLLATE NOCASE DESC)) THEN 1 ELSE 0 END) as active FROM msgtable GROUP BY receipt order by cTime desc;";
+		const char *sql = "SELECT receipt, cTime, count(msgid), count(unread), (CASE WHEN receipt IN (SELECT CAST(keyid AS TEXT) FROM (SELECT *, max(bdate) FROM (SELECT *, max(bdate) FROM tokenstore GROUP BY pid, dev) GROUP BY ptoken, dev ORDER BY pid COLLATE NOCASE DESC)) THEN 1 ELSE 0 END) as active FROM msgtable GROUP BY receipt order by cTime desc;";
         sqlite3_stmt *sqlStatement;
 		
         if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
@@ -1330,7 +1369,8 @@
             listEntry.keyid = [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 0)];
             listEntry.lastSeen = [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 1)];
             listEntry.messagecount = sqlite3_column_int(sqlStatement, 2);
-			listEntry.active = sqlite3_column_int(sqlStatement, 3) == 1;
+			listEntry.unreadcount = sqlite3_column_int(sqlStatement, 3);
+			listEntry.active = sqlite3_column_int(sqlStatement, 4) == 1;
             [threads addObject:listEntry];
         }
         
@@ -1481,6 +1521,43 @@
     }
 }
 
+- (BOOL)markAllMessagesAsReadFromKeyId:(NSString *)keyId {
+	if(db == nil || keyId == nil){
+		[ErrorLogger ERRORDEBUG: @"ERROR: DB Object is null or Input is null."];
+		return NO;
+	}
+	
+	BOOL ret = YES;
+	@try {
+		sqlite3_stmt *sqlStatement;
+		const char *sql = "UPDATE msgtable SET unread = NULL WHERE receipt = ?";
+		
+		if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK){
+			[ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while creating statement. '%s'", sqlite3_errmsg(db)]];
+			ret = NO;
+		}
+		
+		// bind keyId
+		sqlite3_bind_text(sqlStatement, 1, [keyId UTF8String], -1, SQLITE_TRANSIENT);
+		
+		if(sqlite3_step(sqlStatement) != SQLITE_DONE){
+			[ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"Error while updating data. '%s'", sqlite3_errmsg(db)]];
+			ret = NO;
+		}
+		
+		if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
+			[ErrorLogger ERRORDEBUG: @"ERROR: Problem with finalize statement"];
+			ret = NO;
+		}
+	}
+	@catch (NSException *exception) {
+		[ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: An exception occured, %@", [exception reason]]];
+		ret = NO;
+	}
+	@finally {
+		return ret;
+	}
+}
 
 - (FileInfo*)GetFileInfo: (NSData*)msgid
 {
@@ -1489,7 +1566,7 @@
         [ErrorLogger ERRORDEBUG: @"ERROR: DB Object is null or Input is null."];
         return nil;
     }
-    
+	
     FileInfo* finfo = nil;
     @try {
         
@@ -1557,7 +1634,7 @@
     BOOL ret = YES;
     @try {
         sqlite3_stmt *sqlStatement;
-        const char *sql = "insert into msgtable (msgid, cTime, rTime, dir, token, sender, msgbody, attach, fname, fbody, ft, fext, smsg, sfile, note, receipt, thread_id) Values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,0)";
+        const char *sql = "insert into msgtable (msgid, cTime, rTime, dir, token, sender, msgbody, attach, fname, fbody, ft, fext, smsg, sfile, note, receipt, thread_id, unread) Values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,0,?)";
         if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
             [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while creating statement. '%s'", sqlite3_errmsg(db)]];
             ret = NO;
@@ -1637,7 +1714,14 @@
         
         // bind keyid
         sqlite3_bind_text(sqlStatement, 16, [MSG.keyid UTF8String], -1, SQLITE_TRANSIENT);
-        
+		
+		// bind unread flag
+		if(MSG.unread) {
+			sqlite3_bind_int(sqlStatement, 17, 1);
+		} else {
+			sqlite3_bind_null(sqlStatement, 17);
+		}
+		
         if(SQLITE_DONE != sqlite3_step(sqlStatement)) {
             [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"ERROR: Error while inserting data. '%s'", sqlite3_errmsg(db)]];
             ret = NO;

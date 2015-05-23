@@ -30,6 +30,7 @@
 #import "ErrorLogger.h"
 #import "BackupCloud.h"
 #import "TimePicker.h"
+#import "MessageDecryptor.h"
 
 @interface ConfigView ()
 
@@ -596,6 +597,8 @@
                         // Try to backup
                         [delegate.BackupSys RecheckCapability];
                         [delegate.BackupSys PerformBackup];
+						
+						[MessageDecryptor tryToDecryptAll];
                     }
                     else if (cell.accessoryType == UITableViewCellAccessoryCheckmark)
                     {

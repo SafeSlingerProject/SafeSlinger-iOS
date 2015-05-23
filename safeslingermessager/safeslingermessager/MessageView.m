@@ -77,8 +77,13 @@
     // Messages from individual database
     NSMutableArray *threadsList = [delegate.DbInstance getConversationThreads];
 	
-	// Messages from individual database
+	// Messages from universal database
     int badgenum = [delegate.UDbInstance updateThreadEntries:threadsList];
+	
+	for(MsgListEntry *entry in threadsList) {
+		badgenum += entry.unreadcount;
+	}
+	
 	if(badgenum > 0) {
         [self.tabBarItem setBadgeValue:[NSString stringWithFormat:@"%d", badgenum]];
 	} else {
@@ -146,7 +151,8 @@
     }
     
     // message count
-    [cell.textLabel setText: (MsgListEntry.ciphercount==0) ? [NSString stringWithFormat:@"%@ %d", display, MsgListEntry.messagecount] : [NSString stringWithFormat:@"%@ %d (%d)", display, MsgListEntry.messagecount, MsgListEntry.ciphercount]];
+	int unread = MsgListEntry.unreadcount + MsgListEntry.ciphercount;
+    [cell.textLabel setText: (unread == 0) ? [NSString stringWithFormat:@"%@ %d", display, MsgListEntry.messagecount] : [NSString stringWithFormat:@"%@ %d (%d)", display, MsgListEntry.messagecount, unread]];
     
     // get photo
     NSString* face = [delegate.DbInstance QueryStringInTokenTableByKeyID: MsgListEntry.keyid Field:@"note"];

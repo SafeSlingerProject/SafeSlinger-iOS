@@ -94,9 +94,11 @@ typedef enum {
         DEBUGMSG(@"UNDEFINED thread...");
 		_bottomBarHeightConstraint.constant = 0;
 		_bottomBarView.hidden = YES;
+		_attachmentButton.hidden = YES;
 	} else {
 		_bottomBarHeightConstraint.constant = BOTTOM_BAR_HEIGHT_WITHOUT_ATTACHMENT;
 		_bottomBarView.hidden = NO;
+		_attachmentButton.hidden = NO;
     }
 	
 	thread_img = [_recipient.photo length] > 0 ? [[UIImage imageWithData:_recipient.photo] scaleToSize:CGSizeMake(45.0f, 45.0f)] : nil;
@@ -123,7 +125,7 @@ typedef enum {
 	if(assignedEntry.ciphercount == 0) {
 		self.navigationItem.title = [NSString stringWithFormat:@"%@ %d", displayName, assignedEntry.messagecount];
 	} else {
-		self.navigationItem.title = [NSString stringWithFormat:@"%@ %d (%d)", displayName, assignedEntry.ciphercount+assignedEntry.messagecount, assignedEntry.ciphercount];
+		self.navigationItem.title = [NSString stringWithFormat:@"%@ %d (%d)", displayName, assignedEntry.messagecount, assignedEntry.ciphercount];
 	}
 }
 
@@ -207,12 +209,16 @@ typedef enum {
     [self.messages addObjectsFromArray:cipherMessages];
 	assignedEntry.ciphercount = (int)cipherMessages.count;
 	
+	[delegate.DbInstance markAllMessagesAsReadFromKeyId:assignedEntry.keyid];
+	
 	MsgEntry *outgoingMessage = delegate.messageSender.outgoingMessage;
 	if([outgoingMessage.keyid isEqualToString:assignedEntry.keyid]) {
 		[self.messages addObject:outgoingMessage];
 	}
 	
 	assignedEntry.messagecount = (int)self.messages.count;
+	
+	[self updateTitle];
 	
     [self.tableView reloadData];
 	
@@ -328,12 +334,6 @@ typedef enum {
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    assignedEntry.messagecount = [delegate.DbInstance ThreadMessageCount:assignedEntry.keyid];
-    assignedEntry.ciphercount = [delegate.UDbInstance ThreadCipherCount:assignedEntry.keyid];
-	
-	[self updateTitle];
-	
     return [self.messages count];
 }
 
