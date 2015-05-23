@@ -892,7 +892,7 @@
 "title_comments" = "Comments/Questions";
 /* title (title case); used at the top of the error dialog. */
 "title_Error" = "Error";
-/* title (title case); used at the top of the license agreement dialog. NOTE: The license agreement itself is not localized. */
+/* title (title case); used at the top of the EU license agreement dialog. NOTE: The license agreement itself is not localized. */
 "title_Eula" = "End-User License Agreement";
 /* title (title case); used at the top of the dialog, which provides a walkthrough of the key exchange protocol. */
 "title_ExchangeWalkthrough" = "Sling Keys Assistant";
@@ -920,6 +920,8 @@
 "title_NotifyFileAvailable" = "SafeSlinger Message Available";
 /* title (title case); used as the title of multiple incoming messages in the notification window. iOS-only. */
 "title_NotifyMulFileAvailable" = "%d SafeSlinger Messages Available";
+/* title (title case); used at the top of the OS license agreement dialog. NOTE: The license agreement itself is not localized. */
+"title_Osl" = "Open-Source Licenses";
 /* title (title case); used at the top of the passphrase screen where user will login. */
 "title_passphrase" = "Passphrase";
 /* menu option (title case); used in the Select File Option menu to select a picture from the photo album on iOS. */
