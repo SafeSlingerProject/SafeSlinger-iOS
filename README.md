@@ -27,7 +27,7 @@ Developer's App Requirements:
 3. 'Server Host Name' can be your own server, OR use ours: `https://slinger-dev.appspot.com`
 4. 'My Secret' can be any information.
 
-![Developer's App Main Screen](https://www.andrew.cmu.edu/user/tenma/ios_help/github/demo-1.png)
+![Developer's App Main Screen](https://www.dropbox.com/s/thhmk3nb2twi2js/demo-1.png?raw=1)
 
 To execute SafeSlinger Exchange Developer app using Xcode and iPhone simulator:
 
@@ -43,25 +43,25 @@ Add Secure Exchange to your iOS App
 
 - Add the safeslingerexchange project as a subproject into your project.
 
-![AddLibrary1](https://www.andrew.cmu.edu/user/tenma/ios_help/github/addlibrary-1.png)
+![AddLibrary1](https://www.dropbox.com/s/mfl16i7c4ut2f3n/addlibrary-1.png?raw=1)
 
 - Add **-ObjC** to *Other Linker Flags* in your target settings.
 
-![AddLibrary2](https://www.andrew.cmu.edu/user/tenma/ios_help/github/addlibrary-2.png)
+![AddLibrary2](https://www.dropbox.com/s/8yxa0xr4cs96xty/addlibrary-2.png?raw=1)
 
 - Add the compiled static library **libsafeslingerexchange.a** to link to the library in your project.
 
-![AddLibrary3](https://www.andrew.cmu.edu/user/tenma/ios_help/github/addlibrary-3.png)
+![AddLibrary3](https://www.dropbox.com/s/p3x2l86aopfg4t4/addlibrary-3.png?raw=1)
 
 - Drag the **exchangeui** bundle from the safeslingerexchange subproject to your Bundle resource as well.
 
-![AddLibrary4](https://www.andrew.cmu.edu/user/tenma/ios_help/github/addlibrary-4.png)
+![AddLibrary4](https://www.dropbox.com/s/hco2g5d9674mec2/addlibrary-4.png?raw=1)
 
 - Select building target as safeslingerexchange static library and then build.
 
 - Make sure your UI controller is embedded in the navigation controller. For example, you can add a navigation controller to your UI through clicking *Edit* -> *Embed In* -> *Navigation Controller*.
 
-![AddLibrary5](https://www.andrew.cmu.edu/user/tenma/ios_help/github/addlibrary-5.png)
+![AddLibrary5](https://www.dropbox.com/s/7ek5wcvh95rycps/addlibrary-5.png?raw=1)
 
 ## Delegate Implementation
 Implement the SafeSlinger delegate function on your UI controller, e.g., ViewController.
