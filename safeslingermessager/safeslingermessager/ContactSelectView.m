@@ -68,7 +68,6 @@ typedef enum {
 	_appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
 	
 	[self setupActionSheetButtons];
-	[self displayTitle];
 	
 	[_showRecentLabel setText:NSLocalizedString(@"label_MostRecentOnly", @"Most recent only")];
     
@@ -88,6 +87,7 @@ typedef enum {
 											   object:nil];
 
 	_filteredContacts = [NSMutableArray new];
+    [self displayTitle];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -340,7 +340,9 @@ typedef enum {
         [_appDelegate.BackupSys PerformBackup];
 		
 		[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
-		[_delegate contactDeleted:contact];
+        if (_contactSelectionMode == ContactSelectionModeIntroduce) {
+            [_delegate contactDeleted:contact];
+        }
 		
 		if (_contacts.count == 0) {
 			[self reloadTable];

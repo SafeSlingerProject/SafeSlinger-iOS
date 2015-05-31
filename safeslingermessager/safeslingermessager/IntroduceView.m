@@ -160,7 +160,7 @@
 			
 			[User2Photo setImage:pickU2.photo.length > 0 ? [UIImage imageWithData:pickU2.photo] : [UIImage imageNamed:@"blank_contact.png"]];
 			
-			NSString *buttonTitle = [NSString stringWithFormat:@"%@ %@\n%@ %@", NSLocalizedString(@"label_SendTo", @"To:"), [NSString compositeName:pickU1.firstName withLastName:pickU1.lastName], NSLocalizedString(@"label_Key", @"Key:"), [NSString ChangeGMT2Local:pickU1.keygenDate GMTFormat:DATABASE_TIMESTR LocalFormat:@"dd/MMM/yyyy"]];
+			NSString *buttonTitle = [NSString stringWithFormat:@"%@ %@\n%@ %@", NSLocalizedString(@"label_SendTo", @"To:"), [NSString compositeName:pickU2.firstName withLastName:pickU2.lastName], NSLocalizedString(@"label_Key", @"Key:"), [NSString ChangeGMT2Local:pickU2.keygenDate GMTFormat:DATABASE_TIMESTR LocalFormat:@"dd/MMM/yyyy"]];
 			
             [User2Btn setTitle:buttonTitle forState:UIControlStateNormal];
             break;
