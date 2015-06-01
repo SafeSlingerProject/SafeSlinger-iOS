@@ -1,14 +1,5 @@
-<<<<<<< HEAD
-Travis CI Build Status
 
 [![Build Status](https://travis-ci.org/SafeSlingerProject/SafeSlinger-iOS.svg?branch=master)](https://travis-ci.org/SafeSlingerProject/SafeSlinger-iOS)
-
-SafeSlinger iOS Client
-===================
-The open source SafeSlinger Exchange library is a secure and easy to use method of exchanging public keys or other authentication data, with strong protection from Man-In-The-Middle (MITM) attacks. Our goal is to make exchanging public keys as simple as possible without sacrificing security. Our [research paper](http://sparrow.ece.cmu.edu/group/pub/farb_safeslinger_mobicom2013.pdf), presented at MobiCom '13, provides a technical analysis of SafeSlinger's key exchange properties.
-=======
-[![Build Status](https://travis-ci.org/SafeSlingerProject/SafeSlinger-iOS.png?branch=master)](https://travis-ci.org/SafeSlingerProject/SafeSlinger-iOS)
->>>>>>> v1.8.2
 
 Quick Links:
 [Downloads](https://github.com/SafeSlingerProject/SafeSlinger-Media/wiki/Platforms),
@@ -18,7 +9,6 @@ Quick Links:
 [Project Website](http://www.cylab.cmu.edu/safeslinger)
 
 SafeSlinger iOS Client Projects
-=======
 
 - **/safeslingerexchange** Contains the library project you can add to your own iOS applications. Both the safeslinger-demo and safeslinger-messenger application projects utilize this library to execute the exchange.
 - **/safeslingerdemo** Contains the simple [SafeSlinger Exchange Developer application](https://itunes.apple.com/app/safeslinger-exchange-for-developers/id909442873) project which shows the minimum requirements to run a safeslinger secure exchange.
