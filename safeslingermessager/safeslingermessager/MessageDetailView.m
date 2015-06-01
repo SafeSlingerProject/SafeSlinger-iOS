@@ -123,9 +123,9 @@ typedef enum {
 	}
 	
 	if(assignedEntry.ciphercount == 0) {
-		self.navigationItem.title = [NSString stringWithFormat:@"%@ %d", displayName, assignedEntry.messagecount];
+		self.navigationItem.title = [NSString stringWithFormat:@"%@ %lu", displayName, (unsigned long)[self.messages count]];
 	} else {
-		self.navigationItem.title = [NSString stringWithFormat:@"%@ %d (%d)", displayName, assignedEntry.messagecount, assignedEntry.ciphercount];
+		self.navigationItem.title = [NSString stringWithFormat:@"%@ %lu (%d)", displayName, (unsigned long)[self.messages count], assignedEntry.ciphercount];
 	}
 }
 
@@ -218,10 +218,8 @@ typedef enum {
 	
 	assignedEntry.messagecount = (int)self.messages.count;
 	
-	[self updateTitle];
-	
+    [self updateTitle];
     [self.tableView reloadData];
-	
 	[self scrollToBottom];
 }
 
@@ -390,6 +388,12 @@ typedef enum {
             [[[[iToast makeText: NSLocalizedString(@"error_UnableToUpdateMessageInDB", @"Unable to update the message database.")]
                setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
         }
+        
+        // when no message left, go back to thread view
+        if([self.messages count]==0)
+            [self.navigationController popViewControllerAnimated:YES];
+        else
+            [self updateTitle];
     }
 }
 
@@ -1060,7 +1064,6 @@ typedef enum {
 }
 
 #pragma mark - MessageSenderDelegate methods
-
 - (void)updatedOutgoingStatusForMessage:(MsgEntry *)message {
 	int i = (int)self.messages.count - 1;
 	BOOL found = NO;
@@ -1079,9 +1082,10 @@ typedef enum {
 	
 	if(!found) {
 		[self.messages addObject:message];
-		
 		[self reloadTable];
-	}
+    }else{
+        [self updateTitle];
+    }
 }
 
 #pragma mark - AudioRecordDelegate methods
