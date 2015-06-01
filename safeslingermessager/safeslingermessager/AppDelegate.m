@@ -32,8 +32,13 @@
 #import "UniversalDB.h"
 #import "ErrorLogger.h"
 #import "FunctionView.h"
+<<<<<<< HEAD
 #import "MessageReceiver.h"
 #import "MessageSender.h"
+=======
+#import "MessageSender.h"
+#import "MessageReceiver.h"
+>>>>>>> v1.8.2
 
 #import <AddressBook/AddressBook.h>
 #import <Crashlytics/Crashlytics.h>
@@ -65,8 +70,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
-    
 	// Preloads keyboard so there's no lag on initial keyboard appearance.
 	UITextField *lagFreeField = [[UITextField alloc] init];
 	[self.window addSubview:lagFreeField];
@@ -96,11 +99,12 @@
     [UDbInstance LoadDBFromStorage];
 	
 	[self updateDatabase];
-    
-    [[NSUserDefaults standardUserDefaults] setInteger:[self getVersionNumberByInt] forKey: kAPPVERSION];
+	
+	int versionNumber = [self getVersionNumberByInt];
+    [[NSUserDefaults standardUserDefaults] setInteger:versionNumber forKey: kAPPVERSION];
     
     // message receiver
-    MessageInBox = [[MessageReceiver alloc]init:DbInstance UniveralTable:UDbInstance Version:[self getVersionNumberByInt]];
+    MessageInBox = [[MessageReceiver alloc]init:DbInstance UniveralTable:UDbInstance Version:versionNumber];
 	// message sender
 	_messageSender = [MessageSender new];
 	
@@ -183,13 +187,6 @@
 		[self ApplyChangeForV17];
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey: kRequirePushNotification];
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey: kRequireMicrophonePrivacy];
-		[[NSUserDefaults standardUserDefaults] setBool:YES forKey: kRequirePushNotification];
-	}
-	
-	int currentVersion = (int)[[NSUserDefaults standardUserDefaults] integerForKey:kAPPVERSION];
-	oldVersion = (1 << 24) | (8 << 16) | 1; // version 1.8.0.1
-	if (currentVersion != 0 && currentVersion <= oldVersion) {
-		[DbInstance patchForContactsFromAddressBook];
 	}
 }
 
@@ -325,41 +322,35 @@
 }
 
 #pragma mark Handle Push Notifications
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
-{
-    
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     DEBUGMSG(@"call didReceiveRemoteNotification...");
     DEBUGMSG(@"userInfo = %@", userInfo);
     NSString* badge = [[userInfo objectForKey:@"aps"]objectForKey:@"badge"];
     DEBUGMSG(@"received badge = %@", badge);
     
-    if(badge&&[self checkIdentity])
-    {
+    if(badge && [self checkIdentity]) {
         DEBUGMSG(@"fetch %d messages...", [badge intValue]);
         [MessageInBox FetchMessageNonces: [badge intValue]];
     }
 }
 
 // for background
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler
-{
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler {
     DEBUGMSG(@"call didReceiveRemoteNotification...");
     DEBUGMSG(@"userInfo = %@", userInfo);
     NSString* badge = [[userInfo objectForKey:@"aps"]objectForKey:@"badge"];
     DEBUGMSG(@"received badge = %@", badge);
     
-    if(badge&&[self checkIdentity])
-    {
+    if(badge && [self checkIdentity]) {
         DEBUGMSG(@"fetch %d messages...", [badge intValue]);
         [MessageInBox FetchMessageNonces: [badge intValue]];
         completionHandler(UIBackgroundFetchResultNewData);
-    }else{
+    } else {
         completionHandler(UIBackgroundFetchResultNoData);
     }
 }
 
-- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
-{
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
     DEBUGMSG(@"didRegisterUserNotificationSettings");
 }
 
@@ -377,7 +368,7 @@
                                           withString:@""];
             DEBUGMSG(@"APNS registered token = %@", hex_device_token);
             if(hex_device_token) [[NSUserDefaults standardUserDefaults] setObject:hex_device_token forKey:kPUSH_TOKEN];
-        }else{
+        } else {
             //Do something when some notification types are disabled
             [ErrorLogger ERRORDEBUG: NSLocalizedString(@"iOS_notificationError1", @"Unable to turn on notifications. Use the \"Settings\" app to enable notifications.")];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:kPUSH_TOKEN];
@@ -394,7 +385,7 @@
                                           withString:@""];
             DEBUGMSG(@"APNS registered token = %@", hex_device_token);
             if(hex_device_token) [[NSUserDefaults standardUserDefaults] setObject:hex_device_token forKey:kPUSH_TOKEN];
-        }else{
+        } else {
             //Do something when some notification types are disabled
             [ErrorLogger ERRORDEBUG: NSLocalizedString(@"iOS_notificationError1", @"Unable to turn on notifications. Use the \"Settings\" app to enable notifications.")];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:kPUSH_TOKEN];
@@ -417,10 +408,9 @@
         DEBUGMSG(@"check to see if MessageInBox is budy..");
         long badge = [UIApplication sharedApplication].applicationIconBadgeNumber;
         
-        if(![MessageInBox IsBusy]&&badge>0)
-        {
-            [MessageInBox FetchMessageNonces: (int)badge];
-        }else{
+        if(![MessageInBox IsBusy] && badge > 0) {
+			[MessageInBox FetchMessageNonces:(int)badge];
+        } else {
             DEBUGMSG(@"thread is busy or badge is zero.");
         }
         

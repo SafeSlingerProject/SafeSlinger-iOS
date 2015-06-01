@@ -67,8 +67,8 @@
     [ProgressLabel setText:nil];
     [ProgressIndicator stopAnimating];
     UserTag = 0;
-    [self CleanSelectContact: User1Tag];
-    [self CleanSelectContact: User2Tag];
+//    [self CleanSelectContact: User1Tag];
+//    [self CleanSelectContact: User2Tag];
 }
 
 - (void)DisplayHow {
@@ -143,22 +143,28 @@
 
 - (void)SetupContact:(ContactEntry*)SelectContact {
     switch (pickUser) {
-        case User1Tag:
+		case User1Tag: {
             pickU1 = SelectContact;
             messageForU2 = [NSString stringWithFormat:NSLocalizedString(@"label_messageIntroduceNameToYou", @"I would like to introduce %@ to you."), [NSString compositeName:pickU1.firstName withLastName:pickU1.lastName]];
-            if([pickU1.photo length]>0) [User1Photo setImage:[UIImage imageWithData:pickU1.photo]];
-            else [User1Photo setImage: [UIImage imageNamed: @"blank_contact.png"]];
-            [User1Btn setTitle:[NSString stringWithFormat:@"%@ %@\n%@ %@", NSLocalizedString(@"label_SendTo", @"To:"), [NSString compositeName:pickU1.firstName withLastName:pickU1.lastName], NSLocalizedString(@"label_Key", @"Key:"), [NSString ChangeGMT2Local:pickU1.keygenDate GMTFormat:DATABASE_TIMESTR LocalFormat:@"dd/MMM/yyyy"]] forState:UIControlStateNormal];
+			
+			[User1Photo setImage:pickU1.photo.length > 0 ? [UIImage imageWithData:pickU1.photo] : [UIImage imageNamed:@"blank_contact.png"]];
+			
+			NSString *buttonTitle = [NSString stringWithFormat:@"%@ %@\n%@ %@", NSLocalizedString(@"label_SendTo", @"To:"), [NSString compositeName:pickU1.firstName withLastName:pickU1.lastName], NSLocalizedString(@"label_Key", @"Key:"), [NSString ChangeGMT2Local:pickU1.keygenDate GMTFormat:DATABASE_TIMESTR LocalFormat:@"dd/MMM/yyyy"]];
+			
+            [User1Btn setTitle:buttonTitle forState:UIControlStateNormal];
             break;
-        case User2Tag:
+		}
+		case User2Tag: {
             pickU2 = SelectContact;
             messageForU1 = [NSString stringWithFormat:NSLocalizedString(@"label_messageIntroduceNameToYou", @"I would like to introduce %@ to you."), [NSString compositeName:pickU2.firstName withLastName:pickU2.lastName]];
-            if([pickU2.photo length]>0) [User2Photo setImage:[UIImage imageWithData:pickU2.photo]];
-            else [User2Photo setImage: [UIImage imageNamed: @"blank_contact.png"]];
-            [User2Btn setTitle:[NSString stringWithFormat:@"%@ %@\n%@ %@", NSLocalizedString(@"label_SendTo", @"To:"), [NSString compositeName:pickU2.firstName withLastName:pickU2.lastName], NSLocalizedString(@"label_Key", @"Key:"), [NSString ChangeGMT2Local:pickU2.keygenDate GMTFormat:DATABASE_TIMESTR LocalFormat:@"dd/MMM/yyyy"]] forState:UIControlStateNormal];
+			
+			[User2Photo setImage:pickU2.photo.length > 0 ? [UIImage imageWithData:pickU2.photo] : [UIImage imageNamed:@"blank_contact.png"]];
+			
+			NSString *buttonTitle = [NSString stringWithFormat:@"%@ %@\n%@ %@", NSLocalizedString(@"label_SendTo", @"To:"), [NSString compositeName:pickU2.firstName withLastName:pickU2.lastName], NSLocalizedString(@"label_Key", @"Key:"), [NSString ChangeGMT2Local:pickU2.keygenDate GMTFormat:DATABASE_TIMESTR LocalFormat:@"dd/MMM/yyyy"]];
+			
+            [User2Btn setTitle:buttonTitle forState:UIControlStateNormal];
             break;
-        default:
-            break;
+		}
     }
 }
 

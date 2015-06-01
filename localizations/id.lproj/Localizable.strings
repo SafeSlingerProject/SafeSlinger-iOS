@@ -1,7 +1,7 @@
 /*
     The MIT License (MIT)
     
-    Copyright (c) 2010-2014 Carnegie Mellon University
+    Copyright (c) 2010-2015 Carnegie Mellon University
     
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
@@ -46,13 +46,15 @@
 /* 'Begin Exchange' is a button (title case); the Begin Exchange button is used to begin the SafeSlinger exchange protocol. */
 "btn_BeginExchangeProximity" = "Mulai Bursa";
 /* 'Cancel' is a button (title case); the Cancel button is used to indicate the user wishes to exit the current screen without saving data. For non-Android use only, since Android uses the Back hardware button instead. */
-"btn_Cancel" = "Membatalkan";
+"btn_Cancel" = "Tidak Jadi";
 /* 'Close' is a button (title case); the Close button is used to allow the user to dismiss a dialog. */
 "btn_Close" = "Dekat";
 /* 'Continue' is a button (title case); the Continue button is used to remind the user that there is another step to complete. */
 "btn_Continue" = "Terus";
 /* 'Create New Key' is a button (title case); the Create New Key button is paired with the Cancel button, and is used to affirm the creation of a new key and passphrase. */
 "btn_CreateNewKey" = "Buat New Key";
+/* 'Delete' is a button (title case); the Delete button is used to affirm the deletion of more a message. */
+"btn_Delete" = "Hapus";
 /* 'Delete Keys' is a button (title case); the Create New Key button is paired with the Cancel button, and is used to affirm the deletion of more recent keys. */
 "btn_DeleteKeys" = "Hapus Keys";
 /* 'Discard' is a button (title case); the Discard button is used to indicate the user wishes to exit the current screen without saving data, such as a voice memo. For non-Android use only, since Android uses the Back hardware button instead. */
@@ -62,7 +64,7 @@
 /* 'Edit' is a button (title case); the Edit button is used to show a screen where the user can edit a contact. */
 "btn_Edit" = "Sunting";
 /* 'Exit' is a button (title case); the Exit button is used to close the application. For non-Android use only, since Android uses the Back hardware button instead. */
-"btn_Exit" = "Keluar";
+"btn_Exit" = "Pintu Keluar";
 /* 'Import' is a button (title case); the Import button is used to import a set of contacts on after an unsuccessful exchange protocol has finished. */
 "btn_Import" = "Impor";
 /* 'Introduce' is a button (title case); the Introduce button is used to send a secure introduction to the two users selected on the Secure Introduction screen. */
@@ -70,7 +72,7 @@
 /* 'Next' is a button (title case); the Next button is used to remind the user that there is another step to complete. */
 "btn_Match" = "Berikutnya";
 /* 'No' is a button (title case); the No button is paired with the Yes button, and is used to indicate a negative answer to a Yes/No question. */
-"btn_No" = "Tidak";
+"btn_No" = "Tak Ada";
 /* 'No Match' is a button (title case); the No Match button is used if the user cannot find the same batting screen on another user's device during the exchange critical care. */
 "btn_NoMatch" = "Tidak ada Pertandingan";
 /* 'Not Now' is a button (title case); the Not Now button is used as a negative button to decline an offered service or permission. */
@@ -78,11 +80,13 @@
 /* 'Forget' is a button (title case); the Forget button is paired with the Remind button and is used to indicate the user wishes to dismiss the current reminder of a potential error state, such as having backup or notification settings turned off, and not be reminded again. */
 "btn_NotRemind" = "Lupa";
 /* 'OK' is a button (title case); the OK button is affirmation button used to indicate the user accepts the data entered on the current screen. */
-"btn_OK" = "oke";
+"btn_OK" = "OKE";
 /* 'Refuse' is a button (title case); the Refuse button is paired with the Accept button to indicate user refusal of a secure introduction. */
 "btn_Refuse" = "Menolak";
 /* 'Remind' is a button (title case); the Remind button is paired with the Forget button and is used to indicate the user wishes to dismiss the current reminder of a potential error state, such as having backup or notification settings turned off, and does want to be reminded again later. */
-"btn_Remind" = "Mengingatkan";
+"btn_Remind" = "Mengingatkan Kembali";
+/* 'Retry' is a button (title case); the Retry button is used to retry sending a message that has failed. */
+"btn_Retry" = "Mencoba kembali";
 /* 'Save' is a button (title case); the Save button is used to indicate the data in question should be saved and persisted. */
 "btn_Save" = "Simpan";
 /* 'Add Attachment' is a button (title case); the Add Attachment button is used on the Compose screen to allow the user to select the source of an attachment to the current message. */
@@ -90,7 +94,7 @@
 /* 'Send' is a button (title case); the Send button will secure the current text message and attachment, if any, and send the message to the selected recipient. */
 "btn_SendFile" = "Mengirim";
 /* 'Yes' is a button (title case); the Yes button is paired with the No button, and is used to indicate an affirmative answer to a Yes/No question. */
-"btn_Yes" = "Ya";
+"btn_Yes" = "Iya Nih";
 
 /* '10 minutes' is a choice (sentence case); used to set the password timeout to 10 minutes. */
 "choice_10mins" = "10 menit";
@@ -167,6 +171,8 @@
 "error_C2DMRegInvalidSender" = "Registrasi tidak tersedia untuk versi ini, silakan cek untuk versi terbaru.";
 /* 'Incorrect device registration with Google. This device does not currently support push messaging.' is an error message (sentence case, period); used to warn during push registration: Incorrect phone registration with Google. This phone doesn't currently support C2DM. Android-only. */
 "error_C2DMRegPhoneRegistrationError" = "Pendaftaran perangkat yang salah dengan Google. Perangkat ini saat ini tidak mendukung dorongan messaging.";
+/* 'Google Play Services is required to receive messages. Please install Google Play Services to continue.' is an error message (sentence case, period); used to warn during push registration: There is no Google Play Services on the phone. The application should ask the user to install Play Services. Fix on the device side. Android-only. */
+"error_C2DMRegPlayServicesMissing" = "Google Play Layanan diperlukan untuk menerima pesan. Silahkan install Google Play Layanan untuk melanjutkan.";
 /* 'Push registration service not available, scheduling retry in %d seconds.' is an error message (sentence case, period); used to warn during push registration: The device can't read the response, or there was a 500/503 from the server that can be retried later. The application should use exponential back off and retry. %d = the current number of seconds until the next push registration attempt. Android-only. */
 "error_C2DMRegServiceNotAvailable" = "Layanan pendaftaran mendorong tidak tersedia, penjadwalan coba lagi dalam %d detik.";
 /* 'Too many applications are registered for Push. Please uninstall some other applications and retry.' is an error message (sentence case, period); used to warn during push registration: The user has too many applications registered. The application should tell the user to uninstall some other applications, let user retry manually. Fix on the device side. Android-only. */
@@ -381,7 +387,7 @@
 /* 'Enter your name and a passphrase to protect your data:' is a screen label (match English casing); used to instruct the user how to proceed on the Setup screen. */
 "label_FindInstruct" = "Masukkan nama Anda dan kata sandi untuk melindungi data Anda:";
 /* 'First Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current first name to use. iOS-only. */
-"label_FirstName" = "Nama kecil";
+"label_FirstName" = "Nama Depan";
 /* 'Tap your name to add or remove contact data, check items you wish to share, and tap Begin Exchange when others are ready to exchange:' is a screen label (match English casing); used to instruct the user how to proceed on the Begin Exchange screen. */
 "label_Home" = "Ketuk nama Anda untuk menambah atau menghapus data kontak, periksa item yang ingin berbagi, dan tekan Mulai Bursa ketika orang lain siap untuk pertukaran:";
 /* 'Home' is a screen label (match English casing); used to denote a 'home' type of email or phone contact type. iOS-only. */
@@ -390,8 +396,8 @@
 "label_hours" = "%d jam";
 /* 'SafeSlinger iCloud is enabled. Tap the Done button when finished.' is a screen label (match English casing); used to indicate the backup will occur while on the Setup screen. iOS-only. */
 "label_iCloudEnable" = "SafeSlinger iCloud diaktifkan. Tekan tombol Selesai setelah selesai.";
-/* 'No messages. You may send a message from the Compose tab.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. */
-"label_InstNoMessages" = "Tidak ada pesan. Anda dapat mengirim pesan dari tab Compose.";
+/* 'No messages. To send a message, tap on the New Message icon at the top of your screen.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. */
+"label_InstNoMessages" = "Tidak ada pesan. Untuk mengirim pesan, tekan ikon Pesan Baru di bagian atas layar Anda.";
 /* 'To add recipients, you must first Sling Keys with one or more other users at the same time. You may also send a Sling Keys contact invitation from the menu.' is a screen label (match English casing); used to instruct the user how to proceed on the Recipient list screen is case of no recipients. */
 "label_InstNoRecipients" = "Untuk menambahkan penerima, pertama Sling Keys dengan satu atau lebih pengguna lain pada saat yang sama harus. Anda juga dapat mengirim kontak undangan Sling Keys dari menu.";
 /* 'None of your current recipients match your search query. Please try a different query or invite a new contact.' is a screen label (match English casing); used to inform the user that no recipients match the search query. */
@@ -411,9 +417,11 @@
 /* 'Key:' is a screen label (match English casing); used to prefix the key generation date in the Recipients list and on the Compose Message screen. */
 "label_Key" = "Key:";
 /* 'Last Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current last name to use. iOS-only. */
-"label_LastName" = "Nama keluarga";
+"label_LastName" = "Nama Belakang";
 /* 'Me' is a screen label (match English casing); used on the secure introduction invitation dialog to indicate the one-hop trust relationship between the user (Me); the trusted person, and the new person. */
 "label_Me" = "Saya";
+/* '(%s has confirmed the key for %s.)' is a screen label (match English casing); used as the automated test text message completing sling keys. %1$s = the name of the sender. %2$s = the name of the recipient. */
+"label_messageAutomatedVerify" = "(%@ telah mengkonfirmasi kunci untuk %@.)";
 /* 'I would like to introduce %s to you.' is a screen label (match English casing); used as the text message when sending secure introduction invitations. %s = the name of a person. */
 "label_messageIntroduceNameToYou" = "Saya ingin memperkenalkan %@ kepada Anda.";
 /* 'SafeSlinger app: %s' is a screen label (match English casing); used as message text to show a user how to install SafeSlinger. %s = the main installation url for mobile devices */
@@ -422,8 +430,6 @@
 "label_messageInviteSetupInst" = "Untuk mengatur koneksi messaging aman, kita bisa bertemu atau telepon satu sama lain pada saat yang sama, dan kemudian Sling Keys hanya sekali untuk memverifikasi sambungan.";
 /* 'Can we start secure messaging with the open source SafeSlinger iPhone or Android app?' is a screen label (match English casing); used as message text to invite a contact to begin secure messaging. */
 "label_messageInviteStartMsg" = "Bisakah kita mulai pesan aman dengan open source SafeSlinger iPhone atau Android app?";
-/* '%s, you are verified.' is a screen label (match English casing); used as the text message completing sling keys. %s = the name of a recipient. */
-"label_messageYouAreVerified" = "%@, Anda diverifikasi.";
 /* '%d minutes' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole minutes. */
 "label_minutes" = "%d menit";
 /* 'Mobile' is a screen label (match English casing); used to denote a 'mobile' type of email or phone contact type. iOS-only. */
@@ -433,15 +439,15 @@
 /* 'My updated SafeSlinger credentials are attached.' is a screen label (match English casing); used as default message attached to a credential update. */
 "label_MsgSendUpdate" = "Saya diperbarui kredensial SafeSlinger terpasang.";
 /* 'None' is a screen label (match English casing); used to indicate the local, non-synchronized contacts account name on the phone when picking a Save Account. */
-"label_None" = "Tak satupun";
+"label_None" = "Tidak Satupun";
 /* 'Non-English' is a screen label (match English casing); used to instruct the user how to switch on Numeric mode while doing comparison. */
 "label_NumericModeHint" = "Non-Inggris";
 /* '%d Files to Share:' is a screen label (match English casing); used on the Sharing Folder screen. %d = the number of files to share. iOS-only. */
 "label_numsharedfiles" = "%d File untuk Berbagi:";
 /* 'Old Threads' is a screen label (match English casing); used for the old thread (iOS only). */
-"label_OldThreads" = "Thread lama";
+"label_OldThreads" = "Thread Lama";
 /* 'Other' is a screen label (match English casing); used to denote a 'other' type of email or phone contact type. iOS-only. */
-"label_othertag" = "Lain";
+"label_othertag" = "Yang Lainnya";
 /* 'Retry' is a screen label (match English casing); used in the Passphrase screen text box as a prefix hint combined with a time measurement when, which is exponentially backed off on invalid passphrase entry, such as 'Retry in 14 seconds'. Used during back off while all user controls have been disabled. */
 "label_PassHintBackoff" = "Mencoba kembali";
 /* 'Updated Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint to create a replacement passphrase. */
@@ -535,7 +541,7 @@
 /* 'Tap to Sling Keys.' is a screen label (match English casing); used to remind the user that we can advance the user to the Sling Keys screen for convenience. */
 "label_TapToSlingKeys" = "Ketuk untuk Sling Keys.";
 /* 'Contacts Account' is a screen label (match English casing); used above the editable field on the Settings screen to show the current address book account to use. */
-"label_targetAccountLabel" = "Akun kontak";
+"label_targetAccountLabel" = "Akun Kontak";
 /* 'You may optionally enable SafeSlinger iCloud backup in iOS Settings. Tap the Done button when finished.' is a screen label (match English casing); used on the Setup screen to remind the user that no backups will be restored on new installation. iOS-only. */
 "label_TouchToConfigureBackupSettings" = "Anda opsional dapat memungkinkan SafeSlinger iCloud cadangan di iOS Settings. Tekan tombol Selesai setelah selesai.";
 /* 'Touch to configure backup settings.' is a screen label (match English casing); used in the notification window when the backup request has been pending over 1 hour. Android-only. */
@@ -543,13 +549,13 @@
 /* 'Touch to configure cache timeout settings.' is a screen label (match English casing); used in the notification window when a passphrase has been cached. Android-only. */
 "label_TouchToConfigureCacheTimeout" = "Sentuh untuk mengkonfigurasi pengaturan batas waktu Cache.";
 /* 'Unknown' is a screen label (match English casing); used in menu lists when unexpected type definitions are encountered. */
-"label_undefinedTypeLabel" = "Diketahui";
+"label_undefinedTypeLabel" = "Tidak Dikenal";
 /* 'Encrypted Sender' is a screen label (match English casing); used as the header for an encrypted message in the message list. */
 "label_UnknownSender" = "Dienkripsi Pengirim";
 /* 'Lowest' is a screen label (match English casing); used as a text box hint on the Grouping screen when entering the lowest ID number. */
 "label_UserIdHint" = "Terendah";
 /* 'User Name' is a screen label (match English casing); used as a placeholder before the users' contact has been loaded. */
-"label_UserName" = "User name";
+"label_UserName" = "Nama Pengguna";
 /* 'All phones must match one of the 3-word phrases. Compare, and then pick the matching phrase.' is a screen label (match English casing); used to instruct the user how to proceed on the Verify screen. */
 "label_VerifyInstruct" = "Semua telepon harus sesuai dengan salah satu frase 3-kata. Bandingkan, dan kemudian memilih frase yang cocok.";
 /* 'To protect your data, SafeSlinger does not store your passphrase anywhere for recovery. You may only access recipients and messages created under the same passphrase login. However, you may generate a new key and passphrase, then repeat Sling Keys with your recipients.' is a screen label (match English casing); used to describe the reasons passphrases are not storeed and how to generate a new one. */
@@ -607,7 +613,7 @@
 /* 'Language' is a menu (title case); used as the settings menu option to change language */
 "menu_language" = "Bahasa";
 /* 'License' is a menu option (title case); used to show a dialog of the End User License Agreement. */
-"menu_License" = "Lisensi";
+"menu_License" = "Surat Izin";
 /* 'Add Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
 "menu_link_contact_add" = "Tambah Kontak Tautan";
 /* 'Change Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
@@ -621,7 +627,7 @@
 /* 'Copy Text' is a menu option (title case); used to copy the message text into the clipboard via the message list context menu. */
 "menu_messageCopyText" = "Salin Teks";
 /* 'Forward' is a menu option (title case); used to create a new message with the same text message/attachment via the message list context menu. */
-"menu_messageForward" = "Depan";
+"menu_messageForward" = "Ke Depan";
 /* 'Privacy Policy' is a menu option (title case); used to show a dialog of the Privacy Policy. */
 "menu_PrivacyPolicy" = "Kebijakan Privasi";
 /* 'Remove' is a menu option (title case); used to remove the currently selected file attachment via the File Options dialog. */
@@ -711,10 +717,12 @@
 /* 'Notifications' is a preferences title (title case); used to sub-divide the Notifications section of the settings screen. */
 "section_notification" = "Pemberitahuan";
 /* 'Storage' is a preferences title (title case); used to sub-divide the Storage section of the settings screen. */
-"section_storage" = "Penyimpanan";
+"section_storage" = "Tempat Penyimpanan";
 
 /* 'Backup restored.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm backup keys and settings have bee restored on re-install. */
 "state_BackupRestored" = "Backup dipulihkan.";
+/* 'Failed to send message. Touch and hold for options.' is an informational message (sentence case, period); used in a message instance to indicate that the message has not been sent to the destination. */
+"state_FailedToSendMessage" = "Gagal mengirim pesan. Sentuh dan tahan untuk pilihan.";
 /* 'Deleted file %s.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that a file has been deleted. %s = the file name of the deleted file. */
 "state_FileDeleted" = "Dihapus %@ berkas.";
 /* 'Message sent.' is an informational message (sentence case, period); TODO: This should be deprecated in favor 1 message push to messages tab (single thread) and >1 messages push to messages tab (all threads) with a toast of state_MessagesSent. */
@@ -755,9 +763,9 @@
 /* 'Developed by:' is an application description (sentence case); used at the end of the about dialog to list the developers of SafeSlinger. */
 "text_DevelopedBy" = "Dikembangkan oleh:";
 /* 'Exchange' is an application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordExchange" = "Pertukaran";
+"text_KeywordExchange" = "Tukar Menukar";
 /* 'Identity' is an application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordIdentity" = "Identitas";
+"text_KeywordIdentity" = "Jati Diri";
 /* 'Key' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordKey" = "Kunci";
 /* 'Messaging' is an application description (sentence case); one of many keywords to use when searching related terms. */
@@ -791,6 +799,8 @@
 "title_ChooseDirectory" = "Pilih Directory";
 /* 'Choose Your Attachment' is a title (title case); used at the top of the menu options when choosing among sources to pick an attachment. */
 "title_ChooseFileLoad" = "Pilih Lampiran Anda";
+/* 'Clear' is a title (title case); used in the Select File Option menu to clear the current attachment. */
+"title_clear" = "Yang Jelas";
 /* 'Comments/Questions' is a title (title case); used as the Subject field of an email message for the user to send feedback to developers. Also used as the menu option to start the email. */
 "title_comments" = "Komentar/Pertanyaan";
 /* 'Error' is a title (title case); used at the top of the error dialog. */
@@ -809,10 +819,12 @@
 "title_HomePanel" = "Rumah";
 /* 'Message' is a title (title case); used at the top of the dialog when viewing message details. */
 "title_MessageDetail" = "Pesan";
+/* 'Message Options' is a title (title case); used at the top of the dialog when viewing message options. */
+"title_MessageOptions" = "Pesan Pilihan";
 /* 'Messages' is a title (title case); used at the top of the message list screen. */
 "title_Messages" = "Pesan";
 /* 'Personal Contact' is a title (title case); used at the top of a menu when choosing to alter the users' contact: Edit, Create New, or Use Another. */
-"title_MyIdentity" = "Kontak pribadi";
+"title_MyIdentity" = "Kontak Pribadi";
 /* 'SafeSlinger Message Available' is a title (title case); used as the title of an incoming message in the notification window. */
 "title_NotifyFileAvailable" = "SafeSlinger Pesan Tersedia";
 /* '%d SafeSlinger Messages Available' is a title (title case); used as the title of multiple incoming messages in the notification window. iOS-only. */
@@ -820,7 +832,7 @@
 /* 'Passphrase' is a title (title case); used at the top of the passphrase screen where user will login. */
 "title_passphrase" = "Passphrase";
 /* 'Photo Album' is a menu option (title case); used in the Select File Option menu to select a picture from the photo album on iOS. */
-"title_photoalbum" = "Photo Album";
+"title_photoalbum" = "Album Foto";
 /* 'Photo Library' is a menu option (title case); used in the Select File Option menu to create a picture from the photo library on iOS. */
 "title_photolibary" = "Photo Library";
 /* 'Recipients' is a title (title case); used at the top of the recipient list screen. */

@@ -177,7 +177,6 @@
                                                 otherButtonTitles: NSLocalizedString(@"btn_Continue", @"Continue"), nil];
         message.tag = AskPerm;
         [message show];
-        message = nil;
     } else if(status == kABAuthorizationStatusDenied || status == kABAuthorizationStatusRestricted) {
         NSString* buttontitle = nil;
         NSString* description = nil;
@@ -196,7 +195,6 @@
                                                 otherButtonTitles: buttontitle, nil];
         message.tag = HelpContact;
         [message show];
-        message = nil;
     } else if(status == kABAuthorizationStatusAuthorized) {
         if(delegate.IdentityNum != NonExist) {
             [self performSegueWithIdentifier:@"EditContact" sender:self];
@@ -248,7 +246,6 @@
                                                     otherButtonTitles: buttontitle, nil];
             message.tag = HelpNotification;
             [message show];
-            message = nil;
             return;
         }
     } else {
@@ -266,7 +263,6 @@
                                                     otherButtonTitles: buttontitle, nil];
             message.tag = HelpNotification;
             [message show];
-            message = nil;
             return;
         }
     }

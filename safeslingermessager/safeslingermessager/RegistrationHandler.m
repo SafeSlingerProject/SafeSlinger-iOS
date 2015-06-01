@@ -25,21 +25,28 @@
 #import "RegistrationHandler.h"
 #import "ErrorLogger.h"
 #import "Utility.h"
+#import "SSEngine.h"
 
 @implementation RegistrationHandler
 
-- (void)registerToken: (NSString*)hex_submissiontoken DeviceHex: (NSString*)hex_token KeyHex: (NSString*)hex_keyid ClientVer: (int)int_clientver
+- (void)registerToken: (NSString*)hex_submissiontoken DeviceHex: (NSString*)hex_token KeyHex: (NSString*)hex_keyid ClientVer: (int)int_clientver PassphraseCache:(NSString*)passcache
 {
     /* 
      * Build packet for registration
-     * client_ver [0:4]
-     * lenkeyid [4:4+4]
-     * keyId [4+4: 4+4+lenkeyid]
-     * lensubtok [4+4+lenkeyid: 4+4+lenkeyid+4]
-     * submissionToken [4+4+lenkeyid+4: 4+4+lenkeyid+4+lensubtok]
-     * lenregid [4+4+lenkeyid+4+lensubtok: 4+4+lenkeyid+4+lensubtok+4]
-     * registrationId [4+4+lenkeyid+4+lensubtok+4: 4+4+lenkeyid+4+lensubtok+4+lenregid]
-     * devtype = [4+4+lenkeyid+4+lensubtok+4+lenregid: 4+4+lenkeyid+4+lensubtok+4+lenregid+4]
+     * client_ver 4 bytes
+     * lenkeyid 4 bytes
+     * keyId
+     * lensubtok 4 bytes
+     * submissionToken
+     * lenregid 4 bytes
+     * registrationId
+     * devtype 4 bytes
+     * lennonce 4 bytes
+     * nonce
+     * lenpubkey 4 bytes
+     * pubkey
+     * lensig 4 bytes
+     * sig
      */
     
     NSMutableData *msgchunk = [[NSMutableData alloc] init];
@@ -66,6 +73,25 @@
     // devtype
     int dev_type = htonl(iOS);
     [msgchunk appendBytes: &dev_type length: 4];
+    
+    // append nonce
+    NSData *nonce = [SSEngine GenRandomBytes:32];
+    NSInteger lennonce = htonl([nonce length]);
+    [msgchunk appendBytes: &lennonce length: 4];
+    [msgchunk appendData: nonce];
+    
+    // append pubkey
+    NSData *pubkey = [SSEngine getPubKey:SIGN_PUB];
+    NSInteger lenpubkey = htonl([pubkey length]);
+    [msgchunk appendBytes: &lenpubkey length: 4];
+    [msgchunk appendData: pubkey];
+    
+    // sign and append signature
+    NSData* SignKey = [SSEngine UnlockPrivateKey:passcache Size:[SSEngine getSelfPrivateKeySize:SIGN_PRI] Type:SIGN_PRI];
+    NSData *sig = [SSEngine Sign:msgchunk withPrikey:SignKey];
+    NSInteger sig_len = htonl([sig length]);
+    [msgchunk appendBytes: &sig_len length: 4];
+    [msgchunk appendData: sig];
     
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@/%@", HTTPURL_PREFIX, HTTPURL_HOST_MSG, POSTREGISTRATION]];;
     

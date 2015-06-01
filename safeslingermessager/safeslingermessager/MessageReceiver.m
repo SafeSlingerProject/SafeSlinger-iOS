@@ -29,6 +29,7 @@
 #import "SSEngine.h"
 #import "UniversalDB.h"
 #import "RegistrationHandler.h"
+#import "MessageDecryptor.h"
 
 @implementation MessageReceiver
 
@@ -44,13 +45,11 @@
     return self;
 }
 
-- (BOOL)IsBusy
-{
-    if([ThreadLock tryLock])
-    {
+- (BOOL)IsBusy {
+    if([ThreadLock tryLock]) {
         [ThreadLock unlock];
         return NO;
-    }else{
+    } else {
         return YES;
     }
 }
@@ -58,7 +57,6 @@
 - (void)FetchMessageNonces:(int)NumOfMostRecents {
     
     if([ThreadLock tryLock]) {
-        
         NumNewMsg = 0;
         MsgCount = NumOfMostRecents;
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
@@ -134,7 +132,7 @@
                              msgchar = msgchar+12;
                              MsgCount = noncecnt;
                              
-                             for(int i=0;i<noncecnt;i++) {
+                             for(int i = 0; i < noncecnt; i++) {
                                  noncelen = ntohl(*(int *)msgchar);
                                  msgchar = msgchar+4;
                                  NSString* encodeNonce = [[NSString alloc]
@@ -182,8 +180,14 @@
             if(![UDbInstance CheckMessage:decodenonce]) {
                 // Get message
                 DEBUGMSG(@"nonce = %@", nonce);
-                [UDbInstance CreateNewEntry:decodenonce];
-                [self RetrieveCipher: decodenonce EncodeNonce:nonce];
+				
+				MsgEntry *msg = [MsgEntry new];
+				msg.msgid = decodenonce;
+				msg.cTime = [NSString GetGMTString:DATABASE_TIMESTR];
+				msg.dir = FromMsg;
+				
+                [UDbInstance createNewEntry:msg];
+                [self RetrieveCipherForMessage:msg withNonceString:nonce];
             } else {
                 [ErrorLogger ERRORDEBUG: @"Message exist."];
                 MsgFinish[[[_MsgNonces objectForKey:nonce]integerValue]] = AlreadyExist;   // already download
@@ -197,7 +201,8 @@
     [self CheckQueriedMessages];
 }
 
-- (void)RetrieveCipher:(NSData *)nonce EncodeNonce:(NSString *)cnonce {
+- (void)RetrieveCipherForMessage:(MsgEntry *)msg withNonceString:(NSString *)nonceString {
+	NSData *nonce = msg.msgid;
     NSMutableData *pktdata = [[NSMutableData alloc] init];
     //E1: Version (4bytes)
     int version = htonl(VersionNum);
@@ -215,7 +220,7 @@
 	[request setHTTPMethod: @"POST"];
 	[request setHTTPBody: pktdata];
     
-    NSInteger index = [[_MsgNonces objectForKey:cnonce]integerValue];
+    NSInteger index = [[_MsgNonces objectForKey:nonceString] integerValue];
     
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
@@ -256,10 +261,13 @@
                      } else {
                          MsgFinish[index] = Downloaded;
                          NSData* cipher = [NSData dataWithBytes:(msgchar+12) length:msglen];
-                         NSArray* EncryptPkt = [NSArray arrayWithObjects: nonce, cipher, nil];
-                         dispatch_async(dispatch_get_main_queue(), ^(void) {
-                             [self SaveSecureMessage:EncryptPkt];
-                         });
+						 
+						 msg.keyid = [SSEngine ExtractKeyID:cipher];
+						 msg.msgbody = [NSData dataWithBytes:[cipher bytes] + LENGTH_KEYID length:[cipher length] - LENGTH_KEYID];
+						 
+						 dispatch_async(dispatch_get_main_queue(), ^(void) {
+							 [self handleNewCipherMessage:msg withCipher:(NSData *)cipher];
+						 });
                      }
                  } else if(ntohl(*(int *)msgchar) == 0) {
                      // Error Message
@@ -319,30 +327,34 @@
         
         DEBUGMSG(@"Fetch results: %d %d %d", _NumExpiredMsg, _NumBadMsg, _NumSafeMsg);
         
-        if(_NumExpiredMsg==MsgCount) {
-            // all messages expired
-            [self PrintToastMessage: NSLocalizedString(@"error_PushMsgMessageNotFound", @"Message expired.")];
-        } else if(_NumExpiredMsg==MsgCount) {
-            [self PrintToastMessage: NSLocalizedString(@"error_InvalidIncomingMessage", @"Bad incoming message format.")];
-        } else if(_NumSafeMsg>0) {
-            
+        if(_NumSafeMsg>0 || MsgCount == 0) {
+			NSLog(@"NumSafeMsg = %d, MsgCount = %d", _NumSafeMsg, MsgCount);
+			
 			if(_notificationDelegate) {
 				[_notificationDelegate messageReceived];
 			} else {
                 // move toast message back..
                 NSString *msg = nil;
-                if(_NumSafeMsg==1)
+				
+				if(_NumSafeMsg < 2) {
                     msg = NSLocalizedString(@"title_NotifyFileAvailable", @"SafeSlinger Message Available");
-                else
+				} else {
                     msg = [NSString stringWithFormat: NSLocalizedString(@"title_NotifyMulFileAvailable", @"%d SafeSlinger Messages Available"),_NumSafeMsg];
+				}
+				
                 [[[[iToast makeText: msg]
                   setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
 				[UtilityFunc playSoundAlert];
 			}
 			
 			[[NSNotificationCenter defaultCenter] postNotificationName:NSNotificationMessageReceived object:nil userInfo:nil];
-        }
-        
+		} else if(_NumExpiredMsg==MsgCount) {
+			// all messages expired
+			[self PrintToastMessage: NSLocalizedString(@"error_PushMsgMessageNotFound", @"Message expired.")];
+		} else if(_NumExpiredMsg==MsgCount) {
+			[self PrintToastMessage: NSLocalizedString(@"error_InvalidIncomingMessage", @"Bad incoming message format.")];
+		}
+		
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         long badge_num = [[UIApplication sharedApplication]applicationIconBadgeNumber];
         badge_num = badge_num - _NumSafeMsg - _NumExpiredMsg;
@@ -353,19 +365,24 @@
     }
 }
 
-- (void)SaveSecureMessage:(NSArray *)EncryptPkt {
-    NSData* nonce = [EncryptPkt objectAtIndex:0];
-    NSData* cipher = [EncryptPkt objectAtIndex:1];
-    
-    if(![[sha3 Keccak256Digest:cipher] isEqualToData:nonce]) {
-        [ErrorLogger ERRORDEBUG:@"ERROR: Received Message Digest Error."];
-        // display error
-        [self PrintToastMessage: NSLocalizedString(@"error_InvalidIncomingMessage", @"Bad incoming message format.")];
-    } else {
-        if(![UDbInstance UpdateEntryWithCipher:nonce Cipher:cipher]) {
-            [self PrintToastMessage: NSLocalizedString(@"error_UnableToSaveMessageInDB", @"Unable to save to the message database.")];
-        }
-    }
+- (void)handleNewCipherMessage:(MsgEntry *)msg withCipher:(NSData *)cipher {
+	if([[NSUserDefaults standardUserDefaults] integerForKey:kAutoDecryptOpt] == TurnOn
+	   && [MessageDecryptor decryptCipherMessage:msg]) {
+		 //auto-decrypt enabled and message was decrypted
+		return;
+	} else {
+		//auto-decrypt disabled or unable to decrypt message
+		//save to DB encrypted
+		if(![[sha3 Keccak256Digest:cipher] isEqualToData:msg.msgid]) {
+			[ErrorLogger ERRORDEBUG:@"ERROR: Received Message Digest Error."];
+			// display error
+			[self PrintToastMessage: NSLocalizedString(@"error_InvalidIncomingMessage", @"Bad incoming message format.")];
+		} else {
+			if(![UDbInstance updateMessageEntry:msg]) {
+				[self PrintToastMessage: NSLocalizedString(@"error_UnableToSaveMessageInDB", @"Unable to save to the message database.")];
+			}
+		}
+	}
 }
 
 - (void)PrintToastMessage:(NSString *)error {

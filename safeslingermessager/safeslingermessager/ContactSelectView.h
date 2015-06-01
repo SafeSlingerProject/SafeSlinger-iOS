@@ -34,6 +34,8 @@
 @protocol ContactSelectViewDelegate <NSObject>
 
 - (void)contactSelected:(ContactEntry *)contact;
+
+@optional
 - (void)contactDeleted:(ContactEntry *)contact;
 
 @end

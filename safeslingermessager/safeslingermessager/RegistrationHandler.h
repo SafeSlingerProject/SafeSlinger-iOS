@@ -26,6 +26,6 @@
 
 @interface RegistrationHandler : NSObject
 
-- (void)registerToken: (NSString*)hex_submissiontoken DeviceHex: (NSString*)hex_token KeyHex: (NSString*)hex_keyid ClientVer: (int)int_clientver;
+- (void)registerToken: (NSString*)hex_submissiontoken DeviceHex: (NSString*)hex_token KeyHex: (NSString*)hex_keyid ClientVer: (int)int_clientver PassphraseCache:(NSString*)passcache;
 
 @end

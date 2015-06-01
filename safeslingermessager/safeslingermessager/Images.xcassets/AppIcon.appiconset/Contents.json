@@ -35,6 +35,12 @@
       "idiom" : "iphone",
       "filename" : "starslinger120p.png",
       "scale" : "2x"
+    },
+    {
+      "size" : "60x60",
+      "idiom" : "iphone",
+      "filename" : "starslinger180p.png",
+      "scale" : "3x"
     }
   ],
   "info" : {

@@ -1,7 +1,7 @@
 /*
     The MIT License (MIT)
     
-    Copyright (c) 2010-2014 Carnegie Mellon University
+    Copyright (c) 2010-2015 Carnegie Mellon University
     
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
@@ -53,6 +53,8 @@
 "btn_Continue" = "Continuar";
 /* 'Create New Key' is a button (title case); the Create New Key button is paired with the Cancel button, and is used to affirm the creation of a new key and passphrase. */
 "btn_CreateNewKey" = "Criar nova chave";
+/* 'Delete' is a button (title case); the Delete button is used to affirm the deletion of more a message. */
+"btn_Delete" = "Excluir";
 /* 'Delete Keys' is a button (title case); the Create New Key button is paired with the Cancel button, and is used to affirm the deletion of more recent keys. */
 "btn_DeleteKeys" = "Excluir Chaves";
 /* 'Discard' is a button (title case); the Discard button is used to indicate the user wishes to exit the current screen without saving data, such as a voice memo. For non-Android use only, since Android uses the Back hardware button instead. */
@@ -74,15 +76,17 @@
 /* 'No Match' is a button (title case); the No Match button is used if the user cannot find the same batting screen on another user's device during the exchange critical care. */
 "btn_NoMatch" = "No Match";
 /* 'Not Now' is a button (title case); the Not Now button is used as a negative button to decline an offered service or permission. */
-"btn_NotNow" = "Não agora";
+"btn_NotNow" = "Não Agora";
 /* 'Forget' is a button (title case); the Forget button is paired with the Remind button and is used to indicate the user wishes to dismiss the current reminder of a potential error state, such as having backup or notification settings turned off, and not be reminded again. */
 "btn_NotRemind" = "Esquecer";
 /* 'OK' is a button (title case); the OK button is affirmation button used to indicate the user accepts the data entered on the current screen. */
-"btn_OK" = "Está bem";
+"btn_OK" = "ESTÁ BEM";
 /* 'Refuse' is a button (title case); the Refuse button is paired with the Accept button to indicate user refusal of a secure introduction. */
 "btn_Refuse" = "Recusar";
 /* 'Remind' is a button (title case); the Remind button is paired with the Forget button and is used to indicate the user wishes to dismiss the current reminder of a potential error state, such as having backup or notification settings turned off, and does want to be reminded again later. */
 "btn_Remind" = "Lembrar";
+/* 'Retry' is a button (title case); the Retry button is used to retry sending a message that has failed. */
+"btn_Retry" = "Tentar novamente";
 /* 'Save' is a button (title case); the Save button is used to indicate the data in question should be saved and persisted. */
 "btn_Save" = "Salvar";
 /* 'Add Attachment' is a button (title case); the Add Attachment button is used on the Compose screen to allow the user to select the source of an attachment to the current message. */
@@ -167,6 +171,8 @@
 "error_C2DMRegInvalidSender" = "O registo não está disponível para esta versão, por favor, verifique se há uma versão atualizada.";
 /* 'Incorrect device registration with Google. This device does not currently support push messaging.' is an error message (sentence case, period); used to warn during push registration: Incorrect phone registration with Google. This phone doesn't currently support C2DM. Android-only. */
 "error_C2DMRegPhoneRegistrationError" = "Registro do dispositivo incorreto com o Google. Este dispositivo não suporta atualmente impulso de mensagens.";
+/* 'Google Play Services is required to receive messages. Please install Google Play Services to continue.' is an error message (sentence case, period); used to warn during push registration: There is no Google Play Services on the phone. The application should ask the user to install Play Services. Fix on the device side. Android-only. */
+"error_C2DMRegPlayServicesMissing" = "Google Play Services é necessária para receber mensagens. Por favor, instale o Google Services para continuar a jogar.";
 /* 'Push registration service not available, scheduling retry in %d seconds.' is an error message (sentence case, period); used to warn during push registration: The device can't read the response, or there was a 500/503 from the server that can be retried later. The application should use exponential back off and retry. %d = the current number of seconds until the next push registration attempt. Android-only. */
 "error_C2DMRegServiceNotAvailable" = "Serviço de registro de envio não estão disponíveis, agendamento repetir em %d segundos.";
 /* 'Too many applications are registered for Push. Please uninstall some other applications and retry.' is an error message (sentence case, period); used to warn during push registration: The user has too many applications registered. The application should tell the user to uninstall some other applications, let user retry manually. Fix on the device side. Android-only. */
@@ -353,7 +359,7 @@
 /* 'Compose Message' is a screen label (match English casing); used as a text box hint on the Compose Message screen where the user can type a message in the box. */
 "label_ComposeHint" = "Componha Mensagem";
 /* 'Your Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current user name (first and last) to use. Android-only. */
-"label_ContactName" = "Seu nome";
+"label_ContactName" = "Seu Nome";
 /* '%d days' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole days. */
 "label_days" = "%d dias";
 /* 'Device:' is a screen label (match English casing); used to prefix a push registration in the recipients list screen as a device ID. */
@@ -377,11 +383,11 @@
 /* 'expires in' is a screen label (match English casing); used on the message list to show how much time is left to download an attachment; a time measurement, such as '5 minutes' or '2 hours' will be appended to this string. iOS-only. */
 "label_expiresIn" = "expira em";
 /* 'File Name' is a screen label (match English casing); used on the Save File As dialog as a hint in the file name text box when changing the file name. */
-"label_FileNameHint" = "Nome do arquivo";
+"label_FileNameHint" = "Nome Do Arquivo";
 /* 'Enter your name and a passphrase to protect your data:' is a screen label (match English casing); used to instruct the user how to proceed on the Setup screen. */
 "label_FindInstruct" = "Digite seu nome e uma senha para proteger seus dados:";
 /* 'First Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current first name to use. iOS-only. */
-"label_FirstName" = "Primeiro nome";
+"label_FirstName" = "Primeiro Nome";
 /* 'Tap your name to add or remove contact data, check items you wish to share, and tap Begin Exchange when others are ready to exchange:' is a screen label (match English casing); used to instruct the user how to proceed on the Begin Exchange screen. */
 "label_Home" = "Toque no seu nome para adicionar ou remover dados de contato, verificar itens que você deseja compartilhar, e tap Comece Exchange quando outros estão prontos para troca:";
 /* 'Home' is a screen label (match English casing); used to denote a 'home' type of email or phone contact type. iOS-only. */
@@ -390,8 +396,8 @@
 "label_hours" = "%d horas";
 /* 'SafeSlinger iCloud is enabled. Tap the Done button when finished.' is a screen label (match English casing); used to indicate the backup will occur while on the Setup screen. iOS-only. */
 "label_iCloudEnable" = "SafeSlinger iCloud está ativado. Toque no botão Concluído quando terminar.";
-/* 'No messages. You may send a message from the Compose tab.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. */
-"label_InstNoMessages" = "Nenhuma mensagem. Você pode enviar uma mensagem a partir da guia Compor.";
+/* 'No messages. To send a message, tap on the New Message icon at the top of your screen.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. */
+"label_InstNoMessages" = "Nenhuma mensagem. Para enviar uma mensagem, toque no ícone de Nova mensagem na parte superior da tela.";
 /* 'To add recipients, you must first Sling Keys with one or more other users at the same time. You may also send a Sling Keys contact invitation from the menu.' is a screen label (match English casing); used to instruct the user how to proceed on the Recipient list screen is case of no recipients. */
 "label_InstNoRecipients" = "Para adicionar destinatários, você deve primeiro Sling Chaves com um ou mais usuários ao mesmo tempo. Você também pode enviar um convite para contato Sling Chaves a partir do menu.";
 /* 'None of your current recipients match your search query. Please try a different query or invite a new contact.' is a screen label (match English casing); used to inform the user that no recipients match the search query. */
@@ -414,6 +420,8 @@
 "label_LastName" = "Sobrenome";
 /* 'Me' is a screen label (match English casing); used on the secure introduction invitation dialog to indicate the one-hop trust relationship between the user (Me); the trusted person, and the new person. */
 "label_Me" = "Me";
+/* '(%s has confirmed the key for %s.)' is a screen label (match English casing); used as the automated test text message completing sling keys. %1$s = the name of the sender. %2$s = the name of the recipient. */
+"label_messageAutomatedVerify" = "(%@ confirmou a chave para %@.)";
 /* 'I would like to introduce %s to you.' is a screen label (match English casing); used as the text message when sending secure introduction invitations. %s = the name of a person. */
 "label_messageIntroduceNameToYou" = "Eu gostaria de apresentar %@ para você.";
 /* 'SafeSlinger app: %s' is a screen label (match English casing); used as message text to show a user how to install SafeSlinger. %s = the main installation url for mobile devices */
@@ -422,8 +430,6 @@
 "label_messageInviteSetupInst" = "Para configurar uma conexão de envio seguro de mensagens, podemos atender ou telefone um do outro, ao mesmo tempo, e, em seguida, Sling Chaves apenas uma vez para verificar a conexão.";
 /* 'Can we start secure messaging with the open source SafeSlinger iPhone or Android app?' is a screen label (match English casing); used as message text to invite a contact to begin secure messaging. */
 "label_messageInviteStartMsg" = "Podemos começar mensagens seguras com o código aberto iPhone SafeSlinger ou app Android?";
-/* '%s, you are verified.' is a screen label (match English casing); used as the text message completing sling keys. %s = the name of a recipient. */
-"label_messageYouAreVerified" = "%@, você são verificados.";
 /* '%d minutes' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole minutes. */
 "label_minutes" = "%d minutos";
 /* 'Mobile' is a screen label (match English casing); used to denote a 'mobile' type of email or phone contact type. iOS-only. */
@@ -715,6 +721,8 @@
 
 /* 'Backup restored.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm backup keys and settings have bee restored on re-install. */
 "state_BackupRestored" = "Backup restaurado.";
+/* 'Failed to send message. Touch and hold for options.' is an informational message (sentence case, period); used in a message instance to indicate that the message has not been sent to the destination. */
+"state_FailedToSendMessage" = "Falha ao enviar a mensagem. Toque e segure por opções.";
 /* 'Deleted file %s.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that a file has been deleted. %s = the file name of the deleted file. */
 "state_FileDeleted" = "%@ arquivo excluído.";
 /* 'Message sent.' is an informational message (sentence case, period); TODO: This should be deprecated in favor 1 message push to messages tab (single thread) and >1 messages push to messages tab (all threads) with a toast of state_MessagesSent. */
@@ -791,6 +799,8 @@
 "title_ChooseDirectory" = "Escolha o diretório";
 /* 'Choose Your Attachment' is a title (title case); used at the top of the menu options when choosing among sources to pick an attachment. */
 "title_ChooseFileLoad" = "Escolha o seu apego";
+/* 'Clear' is a title (title case); used in the Select File Option menu to clear the current attachment. */
+"title_clear" = "Claro";
 /* 'Comments/Questions' is a title (title case); used as the Subject field of an email message for the user to send feedback to developers. Also used as the menu option to start the email. */
 "title_comments" = "Comentários/Perguntas";
 /* 'Error' is a title (title case); used at the top of the error dialog. */
@@ -809,6 +819,8 @@
 "title_HomePanel" = "Casa";
 /* 'Message' is a title (title case); used at the top of the dialog when viewing message details. */
 "title_MessageDetail" = "Mensagem";
+/* 'Message Options' is a title (title case); used at the top of the dialog when viewing message options. */
+"title_MessageOptions" = "Opções de Mensagens";
 /* 'Messages' is a title (title case); used at the top of the message list screen. */
 "title_Messages" = "Mensagens";
 /* 'Personal Contact' is a title (title case); used at the top of a menu when choosing to alter the users' contact: Edit, Create New, or Use Another. */
@@ -834,7 +846,7 @@
 /* 'Save File As' is a title (title case); used at the top of the File Manager when saving a file on Android. */
 "title_SaveFileAs" = "Salvar arquivo como";
 /* 'Secure Introduction' is a title (title case); used at the top of the secure introduction composition screen. */
-"title_SecureIntroduction" = "Introdução seguro";
+"title_SecureIntroduction" = "Introdução Seguro";
 /* 'Secure Introduction Invitation!' is a title (title case); used at the top of the confirmation dialog when receiving a secure introduction. */
 "title_SecureIntroductionInvite" = "Fixe Convite Introdução!";
 /* 'Sending Options:' is a title (title case); used to denote the dialog for user to pickup sender source options. */

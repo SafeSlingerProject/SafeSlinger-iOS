@@ -1,7 +1,7 @@
 /*
     The MIT License (MIT)
     
-    Copyright (c) 2010-2014 Carnegie Mellon University
+    Copyright (c) 2010-2015 Carnegie Mellon University
     
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
@@ -53,6 +53,8 @@
 "btn_Continue" = "继续";
 /* 'Create New Key' is a button (title case); the Create New Key button is paired with the Cancel button, and is used to affirm the creation of a new key and passphrase. */
 "btn_CreateNewKey" = "产生新密钥";
+/* 'Delete' is a button (title case); the Delete button is used to affirm the deletion of more a message. */
+"btn_Delete" = "删除";
 /* 'Delete Keys' is a button (title case); the Create New Key button is paired with the Cancel button, and is used to affirm the deletion of more recent keys. */
 "btn_DeleteKeys" = "删除密钥";
 /* 'Discard' is a button (title case); the Discard button is used to indicate the user wishes to exit the current screen without saving data, such as a voice memo. For non-Android use only, since Android uses the Back hardware button instead. */
@@ -83,6 +85,8 @@
 "btn_Refuse" = "拒绝";
 /* 'Remind' is a button (title case); the Remind button is paired with the Forget button and is used to indicate the user wishes to dismiss the current reminder of a potential error state, such as having backup or notification settings turned off, and does want to be reminded again later. */
 "btn_Remind" = "提醒";
+/* 'Retry' is a button (title case); the Retry button is used to retry sending a message that has failed. */
+"btn_Retry" = "重试";
 /* 'Save' is a button (title case); the Save button is used to indicate the data in question should be saved and persisted. */
 "btn_Save" = "储存";
 /* 'Add Attachment' is a button (title case); the Add Attachment button is used on the Compose screen to allow the user to select the source of an attachment to the current message. */
@@ -140,7 +144,7 @@
 "choice_Up" = "上一层";
 
 /* 'Some members are using an older version; all members must upgrade to the newest version.' is an error message (sentence case, period); used to warn when some members of the key exchange protocol are using less than the minimum version. Used for backward-compatibility in some cases. */
-"error_AllMembersMustUpgrade" = "一些成员使用的是较旧的版本;所有成员都必须升级到最新版本。";
+"error_AllMembersMustUpgrade" = "一些成员使用的是旧版本;所有成员都必须升级到最新版本。";
 /* 'All members must upgrade, some are using older key formats.' is an error message (sentence case, period); used to warn when the key format is incorrect after an exchange and perhaps used an old format. */
 "error_AllMembersMustUpgradeBadKeyFormat" = "所有成员都必须升级，某些成员使用旧软体版本的密钥格式。";
 /* 'All members must upgrade, some are using older push registration formats.' is an error message (sentence case, period); used to warn when the push registration format is incorrect or corrupted. */
@@ -152,7 +156,7 @@
 /* 'Audio recorder encoding error.' is an error message (sentence case, period); used to warn when attempting to record an audio message fails to encode properly. iOS-only. */
 "error_AudioRecorderEncodeError" = "录音编码错误。";
 /* 'Microphone permission is required to record a secure voice message. Tap the %s button for SafeSlinger Microphone permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Microphone permission. iOS-only. */
-"error_AudioRecorderPermissionError" = "麦克风的权限，需要记录一个安全的语音留言。点击%@按钮SafeSlinger麦克风权限的详细信息。";
+"error_AudioRecorderPermissionError" = "麦克风权限需要记录一个安全的语音留言。点击%@按钮SafeSlinger麦克风权限的详细信息。";
 /* 'No backup to restore.' is an error message (sentence case, period); used to warn at application setup, when there is no pre-existing backup to restore and warn the user that any previous keys have not been restored. */
 "error_BackupNotFound" = "无法找到备份。";
 /* 'Device does not support backup restore.' is an error message (sentence case, period); used to warn when the device hardware does not support restoration from backup. */
@@ -167,6 +171,8 @@
 "error_C2DMRegInvalidSender" = "此版本无法进行讯息通知注册，请检查新的版本并安装。";
 /* 'Incorrect device registration with Google. This device does not currently support push messaging.' is an error message (sentence case, period); used to warn during push registration: Incorrect phone registration with Google. This phone doesn't currently support C2DM. Android-only. */
 "error_C2DMRegPhoneRegistrationError" = "该设备在Google服务注册失败。目前此设备不支持讯息通知服务。";
+/* 'Google Play Services is required to receive messages. Please install Google Play Services to continue.' is an error message (sentence case, period); used to warn during push registration: There is no Google Play Services on the phone. The application should ask the user to install Play Services. Fix on the device side. Android-only. */
+"error_C2DMRegPlayServicesMissing" = "谷歌播放服务是需要接收消息。请安装谷歌播放服务继续。";
 /* 'Push registration service not available, scheduling retry in %d seconds.' is an error message (sentence case, period); used to warn during push registration: The device can't read the response, or there was a 500/503 from the server that can be retried later. The application should use exponential back off and retry. %d = the current number of seconds until the next push registration attempt. Android-only. */
 "error_C2DMRegServiceNotAvailable" = "目前讯息通知服务的注册功能无法使用，请在%d秒后尝试注册。";
 /* 'Too many applications are registered for Push. Please uninstall some other applications and retry.' is an error message (sentence case, period); used to warn during push registration: The user has too many applications registered. The application should tell the user to uninstall some other applications, let user retry manually. Fix on the device side. Android-only. */
@@ -320,17 +326,17 @@
 "help_verify" = "现在你必须从这三个词组中找出和所有成员相同(匹配)的词组，每位成员必须选择相同的词组，然后按下一步。";
 
 /* 'Camera permission is required to attach snapshots to secure messages. Tap the %s button for SafeSlinger Camera permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Camera permission. iOS-only. */
-"iOS_cameraError" = "摄像机权限是必需的附加快照，以确保邮件。点击%@按钮SafeSlinger相机权限的详细信息。";
+"iOS_cameraError" = "摄像头权限是必需的附加快照，以确保邮件。点击%@按钮SafeSlinger相机权限的详细信息。";
 /* 'Contacts permission is required for securely sharing contact cards. Tap the %s button for SafeSlinger Contacts permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Contacts permission. iOS-only. */
-"iOS_contactError" = "联系人许可，才能进行安全地共享联系人卡片。点击%@按钮SafeSlinger联系人权限的详细信息。";
+"iOS_contactError" = "联系方式许可，才能进行安全地共享联系人卡片。点击%@按钮SafeSlinger联系人权限的详细信息。";
 /* 'Push registration is missing.' is an error message (sentence case, period); used to warn the user the push registration is missing. iOS-only. */
 "iOS_errorpushtoken" = "讯息通知辨识码失效。";
 /* 'Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the %s button for SafeSlinger Notification permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Notifications permission. iOS-only. */
-"iOS_notificationError1" = "对于任何警报或横幅，徽章号码通知的权限，都需要安全的信息传递。点击%@按钮SafeSlinger通知权限的详细信息。";
+"iOS_notificationError1" = "对于任何警报或横幅和徽章号通知允许，都需要安全的信息传递。点击%@按钮SafeSlinger通知权限的详细信息。";
 /* 'SafeSlinger is not optimized for iOS 5.x devices. SafeSlinger requires iOS 6 or higher.' is an informational message (sentence case, period); message for dialog popups when a user still uses an old iOS device. iOS-only. */
 "iOS_oldOSWarn" = "SafeSlinger并没有为iOS 5.x的设备进行优化。 SafeSlinger需要iOS6或更高系统版本。";
 /* 'Photo Library permission is required to attach pictures to secure messages. Tap the %s button for SafeSlinger Photo Library permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Photo Library permission. iOS-only. */
-"iOS_photolibraryError" = "图片库的权限，需要附上图片，以确保邮件。点击%@按钮SafeSlinger图片库权限的详细信息。";
+"iOS_photolibraryError" = "图片库权限是必需的附加图片，以确保邮件。点击%@按钮SafeSlinger图片库权限的详细信息。";
 /* 'You can select your contact card to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Contacts when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Contacts permission. iOS-only. */
 "iOS_RequestPermissionContacts" = "您可以从手机装置中选择您的联系资料并发送您的朋友，讯息将被SafeSlinger加密保护。要启用此功能，您必须在应用程式询问时允许SafeSlinger存取通讯录隐私权限。";
 /* 'You can record a voice message to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Microphone when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Microphone permission. iOS-only. */
@@ -390,8 +396,8 @@
 "label_hours" = "%d小时";
 /* 'SafeSlinger iCloud is enabled. Tap the Done button when finished.' is a screen label (match English casing); used to indicate the backup will occur while on the Setup screen. iOS-only. */
 "label_iCloudEnable" = "SafeSlinger的iClou备份已启用。";
-/* 'No messages. You may send a message from the Compose tab.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. */
-"label_InstNoMessages" = "没有讯息。您可以发送讯息，从主选单上选择编辑新讯息。";
+/* 'No messages. To send a message, tap on the New Message icon at the top of your screen.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. */
+"label_InstNoMessages" = "没有消息。要发送信息，请点击上的新邮件图标在屏幕的顶部。";
 /* 'To add recipients, you must first Sling Keys with one or more other users at the same time. You may also send a Sling Keys contact invitation from the menu.' is a screen label (match English casing); used to instruct the user how to proceed on the Recipient list screen is case of no recipients. */
 "label_InstNoRecipients" = "要添加收件人，您必须先与一个或多个用户去交换金钥。您也可以从选单中送出金钥交换的邀请讯息。";
 /* 'None of your current recipients match your search query. Please try a different query or invite a new contact.' is a screen label (match English casing); used to inform the user that no recipients match the search query. */
@@ -414,6 +420,8 @@
 "label_LastName" = "姓";
 /* 'Me' is a screen label (match English casing); used on the secure introduction invitation dialog to indicate the one-hop trust relationship between the user (Me); the trusted person, and the new person. */
 "label_Me" = "我";
+/* '(%s has confirmed the key for %s.)' is a screen label (match English casing); used as the automated test text message completing sling keys. %1$s = the name of the sender. %2$s = the name of the recipient. */
+"label_messageAutomatedVerify" = "（%@已经确认键%@。）";
 /* 'I would like to introduce %s to you.' is a screen label (match English casing); used as the text message when sending secure introduction invitations. %s = the name of a person. */
 "label_messageIntroduceNameToYou" = "我想介绍%@给你。";
 /* 'SafeSlinger app: %s' is a screen label (match English casing); used as message text to show a user how to install SafeSlinger. %s = the main installation url for mobile devices */
@@ -422,8 +430,6 @@
 "label_messageInviteSetupInst" = "设置一个安全讯息管道，我们可以透过碰面或打电话给对方并进行一次金钥交换验证。";
 /* 'Can we start secure messaging with the open source SafeSlinger iPhone or Android app?' is a screen label (match English casing); used as message text to invite a contact to begin secure messaging. */
 "label_messageInviteStartMsg" = "可以使用SafeSlinger iPhone或Android程式开始你的安全通讯？";
-/* '%s, you are verified.' is a screen label (match English casing); used as the text message completing sling keys. %s = the name of a recipient. */
-"label_messageYouAreVerified" = "%@，你验证。";
 /* '%d minutes' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole minutes. */
 "label_minutes" = "%d分钟";
 /* 'Mobile' is a screen label (match English casing); used to denote a 'mobile' type of email or phone contact type. iOS-only. */
@@ -499,7 +505,7 @@
 /* 'Show this hint next time.' is a screen label (match English casing); used in the key exchange walkthrough dialog to toggle the display of the walkthrough at the next attempted key exchange. */
 "label_ShowHintAtLaunch" = "下一次显示此提示";
 /* 'Using speech recognition is disabled because it might cause an information leak' is a screen label (match English casing); used to alert the user about possible information leak on the use of speech recognition when the user tries to use this feature */
-"label_SpeechRecognitionAlert" = "使用语音识别被禁用，因为它可能导致信息泄露";
+"label_SpeechRecognitionAlert" = "使用语音识别被禁用，因为它可能会导致信息泄露";
 /* 'Step 1' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
 "label_step_1" = "第1步";
 /* 'Step 2' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
@@ -607,7 +613,7 @@
 /* 'Language' is a menu (title case); used as the settings menu option to change language */
 "menu_language" = "语言";
 /* 'License' is a menu option (title case); used to show a dialog of the End User License Agreement. */
-"menu_License" = "许可";
+"menu_License" = "许可证";
 /* 'Add Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
 "menu_link_contact_add" = "加入收件人联系资讯";
 /* 'Change Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
@@ -715,6 +721,8 @@
 
 /* 'Backup restored.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm backup keys and settings have bee restored on re-install. */
 "state_BackupRestored" = "备份恢复。";
+/* 'Failed to send message. Touch and hold for options.' is an informational message (sentence case, period); used in a message instance to indicate that the message has not been sent to the destination. */
+"state_FailedToSendMessage" = "消息发送失败。触摸并按住选项。";
 /* 'Deleted file %s.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that a file has been deleted. %s = the file name of the deleted file. */
 "state_FileDeleted" = "删除文件%@。";
 /* 'Message sent.' is an informational message (sentence case, period); TODO: This should be deprecated in favor 1 message push to messages tab (single thread) and >1 messages push to messages tab (all threads) with a toast of state_MessagesSent. */
@@ -745,7 +753,7 @@
 /* 'Strong cryptography protects your information' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
 "text_About3" = "透过强健密码系统保护你的个人资讯";
 /* 'SafeSlinger: Speak 3 words and forever chat in peace.' is an application description (sentence case); used in the about box and app store listing to describe the application features. Short form: 80 character max, should be exciting. */
-"text_About_Short" = "SafeSlinger：说出3个字，并在和平永远聊天。";
+"text_About_Short" = "SafeSlinger：讲3个字，并在和平永远聊天。";
 /* 'email: %s' is an application description (sentence case); used in the app store listing, %s = SafeSlinger support email address. */
 "text_AboutEmail" = "电子邮件: %@";
 /* 'Features:' is an application description (sentence case); used in the about box and app store listing to describe the application features. */
@@ -753,7 +761,7 @@
 /* 'web: %s' is an application description (sentence case); used in the app store listing, %s = SafeSlinger project web page address. */
 "text_AboutWeb" = "网页: %@";
 /* 'Developed by:' is an application description (sentence case); used at the end of the about dialog to list the developers of SafeSlinger. */
-"text_DevelopedBy" = "开发者：";
+"text_DevelopedBy" = "开发的：";
 /* 'Exchange' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordExchange" = "交换";
 /* 'Identity' is an application description (sentence case); one of many keywords to use when searching related terms. */
@@ -791,6 +799,8 @@
 "title_ChooseDirectory" = "选择目录";
 /* 'Choose Your Attachment' is a title (title case); used at the top of the menu options when choosing among sources to pick an attachment. */
 "title_ChooseFileLoad" = "选择档案";
+/* 'Clear' is a title (title case); used in the Select File Option menu to clear the current attachment. */
+"title_clear" = "明确";
 /* 'Comments/Questions' is a title (title case); used as the Subject field of an email message for the user to send feedback to developers. Also used as the menu option to start the email. */
 "title_comments" = "评论/问题";
 /* 'Error' is a title (title case); used at the top of the error dialog. */
@@ -809,6 +819,8 @@
 "title_HomePanel" = "首页";
 /* 'Message' is a title (title case); used at the top of the dialog when viewing message details. */
 "title_MessageDetail" = "讯息内容";
+/* 'Message Options' is a title (title case); used at the top of the dialog when viewing message options. */
+"title_MessageOptions" = "邮件选项";
 /* 'Messages' is a title (title case); used at the top of the message list screen. */
 "title_Messages" = "讯息";
 /* 'Personal Contact' is a title (title case); used at the top of a menu when choosing to alter the users' contact: Edit, Create New, or Use Another. */

@@ -30,7 +30,6 @@
 #define DATABASE_TITLE @"safeslinger"
 #define DATABASE_TIMESTR @"yyyy-MM-dd'T'HH:mm:ss'Z'"
 
-
 /**
  Database Tables
     
@@ -99,6 +98,7 @@ typedef enum {
 @property (nonatomic, strong) NSString *lastSeen;
 @property (nonatomic, readwrite) int messagecount;
 @property (nonatomic, readwrite) int ciphercount;
+@property (nonatomic, readwrite) int unreadcount;
 @property (nonatomic, readwrite) BOOL active;
 
 @end
@@ -125,8 +125,9 @@ typedef enum {
 @property (nonatomic, readwrite) int attach;    // has attachment (1) or null (0)
 @property (nonatomic, readwrite) ProtectType sfile;     // encrypted(1) or decrypted(0) file,
 @property (nonatomic, strong) NSString *fname;  // filename
-@property (nonatomic, strong) NSData *fbody;    // file extension, MIME type
-@property (nonatomic, strong) NSString *fext;   // file raw data
+@property (nonatomic, strong) NSData *fbody;    // file raw data
+@property (nonatomic, strong) NSString *fext;   // file extension, MIME type
+@property (nonatomic, readwrite) int unread; // flag that indicates if the message was not read yet
 
 
 -(MsgEntry*)InitOutgoingMsg: (NSData*)newmsgid Recipient:(ContactEntry*)user Message:(NSString*)message FileName:(NSString*)File FileType:(NSString*)MimeType FileData:(NSData*)FileRaw;
@@ -150,7 +151,6 @@ typedef enum {
 }
 
 - (BOOL)PatchForTokenStoreTable;
-- (BOOL)patchForContactsFromAddressBook;
 
 // basic database operation
 - (BOOL)LoadDBFromStorage:(NSString *)specific_path;
@@ -169,6 +169,7 @@ typedef enum {
 // for Message Thread
 - (NSMutableArray *)getConversationThreads;
 - (NSArray *)loadMessagesExchangedWithKeyId:(NSString *)keyId;
+- (BOOL)markAllMessagesAsReadFromKeyId:(NSString *)keyId;
 - (int)ThreadMessageCount:(NSString *)KEYID;
 - (BOOL)DeleteThread:(NSString *)KEYID;
 

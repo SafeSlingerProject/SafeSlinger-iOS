@@ -31,6 +31,8 @@
 #import "Utility.h"
 #import "SetupView.h"
 #import "KeySelectionView.h"
+#import "UniversalDB.h"
+#import "MessageDecryptor.h"
 
 @interface Passphase ()
 
@@ -104,8 +106,12 @@
 - (IBAction)Login:(id)sender {
     if([self CheckPassphase: PassField.text]) {
         error_t = 0;
-        [self performSegueWithIdentifier: @"SwitchToMain" sender:self];
-        
+		
+		if([[NSUserDefaults standardUserDefaults] integerForKey:kAutoDecryptOpt] == TurnOn) {
+			[MessageDecryptor tryToDecryptAll];
+		}
+		
+		[self performSegueWithIdentifier: @"SwitchToMain" sender:self];
     } else {
         [[[[iToast makeText: NSLocalizedString(@"error_couldNotExtractPrivateKey", @"Could not extract private key.")]
            setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];

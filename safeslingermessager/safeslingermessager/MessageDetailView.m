@@ -22,6 +22,8 @@
  * THE SOFTWARE.
  */
 
+#import <MobileCoreServices/UTType.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 #import "MessageDetailView.h"
 #import "AppDelegate.h"
 #import "SafeSlingerDB.h"
@@ -33,28 +35,53 @@
 #import "InvitationView.h"
 #import "MessageView.h"
 
+#define BOTTOM_BAR_HEIGHT_WITHOUT_ATTACHMENT 44
+#define BOTTOM_BAR_HEIGHT_WITH_ATTACHMENT 88
+
+typedef enum {
+	AttachmentStatusEmpty,
+	AttachmentStatusAudio,
+	AttachmentStatusImage
+} AttachmentStatus;
+
+typedef enum {
+	AttachmentTypePhotoLibrary = 0,
+	AttachmentTypePhotosAlbum = 1,
+	AttachmentTypeCamera = 2,
+	AttachmentTypeSoundRecoder = 3,
+	AttachmentTypeClear = 4
+} AttachmentType;
+
 @interface MessageDetailView ()
 
 @property (strong, nonatomic) ContactEntry *recipient;
 @property (strong, nonatomic) NSMutableDictionary *pendingMessages;
 @property (strong, nonatomic) NSIndexPath *longPressedIndexPath;
 
+@property (strong, nonatomic) NSURL *attachedFile;
+@property (strong, nonatomic) NSData *attachedFileRawData;
+@property AttachmentStatus attachmentStatus;
 @end
 
 @implementation MessageDetailView
 
-@synthesize delegate, b_img, thread_img, assignedEntry, OperationLock, InstanceMessage, InstanceBtn, CancelBtn, BackBtn, InstanceBox;
+@synthesize delegate, b_img, thread_img, assignedEntry, OperationLock, CancelBtn, BackBtn;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	_attachmentStatus = AttachmentStatusEmpty;
+	[self updateAttachmentStatus];
     
-    delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
-    BackGroundQueue = dispatch_queue_create("safeslinger.background.queue", NULL);
+    delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    BackGroundQueue = dispatch_queue_create("safeslinger.background.queue", nil);
     b_img = [UIImage imageNamed: @"blank_contact_small.png"];
+	_messageTextField.placeholder = NSLocalizedString(@"label_ComposeHint", nil);
+	_tableView.contentInset = UIEdgeInsetsZero;
 	
-    OperationLock = [[NSLock alloc]init];
+    OperationLock = [NSLock new];
 	
-    _previewer = [[QLPreviewController alloc] init];
+    _previewer = [QLPreviewController new];
     [_previewer setDataSource:self];
     [_previewer setDelegate:self];
     [_previewer setCurrentPreviewItemIndex:0];
@@ -62,12 +89,16 @@
 	_recipient = [delegate.DbInstance loadContactEntryWithKeyId:assignedEntry.keyid];
 	_pendingMessages = [NSMutableDictionary new];
 	
-    //for unknown thread
-    if(_recipient == nil || (_recipient.firstName == nil && _recipient.lastName == nil)) {
+    //for unknown thread or contact not active
+    if(_recipient == nil || (_recipient.firstName == nil && _recipient.lastName == nil) || !assignedEntry.active) {
         DEBUGMSG(@"UNDEFINED thread...");
-        [InstanceBox setHidden:YES];
-    } else {
-        [InstanceBox setHidden:NO];
+		_bottomBarHeightConstraint.constant = 0;
+		_bottomBarView.hidden = YES;
+		_attachmentButton.hidden = YES;
+	} else {
+		_bottomBarHeightConstraint.constant = BOTTOM_BAR_HEIGHT_WITHOUT_ATTACHMENT;
+		_bottomBarView.hidden = NO;
+		_attachmentButton.hidden = NO;
     }
 	
 	thread_img = [_recipient.photo length] > 0 ? [[UIImage imageWithData:_recipient.photo] scaleToSize:CGSizeMake(45.0f, 45.0f)] : nil;
@@ -77,15 +108,6 @@
                                                  style:UIBarButtonItemStyleDone
                                                 target:self
                                                 action:@selector(DismissKeyboard)];
-	
-	// hides textfield if this contact is not active
-	if(assignedEntry.active) {
-		[InstanceMessage setPlaceholder:NSLocalizedString(@"label_ComposeHint", @"Compose Message")];
-		[InstanceBtn setTitle: NSLocalizedString(@"title_SendFile", @"Send") forState: UIControlStateNormal];
-	} else {
-		[self.tableView.tableFooterView removeFromSuperview];
-		self.tableView.tableFooterView = nil;
-	}
 	
 	UILongPressGestureRecognizer *gestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
 	gestureRecognizer.delegate = self;
@@ -101,14 +123,75 @@
 	}
 	
 	if(assignedEntry.ciphercount == 0) {
-		self.navigationItem.title = [NSString stringWithFormat:@"%@ %d", displayName, assignedEntry.messagecount];
+		self.navigationItem.title = [NSString stringWithFormat:@"%@ %lu", displayName, (unsigned long)[self.messages count]];
 	} else {
-		self.navigationItem.title = [NSString stringWithFormat:@"%@ %d (%d)", displayName, assignedEntry.ciphercount+assignedEntry.messagecount, assignedEntry.ciphercount];
+		self.navigationItem.title = [NSString stringWithFormat:@"%@ %lu (%d)", displayName, (unsigned long)[self.messages count], assignedEntry.ciphercount];
 	}
 }
 
+- (void)updateAttachmentStatus {
+	switch (_attachmentStatus) {
+		case AttachmentStatusEmpty:
+			[_attachmentButton setImage:[UIImage imageNamed:@"attachment_add"] forState:UIControlStateNormal];
+			[_sendButton setImage:[UIImage imageNamed:@"send"] forState:UIControlStateNormal];
+			
+			_attachmentFileThumbnailImageView.image = nil;
+			
+			[self hideAttachmentDetailsView];
+			break;
+			
+		case AttachmentStatusAudio: {
+			[_attachmentButton setImage:[UIImage imageNamed:@"attachment_audio"] forState:UIControlStateNormal];
+			[_sendButton setImage:[UIImage imageNamed:@"send_attachment"] forState:UIControlStateNormal];
+			
+			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+				UIImage *thumbnail = [UIImage imageNamed:@"microphone_icon"];
+				
+				dispatch_async(dispatch_get_main_queue(), ^{
+					_attachmentFileThumbnailImageView.image = thumbnail;
+				});
+			});
+			
+			[self showAttachmentDetailsView];
+			break;
+		}
+			
+		case AttachmentStatusImage: {
+			[_attachmentButton setImage:[UIImage imageNamed:@"attachment_image"] forState:UIControlStateNormal];
+			[_sendButton setImage:[UIImage imageNamed:@"send_attachment"] forState:UIControlStateNormal];
+			
+			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+				UIImage *thumbnail = [UIImage imageWithData:_attachedFileRawData];
+				
+				dispatch_async(dispatch_get_main_queue(), ^{
+					_attachmentFileThumbnailImageView.image = thumbnail;
+				});
+			});
+			
+			[self showAttachmentDetailsView];
+			break;
+		}
+	}
+}
+
+- (void)showAttachmentDetailsView {
+	_attachmentDetailsView.hidden = NO;
+	_bottomBarHeightConstraint.constant = BOTTOM_BAR_HEIGHT_WITH_ATTACHMENT;
+	
+	NSString *fileNameLabel = [NSString stringWithFormat:@"%@ (%.0fKb)", [_attachedFile lastPathComponent], _attachedFileRawData.length/1024.0f];
+	
+	[_attachmentFileNameButton setTitle:fileNameLabel forState:UIControlStateNormal];
+}
+
+- (void)hideAttachmentDetailsView {
+	_attachmentDetailsView.hidden = YES;
+	_bottomBarHeightConstraint.constant = BOTTOM_BAR_HEIGHT_WITHOUT_ATTACHMENT;
+	
+	_attachmentFileNameButton.titleLabel.text = @"";
+}
+
 - (void)DismissKeyboard {
-    [InstanceMessage resignFirstResponder];
+    [_messageTextField resignFirstResponder];
 }
 
 - (void)scrollToBottom {
@@ -126,6 +209,8 @@
     [self.messages addObjectsFromArray:cipherMessages];
 	assignedEntry.ciphercount = (int)cipherMessages.count;
 	
+	[delegate.DbInstance markAllMessagesAsReadFromKeyId:assignedEntry.keyid];
+	
 	MsgEntry *outgoingMessage = delegate.messageSender.outgoingMessage;
 	if([outgoingMessage.keyid isEqualToString:assignedEntry.keyid]) {
 		[self.messages addObject:outgoingMessage];
@@ -133,8 +218,8 @@
 	
 	assignedEntry.messagecount = (int)self.messages.count;
 	
+    [self updateTitle];
     [self.tableView reloadData];
-	
 	[self scrollToBottom];
 }
 
@@ -148,56 +233,71 @@
     [super viewWillAppear:animated];
 	
 	delegate.MessageInBox.notificationDelegate = self;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardDidShow:)
-                                                 name:UIKeyboardDidShowNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide:)
-                                                 name:UIKeyboardWillHideNotification
+	[self registerForInputNotifications];
+	
+	[self reloadTable];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+	delegate.MessageInBox.notificationDelegate = nil;
+	[self unregisterForInputNotifications];
+	
+    [super viewWillDisappear:animated];
+}
+
+- (void)registerForInputNotifications {
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(keyboardWillShow:)
+												 name:UIKeyboardWillShowNotification
+											   object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(keyboardWillHide:)
+												 name:UIKeyboardWillHideNotification
 											   object:nil];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(inputModeDidChange:)
 												 name:@"UITextInputCurrentInputModeDidChangeNotification"
 											   object:nil];
-	
-	[self reloadTable];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillShowNotification
-                                                  object:nil];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillHideNotification
+- (void)unregisterForInputNotifications {
+	[[NSNotificationCenter defaultCenter] removeObserver:self
+													name:UIKeyboardWillShowNotification
+												  object:nil];
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self
+													name:UIKeyboardWillHideNotification
 												  object:nil];
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self
 													name:@"UITextInputCurrentInputModeDidChangeNotification"
 												  object:nil];
-	
-	delegate.MessageInBox.notificationDelegate = nil;
-	
-    [super viewWillDisappear:animated];
 }
 
-- (void)keyboardDidShow:(NSNotification *)notification {
-    // adjust view due to keyboard
-    if(floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        CGFloat keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
-        CGFloat offset = self.tableView.contentSize.height + InstanceBox.frame.size.height + keyboardSize - self.view.frame.size.height;
-        if(offset>0) {
-            [self.tableView setContentOffset:CGPointMake(0.0, offset) animated:YES];
-        }
-    }
+- (void)keyboardWillShow:(NSNotification *)notification {
+	// adjust view due to keyboard
+	CGFloat keyboardSize = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
+	NSTimeInterval animationDuration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+	
+	[self.view layoutIfNeeded];
+	_bottomBarBottomSpaceConstraint.constant = keyboardSize;
+	[UIView animateWithDuration:animationDuration
+					 animations:^{
+						 [self.view layoutIfNeeded];
+					 }];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-    
+	NSTimeInterval animationDuration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+	
+	[self.view layoutIfNeeded];
+	_bottomBarBottomSpaceConstraint.constant = 0;
+	[UIView animateWithDuration:animationDuration
+					 animations:^{
+						 [self.view layoutIfNeeded];
+					 }];
 }
 
 - (void)inputModeDidChange:(NSNotification *)notification {
@@ -206,36 +306,19 @@
 	NSString *modeIdentifier = [inputMode respondsToSelector:@selector(identifier)] ? (NSString *)[inputMode performSelector:@selector(identifier)] : nil;
 	
 	if([modeIdentifier isEqualToString:@"dictation"]) {
-		[UIView setAnimationsEnabled:NO];
-		[[NSNotificationCenter defaultCenter] removeObserver:self
-														name:UIKeyboardDidShowNotification
-													  object:nil];
-		
-		[[NSNotificationCenter defaultCenter] removeObserver:self
-														name:UIKeyboardWillHideNotification
-													  object:nil];
-		
 		// hide the keyboard and show again to cancel dictation
-		[InstanceMessage resignFirstResponder];
-		[InstanceMessage becomeFirstResponder];
-		
+		[UIView setAnimationsEnabled:NO];
+		[self unregisterForInputNotifications];
+		[_messageTextField resignFirstResponder];
+		[_messageTextField becomeFirstResponder];
+		[self registerForInputNotifications];
 		[UIView setAnimationsEnabled:YES];
-		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(keyboardDidShow:)
-													 name:UIKeyboardDidShowNotification
-												   object:nil];
 		
-		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(keyboardWillHide:)
-													 name:UIKeyboardWillHideNotification
-												   object:nil];
-		
-		UIAlertView *denyAlert = [[UIAlertView alloc] initWithTitle:nil
-															message:NSLocalizedString(@"label_SpeechRecognitionAlert", nil)
-														   delegate:nil
-												  cancelButtonTitle:NSLocalizedString(@"btn_OK", nil)
-												  otherButtonTitles:nil];
-		[denyAlert show];
+		[[[UIAlertView alloc] initWithTitle:nil
+									message:NSLocalizedString(@"label_SpeechRecognitionAlert", nil)
+								   delegate:nil
+						  cancelButtonTitle:NSLocalizedString(@"btn_OK", nil)
+						  otherButtonTitles:nil] show];
 	}
 }
 
@@ -249,20 +332,15 @@
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    assignedEntry.messagecount = [delegate.DbInstance ThreadMessageCount:assignedEntry.keyid];
-    assignedEntry.ciphercount = [delegate.UDbInstance ThreadCipherCount:assignedEntry.keyid];
-	
-	[self updateTitle];
-	
     return [self.messages count];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if([self.messages count]==0)
+	if([self.messages count] == 0) {
         return NSLocalizedString(@"label_InstNoMessages", @"No messages. You may send a message from tapping the 'Compose Message' Button in Home Menu.");
-    else
+	} else {
         return @"";
+	}
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -310,6 +388,12 @@
             [[[[iToast makeText: NSLocalizedString(@"error_UnableToUpdateMessageInDB", @"Unable to update the message database.")]
                setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
         }
+        
+        // when no message left, go back to thread view
+        if([self.messages count]==0)
+            [self.navigationController popViewControllerAnimated:YES];
+        else
+            [self updateTitle];
     }
 }
 
@@ -417,13 +501,11 @@
     if([assignedEntry.keyid isEqualToString:@"UNDEFINED"])
         return;
     
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath: indexPath];
-    MsgEntry* entry = [self.messages objectAtIndex:indexPath.row];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    MsgEntry* entry = self.messages[indexPath.row];
     
-    if(entry.smsg == Encrypted)
-    {
-        if([self.tableView cellForRowAtIndexPath:indexPath].tag!=-1&&[OperationLock tryLock])
-        {
+    if(entry.smsg == Encrypted) {
+        if(cell.tag != -1 && [OperationLock tryLock]) {
             cell.detailTextLabel.text = NSLocalizedString(@"prog_decrypting", @"decrypting...");
             dispatch_async(BackGroundQueue, ^(void) {
                 [self DecryptMessage: entry WithIndex: indexPath];
@@ -505,11 +587,10 @@
 		
 		if(buttonIndex == 1) {
 			// retry
-			
 			[CATransaction begin];
 			[CATransaction setCompletionBlock:^{
 				// animation has finished
-				[self.tableView scrollRectToVisible:InstanceBox.frame animated:YES];
+				[self scrollToBottom];
 			}];
 			
 			[self.tableView beginUpdates];
@@ -819,27 +900,32 @@
 }
 
 - (IBAction)sendshortmsg:(id)sender {
-	if(InstanceMessage.text == nil || InstanceMessage.text.length == 0) {
+	if((_messageTextField.text == nil || _messageTextField.text.length == 0) && !_attachedFile) {
 		return;
 	}
 	
-	[self sendTextMessage:InstanceMessage.text tableViewUpdateStarted:NO];
+	[self sendTextMessage:_messageTextField.text tableViewUpdateStarted:NO];
 }
 
 - (void)sendTextMessage:(NSString *)text tableViewUpdateStarted:(BOOL)updateStarted {
-	NSMutableData *pktdata = [[NSMutableData alloc]initWithCapacity:0];
-	NSData *messageId = [SSEngine BuildCipher:_recipient.keyId Message:[text dataUsingEncoding:NSUTF8StringEncoding] Attach:nil RawFile:nil MIMETYPE:nil Cipher:pktdata];
+	NSMutableData *pktdata = [NSMutableData new];
+	
+	// get file type in MIME format
+	CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension,(__bridge CFStringRef)[[_attachedFile lastPathComponent] pathExtension], NULL);
+	NSString* mimeType = (__bridge NSString*)UTTypeCopyPreferredTagWithClass(UTI, kUTTagClassMIMEType);
+	
+	NSData *messageId = [SSEngine BuildCipher:_recipient.keyId Message:[text dataUsingEncoding:NSUTF8StringEncoding] Attach:[_attachedFile lastPathComponent]	RawFile:_attachedFileRawData MIMETYPE:mimeType Cipher:pktdata];
 	
 	MsgEntry *newMessage = [[MsgEntry alloc]
 							InitOutgoingMsg:messageId
 							Recipient:_recipient
 							Message:text
-							FileName:nil
-							FileType:nil
-							FileData:nil];
+							FileName:[_attachedFile lastPathComponent]
+							FileType:mimeType
+							FileData:_attachedFileRawData];
 	newMessage.outgoingStatus = MessageOutgoingStatusSending;
 	
-	InstanceMessage.text = @"";
+	_messageTextField.text = @"";
 	
 	[self.messages addObject:newMessage];
 	
@@ -847,7 +933,7 @@
 		[CATransaction begin];
 		[CATransaction setCompletionBlock:^{
 			// animation has finished
-			[self.tableView scrollRectToVisible:InstanceBox.frame animated:YES];
+			[self scrollToBottom];
 		}];
 		
 		[self.tableView beginUpdates];
@@ -861,9 +947,77 @@
 	
 	delegate.messageSender.delegate = self;
 	[delegate.messageSender sendMessage:newMessage packetData:pktdata];
+	
+	_attachedFile = nil;
+	_attachedFileRawData = nil;
+	_attachmentStatus = AttachmentStatusEmpty;
+	[self updateAttachmentStatus];
+}
+
+- (BOOL)CheckPhotoPermission {
+	BOOL ret = NO;
+	ALAuthorizationStatus authStatus = [ALAssetsLibrary authorizationStatus];
+	if(authStatus == ALAuthorizationStatusNotDetermined) {
+		ret = YES; // wait to trigger it
+	} else if(authStatus == ALAuthorizationStatusRestricted || authStatus == ALAuthorizationStatusDenied) {
+		// show indicator
+		NSString* buttontitle = nil;
+		NSString* description = nil;
+		
+		if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+			buttontitle = NSLocalizedString(@"menu_Help", nil);
+			description = [NSString stringWithFormat: NSLocalizedString(@"iOS_photolibraryError", nil), buttontitle];
+		} else {
+			buttontitle = NSLocalizedString(@"menu_Settings", nil);
+			description = [NSString stringWithFormat: NSLocalizedString(@"iOS_photolibraryError", nil), buttontitle];
+		}
+		
+		UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", nil)
+														  message: description
+														 delegate: self
+												cancelButtonTitle: NSLocalizedString(@"btn_Cancel", nil)
+												otherButtonTitles: buttontitle, nil];
+		message.tag = HelpPhotoLibrary;
+		[message show];
+		message = nil;
+	} else if(authStatus == ALAuthorizationStatusAuthorized){
+		ret = YES;
+	}
+	return ret;
+}
+
+- (BOOL)CheckCameraPermission {
+	AVCaptureDevice *inputDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+	AVCaptureDeviceInput *captureInput = [AVCaptureDeviceInput deviceInputWithDevice:inputDevice error:nil];
+	if (!captureInput) {
+		// show indicator
+		NSString* buttontitle = nil;
+		NSString* description = nil;
+		
+		if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+			buttontitle = NSLocalizedString(@"menu_Help", nil);
+			description = [NSString stringWithFormat: NSLocalizedString(@"iOS_cameraError", nil), buttontitle];
+		} else {
+			buttontitle = NSLocalizedString(@"menu_Settings", nil);
+			description = [NSString stringWithFormat: NSLocalizedString(@"iOS_cameraError", nil), buttontitle];
+		}
+		
+		UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", nil)
+														  message: description
+														 delegate: self
+												cancelButtonTitle: NSLocalizedString(@"btn_Cancel", nil)
+												otherButtonTitles: buttontitle, nil];
+		message.tag = HelpCamera;
+		[message show];
+		message = nil;
+		return NO;
+	} else {
+		return YES;
+	}
 }
 
 #pragma UITextFieldDelegate Methods
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     self.navigationItem.leftBarButtonItem = CancelBtn;
 }
@@ -889,10 +1043,14 @@
         view.InviterFaceImg = thread_img;
         view.InviterName = [NSString humanreadable: [delegate.DbInstance QueryStringInTokenTableByKeyID: assignedEntry.keyid Field:@"pid"]];
         view.InviteeVCard = _tRecord;
-    }
+	} else if([segue.identifier isEqualToString:@"AudioRecordSegue"]) {
+		AudioRecordView *destination = (AudioRecordView *)segue.destinationViewController;
+		destination.delegate = self;
+	}
 }
 
 #pragma mark - MessageReceiverNotificationDelegate methods
+
 - (void)messageReceived {
 	NSUInteger count = self.messages.count;
 	[self reloadTable];
@@ -906,11 +1064,11 @@
 }
 
 #pragma mark - MessageSenderDelegate methods
-
 - (void)updatedOutgoingStatusForMessage:(MsgEntry *)message {
 	int i = (int)self.messages.count - 1;
 	BOOL found = NO;
 	
+	// go backwards through the messages
 	while(i >= 0 && !found) {
 		MsgEntry *entry = self.messages[i];
 		if([entry.msgid isEqualToData:message.msgid]) {
@@ -919,13 +1077,165 @@
 			[self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:i inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
 			found = YES;
 		}
+		i--;
 	}
 	
 	if(!found) {
 		[self.messages addObject:message];
-		
 		[self reloadTable];
+    }else{
+        [self updateTitle];
+    }
+}
+
+#pragma mark - AudioRecordDelegate methods
+
+- (void)recordedAudioInURL:(NSURL *)audioURL {
+	NSData *rawData = [NSData dataWithContentsOfURL:audioURL];
+	
+	if([rawData length] == 0) {
+		[[[[iToast makeText: NSLocalizedString(@"error_CannotSendEmptyFile", @"Cannot send an empty file.")]
+		   setGravity:iToastGravityCenter] setDuration:iToastDurationShort] show];
+	} else if([_attachedFileRawData length] > 9437184) {
+		NSString *msg = [NSString stringWithFormat: NSLocalizedString(@"error_CannotSendFilesOver", @"Cannot send attachments greater than %d bytes in size."), 9437184];
+		[[[[iToast makeText: msg]
+		   setGravity:iToastGravityCenter] setDuration:iToastDurationShort] show];
+	} else {
+		_attachedFile = audioURL;
+		_attachedFileRawData = rawData;
+		_attachmentStatus = AttachmentStatusAudio;
+		[self updateAttachmentStatus];
 	}
+}
+
+#pragma mark - IBAction methods
+
+- (IBAction)selectAttachment:(id)sender {
+	UIActionSheet *actionSheet = [[UIActionSheet alloc]
+								  initWithTitle: NSLocalizedString(@"title_ChooseFileLoad", @"Choose Your File")
+								  delegate: self
+								  cancelButtonTitle: nil
+								  destructiveButtonTitle: nil
+								  otherButtonTitles:
+								  NSLocalizedString(@"title_photolibary", @"Photo Library"),
+								  NSLocalizedString(@"title_photoalbum", @"Photo Album"),
+								  NSLocalizedString(@"title_camera", @"Camera"),
+								  NSLocalizedString(@"title_soundrecoder", @"Sound Recorder"),
+								  nil];
+	
+	if(_attachmentStatus != AttachmentStatusEmpty) {
+		[actionSheet setDestructiveButtonIndex:[actionSheet addButtonWithTitle:NSLocalizedString(@"title_clear", nil)]]; 
+	}
+	
+	[actionSheet setCancelButtonIndex:[actionSheet addButtonWithTitle:NSLocalizedString(@"btn_Cancel", @"Cancel")]];
+	[actionSheet showInView:[self.navigationController view]];
+}
+
+- (IBAction)unwindToMessageDetailView:(UIStoryboardSegue *)unwindSegue {
+	
+}
+
+#pragma mark - UIActionSheetDelegate methods
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+	if(buttonIndex == actionSheet.cancelButtonIndex) {
+		return;
+	}
+	
+	[self dismissViewControllerAnimated:NO completion:nil];
+	
+	switch (buttonIndex) {
+		case AttachmentTypePhotoLibrary:
+			if([self CheckPhotoPermission]) {
+				UIImagePickerController *imagePicker = [UIImagePickerController new];
+				imagePicker.delegate = self;
+				imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+				imagePicker.allowsEditing = YES;
+				[self presentViewController:imagePicker animated:YES completion:nil];
+			}
+			
+			break;
+			
+		case AttachmentTypePhotosAlbum:
+			if([self CheckPhotoPermission]) {
+				UIImagePickerController *imagePicker = [UIImagePickerController new];
+				imagePicker.delegate = self;
+				imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+				imagePicker.allowsEditing = YES;
+				[self presentViewController:imagePicker animated:YES completion:nil];
+			}
+			
+			break;
+			
+		case AttachmentTypeCamera:
+			if([self CheckCameraPermission]) {
+				UIImagePickerController *imagePicker = [UIImagePickerController new];
+				imagePicker.delegate = self;
+				imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+				imagePicker.showsCameraControls = YES;
+				imagePicker.allowsEditing = YES;
+				[self presentViewController:imagePicker animated:YES completion:nil];
+			}
+			
+			break;
+			
+		case AttachmentTypeSoundRecoder:
+			[self performSegueWithIdentifier:@"AudioRecordSegue" sender:self];
+			break;
+			
+		case AttachmentTypeClear:
+			_attachedFile = nil;
+			_attachedFileRawData = nil;
+			_attachmentStatus = AttachmentStatusEmpty;
+			[self updateAttachmentStatus];
+			break;
+			
+	}
+}
+
+#pragma mark - UIImagePickerControllerDelegate methods
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+	[self dismissViewControllerAnimated:YES completion:nil];
+	
+	[info valueForKey:UIImagePickerControllerReferenceURL];
+	NSURL *urlstr = [info valueForKey:UIImagePickerControllerReferenceURL];
+	NSData *imgdata = UIImageJPEGRepresentation([info valueForKey:UIImagePickerControllerOriginalImage], 1.0);
+	
+	if(!imgdata.length) {
+		[[[[iToast makeText: NSLocalizedString(@"error_CannotSendEmptyFile", @"Cannot send an empty file.")]
+		   setGravity:iToastGravityCenter] setDuration:iToastDurationShort] show];
+		return;
+	} else if(imgdata.length > 9437184) {
+		NSString *msg = [NSString stringWithFormat: NSLocalizedString(@"error_CannotSendFilesOver", "Cannot send attachments greater than %d bytes in size."), 9437184];
+		[[[[iToast makeText: msg]
+		   setGravity:iToastGravityCenter] setDuration:iToastDurationShort] show];
+		return;
+	}
+	
+	NSString *filename = nil;
+	
+	if(!urlstr) {
+		DEBUGMSG(@"camera file");
+		NSDateFormatter *format = [[NSDateFormatter alloc] init];
+		[format setDateFormat:@"yyyyMMdd-HHmmss"];
+		NSDate *now = [[NSDate alloc] init];
+		NSString *dateString = [format stringFromDate:now];
+		filename = [NSString stringWithFormat:@"cam-%@.jpg", dateString];
+	} else {
+		// has id
+		NSRange range, idrange;
+		range = [[urlstr absoluteString] rangeOfString:@"id="];
+		idrange.location = range.location+range.length;
+		range = [[urlstr absoluteString] rangeOfString:@"&ext="];
+		idrange.length = range.location - idrange.location;
+		filename = [NSString stringWithFormat:@"%@.%@", [[urlstr absoluteString]substringWithRange:idrange], [[urlstr absoluteString]substringFromIndex:range.location+range.length]];
+	}
+	
+	_attachedFile = [NSURL URLWithString:filename];
+	_attachedFileRawData = imgdata;
+	_attachmentStatus = AttachmentStatusImage;
+	[self updateAttachmentStatus];
 }
 
 @end

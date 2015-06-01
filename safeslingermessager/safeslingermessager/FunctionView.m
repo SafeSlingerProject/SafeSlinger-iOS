@@ -51,8 +51,6 @@
     
     UITabBarItem *item = [self.viewControllers objectAtIndex: MESSAGES_VIEW_CONTROLLER_INDEX];
     [item setTitle: NSLocalizedString(@"menu_TagListMessages", @"Messages")];
-    item = [self.viewControllers objectAtIndex: COMPOSE_VIEW_CONTROLLER_INDEX];
-    [item setTitle: NSLocalizedString(@"menu_TagComposeMessage", @"Compose")];
     item = [self.viewControllers objectAtIndex: SLING_KEYS_VIEW_CONTROLLER_INDEX];
     [item setTitle: NSLocalizedString(@"menu_TagExchange", @"Sling Keys")];
     item = [self.viewControllers objectAtIndex: INTRODUCTION_VIEW_CONTROLLER_INDEX];
@@ -80,17 +78,16 @@
     [self registerDeviceInfo];
 }
 
-- (void)registerDeviceInfo
-{
+- (void)registerDeviceInfo {
     RegistrationHandler *handler = [[RegistrationHandler alloc]init];
     NSString* hex_token = [[NSUserDefaults standardUserDefaults] stringForKey: kPUSH_TOKEN];
     int ver = [(AppDelegate*)[[UIApplication sharedApplication]delegate]getVersionNumberByInt];
+    NSString* pass_cache = [(AppDelegate*)[[UIApplication sharedApplication]delegate]tempralPINCode];
     NSString* hex_subtoken = [SSEngine getSelfSubmissionToken];
     NSString* hex_keyid = [SSEngine getSelfKeyID];
     
-    if(hex_token && hex_subtoken && hex_keyid)
-    {
-        [handler registerToken: hex_subtoken DeviceHex: hex_token KeyHex: hex_keyid ClientVer: ver];
+    if(hex_token && hex_subtoken && hex_keyid) {
+        [handler registerToken: hex_subtoken DeviceHex: hex_token KeyHex: hex_keyid ClientVer: ver PassphraseCache:pass_cache];
     }
 }
 

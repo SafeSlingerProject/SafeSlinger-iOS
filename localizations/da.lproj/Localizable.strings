@@ -1,7 +1,7 @@
 /*
     The MIT License (MIT)
     
-    Copyright (c) 2010-2014 Carnegie Mellon University
+    Copyright (c) 2010-2015 Carnegie Mellon University
     
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
@@ -53,6 +53,8 @@
 "btn_Continue" = "Fortsætte";
 /* 'Create New Key' is a button (title case); the Create New Key button is paired with the Cancel button, and is used to affirm the creation of a new key and passphrase. */
 "btn_CreateNewKey" = "Opret ny nøgle";
+/* 'Delete' is a button (title case); the Delete button is used to affirm the deletion of more a message. */
+"btn_Delete" = "Slet";
 /* 'Delete Keys' is a button (title case); the Create New Key button is paired with the Cancel button, and is used to affirm the deletion of more recent keys. */
 "btn_DeleteKeys" = "Delete";
 /* 'Discard' is a button (title case); the Discard button is used to indicate the user wishes to exit the current screen without saving data, such as a voice memo. For non-Android use only, since Android uses the Back hardware button instead. */
@@ -83,6 +85,8 @@
 "btn_Refuse" = "Nægte";
 /* 'Remind' is a button (title case); the Remind button is paired with the Forget button and is used to indicate the user wishes to dismiss the current reminder of a potential error state, such as having backup or notification settings turned off, and does want to be reminded again later. */
 "btn_Remind" = "Mind";
+/* 'Retry' is a button (title case); the Retry button is used to retry sending a message that has failed. */
+"btn_Retry" = "Prøv igen";
 /* 'Save' is a button (title case); the Save button is used to indicate the data in question should be saved and persisted. */
 "btn_Save" = "Gem";
 /* 'Add Attachment' is a button (title case); the Add Attachment button is used on the Compose screen to allow the user to select the source of an attachment to the current message. */
@@ -167,6 +171,8 @@
 "error_C2DMRegInvalidSender" = "Tilmelding er ikke tilgængelig for denne version, skal du kontrollere, om en opdateret version.";
 /* 'Incorrect device registration with Google. This device does not currently support push messaging.' is an error message (sentence case, period); used to warn during push registration: Incorrect phone registration with Google. This phone doesn't currently support C2DM. Android-only. */
 "error_C2DMRegPhoneRegistrationError" = "Forkert registrering enhed med Google. Denne enhed understøtter i øjeblikket ikke skubbe messaging.";
+/* 'Google Play Services is required to receive messages. Please install Google Play Services to continue.' is an error message (sentence case, period); used to warn during push registration: There is no Google Play Services on the phone. The application should ask the user to install Play Services. Fix on the device side. Android-only. */
+"error_C2DMRegPlayServicesMissing" = "Google Play Services er forpligtet til at modtage beskeder. Du skal installere Google Play Services til at fortsætte.";
 /* 'Push registration service not available, scheduling retry in %d seconds.' is an error message (sentence case, period); used to warn during push registration: The device can't read the response, or there was a 500/503 from the server that can be retried later. The application should use exponential back off and retry. %d = the current number of seconds until the next push registration attempt. Android-only. */
 "error_C2DMRegServiceNotAvailable" = "Push registrering ikke tilgængelig, planlægning igen om %d sekunder.";
 /* 'Too many applications are registered for Push. Please uninstall some other applications and retry.' is an error message (sentence case, period); used to warn during push registration: The user has too many applications registered. The application should tell the user to uninstall some other applications, let user retry manually. Fix on the device side. Android-only. */
@@ -250,7 +256,7 @@
 /* 'Message expired.' is an error message (sentence case, period); used to warn when getting messages, the message id cannot be found and it has likely been scrubbed from the server. */
 "error_PushMsgMessageNotFound" = "Besked udløbet.";
 /* 'The message is too big. Reduce the size of the message.' is an error message (sentence case, period); used to warn when sending messages to device and the initial push exceeds 1024 bytes. Unlikely, since the initial push only contains the message hash identifier, which is 32 bytes plus a bit more of meta data. */
-"error_PushMsgMessageTooBig" = "Budskabet er for stor. Reducer størrelsen af meddelelsen.";
+"error_PushMsgMessageTooBig" = "Budskabet er for stor. Reducer størrelsen af ​​meddelelsen.";
 /* 'That recipient's push registration is no longer valid. The recipient may have uninstalled SafeSlinger or turned off notifications. You should stop sending messages to this device.' is an error message (sentence case, period); used to warn when sending messages to device and the recipient is no longer registered. */
 "error_PushMsgNotRegistered" = "Denne modtagerens skubbe registrering ikke længere er gyldig. Modtageren kan have afinstalleret SafeSlinger eller slukket underretninger. Du bør stoppe med at sende beskeder til denne enhed.";
 /* 'There was an error communicating with the push notification service.' is an error message (sentence case, period); used to warn when sending messages to device and the push service replies incorrect HTTP status code. */
@@ -390,12 +396,12 @@
 "label_hours" = "%d timer";
 /* 'SafeSlinger iCloud is enabled. Tap the Done button when finished.' is a screen label (match English casing); used to indicate the backup will occur while on the Setup screen. iOS-only. */
 "label_iCloudEnable" = "SafeSlinger iCloud er aktiveret. Tryk på knappen Udført, når du er færdig.";
-/* 'No messages. You may send a message from the Compose tab.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. */
-"label_InstNoMessages" = "Ingen beskeder. Du kan sende en besked fra fanen Compose.";
+/* 'No messages. To send a message, tap on the New Message icon at the top of your screen.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. */
+"label_InstNoMessages" = "Ingen beskeder. Hvis du vil sende en besked, skal du trykke på ikonet Ny meddelelse øverst på skærmen.";
 /* 'To add recipients, you must first Sling Keys with one or more other users at the same time. You may also send a Sling Keys contact invitation from the menu.' is a screen label (match English casing); used to instruct the user how to proceed on the Recipient list screen is case of no recipients. */
 "label_InstNoRecipients" = "Hvis du vil tilføje modtagere, skal du først Sling Keys med en eller flere andre brugere på samme tid. Du kan også sende en slynge Keys kontakt invitation fra menuen.";
 /* 'None of your current recipients match your search query. Please try a different query or invite a new contact.' is a screen label (match English casing); used to inform the user that no recipients match the search query. */
-"label_InstNoRecipientsMatchQuery" = "Ingen af dine nuværende modtagere matcher din søgning. Prøv en anden forespørgsel eller invitere en ny kontakt.";
+"label_InstNoRecipientsMatchQuery" = "Ingen af ​​dine nuværende modtagere matcher din søgning. Prøv en anden forespørgsel eller invitere en ny kontakt.";
 /* 'No shared file. Connect your device with iTunes and drag files to the shared folder.' is a screen label (match English casing); used to instruct the user how to proceed on the Shared Files screen is case of no files to share. iOS-only. */
 "label_InstNoSharedFile" = "Ingen delt fil. Tilslut din enhed med iTunes og trække filer til delte mappe.";
 /* 'Pick a recipient to send a message to:' is a screen label (match English casing); used to instruct the user how to proceed on the Pick Recipients list screen. */
@@ -414,6 +420,8 @@
 "label_LastName" = "Efternavn";
 /* 'Me' is a screen label (match English casing); used on the secure introduction invitation dialog to indicate the one-hop trust relationship between the user (Me); the trusted person, and the new person. */
 "label_Me" = "Mig";
+/* '(%s has confirmed the key for %s.)' is a screen label (match English casing); used as the automated test text message completing sling keys. %1$s = the name of the sender. %2$s = the name of the recipient. */
+"label_messageAutomatedVerify" = "(%@ har bekræftet nøgle til %@.)";
 /* 'I would like to introduce %s to you.' is a screen label (match English casing); used as the text message when sending secure introduction invitations. %s = the name of a person. */
 "label_messageIntroduceNameToYou" = "Jeg vil gerne introducere %@ til dig.";
 /* 'SafeSlinger app: %s' is a screen label (match English casing); used as message text to show a user how to install SafeSlinger. %s = the main installation url for mobile devices */
@@ -422,8 +430,6 @@
 "label_messageInviteSetupInst" = "At sætte en sikker messaging-forbindelse, kan vi mødes eller telefon hinanden på samme tid, og derefter Sling Keys bare én gang for at kontrollere forbindelsen.";
 /* 'Can we start secure messaging with the open source SafeSlinger iPhone or Android app?' is a screen label (match English casing); used as message text to invite a contact to begin secure messaging. */
 "label_messageInviteStartMsg" = "Kan vi begynde sikker messaging med open source SafeSlinger iPhone eller Android app?";
-/* '%s, you are verified.' is a screen label (match English casing); used as the text message completing sling keys. %s = the name of a recipient. */
-"label_messageYouAreVerified" = "%@, er du verificeret.";
 /* '%d minutes' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole minutes. */
 "label_minutes" = "%d minutter";
 /* 'Mobile' is a screen label (match English casing); used to denote a 'mobile' type of email or phone contact type. iOS-only. */
@@ -715,6 +721,8 @@
 
 /* 'Backup restored.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm backup keys and settings have bee restored on re-install. */
 "state_BackupRestored" = "Backup genoprettet.";
+/* 'Failed to send message. Touch and hold for options.' is an informational message (sentence case, period); used in a message instance to indicate that the message has not been sent to the destination. */
+"state_FailedToSendMessage" = "Kunne ikke sende beskeden. Tryk og hold for indstillinger.";
 /* 'Deleted file %s.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that a file has been deleted. %s = the file name of the deleted file. */
 "state_FileDeleted" = "Slettet fil %@.";
 /* 'Message sent.' is an informational message (sentence case, period); TODO: This should be deprecated in favor 1 message push to messages tab (single thread) and >1 messages push to messages tab (all threads) with a toast of state_MessagesSent. */
@@ -791,6 +799,8 @@
 "title_ChooseDirectory" = "Vælg firmavejviser";
 /* 'Choose Your Attachment' is a title (title case); used at the top of the menu options when choosing among sources to pick an attachment. */
 "title_ChooseFileLoad" = "Vælg din Attachment";
+/* 'Clear' is a title (title case); used in the Select File Option menu to clear the current attachment. */
+"title_clear" = "Ryd";
 /* 'Comments/Questions' is a title (title case); used as the Subject field of an email message for the user to send feedback to developers. Also used as the menu option to start the email. */
 "title_comments" = "Kommentar/Spørgsmål";
 /* 'Error' is a title (title case); used at the top of the error dialog. */
@@ -809,6 +819,8 @@
 "title_HomePanel" = "Hjem";
 /* 'Message' is a title (title case); used at the top of the dialog when viewing message details. */
 "title_MessageDetail" = "Besked";
+/* 'Message Options' is a title (title case); used at the top of the dialog when viewing message options. */
+"title_MessageOptions" = "Meddelelsesindstillinger";
 /* 'Messages' is a title (title case); used at the top of the message list screen. */
 "title_Messages" = "Meddelelser";
 /* 'Personal Contact' is a title (title case); used at the top of a menu when choosing to alter the users' contact: Edit, Create New, or Use Another. */

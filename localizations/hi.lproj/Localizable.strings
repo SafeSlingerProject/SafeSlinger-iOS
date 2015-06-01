@@ -1,7 +1,7 @@
 /*
     The MIT License (MIT)
     
-    Copyright (c) 2010-2014 Carnegie Mellon University
+    Copyright (c) 2010-2015 Carnegie Mellon University
     
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
@@ -53,6 +53,8 @@
 "btn_Continue" = "जारी रखें";
 /* 'Create New Key' is a button (title case); the Create New Key button is paired with the Cancel button, and is used to affirm the creation of a new key and passphrase. */
 "btn_CreateNewKey" = "नई कुंजी बनाएँ";
+/* 'Delete' is a button (title case); the Delete button is used to affirm the deletion of more a message. */
+"btn_Delete" = "हटाना";
 /* 'Delete Keys' is a button (title case); the Create New Key button is paired with the Cancel button, and is used to affirm the deletion of more recent keys. */
 "btn_DeleteKeys" = "कुंजी हटाएँ";
 /* 'Discard' is a button (title case); the Discard button is used to indicate the user wishes to exit the current screen without saving data, such as a voice memo. For non-Android use only, since Android uses the Back hardware button instead. */
@@ -83,19 +85,21 @@
 "btn_Refuse" = "इनकार";
 /* 'Remind' is a button (title case); the Remind button is paired with the Forget button and is used to indicate the user wishes to dismiss the current reminder of a potential error state, such as having backup or notification settings turned off, and does want to be reminded again later. */
 "btn_Remind" = "याद दिलाना";
+/* 'Retry' is a button (title case); the Retry button is used to retry sending a message that has failed. */
+"btn_Retry" = "पुन: प्रयास करें";
 /* 'Save' is a button (title case); the Save button is used to indicate the data in question should be saved and persisted. */
 "btn_Save" = "सेव";
 /* 'Add Attachment' is a button (title case); the Add Attachment button is used on the Compose screen to allow the user to select the source of an attachment to the current message. */
-"btn_SelectFile" = "अनुलग्नक जोड़ें";
+"btn_SelectFile" = "संलग्न करें";
 /* 'Send' is a button (title case); the Send button will secure the current text message and attachment, if any, and send the message to the selected recipient. */
 "btn_SendFile" = "भेजो";
 /* 'Yes' is a button (title case); the Yes button is paired with the No button, and is used to indicate an affirmative answer to a Yes/No question. */
 "btn_Yes" = "हाँ";
 
 /* '10 minutes' is a choice (sentence case); used to set the password timeout to 10 minutes. */
-"choice_10mins" = "10 मिनट";
+"choice_10mins" = "10 मिनटों";
 /* '1 hour' is a choice (sentence case); used to set the password timeout to 1 hour. */
-"choice_1hour" = "1 घंटे";
+"choice_1hour" = "1 घंटा";
 /* '1 minute' is a choice (sentence case); used to set the password timeout to 1 minute. */
 "choice_1min" = "1 मिनट";
 /* '20 minutes' is a choice (sentence case); used to set the password timeout to 20 minutes. */
@@ -107,7 +111,7 @@
 /* '40 minutes' is a choice (sentence case); used to set the password timeout to 40 minutes. */
 "choice_40mins" = "40 मिनट";
 /* '4 hours' is a choice (sentence case); used to set the password timeout to 4 hours. */
-"choice_4hours" = "4 घंटे";
+"choice_4hours" = "चार घंटे";
 /* '5 minutes' is a choice (sentence case); used to set the password timeout to 5 minutes. */
 "choice_5mins" = "5 मिनट";
 /* '8 hours' is a choice (sentence case); used to set the password timeout to 8 hours. */
@@ -127,7 +131,7 @@
 /* 'Small' is a choice (sentence case); used in the settings to choose a small font size. */
 "choice_font_small" = "छोटा";
 /* 'Internal Storage' is a choice (sentence case); used to set the attachment root path to an internal source. Android-only. */
-"choice_internal_storage" = "आंतरिक भंडारण";
+"choice_internal_storage" = "आंतरिक स्टोरेज";
 /* 'No Limit' is a choice (sentence case); used to remove the timeout for the password. */
 "choice_nolimit" = "कोई सीमा नहीं";
 /* '%d users' is a choice (sentence case); used to describe the number of users currently attempting to exchange keys. %d = number of users in the exchange. */
@@ -135,7 +139,7 @@
 /* 'Save Directory' is a choice (sentence case); used when the user chooses to change the directory of the attachment before saving. */
 "choice_SaveDirectory" = "सहेजें निर्देशिका";
 /* 'Save file' is a choice (sentence case); used when the user chooses to change the filename of the attachment before saving. */
-"choice_SaveFile" = "फ़ाइल सहेजें";
+"choice_SaveFile" = "फाइल सुरक्षित करें";
 /* 'Up' is a choice (sentence case); used in the File Manager dialog to navigate up to a parent directory. */
 "choice_Up" = "ऊपर";
 
@@ -167,6 +171,8 @@
 "error_C2DMRegInvalidSender" = "पंजीकरण इस संस्करण के लिए उपलब्ध नहीं है, एक अद्यतन संस्करण के लिए जांच करें।";
 /* 'Incorrect device registration with Google. This device does not currently support push messaging.' is an error message (sentence case, period); used to warn during push registration: Incorrect phone registration with Google. This phone doesn't currently support C2DM. Android-only. */
 "error_C2DMRegPhoneRegistrationError" = "गूगल के साथ गलत डिवाइस पंजीकरण। यह डिवाइस वर्तमान में धक्का मैसेजिंग का समर्थन नहीं करता।";
+/* 'Google Play Services is required to receive messages. Please install Google Play Services to continue.' is an error message (sentence case, period); used to warn during push registration: There is no Google Play Services on the phone. The application should ask the user to install Play Services. Fix on the device side. Android-only. */
+"error_C2DMRegPlayServicesMissing" = "Google Play सेवाओं के संदेश प्राप्त करने के लिए आवश्यक है। गूगल जारी रखने के लिए सेवा खेलो स्थापित करें।";
 /* 'Push registration service not available, scheduling retry in %d seconds.' is an error message (sentence case, period); used to warn during push registration: The device can't read the response, or there was a 500/503 from the server that can be retried later. The application should use exponential back off and retry. %d = the current number of seconds until the next push registration attempt. Android-only. */
 "error_C2DMRegServiceNotAvailable" = "पुश पंजीकरण सेवा उपलब्ध नहीं, निर्धारण %d सेकंड में पुन: प्रयास करें।";
 /* 'Too many applications are registered for Push. Please uninstall some other applications and retry.' is an error message (sentence case, period); used to warn during push registration: The user has too many applications registered. The application should tell the user to uninstall some other applications, let user retry manually. Fix on the device side. Android-only. */
@@ -212,13 +218,13 @@
 /* 'Bad message format.' is an error message (sentence case, period); used to warn when the outgoing message was not formatted properly. */
 "error_InvalidMsg" = "बुरा संदेश स्वरूप।";
 /* 'Invalid recipient.' is an error message (sentence case, period); used to warn when the user has not selected 1 recipient to send a message on the Compose Message screen, also when the user has not selected 2 recipients to send introductions to on the Secure Introduction screen. */
-"error_InvalidRecipient" = "अमान्य प्राप्तकर्ता।";
+"error_InvalidRecipient" = "अवैध प्राप्तकर्ता।";
 /* 'You have reported a difference in phrases. Begin the exchange again.' is an error message (sentence case, period); used to warn when the user presses the 'No Match' button that they are aborting the protocol for the group and sending a non-match signature to others. */
 "error_LocalGroupCommitDiffer" = "आप वाक्यांशों में एक अंतर की सूचना है। फिर से आदान-प्रदान शुरू करो।";
 /* 'The peer key format is invalid.' is an error message (sentence case, period); used to warn when the public key we used for this recipient does not exist or is improperly formatted. */
 "error_MessageInvalidPeerKeyFormat" = "सहकर्मी कुंजी प्रारूप अवैध है।";
 /* 'Signature verification failed.' is an error message (sentence case, period); used to warn when key used to generate an incoming message signature is not in the key database. */
-"error_MessageSignatureVerificationFails" = "हस्ताक्षर सत्यापन में विफल रहा है।";
+"error_MessageSignatureVerificationFails" = "हस्ताक्षर सत्यापन विफल रहा।";
 /* 'Passphrases require at least %d characters.' is an error message (sentence case, period); used to warn when a user has setup a passphrase, which does not fit the minimum required length. %d = current requirement is at least 8 characters. */
 "error_minPassphraseRequire" = "पासफ्रेज का कम से कम %d पात्रों की आवश्यकता होती है।";
 /* 'A minimum of %d members are required to exchange data.' is an error message (sentence case, period); used to warn when attempting to leave the Group Size screen without choosing a group size. %d = the minimum number of users to complete the exchange protocol, 2 usually. */
@@ -375,7 +381,7 @@
 /* 'expires %s' is a screen label (match English casing); used on the message list to show how much time is left to download an attachment. %s = a time measurement, such as 'in 5 minutes' or 'in 2 hours'. Android-only. */
 "label_expires" = "%@ की समय सीमा समाप्त";
 /* 'expires in' is a screen label (match English casing); used on the message list to show how much time is left to download an attachment; a time measurement, such as '5 minutes' or '2 hours' will be appended to this string. iOS-only. */
-"label_expiresIn" = "में समाप्त हो रहा है";
+"label_expiresIn" = "में समाप्त होगा";
 /* 'File Name' is a screen label (match English casing); used on the Save File As dialog as a hint in the file name text box when changing the file name. */
 "label_FileNameHint" = "फ़ाइल का नाम";
 /* 'Enter your name and a passphrase to protect your data:' is a screen label (match English casing); used to instruct the user how to proceed on the Setup screen. */
@@ -390,8 +396,8 @@
 "label_hours" = "%d घंटे";
 /* 'SafeSlinger iCloud is enabled. Tap the Done button when finished.' is a screen label (match English casing); used to indicate the backup will occur while on the Setup screen. iOS-only. */
 "label_iCloudEnable" = "SafeSlinger iCloud सक्षम है। जब समाप्त हो गया बटन टैप करें।";
-/* 'No messages. You may send a message from the Compose tab.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. */
-"label_InstNoMessages" = "कोई संदेश नहीं। आप लिखें टैब से एक संदेश भेज सकते हैं।";
+/* 'No messages. To send a message, tap on the New Message icon at the top of your screen.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. */
+"label_InstNoMessages" = "कोई संदेश नहीं। अपनी स्क्रीन के शीर्ष पर स्थित नया संदेश आइकन पर एक संदेश है, नल भेजने के लिए।";
 /* 'To add recipients, you must first Sling Keys with one or more other users at the same time. You may also send a Sling Keys contact invitation from the menu.' is a screen label (match English casing); used to instruct the user how to proceed on the Recipient list screen is case of no recipients. */
 "label_InstNoRecipients" = "प्राप्तकर्ताओं को जोड़ने के लिए, तुम चाहिए पहले गोफन कुंजी एक ही समय में एक या एक से अधिक अन्य उपयोगकर्ताओं के साथ। तुम भी मेनू से एक गोफन कुंजी संपर्क निमंत्रण भेज सकते हैं।";
 /* 'None of your current recipients match your search query. Please try a different query or invite a new contact.' is a screen label (match English casing); used to inform the user that no recipients match the search query. */
@@ -411,9 +417,11 @@
 /* 'Key:' is a screen label (match English casing); used to prefix the key generation date in the Recipients list and on the Compose Message screen. */
 "label_Key" = "कुंजी:";
 /* 'Last Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current last name to use. iOS-only. */
-"label_LastName" = "अंतिम नाम";
+"label_LastName" = "उपनाम";
 /* 'Me' is a screen label (match English casing); used on the secure introduction invitation dialog to indicate the one-hop trust relationship between the user (Me); the trusted person, and the new person. */
 "label_Me" = "मुझसे";
+/* '(%s has confirmed the key for %s.)' is a screen label (match English casing); used as the automated test text message completing sling keys. %1$s = the name of the sender. %2$s = the name of the recipient. */
+"label_messageAutomatedVerify" = "(%@ %@ के लिए चाबी की पुष्टि की है।)";
 /* 'I would like to introduce %s to you.' is a screen label (match English casing); used as the text message when sending secure introduction invitations. %s = the name of a person. */
 "label_messageIntroduceNameToYou" = "मैं तुम्हें करने के लिए %@ शुरू करना चाहते हैं।";
 /* 'SafeSlinger app: %s' is a screen label (match English casing); used as message text to show a user how to install SafeSlinger. %s = the main installation url for mobile devices */
@@ -422,8 +430,6 @@
 "label_messageInviteSetupInst" = "एक सुरक्षित संदेश कनेक्शन सेटअप करने के लिए, हम कनेक्शन सत्यापित करने के लिए सिर्फ एक बार फिर गोफन कुंजी मिलने या फोन एक दूसरे को एक ही समय में, और कर सकते हैं।";
 /* 'Can we start secure messaging with the open source SafeSlinger iPhone or Android app?' is a screen label (match English casing); used as message text to invite a contact to begin secure messaging. */
 "label_messageInviteStartMsg" = "हम खुले स्रोत SafeSlinger iPhone या Android app के साथ सुरक्षित संदेश शुरू कर सकते हैं?";
-/* '%s, you are verified.' is a screen label (match English casing); used as the text message completing sling keys. %s = the name of a recipient. */
-"label_messageYouAreVerified" = "%@, आप सत्यापित कर रहे हैं।";
 /* '%d minutes' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole minutes. */
 "label_minutes" = "%d मिनट";
 /* 'Mobile' is a screen label (match English casing); used to denote a 'mobile' type of email or phone contact type. iOS-only. */
@@ -459,7 +465,7 @@
 /* 'Passphrase cached' is a screen label (match English casing); used in the notification window when a passphrase has been cached. Android-only. */
 "label_PassPhraseIsCached" = "पदबंध कैश्ड";
 /* 'phone-only' is a screen label (match English casing); used to indicate the local, non-synchronized contacts account type on the phone when picking a Save Account. */
-"label_phoneOnly" = "फोन केवल";
+"label_phoneOnly" = "केवल दूरभाष";
 /* 'Photo' is a screen label (match English casing); used on the Begin Exchange screen to toggle sending the users' photo during the exchange. */
 "label_Photo" = "तस्वीर";
 /* 'This number is used to create a unique group of users. Compare, and then enter the lowest number among all users.' is a screen label (match English casing); used to instruct the user how to proceed on the Grouping screen. */
@@ -501,7 +507,7 @@
 /* 'Using speech recognition is disabled because it might cause an information leak' is a screen label (match English casing); used to alert the user about possible information leak on the use of speech recognition when the user tries to use this feature */
 "label_SpeechRecognitionAlert" = "यह एक सूचना रिसाव के कारण हो सकता है क्योंकि वाक् पहचान का उपयोग करना अक्षम किया गया है";
 /* 'Step 1' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
-"label_step_1" = "चरण 1";
+"label_step_1" = "स्टेप 1";
 /* 'Step 2' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
 "label_step_2" = "चरण 2";
 /* 'Step 3' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
@@ -581,23 +587,23 @@
 /* 'Text from Contacts' is a menu option (title case); used when adding a contact invitaion via sms. */
 "menu_ContactInviteSms" = "संपर्कों से पाठ";
 /* 'Create New' is a menu option (title case); used to show a new empty contact in the address book for editing as the users' current identity via the Personal Contact dialog. */
-"menu_CreateNew" = "नई बनाएँ";
+"menu_CreateNew" = "नया निर्माण";
 /* 'Delete' is a menu option (title case); used to delete the current item from the list context menu. */
 "menu_delete" = "हटाना";
 /* 'Delete Thread %s' is a menu option (title case); used to delete all messages from this person via the message list context menu. %s = the name of a person. */
 "menu_deleteThread" = "थ्रेड %@ हटाएं";
 /* 'View Detail' is a menu option (title case); used to show a dialog of more detail about the item via the message list context menu. */
-"menu_Details" = "देखें विस्तार से";
+"menu_Details" = "विस्तार से देखें";
 /* 'Download Directory' is a choice (sentence case); used when the user chooses to change the directory of the attachment before saving. */
 "menu_DownloadDirectory" = "डाउनलोड निर्देशिका";
 /* 'Edit' is a menu option (title case); used to provide a generic edit menu option. */
 "menu_Edit" = "संपादित";
 /* 'Edit Contact' is a menu option (title case); used to show the users' current contact in the address book for editing via the Personal Contact dialog. */
-"menu_EditContact" = "संपादित करें संपर्क";
+"menu_EditContact" = "संपादित संपर्क";
 /* 'Edit Name' is a menu option (title case); used to show the Settings dialog to change the preferred name. */
-"menu_EditName" = "संपादित नाम";
+"menu_EditName" = "नाम संपादित करें";
 /* 'File Manager' is a menu option (title case); used to show a custom file system navigation menu via the Choose Your File dialog. Android-only. */
-"menu_FileManager" = "फ़ाइल प्रबंधक";
+"menu_FileManager" = "फ़ाइल मैनेजर";
 /* 'Forgot Passphrase?' is a menu option (title case); used on the passphrase screen to show users how to generate a new key after forgetting the passphrase that protects the old one. */
 "menu_ForgotPassphrase" = "पदबंध भूल गए?";
 /* 'Help' is a menu option (title case); used to show a help dialog for the current screen. */
@@ -613,13 +619,13 @@
 /* 'Change Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
 "menu_link_contact_change" = "बदले संपर्क लिंक";
 /* 'Logout' is a menu option (title case); used to remove the cached passphrase and force the user to login again. */
-"menu_Logout" = "लॉगआउट";
+"menu_Logout" = "लॉग आउट";
 /* 'Manage Passphrases' is a menu option (title case); used on the settings screen to allow users to remove newer keys if created by users without orignial user authorization. */
 "menu_ManagePassphrases" = "पासफ्रेज प्रबंधित";
 /* 'Message Font Size' is a menu (title case); used as the settings menu option to change message font size */
 "menu_message_font_size" = "संदेश फ़ॉन्ट का आकार";
 /* 'Copy Text' is a menu option (title case); used to copy the message text into the clipboard via the message list context menu. */
-"menu_messageCopyText" = "कॉपी पाठ";
+"menu_messageCopyText" = "पाठ कॉपी करें";
 /* 'Forward' is a menu option (title case); used to create a new message with the same text message/attachment via the message list context menu. */
 "menu_messageForward" = "आगे";
 /* 'Privacy Policy' is a menu option (title case); used to show a dialog of the Privacy Policy. */
@@ -627,19 +633,19 @@
 /* 'Remove' is a menu option (title case); used to remove the currently selected file attachment via the File Options dialog. */
 "menu_Remove" = "हटा";
 /* 'Restore Default Settings' is a menu option (title case); used as Settings screen menu item for restoring all settings to default */
-"menu_restore_default" = "डिफ़ॉल्ट सेटिंग पुनर्स्थापित";
+"menu_restore_default" = "डिफ़ॉल्ट सेटिंग्स को पुनर्स्थापित करें";
 /* 'Sound' is a menu option (title case); used as Settings item for entering ringtone selection screen */
 "menu_ringtone" = "ध्वनि";
 /* 'Add Contact Invitation' is a menu option (title case); used to send an email or text message containing an installation link for SafeSlinger. */
 "menu_SelectShareApp" = "संपर्क निमंत्रण जोड़ें";
 /* 'Send Feedback' is a menu option (title case); used to send an email with support data for feedback. */
-"menu_sendFeedback" = "फ़ीडबैक भेजें";
+"menu_sendFeedback" = "प्रतिक्रिया भेजें";
 /* 'Send Update' is a menu option (title case); used to send a credential update via the recipient list context menu. */
 "menu_SendUpdate" = "अद्यतन भेजें";
 /* 'Settings' is a menu option (title case); used to show the settings screen. */
 "menu_Settings" = "सेटिंग्स";
 /* 'Show Tutorial' is a menu option (title case); used to toggle the key exchange walkthrough when exchanging keys via the Settings screen. */
-"menu_ShowTutorial" = "दिखाएँ ट्यूटोरियल";
+"menu_ShowTutorial" = "टूटोरियल्स दिखाना";
 /* 'Compose' is a menu option (title case); used at the title of the message composition tab for the home tab view. */
 "menu_TagComposeMessage" = "लिखना";
 /* 'Sling Keys' is a menu option (title case); used as the title of the key exchange tab for the home tab view. */
@@ -715,10 +721,12 @@
 
 /* 'Backup restored.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm backup keys and settings have bee restored on re-install. */
 "state_BackupRestored" = "बैकअप से बहाल।";
+/* 'Failed to send message. Touch and hold for options.' is an informational message (sentence case, period); used in a message instance to indicate that the message has not been sent to the destination. */
+"state_FailedToSendMessage" = "संदेश भेजने में विफल। टच और विकल्पों के लिए पकड़।";
 /* 'Deleted file %s.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that a file has been deleted. %s = the file name of the deleted file. */
 "state_FileDeleted" = "नष्ट कर दिया फ़ाइल %@।";
 /* 'Message sent.' is an informational message (sentence case, period); TODO: This should be deprecated in favor 1 message push to messages tab (single thread) and >1 messages push to messages tab (all threads) with a toast of state_MessagesSent. */
-"state_FileSent" = "संदेश भेजा है।";
+"state_FileSent" = "संदेश भेजा गया।";
 /* 'Invitation added.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the addition of a contact invitation. */
 "state_InvitationAdded" = "निमंत्रण गयी।";
 /* 'Message saved as draft.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that an un-sent message has been saved. */
@@ -771,7 +779,7 @@
 /* 'translate: %s' is an application description (sentence case); used in the app store listing, %s = SafeSlinger project localization repo. */
 "text_LocalizationRepo" = "अनुवाद करें: %@";
 /* 'Related Terms:' is an application description (sentence case); used in the app store listing to list related search terms to help users looking for secure key exchange and messaging. */
-"text_RelatedSearchTerms" = "संबंधित नियम:";
+"text_RelatedSearchTerms" = "संबंधित शर्तें:";
 /* 'Requirements:' is an application description (sentence case); used in the about box and app store listing to enumerate requirements. */
 "text_Requirements" = "आवश्यकताएँ:";
 /* 'Must be installed on a minimum of 2 devices.' is an application description (sentence case); used in the about box and app store listing to enumerate requirements. */
@@ -791,6 +799,8 @@
 "title_ChooseDirectory" = "निर्देशिका चुनें";
 /* 'Choose Your Attachment' is a title (title case); used at the top of the menu options when choosing among sources to pick an attachment. */
 "title_ChooseFileLoad" = "अपने लगाव चुनें";
+/* 'Clear' is a title (title case); used in the Select File Option menu to clear the current attachment. */
+"title_clear" = "साफ";
 /* 'Comments/Questions' is a title (title case); used as the Subject field of an email message for the user to send feedback to developers. Also used as the menu option to start the email. */
 "title_comments" = "टिप्पणियाँ/प्रश्न";
 /* 'Error' is a title (title case); used at the top of the error dialog. */
@@ -809,6 +819,8 @@
 "title_HomePanel" = "होम";
 /* 'Message' is a title (title case); used at the top of the dialog when viewing message details. */
 "title_MessageDetail" = "संदेश";
+/* 'Message Options' is a title (title case); used at the top of the dialog when viewing message options. */
+"title_MessageOptions" = "संदेश विकल्प";
 /* 'Messages' is a title (title case); used at the top of the message list screen. */
 "title_Messages" = "संदेश";
 /* 'Personal Contact' is a title (title case); used at the top of a menu when choosing to alter the users' contact: Edit, Create New, or Use Another. */
@@ -820,9 +832,9 @@
 /* 'Passphrase' is a title (title case); used at the top of the passphrase screen where user will login. */
 "title_passphrase" = "पदबंध";
 /* 'Photo Album' is a menu option (title case); used in the Select File Option menu to select a picture from the photo album on iOS. */
-"title_photoalbum" = "फोटो एल्बम";
+"title_photoalbum" = "फोटो एलबम";
 /* 'Photo Library' is a menu option (title case); used in the Select File Option menu to create a picture from the photo library on iOS. */
-"title_photolibary" = "फोटो लाइब्रेरी";
+"title_photolibary" = "चित्र पुस्तकालय";
 /* 'Recipients' is a title (title case); used at the top of the recipient list screen. */
 "title_PickRecipient" = "प्राप्तकर्ता";
 /* 'Question' is a title (title case); used at the top question yes/no dialog. */

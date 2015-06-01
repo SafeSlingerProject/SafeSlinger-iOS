@@ -48,7 +48,6 @@
 #define ENCKEYSIZE 2048
 #define SIGNKEYSIZE 1024
 #define EXPONENT 65537
-#define ENTROPY_BLOCK_SIZE 64
 
 @implementation SSEngine
 
@@ -57,7 +56,7 @@
     char* keyid[128];
     memset(keyid, 0, 128);
     unsigned char *bytePtr = (unsigned char *)[packet bytes];
-    memcpy(keyid, bytePtr, 88);
+    memcpy(keyid, bytePtr, LENGTH_KEYID);
     return [NSString stringWithCString: (const char*)keyid encoding:NSASCIIStringEncoding];
 }
 
@@ -141,7 +140,7 @@
 +(NSString*)getSelfSubmissionToken
 {
     // compute on the fly
-    return [Base64 encode:[sha3 Keccak256Digest:[self getPrivateKey:SIGN_PRI]]];
+    return [Base64 encode:[sha3 Keccak256Digest:[self getPubKey: SIGN_PUB]]];
 }
 
 +(NSString*)getSelfGenKeyDate
@@ -260,13 +259,13 @@
     return keysize;
 }
 
-+(NSData*)GenRandomAESKey
++(NSData*)GenRandomBytes:(int)len_bytes
 {
-    unsigned char buf[ENTROPY_BLOCK_SIZE];
-    int err = SecRandomCopyBytes(kSecRandomDefault, ENTROPY_BLOCK_SIZE, buf);
+    unsigned char buf[len_bytes];
+    int err = SecRandomCopyBytes(kSecRandomDefault, len_bytes, buf);
     if(err == noErr)
     {
-        return [[NSData alloc] initWithBytes:buf length:ENTROPY_BLOCK_SIZE];
+        return [[NSData alloc] initWithBytes:buf length:len_bytes];
     }else{
         return nil;
     }
@@ -809,7 +808,7 @@
     NSMutableData* pubEncData = [NSMutableData dataWithCapacity:0];
     
     // prepare symmetric cipher first
-    NSData* skey = [self GenRandomAESKey];
+    NSData* skey = [self GenRandomBytes: 64];
     // Encrypt UTF8 Data
     NSData* mcipher = [self AESEncrypt:plain  withAESKey:skey];
     
@@ -1054,7 +1053,7 @@
     //E4: Token_length, UAirship token string
     len = htonl([token length]);
     [cipher appendBytes: &len length: 4];
-    //E5: Token, UAirship token string
+    //E5: Token, push token
     [cipher appendBytes: [token cStringUsingEncoding: NSASCIIStringEncoding] length: [token length]];
     //E6: Message len
     len = htonl([encryptMsg length]);

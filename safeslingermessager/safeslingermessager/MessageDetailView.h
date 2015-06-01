@@ -28,13 +28,13 @@
 #import <dispatch/dispatch.h>
 #import "MessageReceiver.h"
 #import "MessageSender.h"
+#import "AudioRecordView.h"
 
 @class MsgListEntry;
 @class AppDelegate;
 @class MessageView;
 
-@interface MessageDetailView : UITableViewController <QLPreviewControllerDataSource, QLPreviewControllerDelegate, UIGestureRecognizerDelegate, UITextFieldDelegate, MessageReceiverNotificationDelegate, MessageSenderDelegate, UIAlertViewDelegate>
-{
+@interface MessageDetailView : UIViewController <UITableViewDataSource, UITabBarDelegate, QLPreviewControllerDataSource, QLPreviewControllerDelegate, UIGestureRecognizerDelegate, UITextFieldDelegate, MessageReceiverNotificationDelegate, MessageSenderDelegate, AudioRecordDelegate, UIAlertViewDelegate, UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
     // For Grand Central Dispatch
     dispatch_queue_t BackGroundQueue;
     AppDelegate *delegate;
@@ -49,9 +49,22 @@
 @property (nonatomic, strong) UIImage *thread_img;
 @property (nonatomic, strong) MsgListEntry *assignedEntry;
 @property (nonatomic, strong) NSLock *OperationLock;
-@property (nonatomic, strong) IBOutlet UITextField *InstanceMessage;
-@property (nonatomic, strong) IBOutlet UIButton *InstanceBtn;
-@property (nonatomic, strong) IBOutlet UIView *InstanceBox;
+
+@property (strong, nonatomic) IBOutlet UIButton *attachmentButton;
+
+@property (strong, nonatomic) IBOutlet UIView *bottomBarView;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *bottomBarHeightConstraint;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *bottomBarBottomSpaceConstraint;
+@property (nonatomic, strong) IBOutlet UITextField *messageTextField;
+@property (nonatomic, strong) IBOutlet UIButton *sendButton;
+
+@property (strong, nonatomic) IBOutlet UIView *attachmentDetailsView;
+@property (strong, nonatomic) IBOutlet UIButton *attachmentFileNameButton;
+@property (strong, nonatomic) IBOutlet UIImageView *attachmentFileThumbnailImageView;
+
+
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+
 @property (nonatomic, strong) UIBarButtonItem *CancelBtn;
 @property (nonatomic, strong) UIBarButtonItem *BackBtn;
 @property (nonatomic) ABRecordRef tRecord;

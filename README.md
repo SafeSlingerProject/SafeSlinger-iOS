@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Travis CI Build Status
 
 [![Build Status](https://travis-ci.org/SafeSlingerProject/SafeSlinger-iOS.svg?branch=master)](https://travis-ci.org/SafeSlingerProject/SafeSlinger-iOS)
@@ -5,27 +6,26 @@ Travis CI Build Status
 SafeSlinger iOS Client
 ===================
 The open source SafeSlinger Exchange library is a secure and easy to use method of exchanging public keys or other authentication data, with strong protection from Man-In-The-Middle (MITM) attacks. Our goal is to make exchanging public keys as simple as possible without sacrificing security. Our [research paper](http://sparrow.ece.cmu.edu/group/pub/farb_safeslinger_mobicom2013.pdf), presented at MobiCom '13, provides a technical analysis of SafeSlinger's key exchange properties.
+=======
+[![Build Status](https://travis-ci.org/SafeSlingerProject/SafeSlinger-iOS.png?branch=master)](https://travis-ci.org/SafeSlingerProject/SafeSlinger-iOS)
+>>>>>>> v1.8.2
 
-Library Features:
+Quick Links:
+[Downloads](https://github.com/SafeSlingerProject/SafeSlinger-Media/wiki/Platforms),
+[Wiki](https://github.com/SafeSlingerProject/SafeSlinger-Media/wiki),
+[Support, Translations, Contributing](https://github.com/SafeSlingerProject/SafeSlinger-Media/wiki/Contributing),
+[Research Paper](http://sparrow.ece.cmu.edu/group/pub/farb_safeslinger_mobicom2013.pdf),
+[Project Website](http://www.cylab.cmu.edu/safeslinger)
 
-- Open source makes security audits easy.
-- The only secure simultaneous key exchange for up to 10 people.
-- Easy to implement and use.
-- Cross-platform Android and iOS.
-- Protection from Man-In-The-Middle attacks during key exchanges.
-- Exchange keys either in person or remote.
-
-The SafeSlinger secure key exchange is implemented cross-platform for [Android](http://github.com/SafeSlingerProject/SafeSlinger-Android) and [iOS](http://github.com/SafeSlingerProject/SafeSlinger-iOS) devices. Keys are exchanged using a simple server implementation on [App Engine](http://github.com/SafeSlingerProject/SafeSlinger-AppEngine).
-
-Repository iOS Projects
+SafeSlinger iOS Client Projects
 =======
 
-- **/safeslingerexchange** contains the library project you can add to your own iOS applications. Both the safeslinger-demo and safeslinger-messenger application projects utilize this library to execute the exchange.
-- **/safeslingerdemo** contains the simple [SafeSlinger Exchange Developer application](https://itunes.apple.com/app/safeslinger-exchange-for-developers/id909442873) project which shows the minimum requirements to run a safeslinger secure exchange.
-- **/safeslingermessenger** contains the full application project source for the [SafeSlinger Messenger](http://itunes.apple.com/app/safeslinger/id493529867) application. This project is a very rich implementation of a safeslinger secure exchange if you want an example of how to use the exchange to verify public keys in your own applications.
-- **/localizations** contains localization support used in iOS platform.
-- **/openssl-ios** contains the complied [OpenSSL](http://www.openssl.org) library.
-- **/sha3-ios-binary** contains only the Keccak portions of the [sphlib 3.0](http://www.saphir2.com/sphlib) library.
+- **/safeslingerexchange** Contains the library project you can add to your own iOS applications. Both the safeslinger-demo and safeslinger-messenger application projects utilize this library to execute the exchange.
+- **/safeslingerdemo** Contains the simple [SafeSlinger Exchange Developer application](https://itunes.apple.com/app/safeslinger-exchange-for-developers/id909442873) project which shows the minimum requirements to run a safeslinger secure exchange.
+- **/safeslingermessenger** Contains the full application project source for the [SafeSlinger Messenger](http://itunes.apple.com/app/safeslinger/id493529867) application. This project is a very rich implementation of a safeslinger secure exchange if you want an example of how to use the exchange to verify public keys in your own applications.
+- **/localizations** Contains localization support used in iOS platform.
+- **/openssl-ios** Contains the complied [OpenSSL](http://www.openssl.org) library.
+- **/sha3-ios-binary** Contains only the Keccak portions of the [sphlib 3.0](http://www.saphir2.com/sphlib) library.
 
 Running the Developer's App on Xcode
 ========
@@ -37,7 +37,7 @@ Developer's App Requirements:
 3. 'Server Host Name' can be your own server, OR use ours: `https://slinger-dev.appspot.com`
 4. 'My Secret' can be any information.
 
-![Developer's App Main Screen](https://www.andrew.cmu.edu/user/tenma/ios_help/github/demo-1.png)
+![Developer's App Main Screen](https://www.dropbox.com/s/thhmk3nb2twi2js/demo-1.png?raw=1)
 
 To execute SafeSlinger Exchange Developer app using Xcode and iPhone simulator:
 
@@ -53,27 +53,27 @@ Add Secure Exchange to your iOS App
 
 - Add the safeslingerexchange project as a subproject into your project.
 
-![AddLibrary1](https://www.andrew.cmu.edu/user/tenma/ios_help/github/addlibrary-1.png)
+![AddLibrary1](https://www.dropbox.com/s/mfl16i7c4ut2f3n/addlibrary-1.png?raw=1)
 
 - Add **-ObjC** to *Other Linker Flags* in your target settings.
 
-![AddLibrary2](https://www.andrew.cmu.edu/user/tenma/ios_help/github/addlibrary-2.png)
+![AddLibrary2](https://www.dropbox.com/s/8yxa0xr4cs96xty/addlibrary-2.png?raw=1)
 
 - Add the compiled static library **libsafeslingerexchange.a** to link to the library in your project.
 
-![AddLibrary3](https://www.andrew.cmu.edu/user/tenma/ios_help/github/addlibrary-3.png)
+![AddLibrary3](https://www.dropbox.com/s/p3x2l86aopfg4t4/addlibrary-3.png?raw=1)
 
 - Drag the **exchangeui** bundle from the safeslingerexchange subproject to your Bundle resource as well.
 
-![AddLibrary4](https://www.andrew.cmu.edu/user/tenma/ios_help/github/addlibrary-4.png)
+![AddLibrary4](https://www.dropbox.com/s/hco2g5d9674mec2/addlibrary-4.png?raw=1)
 
 - Select building target as safeslingerexchange static library and then build.
 
 - Make sure your UI controller is embedded in the navigation controller. For example, you can add a navigation controller to your UI through clicking *Edit* -> *Embed In* -> *Navigation Controller*.
 
-![AddLibrary5](https://www.andrew.cmu.edu/user/tenma/ios_help/github/addlibrary-5.png)
+![AddLibrary5](https://www.dropbox.com/s/7ek5wcvh95rycps/addlibrary-5.png?raw=1)
 
-## Delegate Implemetation
+## Delegate Implementation
 Implement the SafeSlinger delegate function on your UI controller, e.g., ViewController.
 
 - Import the SafeSlinger header into your project.
@@ -162,19 +162,11 @@ Implement the SafeSlinger delegate function on your UI controller, e.g., ViewCon
 
 - Build your application and run the app on iOS devices or simulator.
 
-Contact
-=======
-
-* SafeSlinger [Project Website](http://www.cylab.cmu.edu/safeslinger)
-* Please submit [Bug Reports](http://github.com/SafeSlingerProject/SafeSlinger-iOS/issues)!
-* Looking for answers, try our [FAQ](http://www.cylab.cmu.edu/safeslinger/faq.html)!
-* Support: <safeslingerapp@gmail.com>
-
 License
 =======
 	The MIT License (MIT)
 
-	Copyright (c) 2010-2014 Carnegie Mellon University
+	Copyright (c) 2010-2015 Carnegie Mellon University
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal

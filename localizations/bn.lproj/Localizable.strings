@@ -1,7 +1,7 @@
 /*
     The MIT License (MIT)
     
-    Copyright (c) 2010-2014 Carnegie Mellon University
+    Copyright (c) 2010-2015 Carnegie Mellon University
     
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
@@ -53,6 +53,8 @@
 "btn_Continue" = "দেখো";
 /* 'Create New Key' is a button (title case); the Create New Key button is paired with the Cancel button, and is used to affirm the creation of a new key and passphrase. */
 "btn_CreateNewKey" = "নতুন কি তৈরি করুন";
+/* 'Delete' is a button (title case); the Delete button is used to affirm the deletion of more a message. */
+"btn_Delete" = "মুছে দিন";
 /* 'Delete Keys' is a button (title case); the Create New Key button is paired with the Cancel button, and is used to affirm the deletion of more recent keys. */
 "btn_DeleteKeys" = "কি মুছে দিন";
 /* 'Discard' is a button (title case); the Discard button is used to indicate the user wishes to exit the current screen without saving data, such as a voice memo. For non-Android use only, since Android uses the Back hardware button instead. */
@@ -83,6 +85,8 @@
 "btn_Refuse" = "প্রত্যাখ্যান করা";
 /* 'Remind' is a button (title case); the Remind button is paired with the Forget button and is used to indicate the user wishes to dismiss the current reminder of a potential error state, such as having backup or notification settings turned off, and does want to be reminded again later. */
 "btn_Remind" = "মনে করিয়ে দিন";
+/* 'Retry' is a button (title case); the Retry button is used to retry sending a message that has failed. */
+"btn_Retry" = "পুনরায় চেষ্টা করা";
 /* 'Save' is a button (title case); the Save button is used to indicate the data in question should be saved and persisted. */
 "btn_Save" = "সংরক্ষণ করুন";
 /* 'Add Attachment' is a button (title case); the Add Attachment button is used on the Compose screen to allow the user to select the source of an attachment to the current message. */
@@ -167,6 +171,8 @@
 "error_C2DMRegInvalidSender" = "নিবন্ধন এই সংস্করণের জন্য উপলব্ধ হয় না, একটি আপডেট করা সংস্করণ জন্য চেক করুন.";
 /* 'Incorrect device registration with Google. This device does not currently support push messaging.' is an error message (sentence case, period); used to warn during push registration: Incorrect phone registration with Google. This phone doesn't currently support C2DM. Android-only. */
 "error_C2DMRegPhoneRegistrationError" = "Google এর সাথে ভুল ডিভাইস নিবন্ধন. এই ডিভাইসটি বর্তমানে ধাক্কা মেসেজিং সমর্থন করে না.";
+/* 'Google Play Services is required to receive messages. Please install Google Play Services to continue.' is an error message (sentence case, period); used to warn during push registration: There is no Google Play Services on the phone. The application should ask the user to install Play Services. Fix on the device side. Android-only. */
+"error_C2DMRegPlayServicesMissing" = "গুগল প্লে সার্ভিস বার্তা গ্রহণ করতে প্রয়োজন বোধ করা হয়. গুগল অবিরত সেবা বিনামূল্যে ইনস্টল করুন.";
 /* 'Push registration service not available, scheduling retry in %d seconds.' is an error message (sentence case, period); used to warn during push registration: The device can't read the response, or there was a 500/503 from the server that can be retried later. The application should use exponential back off and retry. %d = the current number of seconds until the next push registration attempt. Android-only. */
 "error_C2DMRegServiceNotAvailable" = "পুশ নিবন্ধন সেবা পাওয়া যায় না, সময় নির্ধারণ %d সেকেন্ডের মধ্যে আবার চেষ্টা করুন.";
 /* 'Too many applications are registered for Push. Please uninstall some other applications and retry.' is an error message (sentence case, period); used to warn during push registration: The user has too many applications registered. The application should tell the user to uninstall some other applications, let user retry manually. Fix on the device side. Android-only. */
@@ -390,8 +396,8 @@
 "label_hours" = "%d ঘন্টা";
 /* 'SafeSlinger iCloud is enabled. Tap the Done button when finished.' is a screen label (match English casing); used to indicate the backup will occur while on the Setup screen. iOS-only. */
 "label_iCloudEnable" = "SafeSlinger iCloud সক্রিয় করা হয়. কর্ম সমাপ্ত হলে সম্পন্ন বোতাম ট্যাপ.";
-/* 'No messages. You may send a message from the Compose tab.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. */
-"label_InstNoMessages" = "কোনো বার্তা. আপনি রচনা ট্যাব থেকে একটি বার্তা পাঠাতে পারে.";
+/* 'No messages. To send a message, tap on the New Message icon at the top of your screen.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. */
+"label_InstNoMessages" = "কোনো বার্তা. আপনার পর্দার উপরের অংশে নতুন বার্তা আইকনের উপর একটি বার্তা, কল পাঠাতে.";
 /* 'To add recipients, you must first Sling Keys with one or more other users at the same time. You may also send a Sling Keys contact invitation from the menu.' is a screen label (match English casing); used to instruct the user how to proceed on the Recipient list screen is case of no recipients. */
 "label_InstNoRecipients" = "প্রাপক যোগ করার জন্য, আপনাকে অবশ্যই প্রথম গুলতি কি একই সময়ে এক বা একাধিক অন্যান্য ব্যবহারকারীদের সাথে. এছাড়াও আপনি মেনু থেকে একটি গুলতি কি যোগাযোগ আমন্ত্রণ পাঠাতে পারে.";
 /* 'None of your current recipients match your search query. Please try a different query or invite a new contact.' is a screen label (match English casing); used to inform the user that no recipients match the search query. */
@@ -414,6 +420,8 @@
 "label_LastName" = "নামের শেষাংশ";
 /* 'Me' is a screen label (match English casing); used on the secure introduction invitation dialog to indicate the one-hop trust relationship between the user (Me); the trusted person, and the new person. */
 "label_Me" = "আমাকে";
+/* '(%s has confirmed the key for %s.)' is a screen label (match English casing); used as the automated test text message completing sling keys. %1$s = the name of the sender. %2$s = the name of the recipient. */
+"label_messageAutomatedVerify" = "(%@ %@ জন্য কি নিশ্চিত করেনি.)";
 /* 'I would like to introduce %s to you.' is a screen label (match English casing); used as the text message when sending secure introduction invitations. %s = the name of a person. */
 "label_messageIntroduceNameToYou" = "আমি আপনাকে %@ পরিচয় করিয়ে দিতে চাই.";
 /* 'SafeSlinger app: %s' is a screen label (match English casing); used as message text to show a user how to install SafeSlinger. %s = the main installation url for mobile devices */
@@ -422,8 +430,6 @@
 "label_messageInviteSetupInst" = "একটি নিরাপদ মেসেজিং সংযোগ সেটআপ করার জন্য, আমরা সংযোগ যাচাই করার জন্য শুধু একবার তারপর গুলতি কি পূরণ বা ফোন একে অপরের একই সময়ে, এবং পারেন.";
 /* 'Can we start secure messaging with the open source SafeSlinger iPhone or Android app?' is a screen label (match English casing); used as message text to invite a contact to begin secure messaging. */
 "label_messageInviteStartMsg" = "আমরা ওপেন সোর্স SafeSlinger আইফোন বা অ্যান্ড্রয়েড app এর সঙ্গে নিরাপদ মেসেজিং শুরু করতে পারেন?";
-/* '%s, you are verified.' is a screen label (match English casing); used as the text message completing sling keys. %s = the name of a recipient. */
-"label_messageYouAreVerified" = "%@, আপনি যাচাই করা হয়.";
 /* '%d minutes' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole minutes. */
 "label_minutes" = "%d মিনিট";
 /* 'Mobile' is a screen label (match English casing); used to denote a 'mobile' type of email or phone contact type. iOS-only. */
@@ -715,6 +721,8 @@
 
 /* 'Backup restored.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm backup keys and settings have bee restored on re-install. */
 "state_BackupRestored" = "ব্যাকআপ পুনঃস্থাপন করা.";
+/* 'Failed to send message. Touch and hold for options.' is an informational message (sentence case, period); used in a message instance to indicate that the message has not been sent to the destination. */
+"state_FailedToSendMessage" = "বার্তা পাঠাতে ব্যর্থ হয়েছে. সংক্ষেপে আলোচনা করা এবং বিকল্প জন্য রাখা.";
 /* 'Deleted file %s.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that a file has been deleted. %s = the file name of the deleted file. */
 "state_FileDeleted" = "মুছে ফেলা ফাইল %@.";
 /* 'Message sent.' is an informational message (sentence case, period); TODO: This should be deprecated in favor 1 message push to messages tab (single thread) and >1 messages push to messages tab (all threads) with a toast of state_MessagesSent. */
@@ -791,6 +799,8 @@
 "title_ChooseDirectory" = "ডাইরেক্টরি চয়ন করুন";
 /* 'Choose Your Attachment' is a title (title case); used at the top of the menu options when choosing among sources to pick an attachment. */
 "title_ChooseFileLoad" = "আপনার সংযুক্তি নির্বাচন করুন";
+/* 'Clear' is a title (title case); used in the Select File Option menu to clear the current attachment. */
+"title_clear" = "পরিষ্কার";
 /* 'Comments/Questions' is a title (title case); used as the Subject field of an email message for the user to send feedback to developers. Also used as the menu option to start the email. */
 "title_comments" = "মন্তব্য/প্রশ্ন";
 /* 'Error' is a title (title case); used at the top of the error dialog. */
@@ -809,6 +819,8 @@
 "title_HomePanel" = "বাড়ি";
 /* 'Message' is a title (title case); used at the top of the dialog when viewing message details. */
 "title_MessageDetail" = "বার্তা";
+/* 'Message Options' is a title (title case); used at the top of the dialog when viewing message options. */
+"title_MessageOptions" = "বার্তা বিকল্প";
 /* 'Messages' is a title (title case); used at the top of the message list screen. */
 "title_Messages" = "বার্তা";
 /* 'Personal Contact' is a title (title case); used at the top of a menu when choosing to alter the users' contact: Edit, Create New, or Use Another. */

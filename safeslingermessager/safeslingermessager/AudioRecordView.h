@@ -28,15 +28,20 @@
 
 @class ComposeView;
 
-@interface AudioRecordView : UIViewController <AVAudioRecorderDelegate, AVAudioPlayerDelegate, UIAlertViewDelegate>
-{
+@protocol AudioRecordDelegate <NSObject>
+
+- (void)recordedAudioInURL:(NSURL *)audioURL;
+
+@end
+
+@interface AudioRecordView : UIViewController <AVAudioRecorderDelegate, AVAudioPlayerDelegate, UIAlertViewDelegate> {
     AVAudioRecorder *audio_recorder;
     AVAudioPlayer *audio_player;
     NSTimer *polling_timer;
     ComposeView* parent;
 }
 
-@property (nonatomic, retain) ComposeView *parent;
+@property (nonatomic, retain) id<AudioRecordDelegate> delegate;
 @property (nonatomic, strong) IBOutlet UILabel *TimeLabel;
 @property (nonatomic, strong) IBOutlet UIButton *PlayBtn;
 @property (nonatomic, strong) IBOutlet UIButton *RecordBtn;

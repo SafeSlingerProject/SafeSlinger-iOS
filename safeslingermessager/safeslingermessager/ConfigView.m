@@ -30,6 +30,7 @@
 #import "ErrorLogger.h"
 #import "BackupCloud.h"
 #import "TimePicker.h"
+#import "MessageDecryptor.h"
 
 @interface ConfigView ()
 
@@ -338,7 +339,6 @@
         {
             switch (indexPath.row)
             {
-                /*
                 case AutoDecrypt:
                     cell.textLabel.text = NSLocalizedString(@"menu_auto_decrypt", @"Auto-decrypt");
                     cell.detailTextLabel.text = NSLocalizedString(@"label_summary_auto_decrypt", @"Automatically decrypt messages when logged in.");
@@ -349,7 +349,7 @@
                         cell.accessoryType = UITableViewCellAccessoryNone;
                     }
                     break;
-                */
+					
                 case KeyID:
                     cell.textLabel.text = NSLocalizedString(@"label_PublicKeyID", @"Key ID");
                     cell.detailTextLabel.text = [SSEngine getSelfKeyID];
@@ -495,6 +495,7 @@
                                                           otherButtonTitles: NSLocalizedString(@"btn_OK", @"OK"), nil];
                     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
                     UITextField *textField = [alert textFieldAtIndex:0];
+                    textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
                     
                     if(indexPath.row==UserFirstName)
                         textField.text = [delegate.DbInstance GetStringConfig: @"Profile_FN"];
@@ -586,7 +587,6 @@
         case AdvanceSec:
         {
             switch (indexPath.row) {
-                /*
                 case AutoDecrypt:
                 {
                     UITableViewCell *cell = [tableView cellForRowAtIndexPath: indexPath];
@@ -597,6 +597,8 @@
                         // Try to backup
                         [delegate.BackupSys RecheckCapability];
                         [delegate.BackupSys PerformBackup];
+						
+						[MessageDecryptor tryToDecryptAll];
                     }
                     else if (cell.accessoryType == UITableViewCellAccessoryCheckmark)
                     {
@@ -608,7 +610,6 @@
                     }
                 }
                     break;
-                */
                 case KeyID:
                 case PushToken:
                 default:

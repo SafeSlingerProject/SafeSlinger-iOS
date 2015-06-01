@@ -26,7 +26,6 @@
 #import "AppDelegate.h"
 #import "SafeSlingerDB.h"
 #import "Utility.h"
-#import "ComposeView.h"
 #import "SlingkeyView.h"
 #import "FunctionView.h"
 #import <safeslingerexchange/iToast.h>
@@ -114,51 +113,52 @@ typedef enum {
 	
     ABAddressBookRef aBook = NULL;
     CFErrorRef error = NULL;
-    __block BOOL _grant = YES;
     aBook = ABAddressBookCreateWithOptions(NULL, &error);
-    ABAddressBookRequestAccessWithCompletion(aBook, ^(bool granted, CFErrorRef error){
-        if(!granted) {
-            _grant = granted;
-        }
-    });
-    
-    int index = 0;
-    CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(aBook);
-    for (int i = 0; i < CFArrayGetCount(allPeople); i++) {
-        ABRecordRef aRecord = CFArrayGetValueAtIndex(allPeople, i);
-		if(ABRecordGetRecordType(aRecord) ==  kABPersonType) { // this check execute if it is person group
-            NSString *firstname = (__bridge NSString*)ABRecordCopyValue(aRecord, kABPersonFirstNameProperty);
-            NSString *lastname = (__bridge NSString*)ABRecordCopyValue(aRecord, kABPersonLastNameProperty);
-            NSString* compositename = [NSString compositeName:firstname withLastName:lastname];
+    ABAddressBookRequestAccessWithCompletion(aBook, ^(bool granted, CFErrorRef error) {
+		
+        if(granted) {
+			int index = 0;
+			CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(aBook);
+			for (int i = 0; i < CFArrayGetCount(allPeople); i++) {
+				ABRecordRef aRecord = CFArrayGetValueAtIndex(allPeople, i);
+				if(ABRecordGetRecordType(aRecord) ==  kABPersonType) { // this check execute if it is person group
+					NSString *firstname = (__bridge NSString*)ABRecordCopyValue(aRecord, kABPersonFirstNameProperty);
+					NSString *lastname = (__bridge NSString*)ABRecordCopyValue(aRecord, kABPersonLastNameProperty);
+					NSString* compositename = [NSString compositeName:firstname withLastName:lastname];
+					
+					// firstname and lastname matches
+					if([compositename isEqualToString:nameInDatabase]) {
+						ContactInfo *contactInfo = [ContactInfo new];
+						contactInfo.recordId = ABRecordGetRecordID(aRecord);
+						contactInfo.label = [NSString stringWithFormat:NSLocalizedString(@"menu_UseContactPerson", nil),compositename];
+						
+						// Parse Photo
+						if(ABPersonHasImageData(aRecord)) {
+							CFDataRef photo = ABPersonCopyImageDataWithFormat(aRecord, kABPersonImageFormatThumbnail);
+							UIImage *image = [UIImage imageWithData: (__bridge NSData *)photo];
+							contactInfo.picture = image;
+							CFRelease(photo);
+						} else {
+							contactInfo.picture = [UIImage imageNamed: @"blank_contact.png"];
+						}
+						
+						[user_actions addObject:contactInfo];
+						index++;
+					}
+				}
+			}
 			
-            // firstname and lastname matches
-            if([compositename isEqualToString:nameInDatabase]) {
-				ContactInfo *contactInfo = [ContactInfo new];
-				contactInfo.recordId = ABRecordGetRecordID(aRecord);
-				contactInfo.label = [NSString stringWithFormat:NSLocalizedString(@"menu_UseContactPerson", nil),compositename];
-                
-                // Parse Photo
-                if(ABPersonHasImageData(aRecord)) {
-                    CFDataRef photo = ABPersonCopyImageDataWithFormat(aRecord, kABPersonImageFormatThumbnail);
-                    UIImage *image = [UIImage imageWithData: (__bridge NSData *)photo];
-					contactInfo.picture = image;
-                    CFRelease(photo);
-                } else {
-					contactInfo.picture = [UIImage imageNamed: @"blank_contact.png"];
-                }
-				
-				[user_actions addObject:contactInfo];
-                index++;
-            }
-        }
-    }
-    
-    if(allPeople)CFRelease(allPeople);
-    if(aBook)CFRelease(aBook);
+			if(allPeople)CFRelease(allPeople);
+		}
+		
+		[user_actions addObjectsFromArray:@[[[Action alloc] initWithLabel:NSLocalizedString(@"menu_UseAnother", nil) actionId:ReSelect],
+											[[Action alloc] initWithLabel:NSLocalizedString(@"menu_UseNoContact", nil) actionId:UseNameOnly],
+											[[Action alloc] initWithLabel:NSLocalizedString(@"menu_CreateNew", nil) actionId:AddNew]]];
+		
+		[self.tableView reloadData];
+    });
 	
-	[user_actions addObjectsFromArray:@[[[Action alloc] initWithLabel:NSLocalizedString(@"menu_UseAnother", nil) actionId:ReSelect],
-										[[Action alloc] initWithLabel:NSLocalizedString(@"menu_UseNoContact", nil) actionId:UseNameOnly],
-										[[Action alloc] initWithLabel:NSLocalizedString(@"menu_CreateNew", nil) actionId:AddNew]]];
+    if(aBook)CFRelease(aBook);
 }
 
 - (IBAction)DisplayHow:(id)sender {

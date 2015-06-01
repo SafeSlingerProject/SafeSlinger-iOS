@@ -103,8 +103,7 @@
     }
 }
 
-- (BOOL)CreateNewEntry: (NSData*)msgnonce
-{
+- (BOOL)createNewEntry:(MsgEntry *)msg {
     DEBUGMSG(@"CreateNewEntry");
     if(db==nil){
         [ErrorLogger ERRORDEBUG: @"ERROR: DB Object is null or Input is null."];
@@ -124,9 +123,9 @@
         const NSString* unknownFlag = @"UNDEFINED";
         
         // msgid
-        sqlite3_bind_blob(sqlStatement, 1, [msgnonce bytes], (int)[msgnonce length], SQLITE_TRANSIENT);
+        sqlite3_bind_blob(sqlStatement, 1, [msg.msgid bytes], (int)[msg.msgid length], SQLITE_TRANSIENT);
         // time
-        sqlite3_bind_text(sqlStatement, 2, [[NSString GetGMTString:DATABASE_TIMESTR]UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(sqlStatement, 2, [msg.cTime UTF8String], -1, SQLITE_TRANSIENT);
         // unknown for keyid
         sqlite3_bind_text(sqlStatement, 3, [unknownFlag UTF8String], -1, SQLITE_TRANSIENT);
         // empty for cipher
@@ -151,6 +150,49 @@
     }
 }
 
+- (BOOL)updateMessageEntry:(MsgEntry *)msg {
+	if(db==nil){
+		[ErrorLogger ERRORDEBUG: @"ERROR: DB Object is null or Input is null."];
+		return NO;
+	}
+	
+	BOOL ret = YES;
+	@try {
+		
+//		NSData *cipher = [NSData dataWithBytes:[newcipher bytes]+LENGTH_KEYID length:[newcipher length]-LENGTH_KEYID];
+		
+		// update entry
+		sqlite3_stmt *sqlStatement;
+		const char *sql = "UPDATE ciphertable SET keyid=?, cipher=? WHERE msgid=?";
+		if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK){
+			[ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while creating statement. '%s'", sqlite3_errmsg(db)]];
+			ret = NO;
+		}
+		
+		sqlite3_bind_text(sqlStatement, 1, [msg.keyid UTF8String], -1, SQLITE_TRANSIENT);
+		sqlite3_bind_blob(sqlStatement, 2, [msg.msgbody bytes], (int)[msg.msgbody length], SQLITE_TRANSIENT);
+		sqlite3_bind_blob(sqlStatement, 3, [msg.msgid bytes], (int)[msg.msgid length], SQLITE_TRANSIENT);
+		
+		if(SQLITE_DONE != sqlite3_step(sqlStatement)){
+			[ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"Error while updating data. '%s'", sqlite3_errmsg(db)]];
+			ret = NO;
+		}
+		
+		if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
+			[ErrorLogger ERRORDEBUG: @"ERROR: Problem with finalize statement"];
+			ret = NO;
+		}
+		
+	}
+	@catch (NSException *exception) {
+		[ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"An exception occured: %@", [exception reason]]];
+		ret = NO;
+	}
+	@finally {
+		return ret;
+	}
+}
+
 - (NSArray*)GetEntriesForKeyID: (NSString*)keyid WithToken:(NSString*)token WithName:(NSString*)name
 {
     if(db==nil)
@@ -158,7 +200,7 @@
         [ErrorLogger ERRORDEBUG:@"ERROR: DB Object is null or input is null."];
         return nil;
     }
-    
+	
     NSMutableArray *Ciphers = nil;
     @try {
         
@@ -286,51 +328,6 @@
 		// if date is smaller than any other thread, insert at the end
 		[threadList addObject:listEntry];
 	}
-}
-
-- (BOOL)UpdateEntryWithCipher: (NSData*)msgnonce Cipher:(NSData*)newcipher
-{
-    if(db==nil){
-        [ErrorLogger ERRORDEBUG: @"ERROR: DB Object is null or Input is null."];
-        return NO;
-    }
-    
-    BOOL ret = YES;
-    @try {
-        
-        NSString *keyid = [SSEngine ExtractKeyID: newcipher];
-        NSData *cipher = [NSData dataWithBytes:[newcipher bytes]+LENGTH_KEYID length:[newcipher length]-LENGTH_KEYID];
-        
-        // update entry
-        sqlite3_stmt *sqlStatement;
-        const char *sql = "UPDATE ciphertable SET keyid=?, cipher=? where msgid=?";
-        if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK){
-            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while creating statement. '%s'", sqlite3_errmsg(db)]];
-            ret = NO;
-        }
-        
-        sqlite3_bind_text(sqlStatement, 1, [keyid UTF8String], -1, SQLITE_TRANSIENT);
-        sqlite3_bind_blob(sqlStatement, 2, [cipher bytes], (int)[cipher length], SQLITE_TRANSIENT);
-        sqlite3_bind_blob(sqlStatement, 3, [msgnonce bytes], (int)[msgnonce length], SQLITE_TRANSIENT);
-        
-        if(SQLITE_DONE != sqlite3_step(sqlStatement)){
-            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"Error while updating data. '%s'", sqlite3_errmsg(db)]];
-            ret = NO;
-        }
-        
-        if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
-            [ErrorLogger ERRORDEBUG: @"ERROR: Problem with finalize statement"];
-            ret = NO;
-        }
-        
-    }
-    @catch (NSException *exception) {
-        [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"An exception occured: %@", [exception reason]]];
-        ret = NO;
-    }
-    @finally {
-        return ret;
-    }
 }
 
 - (int)ThreadCipherCount: (NSString*)KEYID
@@ -487,19 +484,79 @@
     }
 }
 
+- (NSArray *)getEncryptedMessages {
+	if(db == nil) {
+		[ErrorLogger ERRORDEBUG: @"ERROR: DB Object is null or Input is null."];
+		return nil;
+	}
+	
+	NSMutableArray *tmparray = [NSMutableArray new];
+	
+	@try {
+		const char *sql = "SELECT * FROM ciphertable WHERE cipher IS NOT NULL ORDER BY cTime ASC";
+		sqlite3_stmt *sqlStatement;
+		if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
+			[ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
+			tmparray = nil;
+		}
+		
+		while (sqlite3_step(sqlStatement) == SQLITE_ROW) {
+			
+			MsgEntry *amsg = [[MsgEntry alloc]init];
+			
+			int rawLen = sqlite3_column_bytes(sqlStatement, 0);
+			if(rawLen > 0) {
+				amsg.msgid = [NSData dataWithBytes:sqlite3_column_blob(sqlStatement, 0) length:rawLen];
+			}
+			
+			if(sqlite3_column_type(sqlStatement, 1) != SQLITE_NULL) {
+				amsg.cTime = amsg.rTime = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 1)];
+			}
+			
+			amsg.dir = FromMsg;
+			
+			if(sqlite3_column_type(sqlStatement, 2) != SQLITE_NULL) {
+				amsg.keyid = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 2)];
+			}
+			
+			// cipher
+			rawLen = sqlite3_column_bytes(sqlStatement, 3);
+			if(rawLen > 0) {
+				amsg.msgbody = [NSData dataWithBytes:sqlite3_column_blob(sqlStatement, 3) length:rawLen];
+			}
+			
+			// 13 smsg boolean
+			amsg.smsg = amsg.sfile = Encrypted;
+			
+			[tmparray addObject:amsg];
+		}
+		
+		if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
+			[ErrorLogger ERRORDEBUG: @"ERROR: Problem with finalize statement"];
+		}
+	}
+	@catch (NSException *exception) {
+		[ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"An exception occured: %@", [exception reason]]];
+		tmparray = nil;
+	}
+	@finally {
+		return tmparray;
+	}
+}
+
 - (BOOL)DeleteThread: (NSString*)keyid
 {
     if(db==nil){
         [ErrorLogger ERRORDEBUG: @"ERROR: DB Object is null or Input is null."];
         return NO;
     }
-    
+	
     BOOL ret = YES;
     @try {
-        
+		
         sqlite3_stmt *sqlStatement;
         const char *sql = "DELETE FROM ciphertable WHERE keyid=?";
-        
+		
         if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK){
             [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while creating statement. '%s'", sqlite3_errmsg(db)]];
             ret = NO;
