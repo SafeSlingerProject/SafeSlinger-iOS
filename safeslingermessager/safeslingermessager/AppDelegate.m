@@ -32,13 +32,8 @@
 #import "UniversalDB.h"
 #import "ErrorLogger.h"
 #import "FunctionView.h"
-<<<<<<< HEAD
 #import "MessageReceiver.h"
 #import "MessageSender.h"
-=======
-#import "MessageSender.h"
-#import "MessageReceiver.h"
->>>>>>> v1.8.2
 
 #import <AddressBook/AddressBook.h>
 #import <Crashlytics/Crashlytics.h>
@@ -179,7 +174,6 @@
 }
 
 #pragma mark - Database updates
-
 - (void)updateDatabase {
 	int oldVersion = (1 << 24) | (7 << 16); // version 1.7
 	if ([DbInstance GetProfileName] && [self getVersionNumberByInt] < oldVersion) {
