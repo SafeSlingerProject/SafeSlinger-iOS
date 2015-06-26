@@ -26,7 +26,7 @@
 "action_NewUserRequest" = "Add a Sling Keys contact invitation via...";
 
 /* application description (sentence case); the names of the individuals who helped develop the application. */
-"app_DeveloperName" = "Bruno Nunes\nGurtej Singh Chandok\nJason Lee\nMadhur Shrimal (JavaScript Lead)\nManish Burham\nMichael W Farb (Android Lead)\nVinay Ramkrishnan\nYue-Hsun Lin (iOS Lead)\n";
+"app_DeveloperName" = "Bruno Nunes (iOS)\nGurtej Singh Chandok (iOS)\nJason Lee (iOS)\nMadhur Shrimal (JS)\nManish Burham (Android)\nMichael W Farb (Android, GAE)\nVinay Ramkrishnan (Android)\nYue-Hsun Lin (iOS, GAE)\n";
 /* application name (title case); used for home screen icons, at the top of many screens, and many other places in the application. */
 "app_name" = "SafeSlinger";
 /* application description (sentence case); the names of the individuals who translated and/or reviewed localizations. */
