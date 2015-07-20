@@ -144,7 +144,7 @@
 "choice_Up" = "Hinauf";
 
 /* 'Some members are using an older version; all members must upgrade to the newest version.' is an error message (sentence case, period); used to warn when some members of the key exchange protocol are using less than the minimum version. Used for backward-compatibility in some cases. */
-"error_AllMembersMustUpgrade" = "Einige Mitglieder nutzen eine ältere Version; alle Mitglieder müssen die neueste Version verwenden.";
+"error_AllMembersMustUpgrade" = "Einige Mitglieder nutzen eine ältere Version; Alle Mitglieder müssen auf die neueste Version aktualisieren.";
 /* 'All members must upgrade, some are using older key formats.' is an error message (sentence case, period); used to warn when the key format is incorrect after an exchange and perhaps used an old format. */
 "error_AllMembersMustUpgradeBadKeyFormat" = "Alle Teilnehmer müssen die Software aktualisieren, manche verwenden ein älteres Schlüsselformat.";
 /* 'All members must upgrade, some are using older push registration formats.' is an error message (sentence case, period); used to warn when the push registration format is incorrect or corrupted. */
@@ -236,7 +236,7 @@
 /* 'You are attempting to send multiple items. At this time, SafeSlinger only supports sending one item at a time.' is an error message (sentence case, period); used to warn when the user attempts to select multiple attachments to send when we only allow one attachment for now. */
 "error_MultipleSendNotSupported" = "Sie versuchen, mehrere Anhänge zu senden. Momentan unterstützt SafeSlinger aber nur das Senden von jeweils einem Element.";
 /* 'The exchange is missing required data.' is an error message (sentence case, period); used to warn when exchange is missing some parameter or data to complete. */
-"error_NoDataToExchange" = "Für den Austausch fehlen erforderliche Daten.";
+"error_NoDataToExchange" = "Im Austausch fehlen erforderliche Daten.";
 /* 'Email account is not setup!' is an error message (sentence case, period); used to warn that a user did not have an email account when he/she tries to send out comments to administrator account. iOS-only. */
 "error_NoEmailAccount" = "E-Mail-Konto ist nicht eingerichtet!";
 /* 'No passphrase entered.' is an error message (sentence case, period); used to warn when a user generates or changes a passphrase and they have entered a blank password, which is not acceptable. */
@@ -272,7 +272,7 @@
 /* 'You need an attachment or a text message to send.' is an error message (sentence case, period); used to warn when the user has not attached a file or typed any text message to send to the recipient after using the 'Send' button. */
 "error_selectDataToSend" = "Geben Sie eine Textnachricht ein, oder wählen Sie eine Datei aus, die Sie senden möchten.";
 /* 'Server Message: %s' is an error message (sentence case, period); used to warn when the server has an error message to send back to the client. %s = an English (non-localized) error message sent by our App Engine server code. */
-"error_ServerAppMessage" = "Server-Nachricht: %@";
+"error_ServerAppMessage" = "Server Nachricht: %@";
 /* 'No response from server.' is an error message (sentence case, period); used to warn when the server timeout occurs, usually after 30 seconds and did not respond to the client. */
 "error_ServerNotResponding" = "Server meldet sich nicht.";
 /* 'Cannot remove the shared file.' is an error message (sentence case, period); used to warn when the shared file cannot be deleted. iOS-only. */
@@ -319,11 +319,11 @@
 /* 'This screen allows you to change the default settings for the application.' is a help message (sentence case, period); used via Help button on the Settings screen to describe in more detail what the Settings screen does. */
 "help_settings" = "In diesem Fenster können Sie die Standardeinstellungen für die Anwendung ändern.";
 /* 'Select the number of people who are attempting to exchange data together and press OK.' is a help message (sentence case, period); used via Help button on the Group Size screen and also the key exchange walkthrough tutorial to describe in more detail what the Group Size screen does. */
-"help_size" = "Wählen Sie die Anzahl der Menschen, die versuchen, Daten miteinander auszutauschen und drücken Sie OK.";
+"help_size" = "Wählen Sie die Anzahl der Teilnehmer, die Daten austauschen wollen, und drücken Sie OK.";
 /* 'This number on this screen is used to create a unique group of users. Review the numbers on all users' screens, then all users should enter the same lowest number and press OK.' is a help message (sentence case, period); used via Help button on the Grouping screen and also the key exchange walkthrough tutorial to describe in more detail what the Grouping screen does. */
-"help_userid" = "Diese Nummer auf diesem Bildschirm wird verwendet, um eine einzigartige Gruppe von Benutzern erstellen. Überprüfen Sie die Zahlen auf den Bildschirmen aller Benutzer, werden alle Benutzer sollten die gleichen niedrigsten Nummer und drücken Sie OK.";
+"help_userid" = "Diese Zahl auf diesem Bildschirm wird verwendet, um die Teilnehmer einer Gruppe zu identifizieren. Überprüfen Sie die Zahlen der anderen Teilnehmer, geben Sie die niedrigste Zahl ein, und drücken Sie OK.";
 /* 'Now, you must match one of these 3-word phrases with all users. Every user must select the same common phrase, and press Next.' is a help message (sentence case, period); used via Help button on the Verify screen and also the key exchange walkthrough tutorial to describe in more detail what the Verify screen does. */
-"help_verify" = "Jetzt müssen Sie eine dieser 3-Wort-Sätze mit aller Benutzer anzeigen lassen. Jeder Benutzer muss die gleiche allgemeine Phrase, und drücken Sie auf Weiter.";
+"help_verify" = "Nur einer der 3-Wort-Sätze oder Zahlen ist identisch mit allen anderen Teilnehmern. Bitte wählen sie den passenden Satz aus und drücken Sie auf Weiter.";
 
 /* 'Camera permission is required to attach snapshots to secure messages. Tap the %s button for SafeSlinger Camera permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Camera permission. iOS-only. */
 "iOS_cameraError" = "Kamera Erlaubnis ist erforderlich, um Schnappschüsse an sichere Nachrichten anzuhängen. Tippen Sie für SafeSlinger Kamera Berechtigungsdetails auf die Taste %@.";
@@ -355,7 +355,7 @@
 /* 'Touch to review your %d messages' is a screen label (match English casing); used in the notification drop down window to indicate what will happen when received messages notification is touched. %d = the number of unseen messages received. */
 "label_ClickForNMsgs" = "Tippen Sie hier, um Ihre %d Nachricht(en) zu lesen";
 /* 'Compare screens on %s devices.' is a screen label (match English casing); used with arrows and phone graphics to remind user to compare mutiple views, not just their own. %s = the number of users. */
-"label_CompareScreensNDevices" = "Bildschirme auf %@ Geräte zu vergleichen.";
+"label_CompareScreensNDevices" = "Vergleichen Sie die Bildschirme auf %@ Geräten.";
 /* 'Compose Message' is a screen label (match English casing); used as a text box hint on the Compose Message screen where the user can type a message in the box. */
 "label_ComposeHint" = "Nachricht verfassen";
 /* 'Your Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current user name (first and last) to use. Android-only. */
@@ -570,7 +570,7 @@
 "label_worktag" = "Büro";
 
 /* 'SafeSlinger Exchange' is an application name (title case); used for dialogs to show the user which that a SafeSlinger Exchange is in progress. */
-"lib_name" = "SafeSlinger Wechsel";
+"lib_name" = "SafeSlinger Austausch";
 
 /* 'About' is a menu option (title case); used to show the about dialog via the Settings screen. */
 "menu_About" = "Über";
