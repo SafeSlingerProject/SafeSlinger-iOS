@@ -149,6 +149,7 @@ typedef enum {
 			}
 			
 			if(allPeople)CFRelease(allPeople);
+            if(aBook)CFRelease(aBook);
 		}
 		
 		[user_actions addObjectsFromArray:@[[[Action alloc] initWithLabel:NSLocalizedString(@"menu_UseAnother", nil) actionId:ReSelect],
@@ -158,7 +159,7 @@ typedef enum {
 		[self.tableView reloadData];
     });
 	
-    if(aBook)CFRelease(aBook);
+    
 }
 
 - (IBAction)DisplayHow:(id)sender {
