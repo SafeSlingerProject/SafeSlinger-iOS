@@ -100,13 +100,6 @@
 {
     AssignedID.text = UniqueID;
      _textfieldOffset = LowestID.frame.size.height + LowestID.frame.origin.y;
-    DEBUGMSG(@"NSFoundationVersionNumber = %f", NSFoundationVersionNumber);
-    if (NSFoundationVersionNumber < NSFoundationVersionNumber_iOS_7_0)
-    {
-        DEBUGMSG(@"iOS 6.x");
-        _textfieldOffset += 70.0f;
-    }
-    
     // decide after user input
     [CompareLabel setText:[NSString stringWithFormat: NSLocalizedStringFromBundle(delegate.res, @"label_CompareScreensNDevices", @"Compare screens on %@ devices.."), [NSString stringWithFormat:@"%d", delegate.protocol.users]]];
     [LowestID becomeFirstResponder];

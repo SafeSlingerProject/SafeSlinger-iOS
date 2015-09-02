@@ -93,6 +93,7 @@
 #define kLicenseURL @"http://www.cylab.cmu.edu/safeslinger/eula.html"
 
 typedef enum PermDialog {
+    NotPermDialog = 0,
     AskPerm = 100,
 	HelpContact,
 	HelpNotification,

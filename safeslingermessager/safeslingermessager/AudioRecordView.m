@@ -46,26 +46,20 @@
     self.navigationItem.title = NSLocalizedString(@"title_soundrecoder", @"Sound Recorder");
     
     // check mic permission
-    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1)
+    if([[NSUserDefaults standardUserDefaults] boolForKey: kRequireMicrophonePrivacy])
     {
-        if([[NSUserDefaults standardUserDefaults] boolForKey: kRequireMicrophonePrivacy])
-        {
-            // Already request before
-            [self RequestAudioRecorder];
-        }else
-        {
-            UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
-                                                              message: NSLocalizedString(@"iOS_RequestPermissionMicrophone", @"You can record a voice message to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Microphone when asked.")
-                                                             delegate: self
-                                                    cancelButtonTitle: NSLocalizedString(@"btn_Cancel", @"Cancel")
-                                                    otherButtonTitles: NSLocalizedString(@"btn_Continue", @"Continue"), nil];
-            message.tag = AskPerm;
-            [message show];
-            message = nil;
-        }
-    }else{
-        PlayBtn.enabled = StopBtn.enabled = NO;
-        [self PrepareAudioRecorder];
+        // Already request before
+        [self RequestAudioRecorder];
+    }else
+    {
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
+                                                          message: NSLocalizedString(@"iOS_RequestPermissionMicrophone", @"You can record a voice message to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Microphone when asked.")
+                                                         delegate: self
+                                                cancelButtonTitle: NSLocalizedString(@"btn_Cancel", @"Cancel")
+                                                otherButtonTitles: NSLocalizedString(@"btn_Continue", @"Continue"), nil];
+        message.tag = AskPerm;
+        [message show];
+        message = nil;
     }
 }
 

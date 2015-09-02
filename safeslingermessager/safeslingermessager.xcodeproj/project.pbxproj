@@ -553,7 +553,7 @@
 				ORGANIZATIONNAME = CyLab;
 				TargetAttributes = {
 					1860573419451001002DD149 = {
-						DevelopmentTeam = SKAXY92CB2;
+						DevelopmentTeam = 6UTF6FRSFG;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -907,7 +907,7 @@
 					"${SRCROOT}/../sha3-ios-binary/include",
 				);
 				INFOPLIST_FILE = "safeslingermessager/safeslingermessager-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
@@ -941,7 +941,7 @@
 					"${SRCROOT}/../sha3-ios-binary/include",
 				);
 				INFOPLIST_FILE = "safeslingermessager/safeslingermessager-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";

@@ -258,7 +258,7 @@ typedef enum {
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(inputModeDidChange:)
-												 name:@"UITextInputCurrentInputModeDidChangeNotification"
+												 name:UITextInputCurrentInputModeDidChangeNotification
 											   object:nil];
 }
 
@@ -272,7 +272,7 @@ typedef enum {
 												  object:nil];
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self
-													name:@"UITextInputCurrentInputModeDidChangeNotification"
+													name:UITextInputCurrentInputModeDidChangeNotification
 												  object:nil];
 }
 
@@ -314,11 +314,14 @@ typedef enum {
 		[self registerForInputNotifications];
 		[UIView setAnimationsEnabled:YES];
 		
-		[[[UIAlertView alloc] initWithTitle:nil
-									message:NSLocalizedString(@"label_SpeechRecognitionAlert", nil)
-								   delegate:nil
-						  cancelButtonTitle:NSLocalizedString(@"btn_OK", nil)
-						  otherButtonTitles:nil] show];
+		UIAlertView *message = [[UIAlertView alloc] initWithTitle:nil
+                                                          message:NSLocalizedString(@"label_SpeechRecognitionAlert", nil)
+                                                         delegate:nil
+                                                cancelButtonTitle:NSLocalizedString(@"btn_OK", nil)
+                                                otherButtonTitles:nil];
+        [message show];
+        message.tag = NotPermDialog;
+        message = nil;
 	}
 }
 
@@ -570,6 +573,7 @@ typedef enum {
 									   delegate:self
 							  cancelButtonTitle:NSLocalizedString(@"btn_Cancel", nil)
 							  otherButtonTitles:NSLocalizedString(@"btn_Retry", nil), NSLocalizedString(@"btn_Delete", nil) , nil] show];
+            
 		}
 	}
 }
@@ -577,7 +581,8 @@ typedef enum {
 #pragma mark - UIAlertViewDelegate methods
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-	if(buttonIndex != alertView.cancelButtonIndex) {
+    
+	if(buttonIndex != alertView.cancelButtonIndex && alertView.tag==NotPermDialog) {
 		MsgEntry *message = self.messages[_longPressedIndexPath.row];
 		
 		// remove message from array and from database
@@ -979,7 +984,7 @@ typedef enum {
 												otherButtonTitles: buttontitle, nil];
 		message.tag = HelpPhotoLibrary;
 		[message show];
-		message = nil;
+        message = nil;
 	} else if(authStatus == ALAuthorizationStatusAuthorized){
 		ret = YES;
 	}
@@ -1009,11 +1014,34 @@ typedef enum {
 												otherButtonTitles: buttontitle, nil];
 		message.tag = HelpCamera;
 		[message show];
-		message = nil;
+        message = nil;
 		return NO;
 	} else {
 		return YES;
 	}
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    if(buttonIndex!=alertView.cancelButtonIndex) {
+        if(alertView.tag==HelpPhotoLibrary) {
+            if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kPhotoHelpURL]];
+            } else {
+                // iOS8
+                NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                [[UIApplication sharedApplication] openURL:url];
+            }
+        } else if(alertView.tag==HelpCamera) {
+            if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kCameraHelpURL]];
+            } else {
+                // iOS8
+                NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                [[UIApplication sharedApplication] openURL:url];
+            }
+        }
+    }
 }
 
 #pragma UITextFieldDelegate Methods
