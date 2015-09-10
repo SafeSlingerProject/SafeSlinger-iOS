@@ -470,7 +470,7 @@
         const char *sql = [sqlstr UTF8String];
         
         sqlite3_stmt *sqlStatement;
-        if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK)
+        if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK)
         {
             [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
             return nil;
@@ -563,7 +563,7 @@
         // get the newest term
         const char *sql = "SELECT pkey FROM tokenstore WHERE keyid=?";
         sqlite3_stmt *sqlStatement;
-        if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) == SQLITE_OK)
+        if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) == SQLITE_OK)
         {
             // keyid
             sqlite3_bind_blob(sqlStatement, 1, [KEYID cStringUsingEncoding:NSUTF8StringEncoding], (int)[KEYID lengthOfBytesUsingEncoding:NSUTF8StringEncoding], SQLITE_TRANSIENT);
@@ -601,7 +601,7 @@
         // get the newest key
         const char *sql = "select dev from tokenstore WHERE keyid=?;";
         sqlite3_stmt *sqlStatement;
-        if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK)
+        if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK)
         {
             [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
             dev = -1;
@@ -639,7 +639,7 @@
         // get the newest key
         const char *sql = "select ex_type from tokenstore where keyid=?;";
         sqlite3_stmt *sqlStatement;
-        if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK)
+        if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK)
         {
             [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
         }
@@ -685,7 +685,7 @@
 		}
 		
         sqlite3_stmt *sqlStatement = nil;
-        if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
+        if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
             [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
         }
         
@@ -724,7 +724,7 @@
 		}
 		
         sqlite3_stmt *sqlStatement = nil;
-        if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
+        if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
             [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
         }
 		
@@ -756,7 +756,7 @@
 		const char *sql = "SELECT * FROM tokenstore WHERE keyid=?";
 		
 		sqlite3_stmt *sqlStatement = nil;
-		if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
+		if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
 			[ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
 		}
 		
@@ -831,7 +831,7 @@
 		const char *sql = "UPDATE tokenstore SET pid=?, note=?, ABRecordID=? WHERE ptoken=?";
 		sqlite3_stmt *sqlStatement;
 			
-		if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
+		if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
 			[ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
 			result = NO;
 		}
@@ -882,7 +882,7 @@
     @try {
         const char *sql = "SELECT pid FROM tokenstore WHERE keyid=?";
         sqlite3_stmt *sqlStatement;
-        if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
+        if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
             [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
             result = NO;
         }
@@ -905,7 +905,7 @@
             // update
             sql = "UPDATE tokenstore SET pid=?, dev=?, bdate=?, note=?, ex_type=?, ptoken=?, pkey=?, pstamp=? WHERE keyid=?";
             
-            if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
+            if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
                 [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
                 result = NO;
             }
@@ -945,7 +945,7 @@
         } else {
             sql = "INSERT INTO tokenstore (ptoken, pid, bdate, dev, ex_type, note, keyid, pkey, pstamp, ABRecordID) Values (?,?,?,?,?,?,?,?,?,?)";
             
-            if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
+            if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
                 [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
                 result = NO;
             }
@@ -1360,7 +1360,7 @@
 		const char *sql = "SELECT receipt, cTime, count(msgid), count(unread), (CASE WHEN receipt IN (SELECT CAST(keyid AS TEXT) FROM (SELECT *, max(bdate) FROM (SELECT *, max(bdate) FROM tokenstore GROUP BY pid, dev) GROUP BY ptoken, dev ORDER BY pid COLLATE NOCASE DESC)) THEN 1 ELSE 0 END) as active FROM msgtable GROUP BY receipt order by cTime desc;";
         sqlite3_stmt *sqlStatement;
 		
-        if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
+        if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
             [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
         }
 		

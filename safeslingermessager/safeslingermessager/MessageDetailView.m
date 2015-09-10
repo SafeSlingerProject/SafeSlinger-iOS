@@ -302,8 +302,9 @@ typedef enum {
 
 - (void)inputModeDidChange:(NSNotification *)notification {
 	// Allows us to block dictation
-	UITextInputMode *inputMode = [UITextInputMode currentInputMode];
-	NSString *modeIdentifier = [inputMode respondsToSelector:@selector(identifier)] ? (NSString *)[inputMode performSelector:@selector(identifier)] : nil;
+    //UITextInputMode *currentInputMode = [notification object];
+	UITextInputMode *currentInputMode = [UITextInputMode currentInputMode];
+	NSString *modeIdentifier = [currentInputMode respondsToSelector:@selector(identifier)] ? (NSString *)[currentInputMode performSelector:@selector(identifier)] : nil;
 	
 	if([modeIdentifier isEqualToString:@"dictation"]) {
 		// hide the keyboard and show again to cancel dictation
@@ -355,8 +356,8 @@ typedef enum {
         totalheight += 62.0f;
 		
         if([msg.msgbody length] > 0) {
-            totalheight += [[NSString stringWithUTF8String: [msg.msgbody bytes]]
-                            sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake(300, CGFLOAT_MAX)].height;
+            CGSize size = [[NSString stringWithUTF8String: [msg.msgbody bytes]] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0f]}];
+            totalheight += size.height;
         }
 		
 		if(msg.attach) {

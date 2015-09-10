@@ -204,14 +204,15 @@
 {
     static NSString *CellIdentifier = @"SettingItemCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
+    if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell...
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.detailTextLabel.numberOfLines = 0;
-    cell.textLabel.text = cell.detailTextLabel.text = nil;
+    cell.textLabel.text = nil;
+    cell.detailTextLabel.text = nil;
     
     switch (indexPath.section) {
         case PassphraseSec:

@@ -152,7 +152,7 @@
     {
         return [NSString stringWithUTF8String: [keygendate bytes]];
     }else {
-        return NULL;
+        return nil;
     }
 }
 
@@ -493,7 +493,7 @@
         DEBUGMSG( @" failed\n  ! RSA_sign returned %d\n\n", ret );
         BIO_free(mem);
         RSA_free(priKey);
-        return NULL;
+        return nil;
     }
     
     NSData* sig = [NSData dataWithBytes:buf length:sig_size];
