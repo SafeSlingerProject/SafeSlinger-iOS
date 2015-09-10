@@ -88,7 +88,18 @@
     
     // sign and append signature
     NSData* SignKey = [SSEngine UnlockPrivateKey:passcache Size:[SSEngine getSelfPrivateKeySize:SIGN_PRI] Type:SIGN_PRI];
+    if(!SignKey)
+    {
+        [ErrorLogger ERRORDEBUG: @"Unlock Private Key failed."];
+        return;
+    }
     NSData *sig = [SSEngine Sign:msgchunk withPrikey:SignKey];
+    if(!sig)
+    {
+        // do error handling
+        [ErrorLogger ERRORDEBUG: @"Signing failed."];
+        return;
+    }
     NSInteger sig_len = htonl([sig length]);
     [msgchunk appendBytes: &sig_len length: 4];
     [msgchunk appendData: sig];

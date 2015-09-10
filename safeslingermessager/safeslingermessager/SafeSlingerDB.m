@@ -528,7 +528,8 @@
                     queryterm = [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 0)];
                 }
             }
-            if(sqlite3_finalize(sqlStatement) != SQLITE_OK)[ErrorLogger ERRORDEBUG: @"ERROR: Problem with finalize statement"];
+            if(sqlite3_finalize(sqlStatement) != SQLITE_OK)
+                [ErrorLogger ERRORDEBUG: @"ERROR: Problem with finalize statement"];
         }else
             [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while creating statement. '%s'", sqlite3_errmsg(db)]];
     }
@@ -1626,6 +1627,7 @@
 }
 
 - (BOOL)InsertMessage:(MsgEntry *)MSG {
+    
     if(db==nil||MSG==nil) {
         [ErrorLogger ERRORDEBUG: @"ERROR: DB Object is null or Input is null."];
         return NO;

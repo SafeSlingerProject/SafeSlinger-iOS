@@ -336,8 +336,9 @@
     BIO *mem = BIO_new(BIO_s_mem());
     BIO_puts(mem, [keybytes bytes]);
     priKey = EVP_PKEY_get1_RSA(PEM_read_bio_PrivateKey(mem, NULL, NULL, NULL));
+    
     if (!priKey ) {
-        [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"PEM_read_bio_PrivateKey ERROR: %s\n", ERR_error_string(ERR_get_error(), NULL)]];
+        [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"EVP_PKEY_get1_RSA ERROR: %s\n", ERR_error_string(ERR_get_error(), NULL)]];
         BIO_free(mem);
         RSA_free(priKey);
         return nil;
@@ -466,7 +467,7 @@
     BIO_puts(mem, [keybytes bytes]);
     priKey = EVP_PKEY_get1_RSA(PEM_read_bio_PrivateKey(mem, NULL, NULL, NULL));
     if ( !priKey ) {
-        DEBUGMSG(@"%s\n", ERR_error_string(ERR_get_error(), NULL));
+        [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"EVP_PKEY_get1_RSA ERROR: %s\n", ERR_error_string(ERR_get_error(), NULL)]];
         BIO_free(mem);
         RSA_free(priKey);
         return nil;
