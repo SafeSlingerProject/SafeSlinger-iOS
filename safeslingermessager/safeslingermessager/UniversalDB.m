@@ -67,61 +67,43 @@
 
 - (BOOL)CheckMessage: (NSData*)msgid
 {
-    if(db==nil||msgid==nil){
+    if(!db || !msgid){
         [ErrorLogger ERRORDEBUG: @"ERROR: DB Object is null or Input is null."];
         return NO;
     }
     
     BOOL exist = NO;
-    @try {
+    
+    sqlite3_stmt *sqlStatement = NULL;
+    const char *sql = "SELECT COUNT(*) FROM ciphertable WHERE msgid=?";
         
-        sqlite3_stmt *sqlStatement;
-        const char *sql = "SELECT COUNT(*) FROM ciphertable WHERE msgid=?";
-        
-        if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK){
-            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while creating statement. '%s'", sqlite3_errmsg(db)]];
-        }
-        
+    if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) == SQLITE_OK){
         // bind msgid
         sqlite3_bind_blob(sqlStatement, 1, [msgid bytes], (int)[msgid length], SQLITE_TRANSIENT);
-        
-        if (sqlite3_step(sqlStatement) == SQLITE_ERROR) {
-            [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"Error while querying data. '%s'", sqlite3_errmsg(db)]];
-        } else {
-            if(sqlite3_column_int(sqlStatement, 0)>0) exist = YES;
+        if(sqlite3_step(sqlStatement) == SQLITE_OK)
+        {
+            if(sqlite3_column_int(sqlStatement, 0)>0)
+                exist = YES;
         }
-        
-        if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
-            [ErrorLogger ERRORDEBUG: @"ERROR: Problem with finalize statement"];
-        }
+        sqlite3_finalize(sqlStatement);
     }
-    @catch (NSException *exception) {
-        [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: An exception occured, %@", [exception reason]]];
-    }
-    @finally {
-        return exist;
-    }
+    
+    return exist;
 }
 
 - (BOOL)createNewEntry:(MsgEntry *)msg {
-    DEBUGMSG(@"CreateNewEntry");
-    if(db==nil){
+    
+    if(!db || !msg){
         [ErrorLogger ERRORDEBUG: @"ERROR: DB Object is null or Input is null."];
         return NO;
     }
     
-    BOOL ret = YES;
-    @try {
-        
-        sqlite3_stmt *sqlStatement;
-        const char *sql = "insert into ciphertable (msgid, cTime, keyid, cipher) Values (?,?,?,?);";
-        if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK){
-            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while creating statement. '%s'", sqlite3_errmsg(db)]];
-            ret = NO;
-        }
-        
+    BOOL ret = NO;
+    sqlite3_stmt *sqlStatement = NULL;
+    const char *sql = "insert into ciphertable (msgid, cTime, keyid, cipher) Values (?,?,?,?);";
+    
+    if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) == SQLITE_OK){
         const NSString* unknownFlag = @"UNDEFINED";
-        
         // msgid
         sqlite3_bind_blob(sqlStatement, 1, [msg.msgid bytes], (int)[msg.msgid length], SQLITE_TRANSIENT);
         // time
@@ -130,72 +112,47 @@
         sqlite3_bind_text(sqlStatement, 3, [unknownFlag UTF8String], -1, SQLITE_TRANSIENT);
         // empty for cipher
         sqlite3_bind_null(sqlStatement, 4);
+        int error = sqlite3_step(sqlStatement);
+        if(error == SQLITE_DONE)
+            ret = YES;
+        else
+            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"ERROR: Error while inserting data. '%s'", sqlite3_errstr(error)]];
+        sqlite3_finalize(sqlStatement);
+    }
         
-        if(SQLITE_DONE != sqlite3_step(sqlStatement)){
-            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"ERROR: Error while inserting data. '%s'", sqlite3_errmsg(db)]];
-            ret = NO;
-        }
-        
-        if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
-            [ErrorLogger ERRORDEBUG: @"ERROR: Problem with finalize statement"];
-            ret = NO;
-        }
-    }
-    @catch (NSException *exception) {
-        [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"An exception occured: %@", [exception reason]]];
-        ret = NO;
-    }
-    @finally {
-        return ret;
-    }
+    return ret;
 }
 
 - (BOOL)updateMessageEntry:(MsgEntry *)msg {
-	if(db==nil){
+	
+    if(!db || !msg)
+    {
 		[ErrorLogger ERRORDEBUG: @"ERROR: DB Object is null or Input is null."];
 		return NO;
 	}
 	
-	BOOL ret = YES;
-	@try {
-		
-//		NSData *cipher = [NSData dataWithBytes:[newcipher bytes]+LENGTH_KEYID length:[newcipher length]-LENGTH_KEYID];
-		
-		// update entry
-		sqlite3_stmt *sqlStatement;
-		const char *sql = "UPDATE ciphertable SET keyid=?, cipher=? WHERE msgid=?";
-		if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK){
-			[ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while creating statement. '%s'", sqlite3_errmsg(db)]];
-			ret = NO;
-		}
-		
-		sqlite3_bind_text(sqlStatement, 1, [msg.keyid UTF8String], -1, SQLITE_TRANSIENT);
-		sqlite3_bind_blob(sqlStatement, 2, [msg.msgbody bytes], (int)[msg.msgbody length], SQLITE_TRANSIENT);
-		sqlite3_bind_blob(sqlStatement, 3, [msg.msgid bytes], (int)[msg.msgid length], SQLITE_TRANSIENT);
-		
-		if(SQLITE_DONE != sqlite3_step(sqlStatement)){
-			[ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"Error while updating data. '%s'", sqlite3_errmsg(db)]];
-			ret = NO;
-		}
-		
-		if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
-			[ErrorLogger ERRORDEBUG: @"ERROR: Problem with finalize statement"];
-			ret = NO;
-		}
-		
-	}
-	@catch (NSException *exception) {
-		[ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"An exception occured: %@", [exception reason]]];
-		ret = NO;
-	}
-	@finally {
-		return ret;
-	}
+	BOOL ret = NO;
+	
+    // update entry
+    sqlite3_stmt *sqlStatement = NULL;
+    const char *sql = "UPDATE ciphertable SET keyid=?, cipher=? WHERE msgid=?";
+    if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) == SQLITE_OK){
+        sqlite3_bind_text(sqlStatement, 1, [msg.keyid UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_blob(sqlStatement, 2, [msg.msgbody bytes], (int)[msg.msgbody length], SQLITE_TRANSIENT);
+        sqlite3_bind_blob(sqlStatement, 3, [msg.msgid bytes], (int)[msg.msgid length], SQLITE_TRANSIENT);
+        int error = sqlite3_step(sqlStatement);
+        if(error == SQLITE_DONE)
+            ret = YES;
+        else
+            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"Error while updating data. '%s'", sqlite3_errstr(error)]];
+        sqlite3_finalize(sqlStatement);
+    }
+    return ret;
 }
 
 - (NSArray*)GetEntriesForKeyID: (NSString*)keyid WithToken:(NSString*)token WithName:(NSString*)name
 {
-    if(db==nil)
+    if(!db || !keyid || !token || !name)
     {
         [ErrorLogger ERRORDEBUG:@"ERROR: DB Object is null or input is null."];
         return nil;
@@ -242,45 +199,43 @@
 }
 
 - (int)updateThreadEntries:(NSMutableArray *)threadlist {
-    if(db == nil || threadlist == nil) {
+    
+    if(!db || !threadlist) {
         [ErrorLogger ERRORDEBUG:@"ERROR: DB Object is null or input is null."];
         return -1;
     }
     
     int NumMessage = 0;
-    @try {
-        sqlite3_stmt *sqlStatement;
-		const char *sql = "SELECT keyid, cTime, count(msgid) FROM ciphertable GROUP BY keyid order by cTime desc;";
+    
+    sqlite3_stmt *sqlStatement = NULL;
+    const char *sql = "SELECT keyid, cTime, count(msgid) FROM ciphertable GROUP BY keyid order by cTime desc;";
 		
-        if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
-            [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
-        }
+    if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) == SQLITE_OK) {
         
         while (sqlite3_step(sqlStatement) == SQLITE_ROW) {
+            
             NSString* keyid = [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 0)];
             DEBUGMSG(@"keyid = %@", keyid);
-			
-			MsgListEntry *listEntry;
-			
-			for(int i = 0; i < threadlist.count; i++) {
-				if([keyid isEqualToString:((MsgListEntry *)threadlist[i]).keyid]) {
-					listEntry = threadlist[i];
-					break;
-				}
-			}
-			
+            
+            MsgListEntry *listEntry;
+            
+            for(int i = 0; i < threadlist.count; i++) {
+                if([keyid isEqualToString:((MsgListEntry *)threadlist[i]).keyid]) {
+                    listEntry = threadlist[i];
+                    break;
+                }
+            }
+            
             if(listEntry) {
                 // update information
                 DEBUGMSG(@"modify entry thread.");
                 NSString *date1 = [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 1)];
                 // compare dates
                 if ([UtilityFunc CompareDate:date1 Target:listEntry.lastSeen] == NSOrderedDescending) {
-					listEntry.lastSeen = date1;
-					
-					[threadlist removeObject:listEntry];
-					[self insertMessageListEntry:listEntry orderedByDateDescendingInArray:threadlist];
+                    listEntry.lastSeen = date1;
+                    [threadlist removeObject:listEntry];
+                    [self insertMessageListEntry:listEntry orderedByDateDescendingInArray:threadlist];
                 }
-                
                 listEntry.ciphercount = sqlite3_column_int(sqlStatement, 2);
                 NumMessage += listEntry.ciphercount;
                 listEntry.messagecount += listEntry.ciphercount;
@@ -292,23 +247,13 @@
                 listEntry.lastSeen = [NSString stringWithUTF8String:(char*)sqlite3_column_text(sqlStatement, 1)];
                 listEntry.messagecount = listEntry.ciphercount = sqlite3_column_int(sqlStatement, 2);
                 NumMessage += listEntry.ciphercount;
-				
-				[self insertMessageListEntry:listEntry orderedByDateDescendingInArray:threadlist];
+                [self insertMessageListEntry:listEntry orderedByDateDescendingInArray:threadlist];
             }
-        }
+        } // end of while
+    }
         
-        if(sqlite3_finalize(sqlStatement) != SQLITE_OK) {
-            [ErrorLogger ERRORDEBUG: @"ERROR: Problem with finalize statement"];
-            NumMessage = -1;
-        }
-    }
-    @catch (NSException *exception) {
-        [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"An exception occured: %@", [exception reason]]];
-        NumMessage = -1;
-    }
-    @finally {
-        return NumMessage;
-    }
+    sqlite3_finalize(sqlStatement);
+    return NumMessage;
 }
 
 - (void)insertMessageListEntry:(MsgListEntry *)listEntry orderedByDateDescendingInArray:(NSMutableArray *)threadList {
@@ -332,273 +277,178 @@
 
 - (int)ThreadCipherCount: (NSString*)KEYID
 {
-    if(db==nil||KEYID==nil)
+    if(!db || !KEYID)
     {
         [ErrorLogger ERRORDEBUG: @"ERROR: DB Object is null or Input is null."];
         return 0;
     }
     
     int count = 0;
-    @try {
-        const char *sql = "SELECT count(msgid) FROM ciphertable WHERE keyid=?";
-        sqlite3_stmt *sqlStatement;
-        if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK)
-        {
-            [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
-        }
-        
+    const char *sql = "SELECT count(msgid) FROM ciphertable WHERE keyid=?";
+    sqlite3_stmt *sqlStatement = NULL;
+    if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) == SQLITE_OK)
+    {
         sqlite3_bind_text(sqlStatement, 1, [KEYID UTF8String], -1, SQLITE_TRANSIENT);
-        
-        if (sqlite3_step(sqlStatement) == SQLITE_ERROR) {
-            [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"Error while querying data. '%s'", sqlite3_errmsg(db)]];
-        } else {
+        int error = sqlite3_step(sqlStatement);
+        if(error==SQLITE_OK)
+        {
             count = sqlite3_column_int(sqlStatement, 0);
+        }else{
+            [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"Error while querying data. '%s'", sqlite3_errstr(error)]];
         }
-        
-        if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
-            [ErrorLogger ERRORDEBUG: @"ERROR: Problem with finalize statement"];
-            count = 0;
-        }
+        sqlite3_finalize(sqlStatement);
     }
-    @catch (NSException *exception) {
-        [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"An exception occured: %@", [exception reason]]];
-        count = 0;
-    }
-    @finally {
-        return count;
-    }
+    return count;
 }
 
 - (BOOL)DeleteMessage: (NSData*)msgid
 {
-    if(db==nil||msgid==nil){
+    if(!db || !msgid){
         [ErrorLogger ERRORDEBUG: @"ERROR: DB Object is null or Input is null."];
         return NO;
     }
     
     BOOL ret = YES;
-    @try {
+    sqlite3_stmt *sqlStatement;
+    const char *sql = "DELETE FROM ciphertable WHERE msgid=?";
         
-        sqlite3_stmt *sqlStatement;
-        const char *sql = "DELETE FROM ciphertable WHERE msgid=?";
-        
-        if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK){
-            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while creating statement. '%s'", sqlite3_errmsg(db)]];
-            ret = NO;
-        }
-        
+    if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) == SQLITE_OK){
         // bind msgid
         sqlite3_bind_blob(sqlStatement, 1, [msgid bytes], (int)[msgid length], SQLITE_TRANSIENT);
-        
-        if(SQLITE_DONE != sqlite3_step(sqlStatement)){
-            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while deleting data. '%s'", sqlite3_errmsg(db)]];
+        int error = sqlite3_step(sqlStatement);
+        if(error != SQLITE_DONE){
+            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while deleting data. '%s'", sqlite3_errstr(error)]];
             ret = NO;
         }
-        
-        if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
-            [ErrorLogger ERRORDEBUG: @"ERROR: Problem with finalize statement"];
-            ret = NO;
-        }
+        sqlite3_finalize(sqlStatement);
     }
-    @catch (NSException *exception) {
-        [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: An exception occured, %@", [exception reason]]];
-        
-        ret = NO;
-    }
-    @finally {
-        return ret;
-    }
+    
+    return ret;
 }
 
 - (NSArray*)LoadThreadMessage: (NSString*)KEYID
 {
-    if(db==nil||KEYID==nil)
+    if(!db || !KEYID)
     {
         [ErrorLogger ERRORDEBUG: @"ERROR: DB Object is null or Input is null."];
         return nil;
     }
     
     NSMutableArray *tmparray = nil;
-    @try {
-        
-        int rownum = 0;
-        tmparray = [NSMutableArray arrayWithCapacity:0];
-        
-        const char *sql = "SELECT * FROM ciphertable WHERE keyid=? ORDER BY cTime ASC";
-        sqlite3_stmt *sqlStatement;
-        if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK)
-        {
-            [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
-            tmparray = nil;
-        }
-        
+    
+    int rownum = 0;
+    tmparray = [NSMutableArray arrayWithCapacity:0];
+    
+    const char *sql = "SELECT * FROM ciphertable WHERE keyid=? ORDER BY cTime ASC";
+    sqlite3_stmt *sqlStatement = NULL;
+    if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) == SQLITE_OK)
+    {
         sqlite3_bind_text(sqlStatement, 1, [KEYID UTF8String], -1, SQLITE_TRANSIENT);
         
-        char* output = NULL;
         while (sqlite3_step(sqlStatement)==SQLITE_ROW) {
             
-            MsgEntry *amsg = [[MsgEntry alloc]init];
-            
-            int rawLen = sqlite3_column_bytes(sqlStatement, 0);
-            if(rawLen>0) {
-                amsg.msgid = [NSData dataWithBytes:sqlite3_column_blob(sqlStatement, 0) length:rawLen];
-            }
-            
-            if(sqlite3_column_type(sqlStatement, 1)!=SQLITE_NULL)
+            if(sqlite3_column_type(sqlStatement, 0) == SQLITE_BLOB
+               && sqlite3_column_bytes(sqlStatement, 0) > 0
+               && sqlite3_column_type(sqlStatement, 1) == SQLITE_TEXT
+               && sqlite3_column_type(sqlStatement, 3) == SQLITE_BLOB
+               && sqlite3_column_bytes(sqlStatement, 3) > 0)
             {
+                MsgEntry *amsg = [[MsgEntry alloc]init];
+                int id_len = sqlite3_column_bytes(sqlStatement, 0);
+                amsg.msgid = [NSData dataWithBytes:sqlite3_column_blob(sqlStatement, 0) length:id_len];
                 amsg.cTime = amsg.rTime = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 1)];
+                amsg.dir = FromMsg;
+                amsg.keyid = KEYID;
+                int cipher_len = sqlite3_column_bytes(sqlStatement, 3);
+                char* output = (char*)sqlite3_column_blob(sqlStatement, 3);
+                amsg.msgbody = [NSData dataWithBytes:output length:cipher_len];
+                amsg.smsg = amsg.sfile = Encrypted;
+                [tmparray addObject:amsg];
+                rownum++;
             }
-            
-            amsg.dir = FromMsg;
-            amsg.keyid = KEYID;
-            
-            // cipher
-            if(sqlite3_column_type(sqlStatement, 3)!=SQLITE_NULL)
-            {
-                int rawLen = sqlite3_column_bytes(sqlStatement, 3);
-                DEBUGMSG(@"cipher size = %d", rawLen);
-                if(rawLen>0) {
-                    output = (char*)sqlite3_column_blob(sqlStatement, 3);
-                    amsg.msgbody = [NSData dataWithBytes:output length:rawLen];
-                }
-            }
-            
-            // 13 smsg boolean
-            amsg.smsg = amsg.sfile = Encrypted;
-            
-            [tmparray addObject:amsg];
-            amsg = nil;
-            rownum++;
         }
-        
-        if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
-            [ErrorLogger ERRORDEBUG: @"ERROR: Problem with finalize statement"];
-        }
+        sqlite3_finalize(sqlStatement);
     }
-    @catch (NSException *exception) {
-        [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"An exception occured: %@", [exception reason]]];
-        tmparray = nil;
-    }
-    @finally {
-        return tmparray;
-    }
+    
+    return tmparray;
 }
 
 - (NSArray *)getEncryptedMessages {
-	if(db == nil) {
+    
+	if(!db) {
 		[ErrorLogger ERRORDEBUG: @"ERROR: DB Object is null or Input is null."];
 		return nil;
 	}
 	
 	NSMutableArray *tmparray = [NSMutableArray new];
 	
-	@try {
-		const char *sql = "SELECT * FROM ciphertable WHERE cipher IS NOT NULL ORDER BY cTime ASC";
-		sqlite3_stmt *sqlStatement;
-		if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK) {
-			[ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
-			tmparray = nil;
-		}
-		
-		while (sqlite3_step(sqlStatement) == SQLITE_ROW) {
-			
-			MsgEntry *amsg = [[MsgEntry alloc]init];
-			
-			int rawLen = sqlite3_column_bytes(sqlStatement, 0);
-			if(rawLen > 0) {
-				amsg.msgid = [NSData dataWithBytes:sqlite3_column_blob(sqlStatement, 0) length:rawLen];
-			}
-			
-			if(sqlite3_column_type(sqlStatement, 1) != SQLITE_NULL) {
-				amsg.cTime = amsg.rTime = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 1)];
-			}
-			
-			amsg.dir = FromMsg;
-			
-			if(sqlite3_column_type(sqlStatement, 2) != SQLITE_NULL) {
-				amsg.keyid = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 2)];
-			}
-			
-			// cipher
-			rawLen = sqlite3_column_bytes(sqlStatement, 3);
-			if(rawLen > 0) {
-				amsg.msgbody = [NSData dataWithBytes:sqlite3_column_blob(sqlStatement, 3) length:rawLen];
-			}
-			
-			// 13 smsg boolean
-			amsg.smsg = amsg.sfile = Encrypted;
-			
-			[tmparray addObject:amsg];
-		}
-		
-		if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
-			[ErrorLogger ERRORDEBUG: @"ERROR: Problem with finalize statement"];
-		}
-	}
-	@catch (NSException *exception) {
-		[ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"An exception occured: %@", [exception reason]]];
-		tmparray = nil;
-	}
-	@finally {
-		return tmparray;
-	}
+	const char *sql = "SELECT * FROM ciphertable WHERE cipher IS NOT NULL ORDER BY cTime ASC";
+    sqlite3_stmt *sqlStatement = NULL;
+    if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) == SQLITE_OK) {
+        
+        while (sqlite3_step(sqlStatement) == SQLITE_ROW) {
+            
+            if(sqlite3_column_type(sqlStatement, 0) == SQLITE_BLOB
+               && sqlite3_column_bytes(sqlStatement, 0) > 0
+               && sqlite3_column_type(sqlStatement, 1) == SQLITE_TEXT
+               && sqlite3_column_type(sqlStatement, 2) == SQLITE_TEXT
+               && sqlite3_column_type(sqlStatement, 3) == SQLITE_BLOB
+               && sqlite3_column_bytes(sqlStatement, 3) > 0
+               )
+            {
+                MsgEntry *amsg = [[MsgEntry alloc]init];
+                amsg.msgid = [NSData dataWithBytes:sqlite3_column_blob(sqlStatement, 0) length:sqlite3_column_bytes(sqlStatement, 0)];
+                amsg.cTime = amsg.rTime = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 1)];
+                amsg.keyid = [NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 2)];
+                amsg.msgbody = [NSData dataWithBytes:sqlite3_column_blob(sqlStatement, 3) length:sqlite3_column_bytes(sqlStatement, 3)];
+                amsg.smsg = amsg.sfile = Encrypted;
+                amsg.dir = FromMsg;
+                [tmparray addObject:amsg];
+            }
+        } // end of while
+        sqlite3_finalize(sqlStatement);
+    }
+    
+    return tmparray;
 }
 
 - (BOOL)DeleteThread: (NSString*)keyid
 {
-    if(db==nil){
+    if(!db || !keyid){
         [ErrorLogger ERRORDEBUG: @"ERROR: DB Object is null or Input is null."];
         return NO;
     }
 	
-    BOOL ret = YES;
-    @try {
+    BOOL ret = NO;
+    sqlite3_stmt *sqlStatement = NULL;
+    const char *sql = "DELETE FROM ciphertable WHERE keyid=?";
 		
-        sqlite3_stmt *sqlStatement;
-        const char *sql = "DELETE FROM ciphertable WHERE keyid=?";
-		
-        if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK){
-            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while creating statement. '%s'", sqlite3_errmsg(db)]];
-            ret = NO;
-        }
-        
+    if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) == SQLITE_OK){
         // bind msgid
         sqlite3_bind_text (sqlStatement, 1, [keyid UTF8String], -1, SQLITE_TRANSIENT);
-        
-        if(SQLITE_DONE != sqlite3_step(sqlStatement)){
-            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while deleting data. '%s'", sqlite3_errmsg(db)]];
-            ret = NO;
-        }
-        
-        if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
-            [ErrorLogger ERRORDEBUG: @"ERROR: Problem with finalize statement"];
-            ret = NO;
-        }
+        int error = sqlite3_step(sqlStatement);
+        if(error!=SQLITE_DONE)
+            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while creating statement. '%s'", sqlite3_errstr(error)]];
+        else
+            ret = YES;
+        sqlite3_finalize(sqlStatement);
     }
-    @catch (NSException *exception) {
-        [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: An exception occured, %@", [exception reason]]];
-        ret = NO;
-    }
-    @finally {
-        return ret;
-    }
+    return ret;
 }
 
 - (BOOL) CloseDB
 {
-    if(db==nil) return YES;
-	@try{
-        if(sqlite3_close(db)!=SQLITE_OK)
-        {
-            [ErrorLogger ERRORDEBUG: @"ERROR: Unable to close the database."];
-            DEBUGMSG(@"ERROR: Unable to close the database.");
-        }else
-            return YES;
-    }@catch (NSException *exception) {
-        [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: An exception occured in SaveDBToStorage: %@", [exception reason]]];
-        DEBUGMSG(@"ERROR: An exception occured in SaveDBToStorage: %@", [exception reason]);
+    if(!db)
+        return YES;
+    
+    int error = sqlite3_close_v2(db);
+	if(error!=SQLITE_OK)
+    {
+        [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Unable to close the database: %s", sqlite3_errstr(error)]];
+        DEBUGMSG(@"ERROR: Unable to close the database: %s", sqlite3_errstr(error));
         return NO;
     }
+    return YES;
 }
 
 @end
