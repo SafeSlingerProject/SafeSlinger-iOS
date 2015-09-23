@@ -46,7 +46,7 @@ enum ProtocolState
 
 @class safeslingerexchange;
 
-@interface SafeSlingerExchange : NSObject <UIAlertViewDelegate>
+@interface SafeSlingerExchange : NSObject
 {
 	int users, retries, minID, version, serverVersion, minVersion;
 	BOOL confirmed, wordListsDiffer;

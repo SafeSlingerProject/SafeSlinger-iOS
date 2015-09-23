@@ -7,12 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		180A3C8E19410333001A44E9 /* Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 184A3B31192FC08E008C64FF /* Base64.h */; };
 		18139A731937B15500FD0870 /* wordlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18139A721937B13400FD0870 /* wordlist.plist */; };
 		18139A771937B9F000FD0870 /* ActivityWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 18139A751937B9F000FD0870 /* ActivityWindow.m */; };
 		18139A791937BBD700FD0870 /* ActivityWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18139A741937B9C500FD0870 /* ActivityWindow.xib */; };
 		184A3B2E192FBF32008C64FF /* NSDataEncryption.m in Sources */ = {isa = PBXBuildFile; fileRef = 184A3B2C192FBF32008C64FF /* NSDataEncryption.m */; };
-		184A3B32192FC08E008C64FF /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 184A3B30192FC08E008C64FF /* Base64.m */; };
 		184A3B37192FE0BB008C64FF /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 184A3B35192FE0BB008C64FF /* Utility.m */; };
 		185002A11934E3660080B355 /* safeslingerexchange.h in Headers */ = {isa = PBXBuildFile; fileRef = 18FA4BDE192E8DFF00734976 /* safeslingerexchange.h */; };
 		1860572919450859002DD149 /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 1860572719450859002DD149 /* Reachability.h */; };
@@ -71,8 +69,6 @@
 		18139A761937B9F000FD0870 /* ActivityWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityWindow.h; sourceTree = "<group>"; };
 		184A3B2C192FBF32008C64FF /* NSDataEncryption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataEncryption.m; sourceTree = "<group>"; };
 		184A3B2D192FBF32008C64FF /* NSDataEncryption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataEncryption.h; sourceTree = "<group>"; };
-		184A3B30192FC08E008C64FF /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
-		184A3B31192FC08E008C64FF /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		184A3B35192FE0BB008C64FF /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
 		184A3B36192FE0BB008C64FF /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
 		1860572719450859002DD149 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -242,8 +238,6 @@
 				18F8BDF119368C3000497D36 /* iToast.h */,
 				184A3B35192FE0BB008C64FF /* Utility.m */,
 				184A3B36192FE0BB008C64FF /* Utility.h */,
-				184A3B30192FC08E008C64FF /* Base64.m */,
-				184A3B31192FC08E008C64FF /* Base64.h */,
 				184A3B2C192FBF32008C64FF /* NSDataEncryption.m */,
 				184A3B2D192FBF32008C64FF /* NSDataEncryption.h */,
 				18968190192EA7F500C3C4A6 /* Config.h */,
@@ -291,7 +285,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				180A3C8E19410333001A44E9 /* Base64.h in Headers */,
 				1860572919450859002DD149 /* Reachability.h in Headers */,
 				18F8BDF319368C3000497D36 /* iToast.h in Headers */,
 				185002A11934E3660080B355 /* safeslingerexchange.h in Headers */,
@@ -343,7 +336,7 @@
 		18FA4BCE192E8DFF00734976 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = CyLab;
 			};
 			buildConfigurationList = 18FA4BD1192E8DFF00734976 /* Build configuration list for PBXProject "safeslingerexchange" */;
@@ -430,7 +423,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				184A3B32192FC08E008C64FF /* Base64.m in Sources */,
 				184A3B2E192FBF32008C64FF /* NSDataEncryption.m in Sources */,
 				18FA4C03192E8FAB00734976 /* WordListViewController.m in Sources */,
 				1860572A19450859002DD149 /* Reachability.m in Sources */,
@@ -563,6 +555,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Yue-Hsun Lin (X6U2B9ZV7E)";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -577,7 +570,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "45d3d25d-9281-45f2-995f-505cdaeeed27";
 				SDKROOT = iphoneos;
@@ -610,7 +603,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				ONLY_ACTIVE_ARCH = NO;
 				PROVISIONING_PROFILE = "45d3d25d-9281-45f2-995f-505cdaeeed27";
 				SDKROOT = iphoneos;

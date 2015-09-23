@@ -45,13 +45,12 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
     [SubmitID setTitle:NSLocalizedStringFromBundle(delegate.res, @"btn_OK", @"OK") forState:UIControlStateNormal];
     [LowestID setPlaceholder:NSLocalizedStringFromBundle(delegate.res, @"label_UserIdHint", @"Lowest")];
     [HintLabel setText: NSLocalizedStringFromBundle(delegate.res, @"label_PromptInstruct", @"This number is used to create a unique group of users. Compare, then enter the lowest number among all users.")];
     
     // customized cancel button
-    UIBarButtonItem *cancelBtn = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedStringFromBundle(delegate.res, @"btn_Cancel", @"Cancel") style:UIBarButtonItemStyleBordered target:self action:@selector(ExitProtocol:)];
+    UIBarButtonItem *cancelBtn = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedStringFromBundle(delegate.res, @"btn_Cancel", @"Cancel") style:UIBarButtonItemStylePlain target:self action:@selector(ExitProtocol:)];
     [self.navigationItem setLeftBarButtonItem:cancelBtn];
     self.navigationItem.hidesBackButton = YES;
     
@@ -66,13 +65,23 @@
 
 -(void) ExitProtocol: (id)sender
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: NSLocalizedStringFromBundle(delegate.res, @"title_Question", @"Question")
-                                                    message: NSLocalizedStringFromBundle(delegate.res, @"ask_QuitConfirmation", @"Quit? Are you sure?")
-                                                   delegate: self
-                                          cancelButtonTitle: NSLocalizedStringFromBundle(delegate.res, @"btn_No", @"No")
-                                          otherButtonTitles: NSLocalizedStringFromBundle(delegate.res, @"btn_Yes", @"Yes"), nil];
-    [alert show];
-    alert = nil;
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedStringFromBundle(delegate.res, @"title_Question", @"Question")
+                                                                   message:NSLocalizedStringFromBundle(delegate.res, @"ask_QuitConfirmation", @"Quit? Are you sure?")
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* okAction = [UIAlertAction actionWithTitle:NSLocalizedStringFromBundle(delegate.res, @"btn_Yes", @"Yes")
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * action){
+                                                         delegate.protocol.state = ProtocolCancel;
+                                                         [delegate DisplayMessage: NSLocalizedStringFromBundle(delegate.res, @"error_WebCancelledByUser", @"User canceled server request.")];
+                                                     }];
+    
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedStringFromBundle(delegate.res, @"btn_No", @"No") style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action) {}];
+    
+    [alert addAction:okAction];
+    [alert addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -80,20 +89,23 @@
     if(buttonIndex!=alertView.cancelButtonIndex)
     {
         // exit protocol
-        delegate.protocol.state = ProtocolCancel;
-        [delegate DisplayMessage: NSLocalizedStringFromBundle(delegate.res, @"error_WebCancelledByUser", @"User canceled server request.")];
+        
     }
 }
 
 - (void)DisplayHow
 {
-    UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedStringFromBundle(delegate.res, @"title_userid", @"Grouping")
-                                                      message: NSLocalizedStringFromBundle(delegate.res, @"help_userid", @"This number on this screen is used to create a unique group of users. Review the numbers on all users' screens, then all users should enter the same lowest number and press 'OK'.")
-                                                     delegate:nil
-                                            cancelButtonTitle: NSLocalizedStringFromBundle(delegate.res, @"btn_Close", @"Close")
-                                            otherButtonTitles:nil];
-    [message show];
-    message = nil;
+    // Display using UIAlertView
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedStringFromBundle(delegate.res, @"title_userid", @"Grouping")
+                                                                   message:NSLocalizedStringFromBundle(delegate.res, @"help_userid", @"This number on this screen is used to create a unique group of users. Review the numbers on all users' screens, then all users should enter the same lowest number and press 'OK'.")
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:NSLocalizedStringFromBundle(delegate.res, @"btn_Close", @"Close")
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+    
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated

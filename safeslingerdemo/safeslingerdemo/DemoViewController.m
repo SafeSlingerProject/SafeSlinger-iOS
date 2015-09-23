@@ -57,13 +57,16 @@
 
 -(IBAction)ShowHelp:(id)sender
 {
-    UIAlertView *help = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"dev_app_name_long", @"SafeSlinger Exchange for Security Developers")
-                                                    message:NSLocalizedString(@"dev_instruct", @"DEMO:\nYou may build and run your own server, OR use ours: slinger-demo.appspot.com. A host name and a secret are required.")
-                                                   delegate: nil
-                                          cancelButtonTitle: NSLocalizedString(@"dev_btn_OK", @"OK")
-                                          otherButtonTitles: nil];
-    [help show];
-    help = nil;
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"dev_app_name_long", @"SafeSlinger Exchange for Security Developers")
+                                                                   message:NSLocalizedString(@"dev_instruct", @"DEMO:\nYou may build and run your own server, OR use ours: slinger-demo.appspot.com. A host name and a secret are required.")
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"dev_btn_OK", @"OK")
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+    
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -198,13 +201,16 @@
     }
     
     // Display using UIAlertView
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: title
-                                                    message: result
-                                                   delegate: nil
-                                          cancelButtonTitle: NSLocalizedString(@"dev_btn_OK", @"OK")
-                                          otherButtonTitles: nil];
-    [alert show];
-    alert = nil;
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:title
+                                                                   message:result
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"dev_btn_OK", @"OK")
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+    
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 

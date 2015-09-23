@@ -126,19 +126,21 @@
 {
     if([input length]==0)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: NSLocalizedStringFromBundle(res, @"lib_name", @"SafeSlinger Exchange")
-                                                        message: NSLocalizedStringFromBundle(res, @"error_NoDataToExchange", @"The exchange is missing required data.")
-                                                       delegate: self
-                                              cancelButtonTitle: NSLocalizedStringFromBundle(res, @"btn_No", @"No")
-                                              otherButtonTitles: nil];
-        [alert show];
-        alert = nil;
-        return;
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedStringFromBundle(res, @"lib_name", @"SafeSlinger Exchange")
+                                                                       message:NSLocalizedStringFromBundle(res, @"error_NoDataToExchange", @"The exchange is missing required data.")
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* okAction = [UIAlertAction actionWithTitle:NSLocalizedStringFromBundle(res, @"btn_OK", @"OK")
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * action){}];
+        
+        [alert addAction:okAction];
+        [mController presentViewController:alert animated:YES completion:nil];
+    }else{
+        exchangeInput = input;
+        // push view
+        [mController.navigationController pushViewController:sizePicker animated:YES];
     }
-    
-    exchangeInput = input;
-    // push view
-    [mController.navigationController pushViewController:sizePicker animated:YES];
 }
 
 -(void)RequestUniqueID: (int)NumOfUsers
@@ -173,13 +175,16 @@
     [actWindow.view removeFromSuperview];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: NSLocalizedStringFromBundle(res, @"lib_name", @"SafeSlinger Exchange")
-                                                    message: NSLocalizedStringFromBundle(res, @"error_ExchangeProtocolTimeoutExceeded", @"Exchange timeout exceeded. Begin the exchange again.")
-                                                   delegate: nil
-                                          cancelButtonTitle: NSLocalizedStringFromBundle(res, @"btn_OK", @"OK")
-                                          otherButtonTitles: nil];
-    [alert show];
-    alert = nil;
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedStringFromBundle(res, @"lib_name", @"SafeSlinger Exchange")
+                                                                   message:NSLocalizedStringFromBundle(res, @"error_ExchangeProtocolTimeoutExceeded", @"Exchange timeout exceeded. Begin the exchange again.")
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* okAction = [UIAlertAction actionWithTitle:NSLocalizedStringFromBundle(res, @"btn_OK", @"OK")
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * action){}];
+    
+    [alert addAction:okAction];
+    [mController presentViewController:alert animated:YES completion:nil];
     [mController EndExchange:RESULT_EXCHANGE_CANCELED ErrorString: NSLocalizedStringFromBundle(res, @"error_ExchangeProtocolTimeoutExceeded", @"Exchange timeout exceeded. Begin the exchange again.") ExchangeSet:nil];
 }
 
@@ -198,14 +203,18 @@
         case ProtocolTimeout:
         case NetworkFailure:
         {
-            DEBUGMSG(@"ERROR: %@", showMessage);
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle: NSLocalizedStringFromBundle(res, @"lib_name", @"SafeSlinger Exchange")
-                                                            message: showMessage
-                                                           delegate: nil
-                                                  cancelButtonTitle: NSLocalizedStringFromBundle(res, @"btn_OK", @"OK")
-                                                  otherButtonTitles: nil];
-            [alert show];
-            alert = nil;
+            NSLog(@"ERROR: %@", showMessage);
+            
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedStringFromBundle(res, @"lib_name", @"SafeSlinger Exchange")
+                                                                           message:showMessage
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction* okAction = [UIAlertAction actionWithTitle:NSLocalizedStringFromBundle(res, @"btn_OK", @"OK")
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction * action){}];
+            
+            [alert addAction:okAction];
+            [mController presentViewController:alert animated:YES completion:nil];
             [mController EndExchange:RESULT_EXCHANGE_CANCELED ErrorString:showMessage ExchangeSet:nil];
         }
             break;

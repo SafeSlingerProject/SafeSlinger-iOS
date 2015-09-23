@@ -40,7 +40,6 @@
 #import <openssl/rand.h>
 #import <openssl/err.h>
 
-#import "Base64.h"
 #import <sha3/sha3.h>
 
 #define DH_PRIME "FFFFFFFFFFFFFFFFC90FDAA22168C234C4C6628B80DC1CD129024E088A67CC74020BBEA63B139B22514A08798E3404DDEF9519B3CD3A431B302B0A6DF25F14374FE1356D6D51C245E485B576625E7EC6F44C42E9A637ED6B0BFF5CB6F406B7EDEE386BFB5A899FA5AE9F24117C4B1FE649286651ECE45B3DC2007CB8A163BF0598DA48361C55D39A69163FA8FD24CF5F83655D23DCA3AD961C62F356208552BB9ED529077096966D670C354E4ABC9804F1746C08CA237327FFFFFFFFFFFFFFFF"
@@ -146,43 +145,92 @@
 	DEBUGMSG(@"Do Async POST to Relative URL: %@", page);
 	DEBUGMSG(@"Data: %@", body);
 	
-	self.serverResponse = [[NSMutableData alloc] init];
-	NSURL *url = [NSURL URLWithString: page relativeToURL: serverURL];
-	[request setURL: url];
+	[request setURL: [NSURL URLWithString: page relativeToURL: serverURL]];
 	[request setHTTPMethod: @"POST"];
 	[request setHTTPBody: body];
-	self.connection = [NSURLConnection connectionWithRequest: request delegate: self];
-	[connection start];
-	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-	[serverResponse resetBytesInRange: NSMakeRange(0, [serverResponse length])];
+    
+    NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *HttpsSession = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+    
+    [[HttpsSession dataTaskWithRequest: request
+                     completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
+                            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                            if(error)
+                            {
+                                state = NetworkFailure;
+                                [self.delegate DisplayMessage: [error description]];
+                            }else{
+                                [serverResponse setData:data];
+                                [self handleSafeSlingerState];
+                            }
+                        }] resume];
 }
 
+-(void) handleSafeSlingerState
+{
+    DEBUGMSG(@"handleSafeSlingerState...");
+    const char *buf = [serverResponse bytes];
+    int statusCode = ntohl(*(int *)buf);
+    if(statusCode==0)
+    {
+        NSString *msg = [NSString stringWithCString:buf+4 encoding:NSASCIIStringEncoding];
+        state = NetworkFailure;
+        [self.delegate DisplayMessage:msg];
+    }else{
+        switch (state)
+        {
+            case AssignUser:
+                [self handleAssignUser];
+                break;
+            case SyncUsers:
+                [self handleSyncUsers];
+                break;
+            case SyncData:
+                [self handleSyncData];
+                break;
+            case SyncSigs:
+                [self handleSyncSigs];
+                break;
+            case SyncDHKeyNodes:
+                [self handleSyncKeyNodes];
+                break;
+            case SyncMatch:
+                [self handleSyncMatch];
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+/*
 -(void) doSyncPostToPage: (NSString *) page withBody: (NSData*) body
 {
-	DEBUGMSG(@"Do Sync POST to Relatuve URL: %@", page);
-	DEBUGMSG(@"DATA: %@", body);
+    DEBUGMSG(@"Do Sync POST to Relatuve URL: %@", page);
+    DEBUGMSG(@"DATA: %@", body);
     
     // Synchronously grab the data
    	NSURL *url = [NSURL URLWithString: page relativeToURL: serverURL];
-	[request setURL: url];
-	[request setHTTPMethod: @"POST"];
-	[request setHTTPBody: body];
+    [request setURL: url];
+    [request setHTTPMethod: @"POST"];
+    [request setHTTPBody: body];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
     NSError        *error;
     NSURLResponse  *response;
     [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     NSInteger status = [(NSHTTPURLResponse *)response statusCode];
-	
+    
     DEBUGMSG(@"HTTP response code: %ld", (long)status);
     if (status != 200)
-	{
-		DEBUGMSG(@"HTTP header: %@", [(NSHTTPURLResponse *)response allHeaderFields]);
+    {
+        DEBUGMSG(@"HTTP header: %@", [(NSHTTPURLResponse *)response allHeaderFields]);
         NSString* err = [NSString stringWithFormat: NSLocalizedStringFromBundle(delegate.res, @"error_HttpCode", @"Server HTTP error: %d"), status];
         state = NetworkFailure;
         [self.delegate DisplayMessage: err];
-	}
+    }
 }
+*/
 
 -(NSData*) generateHashForPhrases
 {
@@ -276,7 +324,7 @@
 	
 	ptr = malloc(HASHLEN + 4);
 	*(int *)ptr = htonl(version);
-	[data_commitment getBytes: ptr + 4];
+	[data_commitment getBytes: ptr + 4 length:HASHLEN];
     
 	self.state = AssignUser;
 	[self doPostToPage: @"assignUser" withBody: [NSData dataWithBytes: ptr length: HASHLEN + 4]];
@@ -325,7 +373,7 @@
     // initially only one user sent
 	*(int *)(buf + 12) = htonl(1);
 	*(int *)(buf + 16) = *(int *)(buf + 4);
-	[data_commitment getBytes: buf + 20];
+	[data_commitment getBytes: buf + 20 length:HASHLEN];
     
     NSString *title = [NSString stringWithFormat:@"%@, %@",
                        [NSString stringWithFormat: NSLocalizedStringFromBundle(delegate.res, @"choice_NumUsers", @"%d users"), users],
@@ -438,11 +486,11 @@
 	*(int *)(buf + 12) = *(int *)(buf + 4);
     
     // HNi
-    [protocol_commitment getBytes: buf + 16];
+    [protocol_commitment getBytes: buf + 16 length:HASHLEN];
     // Gi
     BN_bn2bin(diffieHellmanKeys->pub_key, (unsigned char*)(buf + 16 + HASHLEN));
     // Ei
-	[encrypted_data getBytes: buf + 16 + HASHLEN + DHPubKeySize];
+	[encrypted_data getBytes: buf + 16 + HASHLEN + DHPubKeySize length:[encrypted_data length]];
     
 	self.state = SyncData;
 	[self doPostToPage: @"syncData" withBody: [NSData dataWithBytes: buf length: len]];
@@ -604,15 +652,15 @@
     
 	if (match)
 	{
-		[match_extrahash getBytes: buf + 16];
-		[wrong_hash getBytes: buf + 16 + HASHLEN];
+		[match_extrahash getBytes: buf + 16 length:HASHLEN];
+		[wrong_hash getBytes: buf + 16 + HASHLEN length:HASHLEN];
         [delegate.actWindow DisplayMessage:Phrase Detail: NSLocalizedStringFromBundle(delegate.res, @"prog_CollectingOthersCommitVerify", @"waiting for verification from all members...")];
         [delegate.compareView.view addSubview:delegate.actWindow.view];
 	}
 	else
 	{
-		[match_hash getBytes: buf + 16];
-		[wrong_nonce getBytes: buf + 16 + HASHLEN];
+		[match_hash getBytes: buf + 16 length:HASHLEN];
+		[wrong_nonce getBytes: buf + 16 + HASHLEN length:HASHLEN];
 	}
     
 	state = SyncSigs;
@@ -806,7 +854,7 @@
             keynodeRequest[2] = htonl([[userIDs objectAtIndex:currentKeyNodeNumber] intValue]);
             keynodeRequest[3] = htonl(DH_size(diffieHellmanKeys));
             BN_bn2bin(expKeynode, (unsigned char*)(&keynodeRequest[4]));
-            [self doSyncPostToPage: @"syncKeyNodes" withBody: [NSData dataWithBytes:&keynodeRequest length:16+DH_size(diffieHellmanKeys)]];
+            [self doPostToPage: @"syncKeyNodes" withBody: [NSData dataWithBytes:&keynodeRequest length:16+DH_size(diffieHellmanKeys)]];
             state = SyncMatch;
         }
         /* Repeat till all keynodes have been generated */ 
@@ -1073,6 +1121,7 @@
     [delegate.mController EndExchange:RESULT_EXCHANGE_OK ErrorString:nil ExchangeSet:GatherDataSet];
 }
 
+/*
 #pragma mark NSURLConnectionDelegate Methods
 - (BOOL)connection: (NSURLConnection *)connection canAuthenticateAgainstProtectionSpace: (NSURLProtectionSpace *)protectionSpace
 {
@@ -1083,14 +1132,14 @@
 {
 	SecTrustRef trust = challenge.protectionSpace.serverTrust;
     SecTrustResultType trustResult;
-    /* Check trust for chertificate. Important! */
+    // Check trust for chertificate
     if (SecTrustEvaluate(trust, &trustResult) == errSecSuccess)
     {
-        /* Handle cases where we trust the certificate here */
+        // Handle cases where we trust the certificate here
         if (trustResult == kSecTrustResultUnspecified ||
             trustResult == kSecTrustResultProceed)
         {
-            /* For added security, we could add pinning here. */
+            // For added security, we could add pinning here.
             [challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
         } else {
             DEBUGMSG(@"ERROR: authentication challenge denied with validated result %d", trustResult);
@@ -1099,7 +1148,7 @@
             [self.delegate DisplayMessage: [[challenge error]localizedDescription] ];
         }
     }else{
-        /* not errSecSuccess */
+        // not errSecSuccess
         DEBUGMSG(@"ERROR: SecTrustEvaluate Failed.");
         [challenge.sender cancelAuthenticationChallenge:challenge];
         state = NetworkFailure;
@@ -1134,7 +1183,6 @@
 
 -(void) connectionDidFinishLoading: (NSURLConnection *)connection
 {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	const char *buf = [serverResponse bytes];
 	
     int statusCode = ntohl(*(int *)buf);
@@ -1169,5 +1217,6 @@
         }
     }
 }
+*/
 
 @end

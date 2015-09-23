@@ -68,7 +68,7 @@
     [self.navigationItem setRightBarButtonItem:HomeButton];
     
     // customized cancel button
-    UIBarButtonItem *cancelBtn = [[UIBarButtonItem alloc]initWithTitle: NSLocalizedStringFromBundle(delegate.res, @"btn_Cancel", @"Cancel") style:UIBarButtonItemStyleBordered target:self action:@selector(ExitProtocol:)];
+    UIBarButtonItem *cancelBtn = [[UIBarButtonItem alloc]initWithTitle: NSLocalizedStringFromBundle(delegate.res, @"btn_Cancel", @"Cancel") style:UIBarButtonItemStylePlain target:self action:@selector(ExitProtocol:)];
     [self.navigationItem setLeftBarButtonItem:cancelBtn];
     self.navigationItem.hidesBackButton = YES;
     
@@ -77,27 +77,40 @@
 
 - (void)DisplayHow
 {
-    UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedStringFromBundle(delegate.res, @"title_verify", @"Verify")
-                                                      message: NSLocalizedStringFromBundle(delegate.res, @"help_verify", @"Now, you must match one of these 3-word phrases with all users. Every user must must select the same common phrase, and press 'Next'.")
-                                                     delegate:nil
-                                            cancelButtonTitle: NSLocalizedStringFromBundle(delegate.res, @"btn_Close", @"Close")
-                                            otherButtonTitles:nil];
-    [message show];
-    message = nil;
+    // Display using UIAlertView
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedStringFromBundle(delegate.res, @"title_verify", @"Verify")
+                                                                   message:NSLocalizedStringFromBundle(delegate.res, @"help_verify", @"Now, you must match one of these 3-word phrases with all users. Every user must must select the same common phrase, and press 'Next'.")
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:NSLocalizedStringFromBundle(delegate.res, @"btn_Close", @"Close")
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+    
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 -(IBAction) ButtonPressed: (id)sender
 {
 	if (((UIButton *)sender).tag == NoMatch)
 	{
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: NSLocalizedStringFromBundle(delegate.res, @"title_Question", @"Question")
-														message: NSLocalizedStringFromBundle(delegate.res, @"ask_QuitConfirmation", @"Quit? Are you sure?")
-													   delegate: self
-                                              cancelButtonTitle: NSLocalizedStringFromBundle(delegate.res, @"btn_No", @"No")
-                                              otherButtonTitles: NSLocalizedStringFromBundle(delegate.res, @"btn_Yes", @"Yes"), nil];
-        alert.tag = NoMatch;
-        [alert show];
-        alert = nil;
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedStringFromBundle(delegate.res, @"title_Question", @"Question")
+                                                                       message:NSLocalizedStringFromBundle(delegate.res, @"ask_QuitConfirmation", @"Quit? Are you sure?")
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* YesAction = [UIAlertAction actionWithTitle:NSLocalizedStringFromBundle(delegate.res, @"btn_Yes", @"Yes")
+                                                                style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * action) {
+                                                                  [delegate.protocol distributeNonces: NO Choice:nil];
+                                                              }];
+        
+        [alert addAction:YesAction];
+        UIAlertAction* NoAction = [UIAlertAction actionWithTitle:NSLocalizedStringFromBundle(delegate.res, @"btn_No", @"No")
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+        
+        [alert addAction:NoAction];
+        [self presentViewController:alert animated:YES completion:nil];
 	}
     else if(((UIButton *)sender).tag == Match)
     {
@@ -127,14 +140,23 @@
 
 -(void) ExitProtocol: (id)sender
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: NSLocalizedStringFromBundle(delegate.res, @"title_Question", @"Question")
-                                                    message: NSLocalizedStringFromBundle(delegate.res, @"ask_QuitConfirmation", @"Quit? Are you sure?")
-                                                   delegate: self
-                                          cancelButtonTitle: NSLocalizedStringFromBundle(delegate.res, @"btn_No", @"No")
-                                          otherButtonTitles: NSLocalizedStringFromBundle(delegate.res, @"btn_Yes", @"Yes"), nil];
-    alert.tag = UserCanel;
-    [alert show];
-    alert = nil;
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedStringFromBundle(delegate.res, @"title_Question", @"Question")
+                                                                   message:NSLocalizedStringFromBundle(delegate.res, @"ask_QuitConfirmation", @"Quit? Are you sure?")
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* YesAction = [UIAlertAction actionWithTitle:NSLocalizedStringFromBundle(delegate.res, @"btn_Yes", @"Yes")
+                                                        style:UIAlertActionStyleDefault
+                                                      handler:^(UIAlertAction * action) {
+                                                          [delegate.protocol distributeNonces: NO Choice:nil];
+                                                      }];
+    
+    [alert addAction:YesAction];
+    UIAlertAction* NoAction = [UIAlertAction actionWithTitle:NSLocalizedStringFromBundle(delegate.res, @"btn_No", @"No")
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * action) {}];
+    
+    [alert addAction:NoAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void) generateWordList: (NSData*)hash_data
