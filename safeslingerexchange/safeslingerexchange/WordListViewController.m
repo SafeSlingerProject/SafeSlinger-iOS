@@ -27,7 +27,7 @@
 #import "safeslingerexchange.h"
 #import "iToast.h"
 #import "Utility.h"
-#import <sha3/sha3.h>
+#import "sha3.h"
 
 #include <stdlib.h>
 

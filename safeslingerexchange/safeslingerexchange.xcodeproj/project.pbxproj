@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02C4CADB1BB859D10073910F /* Keccak-readable-and-compact.c in Sources */ = {isa = PBXBuildFile; fileRef = 02C4CAD91BB859D10073910F /* Keccak-readable-and-compact.c */; settings = {ASSET_TAGS = (); }; };
+		02C4CADC1BB859D10073910F /* Keccak-readable-and-compact.h in Headers */ = {isa = PBXBuildFile; fileRef = 02C4CADA1BB859D10073910F /* Keccak-readable-and-compact.h */; settings = {ASSET_TAGS = (); }; };
+		02C4CADF1BB85C080073910F /* sha3.h in Headers */ = {isa = PBXBuildFile; fileRef = 02C4CADD1BB85C080073910F /* sha3.h */; settings = {ASSET_TAGS = (); }; };
+		02C4CAE01BB85C080073910F /* sha3.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C4CADE1BB85C080073910F /* sha3.m */; settings = {ASSET_TAGS = (); }; };
 		18139A731937B15500FD0870 /* wordlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18139A721937B13400FD0870 /* wordlist.plist */; };
 		18139A771937B9F000FD0870 /* ActivityWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 18139A751937B9F000FD0870 /* ActivityWindow.m */; };
 		18139A791937BBD700FD0870 /* ActivityWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18139A741937B9C500FD0870 /* ActivityWindow.xib */; };
@@ -60,6 +64,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		02C4CAD91BB859D10073910F /* Keccak-readable-and-compact.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "Keccak-readable-and-compact.c"; sourceTree = "<group>"; };
+		02C4CADA1BB859D10073910F /* Keccak-readable-and-compact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Keccak-readable-and-compact.h"; sourceTree = "<group>"; };
+		02C4CADD1BB85C080073910F /* sha3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha3.h; sourceTree = "<group>"; };
+		02C4CADE1BB85C080073910F /* sha3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sha3.m; sourceTree = "<group>"; };
 		18139A6A1937A32800FD0870 /* sse_ic_phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sse_ic_phone.png; sourceTree = "<group>"; };
 		18139A6B1937A32800FD0870 /* sse_ic_arrow_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sse_ic_arrow_right.png; sourceTree = "<group>"; };
 		18139A6C1937A32800FD0870 /* sse__ic_arrow_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sse__ic_arrow_left.png; sourceTree = "<group>"; };
@@ -230,6 +238,10 @@
 		18FA4BDB192E8DFF00734976 /* safeslingerexchange */ = {
 			isa = PBXGroup;
 			children = (
+				02C4CAD91BB859D10073910F /* Keccak-readable-and-compact.c */,
+				02C4CADA1BB859D10073910F /* Keccak-readable-and-compact.h */,
+				02C4CADD1BB85C080073910F /* sha3.h */,
+				02C4CADE1BB85C080073910F /* sha3.m */,
 				1860572719450859002DD149 /* Reachability.h */,
 				1860572819450859002DD149 /* Reachability.m */,
 				18139A751937B9F000FD0870 /* ActivityWindow.m */,
@@ -287,7 +299,9 @@
 			files = (
 				1860572919450859002DD149 /* Reachability.h in Headers */,
 				18F8BDF319368C3000497D36 /* iToast.h in Headers */,
+				02C4CADC1BB859D10073910F /* Keccak-readable-and-compact.h in Headers */,
 				185002A11934E3660080B355 /* safeslingerexchange.h in Headers */,
+				02C4CADF1BB85C080073910F /* sha3.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,10 +441,12 @@
 				18FA4C03192E8FAB00734976 /* WordListViewController.m in Sources */,
 				1860572A19450859002DD149 /* Reachability.m in Sources */,
 				18F8BDF219368C3000497D36 /* iToast.m in Sources */,
+				02C4CAE01BB85C080073910F /* sha3.m in Sources */,
 				18FA4C0D192E8FB700734976 /* GroupingViewController.m in Sources */,
 				184A3B37192FE0BB008C64FF /* Utility.m in Sources */,
 				18FA4C0C192E8FB700734976 /* SafeSlinger.m in Sources */,
 				18139A771937B9F000FD0870 /* ActivityWindow.m in Sources */,
+				02C4CADB1BB859D10073910F /* Keccak-readable-and-compact.c in Sources */,
 				18FA4C0E192E8FB700734976 /* GroupSizePicker.m in Sources */,
 				18FA4BE1192E8DFF00734976 /* safeslingerexchange.m in Sources */,
 			);
@@ -553,8 +569,9 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Yue-Hsun Lin (X6U2B9ZV7E)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Michael Farb (68KHK2BY77)";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_BITCODE = NO;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -570,9 +587,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "45d3d25d-9281-45f2-995f-505cdaeeed27";
+				PROVISIONING_PROFILE = "8121b21a-ac68-4c39-9b19-859cac032832";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -593,8 +610,9 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Yue-Hsun Lin (X6U2B9ZV7E)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Michael Farb (68KHK2BY77)";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -603,9 +621,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "45d3d25d-9281-45f2-995f-505cdaeeed27";
+				PROVISIONING_PROFILE = "8121b21a-ac68-4c39-9b19-859cac032832";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -621,7 +639,6 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../openssl-ios/include",
-					"$(SRCROOT)/../sha3-ios-binary/include",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/../openssl-ios/lib",
@@ -645,7 +662,6 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../openssl-ios/include",
-					"$(SRCROOT)/../sha3-ios-binary/include",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/../openssl-ios/lib",

@@ -23,7 +23,7 @@
  */
 
 #import "NSDataEncryption.h"
-#import <sha3/sha3.h>
+#import "sha3.h"
 #import <CommonCrypto/CommonCryptor.h>
 #import <CommonCrypto/CommonHMAC.h>
 #import "SafeSlinger.h"
