@@ -7,10 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		02C4CADB1BB859D10073910F /* Keccak-readable-and-compact.c in Sources */ = {isa = PBXBuildFile; fileRef = 02C4CAD91BB859D10073910F /* Keccak-readable-and-compact.c */; settings = {ASSET_TAGS = (); }; };
-		02C4CADC1BB859D10073910F /* Keccak-readable-and-compact.h in Headers */ = {isa = PBXBuildFile; fileRef = 02C4CADA1BB859D10073910F /* Keccak-readable-and-compact.h */; settings = {ASSET_TAGS = (); }; };
-		02C4CADF1BB85C080073910F /* sha3.h in Headers */ = {isa = PBXBuildFile; fileRef = 02C4CADD1BB85C080073910F /* sha3.h */; settings = {ASSET_TAGS = (); }; };
-		02C4CAE01BB85C080073910F /* sha3.m in Sources */ = {isa = PBXBuildFile; fileRef = 02C4CADE1BB85C080073910F /* sha3.m */; settings = {ASSET_TAGS = (); }; };
+		02B113041BC24C57003591E3 /* sha3.h in Headers */ = {isa = PBXBuildFile; fileRef = 02B113031BC24C57003591E3 /* sha3.h */; settings = {ASSET_TAGS = (); }; };
+		02B113061BC24CC5003591E3 /* libsha3-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02B113051BC24CC5003591E3 /* libsha3-ios.a */; settings = {ASSET_TAGS = (); }; };
 		18139A731937B15500FD0870 /* wordlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18139A721937B13400FD0870 /* wordlist.plist */; };
 		18139A771937B9F000FD0870 /* ActivityWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 18139A751937B9F000FD0870 /* ActivityWindow.m */; };
 		18139A791937BBD700FD0870 /* ActivityWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18139A741937B9C500FD0870 /* ActivityWindow.xib */; };
@@ -20,7 +18,6 @@
 		1860572919450859002DD149 /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 1860572719450859002DD149 /* Reachability.h */; };
 		1860572A19450859002DD149 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1860572819450859002DD149 /* Reachability.m */; };
 		1860CF1D196DAB3400D1D951 /* safeslingerexchange.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 18FA4BDE192E8DFF00734976 /* safeslingerexchange.h */; };
-		1897938B19350AAE004C4409 /* libsha3-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1897938A19350AAE004C4409 /* libsha3-ios.a */; };
 		1897938D19350AC5004C4409 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1897938C19350AC5004C4409 /* libcrypto.a */; };
 		189793BE19351DF7004C4409 /* WordListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18FA4C00192E8FAB00734976 /* WordListViewController.xib */; };
 		189793BF19351DF7004C4409 /* GroupSizePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18FA4C09192E8FB700734976 /* GroupSizePicker.xib */; };
@@ -64,10 +61,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		02C4CAD91BB859D10073910F /* Keccak-readable-and-compact.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "Keccak-readable-and-compact.c"; sourceTree = "<group>"; };
-		02C4CADA1BB859D10073910F /* Keccak-readable-and-compact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Keccak-readable-and-compact.h"; sourceTree = "<group>"; };
-		02C4CADD1BB85C080073910F /* sha3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha3.h; sourceTree = "<group>"; };
-		02C4CADE1BB85C080073910F /* sha3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sha3.m; sourceTree = "<group>"; };
+		02B113031BC24C57003591E3 /* sha3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha3.h; sourceTree = "<group>"; };
+		02B113051BC24CC5003591E3 /* libsha3-ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libsha3-ios.a"; path = "safeslingerexchange/libsha3-ios.a"; sourceTree = "<group>"; };
 		18139A6A1937A32800FD0870 /* sse_ic_phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sse_ic_phone.png; sourceTree = "<group>"; };
 		18139A6B1937A32800FD0870 /* sse_ic_arrow_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sse_ic_arrow_right.png; sourceTree = "<group>"; };
 		18139A6C1937A32800FD0870 /* sse__ic_arrow_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sse__ic_arrow_left.png; sourceTree = "<group>"; };
@@ -82,7 +77,6 @@
 		1860572719450859002DD149 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		1860572819450859002DD149 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		18968190192EA7F500C3C4A6 /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
-		1897938A19350AAE004C4409 /* libsha3-ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libsha3-ios.a"; path = "../sha3-ios-binary/libsha3-ios.a"; sourceTree = "<group>"; };
 		1897938C19350AC5004C4409 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = "../openssl-ios/lib/libcrypto.a"; sourceTree = "<group>"; };
 		189793B119351DE3004C4409 /* exchangeui.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = exchangeui.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		189793B219351DE3004C4409 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -159,7 +153,7 @@
 			files = (
 				18BC3990196DE42000CC172B /* CFNetwork.framework in Frameworks */,
 				1897938D19350AC5004C4409 /* libcrypto.a in Frameworks */,
-				1897938B19350AAE004C4409 /* libsha3-ios.a in Frameworks */,
+				02B113061BC24CC5003591E3 /* libsha3-ios.a in Frameworks */,
 				18FA4BDA192E8DFF00734976 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -226,9 +220,9 @@
 		18FA4BD8192E8DFF00734976 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				02B113051BC24CC5003591E3 /* libsha3-ios.a */,
 				18BC398F196DE42000CC172B /* CFNetwork.framework */,
 				1897938C19350AC5004C4409 /* libcrypto.a */,
-				1897938A19350AAE004C4409 /* libsha3-ios.a */,
 				18FA4BD9192E8DFF00734976 /* Foundation.framework */,
 				189793B219351DE3004C4409 /* CoreFoundation.framework */,
 			);
@@ -238,10 +232,7 @@
 		18FA4BDB192E8DFF00734976 /* safeslingerexchange */ = {
 			isa = PBXGroup;
 			children = (
-				02C4CAD91BB859D10073910F /* Keccak-readable-and-compact.c */,
-				02C4CADA1BB859D10073910F /* Keccak-readable-and-compact.h */,
-				02C4CADD1BB85C080073910F /* sha3.h */,
-				02C4CADE1BB85C080073910F /* sha3.m */,
+				02B113031BC24C57003591E3 /* sha3.h */,
 				1860572719450859002DD149 /* Reachability.h */,
 				1860572819450859002DD149 /* Reachability.m */,
 				18139A751937B9F000FD0870 /* ActivityWindow.m */,
@@ -299,9 +290,8 @@
 			files = (
 				1860572919450859002DD149 /* Reachability.h in Headers */,
 				18F8BDF319368C3000497D36 /* iToast.h in Headers */,
-				02C4CADC1BB859D10073910F /* Keccak-readable-and-compact.h in Headers */,
 				185002A11934E3660080B355 /* safeslingerexchange.h in Headers */,
-				02C4CADF1BB85C080073910F /* sha3.h in Headers */,
+				02B113041BC24C57003591E3 /* sha3.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,12 +431,10 @@
 				18FA4C03192E8FAB00734976 /* WordListViewController.m in Sources */,
 				1860572A19450859002DD149 /* Reachability.m in Sources */,
 				18F8BDF219368C3000497D36 /* iToast.m in Sources */,
-				02C4CAE01BB85C080073910F /* sha3.m in Sources */,
 				18FA4C0D192E8FB700734976 /* GroupingViewController.m in Sources */,
 				184A3B37192FE0BB008C64FF /* Utility.m in Sources */,
 				18FA4C0C192E8FB700734976 /* SafeSlinger.m in Sources */,
 				18139A771937B9F000FD0870 /* ActivityWindow.m in Sources */,
-				02C4CADB1BB859D10073910F /* Keccak-readable-and-compact.c in Sources */,
 				18FA4C0E192E8FB700734976 /* GroupSizePicker.m in Sources */,
 				18FA4BE1192E8DFF00734976 /* safeslingerexchange.m in Sources */,
 			);
@@ -514,6 +502,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "exchangeui/exchangeui-Prefix.pch";
@@ -528,7 +517,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "armv7 armv7s arm64";
+				VALID_ARCHS = "$(VALID_ARCHS)";
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
@@ -538,6 +527,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "exchangeui/exchangeui-Prefix.pch";
@@ -548,7 +538,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "armv7 armv7s arm64";
+				VALID_ARCHS = "$(VALID_ARCHS)";
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
@@ -557,8 +547,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -588,9 +578,10 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PROVISIONING_PROFILE = "8121b21a-ac68-4c39-9b19-859cac032832";
 				SDKROOT = iphoneos;
+				VALID_ARCHS = "$(VALID_ARCHS)";
 			};
 			name = Debug;
 		};
@@ -598,8 +589,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -626,6 +617,7 @@
 				PROVISIONING_PROFILE = "8121b21a-ac68-4c39-9b19-859cac032832";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "$(VALID_ARCHS)";
 			};
 			name = Release;
 		};
@@ -633,6 +625,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/safeslingerexchange.dst;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "safeslingerexchange/safeslingerexchange-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -642,13 +635,13 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/../openssl-ios/lib",
-					"$(SRCROOT)/../sha3-ios-binary/",
+					"$(PROJECT_DIR)/safeslingerexchange",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "$(ARCHS_STANDARD) armv7s";
+				VALID_ARCHS = "$(VALID_ARCHS)";
 			};
 			name = Debug;
 		};
@@ -656,6 +649,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/safeslingerexchange.dst;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "safeslingerexchange/safeslingerexchange-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -665,13 +659,13 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/../openssl-ios/lib",
-					"$(SRCROOT)/../sha3-ios-binary/",
+					"$(PROJECT_DIR)/safeslingerexchange",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "$(ARCHS_STANDARD) armv7s";
+				VALID_ARCHS = "$(VALID_ARCHS)";
 			};
 			name = Release;
 		};

@@ -159,6 +159,7 @@
                                 state = NetworkFailure;
                                 [self.delegate DisplayMessage: [error description]];
                             }else{
+                                DEBUGMSG(@"received data = %@", [data hexadecimalString]);
                                 [serverResponse setData:data];
                                 [self handleSafeSlingerState];
                             }
@@ -167,7 +168,7 @@
 
 -(void) handleSafeSlingerState
 {
-    DEBUGMSG(@"handleSafeSlingerState...");
+    DEBUGMSG(@"handleSafeSlingerState..., state = %d", state);
     const char *buf = [serverResponse bytes];
     int statusCode = ntohl(*(int *)buf);
     if(statusCode==0)
