@@ -204,7 +204,7 @@
         case NetworkFailure:
         {
             NSLog(@"ERROR: %@", showMessage);
-            
+            [mController EndExchange:RESULT_EXCHANGE_CANCELED ErrorString:showMessage ExchangeSet:nil];
             UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedStringFromBundle(res, @"lib_name", @"SafeSlinger Exchange")
                                                                            message:showMessage
                                                                     preferredStyle:UIAlertControllerStyleAlert];
@@ -215,12 +215,11 @@
             
             [alert addAction:okAction];
             [mController presentViewController:alert animated:YES completion:nil];
-            [mController EndExchange:RESULT_EXCHANGE_CANCELED ErrorString:showMessage ExchangeSet:nil];
         }
             break;
         case ProtocolCancel:
-            [[[[iToast makeText: showMessage] setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
             [mController EndExchange:RESULT_EXCHANGE_CANCELED ErrorString:showMessage ExchangeSet:nil];
+            [[[[iToast makeText: showMessage] setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
             break;
         default:
             break;

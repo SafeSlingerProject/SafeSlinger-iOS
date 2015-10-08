@@ -157,7 +157,7 @@
                             if(error)
                             {
                                 state = NetworkFailure;
-                                [self.delegate DisplayMessage: [error description]];
+                                [self.delegate DisplayMessage: [error localizedDescription]];
                             }else{
                                 DEBUGMSG(@"received data = %@", [data hexadecimalString]);
                                 [serverResponse setData:data];
@@ -670,6 +670,7 @@
 -(void) handleSyncSigs
 {
     if (wordListsDiffer) {
+        DEBUGMSG(@"reported wordListsDiffer");
         state = ProtocolFail;
         [self.delegate DisplayMessage: NSLocalizedStringFromBundle(delegate.res, @"error_LocalGroupCommitDiffer", @"You have reported a difference in phrases. Begin the exchange again.")];
         return;

@@ -26,7 +26,7 @@
 
 @class safeslingerexchange;
 
-@interface GroupingViewController : UIViewController <UIAlertViewDelegate> {
+@interface GroupingViewController : UIViewController {
 	
 }
 

@@ -130,14 +130,6 @@
 	
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(buttonIndex!=alertView.cancelButtonIndex)
-    {
-        [delegate.protocol distributeNonces: NO Choice:nil];
-    }
-}
-
 -(void) ExitProtocol: (id)sender
 {
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedStringFromBundle(delegate.res, @"title_Question", @"Question")
@@ -343,7 +335,6 @@
     PreferredLanguage = [[NSLocale preferredLanguages] objectAtIndex:0];
     [CompareLabel setText:[NSString stringWithFormat: NSLocalizedStringFromBundle(delegate.res, @"label_CompareScreensNDevices", @"Compare screens on %@ devices.."), [NSString stringWithFormat:@"%d", delegate.protocol.users]]];
     [self generateWordList: [delegate.protocol generateHashForPhrases]];
-    
     if(delegate.first_use) [self DisplayHow];
 }
     

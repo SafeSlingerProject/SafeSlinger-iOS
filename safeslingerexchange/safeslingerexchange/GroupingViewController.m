@@ -84,15 +84,6 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(buttonIndex!=alertView.cancelButtonIndex)
-    {
-        // exit protocol
-        
-    }
-}
-
 - (void)DisplayHow
 {
     // Display using UIAlertView

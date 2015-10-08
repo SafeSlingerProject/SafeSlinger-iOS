@@ -34,7 +34,7 @@ enum UserChoice
 
 @class safeslingerexchange;
 
-@interface WordListViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, UIAlertViewDelegate>
+@interface WordListViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource>
 {
     
 	NSArray *word_lists, *even_words, *odd_words;
