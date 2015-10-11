@@ -186,7 +186,7 @@
 				ORGANIZATIONNAME = CyLab;
 				TargetAttributes = {
 					1827E9CA192E4CD700325334 = {
-						DevelopmentTeam = 6UTF6FRSFG;
+						DevelopmentTeam = 27LU3HGQJP;
 						SystemCapabilities = {
 							com.apple.DataProtection = {
 								enabled = 0;
@@ -408,47 +408,6 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Michael Farb (68KHK2BY77)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Michael Farb (68KHK2BY77)";
-				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SRCROOT)",
-					"$(inherited)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "safeslingerdemo/safeslingerdemo-Prefix.pch";
-				GENERATE_MASTER_OBJECT_FILE = NO;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"${SRCROOT}/../safeslingerexchange",
-				);
-				INFOPLIST_FILE = "safeslingerdemo/safeslingerdemo-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LIBRARY_SEARCH_PATHS = "";
-				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-stdlib=libstdc++",
-					"-lstdc++",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = edu.cmu.cylab.safeslingerexchangedev.app.test;
-				PRODUCT_NAME = "SafeSlinger Exchange Dev";
-				PROVISIONING_PROFILE = "8121b21a-ac68-4c39-9b19-859cac032832";
-				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = "$(VALID_ARCHS)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Debug;
-		};
-		1827E9FF192E4CD700325334 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
-				CLANG_CXX_LIBRARY = "compiler-default";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				ENABLE_BITCODE = NO;
@@ -473,9 +432,50 @@
 					"-stdlib=libstdc++",
 					"-lstdc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = edu.cmu.cylab.safeslingerexchangedev.app.test;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.cmu.cylab.safeslingerexchangedev.app;
 				PRODUCT_NAME = "SafeSlinger Exchange Dev";
-				PROVISIONING_PROFILE = "8121b21a-ac68-4c39-9b19-859cac032832";
+				PROVISIONING_PROFILE = "a5262a66-20c2-416e-8c88-ce9aabee070e";
+				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = "$(VALID_ARCHS)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		1827E9FF192E4CD700325334 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Carnegie Mellon University (27LU3HGQJP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Carnegie Mellon University (27LU3HGQJP)";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "safeslingerdemo/safeslingerdemo-Prefix.pch";
+				GENERATE_MASTER_OBJECT_FILE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"${SRCROOT}/../safeslingerexchange",
+				);
+				INFOPLIST_FILE = "safeslingerdemo/safeslingerdemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LIBRARY_SEARCH_PATHS = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-stdlib=libstdc++",
+					"-lstdc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = edu.cmu.cylab.safeslingerexchangedev.app;
+				PRODUCT_NAME = "SafeSlinger Exchange Dev";
+				PROVISIONING_PROFILE = "a5262a66-20c2-416e-8c88-ce9aabee070e";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "$(VALID_ARCHS)";
 				WRAPPER_EXTENSION = app;

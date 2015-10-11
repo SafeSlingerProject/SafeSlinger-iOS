@@ -149,6 +149,8 @@
 	[request setHTTPBody: body];
     
     NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+    // set minimum version as TLS v1.0
+    defaultConfigObject.TLSMinimumSupportedProtocol = kTLSProtocol1;
     NSURLSession *HttpsSession = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
     
     [[HttpsSession dataTaskWithRequest: request
@@ -168,7 +170,6 @@
 
 -(void) handleSafeSlingerState
 {
-    DEBUGMSG(@"handleSafeSlingerState..., state = %d", state);
     const char *buf = [serverResponse bytes];
     int statusCode = ntohl(*(int *)buf);
     if(statusCode==0)
@@ -202,35 +203,6 @@
         }
     }
 }
-
-/*
--(void) doSyncPostToPage: (NSString *) page withBody: (NSData*) body
-{
-    DEBUGMSG(@"Do Sync POST to Relatuve URL: %@", page);
-    DEBUGMSG(@"DATA: %@", body);
-    
-    // Synchronously grab the data
-   	NSURL *url = [NSURL URLWithString: page relativeToURL: serverURL];
-    [request setURL: url];
-    [request setHTTPMethod: @"POST"];
-    [request setHTTPBody: body];
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    
-    NSError        *error;
-    NSURLResponse  *response;
-    [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    NSInteger status = [(NSHTTPURLResponse *)response statusCode];
-    
-    DEBUGMSG(@"HTTP response code: %ld", (long)status);
-    if (status != 200)
-    {
-        DEBUGMSG(@"HTTP header: %@", [(NSHTTPURLResponse *)response allHeaderFields]);
-        NSString* err = [NSString stringWithFormat: NSLocalizedStringFromBundle(delegate.res, @"error_HttpCode", @"Server HTTP error: %d"), status];
-        state = NetworkFailure;
-        [self.delegate DisplayMessage: err];
-    }
-}
-*/
 
 -(NSData*) generateHashForPhrases
 {
@@ -1121,103 +1093,5 @@
     [delegate DisplayMessage:nil];
     [delegate.mController EndExchange:RESULT_EXCHANGE_OK ErrorString:nil ExchangeSet:GatherDataSet];
 }
-
-/*
-#pragma mark NSURLConnectionDelegate Methods
-- (BOOL)connection: (NSURLConnection *)connection canAuthenticateAgainstProtectionSpace: (NSURLProtectionSpace *)protectionSpace
-{
-	return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
-}
-
-- (void)connection: (NSURLConnection *)connection didReceiveAuthenticationChallenge: (NSURLAuthenticationChallenge *)challenge
-{
-	SecTrustRef trust = challenge.protectionSpace.serverTrust;
-    SecTrustResultType trustResult;
-    // Check trust for chertificate
-    if (SecTrustEvaluate(trust, &trustResult) == errSecSuccess)
-    {
-        // Handle cases where we trust the certificate here
-        if (trustResult == kSecTrustResultUnspecified ||
-            trustResult == kSecTrustResultProceed)
-        {
-            // For added security, we could add pinning here.
-            [challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
-        } else {
-            DEBUGMSG(@"ERROR: authentication challenge denied with validated result %d", trustResult);
-            [challenge.sender cancelAuthenticationChallenge:challenge];
-            state = NetworkFailure;
-            [self.delegate DisplayMessage: [[challenge error]localizedDescription] ];
-        }
-    }else{
-        // not errSecSuccess
-        DEBUGMSG(@"ERROR: SecTrustEvaluate Failed.");
-        [challenge.sender cancelAuthenticationChallenge:challenge];
-        state = NetworkFailure;
-        [self.delegate DisplayMessage: [[challenge error]localizedDescription] ];
-    }
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-	DEBUGMSG(@"connection error: %@ %@", [error localizedDescription], [[error userInfo] objectForKey: NSURLErrorFailingURLStringErrorKey]);
-    state = NetworkFailure;
-    [self.delegate DisplayMessage: [error localizedDescription]];
-}
-
--(void) connection: (NSURLConnection *)connection didReceiveResponse: (NSURLResponse *)response
-{
-	NSInteger status = [(NSHTTPURLResponse *)response statusCode];
-	DEBUGMSG(@"HTTP response code: %ld", (long)status);
-	if (status != 200)
-	{
-		DEBUGMSG(@"HTTP header: %@", [(NSHTTPURLResponse *)response allHeaderFields]);
-		NSString* err = [NSString stringWithFormat: NSLocalizedStringFromBundle(delegate.res, @"error_HttpCode", @"Server HTTP error: %d"), status];
-        state = NetworkFailure;
-        [self.delegate DisplayMessage:err];
-	}
-}
-
--(void) connection: (NSURLConnection *)connection didReceiveData: (NSData *) receivedData
-{
-	[serverResponse appendData: receivedData];
-}
-
--(void) connectionDidFinishLoading: (NSURLConnection *)connection
-{
-	const char *buf = [serverResponse bytes];
-	
-    int statusCode = ntohl(*(int *)buf);
-	if(statusCode==0)
-	{
-        NSString *msg = [NSString stringWithCString:buf+4 encoding:NSASCIIStringEncoding];
-        state = NetworkFailure;
-        [self.delegate DisplayMessage:msg];
-	}else{
-        switch (state)
-        {
-            case AssignUser:
-                [self handleAssignUser];
-                break;
-            case SyncUsers:
-                [self handleSyncUsers];
-                break;
-            case SyncData:
-                [self handleSyncData];
-                break;
-            case SyncSigs:
-                [self handleSyncSigs];
-                break;
-            case SyncDHKeyNodes:
-                [self handleSyncKeyNodes];
-                break;
-            case SyncMatch:
-                [self handleSyncMatch];
-                break;
-            default:
-                break;
-        }
-    }
-}
-*/
 
 @end
