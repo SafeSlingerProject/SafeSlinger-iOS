@@ -31,13 +31,12 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
-    #import <safeslingerexchange/Base64.h>
     #import <safeslingerexchange/iToast.h>
     #import <safeslingerexchange/ActivityWindow.h>
-    #import <sha3/sha3.h>
+    #import <safeslingerexchange/sha3.h>
 
 /* BETA test version flag */
-// #define BETA
+#define BETA
 
 #import "Config.h"
 

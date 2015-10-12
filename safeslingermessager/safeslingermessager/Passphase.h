@@ -27,7 +27,7 @@
 
 @class AppDelegate;
 
-@interface Passphase : UIViewController <UITextFieldDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate, UIAlertViewDelegate>
+@interface Passphase : UIViewController <UITextFieldDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
 {
     int error_t, tout_bound;
     NSTimer *errTimer;

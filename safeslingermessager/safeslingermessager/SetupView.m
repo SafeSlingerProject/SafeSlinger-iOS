@@ -83,32 +83,6 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString: kLicenseURL]];
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    switch (alertView.tag) {
-        case PushNotificationConfirm:
-        {
-            if(buttonIndex==alertView.cancelButtonIndex) {
-                exit(EXIT_SUCCESS);
-            } else {
-                [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kRequirePushNotification];
-                [delegate registerPushToken];
-            }
-        }
-            break;
-        case HelpAndFeedBack:
-        {
-            if(buttonIndex!=alertView.cancelButtonIndex) {
-                // feedback
-                [UtilityFunc SendOpts:self];
-            }
-        }
-            break;
-        default:
-            break;
-    }
-}
-
 - (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
     switch (result)
@@ -146,14 +120,27 @@
 - (void)TriggerNotificationRequire
 {
     if(![[NSUserDefaults standardUserDefaults] boolForKey: kRequirePushNotification]) {
-        UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
-                                                          message: NSLocalizedString(@"iOS_RequestPermissionNotifications", @"SafeSlinger is an encrypted messaging application and cannot function without allowing incoming messages from Notifications. To enable incoming messages, you must allow SafeSlinger to send you Notifications when asked.")
-                                                         delegate: self
-                                                cancelButtonTitle: NSLocalizedString(@"btn_Exit", @"Exit")
-                                                otherButtonTitles: NSLocalizedString(@"btn_Continue", @"Continue"), nil];
-        message.tag = PushNotificationConfirm;
-        [message show];
-        message = nil;
+        // case PushNotificationConfirm
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"title_find", @"Setup")
+                                                                       message:NSLocalizedString(@"iOS_RequestPermissionNotifications", @"SafeSlinger is an encrypted messaging application and cannot function without allowing incoming messages from Notifications. To enable incoming messages, you must allow SafeSlinger to send you Notifications when asked.")
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Continue", @"Continue")
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * action){
+                                                             [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kRequirePushNotification];
+                                                             [delegate registerPushToken];
+                                                         }];
+        
+        [alert addAction:okAction];
+        UIAlertAction* exitAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Exit", @"Exit")
+                                                          style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction * action){
+                                                            exit(EXIT_SUCCESS);
+                                                        }];
+        
+        [alert addAction:exitAction];
+        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 
@@ -277,14 +264,26 @@
 
 - (IBAction) DisplayHelp: (id)sender
 {
-    UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"title_find", @"Setup")
-                                                      message:NSLocalizedString(@"help_find", @"Use this screen to set your name, phone, and email to exchange with others. Tap the 'Done' button when finished.")
-                                                     delegate:self
-                                            cancelButtonTitle:NSLocalizedString(@"btn_Close", @"Close")
-                                            otherButtonTitles:NSLocalizedString(@"menu_sendFeedback", @"Send Feedback"), nil];
-    message.tag = HelpAndFeedBack;
-    [message show];
-    message = nil;
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"title_find", @"Setup")
+                                                                   message:NSLocalizedString(@"help_find", @"Use this screen to set your name, phone, and email to exchange with others. Tap the 'Done' button when finished.")
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* closeAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Close", @"Close")
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * action){
+                                                         
+                                                     }];
+    
+    [alert addAction:closeAction];
+    UIAlertAction* feedbackAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"menu_sendFeedback", @"Send Feedback")
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * action){
+                                                             // feedback
+                                                             [UtilityFunc SendOpts:self];
+                                                         }];
+    
+    [alert addAction:feedbackAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (IBAction)CreateProfile: (id)sender

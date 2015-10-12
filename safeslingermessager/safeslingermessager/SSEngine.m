@@ -140,7 +140,7 @@
 +(NSString*)getSelfSubmissionToken
 {
     // compute on the fly
-    return [Base64 encode:[sha3 Keccak256Digest:[self getPubKey: SIGN_PUB]]];
+    return [[sha3 Keccak256Digest:[self getPubKey: SIGN_PUB]]base64EncodedStringWithOptions:0];
 }
 
 +(NSString*)getSelfGenKeyDate
@@ -457,7 +457,7 @@
     unsigned char* p;
     int plen = 0;
     
-    if(text==nil)
+    if(!text)
     {
         DEBUGMSG(@" failed\n  !  Plaintext is nil\n\n");
         return nil;
@@ -635,7 +635,7 @@
     CC_SHA512_Init(&ctx);
     CC_SHA512_Update(&ctx, [pkeydata bytes], (int)[pkeydata length]);
     CC_SHA512_Final(keyidarray, &ctx);
-    NSString *idstr = [Base64 encode:[NSData dataWithBytes:keyidarray length:64]];
+    NSString *idstr = [[NSData dataWithBytes:keyidarray length:64]base64EncodedStringWithOptions:0];
     
     [delegate.DbInstance InsertOrUpdateConfig:[idstr dataUsingEncoding:NSUTF8StringEncoding] withTag: @"KEYID"];
     

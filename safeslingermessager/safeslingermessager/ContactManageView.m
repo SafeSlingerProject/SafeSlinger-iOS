@@ -163,17 +163,25 @@ typedef enum {
 }
 
 - (IBAction)DisplayHow:(id)sender {
-    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"title_MyIdentity", @"Personal Contact")
-                                                      message:NSLocalizedString(@"help_identity_menu", @"You may also change personal data about your identity on this screen by tapping on the button with your name. This will display a menu allowing you to Edit your contact, Create New contact, or Use Another contact.")
-                                                     delegate:self
-                                            cancelButtonTitle:NSLocalizedString(@"btn_Close", @"Close")
-                                            otherButtonTitles:NSLocalizedString(@"menu_sendFeedback", @"Send Feedback"), nil] show];
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if(buttonIndex!=alertView.cancelButtonIndex) {
-        [UtilityFunc SendOpts:self];
-    }
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"title_MyIdentity", @"Personal Contact")
+                                                                   message:NSLocalizedString(@"help_identity_menu", @"You may also change personal data about your identity on this screen by tapping on the button with your name. This will display a menu allowing you to Edit your contact, Create New contact, or Use Another contact.")
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* closeAciton = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Close", @"Close")
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * action){
+                                                             
+                                                         }];
+    
+    [alert addAction:closeAciton];
+    UIAlertAction* feedbackAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"menu_sendFeedback", @"Send Feedback")
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * action){
+                                                             [UtilityFunc SendOpts:self];
+                                                         }];
+    
+    [alert addAction:feedbackAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {

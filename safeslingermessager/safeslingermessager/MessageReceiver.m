@@ -175,7 +175,8 @@
 
 - (void)DownloadMessages {
     for(NSString* nonce in [_MsgNonces allKeys]) {
-        NSData* decodenonce = [Base64 decode:[nonce cStringUsingEncoding:NSUTF8StringEncoding] length:[nonce lengthOfBytesUsingEncoding:NSUTF8StringEncoding]];
+        NSData* decodenonce = [[NSData alloc]initWithBase64EncodedString:nonce options:0];
+        //[Base64 decode:[nonce cStringUsingEncoding:NSUTF8StringEncoding] length:[nonce lengthOfBytesUsingEncoding:NSUTF8StringEncoding]];
         if([decodenonce length]==NONCELEN) {
             if(![UDbInstance CheckMessage:decodenonce]) {
                 // Get message

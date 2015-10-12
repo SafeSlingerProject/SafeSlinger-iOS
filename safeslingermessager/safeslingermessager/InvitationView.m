@@ -119,11 +119,11 @@
     for (CFIndex i = 0; i < ABMultiValueGetCount(allIMPP); i++) {
         CFDictionaryRef anIMPP = ABMultiValueCopyValueAtIndex(allIMPP, i);
         if ([(NSString *)CFDictionaryGetValue(anIMPP, kABPersonInstantMessageServiceKey) caseInsensitiveCompare:@"SafeSlinger-PubKey"] == NSOrderedSame) {
-            keyelement = [Base64 decode:(NSString *)CFDictionaryGetValue(anIMPP, kABPersonInstantMessageUsernameKey)];
-            keyelement = [NSData dataWithBytes:[keyelement bytes] length:[keyelement length]];
+            keyelement = [[NSData alloc]initWithBase64EncodedString:(NSString *)CFDictionaryGetValue(anIMPP, kABPersonInstantMessageUsernameKey) options:0];
+            //keyelement = [NSData dataWithBytes:[keyelement bytes] length:[keyelement length]];
         } else if([(NSString *)CFDictionaryGetValue(anIMPP, kABPersonInstantMessageServiceKey) caseInsensitiveCompare:@"SafeSlinger-Push"] == NSOrderedSame) {
             comparedtoken = (NSString *)CFDictionaryGetValue(anIMPP, kABPersonInstantMessageUsernameKey);
-            token = [Base64 decode:comparedtoken];
+            token = [[NSData alloc]initWithBase64EncodedString:comparedtoken options:0];
         }
         if(anIMPP)CFRelease(anIMPP);
     }

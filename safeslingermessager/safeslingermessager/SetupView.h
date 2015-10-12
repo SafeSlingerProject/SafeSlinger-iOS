@@ -33,7 +33,7 @@ enum Dialogtype {
     HelpAndFeedBack
 }Dialogtype;
 
-@interface SetupView : UIViewController <UITextFieldDelegate, BackupDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate>
+@interface SetupView : UIViewController <UITextFieldDelegate, BackupDelegate, MFMailComposeViewControllerDelegate>
 {
     // For Grand Central Dispatch
     dispatch_queue_t _bg_queue;

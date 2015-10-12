@@ -180,13 +180,8 @@
     } else if(status == kABAuthorizationStatusDenied || status == kABAuthorizationStatusRestricted) {
         NSString* buttontitle = nil;
         NSString* description = nil;
-        if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-            buttontitle = NSLocalizedString(@"menu_Help", @"Help");
-            description = [NSString stringWithFormat: NSLocalizedString(@"iOS_contactError", @"Contacts permission is required for securely sharing contact cards. Tap the %@ button for SafeSlinger Contacts permission details."), buttontitle];
-        } else {
-            buttontitle = NSLocalizedString(@"menu_Settings", @"menu_Settings");
-            description = [NSString stringWithFormat: NSLocalizedString(@"iOS_contactError", @"Contacts permission is required for securely sharing contact cards. Tap the %@ button for SafeSlinger Contacts permission details."), buttontitle];
-        }
+        buttontitle = NSLocalizedString(@"menu_Settings", @"menu_Settings");
+        description = [NSString stringWithFormat: NSLocalizedString(@"iOS_contactError", @"Contacts permission is required for securely sharing contact cards. Tap the %@ button for SafeSlinger Contacts permission details."), buttontitle];
         
         UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
                                                           message: description
@@ -208,21 +203,11 @@
         if(alertView.tag==AskPerm) {
             [UtilityFunc TriggerContactPermission];
         } else if(alertView.tag==HelpContact) {
-            if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kContactHelpURL]];
-            } else {
-                // iOS8
-                NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-                [[UIApplication sharedApplication] openURL:url];
-            }
+            NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+            [[UIApplication sharedApplication] openURL:url];
         } else if(alertView.tag==HelpNotification) {
-            if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kPushNotificationHelpURL]];
-            } else {
-                // iOS8
-                NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-                [[UIApplication sharedApplication] openURL:url];
-            }
+            NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+            [[UIApplication sharedApplication] openURL:url];
         }
     }
 }
@@ -232,39 +217,20 @@
     NSString* description = nil;
     
     // check notification permission
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-        int flag =[[UIApplication sharedApplication] enabledRemoteNotificationTypes] & (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert);
-        if (flag != (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert))
-        {
-            buttontitle = NSLocalizedString(@"menu_Help", @"Help");
-            description = [NSString stringWithFormat: NSLocalizedString(@"iOS_notificationError1", @"Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the %@ button for SafeSlinger Notification permission details."), buttontitle];
+    int flag =[UIApplication sharedApplication].currentUserNotificationSettings.types & (UIUserNotificationTypeBadge | UIUserNotificationTypeAlert);
+    if (![[UIApplication sharedApplication] isRegisteredForRemoteNotifications] || flag != (UIUserNotificationTypeBadge | UIUserNotificationTypeAlert))
+    {
+        buttontitle = NSLocalizedString(@"menu_Settings", @"menu_Settings");
+        description = [NSString stringWithFormat: NSLocalizedString(@"iOS_notificationError1", @"Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the %@ button for SafeSlinger Notification permission details."), buttontitle];
             
-            UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
-                                                              message: description
-                                                             delegate: self
-                                                    cancelButtonTitle: NSLocalizedString(@"btn_Cancel", @"Cancel")
-                                                    otherButtonTitles: buttontitle, nil];
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
+                                                          message: description
+                                                         delegate: self
+                                                cancelButtonTitle: NSLocalizedString(@"btn_Cancel", @"Cancel")
+                                                otherButtonTitles: buttontitle, nil];
             message.tag = HelpNotification;
             [message show];
             return;
-        }
-    } else {
-        int flag =[UIApplication sharedApplication].currentUserNotificationSettings.types & (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert);
-        
-        if (![[UIApplication sharedApplication] isRegisteredForRemoteNotifications] || flag != (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert))
-        {
-            buttontitle = NSLocalizedString(@"menu_Settings", @"menu_Settings");
-            description = [NSString stringWithFormat: NSLocalizedString(@"iOS_notificationError1", @"Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the %@ button for SafeSlinger Notification permission details."), buttontitle];
-            
-            UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
-                                                              message: description
-                                                             delegate: self
-                                                    cancelButtonTitle: NSLocalizedString(@"btn_Cancel", @"Cancel")
-                                                    otherButtonTitles: buttontitle, nil];
-            message.tag = HelpNotification;
-            [message show];
-            return;
-        }
     }
     
     NSString* vCard;
@@ -326,7 +292,7 @@
         
         // update cache image
         NSData* img = (NSData*)UIImageJPEGRepresentation(image, 0.9);
-        NSString *encodedPhoto = [Base64 encode: img];
+        NSString *encodedPhoto = [img base64EncodedStringWithOptions:0];
         [contact_labels addObject: @"Photo"];
         [contact_values addObject: encodedPhoto];
         [contact_selections addObject:[NSNumber numberWithBool:YES]];

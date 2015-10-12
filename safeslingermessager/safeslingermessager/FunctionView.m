@@ -66,13 +66,25 @@
     id currentiCloudToken = [[NSFileManager defaultManager] ubiquityIdentityToken];
     if([[NSUserDefaults standardUserDefaults] integerForKey: kRemindBackup]==TurnOn && !currentiCloudToken) {
         // notifiy user to enable it
-        UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"title_find", @"Setup")
-                                                          message:NSLocalizedString(@"ask_BackupDisabledRemindLater", @"Backup is disabled. Do you want to adjust backup settings and keep this reminder?")
-                                                         delegate:self
-                                                cancelButtonTitle:NSLocalizedString(@"btn_Remind", @"Remind")
-                                                otherButtonTitles:NSLocalizedString(@"btn_NotRemind", @"Forget"), nil];
-        [message show];
-        message = nil;
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"title_find", @"Setup")
+                                                                       message:NSLocalizedString(@"ask_BackupDisabledRemindLater", @"Backup is disabled. Do you want to adjust backup settings and keep this reminder?")
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* remindAciton = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Remind", @"Remind")
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction * action){
+                                                                 [[NSUserDefaults standardUserDefaults] setInteger:TurnOff forKey: kRemindBackup];
+                                                             }];
+        
+        [alert addAction:remindAciton];
+        UIAlertAction* forgetAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_NotRemind", @"Forget")
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction * action){
+                                                                 // do nothing
+                                                             }];
+        
+        [alert addAction:forgetAction];
+        [self presentViewController:alert animated:YES completion:nil];
     }
     // Update registration if necessary
     [self registerDeviceInfo];
@@ -93,12 +105,6 @@
 
 - (IBAction)Logout:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if(buttonIndex!=alertView.cancelButtonIndex) {
-        [[NSUserDefaults standardUserDefaults] setInteger:TurnOff forKey: kRemindBackup];
-    }
 }
 
 - (void)tappedRightButton:(id)sender {

@@ -315,14 +315,19 @@ typedef enum {
 		[self registerForInputNotifications];
 		[UIView setAnimationsEnabled:YES];
 		
-		UIAlertView *message = [[UIAlertView alloc] initWithTitle:nil
-                                                          message:NSLocalizedString(@"label_SpeechRecognitionAlert", nil)
-                                                         delegate:nil
-                                                cancelButtonTitle:NSLocalizedString(@"btn_OK", nil)
-                                                otherButtonTitles:nil];
-        [message show];
-        message.tag = NotPermDialog;
-        message = nil;
+        // for case NotPermDialog
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil
+                                                                       message:NSLocalizedString(@"label_SpeechRecognitionAlert", nil)
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_OK", nil)
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * action){
+                                                             
+                                                         }];
+        
+        [alert addAction:okAction];
+        [self presentViewController:alert animated:YES completion:nil];
 	}
 }
 
@@ -580,7 +585,6 @@ typedef enum {
 }
 
 #pragma mark - UIAlertViewDelegate methods
-
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     
 	if(buttonIndex != alertView.cancelButtonIndex && alertView.tag==NotPermDialog) {
@@ -970,13 +974,8 @@ typedef enum {
 		NSString* buttontitle = nil;
 		NSString* description = nil;
 		
-		if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-			buttontitle = NSLocalizedString(@"menu_Help", nil);
-			description = [NSString stringWithFormat: NSLocalizedString(@"iOS_photolibraryError", nil), buttontitle];
-		} else {
-			buttontitle = NSLocalizedString(@"menu_Settings", nil);
-			description = [NSString stringWithFormat: NSLocalizedString(@"iOS_photolibraryError", nil), buttontitle];
-		}
+		buttontitle = NSLocalizedString(@"menu_Settings", nil);
+        description = [NSString stringWithFormat: NSLocalizedString(@"iOS_photolibraryError", nil), buttontitle];
 		
 		UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", nil)
 														  message: description
@@ -997,25 +996,26 @@ typedef enum {
 	AVCaptureDeviceInput *captureInput = [AVCaptureDeviceInput deviceInputWithDevice:inputDevice error:nil];
 	if (!captureInput) {
 		// show indicator
-		NSString* buttontitle = nil;
-		NSString* description = nil;
-		
-		if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-			buttontitle = NSLocalizedString(@"menu_Help", nil);
-			description = [NSString stringWithFormat: NSLocalizedString(@"iOS_cameraError", nil), buttontitle];
-		} else {
-			buttontitle = NSLocalizedString(@"menu_Settings", nil);
-			description = [NSString stringWithFormat: NSLocalizedString(@"iOS_cameraError", nil), buttontitle];
-		}
-		
-		UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", nil)
-														  message: description
-														 delegate: self
-												cancelButtonTitle: NSLocalizedString(@"btn_Cancel", nil)
-												otherButtonTitles: buttontitle, nil];
-		message.tag = HelpCamera;
-		[message show];
-        message = nil;
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"title_find", nil)
+                                                                       message:[NSString stringWithFormat: NSLocalizedString(@"iOS_cameraError", nil), NSLocalizedString(@"menu_Settings", nil)]
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* cancelAciton = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Cancel", nil)
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction * action){
+                                                                 
+                                                             }];
+        
+        [alert addAction:cancelAciton];
+        UIAlertAction* setAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"menu_Settings", nil)
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction * action){
+                                                                 NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                                                                 [[UIApplication sharedApplication] openURL:url];
+                                                             }];
+        
+        [alert addAction:setAction];
+        [self presentViewController:alert animated:YES completion:nil];
 		return NO;
 	} else {
 		return YES;
@@ -1026,21 +1026,11 @@ typedef enum {
     
     if(buttonIndex!=alertView.cancelButtonIndex) {
         if(alertView.tag==HelpPhotoLibrary) {
-            if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kPhotoHelpURL]];
-            } else {
-                // iOS8
-                NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-                [[UIApplication sharedApplication] openURL:url];
-            }
+            NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+            [[UIApplication sharedApplication] openURL:url];
         } else if(alertView.tag==HelpCamera) {
-            if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kCameraHelpURL]];
-            } else {
-                // iOS8
-                NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-                [[UIApplication sharedApplication] openURL:url];
-            }
+            // iOS8
+            
         }
     }
 }

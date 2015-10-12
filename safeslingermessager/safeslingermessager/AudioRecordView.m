@@ -52,14 +52,27 @@
         [self RequestAudioRecorder];
     }else
     {
-        UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
-                                                          message: NSLocalizedString(@"iOS_RequestPermissionMicrophone", @"You can record a voice message to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Microphone when asked.")
-                                                         delegate: self
-                                                cancelButtonTitle: NSLocalizedString(@"btn_Cancel", @"Cancel")
-                                                otherButtonTitles: NSLocalizedString(@"btn_Continue", @"Continue"), nil];
-        message.tag = AskPerm;
-        [message show];
-        message = nil;
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"title_find", @"Setup")
+                                                                       message:NSLocalizedString(@"iOS_RequestPermissionMicrophone", @"You can record a voice message to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Microphone when asked.")
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* cancelAciton = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Cancel", @"Cancel")
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction * action){
+                                                                 [self.navigationController popViewControllerAnimated:YES];
+                                                             }];
+        
+        [alert addAction:cancelAciton];
+        UIAlertAction* contAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Continue", @"Continue")
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action){
+                                                              // reguest microphone permission
+                                                              [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kRequireMicrophonePrivacy];
+                                                              [self RequestAudioRecorder];
+                                                          }];
+        
+        [alert addAction:contAction];
+        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 
@@ -81,58 +94,28 @@
             self.TimeLabel.text = @"--:--";
             [ErrorLogger ERRORDEBUG: NSLocalizedString(@"error_AudioRecorderPermissionError", @"Microphone Permission required. Please go to Settings to turn on Microphone privacy access.")];
             
-            NSString* buttontitle = nil;
-            NSString* description = nil;
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"title_find", @"Setup")
+                                                                           message:[NSString stringWithFormat: NSLocalizedString(@"error_AudioRecorderPermissionError", @"Microphone permission is required to record a secure voice message. Tap the %@ button for SafeSlinger Microphone permission details."), NSLocalizedString(@"menu_Settings", @"menu_Settings")]
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
             
-            if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-                buttontitle = NSLocalizedString(@"menu_Help", @"Help");
-                description = [NSString stringWithFormat: NSLocalizedString(@"error_AudioRecorderPermissionError", @"Microphone permission is required to record a secure voice message. Tap the %@ button for SafeSlinger Microphone permission details."), buttontitle];
-            } else {
-                buttontitle = NSLocalizedString(@"menu_Settings", @"menu_Settings");
-                description = [NSString stringWithFormat: NSLocalizedString(@"error_AudioRecorderPermissionError", @"Microphone permission is required to record a secure voice message. Tap the %@ button for SafeSlinger Microphone permission details."), buttontitle];
-            }
+            UIAlertAction* cancelAciton = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Cancel", @"Cancel")
+                                                                  style:UIAlertActionStyleDefault
+                                                                handler:^(UIAlertAction * action){
+                                                                    [self.navigationController popViewControllerAnimated:YES];
+                                                                }];
             
-            UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
-                                                              message: description
-                                                             delegate: self
-                                                    cancelButtonTitle: NSLocalizedString(@"btn_Cancel", @"Cancel")
-                                                    otherButtonTitles: buttontitle, nil];
-            message.tag = HelpMicrophone;
-            [message show];
-            message = nil;
+            [alert addAction:cancelAciton];
+            UIAlertAction* setAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"menu_Settings", @"menu_Settings")
+                                                                     style:UIAlertActionStyleDefault
+                                                                   handler:^(UIAlertAction * action){
+                                                                       NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                                                                       [[UIApplication sharedApplication] openURL:url];
+                                                                   }];
+            
+            [alert addAction:setAction];
+            [self presentViewController:alert animated:YES completion:nil];
         }
     }];
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(alertView.tag==HelpMicrophone)
-    {
-        if(buttonIndex==alertView.cancelButtonIndex)
-        {
-            [self.navigationController popViewControllerAnimated:YES];
-        }else{
-            if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kMicrophoneHelpURL]];
-                [self.navigationController popViewControllerAnimated:YES];
-            } else {
-                // iOS8
-                NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-                [[UIApplication sharedApplication] openURL:url];
-            }
-        }
-    }else if(alertView.tag==AskPerm)
-    {
-        if(buttonIndex==alertView.cancelButtonIndex)
-        {
-            [self.navigationController popViewControllerAnimated:YES];
-        }else{
-            // reguest microphone permission
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kRequireMicrophonePrivacy];
-            [self RequestAudioRecorder];
-        }
-    }
-    
 }
 
 -(void)PrepareAudioRecorder

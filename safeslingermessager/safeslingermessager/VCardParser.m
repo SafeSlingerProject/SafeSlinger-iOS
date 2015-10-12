@@ -46,7 +46,7 @@
     if (FN) [vCard appendString: FN];
     [vCard appendString: @"\n"];
 #pragma mark PubliKey
-    [vCard appendFormat: @"IMPP;SafeSlinger-PubKey:%@\n", [Base64 encode:[SSEngine getPackPubKeys]]];
+    [vCard appendFormat: @"IMPP;SafeSlinger-PubKey:%@\n", [[SSEngine getPackPubKeys]base64EncodedStringWithOptions:0]];
     NSString* hex_token = [[NSUserDefaults standardUserDefaults] stringForKey: kPUSH_TOKEN];
     NSMutableData *encodeToken = [NSMutableData dataWithLength:0];
     if(hex_token)
@@ -65,7 +65,7 @@
         [encodeToken appendData:[NSData dataWithBytes: &len length: 4]];
         [encodeToken appendData:[str dataUsingEncoding:NSASCIIStringEncoding]];
     }
-    [vCard appendFormat: @"IMPP;SafeSlinger-Push:%@\n", [Base64 encode:encodeToken]];
+    [vCard appendFormat: @"IMPP;SafeSlinger-Push:%@\n", [encodeToken base64EncodedStringWithOptions:0]];
     
 #pragma mark EndofVCard
 	[vCard appendString: @"END:VCARD"];
@@ -80,9 +80,9 @@
     [vCard appendString: [NSString vcardnstring:contact.firstName withLastName:contact.lastName]];
     [vCard appendString: @"\n"];
     
-    if(contact.photo) [vCard appendFormat: @"PHOTO;TYPE=JPEG;ENCODING=b:%@\n",[Base64 encode:contact.photo]];
+    if(contact.photo) [vCard appendFormat: @"PHOTO;TYPE=JPEG;ENCODING=b:%@\n",[contact.photo base64EncodedStringWithOptions:0]];
     
-    NSString* Base64Enckey = [Base64 encode:[[NSString stringWithFormat:@"%@\n%@\n%@", contact.keyId, contact.keygenDate, Pubkey] dataUsingEncoding:NSASCIIStringEncoding]];
+    NSString* Base64Enckey = [[[NSString stringWithFormat:@"%@\n%@\n%@", contact.keyId, contact.keygenDate, Pubkey] dataUsingEncoding:NSASCIIStringEncoding]base64EncodedStringWithOptions:0];
     [vCard appendFormat: @"IMPP;SafeSlinger-PubKey:%@\n", Base64Enckey];
     
     // push token format: Base64EncodeByteArray(type | lentok | token)
@@ -93,7 +93,7 @@
     [encToken appendData:[NSData dataWithBytes: &len length: 4]];
     [encToken appendData:[contact.pushToken dataUsingEncoding:NSASCIIStringEncoding]];
     
-    NSString* Base64Enctoken = [Base64 encode: encToken];
+    NSString* Base64Enctoken = [encToken base64EncodedStringWithOptions:0];
     [vCard appendFormat: @"IMPP;SafeSlinger-Push:%@\n", Base64Enctoken];
 	[vCard appendString: @"END:VCARD"];
     
@@ -206,7 +206,7 @@
     }// end of for
     
 #pragma mark PubliKey
-    [vCard appendFormat: @"IMPP;SafeSlinger-PubKey:%@\n", [Base64 encode:[SSEngine getPackPubKeys]]];
+    [vCard appendFormat: @"IMPP;SafeSlinger-PubKey:%@\n", [[SSEngine getPackPubKeys]base64EncodedStringWithOptions:0]];
     NSString* hex_token = [[NSUserDefaults standardUserDefaults] stringForKey: kPUSH_TOKEN];
     NSMutableData *encodeToken = [NSMutableData dataWithLength:0];
     if(hex_token)
@@ -225,7 +225,7 @@
         [encodeToken appendData:[NSData dataWithBytes: &len length: 4]];
         [encodeToken appendData:[str dataUsingEncoding:NSASCIIStringEncoding]];
     }
-    [vCard appendFormat: @"IMPP;SafeSlinger-Push:%@\n", [Base64 encode:encodeToken]];
+    [vCard appendFormat: @"IMPP;SafeSlinger-Push:%@\n", [encodeToken base64EncodedStringWithOptions:0]];
     
 #pragma mark EndofVCard
 	[vCard appendString: @"END:VCARD"];
@@ -265,7 +265,7 @@
                 [tokens removeAllObjects];
 				continue;
 			}else{
-                NSData *decodedPhoto = [Base64 decode: imageString];
+                NSData *decodedPhoto = [[NSData alloc] initWithBase64EncodedString:imageString options:0];
                 if(decodedPhoto!=nil) {
                     ABPersonSetImageData(aRecord, (__bridge CFDataRef)decodedPhoto, &error);
                 }

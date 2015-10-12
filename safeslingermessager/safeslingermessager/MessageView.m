@@ -156,7 +156,7 @@
     
     // get photo
     NSString* face = [delegate.DbInstance QueryStringInTokenTableByKeyID: MsgListEntry.keyid Field:@"note"];
-    [cell.imageView setImage: ([face length]==0) ? b_img : [[UIImage imageWithData: [Base64 decode:face]]scaleToSize:CGSizeMake(45.0f, 45.0f)]];
+    [cell.imageView setImage: ([face length]==0) ? b_img : [[UIImage imageWithData: [[NSData alloc] initWithBase64EncodedString:face options:0] ]scaleToSize:CGSizeMake(45.0f, 45.0f)]];
     
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier: NSCalendarIdentifierGregorian];
     NSDateComponents *components = nil;

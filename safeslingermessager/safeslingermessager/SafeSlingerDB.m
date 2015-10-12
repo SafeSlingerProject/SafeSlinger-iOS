@@ -802,7 +802,8 @@
 	
 	// setphoto
 	if(sqlite3_column_type(sqlStatement, 5) != SQLITE_NULL) {
-		contact.photo = [Base64 decode:[NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 5)]];
+        contact.photo = [[NSData alloc]initWithBase64EncodedString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 5)] options:0];
+        //[Base64 decode:[NSString stringWithUTF8String:(char *)sqlite3_column_text(sqlStatement, 5)]];
 	}
 	
 	// set keyid and pstamp
@@ -842,7 +843,7 @@
 		
 		// bind photo
 		if (contact.photo != nil) {
-			sqlite3_bind_text(sqlStatement, 2, [[Base64 encode:contact.photo] UTF8String], -1, SQLITE_TRANSIENT);
+			sqlite3_bind_text(sqlStatement, 2, [[contact.photo base64EncodedStringWithOptions:0]UTF8String], -1, SQLITE_TRANSIENT);
 		} else {
 			sqlite3_bind_null(sqlStatement, 2);
 		}
@@ -919,7 +920,7 @@
             sqlite3_bind_text(sqlStatement, 3, [now UTF8String], -1, SQLITE_TRANSIENT);
             // bind photo
             if (contact.photo != nil) {
-                sqlite3_bind_text(sqlStatement, 4, [[Base64 encode: UIImageJPEGRepresentation([UIImage imageWithData:contact.photo], 0.9)] UTF8String], -1, SQLITE_TRANSIENT);
+                sqlite3_bind_text(sqlStatement, 4, [[UIImageJPEGRepresentation([UIImage imageWithData:contact.photo], 0.9) base64EncodedStringWithOptions:0] UTF8String], -1, SQLITE_TRANSIENT);
             } else {
                 sqlite3_bind_null(sqlStatement, 4);
             }
@@ -962,7 +963,8 @@
 			sqlite3_bind_int(sqlStatement, 5, contact.exchangeType);
             // bind photo
 			if (contact.photo != nil) {
-				sqlite3_bind_text(sqlStatement, 6, [[Base64 encode: UIImageJPEGRepresentation([UIImage imageWithData:contact.photo], 0.9)] UTF8String], -1, SQLITE_TRANSIENT);
+                sqlite3_bind_text(sqlStatement, 6, [[UIImageJPEGRepresentation([UIImage imageWithData:contact.photo], 0.9) base64EncodedStringWithOptions:0] UTF8String], -1, SQLITE_TRANSIENT);
+				//sqlite3_bind_text(sqlStatement, 6, [[Base64 encode: UIImageJPEGRepresentation([UIImage imageWithData:contact.photo], 0.9)] UTF8String], -1, SQLITE_TRANSIENT);
 			} else {
 				sqlite3_bind_null(sqlStatement, 6);
 			}
@@ -1864,43 +1866,28 @@
 
 - (BOOL)DeleteMessage: (NSData*)msgid
 {
-    if(db==nil){
+    if(!db || !msgid){
         [ErrorLogger ERRORDEBUG: @"ERROR: DB Object is null or Input is null."];
         return NO;
     }
     
     BOOL ret = YES;
-    @try {
+    
+    sqlite3_stmt *sqlStatement;
+    const char *sql = "DELETE FROM msgtable WHERE msgid=?";
         
-        sqlite3_stmt *sqlStatement;
-        const char *sql = "DELETE FROM msgtable WHERE msgid=?";
-        
-        if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK){
-            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while creating statement. '%s'", sqlite3_errmsg(db)]];
-            ret = NO;
-        }
-        
+    if(sqlite3_prepare_v2(db, sql, -1, &sqlStatement, NULL) == SQLITE_OK){
         // bind msgid
         sqlite3_bind_blob(sqlStatement, 1, [msgid bytes], (int)[msgid length], SQLITE_TRANSIENT);
-        
-        if(SQLITE_DONE != sqlite3_step(sqlStatement)){
-            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while deleting data. '%s'", sqlite3_errmsg(db)]];
+        int error = sqlite3_step(sqlStatement);
+        if(error != SQLITE_DONE){
+            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while deleting data. '%s'", sqlite3_errstr(error)]];
             ret = NO;
         }
-        
-        if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
-            [ErrorLogger ERRORDEBUG: @"ERROR: Problem with finalize statement"];
-            ret = NO;
-        }
+        sqlite3_finalize(sqlStatement);
     }
-    @catch (NSException *exception) {
-        [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: An exception occured, %@", [exception reason]]];
-        
-        ret = NO;
-    }
-    @finally {
-        return ret;
-    }
+    
+    return ret;
 }
 
 - (BOOL) CloseDB

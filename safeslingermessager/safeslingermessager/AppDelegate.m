@@ -36,7 +36,7 @@
 #import "MessageSender.h"
 
 #import <AddressBook/AddressBook.h>
-#import <Crashlytics/Crashlytics.h>
+//#import <Crashlytics/Crashlytics.h>
 
 @implementation AppDelegate
 
@@ -71,10 +71,6 @@
 	[lagFreeField becomeFirstResponder];
 	[lagFreeField resignFirstResponder];
 	[lagFreeField removeFromSuperview];
-	
-
-    [Crashlytics startWithAPIKey:@"a9f2629c171299fa2ff44a07abafb7652f4e1d5c"];
-    [[Crashlytics sharedInstance]setDebugMode:YES];
     
     // get root path
 	NSArray *arr = [[NSArray alloc] initWithArray: NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)];
@@ -112,14 +108,9 @@
 - (void)registerPushToken
 {
     // database entry does not exist, try to do registraiton again..
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-        [[UIApplication sharedApplication]registerForRemoteNotificationTypes: (UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound)];
-    } else {
-        // iOS8
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound) categories:nil];
-        [[UIApplication sharedApplication]registerUserNotificationSettings: settings];
-        [[UIApplication sharedApplication]registerForRemoteNotifications];
-    }
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge|UIUserNotificationTypeAlert|UIUserNotificationTypeSound) categories:nil];
+    [[UIApplication sharedApplication]registerUserNotificationSettings: settings];
+    [[UIApplication sharedApplication]registerForRemoteNotifications];
 }
 
 - (void)removeContactLink {
@@ -272,7 +263,7 @@
     // Identity checking, check if conact is linked
     NSData* contact_data = [DbInstance GetConfig:@"IdentityNum"];
     if(contact_data) {
-        [contact_data getBytes:&IdentityNum];
+        [contact_data getBytes:&IdentityNum length:4];
     } else {
         IdentityNum = NonExist;
     }
@@ -352,40 +343,21 @@
     DEBUGMSG(@"didRegisterForRemoteNotificationsWithDeviceToken");
     
     // TODO: will replace device token resgitration by our own
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-        int flag = [app enabledRemoteNotificationTypes] & (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert);
-        if(flag == (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert)) {
-            //re-enabled
-            NSString *hex_device_token = [[[deviceToken description]
+    //Do something when notifications are disabled altogther
+    int flag = [UIApplication sharedApplication].currentUserNotificationSettings.types & (UIUserNotificationTypeBadge | UIUserNotificationTypeAlert);
+    if ([[UIApplication sharedApplication] isRegisteredForRemoteNotifications] && flag == (UIUserNotificationTypeBadge | UIUserNotificationTypeAlert)) {
+        //re-enabled
+        NSString *hex_device_token = [[[deviceToken description]
                                            stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]]
                                           stringByReplacingOccurrencesOfString:@" "
                                           withString:@""];
-            DEBUGMSG(@"APNS registered token = %@", hex_device_token);
-            if(hex_device_token) [[NSUserDefaults standardUserDefaults] setObject:hex_device_token forKey:kPUSH_TOKEN];
-        } else {
-            //Do something when some notification types are disabled
-            [ErrorLogger ERRORDEBUG: NSLocalizedString(@"iOS_notificationError1", @"Unable to turn on notifications. Use the \"Settings\" app to enable notifications.")];
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:kPUSH_TOKEN];
-        }
+        DEBUGMSG(@"APNS registered token = %@", hex_device_token);
+        if(hex_device_token) [[NSUserDefaults standardUserDefaults] setObject:hex_device_token forKey:kPUSH_TOKEN];
     } else {
-        //Do something when notifications are disabled altogther
-        int flag = [UIApplication sharedApplication].currentUserNotificationSettings.types & (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert);
-        
-        if ([[UIApplication sharedApplication] isRegisteredForRemoteNotifications] && flag == (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert)) {
-            //re-enabled
-            NSString *hex_device_token = [[[deviceToken description]
-                                           stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]]
-                                          stringByReplacingOccurrencesOfString:@" "
-                                          withString:@""];
-            DEBUGMSG(@"APNS registered token = %@", hex_device_token);
-            if(hex_device_token) [[NSUserDefaults standardUserDefaults] setObject:hex_device_token forKey:kPUSH_TOKEN];
-        } else {
-            //Do something when some notification types are disabled
-            [ErrorLogger ERRORDEBUG: NSLocalizedString(@"iOS_notificationError1", @"Unable to turn on notifications. Use the \"Settings\" app to enable notifications.")];
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:kPUSH_TOKEN];
-        }
+        //Do something when some notification types are disabled
+        [ErrorLogger ERRORDEBUG: NSLocalizedString(@"iOS_notificationError1", @"Unable to turn on notifications. Use the \"Settings\" app to enable notifications.")];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kPUSH_TOKEN];
     }
-    
 }
 
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {

@@ -65,21 +65,26 @@
 }
 
 - (IBAction)CreateNewKey:(id)sender {
-    UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"title_passphrase", @"Passphrase")
-                                                      message:NSLocalizedString(@"label_WarnForgotPassphrase", @"To protect your data, SafeSlinger does not store your passphrase anywhere for recovery. You may only access recipients and messages created under the same passphrase login. However, you may generate a new key and passphrase, then repeat Sling Keys with your recipients.")
-                                                     delegate:self
-                                            cancelButtonTitle:NSLocalizedString(@"btn_Cancel", @"Cancel")
-                                            otherButtonTitles:NSLocalizedString(@"btn_CreateNewKey", @"Create New Key"), nil];
     
-    [message show];
-    message = nil;
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if(buttonIndex!=alertView.cancelButtonIndex) {
-        // Create New Key
-        [self performSegueWithIdentifier:@"CreateNewKey" sender:self];
-    }
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"title_passphrase", @"Passphrase")
+                                                                   message:NSLocalizedString(@"label_WarnForgotPassphrase", @"To protect your data, SafeSlinger does not store your passphrase anywhere for recovery. You may only access recipients and messages created under the same passphrase login. However, you may generate a new key and passphrase, then repeat Sling Keys with your recipients.")
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_CreateNewKey", @"Create New Key")
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * action){
+                                                         [self performSegueWithIdentifier:@"CreateNewKey" sender:self];
+                                                     }];
+    
+    [alert addAction:okAction];
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Cancel", @"Cancel")
+                                                         style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction * action){
+                                                           // do nothing
+                                                       }];
+    
+    [alert addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)StartRetryTimer {

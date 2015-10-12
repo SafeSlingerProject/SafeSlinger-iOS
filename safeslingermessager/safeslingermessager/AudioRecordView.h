@@ -34,7 +34,7 @@
 
 @end
 
-@interface AudioRecordView : UIViewController <AVAudioRecorderDelegate, AVAudioPlayerDelegate, UIAlertViewDelegate> {
+@interface AudioRecordView : UIViewController <AVAudioRecorderDelegate, AVAudioPlayerDelegate> {
     AVAudioRecorder *audio_recorder;
     AVAudioPlayer *audio_player;
     NSTimer *polling_timer;

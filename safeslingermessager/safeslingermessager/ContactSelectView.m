@@ -393,11 +393,7 @@ typedef enum {
 	} else if(status == kABAuthorizationStatusDenied || status == kABAuthorizationStatusRestricted) {
 		NSString* buttontitle = nil;
 		
-		if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-			buttontitle = NSLocalizedString(@"menu_Help", nil);
-		} else {
-			buttontitle = NSLocalizedString(@"menu_Settings", nil);
-		}
+		buttontitle = NSLocalizedString(@"menu_Settings", nil);
 		
 		UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", nil)
 														  message: [NSString stringWithFormat: NSLocalizedString(@"iOS_contactError", nil), buttontitle]
@@ -430,12 +426,7 @@ typedef enum {
 				[UtilityFunc TriggerContactPermission];
 				break;
 			case AlertViewRequestContactsPermissionHelp:
-				if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-					[[UIApplication sharedApplication] openURL:[NSURL URLWithString:kContactHelpURL]];
-				} else {
-					// iOS8
-					[[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-				}
+				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
 				break;
 			case AlertViewHelpInfo:
 				[UtilityFunc SendOpts:self];
@@ -582,13 +573,25 @@ typedef enum {
 }
 
 - (IBAction)infoButtonTouched:(UIButton *)sender {
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"title_PickRecipient", @"Recipients")
-													  message:NSLocalizedString(@"help_PickRecip", @"Contacts with SafeSlinger keys are displayed here, select one to send your message to.")
-													 delegate:self
-											cancelButtonTitle:NSLocalizedString(@"btn_Close", @"Close")
-											otherButtonTitles:NSLocalizedString(@"menu_sendFeedback", @"Send Feedback"), nil];
-	alert.tag = AlertViewHelpInfo;
-	[alert show];
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"title_PickRecipient", @"Recipients")
+                                                                   message:NSLocalizedString(@"help_PickRecip", @"Contacts with SafeSlinger keys are displayed here, select one to send your message to.")
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* closeAciton = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Close", @"Close")
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * action){
+                                                         
+                                                     }];
+    
+    [alert addAction:closeAciton];
+    UIAlertAction* feedbackAciton = [UIAlertAction actionWithTitle:NSLocalizedString(@"menu_sendFeedback", @"Send Feedback")
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * action){
+                                                         [UtilityFunc SendOpts:self];
+                                                     }];
+    
+    [alert addAction:feedbackAciton];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (IBAction)contactInfoButtonTouched:(UIButton *)sender {
@@ -599,12 +602,18 @@ typedef enum {
 #pragma mark - Utils
 
 - (void)showMessage:(NSString *)message withTitle:(NSString *)title {
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-													  message:message
-													 delegate:nil
-											cancelButtonTitle:NSLocalizedString(@"btn_OK", nil)
-											otherButtonTitles:nil];
-	[alert show];
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:title
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* okAciton = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_OK", nil)
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * action){
+                                                             
+                                                         }];
+    
+    [alert addAction:okAciton];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end

@@ -15,6 +15,7 @@
 @implementation MessageDecryptor
 
 + (void)tryToDecryptAll {
+    DEBUGMSG(@"tryToDecryptAll");
 	AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 		NSArray *encryptedMessages = [delegate.UDbInstance getEncryptedMessages];
