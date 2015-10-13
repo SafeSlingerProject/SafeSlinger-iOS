@@ -22,9 +22,8 @@
  * THE SOFTWARE.
  */
 
-
-#import <UIKit/UIKit.h>
-#import <AVFoundation/AVFoundation.h>
+@import AVFoundation;
+@import UIKit;
 
 @class ComposeView;
 

@@ -22,10 +22,10 @@
  * THE SOFTWARE.
  */
 
-#import <UIKit/UIKit.h>
-#import <MessageUI/MessageUI.h>
-#import <AddressBook/AddressBook.h>
-#import <AddressBookUI/AddressBookUI.h>
+@import UIKit;
+@import AddressBookUI;
+@import AddressBook;
+@import MessageUI;
 #import "ContactEntry.h"
 #import "ContactManageView.h"
 

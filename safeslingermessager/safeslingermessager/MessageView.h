@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-#import <UIKit/UIKit.h>
-#import <AddressBook/AddressBook.h>
+@import UIKit;
+@import AddressBook;
 #import "MessageSender.h"
 
 @class AppDelegate;

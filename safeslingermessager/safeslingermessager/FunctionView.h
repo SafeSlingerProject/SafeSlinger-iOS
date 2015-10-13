@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 #import <safeslingerexchange/safeslingerexchange.h>
 
 #define MESSAGES_VIEW_CONTROLLER_INDEX 0

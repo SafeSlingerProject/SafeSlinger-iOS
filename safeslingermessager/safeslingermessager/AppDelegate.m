@@ -35,7 +35,7 @@
 #import "MessageReceiver.h"
 #import "MessageSender.h"
 
-#import <AddressBook/AddressBook.h>
+@import AddressBook;
 //#import <Crashlytics/Crashlytics.h>
 
 @implementation AppDelegate

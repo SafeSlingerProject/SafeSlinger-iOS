@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 typedef enum SettingCategory{
     PassphraseSec = 0,
@@ -71,7 +71,7 @@ typedef enum AboutSet{
 
 @class AppDelegate;
 
-@interface ConfigView : UITableViewController <UIAlertViewDelegate>
+@interface ConfigView : UITableViewController
 {
     NSArray *SectionHeader;
     AppDelegate *delegate;

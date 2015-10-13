@@ -22,8 +22,10 @@
  * THE SOFTWARE.
  */
 
-#import <MobileCoreServices/UTType.h>
-#import <AssetsLibrary/AssetsLibrary.h>
+//#import <MobileCoreServices/UTType.h>
+//#import <AssetsLibrary/AssetsLibrary.h>
+@import MobileCoreServices;
+@import Photos;
 #import "MessageDetailView.h"
 #import "AppDelegate.h"
 #import "SafeSlingerDB.h"
@@ -966,26 +968,30 @@ typedef enum {
 
 - (BOOL)CheckPhotoPermission {
 	BOOL ret = NO;
-	ALAuthorizationStatus authStatus = [ALAssetsLibrary authorizationStatus];
-	if(authStatus == ALAuthorizationStatusNotDetermined) {
+	PHAuthorizationStatus authStatus = [PHPhotoLibrary authorizationStatus];
+	if(authStatus == PHAuthorizationStatusNotDetermined) {
 		ret = YES; // wait to trigger it
-	} else if(authStatus == ALAuthorizationStatusRestricted || authStatus == ALAuthorizationStatusDenied) {
+	} else if(authStatus == PHAuthorizationStatusRestricted || authStatus == PHAuthorizationStatusDenied) {
 		// show indicator
-		NSString* buttontitle = nil;
-		NSString* description = nil;
-		
-		buttontitle = NSLocalizedString(@"menu_Settings", nil);
-        description = [NSString stringWithFormat: NSLocalizedString(@"iOS_photolibraryError", nil), buttontitle];
-		
-		UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", nil)
-														  message: description
-														 delegate: self
-												cancelButtonTitle: NSLocalizedString(@"btn_Cancel", nil)
-												otherButtonTitles: buttontitle, nil];
-		message.tag = HelpPhotoLibrary;
-		[message show];
-        message = nil;
-	} else if(authStatus == ALAuthorizationStatusAuthorized){
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"title_find", nil)
+                                                                       message:[NSString stringWithFormat: NSLocalizedString(@"iOS_photolibraryError", nil), NSLocalizedString(@"menu_Settings", nil)]
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* cancelAciton = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Cancel", nil)
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction * action){
+                                                                 
+                                                             }];
+        UIAlertAction* setAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"menu_Settings", nil)
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action){
+                                                              NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                                                              [[UIApplication sharedApplication] openURL:url];
+                                                          }];
+        [alert addAction:setAction];
+        [alert addAction:cancelAciton];
+        [self presentViewController:alert animated:YES completion:nil];
+	} else if(authStatus == PHAuthorizationStatusAuthorized){
 		ret = YES;
 	}
 	return ret;
@@ -1005,16 +1011,14 @@ typedef enum {
                                                              handler:^(UIAlertAction * action){
                                                                  
                                                              }];
-        
-        [alert addAction:cancelAciton];
         UIAlertAction* setAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"menu_Settings", nil)
                                                                style:UIAlertActionStyleDefault
                                                              handler:^(UIAlertAction * action){
                                                                  NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
                                                                  [[UIApplication sharedApplication] openURL:url];
                                                              }];
-        
         [alert addAction:setAction];
+        [alert addAction:cancelAciton];
         [self presentViewController:alert animated:YES completion:nil];
 		return NO;
 	} else {
@@ -1128,92 +1132,75 @@ typedef enum {
 }
 
 #pragma mark - IBAction methods
-
 - (IBAction)selectAttachment:(id)sender {
-	UIActionSheet *actionSheet = [[UIActionSheet alloc]
-								  initWithTitle: NSLocalizedString(@"title_ChooseFileLoad", @"Choose Your File")
-								  delegate: self
-								  cancelButtonTitle: nil
-								  destructiveButtonTitle: nil
-								  otherButtonTitles:
-								  NSLocalizedString(@"title_photolibary", @"Photo Library"),
-								  NSLocalizedString(@"title_photoalbum", @"Photo Album"),
-								  NSLocalizedString(@"title_camera", @"Camera"),
-								  NSLocalizedString(@"title_soundrecoder", @"Sound Recorder"),
-								  nil];
-	
-	if(_attachmentStatus != AttachmentStatusEmpty) {
-		[actionSheet setDestructiveButtonIndex:[actionSheet addButtonWithTitle:NSLocalizedString(@"title_clear", nil)]]; 
-	}
-	
-	[actionSheet setCancelButtonIndex:[actionSheet addButtonWithTitle:NSLocalizedString(@"btn_Cancel", @"Cancel")]];
-	[actionSheet showInView:[self.navigationController view]];
+    UIAlertController* actionSheet = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"title_ChooseFileLoad", @"Choose Your File")
+                                                                         message:nil
+                                                                  preferredStyle:UIAlertControllerStyleActionSheet];
+    if(_attachmentStatus != AttachmentStatusEmpty) {
+        UIAlertAction* destructAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"title_clear", nil)
+                                                               style:UIAlertActionStyleDestructive
+                                                             handler:^(UIAlertAction *action) {
+                                                                 _attachedFile = nil;
+                                                                 _attachedFileRawData = nil;
+                                                                 _attachmentStatus = AttachmentStatusEmpty;
+                                                                 [self updateAttachmentStatus];
+                                                             }];
+        [actionSheet addAction:destructAction];
+    }
+    
+    UIAlertAction* photoAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"title_photolibary", @"Photo Library")
+                                                          style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction *action) {
+                                                            if([self CheckPhotoPermission]) {
+                                                                UIImagePickerController *imagePicker = [UIImagePickerController new];
+                                                                imagePicker.delegate = self;
+                                                                imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                                                                imagePicker.allowsEditing = YES;
+                                                                [self presentViewController:imagePicker animated:YES completion:nil];
+                                                            }
+                                                        }];
+    UIAlertAction* albumAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"title_photoalbum", @"Photo Album")
+                                                          style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction *action) {
+                                                            if([self CheckPhotoPermission]) {
+                                                                UIImagePickerController *imagePicker = [UIImagePickerController new];
+                                                                imagePicker.delegate = self;
+                                                                imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+                                                                imagePicker.allowsEditing = YES;
+                                                                [self presentViewController:imagePicker animated:YES completion:nil];
+                                                            }
+                                                        }];
+    UIAlertAction* cameraAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"title_camera", @"Camera")
+                                                          style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction *action) {
+                                                            if([self CheckCameraPermission]) {
+                                                                UIImagePickerController *imagePicker = [UIImagePickerController new];
+                                                                imagePicker.delegate = self;
+                                                                imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                                                                imagePicker.showsCameraControls = YES;
+                                                                imagePicker.allowsEditing = YES;
+                                                                [self presentViewController:imagePicker animated:YES completion:nil];
+                                                            }
+                                                        }];
+    UIAlertAction* soundrecordAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"title_soundrecoder", @"Sound Recorder")
+                                                          style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction *action) {
+                                                            [self performSegueWithIdentifier:@"AudioRecordSegue" sender:self];
+                                                        }];
+    [actionSheet addAction:photoAction];
+    [actionSheet addAction:albumAction];
+    [actionSheet addAction:cameraAction];
+    [actionSheet addAction:soundrecordAction];
+    [actionSheet setModalPresentationStyle:UIModalPresentationPopover];
+    [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
 - (IBAction)unwindToMessageDetailView:(UIStoryboardSegue *)unwindSegue {
 	
 }
 
-#pragma mark - UIActionSheetDelegate methods
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-	if(buttonIndex == actionSheet.cancelButtonIndex) {
-		return;
-	}
-	
-	[self dismissViewControllerAnimated:NO completion:nil];
-	
-	switch (buttonIndex) {
-		case AttachmentTypePhotoLibrary:
-			if([self CheckPhotoPermission]) {
-				UIImagePickerController *imagePicker = [UIImagePickerController new];
-				imagePicker.delegate = self;
-				imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-				imagePicker.allowsEditing = YES;
-				[self presentViewController:imagePicker animated:YES completion:nil];
-			}
-			
-			break;
-			
-		case AttachmentTypePhotosAlbum:
-			if([self CheckPhotoPermission]) {
-				UIImagePickerController *imagePicker = [UIImagePickerController new];
-				imagePicker.delegate = self;
-				imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-				imagePicker.allowsEditing = YES;
-				[self presentViewController:imagePicker animated:YES completion:nil];
-			}
-			
-			break;
-			
-		case AttachmentTypeCamera:
-			if([self CheckCameraPermission]) {
-				UIImagePickerController *imagePicker = [UIImagePickerController new];
-				imagePicker.delegate = self;
-				imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-				imagePicker.showsCameraControls = YES;
-				imagePicker.allowsEditing = YES;
-				[self presentViewController:imagePicker animated:YES completion:nil];
-			}
-			
-			break;
-			
-		case AttachmentTypeSoundRecoder:
-			[self performSegueWithIdentifier:@"AudioRecordSegue" sender:self];
-			break;
-			
-		case AttachmentTypeClear:
-			_attachedFile = nil;
-			_attachedFileRawData = nil;
-			_attachmentStatus = AttachmentStatusEmpty;
-			[self updateAttachmentStatus];
-			break;
-			
-	}
-}
 
 #pragma mark - UIImagePickerControllerDelegate methods
-
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
 	[self dismissViewControllerAnimated:YES completion:nil];
 	

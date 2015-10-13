@@ -1881,7 +1881,7 @@
         sqlite3_bind_blob(sqlStatement, 1, [msgid bytes], (int)[msgid length], SQLITE_TRANSIENT);
         int error = sqlite3_step(sqlStatement);
         if(error != SQLITE_DONE){
-            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while deleting data. '%s'", sqlite3_errstr(error)]];
+            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while deleting data. %s", sqlite3_errstr(error)]];
             ret = NO;
         }
         sqlite3_finalize(sqlStatement);

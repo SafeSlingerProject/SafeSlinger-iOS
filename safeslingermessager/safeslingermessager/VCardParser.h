@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 #import <AddressBook/AddressBook.h>
 
 @class ContactEntry;

@@ -22,10 +22,10 @@
  * THE SOFTWARE.
  */
 
-#import <UIKit/UIKit.h>
-#import <QuickLook/QuickLook.h>
-#import <AddressBook/AddressBook.h>
-#import <dispatch/dispatch.h>
+@import UIKit;
+@import QuickLook;
+@import AddressBook;
+@import Dispatch;
 #import "MessageReceiver.h"
 #import "MessageSender.h"
 #import "AudioRecordView.h"
@@ -34,7 +34,7 @@
 @class AppDelegate;
 @class MessageView;
 
-@interface MessageDetailView : UIViewController <UITableViewDataSource, UITabBarDelegate, QLPreviewControllerDataSource, QLPreviewControllerDelegate, UIGestureRecognizerDelegate, UITextFieldDelegate, MessageReceiverNotificationDelegate, MessageSenderDelegate, AudioRecordDelegate, UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
+@interface MessageDetailView : UIViewController <UITableViewDataSource, UITabBarDelegate, QLPreviewControllerDataSource, QLPreviewControllerDelegate, UIGestureRecognizerDelegate, UITextFieldDelegate, MessageReceiverNotificationDelegate, MessageSenderDelegate, AudioRecordDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
     // For Grand Central Dispatch
     dispatch_queue_t BackGroundQueue;
     AppDelegate *delegate;

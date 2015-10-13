@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 #import "SafeSlingerDB.h"
 
 typedef enum KeyType {

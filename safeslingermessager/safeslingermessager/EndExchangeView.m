@@ -64,12 +64,16 @@
 }
 
 - (IBAction)DisplayHow:(id)sender {
-    UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"title_save", @"End Exchange")
-                                                      message:NSLocalizedString(@"help_save", @"When finished, the protocol will reveal a list of the identity data exchanged. Select the contacts you wish to save and press 'Import'.";)
-                                                     delegate:nil
-                                            cancelButtonTitle:NSLocalizedString(@"btn_Close", @"Close")
-                                            otherButtonTitles:nil];
-    [message show];
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"title_save", @"End Exchange")
+                                                                   message:NSLocalizedString(@"help_save", @"When finished, the protocol will reveal a list of the identity data exchanged. Select the contacts you wish to save and press 'Import'.")
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* closeAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Close", @"Close")
+                                                          style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction * action){
+                                                            
+                                                        }];
+    [alert addAction:closeAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (IBAction)Import:(id)sender {
@@ -307,20 +311,24 @@
 }
 
 - (IBAction)Cancel:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_Question", @"Question")
-                                                    message: NSLocalizedString(@"ask_QuitConfirmation", @"Quit? Are you sure?")
-                                                   delegate: self
-                                          cancelButtonTitle: NSLocalizedString(@"btn_No", @"No")
-                                          otherButtonTitles: NSLocalizedString(@"btn_Yes", @"Yes"), nil];
-    [alert show];
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if(buttonIndex!=alertView.cancelButtonIndex) {
-        contactList = nil;
-        free(selections);
-        [UtilityFunc PopToMainPanel:self.navigationController];
-    }
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"title_save", @"End Exchange")
+                                                                   message:NSLocalizedString(@"help_save", @"When finished, the protocol will reveal a list of the identity data exchanged. Select the contacts you wish to save and press 'Import'.")
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* noAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_No", @"No")
+                                                          style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction * action){
+                                                            
+                                                        }];
+    UIAlertAction* yesAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Yes", @"Yes")
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * action){
+                                                         contactList = nil;
+                                                         free(selections);
+                                                         [UtilityFunc PopToMainPanel:self.navigationController];
+                                                     }];
+    [alert addAction:noAction];
+    [alert addAction:yesAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark UITableViewDelegate

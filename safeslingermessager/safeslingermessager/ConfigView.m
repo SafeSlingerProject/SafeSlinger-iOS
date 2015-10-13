@@ -404,17 +404,26 @@
         }
     }
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"menu_ManagePassphrases", @"Manage Passphrases")
-                                                    message: msg
-                                                   delegate: self
-                                          cancelButtonTitle: NSLocalizedString(@"btn_Cancel", @"Cancel")
-                                          otherButtonTitles: nil];
-    if(DB_KEY_INDEX<([keyarr count]-1))
-        [alert addButtonWithTitle: NSLocalizedString(@"btn_DeleteKeys", @"Delete Keys")];
+    // for case NotPermDialog
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"menu_ManagePassphrases", @"Manage Passphrases")
+                                                                   message:msg
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    if(DB_KEY_INDEX<([keyarr count]-1)){
+        UIAlertAction* delAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_DeleteKeys", @"Delete Keys")
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * action){
+                                                             [self DeleteNewerKeys];
+                                                         }];
+        [alert addAction:delAction];
+    }
     
-    alert.tag = ManagePass;
-    [alert show];
-    alert = nil;
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Cancel", @"Cancel")
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * action){
+                                                         
+                                                     }];
+    [alert addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)DeleteNewerKeys
@@ -667,7 +676,7 @@
                 break;
             case ManagePass:
             {
-                [self DeleteNewerKeys];
+                
             }
                 break;
             default:

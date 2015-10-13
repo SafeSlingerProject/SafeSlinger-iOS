@@ -22,11 +22,11 @@
  * THE SOFTWARE.
  */
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @class AppDelegate;
 
-@interface EndExchangeView : UIViewController <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate> {
+@interface EndExchangeView : UIViewController <UITableViewDelegate, UITableViewDataSource> {
 	NSArray *contactList;
 	BOOL *selections;
     AppDelegate *delegate;

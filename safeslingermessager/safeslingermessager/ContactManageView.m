@@ -172,8 +172,6 @@ typedef enum {
                                                          handler:^(UIAlertAction * action){
                                                              
                                                          }];
-    
-    [alert addAction:closeAciton];
     UIAlertAction* feedbackAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"menu_sendFeedback", @"Send Feedback")
                                                            style:UIAlertActionStyleDefault
                                                          handler:^(UIAlertAction * action){
@@ -181,6 +179,7 @@ typedef enum {
                                                          }];
     
     [alert addAction:feedbackAction];
+    [alert addAction:closeAciton];
     [self presentViewController:alert animated:YES completion:nil];
 }
 

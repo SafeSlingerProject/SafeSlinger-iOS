@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-#import <UIKit/UIKit.h>
-#import <MessageUI/MessageUI.h>
+@import UIKit;
+@import MessageUI;
 #import "BackupCloud.h"
 
 @class AppDelegate;

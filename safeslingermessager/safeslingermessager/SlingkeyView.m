@@ -170,26 +170,40 @@
 -(IBAction) EditContact {
     ABAuthorizationStatus status = ABAddressBookGetAuthorizationStatus();
     if(status == kABAuthorizationStatusNotDetermined) {
-        UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
-                                                          message: NSLocalizedString(@"iOS_RequestPermissionContacts", @"You can select your contact card to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Contacts when asked.")
-                                                         delegate: self
-                                                cancelButtonTitle: NSLocalizedString(@"btn_NotNow", @"Not Now")
-                                                otherButtonTitles: NSLocalizedString(@"btn_Continue", @"Continue"), nil];
-        message.tag = AskPerm;
-        [message show];
+        UIAlertController* actionAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"title_find", @"Setup")
+                                                                            message:NSLocalizedString(@"iOS_RequestPermissionContacts", @"You can select your contact card to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Contacts when asked.")
+                                                                     preferredStyle:UIAlertControllerStyleActionSheet];
+        UIAlertAction* noAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_NotNow", @"Not Now")
+                                                              style:UIAlertActionStyleDestructive
+                                                            handler:^(UIAlertAction *action) {
+                                                                
+                                                            }];
+        UIAlertAction* yesAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Continue", @"Continue")
+                                                              style:UIAlertActionStyleDestructive
+                                                            handler:^(UIAlertAction *action) {
+                                                                [UtilityFunc TriggerContactPermission];
+                                                            }];
+        [actionAlert addAction:yesAction];
+        [actionAlert addAction:noAction];
+        [self presentViewController:actionAlert animated:YES completion:nil];
     } else if(status == kABAuthorizationStatusDenied || status == kABAuthorizationStatusRestricted) {
-        NSString* buttontitle = nil;
-        NSString* description = nil;
-        buttontitle = NSLocalizedString(@"menu_Settings", @"menu_Settings");
-        description = [NSString stringWithFormat: NSLocalizedString(@"iOS_contactError", @"Contacts permission is required for securely sharing contact cards. Tap the %@ button for SafeSlinger Contacts permission details."), buttontitle];
-        
-        UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
-                                                          message: description
-                                                         delegate: self
-                                                cancelButtonTitle: NSLocalizedString(@"btn_Cancel", @"Cancel")
-                                                otherButtonTitles: buttontitle, nil];
-        message.tag = HelpContact;
-        [message show];
+        UIAlertController* actionAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"title_find", @"Setup")
+                                                                             message:[NSString stringWithFormat: NSLocalizedString(@"iOS_contactError", @"Contacts permission is required for securely sharing contact cards. Tap the %@ button for SafeSlinger Contacts permission details."), NSLocalizedString(@"menu_Settings", @"menu_Settings")]
+                                                                      preferredStyle:UIAlertControllerStyleActionSheet];
+        UIAlertAction* noAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_NotNow", @"Not Now")
+                                                           style:UIAlertActionStyleDestructive
+                                                         handler:^(UIAlertAction *action) {
+                                                             
+                                                         }];
+        UIAlertAction* yesAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"menu_Settings", @"menu_Settings")
+                                                            style:UIAlertActionStyleDestructive
+                                                          handler:^(UIAlertAction *action) {
+                                                              NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                                                              [[UIApplication sharedApplication] openURL:url];
+                                                          }];
+        [actionAlert addAction:yesAction];
+        [actionAlert addAction:noAction];
+        [self presentViewController:actionAlert animated:YES completion:nil];
     } else if(status == kABAuthorizationStatusAuthorized) {
         if(delegate.IdentityNum != NonExist) {
             [self performSegueWithIdentifier:@"EditContact" sender:self];
@@ -198,39 +212,28 @@
     
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if(buttonIndex!=alertView.cancelButtonIndex) {
-        if(alertView.tag==AskPerm) {
-            [UtilityFunc TriggerContactPermission];
-        } else if(alertView.tag==HelpContact) {
-            NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-            [[UIApplication sharedApplication] openURL:url];
-        } else if(alertView.tag==HelpNotification) {
-            NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-            [[UIApplication sharedApplication] openURL:url];
-        }
-    }
-}
-
 - (IBAction)BeginExchange {
-    NSString* buttontitle = nil;
-    NSString* description = nil;
-    
     // check notification permission
     int flag =[UIApplication sharedApplication].currentUserNotificationSettings.types & (UIUserNotificationTypeBadge | UIUserNotificationTypeAlert);
     if (![[UIApplication sharedApplication] isRegisteredForRemoteNotifications] || flag != (UIUserNotificationTypeBadge | UIUserNotificationTypeAlert))
     {
-        buttontitle = NSLocalizedString(@"menu_Settings", @"menu_Settings");
-        description = [NSString stringWithFormat: NSLocalizedString(@"iOS_notificationError1", @"Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the %@ button for SafeSlinger Notification permission details."), buttontitle];
-            
-        UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", @"Setup")
-                                                          message: description
-                                                         delegate: self
-                                                cancelButtonTitle: NSLocalizedString(@"btn_Cancel", @"Cancel")
-                                                otherButtonTitles: buttontitle, nil];
-            message.tag = HelpNotification;
-            [message show];
-            return;
+        UIAlertController* actionAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"title_find", @"Setup")
+                                                                             message:[NSString stringWithFormat: NSLocalizedString(@"iOS_notificationError1", @"Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the %@ button for SafeSlinger Notification permission details."), NSLocalizedString(@"menu_Settings", @"menu_Settings")]
+                                                                      preferredStyle:UIAlertControllerStyleActionSheet];
+        UIAlertAction* noAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Cancel", @"Cancel")
+                                                           style:UIAlertActionStyleDestructive
+                                                         handler:^(UIAlertAction *action) {
+                                                             
+                                                         }];
+        UIAlertAction* yesAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"menu_Settings", @"menu_Settings")
+                                                            style:UIAlertActionStyleDestructive
+                                                          handler:^(UIAlertAction *action) {
+                                                              NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                                                              [[UIApplication sharedApplication] openURL:url];
+                                                          }];
+        [actionAlert addAction:yesAction];
+        [actionAlert addAction:noAction];
+        [self presentViewController:actionAlert animated:YES completion:nil];
     }
     
     NSString* vCard;
@@ -427,32 +430,30 @@
 }
 
 - (void)DisplayHow {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc]
-                                  initWithTitle: nil
-                                  delegate: self
-                                  cancelButtonTitle: NSLocalizedString(@"btn_Cancel", @"Cancel")
-                                  destructiveButtonTitle: nil
-                                  otherButtonTitles:
-                                  NSLocalizedString(@"menu_Help", @"Help"),
-                                  NSLocalizedString(@"menu_sendFeedback", @"Send Feedback"),
-                                  nil];
-    [actionSheet showFromBarButtonItem:self.parentViewController.navigationItem.rightBarButtonItem animated:YES];
-    actionSheet = nil;
-}
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    switch (buttonIndex) {
-        case Help: {
-            // show help
-            [self performSegueWithIdentifier:@"ShowHelp" sender:self];
-        }
-            break;
-        case Feedback:
-            [UtilityFunc SendOpts:self];
-            break;
-        default:
-            break;
-    }
+    UIAlertController* actionSheet = [UIAlertController alertControllerWithTitle:nil
+                                                          message:nil
+                                                   preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Cancel", @"Cancel")
+                                             style:UIAlertActionStyleDestructive
+                                           handler:^(UIAlertAction *action) {
+                                               
+                                           }];
+    UIAlertAction* helpAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"menu_Help", @"Help")
+                                           style:UIAlertActionStyleDefault
+                                         handler:^(UIAlertAction *action) {
+                                             [self performSegueWithIdentifier:@"ShowHelp" sender:self];
+                                         }];
+    UIAlertAction* feedbackAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"menu_sendFeedback", @"Send Feedback")
+                                                          style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction *action) {
+                                                            [UtilityFunc SendOpts:self];
+                                                        }];
+    // note: you can control the order buttons are shown, unlike UIActionSheet
+    [actionSheet addAction:helpAction];
+    [actionSheet addAction:feedbackAction];
+    [actionSheet addAction:cancelAction];
+    [actionSheet setModalPresentationStyle:UIModalPresentationPopover];
+    [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {

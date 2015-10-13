@@ -49,13 +49,13 @@
     
     [LogoutBtn setTitle:NSLocalizedString(@"menu_Logout", @"Logout")];
     
-    UITabBarItem *item = [self.viewControllers objectAtIndex: MESSAGES_VIEW_CONTROLLER_INDEX];
+    UITabBarItem *item = (UITabBarItem*)[self.viewControllers objectAtIndex: MESSAGES_VIEW_CONTROLLER_INDEX];
     [item setTitle: NSLocalizedString(@"menu_TagListMessages", @"Messages")];
-    item = [self.viewControllers objectAtIndex: SLING_KEYS_VIEW_CONTROLLER_INDEX];
+    item = (UITabBarItem*)[self.viewControllers objectAtIndex: SLING_KEYS_VIEW_CONTROLLER_INDEX];
     [item setTitle: NSLocalizedString(@"menu_TagExchange", @"Sling Keys")];
-    item = [self.viewControllers objectAtIndex: INTRODUCTION_VIEW_CONTROLLER_INDEX];
+    item = (UITabBarItem*)[self.viewControllers objectAtIndex: INTRODUCTION_VIEW_CONTROLLER_INDEX];
     [item setTitle: NSLocalizedString(@"menu_Introduction", @"Introduction")];
-    item = [self.viewControllers objectAtIndex: SETTINGS_VIEW_CONTROLLER_INDEX];
+    item = (UITabBarItem*)[self.viewControllers objectAtIndex: SETTINGS_VIEW_CONTROLLER_INDEX];
     [item setTitle: NSLocalizedString(@"menu_Settings", @"Settings")];
 }
 

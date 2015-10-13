@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 CyLab. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 #import "UniversalDB.h"
 
 @interface MessageDecryptor : NSObject

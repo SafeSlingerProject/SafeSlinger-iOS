@@ -40,13 +40,6 @@ typedef enum {
 	InviteContactActionSheetUseAnother
 } InviteContactActionSheet;
 
-typedef enum {
-	AlertViewRequestContactsPermission = 99,
-	AlertViewRequestContactsPermissionHelp,
-	AlertViewHelpInfo,
-	AlertViewContactInfo
-} AlertView;
-
 @interface ContactSelectView ()
 
 @property (nonatomic) InviteContactActionSheet selectedInviteType;
@@ -217,13 +210,16 @@ typedef enum {
         ContactEntry *sc = _filteredContacts[indexPath.row];
 		_selectedContactIndex = [_contacts indexOfObject:sc];
 		
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_RecipientDetail", @"Recipient Detail")
-														message:[sc printContact]
-													   delegate:self
-											  cancelButtonTitle:NSLocalizedString(@"btn_Close", @"Close")
-											  otherButtonTitles:nil];
-		alert.tag = AlertViewContactInfo;
-		[alert show];
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"title_RecipientDetail", @"Recipient Detail")
+                                                                       message:[sc printContact]
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* closeAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Close", @"Close")
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction * action){
+                                                                 
+                                                             }];
+        [alert addAction:closeAction];
+        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 
@@ -383,25 +379,39 @@ typedef enum {
 	ABAuthorizationStatus status = ABAddressBookGetAuthorizationStatus();
 	
 	if(status == kABAuthorizationStatusNotDetermined) {
-		UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", nil)
-														  message: NSLocalizedString(@"iOS_RequestPermissionContacts", nil)
-														 delegate: self
-												cancelButtonTitle: NSLocalizedString(@"btn_NotNow", nil)
-												otherButtonTitles: NSLocalizedString(@"btn_Continue", nil), nil];
-		message.tag = AlertViewRequestContactsPermission;
-		[message show];
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"title_find", nil)
+                                                                       message:NSLocalizedString(@"iOS_RequestPermissionContacts", nil)
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_NotNow", nil)
+                                                              style:UIAlertActionStyleDefault
+                                                            handler:^(UIAlertAction * action){
+                                                                
+                                                            }];
+        UIAlertAction* contAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Continue", nil)
+                                                              style:UIAlertActionStyleDefault
+                                                            handler:^(UIAlertAction * action){
+                                                                [UtilityFunc TriggerContactPermission];
+                                                            }];
+        [alert addAction:contAction];
+        [alert addAction:cancelAction];
+        [self presentViewController:alert animated:YES completion:nil];
 	} else if(status == kABAuthorizationStatusDenied || status == kABAuthorizationStatusRestricted) {
-		NSString* buttontitle = nil;
-		
-		buttontitle = NSLocalizedString(@"menu_Settings", nil);
-		
-		UIAlertView *message = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"title_find", nil)
-														  message: [NSString stringWithFormat: NSLocalizedString(@"iOS_contactError", nil), buttontitle]
-														 delegate: self
-												cancelButtonTitle: NSLocalizedString(@"btn_Cancel", nil)
-												otherButtonTitles: buttontitle, nil];
-		message.tag = AlertViewRequestContactsPermissionHelp;
-		[message show];
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"title_find", nil)
+                                                                       message:[NSString stringWithFormat: NSLocalizedString(@"iOS_contactError", nil), NSLocalizedString(@"menu_Settings", nil)]
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Cancel", nil)
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction * action){
+                                                                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+                                                             }];
+        UIAlertAction* setAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"menu_Settings", nil)
+                                                             style:UIAlertActionStyleDefault
+                                                           handler:^(UIAlertAction * action){
+                                                               [UtilityFunc TriggerContactPermission];
+                                                           }];
+        [alert addAction:setAction];
+        [alert addAction:cancelAction];
+        [self presentViewController:alert animated:YES completion:nil];
 	} else if(status == kABAuthorizationStatusAuthorized) {
 		_addressBookController = [[ABPeoplePickerNavigationController alloc] init];
 		[_addressBookController setPeoplePickerDelegate:self];
@@ -413,27 +423,6 @@ typedef enum {
 		}
 		
 		[self presentViewController:_addressBookController animated:YES completion:nil];
-	}
-}
-
-#pragma mark - UIAlertViewDelegate methods
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-	
-	if(buttonIndex != alertView.cancelButtonIndex){
-		switch (alertView.tag) {
-			case AlertViewRequestContactsPermission:
-				[UtilityFunc TriggerContactPermission];
-				break;
-			case AlertViewRequestContactsPermissionHelp:
-				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-				break;
-			case AlertViewHelpInfo:
-				[UtilityFunc SendOpts:self];
-				break;
-			default:
-				break;
-		}
 	}
 }
 

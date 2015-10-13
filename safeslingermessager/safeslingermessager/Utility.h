@@ -22,9 +22,9 @@
  * THE SOFTWARE.
  */
 
-#import <Foundation/Foundation.h>
-#import <AddressBook/AddressBook.h>
-#import <MessageUI/MessageUI.h>
+@import Foundation;
+@import MessageUI;
+@import AddressBook;
 
 @interface UtilityFunc : NSObject
 

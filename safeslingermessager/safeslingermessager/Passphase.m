@@ -133,47 +133,52 @@
 }
 
 -(IBAction)PressHelp:(id)sender {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc]
-                                  initWithTitle: nil
-                                  delegate: self
-                                  cancelButtonTitle: NSLocalizedString(@"btn_Cancel", @"Cancel")
-                                  destructiveButtonTitle: nil
-                                  otherButtonTitles:
-                                  NSLocalizedString(@"menu_Help", @"Help"),
-                                  NSLocalizedString(@"menu_sendFeedback", @"Send Feedback"),
-                                  NSLocalizedString(@"menu_License", @"License"),
-                                  NSLocalizedString(@"menu_PrivacyPolicy", @"Privacy Policy"),
-                                  nil];
     
-    [actionSheet showInView: self.view];
-    actionSheet = nil;
-}
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    switch (buttonIndex) {
-        case Help: {
-            UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"title_passphrase", @"Passphrase")
-                                                              message:NSLocalizedString(@"help_passphrase", @"Use this screen to login to the application with your passphrase. If you have forgotten your passphrase, you may generate a new key protected by a new passphrase by tapping the Forgot Passphrase? button. Tap the user name to switch between multiple keys.")
-                                                             delegate:self
-                                                    cancelButtonTitle:NSLocalizedString(@"btn_Close", @"Close")
-                                                    otherButtonTitles:nil];
-            
-            [message show];
-            message = nil;
-        }
-            break;
-        case Feedback:
-            [UtilityFunc SendOpts:self];
-            break;
-        case LicenseLink:
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString: kLicenseURL]];
-            break;
-        case PrivacyLink:
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString: kPrivacyURL]];
-            break;
-        default:
-            break;
-    }
+    UIAlertController* actionSheet = [UIAlertController alertControllerWithTitle:nil
+                                                                         message:nil
+                                                                  preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Cancel", @"Cancel")
+                                                           style:UIAlertActionStyleDestructive
+                                                         handler:^(UIAlertAction *action) {
+                                                             
+                                                         }];
+    UIAlertAction* helpAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"menu_Help", @"Help")
+                                                         style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction *action) {
+                                                           UIAlertController* actionSheet = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"title_passphrase", @"Passphrase")
+                                                                                                                                message:NSLocalizedString(@"help_passphrase", @"Use this screen to login to the application with your passphrase. If you have forgotten your passphrase, you may generate a new key protected by a new passphrase by tapping the Forgot Passphrase? button. Tap the user name to switch between multiple keys.")
+                                                                                                                         preferredStyle:UIAlertControllerStyleActionSheet];
+                                                           UIAlertAction* closeAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Close", @"Close")
+                                                                                                                  style:UIAlertActionStyleDestructive
+                                                                                                                handler:^(UIAlertAction *action) {
+                                                                                                                    
+                                                                                                                }];
+                                                           [actionSheet addAction:closeAction];
+                                                           [self presentViewController:actionSheet animated:YES completion:nil];
+                                                       }];
+    UIAlertAction* feedbackAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"menu_sendFeedback", @"Send Feedback")
+                                                             style:UIAlertActionStyleDefault
+                                                           handler:^(UIAlertAction *action) {
+                                                               [UtilityFunc SendOpts:self];
+                                                           }];
+    UIAlertAction* licenseAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"menu_License", @"License")
+                                                             style:UIAlertActionStyleDefault
+                                                           handler:^(UIAlertAction *action) {
+                                                               [[UIApplication sharedApplication] openURL:[NSURL URLWithString: kLicenseURL]];
+                                                           }];
+    UIAlertAction* policyAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"menu_PrivacyPolicy", @"Privacy Policy")
+                                                             style:UIAlertActionStyleDefault
+                                                           handler:^(UIAlertAction *action) {
+                                                               [[UIApplication sharedApplication] openURL:[NSURL URLWithString: kPrivacyURL]];
+                                                           }];
+    // note: you can control the order buttons are shown, unlike UIActionSheet
+    [actionSheet addAction:helpAction];
+    [actionSheet addAction:feedbackAction];
+    [actionSheet addAction:licenseAction];
+    [actionSheet addAction:policyAction];
+    [actionSheet addAction:cancelAction];
+    [actionSheet setModalPresentationStyle:UIModalPresentationPopover];
+    [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {

@@ -22,16 +22,17 @@
  * THE SOFTWARE.
  */
 
-#import <UIKit/UIKit.h>
-#import <AddressBook/AddressBook.h>
-#import <AddressBookUI/AddressBookUI.h>
+@import UIKit;
+@import AddressBook;
+@import AddressBookUI;
+@import MessageUI;
+
 #import <safeslingerexchange/safeslingerexchange.h>
-#import <MessageUI/MessageUI.h>
 #import "ContactManageView.h"
 
 @class AppDelegate;
 
-@interface SlingkeyView : UIViewController <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, UIAlertViewDelegate, SafeSlingerDelegate, MFMailComposeViewControllerDelegate> {
+@interface SlingkeyView : UIViewController <UITableViewDelegate, UITableViewDataSource, SafeSlingerDelegate, MFMailComposeViewControllerDelegate> {
     AppDelegate *delegate;
     
     // safeslinger exchange object

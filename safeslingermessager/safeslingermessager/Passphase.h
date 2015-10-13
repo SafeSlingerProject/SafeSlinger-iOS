@@ -22,12 +22,12 @@
  * THE SOFTWARE.
  */
 
-#import <UIKit/UIKit.h>
-#import <MessageUI/MessageUI.h>
+@import UIKit;
+@import MessageUI;
 
 @class AppDelegate;
 
-@interface Passphase : UIViewController <UITextFieldDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
+@interface Passphase : UIViewController <UITextFieldDelegate, MFMailComposeViewControllerDelegate>
 {
     int error_t, tout_bound;
     NSTimer *errTimer;

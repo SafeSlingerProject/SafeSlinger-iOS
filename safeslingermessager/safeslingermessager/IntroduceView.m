@@ -72,6 +72,33 @@
 }
 
 - (void)DisplayHow {
+    
+    UIAlertController* actionSheet = [UIAlertController alertControllerWithTitle:nil
+                                                                         message:nil
+                                                                  preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Cancel", @"Cancel")
+                                                           style:UIAlertActionStyleDestructive
+                                                         handler:^(UIAlertAction *action) {
+                                                             
+                                                         }];
+    UIAlertAction* helpAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"menu_Help", @"Help")
+                                                         style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction *action) {
+                                                           [self performSegueWithIdentifier:@"ShowHelp" sender:self];
+                                                       }];
+    UIAlertAction* feedbackAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"menu_sendFeedback", @"Send Feedback")
+                                                             style:UIAlertActionStyleDefault
+                                                           handler:^(UIAlertAction *action) {
+                                                               [UtilityFunc SendOpts:self];
+                                                           }];
+    // note: you can control the order buttons are shown, unlike UIActionSheet
+    [actionSheet addAction:cancelAction];
+    [actionSheet addAction:helpAction];
+    [actionSheet addAction:feedbackAction];
+    [actionSheet setModalPresentationStyle:UIModalPresentationPopover];
+    [self presentViewController:actionSheet animated:YES completion:nil];
+    
+    /*
     UIActionSheet *actionSheet = [[UIActionSheet alloc]
                                   initWithTitle: nil
                                   delegate: self
@@ -83,20 +110,7 @@
                                   nil];
     [actionSheet showFromBarButtonItem:self.parentViewController.navigationItem.rightBarButtonItem animated:YES];
     actionSheet = nil;
-}
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    switch (buttonIndex) {
-        case Help:
-            // show help
-            [self performSegueWithIdentifier:@"ShowHelp" sender:self];
-            break;
-        case Feedback:
-            [UtilityFunc SendOpts:self];
-            break;
-        default:
-            break;
-    }
+    */
 }
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
