@@ -398,7 +398,7 @@ typedef enum {
 			if(ABPersonHasImageData(contact)) {
 				CFDataRef imgData = ABPersonCopyImageDataWithFormat(contact, kABPersonImageFormatThumbnail);
 				UIImage *image = [UIImage imageWithData:(__bridge NSData *)imgData];
-				_editingContact.photo = UIImageJPEGRepresentation([image scaleToSize:CGSizeMake(45.0f, 45.0f)], 0.9);
+				_editingContact.photo = UIImageJPEGRepresentation([image scaleToSize:CGSizeMake(45.0f, 45.0f)], 1.0);
 				CFRelease(imgData);
 			} else {
 				_editingContact.photo = nil;

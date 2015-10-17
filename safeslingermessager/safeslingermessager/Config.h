@@ -106,13 +106,6 @@ typedef enum PermDialog {
 #define HalfkeyboardHieght 108.0f
 #define MsgBoxHieght 30.0f
 
-typedef enum HelpActionSheet {
-	Help = 0,
-	Feedback,
-    LicenseLink,
-    PrivacyLink
-}HelpActionSheet;
-
 typedef enum OptionType {
     Unregistered = 0,
 	TurnOff = 1,

@@ -321,7 +321,6 @@ typedef enum {
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil
                                                                        message:NSLocalizedString(@"label_SpeechRecognitionAlert", nil)
                                                                 preferredStyle:UIAlertControllerStyleAlert];
-        
         UIAlertAction* okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_OK", nil)
                                                            style:UIAlertActionStyleDefault
                                                          handler:^(UIAlertAction * action){
@@ -976,9 +975,8 @@ typedef enum {
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"title_find", nil)
                                                                        message:[NSString stringWithFormat: NSLocalizedString(@"iOS_photolibraryError", nil), NSLocalizedString(@"menu_Settings", nil)]
                                                                 preferredStyle:UIAlertControllerStyleAlert];
-        
         UIAlertAction* cancelAciton = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Cancel", nil)
-                                                               style:UIAlertActionStyleDefault
+                                                               style:UIAlertActionStyleCancel
                                                              handler:^(UIAlertAction * action){
                                                                  
                                                              }];
@@ -1007,7 +1005,7 @@ typedef enum {
                                                                 preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction* cancelAciton = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Cancel", nil)
-                                                               style:UIAlertActionStyleDefault
+                                                               style:UIAlertActionStyleCancel
                                                              handler:^(UIAlertAction * action){
                                                                  
                                                              }];
@@ -1136,7 +1134,7 @@ typedef enum {
     UIAlertController* actionSheet = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"title_ChooseFileLoad", @"Choose Your File")
                                                                          message:nil
                                                                   preferredStyle:UIAlertControllerStyleActionSheet];
-    if(_attachmentStatus != AttachmentStatusEmpty) {
+    //if(_attachmentStatus != AttachmentStatusEmpty) {
         UIAlertAction* destructAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"title_clear", nil)
                                                                style:UIAlertActionStyleDestructive
                                                              handler:^(UIAlertAction *action) {
@@ -1146,7 +1144,7 @@ typedef enum {
                                                                  [self updateAttachmentStatus];
                                                              }];
         [actionSheet addAction:destructAction];
-    }
+    //}
     
     UIAlertAction* photoAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"title_photolibary", @"Photo Library")
                                                           style:UIAlertActionStyleDefault

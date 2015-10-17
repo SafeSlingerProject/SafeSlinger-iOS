@@ -184,7 +184,7 @@
         // get photo if possible
         if(ABPersonHasImageData(aRecord)) {
             CFDataRef photo = ABPersonCopyImageDataWithFormat(aRecord, kABPersonImageFormatThumbnail);
-            contact.photo = UIImageJPEGRepresentation([UIImage imageWithData:(__bridge NSData *)photo], 0.9);
+            contact.photo = UIImageJPEGRepresentation([UIImage imageWithData:(__bridge NSData *)photo], 1.0);
             CFRelease(photo);
         }
 		

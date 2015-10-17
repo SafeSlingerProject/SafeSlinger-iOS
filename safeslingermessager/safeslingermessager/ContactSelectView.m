@@ -358,23 +358,6 @@ typedef enum {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-#pragma mark - UIActionSheetDelegate methods
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-	if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:NSLocalizedString(@"menu_ContactInviteSms", nil)]) {
-		_selectedInviteType = InviteContactActionSheetTextFromContacts;
-		
-		[self showAddressBook];
-	} else if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:NSLocalizedString(@"menu_ContactInviteEmail", nil)]) {
-		_selectedInviteType = InviteContactActionSheetEmailFromContacts;
-		
-		[self showAddressBook];
-	} else if([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:NSLocalizedString(@"menu_UseAnother", nil)]) {
-		UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:[NSArray arrayWithObject:[self shortInviteMessage]] applicationActivities:nil];
-		[self presentViewController:activityController animated:YES completion:nil];
-	}
-}
-
 - (void)showAddressBook {
 	ABAuthorizationStatus status = ABAddressBookGetAuthorizationStatus();
 	
@@ -383,7 +366,7 @@ typedef enum {
                                                                        message:NSLocalizedString(@"iOS_RequestPermissionContacts", nil)
                                                                 preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_NotNow", nil)
-                                                              style:UIAlertActionStyleDefault
+                                                              style:UIAlertActionStyleCancel
                                                             handler:^(UIAlertAction * action){
                                                                 
                                                             }];
@@ -400,7 +383,7 @@ typedef enum {
                                                                        message:[NSString stringWithFormat: NSLocalizedString(@"iOS_contactError", nil), NSLocalizedString(@"menu_Settings", nil)]
                                                                 preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Cancel", nil)
-                                                               style:UIAlertActionStyleDefault
+                                                               style:UIAlertActionStyleCancel
                                                              handler:^(UIAlertAction * action){
                                                                  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
                                                              }];
@@ -506,7 +489,6 @@ typedef enum {
 }
 
 #pragma mark - Invite messages
-
 - (NSString *)shortInviteMessage {
 	return [NSString stringWithFormat:@"%@ %@ %@", NSLocalizedString(@"label_messageInviteStartMsg", nil), NSLocalizedString(@"label_messageInviteSetupInst", nil), [NSString stringWithFormat:NSLocalizedString(@"label_messageInviteInstall", nil), kHelpURL]];
 }
@@ -516,7 +498,6 @@ typedef enum {
 }
 
 #pragma mark - UISearchBarDelegate methods
-
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
 	[_filteredContacts removeAllObjects];
 	
@@ -541,20 +522,41 @@ typedef enum {
 }
 
 #pragma mark - IBAction methods
-
 - (IBAction)addContactTouched:(UIButton *)sender {
-	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"action_NewUserRequest", nil)
-															 delegate:self
-													cancelButtonTitle:nil
-											   destructiveButtonTitle:nil
-													otherButtonTitles:nil];
-	
-	for(NSString *button in _actionSheetButtons) {
-		[actionSheet addButtonWithTitle:button];
-	}
-	actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:NSLocalizedString(@"btn_Cancel", nil)];
-	
-	[actionSheet showFromRect:sender.frame inView:self.view animated:YES];
+    UIAlertController* actionSheet = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"action_NewUserRequest", nil)
+                                                                         message:nil
+                                                                  preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Cancel", nil)
+                                                             style:UIAlertActionStyleCancel
+                                                           handler:^(UIAlertAction *action) {
+                                                               
+                                                           }];
+    UIAlertAction* SmsAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"menu_ContactInviteSms", nil)
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action) {
+                                                             _selectedInviteType = InviteContactActionSheetTextFromContacts;
+                                                             [self showAddressBook];
+                                                         }];
+    UIAlertAction* EmailAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"menu_ContactInviteEmail", nil)
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action) {
+                                                             _selectedInviteType = InviteContactActionSheetEmailFromContacts;
+                                                             [self showAddressBook];
+                                                         }];
+    UIAlertAction* AnotherAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"menu_UseAnother", nil)
+                                                          style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction *action) {
+                                                            UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:[NSArray arrayWithObject:[self shortInviteMessage]] applicationActivities:nil];
+                                                            [self presentViewController:activityController animated:YES completion:nil];
+                                                        }];
+    
+    [actionSheet addAction:cancelAction];
+    [actionSheet addAction:SmsAction];
+    [actionSheet addAction:EmailAction];
+    [actionSheet addAction:AnotherAction];
+    [actionSheet setModalPresentationStyle:UIModalPresentationPopover];
+    [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
 - (IBAction)doneButtonTouched:(UIBarButtonItem *)sender {
@@ -571,14 +573,12 @@ typedef enum {
                                                      handler:^(UIAlertAction * action){
                                                          
                                                      }];
-    
-    [alert addAction:closeAciton];
     UIAlertAction* feedbackAciton = [UIAlertAction actionWithTitle:NSLocalizedString(@"menu_sendFeedback", @"Send Feedback")
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * action){
                                                          [UtilityFunc SendOpts:self];
                                                      }];
-    
+    [alert addAction:closeAciton];
     [alert addAction:feedbackAciton];
     [self presentViewController:alert animated:YES completion:nil];
 }
@@ -589,7 +589,6 @@ typedef enum {
 }
 
 #pragma mark - Utils
-
 - (void)showMessage:(NSString *)message withTitle:(NSString *)title {
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:title
                                                                    message:message

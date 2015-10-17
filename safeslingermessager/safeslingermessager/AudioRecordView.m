@@ -57,12 +57,10 @@
                                                                 preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction* cancelAciton = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Cancel", @"Cancel")
-                                                               style:UIAlertActionStyleDefault
+                                                               style:UIAlertActionStyleCancel
                                                              handler:^(UIAlertAction * action){
                                                                  [self.navigationController popViewControllerAnimated:YES];
                                                              }];
-        
-        [alert addAction:cancelAciton];
         UIAlertAction* contAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Continue", @"Continue")
                                                             style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction * action){
@@ -70,8 +68,8 @@
                                                               [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kRequireMicrophonePrivacy];
                                                               [self RequestAudioRecorder];
                                                           }];
-        
         [alert addAction:contAction];
+        [alert addAction:cancelAciton];
         [self presentViewController:alert animated:YES completion:nil];
     }
 }
@@ -99,20 +97,18 @@
                                                                     preferredStyle:UIAlertControllerStyleAlert];
             
             UIAlertAction* cancelAciton = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Cancel", @"Cancel")
-                                                                  style:UIAlertActionStyleDefault
+                                                                  style:UIAlertActionStyleCancel
                                                                 handler:^(UIAlertAction * action){
                                                                     [self.navigationController popViewControllerAnimated:YES];
                                                                 }];
-            
-            [alert addAction:cancelAciton];
             UIAlertAction* setAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"menu_Settings", @"menu_Settings")
                                                                      style:UIAlertActionStyleDefault
                                                                    handler:^(UIAlertAction * action){
                                                                        NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
                                                                        [[UIApplication sharedApplication] openURL:url];
                                                                    }];
-            
             [alert addAction:setAction];
+            [alert addAction:cancelAciton];
             [self presentViewController:alert animated:YES completion:nil];
         }
     }];

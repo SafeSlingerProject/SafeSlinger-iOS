@@ -69,7 +69,6 @@
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"title_passphrase", @"Passphrase")
                                                                    message:NSLocalizedString(@"label_WarnForgotPassphrase", @"To protect your data, SafeSlinger does not store your passphrase anywhere for recovery. You may only access recipients and messages created under the same passphrase login. However, you may generate a new key and passphrase, then repeat Sling Keys with your recipients.")
                                                             preferredStyle:UIAlertControllerStyleAlert];
-    
     UIAlertAction* okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_CreateNewKey", @"Create New Key")
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * action){
@@ -138,18 +137,17 @@
                                                                          message:nil
                                                                   preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Cancel", @"Cancel")
-                                                           style:UIAlertActionStyleDestructive
+                                                           style:UIAlertActionStyleCancel
                                                          handler:^(UIAlertAction *action) {
-                                                             
                                                          }];
     UIAlertAction* helpAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"menu_Help", @"Help")
                                                          style:UIAlertActionStyleDefault
                                                        handler:^(UIAlertAction *action) {
                                                            UIAlertController* actionSheet = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"title_passphrase", @"Passphrase")
-                                                                                                                                message:NSLocalizedString(@"help_passphrase", @"Use this screen to login to the application with your passphrase. If you have forgotten your passphrase, you may generate a new key protected by a new passphrase by tapping the Forgot Passphrase? button. Tap the user name to switch between multiple keys.")
-                                                                                                                         preferredStyle:UIAlertControllerStyleActionSheet];
+                                                                                message:NSLocalizedString(@"help_passphrase", @"Use this screen to login to the application with your passphrase. If you have forgotten your passphrase, you may generate a new key protected by a new passphrase by tapping the Forgot Passphrase? button. Tap the user name to switch between multiple keys.")
+                                                                        preferredStyle:UIAlertControllerStyleAlert];
                                                            UIAlertAction* closeAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Close", @"Close")
-                                                                                                                  style:UIAlertActionStyleDestructive
+                                                                                                                  style:UIAlertActionStyleDefault
                                                                                                                 handler:^(UIAlertAction *action) {
                                                                                                                     
                                                                                                                 }];

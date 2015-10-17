@@ -24,14 +24,6 @@
 	<string>1.8.2.2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSCameraUsageDescription</key>
-	<string>Camera permission is required to attach capatured picture to your secure messages. To enable this feature, you must allow SafeSlinger access to your Camera when asked.</string>
-	<key>NSContactsUsageDescription</key>
-	<string>You can select your contact card to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Contacts when asked.</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Microphone permission is required to record a secure voice message. To enable this feature, you must allow SafeSlinger access to your Mircohpone when asked.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Photo Library permission is required to attach picture from photo library to your secure messages. To enable this feature, you must allow SafeSlinger access to your Photo Library when asked.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

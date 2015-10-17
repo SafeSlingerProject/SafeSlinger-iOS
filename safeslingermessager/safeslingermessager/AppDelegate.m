@@ -176,8 +176,8 @@
 }
 
 - (void)ApplyChangeForV17 {
-    if([DbInstance PatchForTokenStoreTable])
-        DEBUGMSG(@"Patch done...");
+    
+    DEBUGMSG1([DbInstance PatchForTokenStoreTable], @"Patch done...");
     
     // save contact index to database
     if([DbInstance GetProfileName] && ([DbInstance GetConfig:@"IdentityNum"]==nil)) {
@@ -290,7 +290,7 @@
                 // set self photo
                 if(ABPersonHasImageData(aRecord)) {
                     CFDataRef imgData = ABPersonCopyImageDataWithFormat(aRecord, kABPersonImageFormatThumbnail);
-                    IdentityImage = UIImageJPEGRepresentation([[UIImage imageWithData:(__bridge NSData *)imgData]scaleToSize:CGSizeMake(45.0f, 45.0f)], 0.9);
+                    IdentityImage = UIImageJPEGRepresentation([[UIImage imageWithData:(__bridge NSData *)imgData]scaleToSize:CGSizeMake(45.0f, 45.0f)], 1.0);
                     CFRelease(imgData);
                 }
                 if(aBook)CFRelease(aBook);

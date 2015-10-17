@@ -28,10 +28,11 @@
 #include <assert.h>
 #include <stdio.h>
 
-#import <AddressBook/AddressBook.h>
+@import AddressBook;
+@import MobileCoreServices;
+@import Security;
 #import <CommonCrypto/CommonHMAC.h>
 #import <CommonCrypto/CommonCryptor.h>
-#import <MobileCoreServices/UTType.h>
 
 #include <openssl/aes.h>
 #include <openssl/rsa.h>
@@ -335,8 +336,14 @@
     
     BIO *mem = BIO_new(BIO_s_mem());
     BIO_puts(mem, [keybytes bytes]);
-    priKey = EVP_PKEY_get1_RSA(PEM_read_bio_PrivateKey(mem, NULL, NULL, NULL));
-    
+    EVP_PKEY *keyio = PEM_read_bio_PrivateKey(mem, NULL, NULL, NULL);
+    if (keyio == NULL)
+    {
+        /* Error */
+        BIO_free(mem);
+        [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"RSA private loading ERROR\n"]];
+    }
+    priKey = EVP_PKEY_get1_RSA(keyio);
     if (!priKey ) {
         [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"EVP_PKEY_get1_RSA ERROR: %s\n", ERR_error_string(ERR_get_error(), NULL)]];
         BIO_free(mem);
@@ -465,7 +472,14 @@
     
     BIO *mem = BIO_new(BIO_s_mem());
     BIO_puts(mem, [keybytes bytes]);
-    priKey = EVP_PKEY_get1_RSA(PEM_read_bio_PrivateKey(mem, NULL, NULL, NULL));
+    EVP_PKEY *keyio = PEM_read_bio_PrivateKey(mem, NULL, NULL, NULL);
+    if (keyio == NULL)
+    {
+        /* Error */
+        BIO_free(mem);
+        [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"RSA private loading ERROR\n"]];
+    }
+    priKey = EVP_PKEY_get1_RSA(keyio);
     if ( !priKey ) {
         [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"EVP_PKEY_get1_RSA ERROR: %s\n", ERR_error_string(ERR_get_error(), NULL)]];
         BIO_free(mem);

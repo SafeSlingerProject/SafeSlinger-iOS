@@ -445,7 +445,6 @@
 	if(error!=SQLITE_OK)
     {
         [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Unable to close the database: %s", sqlite3_errstr(error)]];
-        DEBUGMSG(@"ERROR: Unable to close the database: %s", sqlite3_errstr(error));
         return NO;
     }
     return YES;

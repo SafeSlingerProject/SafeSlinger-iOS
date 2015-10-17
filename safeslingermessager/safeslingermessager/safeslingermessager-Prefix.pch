@@ -35,7 +35,9 @@
 #import "Config.h"
 
 #ifdef BETA
-#define DEBUGMSG NSLog
+    #define DEBUGMSG NSLog
+    #define DEBUGMSG1(X, Y) if (!(X)) { NSLog(Y); }
+    #define DEBUGMSG2(X, Y, Z) if (!(X)) { NSLog(Y, Z); }
 #else
 #define DEBUGMSG(...)
 #endif

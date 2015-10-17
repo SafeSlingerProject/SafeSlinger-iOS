@@ -418,7 +418,7 @@
     }
     
     UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Cancel", @"Cancel")
-                                                       style:UIAlertActionStyleDefault
+                                                       style:UIAlertActionStyleCancel
                                                      handler:^(UIAlertAction * action){
                                                          
                                                      }];

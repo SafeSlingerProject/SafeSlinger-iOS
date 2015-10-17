@@ -47,7 +47,7 @@ typedef enum {
 } ContactSelectionMode;
 
 
-@interface ContactSelectView : UITableViewController <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate, UIActionSheetDelegate, ABPeoplePickerNavigationControllerDelegate, MFMessageComposeViewControllerDelegate, UIAlertViewDelegate, UISearchBarDelegate> {
+@interface ContactSelectView : UITableViewController <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate,  ABPeoplePickerNavigationControllerDelegate, MFMessageComposeViewControllerDelegate, UISearchBarDelegate> {
 	
 }
 

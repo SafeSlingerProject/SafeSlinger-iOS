@@ -174,12 +174,12 @@
                                                                             message:NSLocalizedString(@"iOS_RequestPermissionContacts", @"You can select your contact card to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Contacts when asked.")
                                                                      preferredStyle:UIAlertControllerStyleActionSheet];
         UIAlertAction* noAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_NotNow", @"Not Now")
-                                                              style:UIAlertActionStyleDestructive
+                                                              style:UIAlertActionStyleDefault
                                                             handler:^(UIAlertAction *action) {
                                                                 
                                                             }];
         UIAlertAction* yesAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Continue", @"Continue")
-                                                              style:UIAlertActionStyleDestructive
+                                                              style:UIAlertActionStyleDefault
                                                             handler:^(UIAlertAction *action) {
                                                                 [UtilityFunc TriggerContactPermission];
                                                             }];
@@ -191,12 +191,12 @@
                                                                              message:[NSString stringWithFormat: NSLocalizedString(@"iOS_contactError", @"Contacts permission is required for securely sharing contact cards. Tap the %@ button for SafeSlinger Contacts permission details."), NSLocalizedString(@"menu_Settings", @"menu_Settings")]
                                                                       preferredStyle:UIAlertControllerStyleActionSheet];
         UIAlertAction* noAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_NotNow", @"Not Now")
-                                                           style:UIAlertActionStyleDestructive
+                                                           style:UIAlertActionStyleDefault
                                                          handler:^(UIAlertAction *action) {
                                                              
                                                          }];
         UIAlertAction* yesAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"menu_Settings", @"menu_Settings")
-                                                            style:UIAlertActionStyleDestructive
+                                                            style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction *action) {
                                                               NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
                                                               [[UIApplication sharedApplication] openURL:url];
@@ -221,12 +221,12 @@
                                                                              message:[NSString stringWithFormat: NSLocalizedString(@"iOS_notificationError1", @"Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the %@ button for SafeSlinger Notification permission details."), NSLocalizedString(@"menu_Settings", @"menu_Settings")]
                                                                       preferredStyle:UIAlertControllerStyleActionSheet];
         UIAlertAction* noAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Cancel", @"Cancel")
-                                                           style:UIAlertActionStyleDestructive
+                                                           style:UIAlertActionStyleDefault
                                                          handler:^(UIAlertAction *action) {
                                                              
                                                          }];
         UIAlertAction* yesAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"menu_Settings", @"menu_Settings")
-                                                            style:UIAlertActionStyleDestructive
+                                                            style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction *action) {
                                                               NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
                                                               [[UIApplication sharedApplication] openURL:url];
@@ -294,7 +294,7 @@
         [ContactImage setImage:image];
         
         // update cache image
-        NSData* img = (NSData*)UIImageJPEGRepresentation(image, 0.9);
+        NSData* img = (NSData*)UIImageJPEGRepresentation(image, 1.0);
         NSString *encodedPhoto = [img base64EncodedStringWithOptions:0];
         [contact_labels addObject: @"Photo"];
         [contact_values addObject: encodedPhoto];
@@ -434,7 +434,7 @@
                                                           message:nil
                                                    preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Cancel", @"Cancel")
-                                             style:UIAlertActionStyleDestructive
+                                             style:UIAlertActionStyleCancel
                                            handler:^(UIAlertAction *action) {
                                                
                                            }];

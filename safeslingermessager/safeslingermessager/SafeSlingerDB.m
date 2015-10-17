@@ -963,8 +963,7 @@
 			sqlite3_bind_int(sqlStatement, 5, contact.exchangeType);
             // bind photo
 			if (contact.photo != nil) {
-                sqlite3_bind_text(sqlStatement, 6, [[UIImageJPEGRepresentation([UIImage imageWithData:contact.photo], 0.9) base64EncodedStringWithOptions:0] UTF8String], -1, SQLITE_TRANSIENT);
-				//sqlite3_bind_text(sqlStatement, 6, [[Base64 encode: UIImageJPEGRepresentation([UIImage imageWithData:contact.photo], 0.9)] UTF8String], -1, SQLITE_TRANSIENT);
+                sqlite3_bind_text(sqlStatement, 6, [[UIImageJPEGRepresentation([UIImage imageWithData:contact.photo], 1.0) base64EncodedStringWithOptions:0] UTF8String], -1, SQLITE_TRANSIENT);
 			} else {
 				sqlite3_bind_null(sqlStatement, 6);
 			}
