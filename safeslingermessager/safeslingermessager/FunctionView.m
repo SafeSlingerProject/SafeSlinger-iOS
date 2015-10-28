@@ -99,7 +99,7 @@
     NSString* hex_keyid = [SSEngine getSelfKeyID];
     
     if(hex_token && hex_subtoken && hex_keyid) {
-        [handler registerToken: hex_subtoken DeviceHex: hex_token KeyHex: hex_keyid ClientVer: ver PassphraseCache:pass_cache];
+        [handler registerToken: hex_keyid DeviceHex: hex_token ClientVer: ver PassphraseCache:pass_cache];
     }
 }
 

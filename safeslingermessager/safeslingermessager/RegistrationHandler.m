@@ -29,15 +29,14 @@
 
 @implementation RegistrationHandler
 
-- (void)registerToken: (NSString*)hex_submissiontoken DeviceHex: (NSString*)hex_token KeyHex: (NSString*)hex_keyid ClientVer: (int)int_clientver PassphraseCache:(NSString*)passcache
+- (void)registerToken: (NSString*)hex_keyid DeviceHex: (NSString*)hex_token ClientVer: (int)int_clientver PassphraseCache:(NSString*)passcache
 {
     /* 
      * Build packet for registration
      * client_ver 4 bytes
      * lenkeyid 4 bytes
      * keyId
-     * lensubtok 4 bytes
-     * submissionToken
+     * lensubtok 4 bytes (always 0 now)
      * lenregid 4 bytes
      * registrationId
      * devtype 4 bytes
@@ -60,12 +59,11 @@
     [msgchunk appendBytes: &lenkeyid length: 4];
     [msgchunk appendData:[hex_keyid dataUsingEncoding: NSASCIIStringEncoding]];
     
-    // lensubtok, submissionToken
-    int lensubtok = htonl([hex_submissiontoken lengthOfBytesUsingEncoding: NSASCIIStringEncoding]);
+    // lensubtok, submissionToken, deprecated now, always 0
+    int lensubtok = 0;
     [msgchunk appendBytes: &lensubtok length: 4];
-    [msgchunk appendData:[hex_submissiontoken dataUsingEncoding: NSASCIIStringEncoding]];
     
-    // lensubtok, submissionToken
+    // lensubtok, registerionID
     int lenregid = htonl([hex_token lengthOfBytesUsingEncoding: NSASCIIStringEncoding]);
     [msgchunk appendBytes: &lenregid length: 4];
     [msgchunk appendData:[hex_token dataUsingEncoding: NSASCIIStringEncoding]];
@@ -114,51 +112,31 @@
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
-    // run in background
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-        if(error) {
-            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-            [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Internet Connection failed. Error - %@ %@",
-                                      [error localizedDescription],
-                                      [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]]];
-            
-            if(error.code==NSURLErrorTimedOut) {
-                dispatch_async(dispatch_get_main_queue(), ^(void) {
-                    [ErrorLogger ERRORDEBUG: NSLocalizedString(@"error_ServerNotResponding", @"No response from server.")];
-                });
-            } else {
-                // general errors
-                dispatch_async(dispatch_get_main_queue(), ^(void) {
-                    [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessageCStr", @"Server Message: '%@'"), [error localizedDescription]]];
-                });
-            }
-        } else {
+    
+    NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+    // set minimum version as TLS v1.0
+    defaultConfigObject.TLSMinimumSupportedProtocol = kTLSProtocol1;
+    NSURLSession *HttpsSession = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+    
+    [[HttpsSession dataTaskWithRequest: request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        if(error)
+        {
+            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessageCStr", @"Server Message: '%@'"), [error localizedDescription]]];
+        }else{
             if([data length] > 0) {
                 // start parsing data
                 const char *msgchar = [data bytes];
                 DEBUGMSG(@"Succeeded! Received %lu bytes of data",(unsigned long)[data length]);
                 DEBUGMSG(@"Return SerV: %02X", ntohl(*(int *)msgchar));
-                if(ntohl(*(int *)msgchar) > 0) {
-                    // Send Response
-                    DEBUGMSG(@"Registration Code: %d", ntohl(*(int *)(msgchar+4)));
-                    DEBUGMSG(@"Registration Response: %s", msgchar+8);
-                    // Registraiton Succeed.
-                    dispatch_async(dispatch_get_main_queue(), ^(void) {
-                        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-                    });
-                } else if(ntohl(*(int *)msgchar) == 0) {
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                if(ntohl(*(int *)msgchar) == 0) {
                     // Error Message
-                    NSString* error_msg = [NSString TranlsateErrorMessage:[NSString stringWithUTF8String: msgchar+4]];
-                    [ErrorLogger ERRORDEBUG:error_msg];
-                    dispatch_async(dispatch_get_main_queue(), ^(void) {
-                        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-                        [ErrorLogger ERRORDEBUG:error_msg];
-                    });
+                    [ErrorLogger ERRORDEBUG:[NSString TranlsateErrorMessage:[NSString stringWithUTF8String: msgchar+4]]];
                 }
             }
         }
-    }];
+    }] resume];
 }
 
 

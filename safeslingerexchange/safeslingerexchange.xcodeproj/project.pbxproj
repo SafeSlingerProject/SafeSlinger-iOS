@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		02B113041BC24C57003591E3 /* sha3.h in Headers */ = {isa = PBXBuildFile; fileRef = 02B113031BC24C57003591E3 /* sha3.h */; settings = {ASSET_TAGS = (); }; };
-		02B113061BC24CC5003591E3 /* libsha3-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02B113051BC24CC5003591E3 /* libsha3-ios.a */; settings = {ASSET_TAGS = (); }; };
+		02B113041BC24C57003591E3 /* sha3.h in Headers */ = {isa = PBXBuildFile; fileRef = 02B113031BC24C57003591E3 /* sha3.h */; };
+		02B113061BC24CC5003591E3 /* libsha3-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02B113051BC24CC5003591E3 /* libsha3-ios.a */; };
 		18139A731937B15500FD0870 /* wordlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18139A721937B13400FD0870 /* wordlist.plist */; };
 		18139A771937B9F000FD0870 /* ActivityWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 18139A751937B9F000FD0870 /* ActivityWindow.m */; };
 		18139A791937BBD700FD0870 /* ActivityWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18139A741937B9C500FD0870 /* ActivityWindow.xib */; };
@@ -340,7 +340,7 @@
 		18FA4BCE192E8DFF00734976 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = CyLab;
 			};
 			buildConfigurationList = 18FA4BD1192E8DFF00734976 /* Build configuration list for PBXProject "safeslingerexchange" */;
@@ -559,7 +559,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Michael Farb (68KHK2BY77)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_BITCODE = NO;
 				ENABLE_TESTABILITY = YES;
@@ -578,8 +578,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "8121b21a-ac68-4c39-9b19-859cac032832";
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "$(VALID_ARCHS)";
 			};
@@ -601,7 +601,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Michael Farb (68KHK2BY77)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -614,7 +614,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "8121b21a-ac68-4c39-9b19-859cac032832";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "$(VALID_ARCHS)";
