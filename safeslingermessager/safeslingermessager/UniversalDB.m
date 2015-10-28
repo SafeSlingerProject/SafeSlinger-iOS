@@ -116,7 +116,7 @@
         if(error == SQLITE_DONE)
             ret = YES;
         else
-            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"ERROR: Error while inserting data. '%s'", sqlite3_errstr(error)]];
+            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"ERROR: Error while inserting data. '%s'", sqlite3_errmsg(db)]];
         sqlite3_finalize(sqlStatement);
     }
         
@@ -144,7 +144,7 @@
         if(error == SQLITE_DONE)
             ret = YES;
         else
-            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"Error while updating data. '%s'", sqlite3_errstr(error)]];
+            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"Error while updating data. '%s'", sqlite3_errmsg(db)]];
         sqlite3_finalize(sqlStatement);
     }
     return ret;
@@ -294,7 +294,7 @@
         {
             count = sqlite3_column_int(sqlStatement, 0);
         }else{
-            [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"Error while querying data. '%s'", sqlite3_errstr(error)]];
+            [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"Error while querying data. '%s'", sqlite3_errmsg(db)]];
         }
         sqlite3_finalize(sqlStatement);
     }
@@ -317,7 +317,7 @@
         sqlite3_bind_blob(sqlStatement, 1, [msgid bytes], (int)[msgid length], SQLITE_TRANSIENT);
         int error = sqlite3_step(sqlStatement);
         if(error != SQLITE_DONE){
-            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while deleting data. %s", sqlite3_errstr(error)]];
+            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while deleting data. %s", sqlite3_errmsg(db)]];
             ret = NO;
         }
         sqlite3_finalize(sqlStatement);
@@ -428,7 +428,7 @@
         sqlite3_bind_text (sqlStatement, 1, [keyid UTF8String], -1, SQLITE_TRANSIENT);
         int error = sqlite3_step(sqlStatement);
         if(error!=SQLITE_DONE)
-            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while creating statement. '%s'", sqlite3_errstr(error)]];
+            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while creating statement. '%s'", sqlite3_errmsg(db)]];
         else
             ret = YES;
         sqlite3_finalize(sqlStatement);
@@ -444,7 +444,7 @@
     int error = sqlite3_close_v2(db);
 	if(error!=SQLITE_OK)
     {
-        [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Unable to close the database: %s", sqlite3_errstr(error)]];
+        [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Unable to close the database: %s", sqlite3_errmsg(db)]];
         return NO;
     }
     return YES;
