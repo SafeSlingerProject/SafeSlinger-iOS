@@ -83,7 +83,7 @@
         [request setHTTPBody: pktdata];
         
         NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
-        defaultConfigObject.TLSMinimumSupportedProtocol = kTLSProtocol1;
+        defaultConfigObject.TLSMinimumSupportedProtocol = kTLSProtocol12;
         NSURLSession *HttpsSession = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
         
         [[HttpsSession dataTaskWithRequest: request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
@@ -225,7 +225,7 @@
     NSInteger index = [[_MsgNonces objectForKey:nonceString] integerValue];
     
     NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
-    defaultConfigObject.TLSMinimumSupportedProtocol = kTLSProtocol1;
+    defaultConfigObject.TLSMinimumSupportedProtocol = kTLSProtocol12;
     NSURLSession *HttpsSession = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
     
     [[HttpsSession dataTaskWithRequest: request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){

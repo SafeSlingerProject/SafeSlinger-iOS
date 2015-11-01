@@ -114,7 +114,7 @@
     
     NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
     // set minimum version as TLS v1.0
-    defaultConfigObject.TLSMinimumSupportedProtocol = kTLSProtocol1;
+    defaultConfigObject.TLSMinimumSupportedProtocol = kTLSProtocol12;
     NSURLSession *HttpsSession = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
     
     [[HttpsSession dataTaskWithRequest: request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
