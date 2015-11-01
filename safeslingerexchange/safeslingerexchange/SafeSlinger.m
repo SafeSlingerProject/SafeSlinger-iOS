@@ -54,7 +54,6 @@
 @synthesize protocolCommitmentSet, dataCommitmentSet, encrypted_dataSet, matchNonceSet, wrongNonceSet, matchHashSet, wrongHashSet, DHPubKeySet;
 @synthesize serverURL;
 @synthesize request;
-@synthesize connection;
 @synthesize serverResponse;
 @synthesize allUsers, keyNodes;
 @synthesize delegate;

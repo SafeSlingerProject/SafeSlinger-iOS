@@ -2,18 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "microphone_icon.png"
+      "filename" : "Micro-24.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "microphone_icon@2x.png"
+      "filename" : "Micro-48.png",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "microphone_icon@3x.png"
+      "filename" : "Micro-72.png",
+      "scale" : "3x"
     }
   ],
   "info" : {

@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "namecard.png"
+      "filename" : "Business Contact Filled-24.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "Business Contact Filled-48.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "Business Contact Filled-72.png",
       "scale" : "3x"
     }
   ],

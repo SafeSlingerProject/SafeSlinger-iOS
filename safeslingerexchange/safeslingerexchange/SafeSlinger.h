@@ -73,7 +73,6 @@ enum ProtocolState
 	// Network Usage
 	NSURL *serverURL;
 	NSMutableURLRequest *request;
-	NSURLConnection *connection;
 	NSMutableData *serverResponse;
 }
 
@@ -87,7 +86,6 @@ enum ProtocolState
 
 @property (nonatomic, retain) NSURL *serverURL;
 @property (nonatomic, retain) NSMutableURLRequest *request;
-@property (nonatomic, retain) NSURLConnection *connection;
 @property (nonatomic, retain) NSMutableData *serverResponse;
 @property (nonatomic, retain) NSMutableArray *allUsers;
 @property (nonatomic, assign) safeslingerexchange *delegate;

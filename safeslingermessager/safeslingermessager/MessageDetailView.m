@@ -639,110 +639,98 @@ typedef enum {
 	[request setHTTPMethod: @"POST"];
 	[request setHTTPBody: pktdata];
     
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
-     {
-         if(error)
-         {
-             // inform the user
-             [ErrorLogger ERRORDEBUG: [NSString stringWithFormat:@"ERROR: Internet Connection failed. Error - %@ %@",
-                                       [error localizedDescription],
-                                       [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]]];
-             if(error.code==NSURLErrorTimedOut)
-             {
-                 dispatch_async(dispatch_get_main_queue(), ^(void) {
-                     cell.tag = 0;
-                     cell.detailTextLabel.text = nil;
-                     [ErrorLogger ERRORDEBUG:NSLocalizedString(@"error_ServerNotResponding", @"No response from server.")];
-                     [[[[iToast makeText: NSLocalizedString(@"error_ServerNotResponding", @"No response from server.")]
-                        setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-                     [OperationLock unlock];
-                 });
-             }else{
-                 // general errors
-                 dispatch_async(dispatch_get_main_queue(), ^(void) {
-                     cell.tag = 0;
-                     cell.detailTextLabel.text = nil;
-                     [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessageCStr", @"Server Message: '%@'"), [error localizedDescription]]];
-                     [[[[iToast makeText: [NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessageCStr", @"Server Message: '%@'"), [error localizedDescription]]]
-                        setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-                     [OperationLock unlock];
-                 });
-             }
-         }else{
-             if ([data length] > 0 )
-             {
-                 // get attachment
-                 const char *msgchar = [data bytes];
-                 DEBUGMSG(@"Response Code: %d", ntohl(*(int *)(msgchar+4)));
-                 int msglen = ntohl(*(int *)(msgchar+8));
-                 DEBUGMSG(@"Received Packet Size: %d", msglen);
-                 if(msglen<=0)
-                 {
-                     [ErrorLogger ERRORDEBUG:@"message length is less than 0"];
-                     // display error
-                     dispatch_async(dispatch_get_main_queue(), ^(void) {
-                         cell.tag = 0;
-                         cell.detailTextLabel.text = nil;
-                         [ErrorLogger ERRORDEBUG:NSLocalizedString(@"error_InvalidIncomingMessage", @"Bad incoming message format.")];
-                         [[[[iToast makeText: NSLocalizedString(@"error_InvalidIncomingMessage", @"Bad incoming message format.")]
-                            setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-                         [OperationLock unlock];
-                     });
-                     
-                 }else{
-                     NSData* encryptedfile = [NSData dataWithBytes:(msgchar+12) length:msglen];
-                     NSData* filehash = [delegate.DbInstance QueryInMsgTableByMsgID:nonce Field: @"fbody"];
-                     NSRange r;r.location = 0;r.length = NONCELEN;
-                     filehash = [filehash subdataWithRange:r];
-                     
-                     // before decrypt we have to check the file hash
-                     if(![[sha3 Keccak256Digest:encryptedfile]isEqualToData:filehash])
-                     {
-                         [ErrorLogger ERRORDEBUG:@"ERROR: Download File Digest Mismatch."];
-                         // display error
-                         dispatch_async(dispatch_get_main_queue(), ^(void) {
-                             cell.tag = 0;
-                             cell.detailTextLabel.text = nil;
-                             [ErrorLogger ERRORDEBUG:NSLocalizedString(@"error_MessageSignatureVerificationFails", @"Signature verification failed.")];
-                             [[[[iToast makeText: NSLocalizedString(@"error_MessageSignatureVerificationFails", @"Signature verification failed.")]
-                                setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-                             [OperationLock unlock];
-                         });
-                     }else{
-                         // save to database
-                         NSString* pubkeySet = [delegate.DbInstance QueryStringInTokenTableByKeyID:[SSEngine ExtractKeyID: encryptedfile] Field:@"pkey"];
-                         NSMutableData *cipher = [NSMutableData dataWithCapacity:[encryptedfile length]-LENGTH_KEYID];
-                         // remove keyid first
-                         [cipher appendBytes:([encryptedfile bytes]+LENGTH_KEYID) length:([encryptedfile length]-LENGTH_KEYID)];
-                         // unlock private key
-                         int PRIKEY_STORE_SIZE = 0;
-                         [[delegate.DbInstance GetConfig:@"PRIKEY_STORE_SIZE"] getBytes:&PRIKEY_STORE_SIZE length:sizeof(PRIKEY_STORE_SIZE)];
-                         NSData* DecKey = [SSEngine UnlockPrivateKey:delegate.tempralPINCode Size:PRIKEY_STORE_SIZE Type:ENC_PRI];
-                         NSData* decipher = [SSEngine UnpackMessage: cipher PubKey:pubkeySet Prikey: DecKey];
-                         if([decipher length]==0||!decipher)
-                         {
-                             // display error
-                             dispatch_async(dispatch_get_main_queue(), ^(void) {
-                                 cell.tag = 0;
-                                 [ErrorLogger ERRORDEBUG:NSLocalizedString(@"error_MessageSignatureVerificationFails", @"Signature verification failed.")];
-                                 [[[[iToast makeText: NSLocalizedString(@"error_MessageSignatureVerificationFails", @"Signature verification failed.")]
-                                    setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-                                 [OperationLock unlock];
-                             });
-                         }else{
-                             [delegate.DbInstance UpdateFileBody:nonce DecryptedData:decipher];
-                             dispatch_async(dispatch_get_main_queue(), ^(void) {
-                                 cell.tag = 0;
-                                 [OperationLock unlock];
-                                 [self reloadTable];
-                             });
-                         }
-                     }
-                 }
-             }
-         }
-     }];
+    NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+    // set minimum version as TLS v1.0
+    defaultConfigObject.TLSMinimumSupportedProtocol = kTLSProtocol1;
+    NSURLSession *HttpsSession = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+    
+    [[HttpsSession dataTaskWithRequest: request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        if(error)
+        {
+            // inform the user
+            [ErrorLogger ERRORDEBUG: [NSString stringWithFormat:@"ERROR: Internet Connection failed. Error - %@ %@",
+                                      [error localizedDescription],
+                                      [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]]];
+            if(error.code==NSURLErrorTimedOut)
+            {
+                cell.tag = 0;
+                cell.detailTextLabel.text = nil;
+                [ErrorLogger ERRORDEBUG:NSLocalizedString(@"error_ServerNotResponding", @"No response from server.")];
+                [[[[iToast makeText: NSLocalizedString(@"error_ServerNotResponding", @"No response from server.")]
+                   setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+                [OperationLock unlock];
+            }else{
+                // general errors
+                cell.tag = 0;
+                cell.detailTextLabel.text = nil;
+                [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessageCStr", @"Server Message: '%@'"), [error localizedDescription]]];
+                [[[[iToast makeText: [NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessageCStr", @"Server Message: '%@'"), [error localizedDescription]]] setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+                [OperationLock unlock];
+            }
+        }else{
+            if([data length] > 0) {
+                // get attachment
+                const char *msgchar = [data bytes];
+                DEBUGMSG(@"Response Code: %d", ntohl(*(int *)(msgchar+4)));
+                int msglen = ntohl(*(int *)(msgchar+8));
+                DEBUGMSG(@"Received Packet Size: %d", msglen);
+                if(msglen<=0)
+                {
+                    [ErrorLogger ERRORDEBUG:@"message length is less than 0"];
+                    // display error
+                    cell.tag = 0;
+                    cell.detailTextLabel.text = nil;
+                    [ErrorLogger ERRORDEBUG:NSLocalizedString(@"error_InvalidIncomingMessage", @"Bad incoming message format.")];
+                    [[[[iToast makeText: NSLocalizedString(@"error_InvalidIncomingMessage", @"Bad incoming message format.")]
+                       setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+                    [OperationLock unlock];
+                }else{
+                    NSData* encryptedfile = [NSData dataWithBytes:(msgchar+12) length:msglen];
+                    NSData* filehash = [delegate.DbInstance QueryInMsgTableByMsgID:nonce Field: @"fbody"];
+                    NSRange r;r.location = 0;r.length = NONCELEN;
+                    filehash = [filehash subdataWithRange:r];
+                    // before decrypt we have to check the file hash
+                    if(![[sha3 Keccak256Digest:encryptedfile]isEqualToData:filehash])
+                    {
+                        [ErrorLogger ERRORDEBUG:@"ERROR: Download File Digest Mismatch."];
+                        // display error
+                        cell.tag = 0;
+                        cell.detailTextLabel.text = nil;
+                        [ErrorLogger ERRORDEBUG:NSLocalizedString(@"error_MessageSignatureVerificationFails", @"Signature verification failed.")];
+                        [[[[iToast makeText: NSLocalizedString(@"error_MessageSignatureVerificationFails", @"Signature verification failed.")]
+                           setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+                        [OperationLock unlock];
+                    }else{
+                        // save to database
+                        NSString* pubkeySet = [delegate.DbInstance QueryStringInTokenTableByKeyID:[SSEngine ExtractKeyID: encryptedfile] Field:@"pkey"];
+                        NSMutableData *cipher = [NSMutableData dataWithCapacity:[encryptedfile length]-LENGTH_KEYID];
+                        // remove keyid first
+                        [cipher appendBytes:([encryptedfile bytes]+LENGTH_KEYID) length:([encryptedfile length]-LENGTH_KEYID)];
+                        // unlock private key
+                        int PRIKEY_STORE_SIZE = 0;
+                        [[delegate.DbInstance GetConfig:@"PRIKEY_STORE_SIZE"] getBytes:&PRIKEY_STORE_SIZE length:sizeof(PRIKEY_STORE_SIZE)];
+                        NSData* DecKey = [SSEngine UnlockPrivateKey:delegate.tempralPINCode Size:PRIKEY_STORE_SIZE Type:ENC_PRI];
+                        NSData* decipher = [SSEngine UnpackMessage: cipher PubKey:pubkeySet Prikey: DecKey];
+                        if([decipher length]==0||!decipher)
+                        {
+                            // display error
+                            cell.tag = 0;
+                            [ErrorLogger ERRORDEBUG:NSLocalizedString(@"error_MessageSignatureVerificationFails", @"Signature verification failed.")];
+                            [[[[iToast makeText: NSLocalizedString(@"error_MessageSignatureVerificationFails", @"Signature verification failed.")]
+                               setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+                            [OperationLock unlock];
+                        }else{
+                            [delegate.DbInstance UpdateFileBody:nonce DecryptedData:decipher];
+                            cell.tag = 0;
+                            [OperationLock unlock];
+                            [self reloadTable];
+                        }
+                    }
+                }
+            }
+        }
+    }] resume];
 }
 
 - (void)DecryptMessage: (MsgEntry*)msg WithIndex:(NSIndexPath*)index {
@@ -1135,15 +1123,14 @@ typedef enum {
                                                                          message:nil
                                                                   preferredStyle:UIAlertControllerStyleActionSheet];
     //if(_attachmentStatus != AttachmentStatusEmpty) {
-        UIAlertAction* destructAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"title_clear", nil)
-                                                               style:UIAlertActionStyleDestructive
+        UIAlertAction* clearAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"title_clear", nil)
+                                                               style:UIAlertActionStyleCancel
                                                              handler:^(UIAlertAction *action) {
                                                                  _attachedFile = nil;
                                                                  _attachedFileRawData = nil;
                                                                  _attachmentStatus = AttachmentStatusEmpty;
                                                                  [self updateAttachmentStatus];
                                                              }];
-        [actionSheet addAction:destructAction];
     //}
     
     UIAlertAction* photoAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"title_photolibary", @"Photo Library")
@@ -1189,6 +1176,7 @@ typedef enum {
     [actionSheet addAction:albumAction];
     [actionSheet addAction:cameraAction];
     [actionSheet addAction:soundrecordAction];
+    [actionSheet addAction:clearAction];
     [actionSheet setModalPresentationStyle:UIModalPresentationPopover];
     [self presentViewController:actionSheet animated:YES completion:nil];
 }

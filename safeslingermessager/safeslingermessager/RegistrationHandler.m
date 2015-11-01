@@ -112,7 +112,6 @@
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
-    
     NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
     // set minimum version as TLS v1.0
     defaultConfigObject.TLSMinimumSupportedProtocol = kTLSProtocol1;

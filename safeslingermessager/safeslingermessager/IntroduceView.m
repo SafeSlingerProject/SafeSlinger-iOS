@@ -228,140 +228,127 @@
 	[request2 setHTTPMethod: @"POST"];
 	[request2 setHTTPBody: pktdata2];
     
-    dispatch_async(dispatch_get_main_queue(), ^(void) {
-        [ProgressLabel setText: NSLocalizedString(@"prog_FileSent", @"message sent, awaiting response...")];
-    });
+    //dispatch_async(dispatch_get_main_queue(), ^(void) {
+    [ProgressLabel setText: NSLocalizedString(@"prog_FileSent", @"message sent, awaiting response...")];
+    //});
     
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    [NSURLConnection sendAsynchronousRequest:request1 queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
-     {
-         if(error)
-         {
-             // inform the user
-             [ErrorLogger ERRORDEBUG: [NSString stringWithFormat:@"ERROR: Internet Connection failed. Error - %@ %@",
-                                       [error localizedDescription],
-                                       [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]]];
-             if(error.code==NSURLErrorTimedOut)
-             {
-                 dispatch_async(dispatch_get_main_queue(), ^(void) {
-                     [ProgressIndicator stopAnimating];
-                     [ProgressLabel setText: NSLocalizedString(@"error_ServerNotResponding", @"No response from server.")];
-                     UserTag = 0;
-                     [self CleanSelectContact: User1Tag];
-                     [self CleanSelectContact: User2Tag];
-                 });
-             }else{
-                 // general errors
-                 dispatch_async(dispatch_get_main_queue(), ^(void) {
-                     [ProgressLabel setText: [NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessageCStr", @"Server Message: '%@'"), [error localizedDescription]]];
-                     [ProgressIndicator stopAnimating];
-                     UserTag = 0;
-                     [self CleanSelectContact: User1Tag];
-                     [self CleanSelectContact: User2Tag];
-                 });
-             }
-         }else{
-             if ([data length] > 0 )
-             {
-                 // start parsing data
-                 DEBUGMSG(@"Succeeded! Received %lu bytes of data",(unsigned long)[data length]);
-                 [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-                 const char *msgchar = [data bytes];
-                 DEBUGMSG(@"Return SerV: %02X", ntohl(*(int *)msgchar));
-                 if (ntohl(*(int *)msgchar) > 0)
-                 {
-                     // Send Response
-                     DEBUGMSG(@"Send Message Code: %d", ntohl(*(int *)(msgchar+4)));
-                     DEBUGMSG(@"Send Message Response: %s", msgchar+8);
-                     // Save to Database
-                     _U1Sent = YES;
-                     if(_U1Sent&&_U2Sent)
-                     {
-                         dispatch_async(dispatch_get_main_queue(), ^(void) {
-                             [self SaveMessages];
-                         });
-                     }
-                 }else if(ntohl(*(int *)msgchar) == 0)
-                 {
-                     // Error Message
-                     NSString* error_msg = [NSString TranlsateErrorMessage:[NSString stringWithUTF8String: msgchar+4]];
-                     DEBUGMSG(@"ERROR: error_msg = %@", error_msg);
-                     dispatch_async(dispatch_get_main_queue(), ^(void) {
-                         [ProgressLabel setText: error_msg];
-                         [ProgressIndicator stopAnimating];
-                         UserTag = 0;
-                         [self CleanSelectContact: User1Tag];
-                         [self CleanSelectContact: User2Tag];
-                     });
-                 }
-             }
-         }
-     }];
+    NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+    // set minimum version as TLS v1.0
+    defaultConfigObject.TLSMinimumSupportedProtocol = kTLSProtocol1;
+    NSURLSession *HttpsSession = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
     
-    [NSURLConnection sendAsynchronousRequest:request2 queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
-     {
-         if(error)
-         {
-             // inform the user
-             [ErrorLogger ERRORDEBUG: [NSString stringWithFormat:@"ERROR: Internet Connection failed. Error - %@ %@",
-                                       [error localizedDescription],
-                                       [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]]];
-             if(error.code==NSURLErrorTimedOut)
-             {
-                 dispatch_async(dispatch_get_main_queue(), ^(void) {
-                     [ProgressLabel setText: NSLocalizedString(@"error_ServerNotResponding", @"No response from server.")];
-                     [ProgressIndicator stopAnimating];
-                     UserTag = 0;
-                     [self CleanSelectContact: User1Tag];
-                     [self CleanSelectContact: User2Tag];
-                 });
-             }else{
-                 // general errors
-                 dispatch_async(dispatch_get_main_queue(), ^(void) {
-                     [ProgressLabel setText: [NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessageCStr", @"Server Message: '%@'"), [error localizedDescription]]];
-                     [ProgressIndicator stopAnimating];
-                     UserTag = 0;
-                     [self CleanSelectContact: User1Tag];
-                     [self CleanSelectContact: User2Tag];
-                 });
-             }
-         }else{
-             if ([data length] > 0 )
-             {
-                 // start parsing data
-                 DEBUGMSG(@"Succeeded! Received %lu bytes of data",(unsigned long)[data length]);
-                 const char *msgchar = [data bytes];
-                 DEBUGMSG(@"Return SerV: %02X", ntohl(*(int *)msgchar));
-                 if (ntohl(*(int *)msgchar) > 0)
-                 {
-                     // Send Response
-                     DEBUGMSG(@"Send Message Code: %d", ntohl(*(int *)(msgchar+4)));
-                     DEBUGMSG(@"Send Message Response: %s", msgchar+8);
-                     // Save to Database
-                     _U2Sent = YES;
-                     if(_U1Sent&&_U2Sent)
-                     {
-                         dispatch_async(dispatch_get_main_queue(), ^(void) {
-                             [self SaveMessages];
-                         });
-                     }
-                 }else if(ntohl(*(int *)msgchar) == 0)
-                 {
-                     // Error Message
-                     NSString* error_msg = [NSString TranlsateErrorMessage:[NSString stringWithUTF8String: msgchar+4]];
-                     DEBUGMSG(@"ERROR: error_msg = %@", error_msg);
-                     dispatch_async(dispatch_get_main_queue(), ^(void) {
-                         [ProgressLabel setText: error_msg];
-                         [ProgressIndicator stopAnimating];
-                         UserTag = 0;
-                         [self CleanSelectContact: User1Tag];
-                         [self CleanSelectContact: User2Tag];
-                     });
-                 }
-                 
-             }
-         }
-     }];
+    [[HttpsSession dataTaskWithRequest: request1 completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        if(error)
+        {
+            // inform the user
+            [ErrorLogger ERRORDEBUG: [NSString stringWithFormat:@"ERROR: Internet Connection failed. Error - %@ %@",
+                                      [error localizedDescription],
+                                      [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]]];
+            if(error.code==NSURLErrorTimedOut)
+            {
+                [ProgressIndicator stopAnimating];
+                [ProgressLabel setText: NSLocalizedString(@"error_ServerNotResponding", @"No response from server.")];
+                UserTag = 0;
+                [self CleanSelectContact: User1Tag];
+                [self CleanSelectContact: User2Tag];
+            }else{
+                // general errors
+                [ProgressLabel setText: [NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessageCStr", @"Server Message: '%@'"), [error localizedDescription]]];
+                [ProgressIndicator stopAnimating];
+                UserTag = 0;
+                [self CleanSelectContact: User1Tag];
+                [self CleanSelectContact: User2Tag];
+            }
+        }else{
+            if ([data length] > 0 )
+            {
+                // start parsing data
+                DEBUGMSG(@"Succeeded! Received %lu bytes of data",(unsigned long)[data length]);
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                const char *msgchar = [data bytes];
+                DEBUGMSG(@"Return SerV: %02X", ntohl(*(int *)msgchar));
+                if (ntohl(*(int *)msgchar) > 0)
+                {
+                    // Send Response
+                    DEBUGMSG(@"Send Message Code: %d", ntohl(*(int *)(msgchar+4)));
+                    DEBUGMSG(@"Send Message Response: %s", msgchar+8);
+                    // Save to Database
+                    _U1Sent = YES;
+                    if(_U1Sent&&_U2Sent)
+                    {
+                        [self SaveMessages];
+                    }
+                }else if(ntohl(*(int *)msgchar) == 0)
+                {
+                    // Error Message
+                    NSString* error_msg = [NSString TranlsateErrorMessage:[NSString stringWithUTF8String: msgchar+4]];
+                    DEBUGMSG(@"ERROR: error_msg = %@", error_msg);
+                    [ProgressLabel setText: error_msg];
+                    [ProgressIndicator stopAnimating];
+                    UserTag = 0;
+                    [self CleanSelectContact: User1Tag];
+                    [self CleanSelectContact: User2Tag];
+                }
+            }
+        }
+    }] resume];
+    
+    [[HttpsSession dataTaskWithRequest: request2 completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        if(error)
+        {
+            // inform the user
+            [ErrorLogger ERRORDEBUG: [NSString stringWithFormat:@"ERROR: Internet Connection failed. Error - %@ %@",
+                                      [error localizedDescription],
+                                      [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]]];
+            if(error.code==NSURLErrorTimedOut)
+            {
+                [ProgressLabel setText: NSLocalizedString(@"error_ServerNotResponding", @"No response from server.")];
+                [ProgressIndicator stopAnimating];
+                UserTag = 0;
+                [self CleanSelectContact: User1Tag];
+                [self CleanSelectContact: User2Tag];
+            }else{
+                // general errors
+                [ProgressLabel setText: [NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessageCStr", @"Server Message: '%@'"), [error localizedDescription]]];
+                [ProgressIndicator stopAnimating];
+                UserTag = 0;
+                [self CleanSelectContact: User1Tag];
+                [self CleanSelectContact: User2Tag];
+            }
+        }else{
+            if ([data length] > 0 )
+            {
+                // start parsing data
+                DEBUGMSG(@"Succeeded! Received %lu bytes of data",(unsigned long)[data length]);
+                const char *msgchar = [data bytes];
+                DEBUGMSG(@"Return SerV: %02X", ntohl(*(int *)msgchar));
+                if (ntohl(*(int *)msgchar) > 0)
+                {
+                    // Send Response
+                    DEBUGMSG(@"Send Message Code: %d", ntohl(*(int *)(msgchar+4)));
+                    DEBUGMSG(@"Send Message Response: %s", msgchar+8);
+                    // Save to Database
+                    _U2Sent = YES;
+                    if(_U1Sent&&_U2Sent)
+                    {
+                        [self SaveMessages];
+                    }
+                }else if(ntohl(*(int *)msgchar) == 0)
+                {
+                    // Error Message
+                    NSString* error_msg = [NSString TranlsateErrorMessage:[NSString stringWithUTF8String: msgchar+4]];
+                    DEBUGMSG(@"ERROR: error_msg = %@", error_msg);
+                    [ProgressLabel setText: error_msg];
+                    [ProgressIndicator stopAnimating];
+                    UserTag = 0;
+                    [self CleanSelectContact: User1Tag];
+                    [self CleanSelectContact: User2Tag];
+                }
+            }
+        }
+    }] resume];
 }
 
 -(void) SaveMessages

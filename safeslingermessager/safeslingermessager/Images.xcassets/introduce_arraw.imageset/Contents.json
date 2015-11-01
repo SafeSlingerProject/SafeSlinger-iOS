@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "1404197695_down.png"
+      "filename" : "Long Arrow Down-24.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "Long Arrow Down-48.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "Long Arrow Down-72.png",
       "scale" : "3x"
     }
   ],

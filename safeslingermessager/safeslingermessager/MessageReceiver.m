@@ -82,95 +82,96 @@
         [request setHTTPMethod: @"POST"];
         [request setHTTPBody: pktdata];
         
-        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-        [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-             if(error) {
-                 [ErrorLogger ERRORDEBUG: [NSString stringWithFormat:@"ERROR: Internet Connection failed. Error - %@ %@",
-                                           [error localizedDescription],
-                                           [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]]];
-                 
-                 if(error.code==NSURLErrorTimedOut) {
-                     dispatch_async(dispatch_get_main_queue(), ^(void) {
-                         [self PrintToastMessage: [NSString stringWithFormat:NSLocalizedString(@"error_ServerNotResponding", @"No response from server."), [error localizedDescription]]];
-                         [ThreadLock unlock];
-                     });
-                 } else {
-                     // general errors
-                     dispatch_async(dispatch_get_main_queue(), ^(void) {
-                         [self PrintToastMessage: [NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessageCStr", @"Server Message: '%@'"), [error localizedDescription]]];
-                         [ThreadLock unlock];
-                     });
-                 }
-             } else {
-                 
-                 if([data length]==0) {
-                     // should not happen, no related error message define now
-                     [ThreadLock unlock];
-                 } else {
-                     // start parsing data
-                     const char *msgchar = [data bytes];
-                     if(ntohl(*(int *)msgchar) == 0) {
-                         // Error Message
-                         NSString* error_msg = [NSString TranlsateErrorMessage:[NSString stringWithUTF8String: msgchar+4]];
-                         [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"error_msg = %@", error_msg]];
-                         dispatch_async(dispatch_get_main_queue(), ^(void) {
-                             [self PrintToastMessage: error_msg];
-                             [ThreadLock unlock];
-                         });
-                     } else if(ntohl(*(int *)(msgchar+4))==1) {
-                         // Received Nonce Count
-                         int noncecnt = ntohl(*(int *)(msgchar+8));
-                         
-                         if(noncecnt>0) {
-                             // length check
-                             _MsgNonces = [NSMutableDictionary dictionary];
-                             if(MsgFinish) free(MsgFinish);
-                             MsgFinish = malloc(sizeof(int) * noncecnt);
-                             
-                             // shift
-                             int noncelen = 0;
-                             msgchar = msgchar+12;
-                             MsgCount = noncecnt;
-                             
-                             for(int i = 0; i < noncecnt; i++) {
-                                 noncelen = ntohl(*(int *)msgchar);
-                                 msgchar = msgchar+4;
-                                 NSString* encodeNonce = [[NSString alloc]
-                                                          initWithData:[NSData dataWithBytes:(const unichar *)msgchar length:noncelen]
-                                                          encoding:NSUTF8StringEncoding];
-                                 encodeNonce = [encodeNonce stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                                 msgchar = msgchar+noncelen;
-                                 [_MsgNonces setObject:[NSNumber numberWithInt:i] forKey:encodeNonce];
-                                 MsgFinish[i] = InitFetch;
-                             }
-                             
-                             // Download messages in a for loop
-                             [self DownloadMessages];
-                         } else {
-                             // noncecnt == 0
-                             [ErrorLogger ERRORDEBUG: @"No available messages."];
-                             dispatch_async(dispatch_get_main_queue(), ^(void) {
-                                 //[delegate.activityView DisableProgress];
-                                 [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-                                 [ThreadLock unlock];
-                                 [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
-                             });
-                         }
-                     } else {
-                         
-                         // should not happen, in case while network has problem..
-                         dispatch_async(dispatch_get_main_queue(), ^(void) {
-                             //[delegate.activityView DisableProgress];
-                             [ErrorLogger ERRORDEBUG: @"Network is unavailable."];
-                             [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-                             [ThreadLock unlock];
-                         });
-                     }
-                 }
-             }
-         }];
+        NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+        defaultConfigObject.TLSMinimumSupportedProtocol = kTLSProtocol1;
+        NSURLSession *HttpsSession = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+        
+        [[HttpsSession dataTaskWithRequest: request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+            if(error) {
+                [ErrorLogger ERRORDEBUG: [NSString stringWithFormat:@"ERROR: Internet Connection failed. Error - %@ %@",
+                                          [error localizedDescription],
+                                          [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]]];
+                
+                if(error.code==NSURLErrorTimedOut) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void) {
+                        [self PrintToastMessage: [NSString stringWithFormat:NSLocalizedString(@"error_ServerNotResponding", @"No response from server."), [error localizedDescription]]];
+                        [ThreadLock unlock];
+                    });
+                } else {
+                    // general errors
+                    [self PrintToastMessage: [NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessageCStr", @"Server Message: '%@'"), [error localizedDescription]]];
+                    [ThreadLock unlock];
+                }
+            } else {
+                
+                if([data length]==0) {
+                    // should not happen, no related error message define now
+                    [ThreadLock unlock];
+                } else {
+                    // start parsing data
+                    const char *msgchar = [data bytes];
+                    if(ntohl(*(int *)msgchar) == 0) {
+                        // Error Message
+                        NSString* error_msg = [NSString TranlsateErrorMessage:[NSString stringWithUTF8String: msgchar+4]];
+                        [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"error_msg = %@", error_msg]];
+                        dispatch_async(dispatch_get_main_queue(), ^(void) {
+                            [self PrintToastMessage: error_msg];
+                            [ThreadLock unlock];
+                        });
+                    } else if(ntohl(*(int *)(msgchar+4))==1) {
+                        // Received Nonce Count
+                        int noncecnt = ntohl(*(int *)(msgchar+8));
+                        
+                        if(noncecnt>0) {
+                            // length check
+                            _MsgNonces = [NSMutableDictionary dictionary];
+                            if(MsgFinish) free(MsgFinish);
+                            MsgFinish = malloc(sizeof(int) * noncecnt);
+                            
+                            // shift
+                            int noncelen = 0;
+                            msgchar = msgchar+12;
+                            MsgCount = noncecnt;
+                            
+                            for(int i = 0; i < noncecnt; i++) {
+                                noncelen = ntohl(*(int *)msgchar);
+                                msgchar = msgchar+4;
+                                NSString* encodeNonce = [[NSString alloc]
+                                                         initWithData:[NSData dataWithBytes:(const unichar *)msgchar length:noncelen]
+                                                         encoding:NSUTF8StringEncoding];
+                                encodeNonce = [encodeNonce stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                                msgchar = msgchar+noncelen;
+                                [_MsgNonces setObject:[NSNumber numberWithInt:i] forKey:encodeNonce];
+                                MsgFinish[i] = InitFetch;
+                            }
+                            
+                            // Download messages in a for loop
+                            [self DownloadMessages];
+                        } else {
+                            // noncecnt == 0
+                            [ErrorLogger ERRORDEBUG: @"No available messages."];
+                            dispatch_async(dispatch_get_main_queue(), ^(void) {
+                                //[delegate.activityView DisableProgress];
+                                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                                [ThreadLock unlock];
+                                [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+                            });
+                        }
+                    } else {
+                        
+                        // should not happen, in case while network has problem..
+                        dispatch_async(dispatch_get_main_queue(), ^(void) {
+                            //[delegate.activityView DisableProgress];
+                            [ErrorLogger ERRORDEBUG: @"Network is unavailable."];
+                            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                            [ThreadLock unlock];
+                        });
+                    }
+                }
+            }
+        }] resume];
     }
-    
 }
 
 - (void)DownloadMessages {
@@ -223,75 +224,63 @@
     
     NSInteger index = [[_MsgNonces objectForKey:nonceString] integerValue];
     
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-         if(error) {
-             MsgFinish[index] = NetworkFail; // service is unavaible
-             [ErrorLogger ERRORDEBUG: [NSString stringWithFormat:@"ERROR: Internet Connection failed. Error - %@ %@",
-                                       [error localizedDescription],
-                                       [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]]];
-             
-             if(error.code==NSURLErrorTimedOut) {
-                 dispatch_async(dispatch_get_main_queue(), ^(void) {
-                     [self PrintToastMessage: NSLocalizedString(@"error_ServerNotResponding", @"No response from server.")];
-                 });
-             } else {
-                 // general errors
-                 dispatch_async(dispatch_get_main_queue(), ^(void) {
-                     [self PrintToastMessage: [NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessageCStr", @"Server Message: '%@'"), [error localizedDescription]]];
-                 });
-             }
-		 } else {
-             if([data length] > 0) {
-                 // start parsing data
-                 const char *msgchar = [data bytes];
-                 DEBUGMSG(@"Succeeded! Received %lu bytes of data",(unsigned long)[data length]);
-                 DEBUGMSG(@"Return SerV: %02X", ntohl(*(int *)msgchar));
-                 if(ntohl(*(int *)msgchar) > 0) {
-                     // Send Response
-                     DEBUGMSG(@"Send Message Code: %d", ntohl(*(int *)(msgchar+4)));
-                     DEBUGMSG(@"Send Message Response: %s", msgchar+8);
-                     // Received Encrypted Message
-                     int msglen = ntohl(*(int *)(msgchar+8));
-                     if(msglen<=0) {
-                         MsgFinish[index] = NetworkFail;
-                         // display error
-                         dispatch_async(dispatch_get_main_queue(), ^(void) {
-                             [self PrintToastMessage: NSLocalizedString(@"error_InvalidIncomingMessage", @"Bad incoming message format.")];
-                         });
-                     } else {
-                         MsgFinish[index] = Downloaded;
-                         NSData* cipher = [NSData dataWithBytes:(msgchar+12) length:msglen];
-						 
-						 msg.keyid = [SSEngine ExtractKeyID:cipher];
-						 msg.msgbody = [NSData dataWithBytes:[cipher bytes] + LENGTH_KEYID length:[cipher length] - LENGTH_KEYID];
-						 
-						 dispatch_async(dispatch_get_main_queue(), ^(void) {
-							 [self handleNewCipherMessage:msg withCipher:(NSData *)cipher];
-						 });
-                     }
-                 } else if(ntohl(*(int *)msgchar) == 0) {
-                     // Error Message
-                     NSString* error_msg = [NSString TranlsateErrorMessage:[NSString stringWithUTF8String: msgchar+4]];
-                     DEBUGMSG(@"ERROR: error_msg = %@", error_msg);
-                     if([[NSString stringWithUTF8String: msgchar+4] hasSuffix:@"MessageNotFound"]) {
-                         // expired one
-                         MsgFinish[index] = Expired;
-                     } else {
-                         MsgFinish[index] = NetworkFail;
-                     }
-					 
-                     dispatch_async(dispatch_get_main_queue(), ^(void) {
-                         [self PrintToastMessage: error_msg];
-                     });
-                 }
-             }
-             
-             dispatch_async(dispatch_get_main_queue(), ^(void) {
-                 [self CheckQueriedMessages];
-             });
-         }
-     }];
+    NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+    defaultConfigObject.TLSMinimumSupportedProtocol = kTLSProtocol1;
+    NSURLSession *HttpsSession = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+    
+    [[HttpsSession dataTaskWithRequest: request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        if(error) {
+            MsgFinish[index] = NetworkFail; // service is unavaible
+            [ErrorLogger ERRORDEBUG: [NSString stringWithFormat:@"ERROR: Internet Connection failed. Error - %@ %@",
+                                      [error localizedDescription],
+                                      [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]]];
+            
+            if(error.code==NSURLErrorTimedOut) {
+                [self PrintToastMessage: NSLocalizedString(@"error_ServerNotResponding", @"No response from server.")];
+            } else {
+                // general errors
+                [self PrintToastMessage: [NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessageCStr", @"Server Message: '%@'"), [error localizedDescription]]];
+            }
+        } else {
+            if([data length] > 0) {
+                // start parsing data
+                const char *msgchar = [data bytes];
+                DEBUGMSG(@"Succeeded! Received %lu bytes of data",(unsigned long)[data length]);
+                DEBUGMSG(@"Return SerV: %02X", ntohl(*(int *)msgchar));
+                if(ntohl(*(int *)msgchar) > 0) {
+                    // Send Response
+                    DEBUGMSG(@"Send Message Code: %d", ntohl(*(int *)(msgchar+4)));
+                    DEBUGMSG(@"Send Message Response: %s", msgchar+8);
+                    // Received Encrypted Message
+                    int msglen = ntohl(*(int *)(msgchar+8));
+                    if(msglen<=0) {
+                        MsgFinish[index] = NetworkFail;
+                        // display error
+                        [self PrintToastMessage: NSLocalizedString(@"error_InvalidIncomingMessage", @"Bad incoming message format.")];
+                    } else {
+                        MsgFinish[index] = Downloaded;
+                        NSData* cipher = [NSData dataWithBytes:(msgchar+12) length:msglen];
+                        msg.keyid = [SSEngine ExtractKeyID:cipher];
+                        msg.msgbody = [NSData dataWithBytes:[cipher bytes] + LENGTH_KEYID length:[cipher length] - LENGTH_KEYID];
+                        [self handleNewCipherMessage:msg withCipher:(NSData *)cipher];
+                    }
+                } else if(ntohl(*(int *)msgchar) == 0) {
+                    // Error Message
+                    NSString* error_msg = [NSString TranlsateErrorMessage:[NSString stringWithUTF8String: msgchar+4]];
+                    DEBUGMSG(@"ERROR: error_msg = %@", error_msg);
+                    if([[NSString stringWithUTF8String: msgchar+4] hasSuffix:@"MessageNotFound"]) {
+                        // expired one
+                        MsgFinish[index] = Expired;
+                    } else {
+                        MsgFinish[index] = NetworkFail;
+                    }
+                    [self PrintToastMessage: error_msg];
+                }
+            }
+            [self CheckQueriedMessages];
+        }
+    }] resume];
 }
 
 - (void)CheckQueriedMessages {

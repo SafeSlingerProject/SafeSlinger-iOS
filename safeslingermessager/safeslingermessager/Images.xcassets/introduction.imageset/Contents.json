@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "conference-32.png"
+      "filename" : "User Groups-24.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "User Groups-48.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "User Groups-72.png",
       "scale" : "3x"
     }
   ],

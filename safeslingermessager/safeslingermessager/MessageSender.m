@@ -41,44 +41,46 @@
 	[request setHTTPMethod: @"POST"];
 	[request setHTTPBody:packetData];
 	
-	NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-	[NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-		[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-		 if(error) {
-			 [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Internet Connection failed. Error - %@ %@",
-									   [error localizedDescription],
-									   [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]]];
-			 
-			 message.rTime = nil;
-			 [self updatedStatus:MessageOutgoingStatusFailed forMessage:message];
-			 _outgoingMessage = nil;
-		 } else {
-			 if([data length] > 0) {
-				 // start parsing data
-				 DEBUGMSG(@"Succeeded! Received %lu bytes of data",(unsigned long)[data length]);
-				 const char *msgchar = [data bytes];
-				 DEBUGMSG(@"Return SerV: %02X", ntohl(*(int *)msgchar));
-				 if (ntohl(*(int *)msgchar) > 0) {
-					 // Send Response
-					 DEBUGMSG(@"Send Message Code: %d", ntohl(*(int *)(msgchar+4)));
-					 DEBUGMSG(@"Send Message Response: %s", msgchar+8);
-					 
-					 message.rTime = [NSString GetGMTString:DATABASE_TIMESTR];
-					 [self updatedStatus:MessageOutgoingStatusSent forMessage:message];
-					 _outgoingMessage = nil;
-				 } else if(ntohl(*(int *)msgchar) == 0) {
-					 // Error Message
-					 NSString* error_msg = [NSString TranlsateErrorMessage:[NSString stringWithUTF8String: msgchar+4]];
-					 DEBUGMSG(@"ERROR: error_msg = %@", error_msg);
-					 
-					 message.rTime = nil;
-					 [self updatedStatus:MessageOutgoingStatusFailed forMessage:message];
-					 _outgoingMessage = nil;
-				 }
-			 }
-		 }
-	 }];
+    NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+    defaultConfigObject.TLSMinimumSupportedProtocol = kTLSProtocol1;
+    NSURLSession *HttpsSession = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+    
+    [[HttpsSession dataTaskWithRequest: request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        if(error) {
+            [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Internet Connection failed. Error - %@ %@",
+                                      [error localizedDescription],
+                                      [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]]];
+            
+            message.rTime = nil;
+            [self updatedStatus:MessageOutgoingStatusFailed forMessage:message];
+            _outgoingMessage = nil;
+        } else {
+            if([data length] > 0) {
+                // start parsing data
+                DEBUGMSG(@"Succeeded! Received %lu bytes of data",(unsigned long)[data length]);
+                const char *msgchar = [data bytes];
+                DEBUGMSG(@"Return SerV: %02X", ntohl(*(int *)msgchar));
+                if (ntohl(*(int *)msgchar) > 0) {
+                    // Send Response
+                    DEBUGMSG(@"Send Message Code: %d", ntohl(*(int *)(msgchar+4)));
+                    DEBUGMSG(@"Send Message Response: %s", msgchar+8);
+                    
+                    message.rTime = [NSString GetGMTString:DATABASE_TIMESTR];
+                    [self updatedStatus:MessageOutgoingStatusSent forMessage:message];
+                    _outgoingMessage = nil;
+                } else if(ntohl(*(int *)msgchar) == 0) {
+                    // Error Message
+                    NSString* error_msg = [NSString TranlsateErrorMessage:[NSString stringWithUTF8String: msgchar+4]];
+                    DEBUGMSG(@"ERROR: error_msg = %@", error_msg);
+                    
+                    message.rTime = nil;
+                    [self updatedStatus:MessageOutgoingStatusFailed forMessage:message];
+                    _outgoingMessage = nil;
+                }
+            }
+        }
+    }] resume];
 }
 
 - (void)updatedStatus:(MessageOutgoingStatus)newStatus forMessage:(MsgEntry *)message {

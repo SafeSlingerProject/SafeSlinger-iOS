@@ -118,8 +118,9 @@
     [contact_values removeAllObjects];
     [contact_selections removeAllObjects];
     [contact_category removeAllObjects];
+    [ContactImage setImage:nil];
     
-    ContactImage.image = nil;
+    //ContactImage.image = nil;
     delegate.IdentityName = [delegate.DbInstance GetProfileName];
     
     switch (delegate.IdentityNum) {
@@ -132,14 +133,14 @@
         case NonLink:
             // Read Profile from database
             [ContactChangeBtn setTitle: delegate.IdentityName forState: UIControlStateNormal];
-            [ContactImage setImage: [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"blank_contact" ofType:@"png"]]];
+            [ContactImage setImage: [UIImage imageNamed:@"blank_contact"]];
             [ExchangeBtn setEnabled:YES];
             break;
         default:
             [ContactChangeBtn setTitle: delegate.IdentityName forState: UIControlStateNormal];
             if(![self ParseContact:delegate.IdentityNum]) {
                 // if permission is disabled
-                [ContactImage setImage: [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"blank_contact" ofType:@"png"]]];
+                [ContactImage setImage: [UIImage imageNamed:@"blank_contact"]];
             }
             [ExchangeBtn setEnabled:YES];
             break;
@@ -303,7 +304,7 @@
         
         CFRelease(photo);
     } else {
-        [ContactImage setImage: [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"blank_contact" ofType:@"png"]]];
+        [ContactImage setImage: [UIImage imageNamed:@"blank_contact"]];
     }
     
     // Parse Emails
@@ -586,7 +587,7 @@
             break;
             
 		case RESULT_EXCHANGE_CANCELED: {
-        // handle canceled result
+            // handle canceled result
             DEBUGMSG(@"Exchange Error: %@", error_str);
             FunctionView *mainview = nil;
             NSArray *stack = [self.navigationController viewControllers];
