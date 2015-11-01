@@ -121,7 +121,7 @@
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         if(error)
         {
-            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessageCStr", @"Server Message: '%@'"), [error localizedDescription]]];
+            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessage", @"Server Message: '%@'"), [error localizedDescription]]];
         }else{
             if([data length] > 0) {
                 // start parsing data

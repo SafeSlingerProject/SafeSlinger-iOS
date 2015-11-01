@@ -100,7 +100,7 @@
                     });
                 } else {
                     // general errors
-                    [self PrintToastMessage: [NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessageCStr", @"Server Message: '%@'"), [error localizedDescription]]];
+                    [self PrintToastMessage: [NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessage", @"Server Message: '%@'"), [error localizedDescription]]];
                     [ThreadLock unlock];
                 }
             } else {
@@ -240,7 +240,7 @@
                 [self PrintToastMessage: NSLocalizedString(@"error_ServerNotResponding", @"No response from server.")];
             } else {
                 // general errors
-                [self PrintToastMessage: [NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessageCStr", @"Server Message: '%@'"), [error localizedDescription]]];
+                [self PrintToastMessage: [NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessage", @"Server Message: '%@'"), [error localizedDescription]]];
             }
         } else {
             if([data length] > 0) {

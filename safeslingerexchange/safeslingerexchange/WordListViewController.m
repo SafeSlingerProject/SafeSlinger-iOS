@@ -77,7 +77,6 @@
 
 - (void)DisplayHow
 {
-    // Display using UIAlertView
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedStringFromBundle(delegate.res, @"title_verify", @"Verify")
                                                                    message:NSLocalizedStringFromBundle(delegate.res, @"help_verify", @"Now, you must match one of these 3-word phrases with all users. Every user must must select the same common phrase, and press 'Next'.")
                                                             preferredStyle:UIAlertControllerStyleAlert];

@@ -86,7 +86,6 @@
 
 - (void)DisplayHow
 {
-    // Display using UIAlertView
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedStringFromBundle(delegate.res, @"title_userid", @"Grouping")
                                                                    message:NSLocalizedStringFromBundle(delegate.res, @"help_userid", @"This number on this screen is used to create a unique group of users. Review the numbers on all users' screens, then all users should enter the same lowest number and press 'OK'.")
                                                             preferredStyle:UIAlertControllerStyleAlert];

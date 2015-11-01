@@ -104,6 +104,13 @@
     [self.tableView reloadData];
 }
 
+- (void)UpdateSingleCell: (NSIndexPath*)cell
+{
+    [self.tableView beginUpdates];
+    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:cell, nil] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView endUpdates];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -492,29 +499,73 @@
                 case UserLastName:
                 {
                     // Popup AlertView
-                    NSString* title = nil;
-                    if(indexPath.row==UserFirstName)
+                    NSString *title = nil;
+                    NSString *first = [delegate.DbInstance GetStringConfig:@"Profile_FN"];
+                    NSString *last = [delegate.DbInstance GetStringConfig:@"Profile_LN"];
+                    
+                    BOOL isFirstName = NO;
+                    if(indexPath.row==UserFirstName){
                         title = NSLocalizedString(@"label_FirstName", @"First Name");
-                    else if(indexPath.row==UserLastName)
+                        isFirstName = YES;
+                    }else if(indexPath.row==UserLastName)
                         title = NSLocalizedString(@"label_LastName", @"Last Name");
                     
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: title
-                                                                    message: nil
-                                                                   delegate: self
-                                                          cancelButtonTitle: NSLocalizedString(@"btn_Cancel", @"Cancel")
-                                                          otherButtonTitles: NSLocalizedString(@"btn_OK", @"OK"), nil];
-                    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-                    UITextField *textField = [alert textFieldAtIndex:0];
-                    textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
+                    UIAlertController* alert = [UIAlertController alertControllerWithTitle:title
+                                                                                   message:nil
+                                                                            preferredStyle:UIAlertControllerStyleAlert];
+                    [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+                        textField.placeholder = title;
+                        if(isFirstName) textField.text = first;
+                        else textField.text = last;
+                    }];
+                    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Cancel", @"Cancel")
+                                                                           style:UIAlertActionStyleCancel
+                                                                         handler:^(UIAlertAction * action) {
+                                                                             // nothing
+                                                                         }];
                     
-                    if(indexPath.row==UserFirstName)
-                        textField.text = [delegate.DbInstance GetStringConfig: @"Profile_FN"];
-                    else if(indexPath.row==UserLastName)
-                        textField.text = [delegate.DbInstance GetStringConfig: @"Profile_LN"];
-                    
-                    alert.tag = indexPath.row;
-                    [alert show];
-                    alert = nil;
+                    UIAlertAction* okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_OK", @"OK")
+                                                                       style:UIAlertActionStyleDefault
+                                                                     handler:^(UIAlertAction * action) {
+                                                                         NSString *modified = alert.textFields.firstObject.text;
+                                                                         if(isFirstName)
+                                                                         {
+                                                                             if([modified length]>0){
+                                                                                 if(![first isEqualToString:modified]){
+                                                                                     [delegate saveConactData:delegate.IdentityNum Firstname:modified Lastname:last];
+                                                                                     [self UpdateSingleCell:indexPath];
+                                                                                 }
+                                                                             }else{
+                                                                                 // length = 0
+                                                                                 if(last){
+                                                                                     // update with NULL fistname
+                                                                                     [delegate saveConactData:delegate.IdentityNum Firstname:nil Lastname:last];
+                                                                                     [self UpdateSingleCell:indexPath];
+                                                                                 }else
+                                                                                     [[[[iToast makeText: NSLocalizedString(@"error_ContactNameMissing", @"This contact is missing a name, please edit.")]
+                                                                                        setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+                                                                             }
+                                                                         }else{
+                                                                             if([modified length]>0){
+                                                                                 if (![last isEqualToString:modified]){
+                                                                                     [delegate saveConactData:delegate.IdentityNum Firstname:first Lastname:modified];
+                                                                                     [self UpdateSingleCell:indexPath];
+                                                                                 }
+                                                                             }else{
+                                                                                 // length = 0
+                                                                                 if(first){
+                                                                                     // update with NULL lastname
+                                                                                     [delegate saveConactData:delegate.IdentityNum Firstname:first Lastname:nil];
+                                                                                     [self UpdateSingleCell:indexPath];
+                                                                                 }else
+                                                                                     [[[[iToast makeText: NSLocalizedString(@"error_ContactNameMissing", @"This contact is missing a name, please edit.")]
+                                                                                        setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+                                                                             }
+                                                                         }
+                                                                     }];
+                    [alert addAction:okAction];
+                    [alert addAction:cancelAction];
+                    [self presentViewController:alert animated:YES completion:nil];
                 }
                     break;
                 case ShowTutorial:
@@ -607,7 +658,6 @@
                         // Try to backup
                         [delegate.BackupSys RecheckCapability];
                         [delegate.BackupSys PerformBackup];
-						
 						[MessageDecryptor tryToDecryptAll];
                     }
                     else if (cell.accessoryType == UITableViewCellAccessoryCheckmark)
@@ -632,59 +682,6 @@
             break;
     }
     
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(buttonIndex!=alertView.cancelButtonIndex)
-    {
-        switch (alertView.tag) {
-            case UserFirstName:
-            {
-                UITextField *textField = [alertView textFieldAtIndex:0];
-                if([textField.text length]>0)
-                {
-                    [delegate saveConactData:delegate.IdentityNum Firstname:textField.text Lastname:[delegate.DbInstance GetStringConfig:@"Profile_LN"]];
-                }else{
-                    if([delegate.DbInstance GetConfig:@"Profile_LN"])
-                    {
-                        [delegate saveConactData:delegate.IdentityNum Firstname:nil Lastname:[delegate.DbInstance GetStringConfig:@"Profile_LN"]];
-                    }else{
-                        [[[[iToast makeText: NSLocalizedString(@"error_ContactNameMissing", @"This contact is missing a name, please edit.")]
-                           setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-                    }
-                }
-                
-            }
-                break;
-            case UserLastName:
-            {
-                UITextField *textField = [alertView textFieldAtIndex:0];
-                if([textField.text length]>0)
-                {
-                    [delegate saveConactData:delegate.IdentityNum Firstname:[delegate.DbInstance GetStringConfig:@"Profile_FN"] Lastname:textField.text];
-                }else{
-                    if([delegate.DbInstance GetConfig:@"Profile_FN"])
-                    {
-                        [delegate saveConactData:delegate.IdentityNum Firstname:[delegate.DbInstance GetStringConfig:@"Profile_FN"] Lastname:nil];
-                    }else{
-                        [[[[iToast makeText: NSLocalizedString(@"error_ContactNameMissing", @"This contact is missing a name, please edit.")]
-                           setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-                    }
-                }
-            }
-                break;
-            case ManagePass:
-            {
-                
-            }
-                break;
-            default:
-                break;
-        }
-        
-        [self.tableView reloadData];
-    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

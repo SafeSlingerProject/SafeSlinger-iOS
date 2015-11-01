@@ -254,7 +254,7 @@
                 [self CleanSelectContact: User2Tag];
             }else{
                 // general errors
-                [ProgressLabel setText: [NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessageCStr", @"Server Message: '%@'"), [error localizedDescription]]];
+                [ProgressLabel setText: [NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessage", @"Server Message: '%@'"), [error localizedDescription]]];
                 [ProgressIndicator stopAnimating];
                 UserTag = 0;
                 [self CleanSelectContact: User1Tag];
@@ -311,7 +311,7 @@
                 [self CleanSelectContact: User2Tag];
             }else{
                 // general errors
-                [ProgressLabel setText: [NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessageCStr", @"Server Message: '%@'"), [error localizedDescription]]];
+                [ProgressLabel setText: [NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessage", @"Server Message: '%@'"), [error localizedDescription]]];
                 [ProgressIndicator stopAnimating];
                 UserTag = 0;
                 [self CleanSelectContact: User1Tag];

@@ -575,44 +575,51 @@ typedef enum {
 	if(_longPressedIndexPath && gestureRecognizer.state == UIGestureRecognizerStateBegan) {
 		MsgEntry *message = self.messages[_longPressedIndexPath.row];
 		if(message.dir == ToMsg && message.outgoingStatus == MessageOutgoingStatusFailed) {
-			[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"title_MessageOptions", nil)
-										message:nil
-									   delegate:self
-							  cancelButtonTitle:NSLocalizedString(@"btn_Cancel", nil)
-							  otherButtonTitles:NSLocalizedString(@"btn_Retry", nil), NSLocalizedString(@"btn_Delete", nil) , nil] show];
             
-		}
-	}
-}
-
-#pragma mark - UIAlertViewDelegate methods
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    
-	if(buttonIndex != alertView.cancelButtonIndex && alertView.tag==NotPermDialog) {
-		MsgEntry *message = self.messages[_longPressedIndexPath.row];
-		
-		// remove message from array and from database
-		[self.messages removeObjectAtIndex:_longPressedIndexPath.row];
-		[delegate.DbInstance DeleteMessage:message.msgid];
-		
-		
-		if(buttonIndex == 1) {
-			// retry
-			[CATransaction begin];
-			[CATransaction setCompletionBlock:^{
-				// animation has finished
-				[self scrollToBottom];
-			}];
-			
-			[self.tableView beginUpdates];
-			[self.tableView deleteRowsAtIndexPaths:@[_longPressedIndexPath] withRowAnimation:UITableViewRowAnimationTop];
-			
-			[self sendTextMessage:[[NSString alloc] initWithData:message.msgbody encoding:NSUTF8StringEncoding] tableViewUpdateStarted:YES];
-		} else {
-			// remove message from tableview
-			[self.tableView beginUpdates];
-			[self.tableView deleteRowsAtIndexPaths:@[_longPressedIndexPath] withRowAnimation:UITableViewRowAnimationTop];
-			[self.tableView endUpdates];
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"title_MessageOptions", nil)
+                                                                           message:nil
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Cancel", nil)
+                                                                   style:UIAlertActionStyleCancel
+                                                                 handler:^(UIAlertAction * action) {
+                                                                     // nothing
+                                                                 }];
+            UIAlertAction* retryAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Retry", nil)
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction * action) {
+                                                                 MsgEntry *message = self.messages[_longPressedIndexPath.row];
+                                                                 // remove message from array and from database
+                                                                 [self.messages removeObjectAtIndex:_longPressedIndexPath.row];
+                                                                 [delegate.DbInstance DeleteMessage:message.msgid];
+                                                                 // retry
+                                                                 [CATransaction begin];
+                                                                 [CATransaction setCompletionBlock:^{
+                                                                     // animation has finished
+                                                                     [self scrollToBottom];
+                                                                 }];
+                                                                 
+                                                                 [self.tableView beginUpdates];
+                                                                 [self.tableView deleteRowsAtIndexPaths:@[_longPressedIndexPath] withRowAnimation:UITableViewRowAnimationTop];
+                                                                 [self sendTextMessage:[[NSString alloc] initWithData:message.msgbody encoding:NSUTF8StringEncoding] tableViewUpdateStarted:YES];
+                                                             }];
+            UIAlertAction* delAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_Delete", nil)
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction * action) {
+                                                                 MsgEntry *message = self.messages[_longPressedIndexPath.row];
+                                                                 // remove message from array and from database
+                                                                 [self.messages removeObjectAtIndex:_longPressedIndexPath.row];
+                                                                 [delegate.DbInstance DeleteMessage:message.msgid];
+                                                                 
+                                                                 // remove message from tableview
+                                                                 [self.tableView beginUpdates];
+                                                                 [self.tableView deleteRowsAtIndexPaths:@[_longPressedIndexPath] withRowAnimation:UITableViewRowAnimationTop];
+                                                                 [self.tableView endUpdates];
+                                                             }];
+            
+            [alert addAction:retryAction];
+            [alert addAction:delAction];
+            [alert addAction:cancelAction];
+            [self presentViewController:alert animated:YES completion:nil];
 		}
 	}
 }
@@ -664,8 +671,8 @@ typedef enum {
                 // general errors
                 cell.tag = 0;
                 cell.detailTextLabel.text = nil;
-                [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessageCStr", @"Server Message: '%@'"), [error localizedDescription]]];
-                [[[[iToast makeText: [NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessageCStr", @"Server Message: '%@'"), [error localizedDescription]]] setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+                [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessage", @"Server Message: '%@'"), [error localizedDescription]]];
+                [[[[iToast makeText: [NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessage", @"Server Message: '%@'"), [error localizedDescription]]] setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
                 [OperationLock unlock];
             }
         }else{
@@ -1010,19 +1017,6 @@ typedef enum {
 	} else {
 		return YES;
 	}
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    
-    if(buttonIndex!=alertView.cancelButtonIndex) {
-        if(alertView.tag==HelpPhotoLibrary) {
-            NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-            [[UIApplication sharedApplication] openURL:url];
-        } else if(alertView.tag==HelpCamera) {
-            // iOS8
-            
-        }
-    }
 }
 
 #pragma UITextFieldDelegate Methods
