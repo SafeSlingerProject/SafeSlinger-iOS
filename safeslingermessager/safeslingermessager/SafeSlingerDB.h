@@ -155,7 +155,6 @@ typedef enum {
 // basic database operation
 - (BOOL)LoadDBFromStorage:(NSString *)specific_path;
 - (BOOL)TrimTable:(NSString *)table_name;
-- (void)DumpUsage;
 - (BOOL)CloseDB;
 
 // for recipients
@@ -167,7 +166,7 @@ typedef enum {
 - (BOOL)addNewRecipient:(ContactEntry *)contact;
 
 // for Message Thread
-- (NSMutableArray *)getConversationThreads;
+- (void)getConversationThreads: (NSMutableArray*)threads;
 - (NSArray *)loadMessagesExchangedWithKeyId:(NSString *)keyId;
 - (BOOL)markAllMessagesAsReadFromKeyId:(NSString *)keyId;
 - (int)ThreadMessageCount:(NSString *)KEYID;

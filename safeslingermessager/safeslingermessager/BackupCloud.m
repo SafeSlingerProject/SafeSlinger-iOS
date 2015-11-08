@@ -158,9 +158,7 @@
         else db_item = [NSString stringWithFormat:@"%@-%d.db", DATABASE_NAME, i];
         
         NSString *floc = [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent: db_item];
-        
         NSFileManager* fs = [NSFileManager defaultManager];
-        
         if([fs fileExistsAtPath:floc])
         {
             // create tmp database
@@ -176,12 +174,12 @@
             [tmp_db InsertOrUpdateConfig:contact withTag:@"IdentityNum"];
             [tmp_db TrimTable:@"msgtable"];
             [tmp_db CloseDB];
-            [archiver encodeObject: [NSData dataWithContentsOfFile:dbpath] forKey: db_item];
+            NSData *db_data = [NSData dataWithContentsOfFile:dbpath];
+            DEBUGMSG(@"dataebase(%d) has %lu bytes.", i, (unsigned long)[db_data length]);
+            [archiver encodeObject:db_data forKey: db_item];
         }
     }
-    
     [archiver finishEncoding];
-    
     return data;
 }
 
@@ -195,9 +193,9 @@
     NSArray *DB_KEY = [unarchiver decodeObjectForKey:kDB_KEY];
     NSArray *DB_LIST = [unarchiver decodeObjectForKey:kDB_LIST];
     
-    if(DB_KEY==nil||DB_LIST==nil)
+    if(!DB_KEY ||!DB_LIST)
     {
-        [ErrorLogger ERRORDEBUG:@"Backup kDB_KEY or kDB_LIST are NULL."];
+        [ErrorLogger ERRORDEBUG: @"Backup kDB_KEY or kDB_LIST are NULL."];
         return NO;
     }
     
@@ -216,7 +214,6 @@
         
         NSData *DatabaseCopy = [unarchiver decodeObjectForKey: db_item];
         DEBUGMSG(@"dataebase(%d) has %lu bytes.", i, (unsigned long)[DatabaseCopy length]);
-        
         NSString* dbpath = [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent: db_item];
         [DatabaseCopy writeToFile: dbpath atomically:YES];
     }
@@ -229,7 +226,6 @@
     }else{
         [delegate.DbInstance LoadDBFromStorage: nil];
     }
-    
     [[NSUserDefaults standardUserDefaults] setInteger:[unarchiver decodeIntegerForKey: kAutoDecryptOpt] forKey:kAutoDecryptOpt];
     [[NSUserDefaults standardUserDefaults] setInteger: [unarchiver decodeIntegerForKey: kRemindBackup] forKey:kRemindBackup];
     [[NSUserDefaults standardUserDefaults] setInteger:[unarchiver decodeIntegerForKey: kShowExchangeHint] forKey:kShowExchangeHint];
@@ -321,7 +317,6 @@
             NSMetadataItem *item = [query resultAtIndex:[query resultCount]-1];
             NSURL *url = [item valueForAttribute:NSMetadataItemURLKey];
             BackupCloudFile *cfile = [[BackupCloudFile alloc] initWithFileURL:url];
-            
             [cfile openWithCompletionHandler:^(BOOL success) {
                 if (success) {
                     // be.gin backup

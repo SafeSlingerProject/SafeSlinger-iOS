@@ -58,9 +58,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	
     [self UpdateThread];
-	
 	self.parentViewController.navigationItem.rightBarButtonItem = _createNewMessageButton;
 }
 
@@ -75,24 +73,19 @@
 
 - (void)UpdateThread {
     // Messages from individual database
-    NSMutableArray *threadsList = [delegate.DbInstance getConversationThreads];
-	
+    [MessageList removeAllObjects];
+    [delegate.DbInstance getConversationThreads: MessageList];
 	// Messages from universal database
-    int badgenum = [delegate.UDbInstance updateThreadEntries:threadsList];
-	
-	for(MsgListEntry *entry in threadsList) {
+    int badgenum = [delegate.UDbInstance updateThreadEntries:MessageList];
+	for(MsgListEntry *entry in MessageList) {
 		badgenum += entry.unreadcount;
 	}
-	
 	if(badgenum > 0) {
         [self.tabBarItem setBadgeValue:[NSString stringWithFormat:@"%d", badgenum]];
 	} else {
         [self.tabBarItem setBadgeValue:nil];
 	}
-	
-	[MessageList setArray:threadsList];
 	self.parentViewController.navigationItem.title = [NSString stringWithFormat:@"%lu %@",(unsigned long)[MessageList count], NSLocalizedString(@"title_Threads" ,@"Threads")];
-	
     [self.tableView reloadData];
 }
 
@@ -102,7 +95,6 @@
 
 - (void)viewDidUnload {
     [MessageList removeAllObjects];
-	
 	[[NSNotificationCenter defaultCenter] removeObserver:self
 													name:NSNotificationMessageReceived
 												  object:nil];
@@ -117,11 +109,10 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	if([MessageList count] == 0) {
+	if([MessageList count] == 0)
         return NSLocalizedString(@"label_InstNoMessages", nil);
-	}
- 
-	return @"";
+	else
+        return @"";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -132,7 +123,6 @@
     }
     
     MsgListEntry *MsgListEntry = [MessageList objectAtIndex:indexPath.row];
-    
     // username
     NSString* display = MsgListEntry.keyid;
     NSString* username = nil;

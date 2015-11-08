@@ -19,9 +19,8 @@
 	AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 		NSArray *encryptedMessages = [delegate.UDbInstance getEncryptedMessages];
-		
 		for(MsgEntry *message in encryptedMessages) {
-			[MessageDecryptor decryptCipherMessage:message];
+			[MessageDecryptor decryptCipherMessage: message];
 		}
 	});
 }
@@ -32,7 +31,6 @@
 	
 	// tap to decrypt
 	NSString* pubkeySet = [delegate.DbInstance QueryStringInTokenTableByKeyID:msg.keyid Field:@"pkey"];
-	
 	if(pubkeySet == nil) {
 		[ErrorLogger ERRORDEBUG: NSLocalizedString(@"error_UnableFindPubKey", @"Unable to match public key to private key in crypto provider.")];
 		return NO;
@@ -51,7 +49,6 @@
 	}
 	
 	NSData* decipher = [SSEngine UnpackMessage:msg.msgbody PubKey:pubkeySet Prikey:DecKey];
-	
 	// parsing
 	if(!decipher || decipher.length == 0) {
 		[ErrorLogger ERRORDEBUG: NSLocalizedString(@"error_MessageSignatureVerificationFails", @"Signature verification failed.")];
@@ -72,7 +69,7 @@
 	NSData* filehash = nil;
 	
 	// parse message format
-	DEBUGMSG(@"Version: %02X", ntohl(*(int *)p));
+	DEBUGMSG(@"version: %02X", ntohl(*(int *)p));
 	offset += 4;
 	
 	len = ntohl(*(int *)(p+offset));
