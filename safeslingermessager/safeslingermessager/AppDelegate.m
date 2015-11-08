@@ -124,10 +124,6 @@
     self.IdentityNum = ContactID;
     NSData *contact = [NSData dataWithBytes:&ContactID length:sizeof(ContactID)];
     [DbInstance InsertOrUpdateConfig:contact withTag:@"IdentityNum"];
-    
-    // Try to backup
-    [BackupSys RecheckCapability];
-    [BackupSys PerformBackup];
 }
 
 - (void)saveConactData:(int)ContactID Firstname:(NSString *)FN Lastname:(NSString *)LN {
@@ -151,17 +147,20 @@
         //change information for kDB_LIST
         NSArray *infoarr = [[NSUserDefaults standardUserDefaults] stringArrayForKey: kDB_LIST];
         NSInteger index = [[NSUserDefaults standardUserDefaults] integerForKey: kDEFAULT_DB_KEY];
-        
         NSMutableArray *arr = [NSMutableArray arrayWithArray:infoarr];
-        
         NSString *keyinfo = [NSString stringWithFormat:@"%@\n%@ %@", [NSString compositeName:FN withLastName:LN], NSLocalizedString(@"label_Key", @"Key:"), [NSString ChangeGMT2Local:[SSEngine getSelfGenKeyDate] GMTFormat:DATABASE_TIMESTR LocalFormat: @"yyyy-MM-dd HH:mm:ss"]];
-        
         [arr setObject:keyinfo atIndexedSubscript:index];
         [[NSUserDefaults standardUserDefaults] setObject:arr forKey: kDB_LIST];
     }
     
     self.IdentityName = [NSString compositeName:FN withLastName:LN];
 	[self saveConactDataWithoutChaningName:ContactID];
+    
+    // do backup since modification
+    if(![oldValue isEqualToString:newValue]) {
+        [BackupSys RecheckCapability];
+        [BackupSys PerformBackup];
+    }
 }
 
 #pragma mark - Database updates

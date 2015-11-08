@@ -99,6 +99,13 @@
     [self.tableView reloadData];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    // do backup before leave the view
+    [delegate.BackupSys RecheckCapability];
+    [delegate.BackupSys PerformBackup];
+}
+
 - (void)UpdateView
 {
     [self.tableView reloadData];
@@ -461,7 +468,7 @@
     [[NSUserDefaults standardUserDefaults] setObject:new_keyarr forKey: kDB_KEY];
     [[NSUserDefaults standardUserDefaults] setObject:new_infoarr forKey: kDB_LIST];
     
-    // Try to backup
+    // Modify key strucutres, do backup
     [delegate.BackupSys RecheckCapability];
     [delegate.BackupSys PerformBackup];
 }
@@ -575,17 +582,11 @@
                     {
                         cell.accessoryType = UITableViewCellAccessoryCheckmark;
                         [[NSUserDefaults standardUserDefaults] setInteger:TurnOn forKey:kShowExchangeHint];
-                        // Try to backup
-                        [delegate.BackupSys RecheckCapability];
-                        [delegate.BackupSys PerformBackup];
                     }
                     else if (cell.accessoryType == UITableViewCellAccessoryCheckmark)
                     {
                         cell.accessoryType = UITableViewCellAccessoryNone;
                         [[NSUserDefaults standardUserDefaults] setInteger:TurnOff forKey:kShowExchangeHint];
-                        // Try to backup
-                        [delegate.BackupSys RecheckCapability];
-                        [delegate.BackupSys PerformBackup];
                     }
                 }
                     break;
@@ -604,17 +605,11 @@
                     {
                         cell.accessoryType = UITableViewCellAccessoryCheckmark;
                         [[NSUserDefaults standardUserDefaults] setInteger:TurnOn forKey: kRemindBackup];
-                        // Try to backup
-                        [delegate.BackupSys RecheckCapability];
-                        [delegate.BackupSys PerformBackup];
                     }
                     else if (cell.accessoryType == UITableViewCellAccessoryCheckmark)
                     {
                         cell.accessoryType = UITableViewCellAccessoryNone;
                         [[NSUserDefaults standardUserDefaults] setInteger:TurnOn forKey: kRemindBackup];
-                        // Try to backup
-                        [delegate.BackupSys RecheckCapability];
-                        [delegate.BackupSys PerformBackup];
                     }
                 }
                     break;
@@ -655,18 +650,12 @@
                     {
                         cell.accessoryType = UITableViewCellAccessoryCheckmark;
                         [[NSUserDefaults standardUserDefaults] setInteger:TurnOn forKey:kAutoDecryptOpt];
-                        // Try to backup
-                        [delegate.BackupSys RecheckCapability];
-                        [delegate.BackupSys PerformBackup];
 						[MessageDecryptor tryToDecryptAll];
                     }
                     else if (cell.accessoryType == UITableViewCellAccessoryCheckmark)
                     {
                         cell.accessoryType = UITableViewCellAccessoryNone;
                         [[NSUserDefaults standardUserDefaults] setInteger:TurnOff forKey:kAutoDecryptOpt];
-                        // Try to backup
-                        [delegate.BackupSys RecheckCapability];
-                        [delegate.BackupSys PerformBackup];
                     }
                 }
                     break;
