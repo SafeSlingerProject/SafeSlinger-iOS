@@ -415,10 +415,11 @@
         return YES;
 	if(sqlite3_close(db)==SQLITE_OK)
     {
-        [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"Unable to close the database: %s", sqlite3_errmsg(db)]];
         return YES;
-    }else
+    }else{
+        [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"Unable to close the database: %s", sqlite3_errmsg(db)]];
         return NO;
+    }
 }
 
 @end

@@ -996,19 +996,18 @@
 }
 
 // Loads the messages exchanged with the keyId KEYID
-- (NSArray *)loadMessagesExchangedWithKeyId:(NSString *)keyId {
-    if(!db || [keyId length]==0) {
-        [ErrorLogger ERRORDEBUG: @"database/keyId is null."];
-        return nil;
+- (void)loadMessagesExchangedWithKeyId:(NSString *)keyId  msglist:(NSMutableArray*)messagelist {
+    
+    if(!db || [keyId length]==0 || !messagelist) {
+        [ErrorLogger ERRORDEBUG: @"database/keyId/messagelist is null."];
+        return;
     }
     
-    NSMutableArray *tmparray = nil;
     int rownum = 0;
     const char *sql = "SELECT * FROM msgtable WHERE receipt=? ORDER BY rTime ASC";
     sqlite3_stmt *sqlStatement;
     if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) == SQLITE_OK)  {
         sqlite3_bind_text(sqlStatement, 1, [keyId UTF8String], -1, SQLITE_TRANSIENT);
-        tmparray = [NSMutableArray array];
         while (sqlite3_step(sqlStatement)==SQLITE_ROW) {
             MsgEntry *amsg = [MsgEntry new];
             //1:msid
@@ -1055,14 +1054,12 @@
             if(amsg.dir == ToMsg && (amsg.rTime == nil || amsg.rTime.length == 0)) {
                 amsg.outgoingStatus = MessageOutgoingStatusFailed;
             }
-            [tmparray addObject:amsg];
+            [messagelist addObject:amsg];
             rownum++;
         }
     }else
         [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
-    
     sqlite3_finalize(sqlStatement);
-    return tmparray;
 }
 
 - (BOOL)markAllMessagesAsReadFromKeyId:(NSString *)keyId {

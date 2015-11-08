@@ -22,10 +22,9 @@
  * THE SOFTWARE.
  */
 
-//#import <MobileCoreServices/UTType.h>
-//#import <AssetsLibrary/AssetsLibrary.h>
 @import MobileCoreServices;
 @import Photos;
+@import QuartzCore;
 #import "MessageDetailView.h"
 #import "AppDelegate.h"
 #import "SafeSlingerDB.h"
@@ -205,18 +204,30 @@ typedef enum {
 
 - (void)reloadTable {
 	[self.messages removeAllObjects];
-    [self.messages setArray:[delegate.DbInstance loadMessagesExchangedWithKeyId:assignedEntry.keyid]];
-	
+    CFTimeInterval startTime = CACurrentMediaTime();
+    [delegate.DbInstance loadMessagesExchangedWithKeyId:assignedEntry.keyid msglist:self.messages];
+    CFTimeInterval elapsedTime = CACurrentMediaTime() - startTime;
+    DEBUGMSG(@"t1 = %f", elapsedTime);
+    
+    startTime = CACurrentMediaTime();
 	NSArray *cipherMessages = [delegate.UDbInstance LoadThreadMessage:assignedEntry.keyid];
     [self.messages addObjectsFromArray:cipherMessages];
 	assignedEntry.ciphercount = (int)cipherMessages.count;
+    elapsedTime = CACurrentMediaTime() - startTime;
+    DEBUGMSG(@"t2 = %f", elapsedTime);
 	
+    startTime = CACurrentMediaTime();
 	[delegate.DbInstance markAllMessagesAsReadFromKeyId:assignedEntry.keyid];
-	
+    elapsedTime = CACurrentMediaTime() - startTime;
+    DEBUGMSG(@"t3 = %f", elapsedTime);
+    
+    startTime = CACurrentMediaTime();
 	MsgEntry *outgoingMessage = delegate.messageSender.outgoingMessage;
 	if([outgoingMessage.keyid isEqualToString:assignedEntry.keyid]) {
 		[self.messages addObject:outgoingMessage];
 	}
+    elapsedTime = CACurrentMediaTime() - startTime;
+    DEBUGMSG(@"t4 = %f", elapsedTime);
 	
 	assignedEntry.messagecount = (int)self.messages.count;
 	
@@ -233,17 +244,14 @@ typedef enum {
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-	
 	delegate.MessageInBox.notificationDelegate = self;
 	[self registerForInputNotifications];
-	
 	[self reloadTable];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
 	delegate.MessageInBox.notificationDelegate = nil;
 	[self unregisterForInputNotifications];
-	
     [super viewWillDisappear:animated];
 }
 
@@ -408,7 +416,6 @@ typedef enum {
 }
 
 #pragma mark - Table view delegate
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"MessageCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
@@ -676,66 +683,78 @@ typedef enum {
                 [OperationLock unlock];
             }
         }else{
-            if([data length] > 0) {
-                // get attachment
+            
+            if([data length]==0) {
+                // should not happen, no related error message define now
+            } else {
+                // start parsing data
                 const char *msgchar = [data bytes];
-                DEBUGMSG(@"Response Code: %d", ntohl(*(int *)(msgchar+4)));
-                int msglen = ntohl(*(int *)(msgchar+8));
-                DEBUGMSG(@"Received Packet Size: %d", msglen);
-                if(msglen<=0)
-                {
-                    [ErrorLogger ERRORDEBUG:@"message length is less than 0"];
-                    // display error
+                if(ntohl(*(int *)msgchar) == 0) {
+                    // Error Message
                     cell.tag = 0;
                     cell.detailTextLabel.text = nil;
-                    [ErrorLogger ERRORDEBUG:NSLocalizedString(@"error_InvalidIncomingMessage", @"Bad incoming message format.")];
-                    [[[[iToast makeText: NSLocalizedString(@"error_InvalidIncomingMessage", @"Bad incoming message format.")]
-                       setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-                    [OperationLock unlock];
-                }else{
-                    NSData* encryptedfile = [NSData dataWithBytes:(msgchar+12) length:msglen];
-                    NSData* filehash = [delegate.DbInstance QueryInMsgTableByMsgID:nonce Field: @"fbody"];
-                    NSRange r;r.location = 0;r.length = NONCELEN;
-                    filehash = [filehash subdataWithRange:r];
-                    // before decrypt we have to check the file hash
-                    if(![[sha3 Keccak256Digest:encryptedfile]isEqualToData:filehash])
+                    NSString* error_msg = [NSString TranlsateErrorMessage:[NSString stringWithUTF8String: msgchar+4]];
+                    [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"error_msg = %@", error_msg]];
+                    [[[[iToast makeText: [NSString stringWithFormat:NSLocalizedString(@"error_ServerAppMessage", @"Server Message: '%@'"), error_msg]] setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+                } else if(ntohl(*(int *)(msgchar+4))==1) {
+                    // Correct File
+                    int file_len = ntohl(*(int *)(msgchar+8));
+                    DEBUGMSG(@"Received File Size: %d", file_len);
+                    if(file_len<=0)
                     {
-                        [ErrorLogger ERRORDEBUG:@"ERROR: Download File Digest Mismatch."];
-                        // display error
                         cell.tag = 0;
                         cell.detailTextLabel.text = nil;
-                        [ErrorLogger ERRORDEBUG:NSLocalizedString(@"error_MessageSignatureVerificationFails", @"Signature verification failed.")];
-                        [[[[iToast makeText: NSLocalizedString(@"error_MessageSignatureVerificationFails", @"Signature verification failed.")]
+                        [ErrorLogger ERRORDEBUG:@"message length is less than 0"];
+                        // display error
+                        [[[[iToast makeText: NSLocalizedString(@"error_InvalidIncomingMessage", @"Bad incoming message format.")]
                            setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-                        [OperationLock unlock];
                     }else{
-                        // save to database
-                        NSString* pubkeySet = [delegate.DbInstance QueryStringInTokenTableByKeyID:[SSEngine ExtractKeyID: encryptedfile] Field:@"pkey"];
-                        NSMutableData *cipher = [NSMutableData dataWithCapacity:[encryptedfile length]-LENGTH_KEYID];
-                        // remove keyid first
-                        [cipher appendBytes:([encryptedfile bytes]+LENGTH_KEYID) length:([encryptedfile length]-LENGTH_KEYID)];
-                        // unlock private key
-                        int PRIKEY_STORE_SIZE = 0;
-                        [[delegate.DbInstance GetConfig:@"PRIKEY_STORE_SIZE"] getBytes:&PRIKEY_STORE_SIZE length:sizeof(PRIKEY_STORE_SIZE)];
-                        NSData* DecKey = [SSEngine UnlockPrivateKey:delegate.tempralPINCode Size:PRIKEY_STORE_SIZE Type:ENC_PRI];
-                        NSData* decipher = [SSEngine UnpackMessage: cipher PubKey:pubkeySet Prikey: DecKey];
-                        if([decipher length]==0||!decipher)
+                        NSData* encryptedfile = [NSData dataWithBytes:(msgchar+12) length:file_len];
+                        NSData* filehash = [delegate.DbInstance QueryInMsgTableByMsgID:nonce Field: @"fbody"];
+                        NSRange r;r.location = 0;r.length = NONCELEN;
+                        filehash = [filehash subdataWithRange:r];
+                        // before decrypt we have to check the file hash
+                        if(![[sha3 Keccak256Digest:encryptedfile]isEqualToData:filehash])
                         {
+                            [ErrorLogger ERRORDEBUG:@"ERROR: Download File Digest Mismatch."];
                             // display error
                             cell.tag = 0;
+                            cell.detailTextLabel.text = nil;
                             [ErrorLogger ERRORDEBUG:NSLocalizedString(@"error_MessageSignatureVerificationFails", @"Signature verification failed.")];
                             [[[[iToast makeText: NSLocalizedString(@"error_MessageSignatureVerificationFails", @"Signature verification failed.")]
                                setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-                            [OperationLock unlock];
                         }else{
-                            [delegate.DbInstance UpdateFileBody:nonce DecryptedData:decipher];
-                            cell.tag = 0;
-                            [OperationLock unlock];
-                            [self reloadTable];
+                            // save to database
+                            NSString* pubkeySet = [delegate.DbInstance QueryStringInTokenTableByKeyID:[SSEngine ExtractKeyID: encryptedfile] Field:@"pkey"];
+                            NSMutableData *cipher = [NSMutableData dataWithCapacity:[encryptedfile length]-LENGTH_KEYID];
+                            // remove keyid first
+                            [cipher appendBytes:([encryptedfile bytes]+LENGTH_KEYID) length:([encryptedfile length]-LENGTH_KEYID)];
+                            // unlock private key
+                            int PRIKEY_STORE_SIZE = 0;
+                            [[delegate.DbInstance GetConfig:@"PRIKEY_STORE_SIZE"] getBytes:&PRIKEY_STORE_SIZE length:sizeof(PRIKEY_STORE_SIZE)];
+                            NSData* DecKey = [SSEngine UnlockPrivateKey:delegate.tempralPINCode Size:PRIKEY_STORE_SIZE Type:ENC_PRI];
+                            NSData* decipher = [SSEngine UnpackMessage: cipher PubKey:pubkeySet Prikey: DecKey];
+                            if([decipher length]==0)
+                            {
+                                // display error
+                                cell.tag = 0;
+                                cell.detailTextLabel.text = nil;
+                                [ErrorLogger ERRORDEBUG:NSLocalizedString(@"error_MessageSignatureVerificationFails", @"Signature verification failed.")];
+                                [[[[iToast makeText: NSLocalizedString(@"error_MessageSignatureVerificationFails", @"Signature verification failed.")]
+                                   setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
+                            }else{
+                                [delegate.DbInstance UpdateFileBody:nonce DecryptedData:decipher];
+                                cell.tag = 0;
+                                cell.detailTextLabel.text = nil;
+                                [self reloadTable];
+                            }
                         }
                     }
+                } else {
+                    // should not happen
                 }
             }
+            [OperationLock unlock];
         }
     }] resume];
 }

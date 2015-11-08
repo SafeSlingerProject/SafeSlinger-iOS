@@ -167,7 +167,7 @@ typedef enum {
 
 // for Message Thread
 - (void)getConversationThreads: (NSMutableArray*)threads;
-- (NSArray *)loadMessagesExchangedWithKeyId:(NSString *)keyId;
+- (void)loadMessagesExchangedWithKeyId:(NSString *)keyId msglist:(NSMutableArray*)messagelist;
 - (BOOL)markAllMessagesAsReadFromKeyId:(NSString *)keyId;
 - (int)ThreadMessageCount:(NSString *)KEYID;
 - (BOOL)DeleteThread:(NSString *)KEYID;
