@@ -154,18 +154,14 @@ typedef enum {
 		} else {
 			_showRecentSwitch.hidden = YES;
 			_showRecentLabel.hidden = YES;
-			
 			[_hintLabel setText: NSLocalizedString(@"label_InstNoRecipientsMatchQuery", nil)];
-			
 			[_hintLabel sizeToFit];
 			_hintLabelHeightConstraint.constant = CGRectGetHeight(_hintLabel.frame);
 		}
 	} else {
 		_showRecentSwitch.hidden = YES;
 		_showRecentLabel.hidden = YES;
-		
 		[_hintLabel setText: NSLocalizedString(@"label_InstNoRecipients", nil)];
-		
 		[_hintLabel sizeToFit];
 		_hintLabelHeightConstraint.constant = CGRectGetHeight(_hintLabel.frame);
 	}
@@ -410,7 +406,6 @@ typedef enum {
 }
 
 #pragma mark - ABPeoplePickerNavigationControllerDelegate methods
-
 - (void)peoplePickerNavigationControllerDidCancel: (ABPeoplePickerNavigationController *)peoplePicker {
 	[peoplePicker dismissViewControllerAnimated:YES completion:nil];
 }
@@ -421,9 +416,11 @@ typedef enum {
 	return NO;
 }
 
-- (void)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker didSelectPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
-	UIViewController *viewController;
-	
+- (void)peoplePickerNavigationController:(ABPeoplePickerNavigationController*)peoplePicker didSelectPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
+    
+    DEBUGMSG(@"send invitation via email..");
+    
+	UIViewController *viewController = nil;
 	if(_selectedInviteType == InviteContactActionSheetTextFromContacts) {
 		
 		ABMultiValueRef phoneProperty = ABRecordCopyValue(person,property);
@@ -458,18 +455,17 @@ typedef enum {
 	}
 	
 	[peoplePicker dismissViewControllerAnimated:YES completion:^{
-		[self presentViewController:viewController animated:YES completion:nil];
+        if(viewController)
+            [self presentViewController:viewController animated:YES completion:nil];
 	}];
 }
 
 #pragma mark - MFMessageComposeViewControllerDelegate methods
-
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {
 	[controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - MFMailComposeViewControllerDelegate methods
-
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
 	switch (result) {
 		case MFMailComposeResultCancelled:
