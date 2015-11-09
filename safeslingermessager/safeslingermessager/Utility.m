@@ -141,7 +141,7 @@
     }
     
     if(!success){
-        [ErrorLogger ERRORDEBUG: @"ERROR: Unable to Add the new record."];
+        [ErrorLogger ERRORDEBUG: @"Unable to Add the new record."];
     }
     
     return success;
@@ -179,7 +179,7 @@
                         // remove it
                         if(!ABAddressBookRemoveRecord(aBook, existing, &error))
                         {
-                            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"ERROR: Unable to remove the old record. Error = %@", CFErrorCopyDescription(error)]];
+                            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Unable to remove the old record. Error = %@", CFErrorCopyDescription(error)]];
                             if(anIMPP)CFRelease(anIMPP);
                             continue;
                         }

@@ -47,18 +47,18 @@
             NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent: @"universal.db"];
             if (![fileManager copyItemAtPath:defaultDBPath toPath:db_path error:&error])
             {
-                [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Failed to create writable database file with message '%@'.", [error localizedDescription]]];
+                [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"Failed to create writable database file with message '%@'.", [error localizedDescription]]];
                 success = NO;
             }
         }
         
         if(!(sqlite3_open([db_path UTF8String], &db) == SQLITE_OK)){
-            [ErrorLogger ERRORDEBUG:@"ERROR: Unable to open database."];
+            [ErrorLogger ERRORDEBUG:@"Unable to open database."];
             success = NO;
         }
         
     }@catch (NSException *exception) {
-        [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: An exception occured, %@", [exception reason]]];
+        [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"An exception occured, %@", [exception reason]]];
         success = NO;
     }@finally {
         return success;
@@ -307,7 +307,7 @@
 
 - (NSArray*)LoadThreadMessage: (NSString*)keyid
 {
-    NSMutableArray *tmparray = [NSMutableArray arrayWithCapacity:0];
+    NSMutableArray *tmparray = [NSMutableArray array];
     if(!db || [keyid length]==0)
     {
         [ErrorLogger ERRORDEBUG: @"database/keyid is null."];

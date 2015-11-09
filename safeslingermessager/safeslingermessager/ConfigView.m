@@ -534,7 +534,7 @@
                     UIAlertAction* okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"btn_OK", @"OK")
                                                                        style:UIAlertActionStyleDefault
                                                                      handler:^(UIAlertAction * action) {
-                                                                         NSString *modified = alert.textFields.firstObject.text;
+                                                                         NSString *modified = ((UITextField*)alert.textFields.firstObject).text;
                                                                          if(isFirstName)
                                                                          {
                                                                              if([modified length]>0){

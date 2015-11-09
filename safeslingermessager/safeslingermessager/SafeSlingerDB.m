@@ -170,7 +170,7 @@
         if(sqlite3_step(sqlStatement) == SQLITE_DONE){
             ret = YES;
         }else
-            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while deleting table. '%s'", sqlite3_errmsg(db)]];
+            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while triming table. '%s'", sqlite3_errmsg(db)]];
         sqlite3_finalize(sqlStatement);
     }else{
         [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while creating statement. '%s'", sqlite3_errmsg(db)]];
@@ -194,10 +194,10 @@
         if (sqlite3_step(sqlStatement) == SQLITE_DONE) {
             ret = YES;
         }else
-            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"ERROR: Error while deleting data. '%s'", sqlite3_errmsg(db)]];
+            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"Error while deleting data. '%s'", sqlite3_errmsg(db)]];
         sqlite3_finalize(sqlStatement);
     }else{
-        [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"ERROR: Error while preparing statement. '%s'", sqlite3_errmsg(db)]];
+        [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"Error while preparing statement. '%s'", sqlite3_errmsg(db)]];
     }
     return ret;
 }
@@ -209,70 +209,46 @@
         return NO;
     }
     
-    BOOL ret = YES;
+    BOOL ret = NO;
     BOOL exist = NO;
-    
-    @try {
-        sqlite3_stmt *sqlStatement;
-        const char *sql = "SELECT COUNT(*) FROM configs WHERE item_key=?;";
-        
-        if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK){
-            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"ERROR: Error while preparing statement. '%s'", sqlite3_errmsg(db)]];
-            ret = NO;
-        }
-        
+    sqlite3_stmt *sqlStatement;
+    const char *sql = "SELECT COUNT(*) FROM configs WHERE item_key=?;";
+    if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) == SQLITE_OK){
         // bind item_key
         sqlite3_bind_text(sqlStatement, 1, [tag UTF8String], -1, SQLITE_TRANSIENT);
-        if (sqlite3_step(sqlStatement) == SQLITE_ERROR) {
-            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"ERROR: Error while query data. '%s'", sqlite3_errmsg(db)]];
-            ret = NO;
+        if (sqlite3_step(sqlStatement) == SQLITE_ROW) {
+            if(sqlite3_column_int(sqlStatement, 0)>0) {
+                exist = YES;
+            }
         } else {
-            if(sqlite3_column_int(sqlStatement, 0)>0) exist = YES;
+            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"Error while query data. '%s'", sqlite3_errmsg(db)]];
         }
-        
-        if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
-            [ErrorLogger ERRORDEBUG: @"ERROR: Problem with finalize statement"];
-            ret = NO;
-        }
-        
-        if(exist)
-        {
-            sql = "update configs set item_value=? WHERE item_key=?;";
-        }else{
-            sql = "insert into configs (item_value, item_key) Values (?,?);";
-        }
-        
-        if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) != SQLITE_OK){
-            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"Error while creating add statement. '%s'", sqlite3_errmsg(db)]];
-            ret = NO;
-        }
-        
+        sqlite3_finalize(sqlStatement);
+    }else{
+        [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"Error while preparing statement. '%s'", sqlite3_errmsg(db)]];
+    }
+    
+    if(exist) sql = "update configs set item_value=? WHERE item_key=?;";
+    else sql = "insert into configs (item_value, item_key) Values (?,?);";
+    if(sqlite3_prepare(db, sql, -1, &sqlStatement, NULL) == SQLITE_OK){
         //item_value
         if(value)
             sqlite3_bind_blob(sqlStatement, 1, [value bytes], (int)[value length], SQLITE_TRANSIENT);
         else
             sqlite3_bind_null(sqlStatement, 1);
-        
         //item_key
         sqlite3_bind_text(sqlStatement, 2, [tag UTF8String], -1, SQLITE_TRANSIENT);
-        
-        if(SQLITE_DONE != sqlite3_step(sqlStatement)){
-            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"ERROR: Error while inserting data. '%s'", sqlite3_errmsg(db)]];
-            ret = NO;
+        if(sqlite3_step(sqlStatement) == SQLITE_DONE){
+            ret = YES;
+        }else{
+            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"Error while inserting data. '%s'", sqlite3_errmsg(db)]];
         }
-        
-        if(sqlite3_finalize(sqlStatement) != SQLITE_OK){
-            [ErrorLogger ERRORDEBUG: @"ERROR: Problem with finalize statement"];
-            ret = NO;
-        }
+        sqlite3_finalize(sqlStatement);
+    }else{
+        [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"Error while creating add statement. '%s'", sqlite3_errmsg(db)]];
     }
-    @catch (NSException *exception) {
-        [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: An exception occured, %@", [exception reason]]];
-        ret = NO;
-    }
-    @finally {
-        return ret;
-    }
+
+    return ret;
 }
 
 - (NSString*)GetStringConfig: (NSString*)tag
@@ -293,8 +269,6 @@
             if(sqlite3_column_bytes(sqlStatement, 0)>0) {
                 data = [NSString stringWithCString:sqlite3_column_blob(sqlStatement, 0) encoding:NSUTF8StringEncoding];
             }
-        }else{
-            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"Error while preparing statement. '%s'", sqlite3_errmsg(db)]];
         }
         sqlite3_finalize(sqlStatement);
     }else{
@@ -322,8 +296,6 @@
             if(rawLen>0) {
                 value = [NSData dataWithBytes:sqlite3_column_blob(sqlStatement, 0) length:rawLen];
             }
-        }else{
-            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Error while executing statement. '%s'", sqlite3_errmsg(db)]];
         }
         sqlite3_finalize(sqlStatement);
     }else{
@@ -971,7 +943,7 @@
             [threads addObject:listEntry];
         }
     }else
-        [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
+        [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"Problem with prepare statement: %s", sql]];
     sqlite3_finalize(sqlStatement);
 }
 
@@ -1058,7 +1030,7 @@
             rownum++;
         }
     }else
-        [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Problem with prepare statement: %s", sql]];
+        [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"Problem with prepare statement: %s", sql]];
     sqlite3_finalize(sqlStatement);
 }
 

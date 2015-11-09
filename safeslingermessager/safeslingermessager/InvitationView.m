@@ -95,7 +95,7 @@
         InviteeVCard = NULL;
     } else {
         // Record is null
-        [ErrorLogger ERRORDEBUG: @"ERROR: The record is a null object."];
+        [ErrorLogger ERRORDEBUG: @"The record is a null object."];
         [[[[iToast makeText: NSLocalizedString(@"error_VcardParseFailure", @"vCard parse failed.")] setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
     }
     
@@ -169,14 +169,14 @@
     
     NSArray* keyarray = [rawdata componentsSeparatedByString:@"\n"];
     if([keyarray count]!=3) {
-        [ErrorLogger ERRORDEBUG: (@"ERROR: Exchange public key is not well-formated!")];
+        [ErrorLogger ERRORDEBUG: (@"exchange public key is not well-formated.")];
         return -1;
     }
     
     contact.exchangeType = [delegate.DbInstance GetExchangeType: [keyarray objectAtIndex:0]];
     if(contact.exchangeType == Exchanged) {
         // do not overwirte it
-        [ErrorLogger ERRORDEBUG: @"ERROR: Already Exchanged Before, Do Not Overwrite."];
+        [ErrorLogger ERRORDEBUG: @"already Exchanged Before, Do Not Overwrite."];
         return 0;
     }
 	
@@ -184,7 +184,7 @@
     
     // update token
 	if(!contact.pushToken) {
-		[ErrorLogger ERRORDEBUG: @"ERROR: recipient's token is missing."];
+		[ErrorLogger ERRORDEBUG: @"recipient's token is missing."];
 		return -1;
 	}
 	
@@ -207,7 +207,7 @@
         [UtilityFunc AddContactEntry:aBook TargetRecord:newRecord];
         
 		if(!ABAddressBookSave(aBook, &error)) {
-            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"ERROR: Unable to Save ABAddressBook. Error = %@", CFErrorCopyDescription(error)]];
+            [ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Unable to Save ABAddressBook. Error = %@", CFErrorCopyDescription(error)]];
         }
         
         if(allPeople)CFRelease(allPeople);

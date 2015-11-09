@@ -142,7 +142,7 @@
     {
         [[[[iToast makeText: NSLocalizedString(@"error_RecoderError", @"Cannot prepare the audio recorder.")]
            setGravity:iToastGravityCenter] setDuration:iToastDurationLong] show];
-        [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"Error: %@", [error localizedDescription]]];
+        [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"%@", [error localizedDescription]]];
         PlayBtn.enabled = StopBtn.enabled = RecordBtn.enabled = NO;
         self.TimeLabel.text = @"--:--";
     }
@@ -157,7 +157,7 @@
 {
     [[[[iToast makeText: NSLocalizedString(@"error_AudioPlayerDecodeError", @"Audio Player Decoding Error.")]
        setGravity:iToastGravityCenter] setDuration:iToastDurationLong] show];
-    [ErrorLogger ERRORDEBUG: @"ERROR: AudioPlayer Decode Error."];
+    [ErrorLogger ERRORDEBUG: @"AudioPlayer Decode Error."];
 }
 
 -(void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder
@@ -171,7 +171,7 @@
 {
     [[[[iToast makeText: NSLocalizedString(@"error_AudioRecorderEncodeError", @"Audio Recorder Encoding Error.")]
        setGravity:iToastGravityCenter] setDuration:iToastDurationLong] show];
-    [ErrorLogger ERRORDEBUG: @"ERROR: AudioPlayer Encode Error."];
+    [ErrorLogger ERRORDEBUG: @"AudioPlayer Encode Error."];
 }
 
 - (IBAction) play
@@ -193,7 +193,7 @@
         {
             [[[[iToast makeText: NSLocalizedString(@"error_AudioPlayerError", @"Cannot Play The Recodring.")]
                setGravity:iToastGravityCenter] setDuration:iToastDurationLong] show];
-            [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"Error: %@", [error localizedDescription]]];
+            [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"%@", [error localizedDescription]]];
         }else {
             TimeLabel.text = @"00:00";
             NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1.0f

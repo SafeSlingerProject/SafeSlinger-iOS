@@ -564,7 +564,7 @@
 		{
 			if (![[tokens objectAtIndex: 0] isEqualToString: @"3.0"])
 			{
-                [ErrorLogger ERRORDEBUG: @"ERROR: VCard Version Error."];
+                [ErrorLogger ERRORDEBUG: @"VCard Version Error."];
 				CFRelease(aRecord);
 				return nil;
 			}

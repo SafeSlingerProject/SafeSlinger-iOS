@@ -44,6 +44,7 @@
 @property (nonatomic, strong) NSMutableArray *messages;
 @property (nonatomic, strong) NSURL *preview_cache_page;
 @property (nonatomic, strong) QLPreviewController *previewer;
+@property (nonatomic, readwrite) BOOL preview_used;
 @property (nonatomic, strong) NSIndexPath *selectIndex;
 @property (nonatomic, strong) UIImage *b_img;
 @property (nonatomic, strong) UIImage *thread_img;
@@ -61,7 +62,6 @@
 @property (strong, nonatomic) IBOutlet UIView *attachmentDetailsView;
 @property (strong, nonatomic) IBOutlet UIButton *attachmentFileNameButton;
 @property (strong, nonatomic) IBOutlet UIImageView *attachmentFileThumbnailImageView;
-
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 

@@ -73,7 +73,7 @@
 	
 	NSArray* keyarray = [rawdata componentsSeparatedByString:@"\n"];
 	if([keyarray count]!=3) {
-		[ErrorLogger ERRORDEBUG: (@"ERROR: Exchange public key is not well-formated!")];
+		[ErrorLogger ERRORDEBUG: (@"Exchange public key is not well-formated!")];
 		return NO;
 	}
 	

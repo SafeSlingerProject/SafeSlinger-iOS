@@ -89,7 +89,7 @@
         [[HttpsSession dataTaskWithRequest: request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
             [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             if(error) {
-                [ErrorLogger ERRORDEBUG: [NSString stringWithFormat:@"ERROR: Internet Connection failed. Error - %@ %@",
+                [ErrorLogger ERRORDEBUG: [NSString stringWithFormat:@"Internet Connection failed. Error - %@ %@",
                                           [error localizedDescription],
                                           [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]]];
                 
@@ -232,7 +232,7 @@
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         if(error) {
             MsgFinish[index] = NetworkFail; // service is unavaible
-            [ErrorLogger ERRORDEBUG: [NSString stringWithFormat:@"ERROR: Internet Connection failed. Error - %@ %@",
+            [ErrorLogger ERRORDEBUG: [NSString stringWithFormat:@"Internet Connection failed. Error - %@ %@",
                                       [error localizedDescription],
                                       [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]]];
             
@@ -268,7 +268,7 @@
                 } else if(ntohl(*(int *)msgchar) == 0) {
                     // Error Message
                     NSString* error_msg = [NSString TranlsateErrorMessage:[NSString stringWithUTF8String: msgchar+4]];
-                    DEBUGMSG(@"ERROR: error_msg = %@", error_msg);
+                    [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"error_msg = %@", error_msg]];
                     if([[NSString stringWithUTF8String: msgchar+4] hasSuffix:@"MessageNotFound"]) {
                         // expired one
                         MsgFinish[index] = Expired;
@@ -364,7 +364,7 @@
 		//auto-decrypt disabled or unable to decrypt message
 		//save to DB encrypted
 		if(![[sha3 Keccak256Digest:cipher] isEqualToData:msg.msgid]) {
-			[ErrorLogger ERRORDEBUG:@"ERROR: Received Message Digest Error."];
+			[ErrorLogger ERRORDEBUG:@"Received Message Digest Error."];
 			// display error
 			[self PrintToastMessage: NSLocalizedString(@"error_InvalidIncomingMessage", @"Bad incoming message format.")];
 		} else {

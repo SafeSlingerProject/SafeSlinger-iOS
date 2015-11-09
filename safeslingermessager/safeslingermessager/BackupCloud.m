@@ -163,7 +163,9 @@
         {
             // create tmp database
             NSString* dbpath = [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent: @"tmp.db"];
-            if([fs fileExistsAtPath:dbpath]) [fs removeItemAtPath:dbpath error:nil];
+            if([fs fileExistsAtPath:dbpath]) {
+                [fs removeItemAtPath:dbpath error:nil];
+            }
             [fs copyItemAtPath:floc toPath:dbpath error:nil];
             
             SafeSlingerDB *tmp_db = [[SafeSlingerDB alloc]init];
@@ -226,6 +228,7 @@
     }else{
         [delegate.DbInstance LoadDBFromStorage: nil];
     }
+    
     [[NSUserDefaults standardUserDefaults] setInteger:[unarchiver decodeIntegerForKey: kAutoDecryptOpt] forKey:kAutoDecryptOpt];
     [[NSUserDefaults standardUserDefaults] setInteger: [unarchiver decodeIntegerForKey: kRemindBackup] forKey:kRemindBackup];
     [[NSUserDefaults standardUserDefaults] setInteger:[unarchiver decodeIntegerForKey: kShowExchangeHint] forKey:kShowExchangeHint];

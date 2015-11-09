@@ -360,7 +360,6 @@
 }
 
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
-    DEBUGMSG(@"didFailToRegisterForRemoteNotificationsWithError: %@", [err debugDescription]);
     [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"Failed To Register For Remote Notifications With Error: %@", err]];
 }
 

@@ -52,9 +52,9 @@
 - (BOOL) DeleteThread: (NSString*)keyid;
 - (int)updateThreadEntries:(NSMutableArray *)threadlist;
 - (NSArray*) GetEntriesForKeyID: (NSString*)keyid WithToken:(NSString*)token WithName:(NSString*)name;
-- (int) ThreadCipherCount: (NSString*)KEYID;
+- (int) ThreadCipherCount: (NSString*)keyid;
 - (BOOL) CheckMessage: (NSData*)msgid;
-- (NSArray*)LoadThreadMessage: (NSString*)KEYID;
+- (NSArray*)LoadThreadMessage: (NSString*)keyid;
 - (NSArray *)getEncryptedMessages;
 - (BOOL)DeleteMessage: (NSData*)msgid;
 

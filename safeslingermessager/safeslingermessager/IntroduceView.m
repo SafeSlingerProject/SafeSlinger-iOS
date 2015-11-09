@@ -242,7 +242,7 @@
         if(error)
         {
             // inform the user
-            [ErrorLogger ERRORDEBUG: [NSString stringWithFormat:@"ERROR: Internet Connection failed. Error - %@ %@",
+            [ErrorLogger ERRORDEBUG: [NSString stringWithFormat:@"Internet Connection failed. Error - %@ %@",
                                       [error localizedDescription],
                                       [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]]];
             if(error.code==NSURLErrorTimedOut)
@@ -283,7 +283,7 @@
                 {
                     // Error Message
                     NSString* error_msg = [NSString TranlsateErrorMessage:[NSString stringWithUTF8String: msgchar+4]];
-                    DEBUGMSG(@"ERROR: error_msg = %@", error_msg);
+                    [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"error_msg = %@", error_msg]];
                     [ProgressLabel setText: error_msg];
                     [ProgressIndicator stopAnimating];
                     UserTag = 0;
@@ -339,7 +339,7 @@
                 {
                     // Error Message
                     NSString* error_msg = [NSString TranlsateErrorMessage:[NSString stringWithUTF8String: msgchar+4]];
-                    DEBUGMSG(@"ERROR: error_msg = %@", error_msg);
+                    [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"error_msg = %@", error_msg]];
                     [ProgressLabel setText: error_msg];
                     [ProgressIndicator stopAnimating];
                     UserTag = 0;

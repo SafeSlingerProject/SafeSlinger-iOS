@@ -54,11 +54,9 @@ typedef enum {
 } AttachmentType;
 
 @interface MessageDetailView ()
-
 @property (strong, nonatomic) ContactEntry *recipient;
 @property (strong, nonatomic) NSMutableDictionary *pendingMessages;
 @property (strong, nonatomic) NSIndexPath *longPressedIndexPath;
-
 @property (strong, nonatomic) NSURL *attachedFile;
 @property (strong, nonatomic) NSData *attachedFileRawData;
 @property AttachmentStatus attachmentStatus;
@@ -86,9 +84,9 @@ typedef enum {
     [_previewer setDataSource:self];
     [_previewer setDelegate:self];
     [_previewer setCurrentPreviewItemIndex:0];
+    _preview_used = NO;
 	
 	_recipient = [delegate.DbInstance loadContactEntryWithKeyId:assignedEntry.keyid];
-	_pendingMessages = [NSMutableDictionary new];
 	
     //for unknown thread or contact not active
     if(_recipient == nil || (_recipient.firstName == nil && _recipient.lastName == nil) || !assignedEntry.active) {
@@ -113,6 +111,13 @@ typedef enum {
 	UILongPressGestureRecognizer *gestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
 	gestureRecognizer.delegate = self;
 	[self.tableView addGestureRecognizer:gestureRecognizer];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    delegate.MessageInBox.notificationDelegate = self;
+    [self registerForInputNotifications];
+    [self reloadTable];
 }
 
 - (void)updateTitle {
@@ -178,16 +183,13 @@ typedef enum {
 - (void)showAttachmentDetailsView {
 	_attachmentDetailsView.hidden = NO;
 	_bottomBarHeightConstraint.constant = BOTTOM_BAR_HEIGHT_WITH_ATTACHMENT;
-	
 	NSString *fileNameLabel = [NSString stringWithFormat:@"%@ (%.0fKb)", [_attachedFile lastPathComponent], _attachedFileRawData.length/1024.0f];
-	
 	[_attachmentFileNameButton setTitle:fileNameLabel forState:UIControlStateNormal];
 }
 
 - (void)hideAttachmentDetailsView {
 	_attachmentDetailsView.hidden = YES;
 	_bottomBarHeightConstraint.constant = BOTTOM_BAR_HEIGHT_WITHOUT_ATTACHMENT;
-	
 	_attachmentFileNameButton.titleLabel.text = @"";
 }
 
@@ -203,50 +205,39 @@ typedef enum {
 }
 
 - (void)reloadTable {
-	[self.messages removeAllObjects];
     CFTimeInterval startTime = CACurrentMediaTime();
-    [delegate.DbInstance loadMessagesExchangedWithKeyId:assignedEntry.keyid msglist:self.messages];
-    CFTimeInterval elapsedTime = CACurrentMediaTime() - startTime;
-    DEBUGMSG(@"t1 = %f", elapsedTime);
-    
-    startTime = CACurrentMediaTime();
-	NSArray *cipherMessages = [delegate.UDbInstance LoadThreadMessage:assignedEntry.keyid];
-    [self.messages addObjectsFromArray:cipherMessages];
-	assignedEntry.ciphercount = (int)cipherMessages.count;
-    elapsedTime = CACurrentMediaTime() - startTime;
-    DEBUGMSG(@"t2 = %f", elapsedTime);
+    if(!_preview_used)
+    {
+        [self.messages removeAllObjects];
+        [delegate.DbInstance loadMessagesExchangedWithKeyId:assignedEntry.keyid msglist:self.messages];
+        dispatch_async(BackGroundQueue, ^(void) {
+            CFTimeInterval startTime = CACurrentMediaTime();
+            [delegate.DbInstance markAllMessagesAsReadFromKeyId:assignedEntry.keyid];
+            CFTimeInterval elapsedTime = CACurrentMediaTime() - startTime;
+            DEBUGMSG(@"reloadTable (background) = %f", elapsedTime);
+        });
+        NSArray *cipherMessages = [delegate.UDbInstance LoadThreadMessage:assignedEntry.keyid];
+        [self.messages addObjectsFromArray:cipherMessages];
+        assignedEntry.ciphercount = (int)cipherMessages.count;
+        MsgEntry *outgoingMessage = delegate.messageSender.outgoingMessage;
+        if([outgoingMessage.keyid isEqualToString:assignedEntry.keyid]) {
+            [self.messages addObject:outgoingMessage];
+        }
+        assignedEntry.messagecount = (int)self.messages.count;
+    }
 	
-    startTime = CACurrentMediaTime();
-	[delegate.DbInstance markAllMessagesAsReadFromKeyId:assignedEntry.keyid];
-    elapsedTime = CACurrentMediaTime() - startTime;
-    DEBUGMSG(@"t3 = %f", elapsedTime);
-    
-    startTime = CACurrentMediaTime();
-	MsgEntry *outgoingMessage = delegate.messageSender.outgoingMessage;
-	if([outgoingMessage.keyid isEqualToString:assignedEntry.keyid]) {
-		[self.messages addObject:outgoingMessage];
-	}
-    elapsedTime = CACurrentMediaTime() - startTime;
-    DEBUGMSG(@"t4 = %f", elapsedTime);
-	
-	assignedEntry.messagecount = (int)self.messages.count;
-	
+    _preview_used = NO;
     [self updateTitle];
     [self.tableView reloadData];
 	[self scrollToBottom];
+    CFTimeInterval elapsedTime = CACurrentMediaTime() - startTime;
+    DEBUGMSG(@"reloadTable (foreground) = %f", elapsedTime);
 }
 
 - (void)viewDidUnload {
     [super viewDidLoad];
     [self.messages removeAllObjects];
     [super viewDidUnload];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-	delegate.MessageInBox.notificationDelegate = self;
-	[self registerForInputNotifications];
-	[self reloadTable];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -342,13 +333,12 @@ typedef enum {
 
 - (NSMutableArray *)messages {
 	if(!_messages) {
-		_messages = [NSMutableArray new];
+		_messages = [NSMutableArray array];
 	}
 	return _messages;
 }
 
 #pragma mark - Table view data source
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.messages count];
 }
@@ -401,7 +391,12 @@ typedef enum {
             [self.messages removeObjectAtIndex:indexPath.row];
             [[[[iToast makeText: [NSString stringWithFormat:NSLocalizedString(@"state_MessagesDeleted", @"%d messages deleted."), 1]]
                setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
-            [self.tableView reloadData];
+            // [self.tableView reloadData];
+            // update table with single cell only
+            [self updateTitle];
+            [self.tableView beginUpdates];
+            [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableView endUpdates];
         } else {
             [[[[iToast makeText: NSLocalizedString(@"error_UnableToUpdateMessageInDB", @"Unable to update the message database.")]
                setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
@@ -410,8 +405,9 @@ typedef enum {
         // when no message left, go back to thread view
         if([self.messages count]==0)
             [self.navigationController popViewControllerAnimated:YES];
-        else
+        else {
             [self updateTitle];
+        }
     }
 }
 
@@ -473,7 +469,6 @@ typedef enum {
 				} else {
                     [cell.imageView setImage:b_img];
 				}
-				
 				cell.detailTextLabel.text = [NSString GetTimeLabelString:msg.cTime];
             }
 			
@@ -567,7 +562,6 @@ typedef enum {
             // start preview
             if(success&&![[self.navigationController topViewController]isEqual:_previewer])
             {
-                DEBUGMSG(@"start preview.");
                 _preview_cache_page = [NSURL fileURLWithPath: tmpfile];
                 [_previewer reloadData];
                 [self.navigationController pushViewController: _previewer animated:YES];
@@ -716,7 +710,7 @@ typedef enum {
                         // before decrypt we have to check the file hash
                         if(![[sha3 Keccak256Digest:encryptedfile]isEqualToData:filehash])
                         {
-                            [ErrorLogger ERRORDEBUG:@"ERROR: Download File Digest Mismatch."];
+                            [ErrorLogger ERRORDEBUG:@"Download File Digest Mismatch."];
                             // display error
                             cell.tag = 0;
                             cell.detailTextLabel.text = nil;
@@ -746,7 +740,15 @@ typedef enum {
                                 [delegate.DbInstance UpdateFileBody:nonce DecryptedData:decipher];
                                 cell.tag = 0;
                                 cell.detailTextLabel.text = nil;
-                                [self reloadTable];
+                                // update one cell only
+                                MsgEntry* targetmsg = (MsgEntry*)[self.messages objectAtIndex:index.row];
+                                targetmsg.sfile = Decrypted;
+                                targetmsg.fbody = decipher;
+                                [self.messages setObject:targetmsg atIndexedSubscript:index.row];
+                                // [self reloadTable];
+                                [self.tableView beginUpdates];
+                                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index.row inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+                                [self.tableView endUpdates];
                             }
                         }
                     }
@@ -766,8 +768,7 @@ typedef enum {
     
     // tap to decrypt
     NSString* pubkeySet = [delegate.DbInstance QueryStringInTokenTableByKeyID:assignedEntry.keyid Field:@"pkey"];
-    
-    if(pubkeySet==nil)
+    if(!pubkeySet)
     {
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             [[[[iToast makeText: NSLocalizedString(@"error_UnableFindPubKey", @"Unable to match public key to private key in crypto provider.")] setGravity:iToastGravityCenter] setDuration:iToastDurationNormal] show];
@@ -825,7 +826,6 @@ typedef enum {
     NSData* filehash = nil;
     
     // parse message format
-    DEBUGMSG(@"Version: %02X", ntohl(*(int *)p));
     offset += 4;
     
     len = ntohl(*(int *)(p+offset));
@@ -874,7 +874,6 @@ typedef enum {
     if(len>0){
         // handle text
         gmt = [[NSString alloc] initWithBytes:p+offset length:len encoding:NSASCIIStringEncoding];
-        DEBUGMSG(@"gmt: %@", gmt);
         offset = offset+len;
     }
     
@@ -912,8 +911,19 @@ typedef enum {
     dispatch_async(dispatch_get_main_queue(), ^(void) {
         [OperationLock unlock];
         [self.tableView cellForRowAtIndexPath:index].tag = 0;
-        [self reloadTable];
+        // update one cell only instead of updating the while table
+        [self.messages replaceObjectAtIndex:index.row withObject:msg];
+        [self.tableView beginUpdates];
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index.row inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView endUpdates];
+        [self updateTitle];
     });
+}
+
+#pragma mark - QLPreviewControllerDelegate
+- (void)previewControllerWillDismiss:(QLPreviewController *)controller
+{
+    _preview_used = YES;
 }
 
 - (id <QLPreviewItem>)previewController: (QLPreviewController *)controller previewItemAtIndex:(NSInteger)index {
@@ -928,7 +938,6 @@ typedef enum {
 	if((_messageTextField.text == nil || _messageTextField.text.length == 0) && !_attachedFile) {
 		return;
 	}
-	
 	[self sendTextMessage:_messageTextField.text tableViewUpdateStarted:NO];
 }
 
@@ -953,7 +962,6 @@ typedef enum {
 	_messageTextField.text = @"";
 	
 	[self.messages addObject:newMessage];
-	
 	if(!updateStarted) {
 		[CATransaction begin];
 		[CATransaction setCompletionBlock:^{
@@ -1072,7 +1080,6 @@ typedef enum {
 }
 
 #pragma mark - MessageReceiverNotificationDelegate methods
-
 - (void)messageReceived {
 	NSUInteger count = self.messages.count;
 	[self reloadTable];
@@ -1104,7 +1111,10 @@ typedef enum {
 	
 	if(!found) {
 		[self.messages addObject:message];
-		[self reloadTable];
+        // lightweight table update
+        // [self reloadTable];
+        [self updateTitle];
+        [self.tableView reloadData];
     }else{
         [self updateTitle];
     }

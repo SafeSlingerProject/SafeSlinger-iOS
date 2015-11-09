@@ -111,7 +111,7 @@
 		}
 		
 		if(!ABAddressBookSave(aBook, &error)) {
-			[ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"ERROR: Unable to Save ABAddressBook. Error = %@", CFErrorCopyDescription(error)]];
+			[ErrorLogger ERRORDEBUG:[NSString stringWithFormat:@"Unable to Save ABAddressBook. Error = %@", CFErrorCopyDescription(error)]];
 		}
 		
 		if(allPeople)CFRelease(allPeople);

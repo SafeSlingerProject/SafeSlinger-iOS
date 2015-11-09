@@ -48,7 +48,7 @@
     [[HttpsSession dataTaskWithRequest: request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error){
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         if(error) {
-            [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"ERROR: Internet Connection failed. Error - %@ %@",
+            [ErrorLogger ERRORDEBUG: [NSString stringWithFormat: @"Internet Connection failed. Error - %@ %@",
                                       [error localizedDescription],
                                       [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]]];
             
@@ -72,8 +72,7 @@
                 } else if(ntohl(*(int *)msgchar) == 0) {
                     // Error Message
                     NSString* error_msg = [NSString TranlsateErrorMessage:[NSString stringWithUTF8String: msgchar+4]];
-                    DEBUGMSG(@"ERROR: error_msg = %@", error_msg);
-                    
+                    [ErrorLogger ERRORDEBUG:[NSString stringWithFormat: @"error_msg = %@", error_msg]];
                     message.rTime = nil;
                     [self updatedStatus:MessageOutgoingStatusFailed forMessage:message];
                     _outgoingMessage = nil;
@@ -91,7 +90,6 @@
 			if(newStatus == MessageOutgoingStatusSent || newStatus == MessageOutgoingStatusFailed) {
 				[_appDelegate.DbInstance InsertMessage:message];
 			}
-			
 			[_delegate updatedOutgoingStatusForMessage:message];
 		});
 	}
