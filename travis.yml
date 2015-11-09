@@ -7,6 +7,7 @@ script:
   - xcodebuild -project safeslingerdemo/safeslingerdemo.xcodeproj -scheme exchangeui -sdk iphonesimulator build
   - xcodebuild -project safeslingerdemo/safeslingerdemo.xcodeproj -scheme safeslingerexchange -sdk iphonesimulator build
   - xcodebuild -project safeslingerdemo/safeslingerdemo.xcodeproj -scheme safeslingerdemo -sdk iphonesimulator build
-  - xcodebuild -project safeslingerdemo/safeslingerdemo.xcodeproj -scheme exchangeui -sdk iphoneos build
-  - xcodebuild -project safeslingerdemo/safeslingerdemo.xcodeproj -scheme safeslingerexchange -sdk iphoneos build
-  - xcodebuild -project safeslingerdemo/safeslingerdemo.xcodeproj -scheme safeslingerdemo -sdk iphoneos build
+  
+  - xcodebuild -project safeslingerdemo/safeslingerdemo.xcodeproj -scheme exchangeui -sdk iphoneos build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+  - xcodebuild -project safeslingerdemo/safeslingerdemo.xcodeproj -scheme safeslingerexchange -sdk iphoneos build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+  - xcodebuild -project safeslingerdemo/safeslingerdemo.xcodeproj -scheme safeslingerdemo -sdk iphoneos build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
