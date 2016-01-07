@@ -33,40 +33,40 @@
 /* '%s has a more recent device or key, are you sure you want to use this older one?' is a question message (sentence case, question mark); is a confirmation question that occurs when the user selected a recipient with more recent information in the database. */
 "ask_ConfirmUseOlderDeviceOrKey" = "%@ Eğer kimse bu eski kullanmak istediğinizden emin misiniz, daha yeni bir cihaz veya anahtar var?";
 /* 'File name %s already exists. Overwrite?' is a question message (sentence case, question mark); is a question that occurs when the user attempts to save a file with the same name as an existing file in the same location. %s = the file name of the attachment. */
-"ask_FileExistsOverwrite" = "Dosya adı %@ zaten var. Üzerine yazılsın mı?";
+"ask_FileExistsOverwrite" = "%@ adlı dosya zaten var. Üstüne yazılsın mı?";
 /* 'Without a Google Account you will only be able to send, NOT receive messages. Do you want to add a Google account?' is a question message (sentence case, question mark); used to warn when a Google account has not been setup, if the user intends to receive messages. Android-only. */
-"ask_GoogleAccountToReceiveMsgs" = "Bir Google Hesabı olmadan sadece mesajları almak DEĞİL göndermek mümkün olacak. Bir Google hesabı eklemek ister misiniz?";
+"ask_GoogleAccountToReceiveMsgs" = "Google hesabınız olmadan sadece mesaj gönderebilirsiniz, MESAJ ALAMAZSINIZ. Bir Google hesabı eklemek ister misiniz?";
 /* 'Quit? Are you sure?' is a question message (sentence case, question mark); is a confirmation question that occurs when the user chooses to end the exchange protocol prematurely. */
-"ask_QuitConfirmation" = "Quit? Emin misiniz?";
+"ask_QuitConfirmation" = "Çıkmak istediğinize emin misiniz?";
 /* 'We'd like your help improving SafeSlinger. Would you like to automatically send any errors to us?' is a question message (sentence case, question mark); is a question that occurs when the user encounters an unhandled exception and are asked if they want to upload this error log and any future error logs. */
-"ask_SendErrorData" = "Biz sizin yardımınıza SafeSlinger iyileştirilmesi istiyorum. Otomatik bize hataları göndermek ister misiniz?";
+"ask_SendErrorData" = "SafeSlinger'ı geliştirmek istiyoruz. Hata raporlarını bize otomatik olarak göndermek ister misiniz?";
 
 /* 'Accept' is a button (title case); the Accept button is paired with the Refuse button to indicate user acceptance of a secure introduction. */
-"btn_Accept" = "Kabul etmek";
+"btn_Accept" = "Onayla";
 /* 'Begin Exchange' is a button (title case); the Begin Exchange button is used to begin the SafeSlinger exchange protocol. */
 "btn_BeginExchangeProximity" = "Alım Satım başlayın";
 /* 'Cancel' is a button (title case); the Cancel button is used to indicate the user wishes to exit the current screen without saving data. For non-Android use only, since Android uses the Back hardware button instead. */
-"btn_Cancel" = "Iptal";
+"btn_Cancel" = "İptal";
 /* 'Close' is a button (title case); the Close button is used to allow the user to dismiss a dialog. */
-"btn_Close" = "Yakın";
+"btn_Close" = "Kapat";
 /* 'Continue' is a button (title case); the Continue button is used to remind the user that there is another step to complete. */
-"btn_Continue" = "Devam etmek";
+"btn_Continue" = "Devam Et";
 /* 'Create New Key' is a button (title case); the Create New Key button is paired with the Cancel button, and is used to affirm the creation of a new key and passphrase. */
-"btn_CreateNewKey" = "Yeni anahtar oluştur";
+"btn_CreateNewKey" = "Yeni Anahtar Oluştur";
 /* 'Delete' is a button (title case); the Delete button is used to affirm the deletion of more a message. */
-"btn_Delete" = "Silmek";
+"btn_Delete" = "Sil";
 /* 'Delete Keys' is a button (title case); the Create New Key button is paired with the Cancel button, and is used to affirm the deletion of more recent keys. */
-"btn_DeleteKeys" = "Tuşlar Sil";
+"btn_DeleteKeys" = "Anahtarları Sil";
 /* 'Discard' is a button (title case); the Discard button is used to indicate the user wishes to exit the current screen without saving data, such as a voice memo. For non-Android use only, since Android uses the Back hardware button instead. */
 "btn_discard" = "Iskarta";
 /* 'Done' is a button (title case); the Done button is used to allow the user to complete a current multi-step process. */
-"btn_Done" = "Tamam";
+"btn_Done" = "Tamamlandı";
 /* 'Edit' is a button (title case); the Edit button is used to show a screen where the user can edit a contact. */
 "btn_Edit" = "Düzenle";
 /* 'Exit' is a button (title case); the Exit button is used to close the application. For non-Android use only, since Android uses the Back hardware button instead. */
 "btn_Exit" = "Çıkış";
 /* 'Import' is a button (title case); the Import button is used to import a set of contacts on after an unsuccessful exchange protocol has finished. */
-"btn_Import" = "Ithalat";
+"btn_Import" = "İçeri Aktar";
 /* 'Introduce' is a button (title case); the Introduce button is used to send a secure introduction to the two users selected on the Secure Introduction screen. */
 "btn_Introduce" = "Tanıtmak";
 /* 'Next' is a button (title case); the Next button is used to remind the user that there is another step to complete. */
@@ -74,11 +74,11 @@
 /* 'No' is a button (title case); the No button is paired with the Yes button, and is used to indicate a negative answer to a Yes/No question. */
 "btn_No" = "Hayır";
 /* 'No Match' is a button (title case); the No Match button is used if the user cannot find the same batting screen on another user's device during the exchange critical care. */
-"btn_NoMatch" = "Hiçbir maç";
+"btn_NoMatch" = "Eşleşme Yok";
 /* 'Not Now' is a button (title case); the Not Now button is used as a negative button to decline an offered service or permission. */
 "btn_NotNow" = "Şimdi Değil";
 /* 'Forget' is a button (title case); the Forget button is paired with the Remind button and is used to indicate the user wishes to dismiss the current reminder of a potential error state, such as having backup or notification settings turned off, and not be reminded again. */
-"btn_NotRemind" = "Unutmak";
+"btn_NotRemind" = "Unut";
 /* 'OK' is a button (title case); the OK button is affirmation button used to indicate the user accepts the data entered on the current screen. */
 "btn_OK" = "Tamam";
 /* 'Refuse' is a button (title case); the Refuse button is paired with the Accept button to indicate user refusal of a secure introduction. */
@@ -86,13 +86,13 @@
 /* 'Remind' is a button (title case); the Remind button is paired with the Forget button and is used to indicate the user wishes to dismiss the current reminder of a potential error state, such as having backup or notification settings turned off, and does want to be reminded again later. */
 "btn_Remind" = "Hatırlatmak";
 /* 'Retry' is a button (title case); the Retry button is used to retry sending a message that has failed. */
-"btn_Retry" = "Tekrar dene";
+"btn_Retry" = "Tekrar Dene";
 /* 'Save' is a button (title case); the Save button is used to indicate the data in question should be saved and persisted. */
 "btn_Save" = "Kaydet";
 /* 'Add Attachment' is a button (title case); the Add Attachment button is used on the Compose screen to allow the user to select the source of an attachment to the current message. */
-"btn_SelectFile" = "Eklenti ekle";
+"btn_SelectFile" = "Eklenti Ekle";
 /* 'Send' is a button (title case); the Send button will secure the current text message and attachment, if any, and send the message to the selected recipient. */
-"btn_SendFile" = "Göndermek";
+"btn_SendFile" = "Gönder";
 /* 'Yes' is a button (title case); the Yes button is paired with the No button, and is used to indicate an affirmative answer to a Yes/No question. */
 "btn_Yes" = "Evet";
 
@@ -117,9 +117,9 @@
 /* '8 hours' is a choice (sentence case); used to set the password timeout to 8 hours. */
 "choice_8hours" = "8 saat";
 /* 'Default Storage' is a choice (sentence case); used to set the attachment root path to the default source. Android-only. */
-"choice_auto_storage" = "Standart Depolama";
+"choice_auto_storage" = "Varsayılan Depolama";
 /* 'Default' is a choice (sentence case); used in any menu to denote the default choice. */
-"choice_default" = "Standart";
+"choice_default" = "Varsayılan";
 /* 'External Storage' is a choice (sentence case); used to set the attachment root path to an external source. Android-only. */
 "choice_external_storage" = "Harici Depolama";
 /* 'Large' is a choice (sentence case); used in the settings to choose a large font size. */
@@ -137,9 +137,9 @@
 /* '%d users' is a choice (sentence case); used to describe the number of users currently attempting to exchange keys. %d = number of users in the exchange. */
 "choice_NumUsers" = "%d kullanıcı";
 /* 'Save Directory' is a choice (sentence case); used when the user chooses to change the directory of the attachment before saving. */
-"choice_SaveDirectory" = "Kaydet Rehber";
+"choice_SaveDirectory" = "Dizini Kaydet";
 /* 'Save file' is a choice (sentence case); used when the user chooses to change the filename of the attachment before saving. */
-"choice_SaveFile" = "Dosyayı kaydet";
+"choice_SaveFile" = "Dosyayı Kaydet";
 /* 'Up' is a choice (sentence case); used in the File Manager dialog to navigate up to a parent directory. */
 "choice_Up" = "Yukarı";
 
@@ -150,73 +150,73 @@
 /* 'All members must upgrade, some are using older push registration formats.' is an error message (sentence case, period); used to warn when the push registration format is incorrect or corrupted. */
 "error_AllMembersMustUpgradeBadPushToken" = "Tüm üyeler bazı eski itme kaydı biçimlerini kullanan, yükseltmeniz gerekir.";
 /* 'Audio player decoding error.' is an error message (sentence case, period); used to warn when attempting to play an audio message fails to decode properly. iOS-only. */
-"error_AudioPlayerDecodeError" = "Ses çalar çözme hatası.";
+"error_AudioPlayerDecodeError" = "Ses oynatıcısında çözme hatası meydana geldi.";
 /* 'Cannot play the recording.' is an error message (sentence case, period); used to warn when the voice recording received cannot be played. iOS-only. */
-"error_AudioPlayerError" = "Kaydı çalamıyor.";
+"error_AudioPlayerError" = "Kayıt çalınamıyor.";
 /* 'Audio recorder encoding error.' is an error message (sentence case, period); used to warn when attempting to record an audio message fails to encode properly. iOS-only. */
-"error_AudioRecorderEncodeError" = "Ses kaydedici kodlama hatası.";
+"error_AudioRecorderEncodeError" = "Ses kaydedicisinde kodlama hatası oluştu.";
 /* 'Microphone permission is required to record a secure voice message. Tap the %s button for SafeSlinger Microphone permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Microphone permission. iOS-only. */
-"error_AudioRecorderPermissionError" = "Mikrofon izni güvenli bir sesli mesajı kaydetmek için gereklidir. SafeSlinger Mikrofon izni detayları için %@ düğmesine dokunun.";
+"error_AudioRecorderPermissionError" = "Mikrofon'a erişim izni güvenli bir sesli mesaj kadetmemek için gereklidir. SafeSlinger'ın detaylı Mikrofon izinlerini görmek için %@ butonuna dokunun.";
 /* 'No backup to restore.' is an error message (sentence case, period); used to warn at application setup, when there is no pre-existing backup to restore and warn the user that any previous keys have not been restored. */
-"error_BackupNotFound" = "Hiçbir yedekleme geri.";
+"error_BackupNotFound" = "Geri yüklemek için yedek yok.";
 /* 'Device does not support backup restore.' is an error message (sentence case, period); used to warn when the device hardware does not support restoration from backup. */
-"error_BackupNotSupportedDevice" = "Cihaz yedekleme geri desteklemiyor.";
+"error_BackupNotSupportedDevice" = "Cihazınız yedekten geri yüklemeyi desteklemiyor.";
 /* 'Due to a bug in Android 4.1, you will have to uninstall and reinstall SafeSlinger.' is an error message (sentence case, period); used to warn when unable to load native libraries due to a Google Play copy-protection bug, which can corrupt installations for users upgrading to Android 4.1. Android-only. */
-"error_BadCopyProtectUpgrade" = "Android 4.1 bir hata nedeniyle, size SafeSlinger kaldırmak ve yeniden yüklemeniz gerekir.";
+"error_BadCopyProtectUpgrade" = "Android 4.1'de bulunan bir hata nedeniyle, SafeSlinger'ı kaldırıp tekrar yüklemeniz gerekiyor.";
 /* 'A Google account is required. Please open the account manager and add a Google account.' is an error message (sentence case, period); used to warn during push registration: There is no Google account on the phone. The application should ask the user to open the account manager and add a Google account. Fix on the device side. Android-only. */
-"error_C2DMRegAccountMissing" = "Bir Google hesabı gereklidir. Hesap yöneticisi açın ve bir Google hesabı ekleyin.";
+"error_C2DMRegAccountMissing" = "Bir Google hesabı gerekiyor. Lütfen hesap yöneticisini açın ve bir Google hesabı ekleyin.";
 /* 'Registration not authenticated, please retry manually later.' is an error message (sentence case, period); used to warn during push registration: Bad password. The application should ask the user to enter his/her password, and let user retry manually later. Fix on the device side. Android-only. */
-"error_C2DMRegAuthenticationFailed" = "Kayıt doğrulanmış değil, daha sonra elle yeniden deneyin.";
+"error_C2DMRegAuthenticationFailed" = "Kayıt doğrulanamadı, lütfen daha sonra manuel olarak tekrar deneyin.";
 /* 'Registration is not available for this version, please check for an updated version.' is an error message (sentence case, period); used to warn during push registration: The sender account is not recognized. Android-only. */
-"error_C2DMRegInvalidSender" = "Kayıt bu sürümü için geçerli değildir, güncelleştirilmiş bir sürümü için kontrol edin.";
+"error_C2DMRegInvalidSender" = "Bu sürümde kayıt desteklenmiyor. Lütfen güncel sürüm olup olmadığını kontrol edin.";
 /* 'Incorrect device registration with Google. This device does not currently support push messaging.' is an error message (sentence case, period); used to warn during push registration: Incorrect phone registration with Google. This phone doesn't currently support C2DM. Android-only. */
-"error_C2DMRegPhoneRegistrationError" = "Google ile hatalı cihaz kaydı. Bu cihaz şu anda itme mesajlaşma desteklemiyor.";
+"error_C2DMRegPhoneRegistrationError" = "Google ile yanlış cihaz kaydı. Bu cihaz şuanda push mesajlarını desteklemiyor.";
 /* 'Google Play Services is required to receive messages. Please install Google Play Services to continue.' is an error message (sentence case, period); used to warn during push registration: There is no Google Play Services on the phone. The application should ask the user to install Play Services. Fix on the device side. Android-only. */
-"error_C2DMRegPlayServicesMissing" = "Google Play Hizmetleri mesajları almak için gereklidir. Google devam etmek Hizmetleri Çal kurun.";
+"error_C2DMRegPlayServicesMissing" = "Mesajları alabilmeniz için Google Play servisleri gereklidir. Lütfen devam edebilmek için Google Play Servislerini yükleyin.";
 /* 'Push registration service not available, scheduling retry in %d seconds.' is an error message (sentence case, period); used to warn during push registration: The device can't read the response, or there was a 500/503 from the server that can be retried later. The application should use exponential back off and retry. %d = the current number of seconds until the next push registration attempt. Android-only. */
 "error_C2DMRegServiceNotAvailable" = "İtme kaydı hizmeti kullanılabilir değil, zamanlama %d saniye içinde tekrar deneyin.";
 /* 'Too many applications are registered for Push. Please uninstall some other applications and retry.' is an error message (sentence case, period); used to warn during push registration: The user has too many applications registered. The application should tell the user to uninstall some other applications, let user retry manually. Fix on the device side. Android-only. */
 "error_C2DMRegTooManyRegistrations" = "Çok fazla uygulama Basarak kayıtlıdır. Diğer bazı uygulamaları kaldırmak ve yeniden deneyin.";
 /* 'Cannot send an empty attachment.' is an error message (sentence case, period); used to warn when use attempts to attach an empty file to the message. */
-"error_CannotSendEmptyFile" = "Boş eki göndermek olamaz.";
+"error_CannotSendEmptyFile" = "Boş eklenti gönderemezsiniz.";
 /* 'Cannot send attachments greater than %d bytes in size.' is an error message (sentence case, period); used to warn when the message and attachment (if any) exceed the current quota limits for the App Engine service we use. %d the maximum limit in bytes of the entire message plus attachments that the App Engine service will allow us to upload. */
-"error_CannotSendFilesOver" = "Boyutunda %d bayt daha büyük ekleri gönderilemiyor.";
+"error_CannotSendFilesOver" = "%d bayttan eklentileri gönderemezsiniz.";
 /* 'Cannot send a null attachment.' is an error message (sentence case, period); used to warn when use attempts to attach an empty file to the message. */
-"error_CannotSendNullFile" = "Null eki göndermek olamaz.";
+"error_CannotSendNullFile" = "Boş eklenti gönderemezsiniz.";
 /* 'Contact creation failed.' is an error message (sentence case, period); used to warn when failing to insert new contact data. */
-"error_contactCreationFailure" = "İletişim oluşturulamadı.";
+"error_contactCreationFailure" = "Kişi oluşturulamadı.";
 /* 'Contact insert failed.' is an error message (sentence case, period); used to warn when failing to insert new contact data. */
-"error_ContactInsertFailed" = "İletişim ekleme başarısız oldu.";
+"error_ContactInsertFailed" = "Kişi eklenemedi.";
 /* 'This contact is missing a name, please edit.' is an error message (sentence case, period); used to warn when the matching contact found on the Setup screen does not have a name. */
-"error_ContactNameMissing" = "Bu kişi, bir isim, düzenleyin lütfen eksik.";
+"error_ContactNameMissing" = "Bu kişini bir ismi yok, lütfen düzenleyin.";
 /* 'This contact is missing a name, please reselect.' is an error message (sentence case, period); used to warn when the matching contact found on the Setup screen does not have a name. */
 "error_ContactNameMissing2" = "Bu kişi, bir isim, yeniden seçin lütfen eksik.";
 /* 'Contact update failed.' is an error message (sentence case, period); used to warn when failing to merge contact data after an exchange. */
-"error_ContactUpdateFailed" = "İletişim güncellemesi başarısız oldu.";
+"error_ContactUpdateFailed" = "Kişi güncellenemedi.";
 /* 'Internet not available, check your settings.' is an error message (sentence case, period); used to warn when the user attempts to communicate with a server and the device cannot detect a path to the Internet. */
-"error_CorrectYourInternetConnection" = "İnternet mevcut değil, ayarlarınızı kontrol edin.";
+"error_CorrectYourInternetConnection" = "İnternet bağlantınız yok, ayarlarınızı kontrol edin.";
 /* 'Could not extract private key.' is an error message (sentence case, period); used to warn when the user is not able to extract the private key from the encrypted private key stored on the device. */
-"error_couldNotExtractPrivateKey" = "Özel anahtarı açılamadı.";
+"error_couldNotExtractPrivateKey" = "Özel anahtar açılamadı.";
 /* 'Exchange timeout exceeded. Begin the exchange again.' is an error message (sentence case, period); used to warn when users have waited too long, 10 minutes, before completing the exchange protocol. */
 "error_ExchangeProtocolTimeoutExceeded" = "Değişim zaman aşımı aşıldı. Yine değişimi başlayın.";
 /* '%s is not supported on %s at this time.' is an error message (sentence case, period); used to warn when a specific capability is not supported by a specific platform. */
 "error_FeatureIsNotSupport" = "%@ anda %@ desteklenmez.";
 /* 'Unable to save %s.' is an error message (sentence case, period); used to warn when there was disk error attempting to save an attachment to the users' device. %s = the name of the file that failed to save. */
-"error_FileSave" = "%@ kaydedilemedi.";
+"error_FileSave" = "%@ kaydedilemiyor.";
 /* 'File storage is not available.' is an error message (sentence case, period); used to warn when attempting to read/write to attachment storage becomes unavailable. */
-"error_FileStorageUnavailable" = "Dosya depolama mevcut değildir.";
+"error_FileStorageUnavailable" = "Dosya depolama mevcut değil.";
 /* 'Server HTTP Error: %d' is an error message (sentence case, period); used to warn when the key exchange or messaging servers encountered an error and need to notify the user. %d = the HTTP status line code is case of an error, like 404 (file not found). 500 is common for uncaught Python run-time errors. */
 "error_HttpCode" = "Sunucu HTTP Hatası: %d";
 /* 'Incorrect data found in exchange. Begin the exchange again.' is an error message (sentence case, period); used to warn when some item received from another group member during the key exchange did not hash correctly to the previously committed value. */
 "error_InvalidCommitVerify" = "Yanlış veri değişimi bulundu. Yine değişimi başlayın.";
 /* 'Please enter a positive integer.' is an error message (sentence case, period); used to warn when the user attempted to type in a group ID on the Grouping screen that was zero, negative, or empty. */
-"error_InvalidCommonUserId" = "Pozitif bir tamsayı girin.";
+"error_InvalidCommonUserId" = "Lütfen pozitif bir değer girin.";
 /* 'A valid contact name is required.' is an error message (sentence case, period); used to warn when the user completes Setup without typing a name, or the name includes 3rd-person words we cannot allow, such as: 'Me', 'Contact', 'Foo',… */
-"error_InvalidContactName" = "Geçerli bir kişi adı gereklidir.";
+"error_InvalidContactName" = "Geçerli bir kişi adı gerekiyor.";
 /* 'Bad incoming message format.' is an error message (sentence case, period); used to warn when the incoming message was not formatted properly. */
-"error_InvalidIncomingMessage" = "Kötü gelen ileti biçimi.";
+"error_InvalidIncomingMessage" = "Geçersiz gelen mesaj biçimi.";
 /* 'Bad message format.' is an error message (sentence case, period); used to warn when the outgoing message was not formatted properly. */
-"error_InvalidMsg" = "Kötü ileti biçimi.";
+"error_InvalidMsg" = "Geçersiz mesaj biçimi.";
 /* 'Invalid recipient.' is an error message (sentence case, period); used to warn when the user has not selected 1 recipient to send a message on the Compose Message screen, also when the user has not selected 2 recipients to send introductions to on the Secure Introduction screen. */
 "error_InvalidRecipient" = "Geçersiz alıcı.";
 /* 'You have reported a difference in phrases. Begin the exchange again.' is an error message (sentence case, period); used to warn when the user presses the 'No Match' button that they are aborting the protocol for the group and sending a non-match signature to others. */
@@ -226,11 +226,11 @@
 /* 'Signature verification failed.' is an error message (sentence case, period); used to warn when key used to generate an incoming message signature is not in the key database. */
 "error_MessageSignatureVerificationFails" = "İmza doğrulama başarısız oldu.";
 /* 'Passphrases require at least %d characters.' is an error message (sentence case, period); used to warn when a user has setup a passphrase, which does not fit the minimum required length. %d = current requirement is at least 8 characters. */
-"error_minPassphraseRequire" = "Passphrases en az %d karakter gerektirir.";
+"error_minPassphraseRequire" = "Şifreler en az %d karakter olmalıdır.";
 /* 'A minimum of %d members are required to exchange data.' is an error message (sentence case, period); used to warn when attempting to leave the Group Size screen without choosing a group size. %d = the minimum number of users to complete the exchange protocol, 2 usually. */
 "error_MinUsersRequired" = "%d üyeden en az veri alışverişi için gereklidir.";
 /* 'SafeSlinger did not detect NDK support on this device, which is required.' is an error message (sentence case, period); used to warn when device has no Native Development Kit support installed. Android-only. */
-"error_MissingNdk" = "SafeSlinger gerekli Bu cihaz, üzerinde NDK desteği tespit etmedi.";
+"error_MissingNdk" = "SafeSlinger bu cihazda gerekli olan NDK desteğini tespit edemedi.";
 /* 'Unexpected data found in exchange. Begin the exchange again.' is an error message (sentence case, period); used to warn when a user has entered a group size number that is too low during the exchange protocol or possibly a Man-in-The-Middle (MiTM) attack where a malicious outsider attempts to join the group. */
 "error_MoreDataThanUsers" = "Beklenmeyen veri değişimi bulundu. Yine değişimi başlayın.";
 /* 'You are attempting to send multiple items. At this time, SafeSlinger only supports sending one item at a time.' is an error message (sentence case, period); used to warn when the user attempts to select multiple attachments to send when we only allow one attachment for now. */
@@ -240,43 +240,43 @@
 /* 'Email account is not setup!' is an error message (sentence case, period); used to warn that a user did not have an email account when he/she tries to send out comments to administrator account. iOS-only. */
 "error_NoEmailAccount" = "E-posta hesabı kurulumu değil!";
 /* 'No passphrase entered.' is an error message (sentence case, period); used to warn when a user generates or changes a passphrase and they have entered a blank password, which is not acceptable. */
-"error_noPassPhrase" = "Hiçbir parola girdi.";
+"error_noPassPhrase" = "Şifre girilmedi.";
 /* 'You must select one of the phrases before proceeding.' is an error message (sentence case, period); used to warn when the user attempts to proceed past the word phrase Verify screen during the exchange protocol and they have not selected, which of the three phrases match with the other users'. */
 "error_NoWordListSelected" = "Sen devam etmeden önce cümleleri birini seçmelisiniz.";
 /* 'Someone reported a difference in phrases. Begin the exchange again.' is an error message (sentence case, period); used to warn when at least one other member of the group during the exchange protocol pressed the 'No Match' button. */
 "error_OtherGroupCommitDiffer" = "Birisi cümleleri bir fark bildirdi. Yine değişimi başlayın.";
 /* 'Memory is too low to complete this operation.' is an error message (sentence case, period); used to warn when a request for memory is made that cannot be satisfied using the available platform resources. Such a request may be made by both the running application or by an internal function of the VM. */
-"error_OutOfMemoryError" = "Hafıza Bu işlemi tamamlamak için çok düşük.";
+"error_OutOfMemoryError" = "Bu işlemi tamamlamak için hafızada yer yok.";
 /* 'Passphrases do not match.' is an error message (sentence case, period); used to warn when the user creates or changes their passphrase and the confirmation second entry did not match the first. */
 "error_passPhrasesDoNotMatch" = "Şifreler eşleşmiyor.";
 /* 'You have exceeded the message quota for that recipient. Please retry later.' is an error message (sentence case, period): used to warn when sending messages to device and the message quota for all applications on the device is full. */
-"error_PushMsgDeviceQuotaExceeded" = "O alıcı için mesaj kotasını aştınız. Daha sonra tekrar deneyin.";
+"error_PushMsgDeviceQuotaExceeded" = "Bu alıcı için mesaj kotasına eriştiniz. Lütfen daha sonra tekrar deneyin.";
 /* 'That recipient has a missing or bad push registration. You should stop sending messages to this device.' is an error message (sentence case, period); used to warn when sending messages to device and the recipient registration was never registered with the push service. */
-"error_PushMsgInvalidRegistration" = "Bu alıcı eksik ya da kötü itme kaydı vardır. Bu cihaza mesaj göndermeyi durdurmak gerekir.";
+"error_PushMsgInvalidRegistration" = "Alıcıda geçersiz push kaydı bulunuyor. Bu cihaza mesaj göndermeyi bırakmalısınız.";
 /* 'Message expired.' is an error message (sentence case, period); used to warn when getting messages, the message id cannot be found and it has likely been scrubbed from the server. */
-"error_PushMsgMessageNotFound" = "Mesaj süresi doldu.";
+"error_PushMsgMessageNotFound" = "Mesajın süresi geçti.";
 /* 'The message is too big. Reduce the size of the message.' is an error message (sentence case, period); used to warn when sending messages to device and the initial push exceeds 1024 bytes. Unlikely, since the initial push only contains the message hash identifier, which is 32 bytes plus a bit more of meta data. */
-"error_PushMsgMessageTooBig" = "Mesajı çok büyük. Mesajın boyutunu azaltın.";
+"error_PushMsgMessageTooBig" = "Bu mesaj çok büyük. Lütfen biraz küçültün.";
 /* 'That recipient's push registration is no longer valid. The recipient may have uninstalled SafeSlinger or turned off notifications. You should stop sending messages to this device.' is an error message (sentence case, period); used to warn when sending messages to device and the recipient is no longer registered. */
-"error_PushMsgNotRegistered" = "O alıcının itme kaydı artık geçerli değil. Alıcı SafeSlinger kaldırıldı veya bildirimleri kapalı olabilir. Bu cihaza mesaj göndermeyi durdurmak gerekir.";
+"error_PushMsgNotRegistered" = "Alıcının push kaydı artık geçerli değil. Alıcı SafeSlinger'ı silmiş veya bildirimleri kapatmış. Bu cihaza mesaj göndermeyi bırakmalısınız.";
 /* 'There was an error communicating with the push notification service.' is an error message (sentence case, period); used to warn when sending messages to device and the push service replies incorrect HTTP status code. */
-"error_PushMsgNotSucceed" = "Push bildirim servisi ile iletişimde hata oluştu.";
+"error_PushMsgNotSucceed" = "Push bildirimleri servisiyle iletişimde bir hata oluştu.";
 /* 'You have exceeded the message quota for this device. Please retry later.' is an error message (sentence case, period); used to warn when sending messages to device and the message quota for SafeSlinger on the device is full. */
-"error_PushMsgQuotaExceeded" = "Bu cihaz için mesaj kotasını aştınız. Daha sonra tekrar deneyin.";
+"error_PushMsgQuotaExceeded" = "Bu cihaz için mesaj limitine ulaştınız. Lütfen daha sonra tekrar deneyin.";
 /* 'Notification service is not available this time. Please try to send the message later.' is an error message (sentence case, period); used to warn when sending messages to device and the push service has no response for push messages. */
-"error_PushMsgServiceFail" = "Bildirim hizmeti bu kez mevcut değildir. Daha sonra mesaj göndermek için deneyin.";
+"error_PushMsgServiceFail" = "Bildirim servisi şuanda aktif değil. Lütfen mesajı daha sonra göndermeyi deneyin.";
 /* 'Cannot prepare the audio recorder.' is an error message (sentence case, period); used to warn when the audio recorder is unavailable from the system to record an audio message. iOS-only. */
-"error_RecoderError" = "Ses kaydedici hazırlayamaz.";
+"error_RecoderError" = "Ses kaydedicisi hazırlanamadı.";
 /* 'To start, Sling Keys with another user at the same time.' is an error message (sentence case, period); used to remind in a notification message that the user should exchange keys with at least one other user to make the app useful to them. */
 "error_ReminderToSlingKeysToUseApp" = "Aynı anda başka bir kullanıcı ile, Sapan Keys başlatmak için.";
 /* 'You need an attachment or a text message to send.' is an error message (sentence case, period); used to warn when the user has not attached a file or typed any text message to send to the recipient after using the 'Send' button. */
-"error_selectDataToSend" = "Bir eki veya göndermek için bir metin mesajı gerekir.";
+"error_selectDataToSend" = "Bir mesaj veya eklenti girmeniz gerekiyor.";
 /* 'Server Message: %s' is an error message (sentence case, period); used to warn when the server has an error message to send back to the client. %s = an English (non-localized) error message sent by our App Engine server code. */
 "error_ServerAppMessage" = "Sunucu İleti: %@";
 /* 'No response from server.' is an error message (sentence case, period); used to warn when the server timeout occurs, usually after 30 seconds and did not respond to the client. */
-"error_ServerNotResponding" = "Sunucudan yanıt yok.";
+"error_ServerNotResponding" = "Sunucu yanıt vermiyor.";
 /* 'Cannot remove the shared file.' is an error message (sentence case, period); used to warn when the shared file cannot be deleted. iOS-only. */
-"error_ShareFileDelError" = "Paylaşılan dosyayı kaldırılamıyor.";
+"error_ShareFileDelError" = "Paylaşılan dosya kaldırılamıyor.";
 /* 'Timeout waiting for some group members to add data.' is an error message (sentence case, period); used to warn during the key exchange protocol when at least one of the members of the group has not submitted their data to the server or client itself is not able to retrieve the data within the timeout window, currently 2 minutes. */
 "error_TimeoutWaitingForAllMembers" = "Bazı grup üyeleri veri eklemek için zaman aşımı bekliyor.";
 /* 'Unable to match public key to private key in crypto provider.' is an error message (sentence case, period); used to warn when the public encryption key used in the message received is not currently the same private key used, the user should probably Sling Keys to update again. */
@@ -290,11 +290,11 @@
 /* 'Unable to update the recipient database.' is an error message (sentence case, period); used to warn when there is database error updating a recipient key/registration . */
 "error_UnableToUpdateRecipientInDB" = "Alıcı veritabanını güncellemek için açılamıyor.";
 /* 'SafeSlinger error, please restart.' is an error message (sentence case, period); used to warn when an unhandled exception or application fault has occurred. */
-"error_UncaughtExceptionOccured" = "SafeSlinger hatası, yeniden başlatın.";
+"error_UncaughtExceptionOccured" = "SafeSlinger'da bir hata oluştu. Lütfen yeniden başlatın.";
 /* 'Contact data was formatted incorrectly.' is an error message (sentence case, period); used to warn when the vCard format used to exchange contact fields during key exchange are improperly formatted. */
-"error_VcardParseFailure" = "İletişim bilgileri hatalı biçimlendirilmiş.";
+"error_VcardParseFailure" = "Kişi bilgileri doğru şekilde biçimlendirildi.";
 /* 'User canceled server request.' is an error message (sentence case, period); used to warn when the user exited the key exchange protocol or messaging transmission before it was finished. */
-"error_WebCancelledByUser" = "Kullanıcı sunucusu isteği iptal etti.";
+"error_WebCancelledByUser" = "Kullanıcı sunucu isteğini iptal etti.";
 
 /* 'Use this screen to set your name to exchange with others, and a passphrase to protect your data. Tap the Done button when finished.' is a help message (sentence case, period); used via Help button on the Setup screen to describe in more detail what the Setup screen does. */
 "help_find" = "Başkaları ile alışverişi için adınızı ayarlamak için bu ekranı kullanın ve parolası verilerinizi korumak için. Bittiğinde Bitti düğmesine dokunun.";
@@ -441,7 +441,7 @@
 /* 'None' is a screen label (match English casing); used to indicate the local, non-synchronized contacts account name on the phone when picking a Save Account. */
 "label_None" = "Hiçbiri";
 /* 'Non-English' is a screen label (match English casing); used to instruct the user how to switch on Numeric mode while doing comparison. */
-"label_NumericModeHint" = "İngilizce olmayan";
+"label_NumericModeHint" = "İngilizce Olmayan";
 /* '%d Files to Share:' is a screen label (match English casing); used on the Sharing Folder screen. %d = the number of files to share. iOS-only. */
 "label_numsharedfiles" = "%d Dosyalar Paylaş:";
 /* 'Old Threads' is a screen label (match English casing); used for the old thread (iOS only). */
@@ -449,7 +449,7 @@
 /* 'Other' is a screen label (match English casing); used to denote a 'other' type of email or phone contact type. iOS-only. */
 "label_othertag" = "Diğer";
 /* 'Retry' is a screen label (match English casing); used in the Passphrase screen text box as a prefix hint combined with a time measurement when, which is exponentially backed off on invalid passphrase entry, such as 'Retry in 14 seconds'. Used during back off while all user controls have been disabled. */
-"label_PassHintBackoff" = "Tekrar dene";
+"label_PassHintBackoff" = "Tekrar Dene";
 /* 'Updated Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint to create a replacement passphrase. */
 "label_PassHintChange" = "Güncelleme Parola";
 /* 'Create Passphrase' is a screen label (match English casing); used in the Passphrase screen text box as a hint to create a new passphrase. */
@@ -589,7 +589,7 @@
 /* 'Create New' is a menu option (title case); used to show a new empty contact in the address book for editing as the users' current identity via the Personal Contact dialog. */
 "menu_CreateNew" = "Yeni Oluştur";
 /* 'Delete' is a menu option (title case); used to delete the current item from the list context menu. */
-"menu_delete" = "Silmek";
+"menu_delete" = "Sil";
 /* 'Delete Thread %s' is a menu option (title case); used to delete all messages from this person via the message list context menu. %s = the name of a person. */
 "menu_deleteThread" = "Konu %@ sil";
 /* 'View Detail' is a menu option (title case); used to show a dialog of more detail about the item via the message list context menu. */
@@ -852,7 +852,7 @@
 /* 'Sending Options:' is a title (title case); used to denote the dialog for user to pickup sender source options. */
 "title_SelectSource" = "Seçenekler Gönderme:";
 /* 'Send' is a title (title case); used at the top of compose message screen. */
-"title_SendFile" = "Göndermek";
+"title_SendFile" = "Gönder";
 /* 'Sharing Folder' is a menu option (title case); used in the Select File Option menu to select a file from the sharing folder on iOS. */
 "title_sharingfolder" = "Paylaşım Klasörü";
 /* 'How many users in the exchange?' is a title (title case); used at the top of the group size selection screen. */
