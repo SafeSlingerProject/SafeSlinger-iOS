@@ -23,19 +23,19 @@
 */
 
 /* 'Add a Sling Keys contact invitation via...' is an action title (sentence case, ellipsis); this title is used during Add Contact Invitation in a dialog of message choices, which can send an installation URL for SafeSlinger along with instructions. */
-"action_NewUserRequest" = "を介してスリングキーコンタクト招待を追加...";
+"action_NewUserRequest" = "スリング鍵連絡先招待を追加...";
 
 /* 'SafeSlinger' is an application name (title case); used for home screen icons, at the top of many screens, and many other places in the application. */
 "app_name" = "SafeSlinger";
 
 /* 'Backup is disabled. Do you want to adjust backup settings and keep this reminder?' is a question message (sentence case, question mark); used to warn when the backup is off to confirm we should keep reminding the user. Used with Forget and Remind buttons. */
-"ask_BackupDisabledRemindLater" = "バックアップが無効になっています。バックアップ設定を調整し、この通知を維持したいですか？";
+"ask_BackupDisabledRemindLater" = "バックアップが無効になっています。 バックアップ設定を調整し、この通知を保存しますか？";
 /* '%s has a more recent device or key, are you sure you want to use this older one?' is a question message (sentence case, question mark); is a confirmation question that occurs when the user selected a recipient with more recent information in the database. */
-"ask_ConfirmUseOlderDeviceOrKey" = "%@より新しいデバイスやキーを持って、あなたはこの古いものを使用してもよろしいのでしょうか？";
+"ask_ConfirmUseOlderDeviceOrKey" = "%@ は、より新しいデバイスまたは鍵を持っています。この古いものを使用してもよろしいですか？";
 /* 'File name %s already exists. Overwrite?' is a question message (sentence case, question mark); is a question that occurs when the user attempts to save a file with the same name as an existing file in the same location. %s = the file name of the attachment. */
 "ask_FileExistsOverwrite" = "ファイル名%@は既に存在します。上書きしますか？";
 /* 'Without a Google Account you will only be able to send, NOT receive messages. Do you want to add a Google account?' is a question message (sentence case, question mark); used to warn when a Google account has not been setup, if the user intends to receive messages. Android-only. */
-"ask_GoogleAccountToReceiveMsgs" = "Googleアカウントがないとあなただけのメッセージを受信し、NOT送信することができるようになります。あなたは、Googleアカウントを追加しますか？";
+"ask_GoogleAccountToReceiveMsgs" = "Googleアカウントがないと、あなたは受信のみで、メッセージの送信はできません。Googleアカウントを追加しますか？";
 /* 'Quit? Are you sure?' is a question message (sentence case, question mark); is a confirmation question that occurs when the user chooses to end the exchange protocol prematurely. */
 "ask_QuitConfirmation" = "本当に終了しますか？";
 /* 'We'd like your help improving SafeSlinger. Would you like to automatically send any errors to us?' is a question message (sentence case, question mark); is a question that occurs when the user encounters an unhandled exception and are asked if they want to upload this error log and any future error logs. */
@@ -52,11 +52,11 @@
 /* 'Continue' is a button (title case); the Continue button is used to remind the user that there is another step to complete. */
 "btn_Continue" = "続ける";
 /* 'Create New Key' is a button (title case); the Create New Key button is paired with the Cancel button, and is used to affirm the creation of a new key and passphrase. */
-"btn_CreateNewKey" = "新しいキーを作成します。";
+"btn_CreateNewKey" = "新規鍵を作成";
 /* 'Delete' is a button (title case); the Delete button is used to affirm the deletion of more a message. */
 "btn_Delete" = "削除";
 /* 'Delete Keys' is a button (title case); the Create New Key button is paired with the Cancel button, and is used to affirm the deletion of more recent keys. */
-"btn_DeleteKeys" = "キーを削除します。";
+"btn_DeleteKeys" = "鍵を削除";
 /* 'Discard' is a button (title case); the Discard button is used to indicate the user wishes to exit the current screen without saving data, such as a voice memo. For non-Android use only, since Android uses the Back hardware button instead. */
 "btn_discard" = "破棄";
 /* 'Done' is a button (title case); the Done button is used to allow the user to complete a current multi-step process. */
@@ -76,7 +76,7 @@
 /* 'No Match' is a button (title case); the No Match button is used if the user cannot find the same batting screen on another user's device during the exchange critical care. */
 "btn_NoMatch" = "不一致";
 /* 'Not Now' is a button (title case); the Not Now button is used as a negative button to decline an offered service or permission. */
-"btn_NotNow" = "今はやめろ";
+"btn_NotNow" = "後で";
 /* 'Forget' is a button (title case); the Forget button is paired with the Remind button and is used to indicate the user wishes to dismiss the current reminder of a potential error state, such as having backup or notification settings turned off, and not be reminded again. */
 "btn_NotRemind" = "消去";
 /* 'OK' is a button (title case); the OK button is affirmation button used to indicate the user accepts the data entered on the current screen. */
@@ -121,15 +121,15 @@
 /* 'Default' is a choice (sentence case); used in any menu to denote the default choice. */
 "choice_default" = "デフォルト";
 /* 'External Storage' is a choice (sentence case); used to set the attachment root path to an external source. Android-only. */
-"choice_external_storage" = "外付けストレージ";
+"choice_external_storage" = "外部ストレージ";
 /* 'Large' is a choice (sentence case); used in the settings to choose a large font size. */
 "choice_font_large" = "大";
 /* 'Medium' is a choice (sentence case); used in the settings to choose a medium font size. */
-"choice_font_medium" = "メディア";
+"choice_font_medium" = "中";
 /* 'Very Small' is a choice (sentence case); used in the settings to choose a tiny font size. */
 "choice_font_micro" = "極小";
 /* 'Small' is a choice (sentence case); used in the settings to choose a small font size. */
-"choice_font_small" = "小さな";
+"choice_font_small" = "小ｑ";
 /* 'Internal Storage' is a choice (sentence case); used to set the attachment root path to an internal source. Android-only. */
 "choice_internal_storage" = "内部ストレージ";
 /* 'No Limit' is a choice (sentence case); used to remove the timeout for the password. */
@@ -144,11 +144,11 @@
 "choice_Up" = "上";
 
 /* 'Some members are using an older version; all members must upgrade to the newest version.' is an error message (sentence case, period); used to warn when some members of the key exchange protocol are using less than the minimum version. Used for backward-compatibility in some cases. */
-"error_AllMembersMustUpgrade" = "一部のメンバーは、古いバージョンを使用しています。すべてのメンバーは、最新バージョンにアップグレードする必要があります。";
+"error_AllMembersMustUpgrade" = "一部のメンバーは、古いバージョンを使用しています。すべてのメンバーが、最新バージョンにアップグレードする必要があります。";
 /* 'All members must upgrade, some are using older key formats.' is an error message (sentence case, period); used to warn when the key format is incorrect after an exchange and perhaps used an old format. */
-"error_AllMembersMustUpgradeBadKeyFormat" = "すべてのメンバーは、いくつかの古いキーの形式を使用している、アップグレードする必要があります。";
+"error_AllMembersMustUpgradeBadKeyFormat" = "すべてのユーザーがアップグレードする必要があります。一部のユーザーが古い形式の鍵を使用しています。";
 /* 'All members must upgrade, some are using older push registration formats.' is an error message (sentence case, period); used to warn when the push registration format is incorrect or corrupted. */
-"error_AllMembersMustUpgradeBadPushToken" = "すべてのメンバーは、いくつかの古いプッシュ登録フォーマットを使用している、アップグレードする必要があります。";
+"error_AllMembersMustUpgradeBadPushToken" = "すべてのメンバーがアップグレードする必要があります。一部、古いプッシュ登録フォーマットを使用してます。";
 /* 'Audio player decoding error.' is an error message (sentence case, period); used to warn when attempting to play an audio message fails to decode properly. iOS-only. */
 "error_AudioPlayerDecodeError" = "再生デコードエラー";
 /* 'Cannot play the recording.' is an error message (sentence case, period); used to warn when the voice recording received cannot be played. iOS-only. */
@@ -156,23 +156,23 @@
 /* 'Audio recorder encoding error.' is an error message (sentence case, period); used to warn when attempting to record an audio message fails to encode properly. iOS-only. */
 "error_AudioRecorderEncodeError" = "録音エンコードエラー";
 /* 'Microphone permission is required to record a secure voice message. Tap the %s button for SafeSlinger Microphone permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Microphone permission. iOS-only. */
-"error_AudioRecorderPermissionError" = "マイク権限がセキュアな音声メッセージを録音する必要があります。 SafeSlingerマイク許可詳細について%@ボタンをタップします。";
+"error_AudioRecorderPermissionError" = "セキュアな音声メッセージを録音するために、マイクのアクセス許可が必要です。 SafeSlinger マイク アクセス許可の詳細については%@ボタンをタップしてください。";
 /* 'No backup to restore.' is an error message (sentence case, period); used to warn at application setup, when there is no pre-existing backup to restore and warn the user that any previous keys have not been restored. */
 "error_BackupNotFound" = "復元のためのバックアップがありません。";
 /* 'Device does not support backup restore.' is an error message (sentence case, period); used to warn when the device hardware does not support restoration from backup. */
 "error_BackupNotSupportedDevice" = "このデバイスはバックアップからの復元ををサポートしていません。";
 /* 'Due to a bug in Android 4.1, you will have to uninstall and reinstall SafeSlinger.' is an error message (sentence case, period); used to warn when unable to load native libraries due to a Google Play copy-protection bug, which can corrupt installations for users upgrading to Android 4.1. Android-only. */
-"error_BadCopyProtectUpgrade" = "アンドロイド4.1のバグのため、あなたはSafeSlingerをアンインストールして再インストールする必要があります。";
+"error_BadCopyProtectUpgrade" = "アンドロイド4.1のバグのため、SafeSlingerをアンインストールして再インストールする必要があります。";
 /* 'A Google account is required. Please open the account manager and add a Google account.' is an error message (sentence case, period); used to warn during push registration: There is no Google account on the phone. The application should ask the user to open the account manager and add a Google account. Fix on the device side. Android-only. */
 "error_C2DMRegAccountMissing" = "Googleアカウントが必要です。アカウントマネージャーを開き、Googleアカウントを追加してください。";
 /* 'Registration not authenticated, please retry manually later.' is an error message (sentence case, period); used to warn during push registration: Bad password. The application should ask the user to enter his/her password, and let user retry manually later. Fix on the device side. Android-only. */
-"error_C2DMRegAuthenticationFailed" = "登録認証されていない、後で手動で再試行してください。";
+"error_C2DMRegAuthenticationFailed" = "登録が承認されていません。後で手動でもう一度試してください。";
 /* 'Registration is not available for this version, please check for an updated version.' is an error message (sentence case, period); used to warn during push registration: The sender account is not recognized. Android-only. */
-"error_C2DMRegInvalidSender" = "登録は、このバージョンでは使用できません、更新されたバージョンを確認してください。";
+"error_C2DMRegInvalidSender" = "このバージョンでは登録できません。更新されたバージョンを確認してください。";
 /* 'Incorrect device registration with Google. This device does not currently support push messaging.' is an error message (sentence case, period); used to warn during push registration: Incorrect phone registration with Google. This phone doesn't currently support C2DM. Android-only. */
 "error_C2DMRegPhoneRegistrationError" = "Googleにデバイスが登録されていません。このデバイスは現在プッシュメッセージングをサポートしていません。";
 /* 'Google Play Services is required to receive messages. Please install Google Play Services to continue.' is an error message (sentence case, period); used to warn during push registration: There is no Google Play Services on the phone. The application should ask the user to install Play Services. Fix on the device side. Android-only. */
-"error_C2DMRegPlayServicesMissing" = "Googleがサービスを再生するメッセージを受信するために必要です。続行するには、Googleのプレイ·サービスをインストールしてください。";
+"error_C2DMRegPlayServicesMissing" = "メッセージを受信するため、Google Play サービスが必要です。 Google Play サービスをインストールして、継続してください。";
 /* 'Push registration service not available, scheduling retry in %d seconds.' is an error message (sentence case, period); used to warn during push registration: The device can't read the response, or there was a 500/503 from the server that can be retried later. The application should use exponential back off and retry. %d = the current number of seconds until the next push registration attempt. Android-only. */
 "error_C2DMRegServiceNotAvailable" = "プッシュ登録サービスが利用できません。%d秒後に再試行します。";
 /* 'Too many applications are registered for Push. Please uninstall some other applications and retry.' is an error message (sentence case, period); used to warn during push registration: The user has too many applications registered. The application should tell the user to uninstall some other applications, let user retry manually. Fix on the device side. Android-only. */
@@ -200,7 +200,7 @@
 /* 'Exchange timeout exceeded. Begin the exchange again.' is an error message (sentence case, period); used to warn when users have waited too long, 10 minutes, before completing the exchange protocol. */
 "error_ExchangeProtocolTimeoutExceeded" = "交換のタイムアウトを超過しました。再度交換を開始します。";
 /* '%s is not supported on %s at this time.' is an error message (sentence case, period); used to warn when a specific capability is not supported by a specific platform. */
-"error_FeatureIsNotSupport" = "%@は現時点で%@ではサポートされません。";
+"error_FeatureIsNotSupport" = "現時点で、%@ で %@ はサポートされていません。";
 /* 'Unable to save %s.' is an error message (sentence case, period); used to warn when there was disk error attempting to save an attachment to the users' device. %s = the name of the file that failed to save. */
 "error_FileSave" = "%@を保存できません。";
 /* 'File storage is not available.' is an error message (sentence case, period); used to warn when attempting to read/write to attachment storage becomes unavailable. */
@@ -220,59 +220,59 @@
 /* 'Invalid recipient.' is an error message (sentence case, period); used to warn when the user has not selected 1 recipient to send a message on the Compose Message screen, also when the user has not selected 2 recipients to send introductions to on the Secure Introduction screen. */
 "error_InvalidRecipient" = "無効な受信者です。";
 /* 'You have reported a difference in phrases. Begin the exchange again.' is an error message (sentence case, period); used to warn when the user presses the 'No Match' button that they are aborting the protocol for the group and sending a non-match signature to others. */
-"error_LocalGroupCommitDiffer" = "あなたは、フレーズの違いを報告しています。再度交換を開始します。";
+"error_LocalGroupCommitDiffer" = "フレーズの違いを報告しました。再度交換を開始します。";
 /* 'The peer key format is invalid.' is an error message (sentence case, period); used to warn when the public key we used for this recipient does not exist or is improperly formatted. */
 "error_MessageInvalidPeerKeyFormat" = "ピアキーの形式が無効です。";
 /* 'Signature verification failed.' is an error message (sentence case, period); used to warn when key used to generate an incoming message signature is not in the key database. */
 "error_MessageSignatureVerificationFails" = "署名の検証に失敗しました。";
 /* 'Passphrases require at least %d characters.' is an error message (sentence case, period); used to warn when a user has setup a passphrase, which does not fit the minimum required length. %d = current requirement is at least 8 characters. */
-"error_minPassphraseRequire" = "パスフレーズは、少なくとも%d文字を必要とします。";
+"error_minPassphraseRequire" = "パスフレーズは、少なくとも%d文字必要です。";
 /* 'A minimum of %d members are required to exchange data.' is an error message (sentence case, period); used to warn when attempting to leave the Group Size screen without choosing a group size. %d = the minimum number of users to complete the exchange protocol, 2 usually. */
 "error_MinUsersRequired" = "データを交換するためには最低%d人必要です。";
 /* 'SafeSlinger did not detect NDK support on this device, which is required.' is an error message (sentence case, period); used to warn when device has no Native Development Kit support installed. Android-only. */
-"error_MissingNdk" = "SafeSlingerが必要とされるこのデバイス上でNDKのサポートを検出しませんでした。";
+"error_MissingNdk" = "このデバイス上に、SafeSlingerが必要なNDKサポートを検出しませんでした。";
 /* 'Unexpected data found in exchange. Begin the exchange again.' is an error message (sentence case, period); used to warn when a user has entered a group size number that is too low during the exchange protocol or possibly a Man-in-The-Middle (MiTM) attack where a malicious outsider attempts to join the group. */
-"error_MoreDataThanUsers" = "予期しないデータが交換で見つかりました。再度交換を開始します。";
+"error_MoreDataThanUsers" = "交換で予期しないデータが見つかりました。再度交換を開始します。";
 /* 'You are attempting to send multiple items. At this time, SafeSlinger only supports sending one item at a time.' is an error message (sentence case, period); used to warn when the user attempts to select multiple attachments to send when we only allow one attachment for now. */
 "error_MultipleSendNotSupported" = "複数のアイテムを送信しようとしています。SafeSlingerは一度に1つのアイテム送信をサポートしています。";
 /* 'The exchange is missing required data.' is an error message (sentence case, period); used to warn when exchange is missing some parameter or data to complete. */
-"error_NoDataToExchange" = "交換が必要なデータが欠落しています。";
+"error_NoDataToExchange" = "交換に必要なデータが欠落しています。";
 /* 'Email account is not setup!' is an error message (sentence case, period); used to warn that a user did not have an email account when he/she tries to send out comments to administrator account. iOS-only. */
 "error_NoEmailAccount" = "メールアカウントが設定されていません！";
 /* 'No passphrase entered.' is an error message (sentence case, period); used to warn when a user generates or changes a passphrase and they have entered a blank password, which is not acceptable. */
 "error_noPassPhrase" = "パスフレーズが入力されていません。";
 /* 'You must select one of the phrases before proceeding.' is an error message (sentence case, period); used to warn when the user attempts to proceed past the word phrase Verify screen during the exchange protocol and they have not selected, which of the three phrases match with the other users'. */
-"error_NoWordListSelected" = "続行する前に、フレーズのいずれかを選択する必要があります。";
+"error_NoWordListSelected" = "続行する前に、いずれかのフレーズを選択する必要があります。";
 /* 'Someone reported a difference in phrases. Begin the exchange again.' is an error message (sentence case, period); used to warn when at least one other member of the group during the exchange protocol pressed the 'No Match' button. */
 "error_OtherGroupCommitDiffer" = "誰かがフレーズの違いを報告しました。再度交換を開始します。";
 /* 'Memory is too low to complete this operation.' is an error message (sentence case, period); used to warn when a request for memory is made that cannot be satisfied using the available platform resources. Such a request may be made by both the running application or by an internal function of the VM. */
-"error_OutOfMemoryError" = "メモリは、この操作を完了するには低すぎます。";
+"error_OutOfMemoryError" = "この操作を完了するには、メモリが少なすぎます。";
 /* 'Passphrases do not match.' is an error message (sentence case, period); used to warn when the user creates or changes their passphrase and the confirmation second entry did not match the first. */
 "error_passPhrasesDoNotMatch" = "パスフレーズが一致しません。";
 /* 'You have exceeded the message quota for that recipient. Please retry later.' is an error message (sentence case, period): used to warn when sending messages to device and the message quota for all applications on the device is full. */
-"error_PushMsgDeviceQuotaExceeded" = "あなたは、その受信者へのメッセージのクォータを超えました。後で再試行してください。";
+"error_PushMsgDeviceQuotaExceeded" = "受信者のメッセージの量が多すぎます。後でもう一度試してください。";
 /* 'That recipient has a missing or bad push registration. You should stop sending messages to this device.' is an error message (sentence case, period); used to warn when sending messages to device and the recipient registration was never registered with the push service. */
-"error_PushMsgInvalidRegistration" = "その受信者がないか、または不良プッシュ登録をされています。あなたは、このデバイスへのメッセージの送信を停止する必要があります。";
+"error_PushMsgInvalidRegistration" = "その受信者が見つからないか、不正なプッシュ登録されています。このデバイスのメッセージの送信を停止すべきです。";
 /* 'Message expired.' is an error message (sentence case, period); used to warn when getting messages, the message id cannot be found and it has likely been scrubbed from the server. */
-"error_PushMsgMessageNotFound" = "メッセージの有効期限が切れて。";
+"error_PushMsgMessageNotFound" = "メッセージは期限切れです。";
 /* 'The message is too big. Reduce the size of the message.' is an error message (sentence case, period); used to warn when sending messages to device and the initial push exceeds 1024 bytes. Unlikely, since the initial push only contains the message hash identifier, which is 32 bytes plus a bit more of meta data. */
-"error_PushMsgMessageTooBig" = "メッセージが大きすぎます。メッセージのサイズを小さくしてください。";
+"error_PushMsgMessageTooBig" = "メッセージが大きすぎます。メッセージのサイズを縮小してください。";
 /* 'That recipient's push registration is no longer valid. The recipient may have uninstalled SafeSlinger or turned off notifications. You should stop sending messages to this device.' is an error message (sentence case, period); used to warn when sending messages to device and the recipient is no longer registered. */
-"error_PushMsgNotRegistered" = "その受信者のプッシュ登録はもはや有効ではありません。受信者はSafeSlingerをアンインストールまたは通知をオフにしている場合があります。あなたは、このデバイスへのメッセージの送信を停止する必要があります。";
+"error_PushMsgNotRegistered" = "その受信者のプッシュ登録は無効です。受信者がSafeSlingerをアンインストールしたり、通知をオフにしている場合があります。あなたは、このデバイスのメッセージの送信を停止すべきです。";
 /* 'There was an error communicating with the push notification service.' is an error message (sentence case, period); used to warn when sending messages to device and the push service replies incorrect HTTP status code. */
-"error_PushMsgNotSucceed" = "プッシュ通知サービスとの通信エラーが発生しました。";
+"error_PushMsgNotSucceed" = "プッシュ通知サービスとの通信にエラーが発生しました。";
 /* 'You have exceeded the message quota for this device. Please retry later.' is an error message (sentence case, period); used to warn when sending messages to device and the message quota for SafeSlinger on the device is full. */
-"error_PushMsgQuotaExceeded" = "あなたは、このデバイスのメッセージ割り当てを超えました。後で再試行してください。";
+"error_PushMsgQuotaExceeded" = "このデバイスのメッセージの量が多すぎます。後でもう一度試してください。";
 /* 'Notification service is not available this time. Please try to send the message later.' is an error message (sentence case, period); used to warn when sending messages to device and the push service has no response for push messages. */
-"error_PushMsgServiceFail" = "通知サービスは、現時点では使用できません。後でメッセージを送信してみてください。";
+"error_PushMsgServiceFail" = "現時点では通知サービスは使用できません。 後でメッセージを送信してみてください。";
 /* 'Cannot prepare the audio recorder.' is an error message (sentence case, period); used to warn when the audio recorder is unavailable from the system to record an audio message. iOS-only. */
 "error_RecoderError" = "オーディオレコーダーを準備きません。";
 /* 'To start, Sling Keys with another user at the same time.' is an error message (sentence case, period); used to remind in a notification message that the user should exchange keys with at least one other user to make the app useful to them. */
-"error_ReminderToSlingKeysToUseApp" = "他のユーザーと、スリングのキーを同時に開始します。";
+"error_ReminderToSlingKeysToUseApp" = "開始するには、スリング鍵を別のユーザーと同時に。";
 /* 'You need an attachment or a text message to send.' is an error message (sentence case, period); used to warn when the user has not attached a file or typed any text message to send to the recipient after using the 'Send' button. */
 "error_selectDataToSend" = "ファイルまたは送信テキストメッセージが必要です。";
 /* 'Server Message: %s' is an error message (sentence case, period); used to warn when the server has an error message to send back to the client. %s = an English (non-localized) error message sent by our App Engine server code. */
-"error_ServerAppMessage" = "サーバーメッセージ：%@";
+"error_ServerAppMessage" = "サーバーメッセージ: %@";
 /* 'No response from server.' is an error message (sentence case, period); used to warn when the server timeout occurs, usually after 30 seconds and did not respond to the client. */
 "error_ServerNotResponding" = "サーバが応答しませんでした。";
 /* 'Cannot remove the shared file.' is an error message (sentence case, period); used to warn when the shared file cannot be deleted. iOS-only. */
@@ -292,57 +292,57 @@
 /* 'SafeSlinger error, please restart.' is an error message (sentence case, period); used to warn when an unhandled exception or application fault has occurred. */
 "error_UncaughtExceptionOccured" = "SafeSlingerエラーです。再起動してください。";
 /* 'Contact data was formatted incorrectly.' is an error message (sentence case, period); used to warn when the vCard format used to exchange contact fields during key exchange are improperly formatted. */
-"error_VcardParseFailure" = "連絡先のデータが正しい形式になっていません。";
+"error_VcardParseFailure" = "連絡先データが誤ってフォーマットされました。";
 /* 'User canceled server request.' is an error message (sentence case, period); used to warn when the user exited the key exchange protocol or messaging transmission before it was finished. */
 "error_WebCancelledByUser" = "ユーザはサーバ要求をキャンセルしました。";
 
 /* 'Use this screen to set your name to exchange with others, and a passphrase to protect your data. Tap the Done button when finished.' is a help message (sentence case, period); used via Help button on the Setup screen to describe in more detail what the Setup screen does. */
-"help_find" = "他の人と交換するために自分の名前を設定するには、この画面を使用して、データを保護するためのパスフレーズ。終了したら、[完了]ボタンをタップします。";
+"help_find" = "この画面を使用して、他の人と交換する自分の名前、およびデータを保護するパスフレーズを設定します。終了したら、完了ボタンをタップしてください。";
 /* 'To exchange identity data, ensure all users are nearby or on the phone. The Begin Exchange button will exchange only the checked contact data.' is a help message (sentence case, period); used via Help button on the Begin Exchange screen and also the key exchange walkthrough tutorial to describe in more detail what the Begin Exchange screen does. */
-"help_home" = "IDデータを交換するために、すべてのユーザーが近くまたは電話であることを確認。開始Exchangeのボタンのみにチェック連絡先データを交換します。";
+"help_home" = "IDデータを交換するために、すべてのユーザーが近くいるか携帯電話をもっていることを確認してください。 交換ボタンを押すとチェックされている連絡先データだけ交換します。";
 /* 'You may also change personal data about your identity on this screen by tapping on the button with your name. This will display a menu allowing you to Edit your contact, Create New contact, or Use Another contact.' is a help message (sentence case, period); Additional help text, which is appended to the Help button text on the Compose and Begin Exchange screens. */
-"help_identity_menu" = "また、あなたの名前のボタンをタップして、この画面上でご本人の個人情報を変更することがあります。これは、あなたの連絡先を編集することを可能にするメニューを表示し、新しい連絡先を作成するか、別の連絡先を使用します。";
+"help_identity_menu" = "自分の名前の付いたボタンをタップして、この画面でIDに関する個人データを変更することもできます。連絡先の編集、新規連絡先の作成、または別の連絡先の使用をすることができる、メニューを表示します。";
 /* 'This screen displays all past messages, and attachments that are still available for download.' is a help message (sentence case, period); used via Help button on the Messages list screen to describe in more detail what the Messages list screen does. */
 "help_Messages" = "この画面では、過去のすべてのメッセージと、まだダウンロード可能なファイルが表示されます。";
 /* 'Use this screen to login to the application with your passphrase. If you have forgotten your passphrase, you may generate a new key protected by a new passphrase by tapping the Forgot Passphrase? button. Tap the user name to switch between multiple keys.' is a help message (sentence case, period); used via Help button on the Passphrase screen to describe in more detail what the Passphrase screen does. */
-"help_passphrase" = "パスフレーズを使用してアプリケーションにログインするには、この画面を使用します。あなたは、パスフレーズを忘れてしまった場合は、忘れたパスフレーズをタップして、新しいパスフレーズで保護された新しいキーを生成することができますか？ボタンを押します。複数のキーを切り替えるには、ユーザー名をタップします。";
+"help_passphrase" = "この画面を使用して、パスフレーズでアプリケーションにログインします。パスフレーズを忘れた場合は、パスフレーズを忘れましたか? ボタンをタップして、新しいパスフレーズで保護された新しい鍵を生成することができます。ユーザー名をタップして、複数の鍵を切り替えることができます。";
 /* 'Use this screen to change your passphrase by entering your last passphrase for confirmation and the new passphrase.' is a help message (sentence case, period); used via Help button on the Change Passphrase screen to describe in more detail what the Change Passphrase screen does. */
-"help_passphrase_change" = "確認し、新しいパスフレーズの最後のパスフレーズを入力して、パスフレーズを変更するには、この画面を使用します。";
+"help_passphrase_change" = "この画面を使用して、確認のため最新のパスフレーズと、新しいパスフレーズを入力することで、パスフレーズを変更します。";
 /* 'Contacts with SafeSlinger keys are displayed here, select one to send your message to.' is a help message (sentence case, period); used via Help button on the Recipients list screen to describe in more detail what the Recipients list screen does. */
 "help_PickRecip" = "SafeSlingerキーを使用している連絡先がここに表示されます。メッセージを送信したい相手を選択してください。";
 /* 'When finished, the protocol will reveal a list of the identity data exchanged. Select the contacts you wish to save and press Import.' is a help message (sentence case, period); used via Help button on the End Exchange screen and also the key exchange walkthrough tutorial to describe in more detail what the End Exchange screen does. */
-"help_save" = "完了したら、プロトコルは、交換のアイデンティティデータのリストを明らかにします。インポートを保存し、押したい連絡先を選択します。";
+"help_save" = "終了すると、手順に従ってIDデータのリストが再表示されます。保存したい連絡先を選択して、 インポートを押してください。";
 /* 'This screen allows you to select two people you have slung keys with before to securely send their keys to each other. Simply press Introduce when ready.' is a help message (sentence case, period); used via Help button on the Secure Introduction screen to describe in more detail what the Secure Introduction screen does. */
-"help_SecureIntroduction" = "この画面では、あなたが確実にお互いに自分のキーを送信する前にキーを投げてきた二人を選択することができます。単に準備ができたら紹介を押します。";
+"help_SecureIntroduction" = "この画面は、お互いに安全に自分の鍵を送信する前に、鍵を投げてきた二人を選択することができます。準備ができたら紹介を押すだけです。";
 /* 'This screen allows you to select some data and a recipient to send to. Simply press Send when ready.' is a help message (sentence case, period); used via Help button on the Compose Message screen to describe in more detail what the Compose Message screen does. */
-"help_Send" = "この画面では、いくつかのデータとに送信す​​る受信者を選択することができます。単に準備ができたら、送信を押します。";
+"help_Send" = "この画面は、いくつかのデータと送信先の​受信者を選択することができます。準備ができたら送信を押すだけです。";
 /* 'This screen allows you to change the default settings for the application.' is a help message (sentence case, period); used via Help button on the Settings screen to describe in more detail what the Settings screen does. */
-"help_settings" = "この画面では、アプリケーションのデフォルト設定を変更することができます。";
+"help_settings" = "この画面は、アプリケーションのデフォルト設定を変更することができます。";
 /* 'Select the number of people who are attempting to exchange data together and press OK.' is a help message (sentence case, period); used via Help button on the Group Size screen and also the key exchange walkthrough tutorial to describe in more detail what the Group Size screen does. */
-"help_size" = "一緒にデータを交換しようとしている人の数を選択してOKを押します。";
+"help_size" = "一緒にデータを交換しようとしている人の数を選択してOKを押してください。";
 /* 'This number on this screen is used to create a unique group of users. Review the numbers on all users' screens, then all users should enter the same lowest number and press OK.' is a help message (sentence case, period); used via Help button on the Grouping screen and also the key exchange walkthrough tutorial to describe in more detail what the Grouping screen does. */
-"help_userid" = "この画面上でこの番号は、ユーザーの固有のグループを作成するために使用されます。その後、すべてのユーザーが同じ最小の番号を押し、[OK]を入力する必要があり、すべてのユーザーの画面で数値を確認します。";
+"help_userid" = "この画面上のこの数は、ユーザーの固有のグループを作成するために使用されます。すべてのユーザーの画面で数を確認します。その後、すべてのユーザーが同じ最小の数を押し、OKを押す必要があります。";
 /* 'Now, you must match one of these 3-word phrases with all users. Every user must select the same common phrase, and press Next.' is a help message (sentence case, period); used via Help button on the Verify screen and also the key exchange walkthrough tutorial to describe in more detail what the Verify screen does. */
-"help_verify" = "さて、あなたはすべてのユーザーとこれらの3ワードフレーズのいずれかと一致する必要があります。すべてのユーザーが同じ共通のフレーズを選択し、[次へ]を押す必要があります。";
+"help_verify" = "さて、すべてのユーザーと、これらの3語のフレーズのいずれかと一致する必要があります。すべてのユーザーが同じ共通のフレーズを選択し、次へを押す必要があります。";
 
 /* 'Camera permission is required to attach snapshots to secure messages. Tap the %s button for SafeSlinger Camera permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Camera permission. iOS-only. */
-"iOS_cameraError" = "カメラの許可がメッセージを保護するためにスナップショットを添付する必要があります。 SafeSlingerカメラ許可詳細について%@ボタンをタップします。";
+"iOS_cameraError" = "安全なメッセージにスナップショットを添付するため、カメラのアクセス許可が必要です。 SafeSlingerカメラ アクセス許可の詳細については%@ボタンをタップしてください。";
 /* 'Contacts permission is required for securely sharing contact cards. Tap the %s button for SafeSlinger Contacts permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Contacts permission. iOS-only. */
-"iOS_contactError" = "コンタクト許可が確実に接触カードを共有するために必要とされます。 SafeSlingerコンタクト許可詳細について%@ボタンをタップします。";
+"iOS_contactError" = "連絡先カードを安全に共有するため、連絡先アクセス許可が必要です。 SafeSlinger連絡先アクセス許可の詳細については%@ボタンをタップしてください。";
 /* 'Push registration is missing.' is an error message (sentence case, period); used to warn the user the push registration is missing. iOS-only. */
-"iOS_errorpushtoken" = "プッシュ登録が欠落しています。";
+"iOS_errorpushtoken" = "プッシュ登録がありません。";
 /* 'Notification permission for either alerts or banners, and badge numbers, are required for secure messaging. Tap the %s button for SafeSlinger Notification permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Notifications permission. iOS-only. */
-"iOS_notificationError1" = "アラートやバナー、バッジ番号のいずれかの通知許可は、セキュアなメッセージングのために必要とされます。 SafeSlinger通知許可詳細について%@ボタンをタップします。";
+"iOS_notificationError1" = "安全なメッセージングのため、アラートやバナーのいずれかと、バッジ番号の通知アクセス許可が必要です。 SafeSlinger通知アクセス許可の詳細については%@ボタンをタップしてください。";
 /* 'SafeSlinger is not optimized for iOS 5.x devices. SafeSlinger requires iOS 6 or higher.' is an informational message (sentence case, period); message for dialog popups when a user still uses an old iOS device. iOS-only. */
-"iOS_oldOSWarn" = "SafeSlingerはのiOS 5.xのデバイス用に最適化されていません。 SafeSlingerは、iOS 6以降が必要です。";
+"iOS_oldOSWarn" = "SafeSlingerはiOS5.xのデバイス用に最適化されていません。SafeSlingerをiOS6以降が必要です。";
 /* 'Photo Library permission is required to attach pictures to secure messages. Tap the %s button for SafeSlinger Photo Library permission details.' is an error message (sentence case, period); used as a Post-Request-Denied Notice for Photo Library permission. iOS-only. */
-"iOS_photolibraryError" = "フォトライブラリ許可がメッセージを保護するために写真を添付する必要があります。 SafeSlingerフォトライブラリ許可詳細について%@ボタンをタップします。";
+"iOS_photolibraryError" = "安全なメッセージに写真を添付するため、フォトライブラリ アクセス許可が必要です。 SafeSlingerフォトライブラリ アクセス許可の詳細については%@ボタンをタップしてください。";
 /* 'You can select your contact card to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Contacts when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Contacts permission. iOS-only. */
-"iOS_RequestPermissionContacts" = "あなたの友人を送信するためにあなたの連絡先カードを選択することができますし、SafeSlingerはあなたのためにそれを暗号化します。要求されたときにこの機能を有効にするには、連絡先にSafeSlingerアクセス​​を許可する必要があります。";
+"iOS_RequestPermissionContacts" = "連絡先カードを選択て、友人に送信して、SafeSlingerがそれを暗号化することができます。この機能を有効にするには、尋ねられたとき、連絡先へのSafeSlingerのアクセスを許可する必要があります。";
 /* 'You can record a voice message to send your friends and SafeSlinger will encrypt it for you. To enable this feature, you must allow SafeSlinger access to your Microphone when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Microphone permission. iOS-only. */
-"iOS_RequestPermissionMicrophone" = "あなたはあなたの友人を送信するために音声メッセージを録音することができますし、SafeSlingerはあなたのためにそれを暗号化します。要求されたときにこの機能を有効にするには、マイクにSafeSlingerアクセス​​を許可する必要があります。";
+"iOS_RequestPermissionMicrophone" = "音声メッセージを録音して、友人に送信し、SafeSlingerがそれを暗号化することができます。この機能を有効にするには、尋ねられたとき、マイクへのSafeSlingerのアクセスを許可する必要があります。";
 /* 'SafeSlinger is an encrypted messaging application and cannot function without allowing incoming messages from Notifications. To enable incoming messages, you must allow SafeSlinger to send you Notifications when asked.' is an informational message (sentence case, period); used as a Pre-Request Notice for Notifications permission. iOS-only. */
-"iOS_RequestPermissionNotifications" = "SafeSlingerは暗号化されたメッセージングアプリケーションであると通知からの着信メッセージを許可することなく機能することはできません。着信メッセージを有効にするには、求められた場合SafeSlingerはあなたに通知を送信できるようにする必要があります。";
+"iOS_RequestPermissionNotifications" = "SafeSlingerは暗号化されたメッセージングアプリケーションで、通知からの着信メッセージを許可しないと機能することはできません。着信メッセージを有効にするには、尋ねられたとき、SafeSlingerの通知の送信を許可する必要があります。";
 
 /* '%s ago' is a screen label (match English casing); used on the messages list screen and is used to describe how long ago a message was sent or received. %s = a time measurement, such as '5 minutes' or '2 hours'. */
 "label_ago" = "%@前";
@@ -369,7 +369,7 @@
 /* 'Your key has changed: Sling Keys again.' is an error message (sentence case, period); used to warn the user that the key in the Recipients list screen has been exchanged once before with a different key from this user. */
 "label_DisabledExchSourceKeyChange" = "あなたの鍵が変更されました：もう一度スリングキーをしてください。";
 /* 'To begin messaging, Sling Keys with this user at the same time.' is a screen label (match English casing); used to remind users that an invite is only the beginning, and to Sling Keys before communicating. */
-"label_DisabledNextSlingKeysWithThisPerson" = "同時にメッセージング、このユーザーとのスリングキーを開始します。";
+"label_DisabledNextSlingKeysWithThisPerson" = "メッセージングを開始するには、このユーザーと同時にスリング鍵してください。";
 /* 'DRAFT' is a screen label (match English casing); used to label a message in the Messages list that has been saved in progress but not yet sent. */
 "label_Draft" = "ドラフト";
 /* 'Key format deprecated: Sling Keys again.' is an error message (sentence case, period); used on the Recipient list screen to warn users that older key formats have been deprecated. Android-only. */
@@ -379,29 +379,29 @@
 /* 'expired' is a screen label (match English casing); used on the Messages list for message attachment that has not been downloaded more than 24 hours after it was originally sent. */
 "label_expired" = "期限切れ";
 /* 'expires %s' is a screen label (match English casing); used on the message list to show how much time is left to download an attachment. %s = a time measurement, such as 'in 5 minutes' or 'in 2 hours'. Android-only. */
-"label_expires" = "%@の有効期限が切れます";
+"label_expires" = "期限 %@";
 /* 'expires in' is a screen label (match English casing); used on the message list to show how much time is left to download an attachment; a time measurement, such as '5 minutes' or '2 hours' will be appended to this string. iOS-only. */
-"label_expiresIn" = "に失効";
+"label_expiresIn" = "期限";
 /* 'File Name' is a screen label (match English casing); used on the Save File As dialog as a hint in the file name text box when changing the file name. */
 "label_FileNameHint" = "ファイル名";
 /* 'Enter your name and a passphrase to protect your data:' is a screen label (match English casing); used to instruct the user how to proceed on the Setup screen. */
-"label_FindInstruct" = "あなたのデータを保護するためにあなたの名前とパスフレーズを入力してください：";
+"label_FindInstruct" = "データを保護するためにあなたの名前とパスフレーズを入力してください:";
 /* 'First Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current first name to use. iOS-only. */
 "label_FirstName" = "名前";
 /* 'Tap your name to add or remove contact data, check items you wish to share, and tap Begin Exchange when others are ready to exchange:' is a screen label (match English casing); used to instruct the user how to proceed on the Begin Exchange screen. */
-"label_Home" = "追加または削除連絡先データを、あなたが共有したい項目をチェックして、他の人が交換する準備ができている場合、Exchangeを開始]をタップするためにあなたの名前をタップします：";
+"label_Home" = "あなたの名前をタップして、連絡先データ追加または削除します。共有したい項目をチェックして、他の人が交換する準備ができたときに、「Exchangeを開始」をタップします。";
 /* 'Home' is a screen label (match English casing); used to denote a 'home' type of email or phone contact type. iOS-only. */
 "label_hometag" = "ホーム";
 /* '%d hours' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole hours. */
 "label_hours" = "%d時間";
 /* 'SafeSlinger iCloud is enabled. Tap the Done button when finished.' is a screen label (match English casing); used to indicate the backup will occur while on the Setup screen. iOS-only. */
-"label_iCloudEnable" = "SafeSlingerのiCloudが有効になっています。終了したら、[完了]ボタンをタップします。";
+"label_iCloudEnable" = "SafeSlingerのiCloudが有効になっています。終了したときに、完了ボタンをタップしてください。";
 /* 'No messages. To send a message, tap on the New Message icon at the top of your screen.' is a screen label (match English casing); used to instruct the user how to proceed on the Message list screen in case of no recipients. */
-"label_InstNoMessages" = "メッセージなし。メッセージを送信するには、画面の上部にある新規メッセージのアイコンをタップします。";
+"label_InstNoMessages" = "メッセージはありません。メッセージを送信するには、画面の上部にある新規メッセージのアイコンをタップします。";
 /* 'To add recipients, you must first Sling Keys with one or more other users at the same time. You may also send a Sling Keys contact invitation from the menu.' is a screen label (match English casing); used to instruct the user how to proceed on the Recipient list screen is case of no recipients. */
-"label_InstNoRecipients" = "受信者を追加するには、同時に1以上の他のユーザとの最初のスリングキーする必要があります。また、メニューからスリングキーコンタクト招待状を送信することができます。";
+"label_InstNoRecipients" = "受信者を追加するには、まず、同時に1人以上の他のユーザとスリング鍵する必要があります。また、メニューからスリング鍵連絡先招待を送ることもできます。";
 /* 'None of your current recipients match your search query. Please try a different query or invite a new contact.' is a screen label (match English casing); used to inform the user that no recipients match the search query. */
-"label_InstNoRecipientsMatchQuery" = "現在の受信者のいずれも、検索クエリに一致しません。別のクエリを試してみたり、新しい連絡先を招待して下さい。";
+"label_InstNoRecipientsMatchQuery" = "検索クエリに、現在の受信者は誰も一致しません。別のクエリを試すか、新しい連絡先を招待して下さい。";
 /* 'No shared file. Connect your device with iTunes and drag files to the shared folder.' is a screen label (match English casing); used to instruct the user how to proceed on the Shared Files screen is case of no files to share. iOS-only. */
 "label_InstNoSharedFile" = "共有ファイルはありません。デバイスをiTunesに接続して、ファイルを共有フォルダにドラッグしてください。";
 /* 'Pick a recipient to send a message to:' is a screen label (match English casing); used to instruct the user how to proceed on the Pick Recipients list screen. */
@@ -413,7 +413,7 @@
 /* 'introduced' is a screen label (match English casing); used to indicate 1-hop trust from a secure introduction in the Recipient list screen. */
 "label_introduced" = "紹介";
 /* 'Invited' is a screen label (match English casing); used on the recipient list to denote when a user has sent an invitation to Sling Keys via emailed or text. */
-"label_inviteSent" = "招待";
+"label_inviteSent" = "招待しました";
 /* 'Key:' is a screen label (match English casing); used to prefix the key generation date in the Recipients list and on the Compose Message screen. */
 "label_Key" = "鍵：";
 /* 'Last Name' is a screen label (match English casing); used above the editable field on the Settings and Setup screen to show the current last name to use. iOS-only. */
@@ -421,27 +421,27 @@
 /* 'Me' is a screen label (match English casing); used on the secure introduction invitation dialog to indicate the one-hop trust relationship between the user (Me); the trusted person, and the new person. */
 "label_Me" = "私";
 /* '(%s has confirmed the key for %s.)' is a screen label (match English casing); used as the automated test text message completing sling keys. %1$s = the name of the sender. %2$s = the name of the recipient. */
-"label_messageAutomatedVerify" = "（%@は%@のキーを確認しています。）";
+"label_messageAutomatedVerify" = "(%@は%@の鍵を確認しました。)";
 /* 'I would like to introduce %s to you.' is a screen label (match English casing); used as the text message when sending secure introduction invitations. %s = the name of a person. */
 "label_messageIntroduceNameToYou" = "あなたに%@をご紹介したいと思います。";
 /* 'SafeSlinger app: %s' is a screen label (match English casing); used as message text to show a user how to install SafeSlinger. %s = the main installation url for mobile devices */
-"label_messageInviteInstall" = "SafeSlingerアプリ：%@";
+"label_messageInviteInstall" = "SafeSlingerアプリ: %@";
 /* 'To setup a secure messaging connection, we can meet or phone each other at the same time, and then Sling Keys just once to verify the connection.' is a screen label (match English casing); used as message text to show a user how to begin secure messaging. */
-"label_messageInviteSetupInst" = "セットアップセキュアなメッセージング接続のために、我々は会うか電話互いに同時に、その後、スリングキー一度だけ接続を確認することができます。";
+"label_messageInviteSetupInst" = "安全なメッセージング接続をセットアップするために、私たちは同時に会うか電話した後、スリング鍵をして、接続を検証することができます。";
 /* 'Can we start secure messaging with the open source SafeSlinger iPhone or Android app?' is a screen label (match English casing); used as message text to invite a contact to begin secure messaging. */
-"label_messageInviteStartMsg" = "我々はオープンソースSafeSlinger iPhoneやAndroidアプリでセキュアなメッセージングを起動することはできますか？";
+"label_messageInviteStartMsg" = "私たちは、オープンソースSafeSlinger iPhoneやAndroidアプリで、安全なメッセージングを開始することはできますか？";
 /* '%d minutes' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole minutes. */
 "label_minutes" = "%d分";
 /* 'Mobile' is a screen label (match English casing); used to denote a 'mobile' type of email or phone contact type. iOS-only. */
 "label_mobiletag" = "携帯電話";
 /* 'Most recent only' is a screen label (match English casing); used as a label for the boolean toggle switching between all or recent-only recipients on recipient list. */
-"label_MostRecentOnly" = "最新の1件のみ";
+"label_MostRecentOnly" = "最新のみ";
 /* 'My updated SafeSlinger credentials are attached.' is a screen label (match English casing); used as default message attached to a credential update. */
-"label_MsgSendUpdate" = "マイ更新SafeSlinger資格情報が添付されています。";
+"label_MsgSendUpdate" = "私の更新されたSafeSlinger資格情報を添付します。";
 /* 'None' is a screen label (match English casing); used to indicate the local, non-synchronized contacts account name on the phone when picking a Save Account. */
 "label_None" = "なし";
 /* 'Non-English' is a screen label (match English casing); used to instruct the user how to switch on Numeric mode while doing comparison. */
-"label_NumericModeHint" = "英語以外の";
+"label_NumericModeHint" = "英語以外";
 /* '%d Files to Share:' is a screen label (match English casing); used on the Sharing Folder screen. %d = the number of files to share. iOS-only. */
 "label_numsharedfiles" = "%d個のファイル共有するには：";
 /* 'Old Threads' is a screen label (match English casing); used for the old thread (iOS only). */
@@ -463,13 +463,13 @@
 /* 'Passphrase Cache' is a screen label (match English casing); used on the Settings screen to above the display of the users' passphrase timeout period. */
 "label_passPhraseCacheTtl" = "フレーズのキャッシュを渡す";
 /* 'Passphrase cached' is a screen label (match English casing); used in the notification window when a passphrase has been cached. Android-only. */
-"label_PassPhraseIsCached" = "パスフレーズキャッシュされました";
+"label_PassPhraseIsCached" = "パスフレーズをキャッシュしました";
 /* 'phone-only' is a screen label (match English casing); used to indicate the local, non-synchronized contacts account type on the phone when picking a Save Account. */
 "label_phoneOnly" = "電話のみ";
 /* 'Photo' is a screen label (match English casing); used on the Begin Exchange screen to toggle sending the users' photo during the exchange. */
 "label_Photo" = "写真";
 /* 'This number is used to create a unique group of users. Compare, and then enter the lowest number among all users.' is a screen label (match English casing); used to instruct the user how to proceed on the Grouping screen. */
-"label_PromptInstruct" = "この番号は、ユーザーの固有のグループを作成するために使用されます。比較して、[すべてのユーザーの中で最も低い数値を入力します。";
+"label_PromptInstruct" = "この数は、ユーザーの固有のグループを作成するために使用されます。比較して、すべてのユーザーの中で最も小さい数を入力します。";
 /* 'Key ID' is a screen label (match English casing); used on the Settings, Compose Message, and Recipients list screens as a label above the base-64 encoded key IDs for sender and recipients. */
 "label_PublicKeyID" = "鍵ID";
 /* 'Push Registration ID' is a screen label (match English casing); used on the Settings screen as a label above the push registration for this user. */
@@ -485,13 +485,13 @@
 /* 'SafeSlinger backup delayed' is a screen label (match English casing); used as a title of the notification when a backup request has been pending more than 1 hour. */
 "label_SafeSlingerBackupDelayed" = "SafeSlingerバックアップの遅れ";
 /* '(SafeSlinger Direct Exchange)' is a screen label (match English casing); used on the Secure Introduction invitation dialog to denote the sender whom the user has performed a direct exchange with and holds direct trust. */
-"label_safeslingered" = "（SafeSlinger直接交換）";
+"label_safeslingered" = "(SafeSlinger直接交換)";
 /* 'Save Account' is a screen label (match English casing); used above the editable field on the End Exchange screen to showing the address book account to use when saving or updating contacts. */
 "label_SaveAccount" = "アカウントを保存";
 /* 'Check contacts you want to update in your address book, then tap Import to save secure contacts:' is a screen label (match English casing); used to instruct the user how to proceed on the End Exchange screen. */
-"label_SaveInstruct" = "あなたのアドレス帳に更新したい連絡先を確認し、安全な連絡先を保存するために、インポートをタップ：";
+"label_SaveInstruct" = "アドレス帳で更新したい連絡先を確認してください。その後、インポートをタップし、安全な連絡先を保存します:";
 /* 'Search contacts' is a screen label (match English casing); used on the Recipients screen to provide a hint to search for contacts. */
-"label_search_contacts_hint" = "検索連絡先";
+"label_search_contacts_hint" = "連絡先の検索";
 /* '%d seconds' is a screen label (match English casing); used as a relative time label to the current time on the message list. %.0f = the number of whole seconds. */
 "label_seconds" = "%d秒";
 /* 'Select Recipient' is a screen label (match English casing); used on the Compose Message screen recipient button before a recipient has been selected. */
@@ -505,7 +505,7 @@
 /* 'Show this hint next time.' is a screen label (match English casing); used in the key exchange walkthrough dialog to toggle the display of the walkthrough at the next attempted key exchange. */
 "label_ShowHintAtLaunch" = "このヒントを次回も表示する。";
 /* 'Using speech recognition is disabled because it might cause an information leak' is a screen label (match English casing); used to alert the user about possible information leak on the use of speech recognition when the user tries to use this feature */
-"label_SpeechRecognitionAlert" = "それは情報漏洩を引き起こす可能性があるので、音声認識を使用すると、無効になっています";
+"label_SpeechRecognitionAlert" = "情報漏洩の原因となる可能性があるため、音声認識の使用は無効になっています";
 /* 'Step 1' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
 "label_step_1" = "ステップ1";
 /* 'Step 2' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
@@ -517,13 +517,13 @@
 /* 'Step 5' is a screen label (match English casing); used in the key exchange walkthrough dialog. */
 "label_step_5" = "ステップ5";
 /* 'Automatically download message attachments when logged in.' is a screen label (match English casing); used as the settings summary to describe what Auto-retrieve attachments will do. */
-"label_summary_auto_attach_retrieval" = "ログインしたときに自動的にメッセージの添付ファイルをダウンロードしてください。";
+"label_summary_auto_attach_retrieval" = "ログインしたときに自動的にメッセージの添付ファイルをダウンロードします。";
 /* 'Automatically decrypt messages when logged in.' is a screen label (match English casing); used as the settings summary to describe what Auto-decrypt will do. */
-"label_summary_auto_decrypt" = "ログインしたときに自動的にメッセージを解読。";
+"label_summary_auto_decrypt" = "ログインしたときに自動的にメッセージを復号化します。";
 /* 'Receive notification when backup is offline.' is a screen label (match English casing); used as the settings summary to describe what Backup Reminder will do. */
 "label_summary_remind_backup_delay" = "バックアップがオフラインのときに通知を受け取ります。";
 /* 'Show a tutorial before attempting to Sling Keys.' is a screen label (match English casing); used as the settings summary to describe what Show Walkthrough will do. */
-"label_summary_show_tutorial" = "スリングキーを試みる前に、チュートリアルを表示します。";
+"label_summary_show_tutorial" = "スリング鍵を試みる前に、チュートリアルを表示します。";
 /* 'Tap to decrypt file' is a screen label (match English casing); used to indicate tapping this message in the list will attempt to decrypt the attachment (if needed). */
 "label_TapToDecryptFile" = "ファイルを復号化するにはタップしてください";
 /* 'Tap to decrypt' is a screen label (match English casing); used to indicate tapping this message in the list will attempt to decrypt it. */
@@ -537,35 +537,35 @@
 /* 'Tap to resume message draft' is a screen label (match English casing); used to indicate tapping this message in the list will take the user to the composition screen. */
 "label_TapToResumeDraft" = "メッセージの作成を再開するにはタップしてください";
 /* 'Tap and hold to send credential update.' is a screen label (match English casing); used as a hint on the recipient list to help the user know if a credential update is needed. Android-only. */
-"label_TapToSendCredentialUpdate" = "資格情報の更新を送信するために、タップしたままにします。";
+"label_TapToSendCredentialUpdate" = "長押しすると、資格情報の更新を送信します。";
 /* 'Tap to Sling Keys.' is a screen label (match English casing); used to remind the user that we can advance the user to the Sling Keys screen for convenience. */
-"label_TapToSlingKeys" = "スリングキーをタップします。";
+"label_TapToSlingKeys" = "タップすると、スリング鍵します。";
 /* 'Contacts Account' is a screen label (match English casing); used above the editable field on the Settings screen to show the current address book account to use. */
 "label_targetAccountLabel" = "アカウントにコンタクトする";
 /* 'You may optionally enable SafeSlinger iCloud backup in iOS Settings. Tap the Done button when finished.' is a screen label (match English casing); used on the Setup screen to remind the user that no backups will be restored on new installation. iOS-only. */
-"label_TouchToConfigureBackupSettings" = "必要に応じて、iOSの設定でSafeSlinger iCloudのバックアップを可能にすることができます。終了したら、[完了]ボタンをタップします。";
+"label_TouchToConfigureBackupSettings" = "オプションで、 iOSの設定でSafeSlinger iCloudのバックアップを有効にすることができます。終了したら、完了ボタンをタップしてください。";
 /* 'Touch to configure backup settings.' is a screen label (match English casing); used in the notification window when the backup request has been pending over 1 hour. Android-only. */
 "label_TouchToConfigureBackupSettingsAndroid" = "バックアップ設定を行うにはタッチします。";
 /* 'Touch to configure cache timeout settings.' is a screen label (match English casing); used in the notification window when a passphrase has been cached. Android-only. */
-"label_TouchToConfigureCacheTimeout" = "キャッシュのタイムアウト設定を構成するタッチします。";
+"label_TouchToConfigureCacheTimeout" = "タッチすると、キャッシュのタイムアウト設定を構成します。";
 /* 'Unknown' is a screen label (match English casing); used in menu lists when unexpected type definitions are encountered. */
 "label_undefinedTypeLabel" = "不明";
 /* 'Encrypted Sender' is a screen label (match English casing); used as the header for an encrypted message in the message list. */
 "label_UnknownSender" = "暗号化された送信者";
 /* 'Lowest' is a screen label (match English casing); used as a text box hint on the Grouping screen when entering the lowest ID number. */
-"label_UserIdHint" = "最下位";
+"label_UserIdHint" = "最小";
 /* 'User Name' is a screen label (match English casing); used as a placeholder before the users' contact has been loaded. */
 "label_UserName" = "ユーザー名";
 /* 'All phones must match one of the 3-word phrases. Compare, and then pick the matching phrase.' is a screen label (match English casing); used to instruct the user how to proceed on the Verify screen. */
 "label_VerifyInstruct" = "すべての携帯電話は、3つのフレーズのいずれかと一致する必要があります。比較して一致するフレーズを選択してください。";
 /* 'To protect your data, SafeSlinger does not store your passphrase anywhere for recovery. You may only access recipients and messages created under the same passphrase login. However, you may generate a new key and passphrase, then repeat Sling Keys with your recipients.' is a screen label (match English casing); used to describe the reasons passphrases are not storeed and how to generate a new one. */
-"label_WarnForgotPassphrase" = "あなたのデータを保護するために、SafeSlingerは、回復のためにどこでもあなたのパスフレーズを保存しません。あなただけの受信者と同じパスフレーズのログインの下に作成されたメッセージにアクセスすることができます。しかし、あなたは、あなたの受信者とのスリングキーを繰り返して、新しい鍵とパスフレーズを生成することができます。";
+"label_WarnForgotPassphrase" = "データを保護するために、 SafeSlingerはどこにも回復用のパスフレーズを保存しません。同じパスフレーズのログインの下で作成された受信者とメッセージにのみアクセスすることができます。ただし、新しい鍵とパスフレーズを生成して、受信者とスリング鍵を繰り返すことができます。";
 /* 'The following keys will be deleted:' is a screen label (match English casing); used to begin list of keys that will be deleted. */
-"label_WarnManagePassFollowsAreRecent" = "以下のキーが削除されます。";
+"label_WarnManagePassFollowsAreRecent" = "次の鍵が削除されます:";
 /* 'There are no more recent keys than yours.' is a screen label (match English casing); used to show there are no keys to delete. */
-"label_WarnManagePassNoMoreRecent" = "あなたよりもより最近のキーがありません。";
+"label_WarnManagePassNoMoreRecent" = "あなたのものより最近の鍵はありません。";
 /* 'Only keys generated more recently than yours, generated on %s, may be deleted.' is a screen label (match English casing); used to show which keys may be deleted. %s = the key generation date of the current key */
-"label_WarnManagePassOnlyRecentDeleted" = "キーのみが%@上で生成、より最近あなたより生成された、削除されることがあります。";
+"label_WarnManagePassOnlyRecentDeleted" = "あなたのものより最近、%@に生成された鍵のみ、削除される可能性があります。";
 /* 'Work' is a screen label (match English casing); used to denote a 'work' type of email or phone contact type. iOS-only. */
 "label_worktag" = "ワーク";
 
@@ -575,7 +575,7 @@
 /* 'About' is a menu option (title case); used to show the about dialog via the Settings screen. */
 "menu_About" = "説明";
 /* 'Auto-retrieve attachments' is a menu option (title case); used to enable/disable automatically retrieving message attachments when logged in via the Settings screen. */
-"menu_auto_attach_retrieval" = "添付ファイルを自動取得";
+"menu_auto_attach_retrieval" = "添付ファイルの自動取得";
 /* 'Auto-decrypt' is a menu option (title case); used to enable/disable automatically decrypting messages when logged in via the Settings screen. */
 "menu_auto_decrypt" = "自動復号化";
 /* 'Change' is a menu option (title case); used to change the currently selected file attachment via the File Options dialog. */
@@ -591,17 +591,17 @@
 /* 'Delete' is a menu option (title case); used to delete the current item from the list context menu. */
 "menu_delete" = "削除";
 /* 'Delete Thread %s' is a menu option (title case); used to delete all messages from this person via the message list context menu. %s = the name of a person. */
-"menu_deleteThread" = "スレッドを削除%@";
+"menu_deleteThread" = "スレッド %@を削除";
 /* 'View Detail' is a menu option (title case); used to show a dialog of more detail about the item via the message list context menu. */
 "menu_Details" = "詳細を表示";
 /* 'Download Directory' is a choice (sentence case); used when the user chooses to change the directory of the attachment before saving. */
-"menu_DownloadDirectory" = "ダウンロードディレクトリ";
+"menu_DownloadDirectory" = "ダウンロード ディレクトリ";
 /* 'Edit' is a menu option (title case); used to provide a generic edit menu option. */
 "menu_Edit" = "編集";
 /* 'Edit Contact' is a menu option (title case); used to show the users' current contact in the address book for editing via the Personal Contact dialog. */
-"menu_EditContact" = "編集連絡";
+"menu_EditContact" = "連絡先を編集";
 /* 'Edit Name' is a menu option (title case); used to show the Settings dialog to change the preferred name. */
-"menu_EditName" = "編集名前";
+"menu_EditName" = "名前を編集";
 /* 'File Manager' is a menu option (title case); used to show a custom file system navigation menu via the Choose Your File dialog. Android-only. */
 "menu_FileManager" = "ファイルマネージャ";
 /* 'Forgot Passphrase?' is a menu option (title case); used on the passphrase screen to show users how to generate a new key after forgetting the passphrase that protects the old one. */
@@ -615,25 +615,25 @@
 /* 'License' is a menu option (title case); used to show a dialog of the End User License Agreement. */
 "menu_License" = "ライセンス";
 /* 'Add Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
-"menu_link_contact_add" = "お問い合わせリンクを追加";
+"menu_link_contact_add" = "連絡先リンクを追加";
 /* 'Change Contact Link' is a menu option (title case); used to select a contact from the address book to update from and link to. */
-"menu_link_contact_change" = "変更お問い合わせリンク";
+"menu_link_contact_change" = "連絡先リンクを変更する";
 /* 'Logout' is a menu option (title case); used to remove the cached passphrase and force the user to login again. */
 "menu_Logout" = "ログアウト";
 /* 'Manage Passphrases' is a menu option (title case); used on the settings screen to allow users to remove newer keys if created by users without orignial user authorization. */
-"menu_ManagePassphrases" = "パスフレーズを管理します";
+"menu_ManagePassphrases" = "パスフレーズを管理";
 /* 'Message Font Size' is a menu (title case); used as the settings menu option to change message font size */
 "menu_message_font_size" = "フォントサイズ";
 /* 'Copy Text' is a menu option (title case); used to copy the message text into the clipboard via the message list context menu. */
 "menu_messageCopyText" = "コピー";
 /* 'Forward' is a menu option (title case); used to create a new message with the same text message/attachment via the message list context menu. */
-"menu_messageForward" = "フォワード";
+"menu_messageForward" = "転送";
 /* 'Privacy Policy' is a menu option (title case); used to show a dialog of the Privacy Policy. */
 "menu_PrivacyPolicy" = "プライバシー・ポリシー";
 /* 'Remove' is a menu option (title case); used to remove the currently selected file attachment via the File Options dialog. */
 "menu_Remove" = "削除する";
 /* 'Restore Default Settings' is a menu option (title case); used as Settings screen menu item for restoring all settings to default */
-"menu_restore_default" = "デフォルト設定に戻します";
+"menu_restore_default" = "デフォルト設定を復元する";
 /* 'Sound' is a menu option (title case); used as Settings item for entering ringtone selection screen */
 "menu_ringtone" = "着信メロディ";
 /* 'Add Contact Invitation' is a menu option (title case); used to send an email or text message containing an installation link for SafeSlinger. */
@@ -641,7 +641,7 @@
 /* 'Send Feedback' is a menu option (title case); used to send an email with support data for feedback. */
 "menu_sendFeedback" = "フィードバックを送信";
 /* 'Send Update' is a menu option (title case); used to send a credential update via the recipient list context menu. */
-"menu_SendUpdate" = "更新の送信";
+"menu_SendUpdate" = "更新を送信";
 /* 'Settings' is a menu option (title case); used to show the settings screen. */
 "menu_Settings" = "設定";
 /* 'Show Tutorial' is a menu option (title case); used to toggle the key exchange walkthrough when exchanging keys via the Settings screen. */
@@ -655,11 +655,11 @@
 /* 'Use Another' is a menu option (title case); used to redo the Setup process again to find another contact to use as the users' main identity via the Personal Contact dialog. */
 "menu_UseAnother" = "別のものを使用";
 /* 'Use Contact %s' is a menu option (title case); used to select the found contact as the users' main identity via the Personal Contact dialog. */
-"menu_UseContactPerson" = "連絡%@を使用";
+"menu_UseContactPerson" = "連絡先 %@を使用する";
 /* 'Use Name Only' is a menu option (title case); used to select no contact as the users' main identity via the Personal Contact dialog. */
-"menu_UseNoContact" = "名前のみを使用してください";
+"menu_UseNoContact" = "名前のみ使用する";
 /* 'Use Profile %s' is a menu option (title case); used to select the main profile contact as the users' main identity via the Personal Contact dialog. */
-"menu_UseProfilePerson" = "プロフィール%@を使用してください";
+"menu_UseProfilePerson" = "プロファイル %@を使用する";
 /* 'Vibrate' is a menu option (title case); used as Settings item for boolean option to vibrate during message notification */
 "menu_vibrate" = "振動";
 
@@ -682,7 +682,7 @@
 /* 'generating signature...' is a progress message (lower case, ellipsis); used to show progress during message signature generation. */
 "prog_generatingSignature" = "署名を生成しています...";
 /* 'loading content...' is a progress message (lower case, ellipsis); used to show progress during file preview loading. */
-"prog_loadingContent" = "コンテンツの読み込み...";
+"prog_loadingContent" = "コンテンツの読み込み中...";
 /* 'pending...' is a progress message (lower case, ellipsis); used to show progress during queued message while waiting to act */
 "prog_pending" = "保留中...";
 /* 'receiving encrypted file...' is a progress message (lower case, ellipsis); used to show progress while receiving the requested file. */
@@ -715,14 +715,14 @@
 /* 'General' is a preferences title (title case); used to sub-divide the General section of the settings screen. */
 "section_general" = "一般";
 /* 'Notifications' is a preferences title (title case); used to sub-divide the Notifications section of the settings screen. */
-"section_notification" = "お知らせ";
+"section_notification" = "通知";
 /* 'Storage' is a preferences title (title case); used to sub-divide the Storage section of the settings screen. */
 "section_storage" = "ストレージ";
 
 /* 'Backup restored.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm backup keys and settings have bee restored on re-install. */
 "state_BackupRestored" = "復元されたバックアップ。";
 /* 'Failed to send message. Touch and hold for options.' is an informational message (sentence case, period); used in a message instance to indicate that the message has not been sent to the destination. */
-"state_FailedToSendMessage" = "メッセージの送信に失敗しました。タッチおよびオプションのままにします。";
+"state_FailedToSendMessage" = "メッセージの送信に失敗しました。オプションは長押しします。";
 /* 'Deleted file %s.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that a file has been deleted. %s = the file name of the deleted file. */
 "state_FileDeleted" = "削除されたファイル%@。";
 /* 'Message sent.' is an informational message (sentence case, period); TODO: This should be deprecated in favor 1 message push to messages tab (single thread) and >1 messages push to messages tab (all threads) with a toast of state_MessagesSent. */
@@ -734,7 +734,7 @@
 /* '%d messages deleted.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the number of messages deleted. %d = the number of messages successfully deleted. */
 "state_MessagesDeleted" = "%dメッセージが削除されました。";
 /* '%d messages sent.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm that N messages has been sent used on all threads views. */
-"state_MessagesSent" = "%dメッセージが送信します。";
+"state_MessagesSent" = "%dのメッセージを送信しました。";
 /* 'Passphrase updated.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the change of password. */
 "state_PassphraseUpdated" = "更新されたパスフレーズを入力します。";
 /* '%d recipients deleted.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the number of recipients deleted. %d the number of recipient's keys successfully deleted. */
@@ -742,7 +742,7 @@
 /* '%s contacts imported.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the number of contacts imported after exchange. %s the number of contacts imported, may be expressed as a ratio, such as 4/5 in case of a partial import. */
 "state_SomeContactsImported" = "%@の連絡先をインポートしました。";
 /* 'Text copied to clipboard.' is an informational message (sentence case, period); used in an auto-dismissed message to confirm the message text has been copied to the device native clipboard. */
-"state_TextCopiedToClipboard" = "クリップボードにコピーされたテキスト。";
+"state_TextCopiedToClipboard" = "テキストをクリップボードにコピーしました。";
 
 /* 'SafeSlinger is designed to easily share identity data, in person or over the phone, authenticated, private, and intact. Each person you share with creates a secure end-to-end channel to send messages.' is an application description (sentence case); used at the beginning of the about box and app store listing to describe the application. Beginning of long form: 4000 character max. */
 "text_About" = "SafeSlingerは、直接もしくは電話によって簡単にIDを共有できるソフトウェアです。あなたと共有する一人一人は、メッセージを送るために、安全なエンドツーエンドのチャネルを作成します。";
@@ -761,33 +761,33 @@
 /* 'web: %s' is an application description (sentence case); used in the app store listing, %s = SafeSlinger project web page address. */
 "text_AboutWeb" = "web: %@";
 /* 'Developed by:' is an application description (sentence case); used at the end of the about dialog to list the developers of SafeSlinger. */
-"text_DevelopedBy" = "によって開発されました：";
+"text_DevelopedBy" = "開発者:";
 /* 'Exchange' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordExchange" = "交換";
 /* 'Identity' is an application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordIdentity" = "アイデンティティ";
+"text_KeywordIdentity" = "ID";
 /* 'Key' is an application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordKey" = "キー";
+"text_KeywordKey" = "鍵";
 /* 'Messaging' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordMessaging" = "メッセージング";
 /* 'Privacy' is an application description (sentence case); one of many keywords to use when searching related terms. */
 "text_KeywordPrivacy" = "プライバシー";
 /* 'Security' is an application description (sentence case); one of many keywords to use when searching related terms. */
-"text_KeywordSecurity" = "セキュリティ";
+"text_KeywordSecurity" = "セキュリティー";
 /* 'Languages provided by:' is an application description (sentence case); used at the end of the about dialog to list the translators of SafeSlinger. */
 "text_LanguagesProvidedBy" = "利用可能な言語:";
 /* 'translate: %s' is an application description (sentence case); used in the app store listing, %s = SafeSlinger project localization repo. */
-"text_LocalizationRepo" = "翻訳：%@";
+"text_LocalizationRepo" = "翻訳: %@";
 /* 'Related Terms:' is an application description (sentence case); used in the app store listing to list related search terms to help users looking for secure key exchange and messaging. */
-"text_RelatedSearchTerms" = "関連用語：";
+"text_RelatedSearchTerms" = "関連条件:";
 /* 'Requirements:' is an application description (sentence case); used in the about box and app store listing to enumerate requirements. */
-"text_Requirements" = "要件：";
+"text_Requirements" = "要件:";
 /* 'Must be installed on a minimum of 2 devices.' is an application description (sentence case); used in the about box and app store listing to enumerate requirements. */
-"text_Requirements1" = "2以上のデバイスにインストールする必要があります。";
+"text_Requirements1" = "最低2デバイスにインストールする必要があります。";
 /* 'An Internet connection must be active.' is an application description (sentence case); used in the about box and app store listing to enumerate requirements. */
-"text_Requirements2" = "インターネット接続をアクティブにする必要があります。";
+"text_Requirements2" = "インターネット接続が有効である必要があります。";
 /* 'open source: %s' is an application description (sentence case); used in the app store listing to show the location of the open source code repository. %s = source code URL. */
-"text_SourceCodeRepo" = "オープンソース：%@";
+"text_SourceCodeRepo" = "オープンソース: %@";
 /* 'Stability fixes.' is an application description (sentence case); used to list what changes have been made to updated versions. */
 "text_WhatsNew" = "安定性の修正。";
 
@@ -828,7 +828,7 @@
 /* 'SafeSlinger Message Available' is a title (title case); used as the title of an incoming message in the notification window. */
 "title_NotifyFileAvailable" = "SafeSlingerによるメッセージ利用可能";
 /* '%d SafeSlinger Messages Available' is a title (title case); used as the title of multiple incoming messages in the notification window. iOS-only. */
-"title_NotifyMulFileAvailable" = "利用可能な%d SafeSlingerメッセージ";
+"title_NotifyMulFileAvailable" = "%dのSafeSlingerメッセージが利用できます";
 /* 'Passphrase' is a title (title case); used at the top of the passphrase screen where user will login. */
 "title_passphrase" = "パスフレーズ";
 /* 'Photo Album' is a menu option (title case); used in the Select File Option menu to select a picture from the photo album on iOS. */
